@@ -1,28 +1,81 @@
 <div class="container">
   <div class="navigation">
-    <div class="logo">
+    <div class="logo logged">
       <a href=""></a>
     </div>
-    <ul class="unsigned">
-      <li>
-        <a routerLinkActive="active-menu" [routerLink]="['login']">
-          <img src="../assets/img/menu/login-white.svg" class="white-icon" alt="ico">
-          <img src="../assets/img/menu/login-black.svg" class="black-icon" alt="ico">
-          <span class="menu-text">Вход</span>
+<!--    <ul class="unsigned">-->
+<!--      <li>-->
+<!--        <a routerLinkActive="active-menu" [routerLink]="['login']">-->
+<!--          <img src="../assets/img/menu/login-white.svg" class="white-icon" alt="ico">-->
+<!--          <img src="../assets/img/menu/login-black.svg" class="black-icon" alt="ico">-->
+<!--          <span class="menu-text">Вход</span>-->
+<!--        </a>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <a routerLinkActive="active-menu" [routerLink]="['recover']">-->
+<!--          <img src="../assets/img/menu/recover-white.svg" class="white-icon" alt="ico">-->
+<!--          <img src="../assets/img/menu/recover-black.svg" class="black-icon" alt="ico">-->
+<!--          <span class="menu-text">Забыли пароль</span>-->
+<!--        </a>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <a routerLinkActive="active-menu" [routerLink]="['registration']">-->
+<!--          <img src="../assets/img/menu/registration-white.svg" class="white-icon" alt="ico">-->
+<!--          <img src="../assets/img/menu/registration-black.svg" class="black-icon" alt="ico">-->
+<!--          <span class="menu-text">Регистрация</span>-->
+<!--        </a>-->
+<!--      </li>-->
+<!--      <li>-->
+<!--        <a routerLinkActive="active-menu" [routerLink]="['calculator']">-->
+<!--          <img src="../assets/img/menu/calculator-white.svg" class="white-icon" alt="ico">-->
+<!--          <img src="../assets/img/menu/calculator-black.svg" class="black-icon" alt="ico">-->
+<!--          <span class="menu-text">Калькулятор</span>-->
+<!--        </a>-->
+<!--      </li>-->
+<!--    </ul>-->
+
+    <ul class="signed">
+      <li class="new-order">
+        <a class="new-order-link" routerLinkActive="active-menu" [routerLink]="['order']">
+          <span class="new-order-btn">
+            <img src="../assets/img/menu/new-order.svg" class="icon" alt="ico">
+            <span class="menu-text new-order-text">Новый заказ</span>
+          </span>
         </a>
       </li>
       <li>
-        <a routerLinkActive="active-menu" [routerLink]="['recover']">
-          <img src="../assets/img/menu/recover-white.svg" class="white-icon" alt="ico">
-          <img src="../assets/img/menu/recover-black.svg" class="black-icon" alt="ico">
-          <span class="menu-text">Забыли пароль</span>
+        <a routerLinkActive="active-menu" [routerLink]="['home']">
+          <img src="../assets/img/menu/home-light.svg" class="white-icon" alt="ico">
+          <img src="../assets/img/menu/home-dark.svg" class="black-icon" alt="ico">
+          <span class="menu-text">Главная</span>
         </a>
       </li>
       <li>
-        <a routerLinkActive="active-menu" [routerLink]="['registration']">
-          <img src="../assets/img/menu/registration-white.svg" class="white-icon" alt="ico">
-          <img src="../assets/img/menu/registration-black.svg" class="black-icon" alt="ico">
-          <span class="menu-text">Регистрация</span>
+        <a routerLinkActive="active-menu" [routerLink]="['journal']">
+          <img src="../assets/img/menu/journal-light.svg" class="white-icon" alt="ico">
+          <img src="../assets/img/menu/journal-dark.svg" class="black-icon" alt="ico">
+          <span class="menu-text">Журнал заказов</span>
+        </a>
+      </li>
+      <li>
+        <a routerLinkActive="active-menu" [routerLink]="['template']">
+          <img src="../assets/img/menu/template-light.svg" class="white-icon" alt="ico">
+          <img src="../assets/img/menu/template-dark.svg" class="black-icon" alt="ico">
+          <span class="menu-text">Шаблон заказов</span>
+        </a>
+      </li>
+      <li>
+        <a routerLinkActive="active-menu" [routerLink]="['book']">
+          <img src="../assets/img/menu/book-light.svg" class="white-icon" alt="ico">
+          <img src="../assets/img/menu/book-dark.svg" class="black-icon" alt="ico">
+          <span class="menu-text">Адрессная книга</span>
+        </a>
+      </li>
+      <li>
+        <a routerLinkActive="active-menu" [routerLink]="['users']">
+          <img src="../assets/img/menu/users-light.svg" class="white-icon" alt="ico">
+          <img src="../assets/img/menu/users-dark.svg" class="black-icon" alt="ico">
+          <span class="menu-text">Пользователи</span>
         </a>
       </li>
       <li>
@@ -32,11 +85,46 @@
           <span class="menu-text">Калькулятор</span>
         </a>
       </li>
+      <li>
+        <a routerLinkActive="active-menu" [routerLink]="['documents']">
+          <img src="../assets/img/menu/docs-light.svg" class="white-icon" alt="ico">
+          <img src="../assets/img/menu/docs-dark.svg" class="black-icon" alt="ico">
+          <span class="menu-text">Документы</span>
+        </a>
+      </li>
+      <li>
+        <a routerLinkActive="active-menu" [routerLink]="['instruction']">
+          <img src="../assets/img/menu/instruction-light.svg" class="white-icon" alt="ico">
+          <img src="../assets/img/menu/instruction-dark.svg" class="black-icon" alt="ico">
+          <span class="menu-text">Инструкция</span>
+        </a>
+      </li>
+      <li>
+        <a routerLinkActive="active-menu" [routerLink]="['profile']">
+          <img src="../assets/img/menu/profile-light.svg" class="white-icon" alt="ico">
+          <img src="../assets/img/menu/profile-dark.svg" class="black-icon" alt="ico">
+          <span class="menu-text">Профиль</span>
+        </a>
+      </li>
+      <li style="margin-top: 25px;">
+        <a href="">
+          <img src="../assets/img/menu/tv-dark.svg" class="icon" alt="ico">
+          <span class="menu-text">Новости</span>
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <img src="../assets/img/menu/alert-dark.svg" class="icon" alt="ico">
+          <span class="menu-text">Хотим стать лучше</span>
+        </a>
+      </li>
+      <li>
+        <a href="">
+          <img src="../assets/img/menu/log-out-dark.svg" class="icon" alt="ico">
+          <span class="menu-text">Выход</span>
+        </a>
+      </li>
     </ul>
-
-<!--    <ul class="signed">-->
-<!--      -->
-<!--    </ul>-->
   </div>
   <main class="content">
     <router-outlet></router-outlet>
