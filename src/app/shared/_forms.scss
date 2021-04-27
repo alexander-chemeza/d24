@@ -1,0 +1,39 @@
+label {
+  display: block;
+  font-family: "Montserrat-SemiBold", sans-serif;
+  font-size: 1.4rem;
+  color: rgba(0,0,0,0.5);
+  margin-top: 20px;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  box-sizing: border-box;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  color: #000000;
+  font-size: 1.4rem;
+  padding: 12px 15px;
+  margin-top: 12px;
+}
+
+input[type="submit"] {
+  padding: 15px 60px;
+  background-color: #ABCF37;
+  color: #FFFFFF;
+  font-size: 1.4rem;
+  outline: none;
+  transition: all .5s;
+  border: none;
+  border-radius: 25px;
+
+  &:hover {
+    background-color: #95b430;
+  }
+}

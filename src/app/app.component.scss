@@ -52,6 +52,7 @@
 
   &:hover .new-order-btn {
     width: 100%;
+    max-width: 175px;
     transition: all 1s;
   }
 
@@ -174,4 +175,20 @@
   box-sizing: border-box;
   transition: all 1s;
   border-radius: 10px;
+
+  background-image: url("../assets/img/background/Vector.svg"),
+  url("../assets/img/background/Vector-3.svg"),
+  url("../assets/img/background/Vector-4.svg"),
+  url("../assets/img/background/Group.svg"),
+  url("../assets/img/background/Vector-1.svg"),
+  url("../assets/img/background/Vector-5.svg"),
+  url("../assets/img/background/Vector-2.svg");
+  background-repeat: no-repeat;
+  background-position: 2.81% 95.7%,
+  30.87% 85.46%,
+  62.04% 90.97%,
+  95.77% 92.46%,
+  80.36% 45.94%,
+  60.34% 7.41%,
+  95.71% 6%;
 }

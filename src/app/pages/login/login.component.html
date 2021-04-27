@@ -1,1 +1,16 @@
-<p>login works!</p>
+<div class="login-content">
+  <p class="preheader">
+    Пожалуйста, введите свои данные для вход в личный кабинет
+  </p>
+
+  <div class="grey-box form">
+    <form>
+      <label for="login">Логин</label>
+      <input type="text" name="login" id="login" [(ngModel)]="username">
+      <label for="password">Пароль</label>
+      <input type="password" name="password" id="password" [(ngModel)]="password">
+      <input type="submit" value="Войти" style="margin-top: 40px;" (click)="doLogin()">
+    </form>
+  </div>
+</div>
+
