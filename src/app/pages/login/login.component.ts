@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.service.login(this.username, this.password)
       .subscribe(data => {
         if (data) {
-          localStorage.setItem('currentUser', data.name);
+          localStorage.setItem('currentUser', JSON.stringify(data));
           this.router.navigate(['home']);
         } else {
           alert('No such user or invalid password');

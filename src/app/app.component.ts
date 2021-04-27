@@ -27,4 +27,9 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
+  doLogout(): void {
+    localStorage.removeItem('currentUser');
+    this.router.navigate(['login']);
+  }
 }

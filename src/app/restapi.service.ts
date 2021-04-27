@@ -34,10 +34,10 @@ export class RestapiService {
     });
 
     // GET method to login, that returns an object {"name": "value", role: "value"}
-    return this.http.get<User>('http://localhost:8080/user/getUserInfo', {headers, responseType: 'json'});
+    return this.http.get<User>('http://localhost:8080/login', {headers, responseType: 'json'});
   }
 
   public registerEntityWithAgreement(data: EntityWithAgreement): Observable<any> {
-    return this.http.post('http://localhost:8080/registration', data);
+    return this.http.post('http://localhost:8080/login', data);
   }
 }
