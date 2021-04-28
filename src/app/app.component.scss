@@ -44,12 +44,28 @@
     width: 270px;
   }
 
+  &:hover ul li a.active-menu {
+
+    &::before {
+      right: 0;
+      transition: all 1s;
+      transition-delay: -0.2s;
+    }
+
+    &::after {
+      right: 0;
+      transition: all 1s;
+      transition-delay: -0.2s;
+    }
+  }
+
   &:hover .logo a {
     background-image: url("../assets/img/menu/logo-long.svg");
   }
 
   &:hover ul li .menu-text {
-    display: inline;
+    //display: inline;
+    visibility: visible;
     opacity: 1;
   }
 
@@ -100,7 +116,8 @@
       }
 
       & .menu-text {
-        display: none;
+        //display: none;
+        visibility: hidden;
         opacity: 0;
         white-space: nowrap;
         transition: all 1s;
@@ -133,6 +150,7 @@
         border-top-left-radius: 63px;
         border-bottom-left-radius: 63px;
         transition: all .5s;
+        transition-delay: -0.2s;
 
         &::after,
         &::before {
@@ -142,20 +160,23 @@
           width: 14px;
           height: 15px;
           transition: all 1s;
+          transition-delay: -0.2s;
         }
 
         &::before {
-          right: 0;
+          right: 20px;
           bottom: 100%;
           background-image: radial-gradient(circle at 0 0, transparent 14px, #A070B5 15px);
           transition: all 1s;
+          transition-delay: -0.2s;;
         }
 
         &::after {
-          right: 0;
+          right: 20px;
           top: 100%;
           background-image: radial-gradient(circle at 0 100%, transparent 14px, #A070B5 15px);
           transition: all 1s;
+          transition-delay: -0.2s;
         }
 
         & .white-icon {
