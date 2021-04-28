@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {RestapiService} from '../../restapi.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-recover',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RecoverComponent implements OnInit {
 
-  constructor() { }
+  login: string;
+  email: string;
+
+  constructor(private service: RestapiService, private router: Router) {
+    this.login = '';
+    this.email = '';
+  }
 
   ngOnInit(): void {
+  }
+
+  doRecover(): void {
+    console.log('recover');
   }
 
 }
