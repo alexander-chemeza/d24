@@ -7,12 +7,12 @@
           <input class="checkbox-block-item" type="radio" name="type" id="type1" (change)="agreement = !agreement" checked>
           <span class="checkbox-block-icon"></span>
         </div>
-        <label for="type1" [ngClass]="{'active-label': agreement, 'inactive-label': !agreement}">Есть договор</label>
+        <label for="type1" [ngClass]="{'active-label': !agreement, 'inactive-label': agreement}">Есть договор</label>
         <div class="checkbox-block" style="margin-right: 15px;">
           <input class="checkbox-block-item" type="radio" name="type" id="type2" (change)="agreement = !agreement">
           <span class="checkbox-block-icon"></span>
         </div>
-        <label for="type2" [ngClass]="{'active-label': !agreement, 'inactive-label': agreement}">Нет договора</label>
+        <label for="type2" [ngClass]="{'active-label': agreement, 'inactive-label': !agreement}">Нет договора</label>
       </div>
     </div>
   </div>
