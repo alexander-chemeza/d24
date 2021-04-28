@@ -31,36 +31,53 @@
           <div class="register-content-main-with-agreement-field-row-content">
             <div [ngClass]="{'person-with-agreement-show': !personWithAgreement, 'person-with-agreement-hide': personWithAgreement}" class="register-content-main-with-agreement-field-row-item pr-45">
               <label for="ur-with-company">Компания</label>
-              <input type="text" name="ur-with-company" id="ur-with-company" placeholder="Введите название компании">
+              <input type="text" name="ur-with-company" id="ur-with-company" placeholder="Введите название компании" [(ngModel)]="companyNameEntityWithAgreement">
             </div>
             <div [ngClass]="{'person-with-agreement-show': !personWithAgreement, 'person-with-agreement-hide': personWithAgreement}" class="register-content-main-with-agreement-field-row-item pl-45">
               <label for="ur-with-unp">УНП компании</label>
-              <input type="text" name="ur-with-unp" id="ur-with-unp" placeholder="Введите УНП">
+              <input type="text" name="ur-with-unp" id="ur-with-unp" placeholder="Введите УНП" [(ngModel)]="unpEntityWithAgreement">
             </div>
 
             <div [ngClass]="{'person-with-agreement-show': personWithAgreement, 'person-with-agreement-hide': !personWithAgreement}" class="register-content-main-with-agreement-field-row-item pr-30">
               <label for="fiz-with-passport">Идентификационный  номер паспорта</label>
-              <input type="text" name="fiz-with-passport" id="fiz-with-passport" placeholder="Введите идентификационный  номер паспорта">
+              <input type="text" name="fiz-with-passport" id="fiz-with-passport" placeholder="Введите идентификационный  номер паспорта" [(ngModel)]="passportNumberIndividualWithAgreement">
             </div>
           </div>
         </div>
       </div>
       <div class="register-content-main-with-agreement-field-columns">
-        <div class="grey-box">
+        <div class="grey-box" [ngClass]="{'person-with-agreement-show': !personWithAgreement, 'person-with-agreement-hide': personWithAgreement}">
           <label for="ur-with-name">Имя</label>
-          <input type="text" name="ur-with-name" id="ur-with-name" placeholder="Введите имя">
+          <input type="text" name="ur-with-name" id="ur-with-name" placeholder="Введите имя" [(ngModel)]="userNameEntityWithAgreement">
           <label for="ur-with-email">Email</label>
-          <input type="email" name="ur-with-email" id="ur-with-email" placeholder="Введите email">
+          <input type="email" name="ur-with-email" id="ur-with-email" placeholder="Введите email" [(ngModel)]="emailEntityWithAgreement">
           <label for="ur-with-phone">Телефон</label>
-          <input type="tel" name="ur-with-phone" id="ur-with-phone" placeholder="Введите телефон">
+          <input type="tel" name="ur-with-phone" id="ur-with-phone" placeholder="Введите телефон" [(ngModel)]="phoneEntityWithAgreement">
         </div>
-        <div class="grey-box">
+        <div class="grey-box" [ngClass]="{'person-with-agreement-show': !personWithAgreement, 'person-with-agreement-hide': personWithAgreement}">
           <label for="ur-with-login">Логин</label>
-          <input type="text" name="ur-with-login" id="ur-with-login" placeholder="Введите логин">
+          <input type="text" name="ur-with-login" id="ur-with-login" placeholder="Введите логин" [(ngModel)]="loginEntityWithAgreement">
           <label for="ur-with-password">Пароль</label>
-          <input type="password" name="ur-with-password" id="ur-with-password" placeholder="Введите пароль">
+          <input type="password" name="ur-with-password" id="ur-with-password" placeholder="Введите пароль" [(ngModel)]="passwordEntityWithAgreement">
           <label for="ur-with-password-repeat">Пароль (подтвердить</label>
           <input type="password" name="ur-with-password-repeat" id="ur-with-password-repeat" placeholder="Повторите пароль">
+        </div>
+
+        <div class="grey-box" [ngClass]="{'person-with-agreement-show': personWithAgreement, 'person-with-agreement-hide': !personWithAgreement}">
+          <label for="fiz-with-name">Имя</label>
+          <input type="text" name="fiz-with-name" id="fiz-with-name" placeholder="Введите имя" [(ngModel)]="nameIndividualWithAgreement">
+          <label for="fiz-with-email">Email</label>
+          <input type="email" name="fiz-with-email" id="fiz-with-email" placeholder="Введите email" [(ngModel)]="emailIndividualWithAgreement">
+          <label for="fiz-with-phone">Телефон</label>
+          <input type="tel" name="fiz-with-phone" id="fiz-with-phone" placeholder="Введите телефон" [(ngModel)]="phoneIndividualWithAgreement">
+        </div>
+        <div class="grey-box" [ngClass]="{'person-with-agreement-show': personWithAgreement, 'person-with-agreement-hide': !personWithAgreement}">
+          <label for="fiz-with-login">Логин</label>
+          <input type="text" name="fiz-with-login" id="fiz-with-login" placeholder="Введите логин" [(ngModel)]="loginIndividualWithAgreement">
+          <label for="fiz-with-password">Пароль</label>
+          <input type="password" name="fiz-with-password" id="fiz-with-password" placeholder="Введите пароль" [(ngModel)]="passwordIndividualWithAgreement">
+          <label for="fiz-with-password-repeat">Пароль (подтвердить</label>
+          <input type="password" name="fiz-with-password-repeat" id="fiz-with-password-repeat" placeholder="Повторите пароль">
         </div>
       </div>
     </div>
@@ -74,31 +91,31 @@
           </div>
           <div [ngClass]="{'person-without-agreement-show': !personWithoutAgreement, 'person-without-agreement-hide': personWithoutAgreement}" class="register-content-main-without-agreement-col-1-ur">
             <label for="ur-without-agreement-client-name">Наименование клиента*</label>
-            <input type="text" name="ur-without-agreement-client-name" id="ur-without-agreement-client-name" placeholder="Введите наименование клиента">
+            <input type="text" name="ur-without-agreement-client-name" id="ur-without-agreement-client-name" placeholder="Введите наименование клиента" [(ngModel)]="clientNameEntityWithoutAgreement">
             <label for="ur-without-agreement-ur-address">Юридический адрес*</label>
-            <input type="text" name="ur-without-agreement-ur-address" id="ur-without-agreement-ur-address" placeholder="Введите юридический адрес">
+            <input type="text" name="ur-without-agreement-ur-address" id="ur-without-agreement-ur-address" placeholder="Введите юридический адрес" [(ngModel)]="legalAddressEntityWithoutAgreement">
             <label for="ur-without-agreement-post-address">Почтовый адрес*</label>
-            <input type="text" name="ur-without-agreement-post-address" id="ur-without-agreement-post-address" placeholder="Введите почтовый адрес">
+            <input type="text" name="ur-without-agreement-post-address" id="ur-without-agreement-post-address" placeholder="Введите почтовый адрес" [(ngModel)]="postAddressEntityWithoutAgreement">
             <label for="ur-without-agreement-unp">УНП*</label>
-            <input type="text" name="ur-without-agreement-unp" id="ur-without-agreement-unp" placeholder="Введите УНП">
+            <input type="text" name="ur-without-agreement-unp" id="ur-without-agreement-unp" placeholder="Введите УНП" [(ngModel)]="unpEntityWithoutAgreement">
           </div>
           <div [ngClass]="{'person-without-agreement-show': personWithoutAgreement, 'person-without-agreement-hide': !personWithoutAgreement}" class="register-content-main-without-agreement-col-1-fiz">
             <label for="fiz-without-agreement-fio">ФИО*</label>
-            <input type="text" name="fiz-without-agreement-fio" id="fiz-without-agreement-fio" placeholder="Введите ФИО">
+            <input type="text" name="fiz-without-agreement-fio" id="fiz-without-agreement-fio" placeholder="Введите ФИО" [(ngModel)]="nameIndividualWithoutAgreement">
             <label for="fiz-without-agreement-doc-type">Вид удостоверения*</label>
-            <input type="text" name="fiz-without-agreement-doc-type" id="fiz-without-agreement-doc-type" placeholder="Введите вид документа">
+            <input type="text" name="fiz-without-agreement-doc-type" id="fiz-without-agreement-doc-type" placeholder="Введите вид документа" [(ngModel)]="documentTypeIndividualWithoutAgreement">
             <div class="fiz-row">
               <div class="fiz-row-item-1">
                 <label for="fiz-without-agreement-doc-seria">Серия*</label>
-                <input type="text" name="fiz-without-agreement-doc-seria" id="fiz-without-agreement-doc-seria" placeholder="Введите серию документа">
+                <input type="text" name="fiz-without-agreement-doc-seria" id="fiz-without-agreement-doc-seria" placeholder="Введите серию документа" [(ngModel)]="passportSeriesIndividualWithoutAgreement">
               </div>
               <div class="fiz-row-item-2">
                 <label for="fiz-without-agreement-doc-number">Номер документа*</label>
-                <input type="text" name="fiz-without-agreement-doc-number" id="fiz-without-agreement-doc-number" placeholder="Введите номер документа">
+                <input type="text" name="fiz-without-agreement-doc-number" id="fiz-without-agreement-doc-number" placeholder="Введите номер документа" [(ngModel)]="passportNumberIndividualWithoutAgreement">
               </div>
             </div>
             <label for="fiz-without-agreement-doc-place">Кем выдано удостоверение*</label>
-            <input type="text" name="fiz-without-agreement-doc-place" id="fiz-without-agreement-doc-place" placeholder="Введите место выдачи документа">
+            <input type="text" name="fiz-without-agreement-doc-place" id="fiz-without-agreement-doc-place" placeholder="Введите место выдачи документа" [(ngModel)]="issueAddressIndividualWithoutAgreement">
           </div>
         </div>
       </div>
@@ -106,27 +123,27 @@
         <div class="grey-box">
           <div [ngClass]="{'person-without-agreement-show': !personWithoutAgreement, 'person-without-agreement-hide': personWithoutAgreement}" class="register-content-main-without-agreement-col-2-ur">
             <label for="ur-without-agreement-okpo">ОКПО*</label>
-            <input type="text" name="ur-without-agreement-okpo" id="ur-without-agreement-okpo" placeholder="Введите ОКПО">
+            <input type="text" name="ur-without-agreement-okpo" id="ur-without-agreement-okpo" placeholder="Введите ОКПО" [(ngModel)]="okpoEntityWithoutAgreement">
             <label for="ur-without-agreement-fio-of-person">ФИО уполномоченного лица*</label>
-            <input type="text" name="ur-without-agreement-fio-of-person" id="ur-without-agreement-fio-of-person" placeholder="Введите ФИО уполномоченного лица">
+            <input type="text" name="ur-without-agreement-fio-of-person" id="ur-without-agreement-fio-of-person" placeholder="Введите ФИО уполномоченного лица" [(ngModel)]="authorizedPersonEntityWithoutAgreement">
             <label for="ur-without-agreement-statement">Основание для подписания договора*</label>
-            <input type="text" name="ur-without-agreement-statement" id="ur-without-agreement-statement" placeholder="Введите основание для подписания договора">
+            <input type="text" name="ur-without-agreement-statement" id="ur-without-agreement-statement" placeholder="Введите основание для подписания договора" [(ngModel)]="groundsForSigningEntityWithoutAgreement">
             <label for="ur-without-agreement-tel-fax">Телефон/факс*</label>
-            <input type="text" name="ur-without-agreement-tel-fax" id="ur-without-agreement-tel-fax" placeholder="Введите телефон/факс">
+            <input type="text" name="ur-without-agreement-tel-fax" id="ur-without-agreement-tel-fax" placeholder="Введите телефон/факс" [(ngModel)]="phoneEntityWithoutAgreement">
             <label for="ur-without-agreement-email">Email*</label>
-            <input type="text" name="ur-without-agreement-email" id="ur-without-agreement-email" placeholder="Введите email">
+            <input type="text" name="ur-without-agreement-email" id="ur-without-agreement-email" placeholder="Введите email" [(ngModel)]="emailEntityWithoutAgreement">
           </div>
           <div [ngClass]="{'person-without-agreement-show': personWithoutAgreement, 'person-without-agreement-hide': !personWithoutAgreement}" class="register-content-main-without-agreement-col-2-fiz">
             <label for="fiz-without-agreement-doc-date">Дата выдачи*</label>
-            <input type="text" name="fiz-without-agreement-doc-date" id="fiz-without-agreement-doc-date" placeholder="Введите дату выдачи">
+            <input type="text" name="fiz-without-agreement-doc-date" id="fiz-without-agreement-doc-date" placeholder="Введите дату выдачи" [(ngModel)]="issueDateIndividualWithoutAgreement">
             <label for="fiz-without-agreement-doc-main-number">Личный номер*</label>
-            <input type="text" name="fiz-without-agreement-doc-main-number" id="fiz-without-agreement-doc-main-number" placeholder="Введите личный номер">
+            <input type="text" name="fiz-without-agreement-doc-main-number" id="fiz-without-agreement-doc-main-number" placeholder="Введите личный номер" [(ngModel)]="personalNumberIndividualWithoutAgreement">
             <label for="fiz-without-agreement-home-address">Адрес прописки*</label>
-            <input type="text" name="fiz-without-agreement-home-address" id="fiz-without-agreement-home-address" placeholder="Введите адрес прописки">
+            <input type="text" name="fiz-without-agreement-home-address" id="fiz-without-agreement-home-address" placeholder="Введите адрес прописки" [(ngModel)]="homeAddressIndividualWithoutAgreement">
             <label for="fiz-without-agreement-tel">Телефон/факс*</label>
-            <input type="tel" name="fiz-without-agreement-tel" id="fiz-without-agreement-tel" placeholder="Введите телефон/факс">
+            <input type="tel" name="fiz-without-agreement-tel" id="fiz-without-agreement-tel" placeholder="Введите телефон/факс" [(ngModel)]="phoneIndividualWithoutAgreement">
             <label for="fiz-without-agreement-email">Email*</label>
-            <input type="email" name="fiz-without-agreement-email" id="fiz-without-agreement-email" placeholder="Введите Email">
+            <input type="email" name="fiz-without-agreement-email" id="fiz-without-agreement-email" placeholder="Введите Email" [(ngModel)]="emailIndividualWithoutAgreement">
           </div>
         </div>
       </div>
@@ -135,13 +152,13 @@
           <div [ngClass]="{'person-without-agreement-show': !personWithoutAgreement, 'person-without-agreement-hide': personWithoutAgreement}" class="register-content-main-without-agrement-col-3-ur">
             <p class="mark">Банковские рейквизиты</p>
             <label for="ur-without-agreement-bank-name">Наименование банка*</label>
-            <input type="text" name="ur-without-agreement-bank-name" id="ur-without-agreement-bank-name" placeholder="Введите наименование банка">
+            <input type="text" name="ur-without-agreement-bank-name" id="ur-without-agreement-bank-name" placeholder="Введите наименование банка" [(ngModel)]="bankNameEntityWithoutAgreement">
             <label for="ur-without-agreement-bank-address">Адрес банка*</label>
-            <input type="text" name="ur-without-agreement-bank-address" id="ur-without-agreement-bank-address" placeholder="Введите адрес банка">
+            <input type="text" name="ur-without-agreement-bank-address" id="ur-without-agreement-bank-address" placeholder="Введите адрес банка" [(ngModel)]="bankAddressEntityWithoutAgreement">
             <label for="ur-without-agreement-bank-code">Код банка*</label>
-            <input type="text" name="ur-without-agreement-bank-code" id="ur-without-agreement-bank-code" placeholder="Введите код банка">
+            <input type="text" name="ur-without-agreement-bank-code" id="ur-without-agreement-bank-code" placeholder="Введите код банка" [(ngModel)]="bankCodeEntityWithoutAgreement">
             <label for="ur-without-agreement-bank-account">Расчетный счет*</label>
-            <input type="text" name="ur-without-agreement-bank-account" id="ur-without-agreement-bank-account" placeholder="Введите расчетный счет">
+            <input type="text" name="ur-without-agreement-bank-account" id="ur-without-agreement-bank-account" placeholder="Введите расчетный счет" [(ngModel)]="accountEntityWithoutAgreement">
             <div class="add-file-box mt-40">
               <div class="add-file-box-item">
                 <input type="file">
@@ -156,9 +173,9 @@
           <div [ngClass]="{'person-without-agreement-show': personWithoutAgreement, 'person-without-agreement-hide': !personWithoutAgreement}" class="register-content-main-without-agrement-col-3-fiz">
             <p class="mark">прочая информация</p>
             <label for="fiz-without-agreement-delivery-frequency">Частота доставки груза*</label>
-            <input type="text" name="fiz-without-agreement-delivery-frequency" id="fiz-without-agreement-delivery-frequency" placeholder="Введите частоту доставки грузов">
+            <input type="text" name="fiz-without-agreement-delivery-frequency" id="fiz-without-agreement-delivery-frequency" placeholder="Введите частоту доставки грузов" [(ngModel)]="deliveryFrequencyIndividualWithoutAgreement">
             <label for="fiz-without-agreement-cargo-description">Описание грузов</label>
-            <input type="text" name="fiz-without-agreement-cargo-description" id="fiz-without-agreement-cargo-description" placeholder="Введите описание грузов">
+            <input type="text" name="fiz-without-agreement-cargo-description" id="fiz-without-agreement-cargo-description" placeholder="Введите описание грузов" [(ngModel)]="cargoDescriptionIndividualWithoutAgreement">
           </div>
         </div>
       </div>
@@ -167,13 +184,13 @@
           <div [ngClass]="{'person-without-agreement-show': !personWithoutAgreement, 'person-without-agreement-hide': personWithoutAgreement}" class="register-content-main-without-agrement-col-4-ur">
             <p class="mark">прочая информация</p>
             <label for="ur-without-agreement-delivery-frequency">Частота доставки груза*</label>
-            <input type="text" name="ur-without-agreement-delivery-frequency" id="ur-without-agreement-delivery-frequency" placeholder="Введите частоту доставки груза">
+            <input type="text" name="ur-without-agreement-delivery-frequency" id="ur-without-agreement-delivery-frequency" placeholder="Введите частоту доставки груза" [(ngModel)]="deliveryFrequencyEntityWithoutAgreement">
             <label for="ur-without-agreement-cargo-description">Описание грузов</label>
-            <input type="text" name="ur-without-agreement-cargo-description" id="ur-without-agreement-cargo-description" placeholder="Введите описание грузов">
+            <input type="text" name="ur-without-agreement-cargo-description" id="ur-without-agreement-cargo-description" placeholder="Введите описание грузов" [(ngModel)]="cargoDescriptionEntityWithoutAgreement">
             <label for="ur-without-agreement-support-email-name">ФИО лица по взаиморасчетам</label>
-            <input type="text" name="ur-without-agreement-support-email-name" id="ur-without-agreement-support-email-name" placeholder="Введите ФИО лица по взаиморасчетам">
+            <input type="text" name="ur-without-agreement-support-email-name" id="ur-without-agreement-support-email-name" placeholder="Введите ФИО лица по взаиморасчетам" [(ngModel)]="settlementPersonEntityWithoutAgreement">
             <label for="ur-without-agreement-support-person-email">Email лица по взаиморасчетам</label>
-            <input type="text" name="ur-without-agreement-support-person-email" id="ur-without-agreement-support-person-email" placeholder="Введите email лица по взаиморасчетам">
+            <input type="text" name="ur-without-agreement-support-person-email" id="ur-without-agreement-support-person-email" placeholder="Введите email лица по взаиморасчетам" [(ngModel)]="settlementPersonEmailEntityWithoutAgreement">
           </div>
           <div [ngClass]="{'person-without-agreement-show': personWithoutAgreement, 'person-without-agreement-hide': !personWithoutAgreement}" class="register-content-main-without-agrement-col-4-fiz">
             <div class="add-file-box">
@@ -192,6 +209,6 @@
     </div>
   </div>
   <div class="register-content-submit">
-    <input type="submit" value="Регистрация">
+    <input type="submit" value="Регистрация" (click)="doRegistration()">
   </div>
 </div>

@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  EntityWithAgreement,
+  EntityWithoutAgreement,
+  IndividualWithAgreement,
+  IndividualWithoutAgreement,
+  RestapiService
+} from '../../restapi.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -6,19 +14,178 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  // Forms swithicng
+  // Forms switching
   agreement: boolean;
   personWithAgreement: boolean;
   personWithoutAgreement: boolean;
+  // Entity user with agreement options
+  companyNameEntityWithAgreement: string;
+  emailEntityWithAgreement: string;
+  loginEntityWithAgreement: string;
+  passwordEntityWithAgreement: string;
+  phoneEntityWithAgreement: string;
+  unpEntityWithAgreement: string;
+  userNameEntityWithAgreement: string;
+  // Entity user without agreement options
+  clientNameEntityWithoutAgreement: string;
+  legalAddressEntityWithoutAgreement: string;
+  postAddressEntityWithoutAgreement: string;
+  unpEntityWithoutAgreement: string;
+  okpoEntityWithoutAgreement: string;
+  authorizedPersonEntityWithoutAgreement: string;
+  groundsForSigningEntityWithoutAgreement: string;
+  phoneEntityWithoutAgreement: string;
+  emailEntityWithoutAgreement: string;
+  bankNameEntityWithoutAgreement: string;
+  bankAddressEntityWithoutAgreement: string;
+  bankCodeEntityWithoutAgreement: string;
+  accountEntityWithoutAgreement: string;
+  deliveryFrequencyEntityWithoutAgreement: string;
+  cargoDescriptionEntityWithoutAgreement: string;
+  settlementPersonEntityWithoutAgreement: string;
+  settlementPersonEmailEntityWithoutAgreement: string;
+  // Individual user with agreement options
+  passportNumberIndividualWithAgreement: string;
+  nameIndividualWithAgreement: string;
+  emailIndividualWithAgreement: string;
+  phoneIndividualWithAgreement: string;
+  loginIndividualWithAgreement: string;
+  passwordIndividualWithAgreement: string;
+  // Individual user without agreement options
+  nameIndividualWithoutAgreement: string;
+  documentTypeIndividualWithoutAgreement: string;
+  passportSeriesIndividualWithoutAgreement: string;
+  passportNumberIndividualWithoutAgreement: string;
+  issueAddressIndividualWithoutAgreement: string;
+  issueDateIndividualWithoutAgreement: string;
+  personalNumberIndividualWithoutAgreement: string;
+  homeAddressIndividualWithoutAgreement: string;
+  phoneIndividualWithoutAgreement: string;
+  emailIndividualWithoutAgreement: string;
+  deliveryFrequencyIndividualWithoutAgreement: string;
+  cargoDescriptionIndividualWithoutAgreement: string;
 
-  constructor() {
+  constructor(private service: RestapiService, private router: Router) {
     // Forms switching
     this.agreement = false;
     this.personWithAgreement = false;
     this.personWithoutAgreement = false;
+    // Entity user with agreement options
+    this.companyNameEntityWithAgreement = '';
+    this.emailEntityWithAgreement = '';
+    this.loginEntityWithAgreement = '';
+    this.passwordEntityWithAgreement = '';
+    this.phoneEntityWithAgreement = '';
+    this.unpEntityWithAgreement = '';
+    this.userNameEntityWithAgreement = '';
+    // Entity user without agreement options
+    this.clientNameEntityWithoutAgreement = '';
+    this.legalAddressEntityWithoutAgreement = '';
+    this.postAddressEntityWithoutAgreement = '';
+    this.unpEntityWithoutAgreement = '';
+    this.okpoEntityWithoutAgreement = '';
+    this.authorizedPersonEntityWithoutAgreement = '';
+    this.groundsForSigningEntityWithoutAgreement = '';
+    this.phoneEntityWithoutAgreement = '';
+    this.emailEntityWithoutAgreement = '';
+    this.bankNameEntityWithoutAgreement = '';
+    this.bankAddressEntityWithoutAgreement = '';
+    this.bankCodeEntityWithoutAgreement = '';
+    this.accountEntityWithoutAgreement = '';
+    this.deliveryFrequencyEntityWithoutAgreement = '';
+    this.cargoDescriptionEntityWithoutAgreement = '';
+    this.settlementPersonEntityWithoutAgreement = '';
+    this.settlementPersonEmailEntityWithoutAgreement = '';
+    // Individual user with agreement options
+    this.passportNumberIndividualWithAgreement = '';
+    this.nameIndividualWithAgreement = '';
+    this.emailIndividualWithAgreement = '';
+    this.phoneIndividualWithAgreement = '';
+    this.loginIndividualWithAgreement = '';
+    this.passwordIndividualWithAgreement = '';
+    // Individual user without agreement options
+    this.nameIndividualWithoutAgreement = '';
+    this.documentTypeIndividualWithoutAgreement = '';
+    this.passportSeriesIndividualWithoutAgreement = '';
+    this.passportNumberIndividualWithoutAgreement = '';
+    this.issueAddressIndividualWithoutAgreement = '';
+    this.issueDateIndividualWithoutAgreement = '';
+    this.personalNumberIndividualWithoutAgreement = '';
+    this.homeAddressIndividualWithoutAgreement = '';
+    this.phoneIndividualWithoutAgreement = '';
+    this.emailIndividualWithoutAgreement = '';
+    this.deliveryFrequencyIndividualWithoutAgreement = '';
+    this.cargoDescriptionIndividualWithoutAgreement = '';
   }
 
   ngOnInit(): void {
+  }
+
+  doRegistration(): void {
+    let data: EntityWithoutAgreement | EntityWithAgreement | IndividualWithoutAgreement | IndividualWithAgreement = {} as any;
+    if (this.agreement === false && this.personWithAgreement === false && this.personWithoutAgreement === false) {
+      data = {
+        companyName_EntityWithAgreement: this.companyNameEntityWithAgreement,
+        email_EntityWithAgreement: this.emailEntityWithAgreement,
+        login_EntityWithAgreement: this.loginEntityWithAgreement,
+        password_EntityWithAgreement: this.passwordEntityWithAgreement,
+        phone_EntityWithAgreement: this.phoneEntityWithAgreement,
+        unp_EntityWithAgreement: this.unpEntityWithAgreement,
+        userName_EntityWithAgreement: this.userNameEntityWithAgreement
+      };
+    } else if (this.agreement === true && this.personWithAgreement === true && this.personWithoutAgreement === false) {
+      data = {
+        clientName_EntityWithoutAgreement: this.clientNameEntityWithoutAgreement,
+        legalAddress_EntityWithoutAgreement: this.legalAddressEntityWithoutAgreement,
+        postAddress_EntityWithoutAgreement: this.postAddressEntityWithoutAgreement,
+        unp_EntityWithoutAgreement: this.unpEntityWithoutAgreement,
+        okpo_EntityWithoutAgreement: this.okpoEntityWithoutAgreement,
+        authorizedPerson_EntityWithoutAgreement: this.authorizedPersonEntityWithoutAgreement,
+        groundsForSigning_EntityWithoutAgreement: this.groundsForSigningEntityWithoutAgreement,
+        phone_EntityWithoutAgreement: this.phoneEntityWithoutAgreement,
+        email_EntityWithoutAgreement: this.emailEntityWithoutAgreement,
+        bankName_EntityWithoutAgreement: this.bankAddressEntityWithoutAgreement,
+        bankAddress_EntityWithoutAgreement: this.bankAddressEntityWithoutAgreement,
+        bankCode_EntityWithoutAgreement: this.bankCodeEntityWithoutAgreement,
+        account_EntityWithoutAgreement: this.accountEntityWithoutAgreement,
+        deliveryFrequency_EntityWithoutAgreement: this.deliveryFrequencyEntityWithoutAgreement,
+        cargoDescription_EntityWithoutAgreement: this.cargoDescriptionEntityWithoutAgreement,
+        settlementPerson_EntityWithoutAgreement: this.settlementPersonEntityWithoutAgreement,
+        settlementPersonEmail_EntityWithoutAgreement: this.settlementPersonEmailEntityWithoutAgreement
+      };
+    } else if (this.agreement === false && this.personWithAgreement === true && this.personWithoutAgreement === false) {
+      data = {
+        passportNumber_IndividualWithAgreement: this.passportNumberIndividualWithAgreement,
+        name_IndividualWithAgreement: this.nameIndividualWithAgreement,
+        email_IndividualWithAgreement: this.emailIndividualWithAgreement,
+        phone_IndividualWithAgreement: this.phoneIndividualWithAgreement,
+        login_IndividualWithAgreement: this.loginIndividualWithAgreement,
+        password_IndividualWithAgreement: this.passwordIndividualWithAgreement
+      };
+    } else if (this.agreement === true && this.personWithAgreement === true && this.personWithoutAgreement === true) {
+      data = {
+        name_IndividualWithoutAgreement: this.nameIndividualWithoutAgreement,
+        documentType_IndividualWithoutAgreement: this.documentTypeIndividualWithoutAgreement,
+        passportSeries_IndividualWithoutAgreement: this.passportSeriesIndividualWithoutAgreement,
+        passportNumber_IndividualWithoutAgreement: this.passportNumberIndividualWithoutAgreement,
+        issueAddress_IndividualWithoutAgreement: this.issueAddressIndividualWithoutAgreement,
+        issueDate_IndividualWithoutAgreement: this.issueDateIndividualWithoutAgreement,
+        personalNumber_IndividualWithoutAgreement: this.personalNumberIndividualWithoutAgreement,
+        homeAddress_IndividualWithoutAgreement: this.homeAddressIndividualWithoutAgreement,
+        phone_IndividualWithoutAgreement: this.phoneIndividualWithoutAgreement,
+        email_IndividualWithoutAgreement: this.emailIndividualWithoutAgreement,
+        deliveryFrequency_IndividualWithoutAgreement: this.deliveryFrequencyIndividualWithoutAgreement,
+        cargoDescription_IndividualWithoutAgreement: this.cargoDescriptionIndividualWithoutAgreement
+      };
+    }
+    console.log(data);
+
+    // this.service.register(data)
+    //   .subscribe(response => {
+    //     if (response === '0') {
+    //       this.router.navigate(['login']);
+    //     }
+    //   });
   }
 
   toggleWithAgreement(event: any): void {
