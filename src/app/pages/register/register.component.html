@@ -1,1 +1,66 @@
-<p>register works!</p>
+<div class="register-content">
+  <div class="register-content-controls">
+    <div class="grey-box">
+      <h2 class="grey-header">Наличие транспортного договора</h2>
+      <div class="register-content-controls-row">
+        <div class="checkbox-block" style="margin-right: 15px;">
+          <input class="checkbox-block-item" type="radio" name="type" id="type1">
+          <span class="checkbox-block-icon"></span>
+        </div>
+        <label for="type1" class="active-label">Есть договор</label>
+        <div class="checkbox-block" style="margin-right: 15px;">
+          <input class="checkbox-block-item" type="radio" name="type" id="type2">
+          <span class="checkbox-block-icon"></span>
+        </div>
+        <label for="type2" class="inactive-label">Нет договора</label>
+      </div>
+    </div>
+  </div>
+  <div class="register-content-main">
+    <div class="register-content-main-with-agreement">
+      <div class="register-content-main-with-agreement-person-controls">
+        <div class="grey-box">
+          <div class="register-content-main-with-agreement-person-controls-items">
+            <button class="active-btn">Юр. лицо</button>
+            <button class="white-btn">Физ. лицо</button>
+          </div>
+        </div>
+      </div>
+      <div class="register-content-main-with-agreement-field-row">
+        <div class="grey-box">
+          <div class="register-content-main-with-agreement-field-row-content">
+            <div class="register-content-main-with-agreemen-field-row-item pr-30">
+              <label for="ur-with-company">Компания</label>
+              <input type="text" name="ur-with-company" id="ur-with-company" placeholder="Введите название компании">
+            </div>
+            <div class="register-content-main-with-agreemen-field-row-item pl-30">
+              <label for="ur-with-unp">УНП компании</label>
+              <input type="text" name="ur-with-unp" id="ur-with-unp" placeholder="Введите УНП">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="register-content-main-with-agreement-field-columns">
+        <div class="grey-box">
+          <label for="ur-with-name">Имя</label>
+          <input type="text" name="ur-with-name" id="ur-with-name" placeholder="Введите имя">
+          <label for="ur-with-email">Email</label>
+          <input type="email" name="ur-with-email" id="ur-with-email" placeholder="Введите email">
+          <label for="ur-with-phone">Телефон</label>
+          <input type="tel" name="ur-with-phone" id="ur-with-phone" placeholder="Введите телефон">
+        </div>
+        <div class="grey-box">
+          <label for="ur-with-login">Логин</label>
+          <input type="text" name="ur-with-login" id="ur-with-login" placeholder="Введите логин">
+          <label for="ur-with-password">Пароль</label>
+          <input type="password" name="ur-with-password" id="ur-with-password" placeholder="Введите пароль">
+          <label for="ur-with-password-repeat">Пароль (подтвердить</label>
+          <input type="password" name="ur-with-password-repeat" id="ur-with-password-repeat" placeholder="Повторите пароль">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="register-content-submit">
+    <input type="submit" value="Регистрация">
+  </div>
+</div>

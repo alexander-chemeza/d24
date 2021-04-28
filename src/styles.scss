@@ -35,4 +35,25 @@ a {
   border-radius: 10px;
   background-color: #EEE6F5;
   padding: 30px;
+  box-sizing: border-box;
+}
+
+.pl-30 {
+  padding-left: 30px;
+}
+
+.pr-30 {
+  padding-right: 30px;
+}
+
+.grey-header {
+  display: block;
+  font-family: "Montserrat-SemiBold", sans-serif;
+  font-size: 1.4rem;
+  color: rgba(0,0,0,0.5);
+  margin-top: 20px;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
 }
