@@ -68,7 +68,8 @@
         max-width: 410px;
       }
 
-      &-col-1-ur {
+      &-col-1-ur,
+      &-col-1-fiz {
         margin-top: 50px;
       }
 
@@ -109,5 +110,22 @@
     font-size: 1.4rem;
     color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
+  }
+}
+
+.fiz-row {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content min-content;
+  grid-template-areas: "item-1 item-2";
+  grid-gap: 0 20px;
+
+  &-item-1 {
+    grid-area: item-1;
+  }
+
+  &-item-2 {
+    grid-area: item-2;
   }
 }

@@ -70,71 +70,119 @@
             <button class="active-btn">Юр. лицо</button>
             <button class="white-btn">Физ лицо</button>
           </div>
-          <div class="register-content-main-without-agreement-col-1-ur">
-            <label for="ur-without-agreement-client-name">Наименование клиента*</label>
-            <input type="text" name="ur-without-agreement-client-name" id="ur-without-agreement-client-name" placeholder="Введите наименование клиента">
-            <label for="ur-without-agreement-ur-address">Юридический адрес*</label>
-            <input type="text" name="ur-without-agreement-ur-address" id="ur-without-agreement-ur-address" placeholder="Введите юридический адрес">
-            <label for="ur-without-agreement-post-address">Почтовый адрес*</label>
-            <input type="text" name="ur-without-agreement-post-address" id="ur-without-agreement-post-address" placeholder="Введите почтовый адрес">
-            <label for="ur-without-agreement-unp">УНП*</label>
-            <input type="text" name="ur-without-agreement-unp" id="ur-without-agreement-unp" placeholder="Введите УНП">
+<!--          <div class="register-content-main-without-agreement-col-1-ur">-->
+<!--            <label for="ur-without-agreement-client-name">Наименование клиента*</label>-->
+<!--            <input type="text" name="ur-without-agreement-client-name" id="ur-without-agreement-client-name" placeholder="Введите наименование клиента">-->
+<!--            <label for="ur-without-agreement-ur-address">Юридический адрес*</label>-->
+<!--            <input type="text" name="ur-without-agreement-ur-address" id="ur-without-agreement-ur-address" placeholder="Введите юридический адрес">-->
+<!--            <label for="ur-without-agreement-post-address">Почтовый адрес*</label>-->
+<!--            <input type="text" name="ur-without-agreement-post-address" id="ur-without-agreement-post-address" placeholder="Введите почтовый адрес">-->
+<!--            <label for="ur-without-agreement-unp">УНП*</label>-->
+<!--            <input type="text" name="ur-without-agreement-unp" id="ur-without-agreement-unp" placeholder="Введите УНП">-->
+<!--          </div>-->
+          <div class="register-content-main-without-agreement-col-1-fiz">
+            <label for="fiz-without-agreement-fio">ФИО*</label>
+            <input type="text" name="fiz-without-agreement-fio" id="fiz-without-agreement-fio" placeholder="Введите ФИО">
+            <label for="fiz-without-agreement-doc-type">Вид удостоверения*</label>
+            <input type="text" name="fiz-without-agreement-doc-type" id="fiz-without-agreement-doc-type" placeholder="Введите вид документа">
+            <div class="fiz-row">
+              <div class="fiz-row-item-1">
+                <label for="fiz-without-agreement-doc-seria">Серия*</label>
+                <input type="text" name="fiz-without-agreement-doc-seria" id="fiz-without-agreement-doc-seria" placeholder="Введите серию документа">
+              </div>
+              <div class="fiz-row-item-2">
+                <label for="fiz-without-agreement-doc-number">Номер документа*</label>
+                <input type="text" name="fiz-without-agreement-doc-number" id="fiz-without-agreement-doc-number" placeholder="Введите номер документа">
+              </div>
+            </div>
+            <label for="fiz-without-agreement-doc-place">Кем выдано удостоверение*</label>
+            <input type="text" name="fiz-without-agreement-doc-place" id="fiz-without-agreement-doc-place" placeholder="Введите место выдачи документа">
           </div>
         </div>
       </div>
       <div class="col-2">
         <div class="grey-box">
-          <div class="register-content-main-without-agreement-col-2-ur">
-            <label for="ur-without-agreement-okpo">ОКПО*</label>
-            <input type="text" name="ur-without-agreement-okpo" id="ur-without-agreement-okpo" placeholder="Введите ОКПО">
-            <label for="ur-without-agreement-fio-of-person">ФИО уполномоченного лица*</label>
-            <input type="text" name="ur-without-agreement-fio-of-person" id="ur-without-agreement-fio-of-person" placeholder="Введите ФИО уполномоченного лица">
-            <label for="ur-without-agreement-statement">Основание для подписания договора*</label>
-            <input type="text" name="ur-without-agreement-statement" id="ur-without-agreement-statement" placeholder="Введите основание для подписания договора">
-            <label for="ur-without-agreement-tel-fax">Телефон/факс*</label>
-            <input type="text" name="ur-without-agreement-tel-fax" id="ur-without-agreement-tel-fax" placeholder="Введите телефон/факс">
-            <label for="ur-without-agreement-email">Email*</label>
-            <input type="text" name="ur-without-agreement-email" id="ur-without-agreement-email" placeholder="Введите email">
+<!--          <div class="register-content-main-without-agreement-col-2-ur">-->
+<!--            <label for="ur-without-agreement-okpo">ОКПО*</label>-->
+<!--            <input type="text" name="ur-without-agreement-okpo" id="ur-without-agreement-okpo" placeholder="Введите ОКПО">-->
+<!--            <label for="ur-without-agreement-fio-of-person">ФИО уполномоченного лица*</label>-->
+<!--            <input type="text" name="ur-without-agreement-fio-of-person" id="ur-without-agreement-fio-of-person" placeholder="Введите ФИО уполномоченного лица">-->
+<!--            <label for="ur-without-agreement-statement">Основание для подписания договора*</label>-->
+<!--            <input type="text" name="ur-without-agreement-statement" id="ur-without-agreement-statement" placeholder="Введите основание для подписания договора">-->
+<!--            <label for="ur-without-agreement-tel-fax">Телефон/факс*</label>-->
+<!--            <input type="text" name="ur-without-agreement-tel-fax" id="ur-without-agreement-tel-fax" placeholder="Введите телефон/факс">-->
+<!--            <label for="ur-without-agreement-email">Email*</label>-->
+<!--            <input type="text" name="ur-without-agreement-email" id="ur-without-agreement-email" placeholder="Введите email">-->
+<!--          </div>-->
+          <div class="register-content-main-without-agreement-col-2-fiz">
+            <label for="fiz-without-agreement-doc-date">Дата выдачи*</label>
+            <input type="text" name="fiz-without-agreement-doc-date" id="fiz-without-agreement-doc-date" placeholder="Введите дату выдачи">
+            <label for="fiz-without-agreement-doc-main-number">Личный номер*</label>
+            <input type="text" name="fiz-without-agreement-doc-main-number" id="fiz-without-agreement-doc-main-number" placeholder="Введите личный номер">
+            <label for="fiz-without-agreement-home-address">Адрес прописки*</label>
+            <input type="text" name="fiz-without-agreement-home-address" id="fiz-without-agreement-home-address" placeholder="Введите адрес прописки">
+            <label for="fiz-without-agreement-tel">Телефон/факс*</label>
+            <input type="tel" name="fiz-without-agreement-tel" id="fiz-without-agreement-tel" placeholder="Введите телефон/факс">
+            <label for="fiz-without-agreement-email">Email*</label>
+            <input type="email" name="fiz-without-agreement-email" id="fiz-without-agreement-email" placeholder="Введите Email">
           </div>
         </div>
       </div>
       <div class="col-3">
         <div class="grey-box">
-          <div class="register-content-main-without-agrement-col-3-ur">
-            <p class="mark">Банковские рейквизиты</p>
-            <label for="ur-without-agreement-bank-name">Наименование банка*</label>
-            <input type="text" name="ur-without-agreement-bank-name" id="ur-without-agreement-bank-name" placeholder="Введите наименование банка">
-            <label for="ur-without-agreement-bank-address">Адрес банка*</label>
-            <input type="text" name="ur-without-agreement-bank-address" id="ur-without-agreement-bank-address" placeholder="Введите адрес банка">
-            <label for="ur-without-agreement-bank-code">Код банка*</label>
-            <input type="text" name="ur-without-agreement-bank-code" id="ur-without-agreement-bank-code" placeholder="Введите код банка">
-            <label for="ur-without-agreement-bank-account">Расчетный счет*</label>
-            <input type="text" name="ur-without-agreement-bank-account" id="ur-without-agreement-bank-account" placeholder="Введите расчетный счет">
-            <div class="add-file-box mt-40">
+<!--          <div class="register-content-main-without-agrement-col-3-ur">-->
+<!--            <p class="mark">Банковские рейквизиты</p>-->
+<!--            <label for="ur-without-agreement-bank-name">Наименование банка*</label>-->
+<!--            <input type="text" name="ur-without-agreement-bank-name" id="ur-without-agreement-bank-name" placeholder="Введите наименование банка">-->
+<!--            <label for="ur-without-agreement-bank-address">Адрес банка*</label>-->
+<!--            <input type="text" name="ur-without-agreement-bank-address" id="ur-without-agreement-bank-address" placeholder="Введите адрес банка">-->
+<!--            <label for="ur-without-agreement-bank-code">Код банка*</label>-->
+<!--            <input type="text" name="ur-without-agreement-bank-code" id="ur-without-agreement-bank-code" placeholder="Введите код банка">-->
+<!--            <label for="ur-without-agreement-bank-account">Расчетный счет*</label>-->
+<!--            <input type="text" name="ur-without-agreement-bank-account" id="ur-without-agreement-bank-account" placeholder="Введите расчетный счет">-->
+<!--            <div class="add-file-box mt-40">-->
+<!--              <div class="add-file-box-item">-->
+<!--                <input type="file">-->
+<!--                <span class="small-bold-text">Прикрепить файл</span>-->
+<!--                <button class="active-btn add-btn ml-15"></button>-->
+<!--              </div>-->
+<!--              <div class="add-file-box-item">-->
+<!--                <span class="small-bold-text">Прикрепите, пожалуйста,<br> Свидетельство о регистрации</span>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+          <div class="register-content-main-without-agrement-col-3-fiz">
+            <label for="fiz-without-agreement-delivery-frequency">Частота доставки груза*</label>
+            <input type="text" name="fiz-without-agreement-delivery-frequency" id="fiz-without-agreement-delivery-frequency" placeholder="Введите частоту доставки грузов">
+            <label for="fiz-without-agreement-cargo-description">Описание грузов</label>
+            <input type="text" name="fiz-without-agreement-cargo-description" id="fiz-without-agreement-cargo-description" placeholder="Введите описание грузов">
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="grey-box">
+<!--          <div class="register-content-main-without-agrement-col-4-ur">-->
+<!--            <p class="mark">прочая информация</p>-->
+<!--            <label for="ur-without-agreement-delivery-frequency">Частота доставки груза*</label>-->
+<!--            <input type="text" name="ur-without-agreement-delivery-frequency" id="ur-without-agreement-delivery-frequency" placeholder="Введите частоту доставки груза">-->
+<!--            <label for="ur-without-agreement-cargo-description">Описание грузов</label>-->
+<!--            <input type="text" name="ur-without-agreement-cargo-description" id="ur-without-agreement-cargo-description" placeholder="Введите описание грузов">-->
+<!--            <label for="ur-without-agreement-support-email-name">ФИО лица по взаиморасчетам</label>-->
+<!--            <input type="text" name="ur-without-agreement-support-email-name" id="ur-without-agreement-support-email-name" placeholder="Введите ФИО лица по взаиморасчетам">-->
+<!--            <label for="ur-without-agreement-support-person-email">Email лица по взаиморасчетам</label>-->
+<!--            <input type="text" name="ur-without-agreement-support-person-email" id="ur-without-agreement-support-person-email" placeholder="Введите email лица по взаиморасчетам">-->
+<!--          </div>-->
+          <div class="register-content-main-without-agrement-col-4-fiz">
+            <div class="add-file-box">
               <div class="add-file-box-item">
                 <input type="file">
                 <span class="small-bold-text">Прикрепить файл</span>
                 <button class="active-btn add-btn ml-15"></button>
               </div>
               <div class="add-file-box-item">
-                <span class="small-bold-text">Прикрепите, пожалуйста,<br> Свидетельство о регистрации</span>
+                <span class="small-bold-text">Прикрепите, пожалуйста, страницы паспорта <br> ( прописка,  последняя и предпоследняя <br> страница в развороте )</span>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-4">
-        <div class="grey-box">
-          <div class="register-content-main-without-agrement-col-4-ur">
-            <p class="mark">прочая информация</p>
-            <label for="ur-without-agreement-delivery-frequency">Частота доставки груза*</label>
-            <input type="text" name="ur-without-agreement-delivery-frequency" id="ur-without-agreement-delivery-frequency" placeholder="Введите частоту доставки груза">
-            <label for="ur-without-agreement-cargo-description">Описание грузов</label>
-            <input type="text" name="ur-without-agreement-cargo-description" id="ur-without-agreement-cargo-description" placeholder="Введите описание грузов">
-            <label for="ur-without-agreement-support-email-name">ФИО лица по взаиморасчетам</label>
-            <input type="text" name="ur-without-agreement-support-email-name" id="ur-without-agreement-support-email-name" placeholder="Введите ФИО лица по взаиморасчетам">
-            <label for="ur-without-agreement-support-person-email">Email лица по взаиморасчетам</label>
-            <input type="text" name="ur-without-agreement-support-person-email" id="ur-without-agreement-support-person-email" placeholder="Введите email лица по взаиморасчетам">
           </div>
         </div>
       </div>
