@@ -105,6 +105,7 @@ input[type="submit"] {
 }
 
 button {
+  display: inline-block;
   border: none;
   border-radius: 5px;
   box-sizing: border-box;
@@ -128,7 +129,40 @@ button {
     transition: all 1s;
 
     &:hover {
-      background-color: #8055a7;
+      background-color: #5e2f88;
     }
+  }
+
+  &.add-btn {
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    border-radius: 45px;
+    background-image: url("../../assets/img/common/add.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
+.add-file-box {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+  &-item {
+    display: flex;
+    align-items: center;
+  }
+
+  & input[type="file"] {
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
   }
 }

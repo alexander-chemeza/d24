@@ -17,49 +17,125 @@
     </div>
   </div>
   <div class="register-content-main">
-    <div class="register-content-main-with-agreement">
-      <div class="register-content-main-with-agreement-person-controls">
-        <div class="grey-box">
-          <div class="register-content-main-with-agreement-person-controls-items">
-            <button class="active-btn">Юр. лицо</button>
-            <button class="white-btn">Физ. лицо</button>
-          </div>
-        </div>
-      </div>
-      <div class="register-content-main-with-agreement-field-row">
-        <div class="grey-box">
-          <div class="register-content-main-with-agreement-field-row-content">
-            <div class="register-content-main-with-agreement-field-row-item pr-30">
-              <label for="ur-with-company">Компания</label>
-              <input type="text" name="ur-with-company" id="ur-with-company" placeholder="Введите название компании">
-            </div>
-            <div class="register-content-main-with-agreement-field-row-item pl-30">
-              <label for="ur-with-unp">УНП компании</label>
-              <input type="text" name="ur-with-unp" id="ur-with-unp" placeholder="Введите УНП">
-            </div>
+<!--    <div class="register-content-main-with-agreement">-->
+<!--      <div class="register-content-main-with-agreement-person-controls">-->
+<!--        <div class="grey-box">-->
+<!--          <div class="register-content-main-with-agreement-person-controls-items">-->
+<!--            <button class="active-btn">Юр. лицо</button>-->
+<!--            <button class="white-btn">Физ. лицо</button>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="register-content-main-with-agreement-field-row">-->
+<!--        <div class="grey-box">-->
+<!--          <div class="register-content-main-with-agreement-field-row-content">-->
 <!--            <div class="register-content-main-with-agreement-field-row-item pr-30">-->
-<!--              <label for="fiz-with-passport">Идентификационный  номер паспорта</label>-->
-<!--              <input type="text" name="fiz-with-passport" id="fiz-with-passport" placeholder="Введите идентификационный  номер паспорта">-->
+<!--              <label for="ur-with-company">Компания</label>-->
+<!--              <input type="text" name="ur-with-company" id="ur-with-company" placeholder="Введите название компании">-->
 <!--            </div>-->
+<!--            <div class="register-content-main-with-agreement-field-row-item pl-30">-->
+<!--              <label for="ur-with-unp">УНП компании</label>-->
+<!--              <input type="text" name="ur-with-unp" id="ur-with-unp" placeholder="Введите УНП">-->
+<!--            </div>-->
+<!--&lt;!&ndash;            <div class="register-content-main-with-agreement-field-row-item pr-30">&ndash;&gt;-->
+<!--&lt;!&ndash;              <label for="fiz-with-passport">Идентификационный  номер паспорта</label>&ndash;&gt;-->
+<!--&lt;!&ndash;              <input type="text" name="fiz-with-passport" id="fiz-with-passport" placeholder="Введите идентификационный  номер паспорта">&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      <div class="register-content-main-with-agreement-field-columns">-->
+<!--        <div class="grey-box">-->
+<!--          <label for="ur-with-name">Имя</label>-->
+<!--          <input type="text" name="ur-with-name" id="ur-with-name" placeholder="Введите имя">-->
+<!--          <label for="ur-with-email">Email</label>-->
+<!--          <input type="email" name="ur-with-email" id="ur-with-email" placeholder="Введите email">-->
+<!--          <label for="ur-with-phone">Телефон</label>-->
+<!--          <input type="tel" name="ur-with-phone" id="ur-with-phone" placeholder="Введите телефон">-->
+<!--        </div>-->
+<!--        <div class="grey-box">-->
+<!--          <label for="ur-with-login">Логин</label>-->
+<!--          <input type="text" name="ur-with-login" id="ur-with-login" placeholder="Введите логин">-->
+<!--          <label for="ur-with-password">Пароль</label>-->
+<!--          <input type="password" name="ur-with-password" id="ur-with-password" placeholder="Введите пароль">-->
+<!--          <label for="ur-with-password-repeat">Пароль (подтвердить</label>-->
+<!--          <input type="password" name="ur-with-password-repeat" id="ur-with-password-repeat" placeholder="Повторите пароль">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <div class="register-content-main-without-agreement">
+      <div class="col-1">
+        <div class="grey-box">
+          <div class="register-content-main-without-agreement-controls">
+            <button class="active-btn">Юр. лицо</button>
+            <button class="white-btn">Физ лицо</button>
+          </div>
+          <div class="register-content-main-without-agreement-col-1-ur">
+            <label for="ur-without-agreement-client-name">Наименование клиента*</label>
+            <input type="text" name="ur-without-agreement-client-name" id="ur-without-agreement-client-name" placeholder="Введите наименование клиента">
+            <label for="ur-without-agreement-ur-address">Юридический адрес*</label>
+            <input type="text" name="ur-without-agreement-ur-address" id="ur-without-agreement-ur-address" placeholder="Введите юридический адрес">
+            <label for="ur-without-agreement-post-address">Почтовый адрес*</label>
+            <input type="text" name="ur-without-agreement-post-address" id="ur-without-agreement-post-address" placeholder="Введите почтовый адрес">
+            <label for="ur-without-agreement-unp">УНП*</label>
+            <input type="text" name="ur-without-agreement-unp" id="ur-without-agreement-unp" placeholder="Введите УНП">
           </div>
         </div>
       </div>
-      <div class="register-content-main-with-agreement-field-columns">
+      <div class="col-2">
         <div class="grey-box">
-          <label for="ur-with-name">Имя</label>
-          <input type="text" name="ur-with-name" id="ur-with-name" placeholder="Введите имя">
-          <label for="ur-with-email">Email</label>
-          <input type="email" name="ur-with-email" id="ur-with-email" placeholder="Введите email">
-          <label for="ur-with-phone">Телефон</label>
-          <input type="tel" name="ur-with-phone" id="ur-with-phone" placeholder="Введите телефон">
+          <div class="register-content-main-without-agreement-col-2-ur">
+            <label for="ur-without-agreement-okpo">ОКПО*</label>
+            <input type="text" name="ur-without-agreement-okpo" id="ur-without-agreement-okpo" placeholder="Введите ОКПО">
+            <label for="ur-without-agreement-fio-of-person">ФИО уполномоченного лица*</label>
+            <input type="text" name="ur-without-agreement-fio-of-person" id="ur-without-agreement-fio-of-person" placeholder="Введите ФИО уполномоченного лица">
+            <label for="ur-without-agreement-statement">Основание для подписания договора*</label>
+            <input type="text" name="ur-without-agreement-statement" id="ur-without-agreement-statement" placeholder="Введите основание для подписания договора">
+            <label for="ur-without-agreement-tel-fax">Телефон/факс*</label>
+            <input type="text" name="ur-without-agreement-tel-fax" id="ur-without-agreement-tel-fax" placeholder="Введите телефон/факс">
+            <label for="ur-without-agreement-email">Email*</label>
+            <input type="text" name="ur-without-agreement-email" id="ur-without-agreement-email" placeholder="Введите email">
+          </div>
         </div>
+      </div>
+      <div class="col-3">
         <div class="grey-box">
-          <label for="ur-with-login">Логин</label>
-          <input type="text" name="ur-with-login" id="ur-with-login" placeholder="Введите логин">
-          <label for="ur-with-password">Пароль</label>
-          <input type="password" name="ur-with-password" id="ur-with-password" placeholder="Введите пароль">
-          <label for="ur-with-password-repeat">Пароль (подтвердить</label>
-          <input type="password" name="ur-with-password-repeat" id="ur-with-password-repeat" placeholder="Повторите пароль">
+          <div class="register-content-main-without-agrement-col-3-ur">
+            <p class="mark">Банковские рейквизиты</p>
+            <label for="ur-without-agreement-bank-name">Наименование банка*</label>
+            <input type="text" name="ur-without-agreement-bank-name" id="ur-without-agreement-bank-name" placeholder="Введите наименование банка">
+            <label for="ur-without-agreement-bank-address">Адрес банка*</label>
+            <input type="text" name="ur-without-agreement-bank-address" id="ur-without-agreement-bank-address" placeholder="Введите адрес банка">
+            <label for="ur-without-agreement-bank-code">Код банка*</label>
+            <input type="text" name="ur-without-agreement-bank-code" id="ur-without-agreement-bank-code" placeholder="Введите код банка">
+            <label for="ur-without-agreement-bank-account">Расчетный счет*</label>
+            <input type="text" name="ur-without-agreement-bank-account" id="ur-without-agreement-bank-account" placeholder="Введите расчетный счет">
+            <div class="add-file-box mt-40">
+              <div class="add-file-box-item">
+                <input type="file">
+                <span class="small-bold-text">Прикрепить файл</span>
+                <button class="active-btn add-btn ml-15"></button>
+              </div>
+              <div class="add-file-box-item">
+                <span class="small-bold-text">Прикрепите, пожалуйста,<br> Свидетельство о регистрации</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-4">
+        <div class="grey-box">
+          <div class="register-content-main-without-agrement-col-4-ur">
+            <p class="mark">прочая информация</p>
+            <label for="ur-without-agreement-delivery-frequency">Частота доставки груза*</label>
+            <input type="text" name="ur-without-agreement-delivery-frequency" id="ur-without-agreement-delivery-frequency" placeholder="Введите частоту доставки груза">
+            <label for="ur-without-agreement-cargo-description">Описание грузов</label>
+            <input type="text" name="ur-without-agreement-cargo-description" id="ur-without-agreement-cargo-description" placeholder="Введите описание грузов">
+            <label for="ur-without-agreement-support-email-name">ФИО лица по взаиморасчетам</label>
+            <input type="text" name="ur-without-agreement-support-email-name" id="ur-without-agreement-support-email-name" placeholder="Введите ФИО лица по взаиморасчетам">
+            <label for="ur-without-agreement-support-person-email">Email лица по взаиморасчетам</label>
+            <input type="text" name="ur-without-agreement-support-person-email" id="ur-without-agreement-support-person-email" placeholder="Введите email лица по взаиморасчетам">
+          </div>
         </div>
       </div>
     </div>

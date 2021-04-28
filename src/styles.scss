@@ -32,6 +32,7 @@ a {
 
 .grey-box {
   width: 100%;
+  height: 100%;
   border-radius: 10px;
   background-color: #EEE6F5;
   padding: 30px;
@@ -46,6 +47,14 @@ a {
   padding-right: 30px;
 }
 
+.ml-15 {
+  margin-left: 15px;
+}
+
+.mt-40 {
+  margin-top: 40px;
+}
+
 .grey-header {
   display: block;
   font-family: "Montserrat-SemiBold", sans-serif;
@@ -56,4 +65,10 @@ a {
   &:first-of-type {
     margin-top: 0;
   }
+}
+
+.small-bold-text {
+  font-family: "Montserrat-SemiBold", sans-serif;
+  font-size: 1.2rem;
+  color: rgba(0,0,0,0.5);
 }

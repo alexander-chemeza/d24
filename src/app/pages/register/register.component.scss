@@ -54,9 +54,60 @@
         grid-gap: 30px;
       }
     }
+
+    &-without-agreement {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      grid-template-areas: "col-1 col-2" "col-3 col-4";
+      grid-gap: 70px 30px;
+
+      &-controls {
+        display: flex;
+        justify-content: space-between;
+        max-width: 410px;
+      }
+
+      &-col-1-ur {
+        margin-top: 50px;
+      }
+
+      & .col-1 {
+        grid-area: col-1;
+      }
+
+      & .col-2 {
+        grid-area: col-2;
+      }
+
+      & .col-3 {
+        grid-area: col-3;
+      }
+
+      & .col-4 {
+        grid-area: col-4;
+      }
+    }
   }
 
   &-submit {
     grid-area: submit;
+  }
+}
+
+.register-content-main-without-agrement-col-3-ur,
+.register-content-main-without-agrement-col-4-ur{
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  & .mark {
+    position: absolute;
+    top: -80px;
+    left: -30px;
+    font-family: "Montserrat-SemiBold", sans-serif;
+    font-size: 1.4rem;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
   }
 }
