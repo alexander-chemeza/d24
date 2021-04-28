@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RegisterComponent } from './pages/register/register.component';
 import { CalculatorComponent } from './pages/calculator/calculator.component';
 import { HomeComponent } from './pages/home/home.component';
 import { JournalComponent } from './pages/journal/journal.component';
@@ -16,11 +15,11 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { OrderComponent } from './pages/order/order.component';
 import {LoginModule} from './pages/login/login.module';
 import {RecoverModule} from './pages/recover/recover.module';
+import {RegisterModule} from './pages/register/register.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    RegisterComponent,
     CalculatorComponent,
     HomeComponent,
     JournalComponent,
@@ -36,7 +35,8 @@ import {RecoverModule} from './pages/recover/recover.module';
     BrowserModule,
     AppRoutingModule,
     LoginModule,
-    RecoverModule
+    RecoverModule,
+    RegisterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

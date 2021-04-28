@@ -1,3 +1,28 @@
+.agreement-show {
+  display: grid;
+}
+
+.agreement-hide {
+  display: none !important;
+}
+
+.person-with-agreement-show {
+  display: block;
+}
+
+.person-with-agreement-hide {
+  display: none;
+}
+
+.person-without-agreement-show {
+  display: block;
+}
+
+.person-without-agreement-hide {
+
+  display: none;
+}
+
 .register-content {
   display: grid;
   grid-template-columns: 1fr;

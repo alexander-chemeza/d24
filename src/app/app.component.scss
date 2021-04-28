@@ -17,6 +17,7 @@
   grid-area: sidebar;
   grid-row: 1;
   transition: all 1s;
+  transition-delay: 0.2s;
 
   & .logo {
     width: 100%;
@@ -36,6 +37,7 @@
     background-position-x: 10px;
     background-repeat: no-repeat;
     transition: all 1s;
+    transition-delay: 0.2s;
   }
 
   &:hover {
@@ -48,12 +50,14 @@
 
   &:hover ul li .menu-text {
     display: inline;
+    opacity: 1;
   }
 
   &:hover .new-order-btn {
     width: 100%;
     max-width: 175px;
     transition: all 1s;
+    transition-delay: 0.2s;
   }
 
   &:hover .new-order-btn img {
@@ -73,8 +77,10 @@
       &.new-order {
         box-sizing: border-box;
         transition: all 1s;
+        transition-delay: 0.2s;
         & .new-order-link {
           transition: all 1s;
+          transition-delay: 0.2s;
           padding: 7px;
 
           & .new-order-btn {
@@ -84,6 +90,7 @@
             background-color: #ABCF37;
             border-radius: 25px;
             transition: all 1s;
+            transition-delay: 0.2s;
 
             & img {
               margin-right: 0;
@@ -94,7 +101,10 @@
 
       & .menu-text {
         display: none;
+        opacity: 0;
         white-space: nowrap;
+        transition: all 1s;
+        transition-delay: 0.2s;
       }
 
       & a {
@@ -131,18 +141,21 @@
           position: absolute;
           width: 14px;
           height: 15px;
+          transition: all 1s;
         }
 
         &::before {
           right: 0;
           bottom: 100%;
           background-image: radial-gradient(circle at 0 0, transparent 14px, #A070B5 15px);
+          transition: all 1s;
         }
 
         &::after {
           right: 0;
           top: 100%;
           background-image: radial-gradient(circle at 0 100%, transparent 14px, #A070B5 15px);
+          transition: all 1s;
         }
 
         & .white-icon {
@@ -174,6 +187,7 @@
   padding: 30px;
   box-sizing: border-box;
   transition: all 1s;
+  transition-delay: 0.2s;
   border-radius: 10px;
   overflow: auto;
 
