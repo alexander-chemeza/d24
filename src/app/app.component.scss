@@ -103,8 +103,7 @@
         left: 60px;
         opacity: 0;
         white-space: nowrap;
-        transition: all 1s;
-        transition-delay: 0.2s;
+        transition: opacity 0.5s;
       }
 
       & a {
