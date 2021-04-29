@@ -113,10 +113,10 @@
       <!--      Entity without agreement-->
       <form [formGroup]="entityUserWithoutAgreementForm" (ngSubmit)="doRegistration()"
             [ngClass]="{'person-without-agreement-show': !personWithoutAgreement, 'person-without-agreement-hide': personWithoutAgreement}">
-        <div class="row">
-          <div class="grey-box">
+        <div class="main-row">
+          <div class="grey-box col-1">
 <!--            controls-->
-            <div class="row">
+            <div class="row-controls">
               <button class="without-agreement-control-btn active-btn" (click)="toggleWithoutAgreement($event)">Юр. лицо</button>
               <button class="without-agreement-control-btn white-btn" (click)="toggleWithoutAgreement($event)">Физ лицо</button>
             </div>
@@ -130,7 +130,7 @@
             <label for="ur-without-agreement-unp">УНП*</label>
             <input type="text" name="ur-without-agreement-unp" id="ur-without-agreement-unp" placeholder="Введите УНП" formControlName="unp">
           </div>
-          <div class="grey-box">
+          <div class="grey-box col-2">
             <label for="ur-without-agreement-okpo">ОКПО*</label>
             <input type="text" name="ur-without-agreement-okpo" id="ur-without-agreement-okpo" placeholder="Введите ОКПО" formControlName="okpo">
             <label for="ur-without-agreement-fio-of-person">ФИО уполномоченного лица*</label>
@@ -142,7 +142,7 @@
             <label for="ur-without-agreement-email">Email*</label>
             <input type="text" name="ur-without-agreement-email" id="ur-without-agreement-email" placeholder="Введите email" formControlName="email">
           </div>
-          <div class="grey-box">
+          <div class="grey-box col-3">
             <p class="mark">Банковские рейквизиты</p>
             <label for="ur-without-agreement-bank-name">Наименование банка*</label>
             <input type="text" name="ur-without-agreement-bank-name" id="ur-without-agreement-bank-name" placeholder="Введите наименование банка" formControlName="bankName">
@@ -163,7 +163,7 @@
               </div>
             </div>
           </div>
-          <div class="grey-box">
+          <div class="grey-box col-4">
             <p class="mark">прочая информация</p>
             <label for="ur-without-agreement-delivery-frequency">Частота доставки груза*</label>
             <input type="text" name="ur-without-agreement-delivery-frequency" id="ur-without-agreement-delivery-frequency" placeholder="Введите частоту доставки груза" formControlName="deliveryFrequency">
@@ -175,7 +175,7 @@
             <input type="text" name="ur-without-agreement-support-person-email" id="ur-without-agreement-support-person-email" placeholder="Введите email лица по взаиморасчетам" formControlName="settlementPersonEmail">
           </div>
         </div>
-        <div class="row">
+        <div class="submit-row">
           <input type="submit" value="Регистрация" [disabled]="entityUserWithoutAgreementForm.invalid">
         </div>
       </form>
@@ -183,9 +183,9 @@
       <!--      Individual without agreement-->
       <form [formGroup]="individualUserWithoutAgreementForm" (ngSubmit)="doRegistration()"
             [ngClass]="{'person-without-agreement-show': personWithoutAgreement, 'person-without-agreement-hide': !personWithoutAgreement}">
-        <div class="row">
-          <div class="grey-box">
-            <div class="row">
+        <div class="main-row">
+          <div class="grey-box col-1">
+            <div class="row-controls">
               <button class="without-agreement-control-btn active-btn" (click)="toggleWithoutAgreement($event)">Юр. лицо</button>
               <button class="without-agreement-control-btn white-btn" (click)="toggleWithoutAgreement($event)">Физ лицо</button>
             </div>
@@ -206,7 +206,7 @@
             <label for="fiz-without-agreement-doc-place">Кем выдано удостоверение*</label>
             <input type="text" name="fiz-without-agreement-doc-place" id="fiz-without-agreement-doc-place" placeholder="Введите место выдачи документа" formControlName="issueAddress">
           </div>
-          <div class="grey-box">
+          <div class="grey-box col-2">
             <label for="fiz-without-agreement-doc-date">Дата выдачи*</label>
             <input type="text" name="fiz-without-agreement-doc-date" id="fiz-without-agreement-doc-date" placeholder="Введите дату выдачи" formControlName="issueDate">
             <label for="fiz-without-agreement-doc-main-number">Личный номер*</label>
@@ -218,14 +218,14 @@
             <label for="fiz-without-agreement-email">Email*</label>
             <input type="email" name="fiz-without-agreement-email" id="fiz-without-agreement-email" placeholder="Введите Email" formControlName="email">
           </div>
-          <div class="grey-box">
+          <div class="grey-box col-3">
             <p class="mark">прочая информация</p>
             <label for="fiz-without-agreement-delivery-frequency">Частота доставки груза*</label>
             <input type="text" name="fiz-without-agreement-delivery-frequency" id="fiz-without-agreement-delivery-frequency" placeholder="Введите частоту доставки грузов" formControlName="deliveryFrequency">
             <label for="fiz-without-agreement-cargo-description">Описание грузов</label>
             <input type="text" name="fiz-without-agreement-cargo-description" id="fiz-without-agreement-cargo-description" placeholder="Введите описание грузов" formControlName="cargoDescription">
           </div>
-          <div class="grey-box">
+          <div class="grey-box col-4">
             <div class="add-file-box">
               <div class="add-file-box-item">
                 <input type="file">
@@ -238,7 +238,7 @@
             </div>
           </div>
         </div>
-        <div class="row">
+        <div class="submit-row">
           <input type="submit" value="Регистрация" [disabled]="individualUserWithoutAgreementForm.invalid">
         </div>
       </form>

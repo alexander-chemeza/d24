@@ -46,8 +46,7 @@
     width: 100%;
     height: 100%;
 
-    &-with-agreement,
-    &-without-agreement {
+    &-with-agreement {
       width: 100%;
       height: 100%;
 
@@ -109,27 +108,71 @@
     }
 
     &-without-agreement {
+      width: 100%;
+      height: 100%;
 
+      & form {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: min-content min-content;
+        grid-template-areas: "main-row" "submit-row";
+        grid-gap: 30px;
+
+        & .main-row {
+          grid-area: main-row;
+          display: grid;
+          grid-template-rows: min-content min-content;
+          grid-template-columns: 1fr 1fr;
+          grid-template-areas: "col-1 col-2" "col-3 col-4";
+          grid-gap: 65px 30px;
+
+          & .col-1 {
+            grid-area: col-1;
+
+            & .row-controls {
+              max-width: 420px;
+              display: flex;
+              justify-content: space-between;
+            }
+          }
+
+          & .col-2 {
+            grid-area: col-2;
+          }
+
+          & .col-3 {
+            grid-area: col-3;
+          }
+
+          & .col-4 {
+            grid-area: col-4;
+          }
+        }
+
+        & .submit-row {
+          grid-area: submit-row;
+        }
+      }
     }
   }
 }
 
-.register-content-main-without-agrement-col-3-ur,
-.register-content-main-without-agrement-col-3-fiz,
-.register-content-main-without-agrement-col-4-ur{
+.register-content-forms-without-agreement form .main-row .col-3,
+.register-content-forms-without-agreement form .main-row .col-4 {
   position: relative;
   width: 100%;
   height: 100%;
 
   & .mark {
     position: absolute;
-    top: -80px;
-    left: -30px;
+    top: -50px;
+    left: 0;
     font-family: "Montserrat-SemiBold", sans-serif;
     font-size: 1.4rem;
     color: rgba(255, 255, 255, 0.5);
     text-transform: uppercase;
   }
+
 }
 
 .fiz-row {
