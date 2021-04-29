@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {RestapiService} from '../../restapi.service';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -11,6 +12,17 @@ export class LoginComponent implements OnInit {
 
   username: string;
   password: string;
+
+  loginForm = new FormGroup({
+    userName: new FormControl('', [
+      Validators.required,
+      Validators.minLength(4)
+    ]),
+    password: new FormControl('',[
+      Validators.required,
+      Validators.minLength(8)
+    ])
+  });
 
   constructor(private service: RestapiService, private router: Router) {
     this.username = '';
@@ -26,6 +38,11 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin(): void {
+    this.username = this.loginForm.value.userName as string;
+    this.password = this.loginForm.value.password as string;
+    console.log(this.username);
+    console.log(this.password);
+
     this.service.login(this.username, this.password)
       .subscribe(data => {
         if (data) {
