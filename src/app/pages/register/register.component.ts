@@ -75,13 +75,13 @@ export class RegisterComponent implements OnInit {
     let data: EntityWithoutAgreement | EntityWithAgreement | IndividualWithoutAgreement | IndividualWithAgreement = {} as any;
     if (!this.agreement && !this.personWithAgreement) {
       data = {
-        companyName_EntityWithAgreement: this.companyNameEntityWithAgreement,
-        email_EntityWithAgreement: this.emailEntityWithAgreement,
-        login_EntityWithAgreement: this.loginEntityWithAgreement,
-        password_EntityWithAgreement: this.passwordEntityWithAgreement,
-        phone_EntityWithAgreement: this.phoneEntityWithAgreement,
-        unp_EntityWithAgreement: this.unpEntityWithAgreement,
-        userName_EntityWithAgreement: this.userNameEntityWithAgreement
+        companyName: this.companyNameEntityWithAgreement,
+        email: this.emailEntityWithAgreement,
+        login: this.loginEntityWithAgreement,
+        password: this.passwordEntityWithAgreement,
+        phone: this.phoneEntityWithAgreement,
+        unp: this.unpEntityWithAgreement,
+        userName: this.userNameEntityWithAgreement
       };
     } else if (this.agreement && !this.personWithoutAgreement) {
       data = {
@@ -128,10 +128,11 @@ export class RegisterComponent implements OnInit {
         cargoDescription_IndividualWithoutAgreement: this.cargoDescriptionIndividualWithoutAgreement
       };
     }
-    // console.log(data);
+    console.log(data); // Вот вывод в консоль идет
     this.service.register(data)
       .subscribe(response => {
-        if (response === '0') {
+        console.log(response);
+        if (response === 0) {
           this.router.navigate(['login']);
         }
       });

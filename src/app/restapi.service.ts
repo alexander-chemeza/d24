@@ -18,13 +18,13 @@ export interface IndividualWithAgreement {
 }
 // Object for registration of entity with agreement
 export interface EntityWithAgreement {
-  companyName_EntityWithAgreement: string;
-  email_EntityWithAgreement: string;
-  login_EntityWithAgreement: string;
-  password_EntityWithAgreement: string;
-  phone_EntityWithAgreement: string;
-  unp_EntityWithAgreement: string;
-  userName_EntityWithAgreement: string;
+  companyName: string;
+  email: string;
+  login: string;
+  password: string;
+  phone: string;
+  unp: string;
+  userName: string;
 }
 // Object for registration of individual without agreement
 export interface IndividualWithoutAgreement {
