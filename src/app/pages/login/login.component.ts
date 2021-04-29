@@ -10,23 +10,18 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
-  username: string;
-  password: string;
-
   loginForm = new FormGroup({
     userName: new FormControl('', [
       Validators.required,
       Validators.minLength(4)
     ]),
-    password: new FormControl('',[
+    password: new FormControl('', [
       Validators.required,
       Validators.minLength(8)
     ])
   });
 
   constructor(private service: RestapiService, private router: Router) {
-    this.username = '';
-    this.password = '';
   }
 
   ngOnInit(): void {
@@ -38,12 +33,7 @@ export class LoginComponent implements OnInit {
   }
 
   doLogin(): void {
-    this.username = this.loginForm.value.userName as string;
-    this.password = this.loginForm.value.password as string;
-    console.log(this.username);
-    console.log(this.password);
-
-    this.service.login(this.username, this.password)
+    this.service.login(this.loginForm.value.userName as string, this.loginForm.value.password as string)
       .subscribe(data => {
         if (data) {
           localStorage.setItem('currentUser', JSON.stringify(data));
