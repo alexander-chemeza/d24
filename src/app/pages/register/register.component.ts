@@ -15,107 +15,57 @@ import {Router} from '@angular/router';
 })
 export class RegisterComponent implements OnInit {
   // Forms switching
-  agreement: boolean;
-  personWithAgreement: boolean;
-  personWithoutAgreement: boolean;
+  agreement = false;
+  personWithAgreement = false;
+  personWithoutAgreement = false;
   // Entity user with agreement options
-  companyNameEntityWithAgreement: string;
-  emailEntityWithAgreement: string;
-  loginEntityWithAgreement: string;
-  passwordEntityWithAgreement: string;
-  phoneEntityWithAgreement: string;
-  unpEntityWithAgreement: string;
-  userNameEntityWithAgreement: string;
+  companyNameEntityWithAgreement = '';
+  emailEntityWithAgreement = '';
+  loginEntityWithAgreement = '';
+  passwordEntityWithAgreement = '';
+  phoneEntityWithAgreement = '';
+  unpEntityWithAgreement = '';
+  userNameEntityWithAgreement = '';
   // Entity user without agreement options
-  clientNameEntityWithoutAgreement: string;
-  legalAddressEntityWithoutAgreement: string;
-  postAddressEntityWithoutAgreement: string;
-  unpEntityWithoutAgreement: string;
-  okpoEntityWithoutAgreement: string;
-  authorizedPersonEntityWithoutAgreement: string;
-  groundsForSigningEntityWithoutAgreement: string;
-  phoneEntityWithoutAgreement: string;
-  emailEntityWithoutAgreement: string;
-  bankNameEntityWithoutAgreement: string;
-  bankAddressEntityWithoutAgreement: string;
-  bankCodeEntityWithoutAgreement: string;
-  accountEntityWithoutAgreement: string;
-  deliveryFrequencyEntityWithoutAgreement: string;
-  cargoDescriptionEntityWithoutAgreement: string;
-  settlementPersonEntityWithoutAgreement: string;
-  settlementPersonEmailEntityWithoutAgreement: string;
+  clientNameEntityWithoutAgreement = '';
+  legalAddressEntityWithoutAgreement = '';
+  postAddressEntityWithoutAgreement = '';
+  unpEntityWithoutAgreement = '';
+  okpoEntityWithoutAgreement = '';
+  authorizedPersonEntityWithoutAgreement = '';
+  groundsForSigningEntityWithoutAgreement = '';
+  phoneEntityWithoutAgreement = '';
+  emailEntityWithoutAgreement = '';
+  bankNameEntityWithoutAgreement = '';
+  bankAddressEntityWithoutAgreement = '';
+  bankCodeEntityWithoutAgreement = '';
+  accountEntityWithoutAgreement = '';
+  deliveryFrequencyEntityWithoutAgreement = '';
+  cargoDescriptionEntityWithoutAgreement = '';
+  settlementPersonEntityWithoutAgreement = '';
+  settlementPersonEmailEntityWithoutAgreement = '';
   // Individual user with agreement options
-  passportNumberIndividualWithAgreement: string;
-  nameIndividualWithAgreement: string;
-  emailIndividualWithAgreement: string;
-  phoneIndividualWithAgreement: string;
-  loginIndividualWithAgreement: string;
-  passwordIndividualWithAgreement: string;
+  passportNumberIndividualWithAgreement = '';
+  nameIndividualWithAgreement = '';
+  emailIndividualWithAgreement = '';
+  phoneIndividualWithAgreement = '';
+  loginIndividualWithAgreement = '';
+  passwordIndividualWithAgreement = '';
   // Individual user without agreement options
-  nameIndividualWithoutAgreement: string;
-  documentTypeIndividualWithoutAgreement: string;
-  passportSeriesIndividualWithoutAgreement: string;
-  passportNumberIndividualWithoutAgreement: string;
-  issueAddressIndividualWithoutAgreement: string;
-  issueDateIndividualWithoutAgreement: string;
-  personalNumberIndividualWithoutAgreement: string;
-  homeAddressIndividualWithoutAgreement: string;
-  phoneIndividualWithoutAgreement: string;
-  emailIndividualWithoutAgreement: string;
-  deliveryFrequencyIndividualWithoutAgreement: string;
-  cargoDescriptionIndividualWithoutAgreement: string;
+  nameIndividualWithoutAgreement = '';
+  documentTypeIndividualWithoutAgreement = '';
+  passportSeriesIndividualWithoutAgreement = '';
+  passportNumberIndividualWithoutAgreement = '';
+  issueAddressIndividualWithoutAgreement = '';
+  issueDateIndividualWithoutAgreement = '';
+  personalNumberIndividualWithoutAgreement = '';
+  homeAddressIndividualWithoutAgreement = '';
+  phoneIndividualWithoutAgreement = '';
+  emailIndividualWithoutAgreement = '';
+  deliveryFrequencyIndividualWithoutAgreement = '';
+  cargoDescriptionIndividualWithoutAgreement = '';
 
   constructor(private service: RestapiService, private router: Router) {
-    // Forms switching
-    this.agreement = false;
-    this.personWithAgreement = false;
-    this.personWithoutAgreement = false;
-    // Entity user with agreement options
-    this.companyNameEntityWithAgreement = '';
-    this.emailEntityWithAgreement = '';
-    this.loginEntityWithAgreement = '';
-    this.passwordEntityWithAgreement = '';
-    this.phoneEntityWithAgreement = '';
-    this.unpEntityWithAgreement = '';
-    this.userNameEntityWithAgreement = '';
-    // Entity user without agreement options
-    this.clientNameEntityWithoutAgreement = '';
-    this.legalAddressEntityWithoutAgreement = '';
-    this.postAddressEntityWithoutAgreement = '';
-    this.unpEntityWithoutAgreement = '';
-    this.okpoEntityWithoutAgreement = '';
-    this.authorizedPersonEntityWithoutAgreement = '';
-    this.groundsForSigningEntityWithoutAgreement = '';
-    this.phoneEntityWithoutAgreement = '';
-    this.emailEntityWithoutAgreement = '';
-    this.bankNameEntityWithoutAgreement = '';
-    this.bankAddressEntityWithoutAgreement = '';
-    this.bankCodeEntityWithoutAgreement = '';
-    this.accountEntityWithoutAgreement = '';
-    this.deliveryFrequencyEntityWithoutAgreement = '';
-    this.cargoDescriptionEntityWithoutAgreement = '';
-    this.settlementPersonEntityWithoutAgreement = '';
-    this.settlementPersonEmailEntityWithoutAgreement = '';
-    // Individual user with agreement options
-    this.passportNumberIndividualWithAgreement = '';
-    this.nameIndividualWithAgreement = '';
-    this.emailIndividualWithAgreement = '';
-    this.phoneIndividualWithAgreement = '';
-    this.loginIndividualWithAgreement = '';
-    this.passwordIndividualWithAgreement = '';
-    // Individual user without agreement options
-    this.nameIndividualWithoutAgreement = '';
-    this.documentTypeIndividualWithoutAgreement = '';
-    this.passportSeriesIndividualWithoutAgreement = '';
-    this.passportNumberIndividualWithoutAgreement = '';
-    this.issueAddressIndividualWithoutAgreement = '';
-    this.issueDateIndividualWithoutAgreement = '';
-    this.personalNumberIndividualWithoutAgreement = '';
-    this.homeAddressIndividualWithoutAgreement = '';
-    this.phoneIndividualWithoutAgreement = '';
-    this.emailIndividualWithoutAgreement = '';
-    this.deliveryFrequencyIndividualWithoutAgreement = '';
-    this.cargoDescriptionIndividualWithoutAgreement = '';
   }
 
   ngOnInit(): void {
@@ -178,14 +128,13 @@ export class RegisterComponent implements OnInit {
         cargoDescription_IndividualWithoutAgreement: this.cargoDescriptionIndividualWithoutAgreement
       };
     }
-    console.log(data);
-
-    // this.service.register(data)
-    //   .subscribe(response => {
-    //     if (response === '0') {
-    //       this.router.navigate(['login']);
-    //     }
-    //   });
+    // console.log(data);
+    this.service.register(data)
+      .subscribe(response => {
+        if (response === '0') {
+          this.router.navigate(['login']);
+        }
+      });
   }
 
   toggleWithAgreement(event: any): void {
