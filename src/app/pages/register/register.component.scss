@@ -7,7 +7,7 @@
 }
 
 .person-with-agreement-show {
-  display: block;
+  display: grid;
 }
 
 .person-with-agreement-hide {
@@ -26,8 +26,8 @@
 .register-content {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: min-content min-content min-content;
-  grid-template-areas: "controls" "main" "submit";
+  grid-template-rows: min-content min-content;
+  grid-template-areas: "controls" "forms";
   grid-gap: 30px;
 
   &-controls {
@@ -41,7 +41,77 @@
     }
   }
 
+  &-forms {
+    grid-area: forms;
+    width: 100%;
+    height: 100%;
 
+    &-with-agreement,
+    &-without-agreement {
+      width: 100%;
+      height: 100%;
+
+      & form {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: min-content min-content min-content min-content;
+        grid-template-areas: "controls" "row-controls" "column-controls" "row-submit";
+        grid-gap: 30px;
+
+        & .user-type-controls {
+          grid-area: controls;
+
+          &-container {
+            max-width: 420px;
+            display: flex;
+            justify-content: space-between;
+          }
+        }
+
+        & .row-controls {
+          grid-area: row-controls;
+          display: grid;
+          grid-template-rows: min-content;
+          grid-template-columns: 1fr 1fr;
+          grid-template-areas: "item-1 item-2";
+          grid-gap: 30px;
+
+          & .row-item-1 {
+            grid-area: item-1;
+          }
+
+          & .row-item-2 {
+            grid-area: item-2;
+          }
+        }
+
+        & .column-controls {
+          grid-area: column-controls;
+          display: grid;
+          grid-template-rows: 1fr;
+          grid-template-columns: 1fr 1fr;
+          grid-template-areas: "item-1 item-2";
+          grid-gap: 30px;
+
+          & .item-1 {
+            grid-area: item-1;
+          }
+
+          & .item-2 {
+            grid-area: item-2;
+          }
+        }
+
+        & .row-submit {
+          grid-area: row-submit;
+        }
+      }
+    }
+
+    &-without-agreement {
+
+    }
+  }
 }
 
 .register-content-main-without-agrement-col-3-ur,

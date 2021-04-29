@@ -23,24 +23,26 @@
       <form [formGroup]="entityUserWithAgreementForm" (ngSubmit)="doRegistration()"
             [ngClass]="{'person-with-agreement-show': !personWithAgreement, 'person-with-agreement-hide': personWithAgreement}">
 <!--        Person type controls-->
-        <div class="grey-box">
-          <button class="with-agreement-control-btn active-btn" (click)="toggleWithAgreement($event)">Юр. лицо</button>
-          <button class="with-agreement-control-btn white-btn" (click)="toggleWithAgreement($event)">Физ. лицо</button>
+        <div class="grey-box user-type-controls">
+          <div class="user-type-controls-container">
+            <button class="with-agreement-control-btn active-btn" (click)="toggleWithAgreement($event)">Юр. лицо</button>
+            <button class="with-agreement-control-btn white-btn" (click)="toggleWithAgreement($event)">Физ. лицо</button>
+          </div>
         </div>
 <!--        Compnay and UNP row-->
-        <div class="grey-box row">
-          <div class="row-item-1">
+        <div class="grey-box row-controls">
+          <div class="row-item-1 pr-30">
             <label for="ur-with-company">Компания</label>
             <input type="text" name="ur-with-company" id="ur-with-company" placeholder="Введите название компании" formControlName="companyName">
           </div>
-          <div class="row-item-2">
+          <div class="row-item-2 pl-30">
             <label for="ur-with-unp">УНП компании</label>
             <input type="text" name="ur-with-unp" id="ur-with-unp" placeholder="Введите УНП" formControlName="unp">
           </div>
         </div>
 <!--        Main fields-->
-        <div class="columns">
-          <div class="grey-box">
+        <div class="column-controls">
+          <div class="grey-box item-1">
             <label for="ur-with-name">Имя</label>
             <input type="text" name="ur-with-name" id="ur-with-name" placeholder="Введите имя" formControlName="userName">
             <label for="ur-with-email">Email</label>
@@ -48,7 +50,7 @@
             <label for="ur-with-phone">Телефон</label>
             <input type="tel" name="ur-with-phone" id="ur-with-phone" placeholder="Введите телефон" formControlName="phone">
           </div>
-          <div class="grey-box">
+          <div class="grey-box item-2">
             <label for="ur-with-login">Логин</label>
             <input type="text" name="ur-with-login" id="ur-with-login" placeholder="Введите логин" formControlName="login">
             <label for="ur-with-password">Пароль</label>
@@ -58,7 +60,7 @@
           </div>
         </div>
 <!--        Register row-->
-        <div class="row">
+        <div class="row-submit">
           <input type="submit" value="Регистрация" [disabled]="entityUserWithAgreementForm.invalid">
         </div>
       </form>
@@ -67,20 +69,22 @@
       <form [formGroup]="individualUserWithAgreementForm" (ngSubmit)="doRegistration()"
             [ngClass]="{'person-with-agreement-show': personWithAgreement, 'person-with-agreement-hide': !personWithAgreement}">
 <!--        Person type controls-->
-        <div class="grey-box">
-          <button class="with-agreement-control-btn active-btn" (click)="toggleWithAgreement($event)">Юр. лицо</button>
-          <button class="with-agreement-control-btn white-btn" (click)="toggleWithAgreement($event)">Физ. лицо</button>
+        <div class="grey-box user-type-controls">
+          <div class="user-type-controls-container">
+            <button class="with-agreement-control-btn active-btn" (click)="toggleWithAgreement($event)">Юр. лицо</button>
+            <button class="with-agreement-control-btn white-btn" (click)="toggleWithAgreement($event)">Физ. лицо</button>
+          </div>
         </div>
 <!--        Passport row-->
-        <div class="grey-box row">
-          <div class="row-item-1">
+        <div class="grey-box row-controls">
+          <div class="row-item-1 pr-30">
             <label for="fiz-with-passport">Идентификационный  номер паспорта</label>
             <input type="text" name="fiz-with-passport" id="fiz-with-passport" placeholder="Введите идентификационный  номер паспорта" formControlName="passportNumber">
           </div>
         </div>
 <!--        Main fields-->
-        <div class="columns">
-          <div class="grey-box">
+        <div class="column-controls">
+          <div class="grey-box item-1">
             <label for="fiz-with-name">Имя</label>
             <input type="text" name="fiz-with-name" id="fiz-with-name" placeholder="Введите имя" formControlName="userName">
             <label for="fiz-with-email">Email</label>
@@ -88,7 +92,7 @@
             <label for="fiz-with-phone">Телефон</label>
             <input type="tel" name="fiz-with-phone" id="fiz-with-phone" placeholder="Введите телефон" formControlName="phone">
           </div>
-          <div class="grey-box">
+          <div class="grey-box item-2">
             <label for="fiz-with-login">Логин</label>
             <input type="text" name="fiz-with-login" id="fiz-with-login" placeholder="Введите логин" formControlName="login">
             <label for="fiz-with-password">Пароль</label>
@@ -98,7 +102,7 @@
           </div>
         </div>
         <!--        Register row-->
-        <div class="row">
+        <div class="row-submit">
           <input type="submit" value="Регистрация" [disabled]="individualUserWithAgreementForm.invalid">
         </div>
       </form>
