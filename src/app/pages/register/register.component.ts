@@ -123,7 +123,7 @@ export class RegisterComponent implements OnInit {
 
   doRegistration(): void {
     let data: EntityWithoutAgreement | EntityWithAgreement | IndividualWithoutAgreement | IndividualWithAgreement = {} as any;
-    if (this.agreement === false && this.personWithAgreement === false && this.personWithoutAgreement === false) {
+    if (!this.agreement && !this.personWithAgreement) {
       data = {
         companyName_EntityWithAgreement: this.companyNameEntityWithAgreement,
         email_EntityWithAgreement: this.emailEntityWithAgreement,
@@ -133,7 +133,7 @@ export class RegisterComponent implements OnInit {
         unp_EntityWithAgreement: this.unpEntityWithAgreement,
         userName_EntityWithAgreement: this.userNameEntityWithAgreement
       };
-    } else if (this.agreement === true && this.personWithAgreement === true && this.personWithoutAgreement === false) {
+    } else if (this.agreement && !this.personWithoutAgreement) {
       data = {
         clientName_EntityWithoutAgreement: this.clientNameEntityWithoutAgreement,
         legalAddress_EntityWithoutAgreement: this.legalAddressEntityWithoutAgreement,
@@ -153,7 +153,7 @@ export class RegisterComponent implements OnInit {
         settlementPerson_EntityWithoutAgreement: this.settlementPersonEntityWithoutAgreement,
         settlementPersonEmail_EntityWithoutAgreement: this.settlementPersonEmailEntityWithoutAgreement
       };
-    } else if (this.agreement === false && this.personWithAgreement === true && this.personWithoutAgreement === false) {
+    } else if (!this.agreement && this.personWithAgreement) {
       data = {
         passportNumber_IndividualWithAgreement: this.passportNumberIndividualWithAgreement,
         name_IndividualWithAgreement: this.nameIndividualWithAgreement,
@@ -162,7 +162,7 @@ export class RegisterComponent implements OnInit {
         login_IndividualWithAgreement: this.loginIndividualWithAgreement,
         password_IndividualWithAgreement: this.passwordIndividualWithAgreement
       };
-    } else if (this.agreement === true && this.personWithAgreement === true && this.personWithoutAgreement === true) {
+    } else if (this.agreement && this.personWithoutAgreement) {
       data = {
         name_IndividualWithoutAgreement: this.nameIndividualWithoutAgreement,
         documentType_IndividualWithoutAgreement: this.documentTypeIndividualWithoutAgreement,
