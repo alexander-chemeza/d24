@@ -1,3 +1,21 @@
+.alert-message {
+  font-size: 1.2rem;
+  margin: 5px 0 0 0;
+  color: red;
+}
+
+.show-alert-message {
+  display: block !important;
+}
+
+.hide-alert-message {
+  display: none;
+}
+
+.alert-message-password {
+  display: none;
+}
+
 label {
   display: block;
   font-family: "Montserrat-SemiBold", sans-serif;

@@ -16,159 +16,174 @@ export class RegisterComponent implements OnInit {
   agreement = false;
   personWithAgreement = false;
   personWithoutAgreement = false;
-  // Entity User With Agreement Form Group Fields
-  entityUserWithAgreementForm = new FormGroup({
-    companyName: new FormControl('', [
-      Validators.required
-    ]),
-    unp: new FormControl('', [
-      Validators.required
-    ]),
-    userName: new FormControl('', [
-      Validators.required
-    ]),
-    email: new FormControl('', [
-      Validators.required
-    ]),
-    phone: new FormControl('', [
-      Validators.required
-    ]),
-    login: new FormControl('', [
-      Validators.required
-    ]),
-    password: new FormControl('', [
-      Validators.required
-    ]),
-    passwordRepeat: new FormControl('', [
-      Validators.required
-    ])
-  });
-  // Entity User Without Agreement Form Group Fields
-  entityUserWithoutAgreementForm = new FormGroup({
-    clientName: new FormControl('', [
-      Validators.required
-    ]),
-    legalAddress: new FormControl('', [
-      Validators.required
-    ]),
-    postAddress: new FormControl('', [
-      Validators.required
-    ]),
-    unp: new FormControl('', [
-      Validators.required
-    ]),
-    okpo: new FormControl('', [
-      Validators.required
-    ]),
-    authorizedPerson: new FormControl('', [
-      Validators.required
-    ]),
-    groundsForSigning: new FormControl('', [
-      Validators.required
-    ]),
-    phone: new FormControl('', [
-      Validators.required
-    ]),
-    email: new FormControl('', [
-      Validators.required
-    ]),
-    bankName: new FormControl('', [
-      Validators.required
-    ]),
-    bankAddress: new FormControl('', [
-      Validators.required
-    ]),
-    bankCode: new FormControl('', [
-      Validators.required
-    ]),
-    account: new FormControl('', [
-      Validators.required
-    ]),
-    deliveryFrequency: new FormControl('', [
-      Validators.required
-    ]),
-    cargoDescription: new FormControl('', [
-      Validators.required
-    ]),
-    settlementPerson: new FormControl('', [
-      Validators.required
-    ]),
-    settlementPersonEmail: new FormControl('', [
-      Validators.required
-    ]),
-  });
-  // Individual User With Agreement Form Group Fields
-  individualUserWithAgreementForm = new FormGroup({
-    passportNumber: new FormControl('', [
-      Validators.required
-    ]),
-    userName: new FormControl('', [
-      Validators.required
-    ]),
-    email: new FormControl('', [
-      Validators.required
-    ]),
-    phone: new FormControl('', [
-      Validators.required
-    ]),
-    login: new FormControl('', [
-      Validators.required
-    ]),
-    password: new FormControl('', [
-      Validators.required
-    ]),
-    passwordRepeat: new FormControl('', [
-      Validators.required
-    ])
-  });
-  // Individual User Without Agreement Form Group Fields
-  individualUserWithoutAgreementForm = new FormGroup({
-    userName: new FormControl('', [
-      Validators.required
-    ]),
-    documentType: new FormControl('', [
-      Validators.required
-    ]),
-    passportSeries: new FormControl('', [
-      Validators.required
-    ]),
-    passportNumber: new FormControl('', [
-      Validators.required
-    ]),
-    issueAddress: new FormControl('', [
-      Validators.required
-    ]),
-    issueDate: new FormControl('', [
-      Validators.required
-    ]),
-    personalNumber: new FormControl('', [
-      Validators.required
-    ]),
-    homeAddress: new FormControl('', [
-      Validators.required
-    ]),
-    phone: new FormControl('', [
-      Validators.required
-    ]),
-    email: new FormControl('', [
-      Validators.required
-    ]),
-    deliveryFrequency: new FormControl('', [
-      Validators.required
-    ]),
-    cargoDescription: new FormControl('', [
-      Validators.required
-    ])
-  });
+
+  entityUserWithAgreementForm: any;
+  entityUserWithoutAgreementForm: any;
+  individualUserWithAgreementForm: any;
+  individualUserWithoutAgreementForm: any;
+
+  passwordEquality = false;
 
   constructor(private service: RestapiService, private router: Router) {
   }
 
   ngOnInit(): void {
+    // Entity User With Agreement Form Group Fields
+    this.entityUserWithAgreementForm = new FormGroup({
+      companyName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+      unp: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+      userName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.email
+      ]),
+      phone: new FormControl('', [
+        Validators.required,
+        Validators.minLength(7),
+      ]),
+      login: new FormControl('', [
+        Validators.required,
+        Validators.pattern('^[a-zA-Z0-9]+$')
+      ]),
+      password: new FormControl('', [
+        Validators.required
+      ]),
+      passwordRepeat: new FormControl('', [
+        Validators.required
+      ])
+    });
+    // Entity User Without Agreement Form Group Fields
+    this.entityUserWithoutAgreementForm = new FormGroup({
+      clientName: new FormControl('', [
+        Validators.required
+      ]),
+      legalAddress: new FormControl('', [
+        Validators.required
+      ]),
+      postAddress: new FormControl('', [
+        Validators.required
+      ]),
+      unp: new FormControl('', [
+        Validators.required
+      ]),
+      okpo: new FormControl('', [
+        Validators.required
+      ]),
+      authorizedPerson: new FormControl('', [
+        Validators.required
+      ]),
+      groundsForSigning: new FormControl('', [
+        Validators.required
+      ]),
+      phone: new FormControl('', [
+        Validators.required
+      ]),
+      email: new FormControl('', [
+        Validators.required
+      ]),
+      bankName: new FormControl('', [
+        Validators.required
+      ]),
+      bankAddress: new FormControl('', [
+        Validators.required
+      ]),
+      bankCode: new FormControl('', [
+        Validators.required
+      ]),
+      account: new FormControl('', [
+        Validators.required
+      ]),
+      deliveryFrequency: new FormControl('', [
+        Validators.required
+      ]),
+      cargoDescription: new FormControl('', [
+        Validators.required
+      ]),
+      settlementPerson: new FormControl('', [
+        Validators.required
+      ]),
+      settlementPersonEmail: new FormControl('', [
+        Validators.required
+      ]),
+    });
+    // Individual User With Agreement Form Group Fields
+    this.individualUserWithAgreementForm = new FormGroup({
+      passportNumber: new FormControl('', [
+        Validators.required
+      ]),
+      userName: new FormControl('', [
+        Validators.required
+      ]),
+      email: new FormControl('', [
+        Validators.required
+      ]),
+      phone: new FormControl('', [
+        Validators.required
+      ]),
+      login: new FormControl('', [
+        Validators.required
+      ]),
+      password: new FormControl('', [
+        Validators.required
+      ]),
+      passwordRepeat: new FormControl('', [
+        Validators.required
+      ])
+    });
+    // Individual User Without Agreement Form Group Fields
+    this.individualUserWithoutAgreementForm = new FormGroup({
+      userName: new FormControl('', [
+        Validators.required
+      ]),
+      documentType: new FormControl('', [
+        Validators.required
+      ]),
+      passportSeries: new FormControl('', [
+        Validators.required
+      ]),
+      passportNumber: new FormControl('', [
+        Validators.required
+      ]),
+      issueAddress: new FormControl('', [
+        Validators.required
+      ]),
+      issueDate: new FormControl('', [
+        Validators.required
+      ]),
+      personalNumber: new FormControl('', [
+        Validators.required
+      ]),
+      homeAddress: new FormControl('', [
+        Validators.required
+      ]),
+      phone: new FormControl('', [
+        Validators.required,
+      ]),
+      email: new FormControl('', [
+        Validators.required
+      ]),
+      deliveryFrequency: new FormControl('', [
+        Validators.required
+      ]),
+      cargoDescription: new FormControl('', [
+        Validators.required
+      ])
+    });
   }
 
   doRegistration(): void {
     let data: UserRegistration = {} as any;
+    const passwordRepeat: string = this.entityUserWithAgreementForm.value.passwordRepeat;
+    console.log('Password repeat', passwordRepeat);
     if (!this.agreement && !this.personWithAgreement) {
       data = {
         userName: this.entityUserWithAgreementForm.value.userName as string,
@@ -180,7 +195,11 @@ export class RegisterComponent implements OnInit {
         unp: this.entityUserWithAgreementForm.value.unp as string,
       };
 
-      if (this.entityUserWithAgreementForm.valid) {
+      this.passwordEquality = data.password !== passwordRepeat;
+
+      console.log('Equality', this.passwordEquality);
+
+      if (this.entityUserWithAgreementForm.valid && !this.passwordEquality) {
         console.log(data);
         this.service.register(data)
           .subscribe(response => {
@@ -258,5 +277,13 @@ export class RegisterComponent implements OnInit {
 
   toggleWithoutAgreement(): void {
     this.personWithoutAgreement = !this.personWithoutAgreement;
+  }
+
+  keyPress(event: any): void {
+    const pattern = /[0-9+\- ]/;
+    const inputChar = String.fromCharCode(event.charCode);
+    if (event.keyCode !== 8 && !pattern.test(inputChar)) {
+      event.preventDefault();
+    }
   }
 }

@@ -33,30 +33,129 @@
         <div class="grey-box row-controls">
           <div class="row-item-1 pr-30">
             <label for="ur-with-company">Компания</label>
-            <input type="text" name="ur-with-company" id="ur-with-company" placeholder="Введите название компании" formControlName="companyName">
+            <input type="text" name="ur-with-company"
+                   id="ur-with-company"
+                   placeholder="Введите название компании"
+                   formControlName="companyName">
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('companyName').invalid &&
+               entityUserWithAgreementForm.get('companyName').touched &&
+               entityUserWithAgreementForm.get('companyName').pristine"
+            >Данное поле обязательно</p>
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('companyName').invalid &&
+               entityUserWithAgreementForm.get('companyName').touched &&
+               entityUserWithAgreementForm.get('companyName').dirty"
+            >Мнимальная длина 4 символа</p>
           </div>
           <div class="row-item-2 pl-30">
             <label for="ur-with-unp">УНП компании</label>
-            <input type="text" name="ur-with-unp" id="ur-with-unp" placeholder="Введите УНП" formControlName="unp">
+            <input type="text" name="ur-with-unp"
+                   id="ur-with-unp"
+                   placeholder="Введите УНП"
+                   formControlName="unp">
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('unp').invalid &&
+               entityUserWithAgreementForm.get('unp').touched &&
+               entityUserWithAgreementForm.get('unp').pristine"
+            >Данное поле обязательно</p>
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('unp').invalid &&
+               entityUserWithAgreementForm.get('unp').touched &&
+               entityUserWithAgreementForm.get('unp').dirty"
+            >Мнимальная длина 4 символа</p>
           </div>
         </div>
 <!--        Main fields-->
         <div class="column-controls">
           <div class="grey-box item-1">
             <label for="ur-with-name">Имя</label>
-            <input type="text" name="ur-with-name" id="ur-with-name" placeholder="Введите имя" formControlName="userName">
+            <input type="text" name="ur-with-name"
+                   id="ur-with-name"
+                   placeholder="Введите имя"
+                   formControlName="userName">
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('userName').invalid &&
+               entityUserWithAgreementForm.get('userName').touched &&
+               entityUserWithAgreementForm.get('userName').pristine"
+            >Данное поле обязательно</p>
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('userName').invalid &&
+               entityUserWithAgreementForm.get('userName').touched &&
+               entityUserWithAgreementForm.get('userName').dirty"
+            >Мнимальная длина 4 символа</p>
             <label for="ur-with-email">Email</label>
-            <input type="email" name="ur-with-email" id="ur-with-email" placeholder="Введите email" formControlName="email">
+            <input type="email" name="ur-with-email"
+                   id="ur-with-email"
+                   placeholder="Введите email"
+                   formControlName="email">
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('email').invalid &&
+               entityUserWithAgreementForm.get('email').touched &&
+               entityUserWithAgreementForm.get('email').pristine"
+            >Данное поле обязательно</p>
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('email').invalid &&
+               entityUserWithAgreementForm.get('email').touched &&
+               entityUserWithAgreementForm.get('email').dirty"
+            >Введите корректный email</p>
             <label for="ur-with-phone">Телефон</label>
-            <input type="tel" name="ur-with-phone" id="ur-with-phone" placeholder="Введите телефон" formControlName="phone">
+            <input type="tel" name="ur-with-phone"
+                   id="ur-with-phone"
+                   placeholder="Введите телефон"
+                   formControlName="phone"
+                   (keypress)="keyPress($event)"
+            >
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('phone').invalid &&
+               entityUserWithAgreementForm.get('phone').touched &&
+               entityUserWithAgreementForm.get('phone').pristine"
+            >Данное поле обязательно</p>
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('phone').invalid &&
+               entityUserWithAgreementForm.get('phone').touched &&
+               entityUserWithAgreementForm.get('phone').dirty"
+            >Минимальная длина 7 символов</p>
           </div>
           <div class="grey-box item-2">
             <label for="ur-with-login">Логин</label>
-            <input type="text" name="ur-with-login" id="ur-with-login" placeholder="Введите логин" formControlName="login">
+            <input type="text" name="ur-with-login"
+                   id="ur-with-login"
+                   placeholder="Введите логин"
+                   formControlName="login">
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('login').invalid &&
+               entityUserWithAgreementForm.get('login').touched &&
+               entityUserWithAgreementForm.get('login').pristine"
+            >Данное поле обязательно</p>
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('login').invalid &&
+               entityUserWithAgreementForm.get('login').touched &&
+               entityUserWithAgreementForm.get('login').dirty"
+            >Кириллица не допускается</p>
             <label for="ur-with-password">Пароль</label>
-            <input type="password" name="ur-with-password" id="ur-with-password" placeholder="Введите пароль" formControlName="password">
+            <input type="password" name="ur-with-password"
+                   id="ur-with-password"
+                   placeholder="Введите пароль"
+                   formControlName="password">
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('password').invalid &&
+               entityUserWithAgreementForm.get('password').touched &&
+               entityUserWithAgreementForm.get('password').pristine"
+            >Данное поле обязательно</p>
             <label for="ur-with-password-repeat">Пароль (подтвердить)</label>
-            <input type="password" name="ur-with-password-repeat" id="ur-with-password-repeat" placeholder="Повторите пароль" formControlName="passwordRepeat">
+            <input type="password" name="ur-with-password-repeat"
+                   id="ur-with-password-repeat"
+                   placeholder="Повторите пароль"
+                   formControlName="passwordRepeat">
+            <p class="alert-message"
+               *ngIf="entityUserWithAgreementForm.get('passwordRepeat').invalid &&
+               entityUserWithAgreementForm.get('passwordRepeat').touched &&
+               entityUserWithAgreementForm.get('passwordRepeat').pristine"
+            >Данное поле обязательно</p>
+            <p class="alert-message"
+               [ngClass]="{'show-alert-message': passwordEquality, 'hide-alert-message': !passwordEquality}"
+            >Пароли не совпадают</p>
           </div>
         </div>
 <!--        Register row-->
