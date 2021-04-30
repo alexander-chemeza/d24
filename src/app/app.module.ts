@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalculatorComponent } from './pages/calculator/calculator.component';
-import { JournalComponent } from './pages/journal/journal.component';
 import { TemplateComponent } from './pages/template/template.component';
 import { BookComponent } from './pages/book/book.component';
 import { UsersComponent } from './pages/users/users.component';
@@ -16,12 +15,12 @@ import {LoginModule} from './pages/login/login.module';
 import {RecoverModule} from './pages/recover/recover.module';
 import {RegisterModule} from './pages/register/register.module';
 import {HomeModule} from './pages/home/home.module';
+import {JournalModule} from './pages/journal/journal.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalculatorComponent,
-    JournalComponent,
     TemplateComponent,
     BookComponent,
     UsersComponent,
@@ -36,7 +35,8 @@ import {HomeModule} from './pages/home/home.module';
     LoginModule,
     RecoverModule,
     RegisterModule,
-    HomeModule
+    HomeModule,
+    JournalModule
   ],
   providers: [],
   bootstrap: [AppComponent]

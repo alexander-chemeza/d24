@@ -1,0 +1,76 @@
+.journal-content {
+  background-color: #B3A4C1;
+  border-radius: 10px;
+  width: 100%;
+  height: 100%;
+  padding: 30px;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: min-content min-content min-content min-content;
+  grid-template-columns: 1fr;
+  grid-template-areas: "search" "controls" "table" "table-controls";
+  grid-gap: 30px;
+
+  & .row-search {
+    grid-area: search;
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    grid-template-rows: min-content;
+    grid-template-areas: "search filter";
+    grid-gap: 30px;
+
+    & input {
+      grid-area: search;
+    }
+
+    & button {
+      grid-area: filter;
+      padding: 12px 60px 12px 30px;
+      color: black;
+    }
+  }
+
+  & .row-controls {
+    grid-area: controls;
+    display: grid;
+    grid-template-rows: min-content;
+    grid-template-columns: max-content auto;
+    grid-template-areas: "group single";
+
+    &-group {
+      grid-area: group;
+
+      & button {
+        padding: 12px 27px;
+        margin-right: 20px;
+        color: black;
+
+        &:last-of-type {
+          margin-right: 0;
+        }
+      }
+    }
+
+    &-single {
+      grid-area: single;
+      justify-self: end;
+
+      & button {
+        padding: 12px 60px 12px 29px;
+        color: black;
+      }
+    }
+  }
+
+  & .row-table {
+    grid-area: table;
+    height: 600px;
+    overflow: auto;
+  }
+
+  & .row-table-controls {
+    position: relative;
+    grid-area: table-controls;
+  }
+}
