@@ -11,16 +11,16 @@
 }
 
 .person-with-agreement-hide {
-  display: none;
+  display: none !important;
 }
 
 .person-without-agreement-show {
-  display: block;
+  display: grid;
 }
 
 .person-without-agreement-hide {
 
-  display: none;
+  display: none !important;
 }
 
 .register-content {

@@ -179,6 +179,17 @@ export class RegisterComponent implements OnInit {
         companyName: this.entityUserWithAgreementForm.value.companyName as string,
         unp: this.entityUserWithAgreementForm.value.unp as string,
       };
+
+      if (this.entityUserWithAgreementForm.valid) {
+        console.log(data);
+        this.service.register(data)
+          .subscribe(response => {
+            console.log(response);
+            if (response === 0) {
+              this.router.navigate(['login']);
+            }
+          });
+      }
     } else if (this.agreement && !this.personWithoutAgreement) {
       data = {
         email: this.entityUserWithoutAgreementForm.value.email as string,
@@ -199,6 +210,11 @@ export class RegisterComponent implements OnInit {
         settlementPerson: this.entityUserWithoutAgreementForm.value.settlementPerson as string,
         settlementPersonEmail: this.entityUserWithoutAgreementForm.value.settlementPersonEmail as string
       };
+
+      if (this.entityUserWithoutAgreementForm.valid) {
+        console.log(data);
+        // RestAPI service usage
+      }
     } else if (!this.agreement && this.personWithAgreement) {
       data = {
         passportNumber: this.individualUserWithAgreementForm.value.passportNumber as string,
@@ -208,6 +224,11 @@ export class RegisterComponent implements OnInit {
         login: this.individualUserWithAgreementForm.value.login as string,
         password: this.individualUserWithAgreementForm.value.password as string,
       };
+
+      if (this.individualUserWithAgreementForm.valid) {
+        console.log(data);
+        // RestAPI service usage
+      }
     } else if (this.agreement && this.personWithoutAgreement) {
       data = {
         passportNumber: this.individualUserWithoutAgreementForm.value.passportNumber,
@@ -223,38 +244,19 @@ export class RegisterComponent implements OnInit {
         deliveryFrequency: this.individualUserWithoutAgreementForm.value.deliveryFrequency,
         cargoDescription: this.individualUserWithoutAgreementForm.value.cargoDescription,
       };
+
+      if (this.individualUserWithoutAgreementForm.valid) {
+        console.log(data);
+        // RestAPI service usage
+      }
     }
-    console.log(data);
-    this.service.register(data)
-      .subscribe(response => {
-        console.log(response);
-        if (response === 0) {
-          this.router.navigate(['login']);
-        }
-      });
   }
 
-  toggleWithAgreement(event: any): void {
-    const btns = document.getElementsByClassName('with-agreement-control-btn') as HTMLCollectionOf<HTMLLinkElement>;
-    for (const btn of Array.from(btns)) {
-      btn.disabled = false;
-      btn.classList.remove('active-btn');
-      btn.classList.add('white-btn');
-    }
-    event.target.classList.add('active-btn');
-    event.target.disabled = true;
+  toggleWithAgreement(): void {
     this.personWithAgreement = !this.personWithAgreement;
   }
 
-  toggleWithoutAgreement(event: any): void {
-    const btns = document.getElementsByClassName('without-agreement-control-btn') as HTMLCollectionOf<HTMLLinkElement>;
-    for (const btn of Array.from(btns)) {
-      btn.disabled = false;
-      btn.classList.remove('active-btn');
-      btn.classList.add('white-btn');
-    }
-    event.target.classList.add('active-btn');
-    event.target.disabled = true;
+  toggleWithoutAgreement(): void {
     this.personWithoutAgreement = !this.personWithoutAgreement;
   }
 }

@@ -25,8 +25,8 @@
 <!--        Person type controls-->
         <div class="grey-box user-type-controls">
           <div class="user-type-controls-container">
-            <button class="with-agreement-control-btn active-btn" (click)="toggleWithAgreement($event)">Юр. лицо</button>
-            <button class="with-agreement-control-btn white-btn" (click)="toggleWithAgreement($event)">Физ. лицо</button>
+            <button class="with-agreement-control-btn active-btn" disabled>Юр. лицо</button>
+            <button class="with-agreement-control-btn white-btn" (click)="toggleWithAgreement()">Физ. лицо</button>
           </div>
         </div>
 <!--        Compnay and UNP row-->
@@ -71,8 +71,8 @@
 <!--        Person type controls-->
         <div class="grey-box user-type-controls">
           <div class="user-type-controls-container">
-            <button class="with-agreement-control-btn active-btn" (click)="toggleWithAgreement($event)">Юр. лицо</button>
-            <button class="with-agreement-control-btn white-btn" (click)="toggleWithAgreement($event)">Физ. лицо</button>
+            <button class="with-agreement-control-btn white-btn" (click)="toggleWithAgreement()">Юр. лицо</button>
+            <button class="with-agreement-control-btn active-btn" disabled>Физ. лицо</button>
           </div>
         </div>
 <!--        Passport row-->
@@ -97,7 +97,7 @@
             <input type="text" name="fiz-with-login" id="fiz-with-login" placeholder="Введите логин" formControlName="login">
             <label for="fiz-with-password">Пароль</label>
             <input type="password" name="fiz-with-password" id="fiz-with-password" placeholder="Введите пароль" formControlName="password">
-            <label for="fiz-with-password-repeat">Пароль (подтвердить</label>
+            <label for="fiz-with-password-repeat">Пароль (подтвердить)</label>
             <input type="password" name="fiz-with-password-repeat" id="fiz-with-password-repeat" placeholder="Повторите пароль" formControlName="passwordRepeat">
           </div>
         </div>
@@ -117,11 +117,11 @@
           <div class="grey-box col-1">
 <!--            controls-->
             <div class="row-controls">
-              <button class="without-agreement-control-btn active-btn" (click)="toggleWithoutAgreement($event)">Юр. лицо</button>
-              <button class="without-agreement-control-btn white-btn" (click)="toggleWithoutAgreement($event)">Физ лицо</button>
+              <button class="without-agreement-control-btn active-btn" disabled>Юр. лицо</button>
+              <button class="without-agreement-control-btn white-btn" (click)="toggleWithoutAgreement()">Физ лицо</button>
             </div>
 <!--            fields-->
-            <label for="ur-without-agreement-client-name">Наименование клиента*</label>
+            <label for="ur-without-agreement-client-name" class="mt-50" style="display: block">Наименование клиента*</label>
             <input type="text" name="ur-without-agreement-client-name" id="ur-without-agreement-client-name" placeholder="Введите наименование клиента" formControlName="clientName">
             <label for="ur-without-agreement-ur-address">Юридический адрес*</label>
             <input type="text" name="ur-without-agreement-ur-address" id="ur-without-agreement-ur-address" placeholder="Введите юридический адрес" formControlName="legalAddress">
@@ -186,10 +186,10 @@
         <div class="main-row">
           <div class="grey-box col-1">
             <div class="row-controls">
-              <button class="without-agreement-control-btn active-btn" (click)="toggleWithoutAgreement($event)">Юр. лицо</button>
-              <button class="without-agreement-control-btn white-btn" (click)="toggleWithoutAgreement($event)">Физ лицо</button>
+              <button class="without-agreement-control-btn white-btn" (click)="toggleWithoutAgreement()">Юр. лицо</button>
+              <button class="without-agreement-control-btn active-btn" disabled>Физ лицо</button>
             </div>
-            <label for="fiz-without-agreement-fio">ФИО*</label>
+            <label for="fiz-without-agreement-fio" class="mt-50" style="display: block">ФИО*</label>
             <input type="text" name="fiz-without-agreement-fio" id="fiz-without-agreement-fio" placeholder="Введите ФИО" formControlName="userName">
             <label for="fiz-without-agreement-doc-type">Вид удостоверения*</label>
             <input type="text" name="fiz-without-agreement-doc-type" id="fiz-without-agreement-doc-type" placeholder="Введите вид документа" formControlName="documentType">
