@@ -1,0 +1,41 @@
+.template-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content min-content;
+  grid-template-areas: "search" "table" "controls";
+  grid-gap: 30px;
+  background-color: #B3A4C1;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding: 30px;
+
+  & .row-search {
+    grid-area: search;
+    display: grid;
+    grid-template-rows: min-content;
+    grid-template-columns: 9fr 1fr;
+    grid-template-areas: "search filter";
+    grid-gap: 20px;
+
+
+    & input {
+      grid-area: search;
+    }
+
+    & button {
+      grid-area: filter;
+      padding: 12px 60px 12px 20px;
+      color: black;
+    }
+  }
+
+  & .row-table {
+    grid-area: table;
+    height: 670px;
+  }
+
+  & .row-controls {
+    grid-area: controls;
+    position: relative;
+  }
+}
