@@ -99,6 +99,14 @@ a {
   padding-right: 45px;
 }
 
+.mt-10 {
+  margin-top: 10px;
+}
+
+.mr-15 {
+  margin-right: 15px;
+}
+
 .ml-15 {
   margin-left: 15px;
 }
@@ -131,6 +139,13 @@ a {
   }
 }
 
+.white-header {
+  text-transform: uppercase;
+  font-family: "Montserrat-SemiBold", sans-serif;
+  font-size: 1.4rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
 .small-bold-text {
   font-family: "Montserrat-SemiBold", sans-serif;
   font-size: 1.2rem;
@@ -151,9 +166,9 @@ a {
 }
 
 .description {
-  font-family: "Montserrat-Medium", sans-serif;
-  font-size: 1.4rem;
-  color: #000000;
+  font-family: "Montserrat-Medium", sans-serif !important;
+  font-size: 1.4rem !important;
+  color: #000000 !important;
 }
 
 .description-small {
