@@ -9,7 +9,6 @@ h2, h3, p {
   margin: 0;
 }
 
-
 html, body {
   margin: 0;
   padding: 0;
@@ -66,6 +65,26 @@ a {
 
 .pl-30 {
   padding-left: 30px;
+}
+
+.pl-0 {
+  padding-left: 0;
+}
+
+.pr-0 {
+  padding-right: 0;
+}
+
+.pt-0 {
+  padding-top: 0;
+}
+
+.br-0 {
+  border-radius: 0;
+}
+
+.pt-30 {
+  padding-top: 30px;
 }
 
 .pr-30 {

@@ -1,0 +1,54 @@
+@import "../../../../node_modules/ag-grid-community/dist/styles/ag-grid.css";
+@import "../../../../node_modules/ag-grid-community/dist/styles/ag-theme-alpine.css";
+@import "~ag-grid-community/src/styles/ag-theme-alpine/sass/ag-theme-alpine-mixin";
+
+.documents-content {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: max-content;
+
+  & .dark-grey-box {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content;
+    grid-template-areas: "table" "controls";
+
+    & .row-table {
+      grid-area: table;
+      height: 770px;
+
+      & .grey-box .ag-theme-alpine {
+        @include ag-theme-alpine((
+          odd-row-background-color: #EEE6F5,
+          row-hover-color: rgb(200, 142, 250),
+          row-height: 45px,
+          borders: false,
+          row-border-color: transparent,
+          cell-horizontal-border: solid transparent,
+          header-column-separator: true,
+          header-column-separator-height: 100%,
+          header-column-separator-width: 0,
+          header-column-separator-color: #transparent,
+          selected-row-background-color: transparent,
+          checkbox-indeterminate-color: transparent,
+          checkbox-checked-color: transparent,
+          range-selection-border-color: transparent,
+        ));
+      }
+    }
+
+    & .row-controls {
+      grid-area: controls;
+    }
+  }
+}
+
+.row-table .grey-box .ag-theme-alpine .ag-root-wrapper.ag-layout-normal.ag-ltr {
+  border-radius: 0 !important;
+}
+
+

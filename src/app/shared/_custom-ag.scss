@@ -261,3 +261,26 @@
   border: 1px solid #E0E4E7 !important;
   color: black;
 }
+
+.table-icon {
+  display: flex;
+  align-items: center;
+}
+
+.table-icon .list-icon-white {
+  display: none;
+  margin-right: 20px;
+}
+
+.table-icon .list-icon-dark {
+  display: inline-block;
+  margin-right: 20px;
+}
+
+.table-icon:hover .table-icon .list-icon-white {
+  display: inline-block !important;
+}
+
+.table-icon:hover .table-icon .list-icon-dark {
+  display: none !important;
+}
