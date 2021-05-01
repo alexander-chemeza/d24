@@ -47,11 +47,21 @@ a {
   background-color: #EEE6F5;
   padding: 30px;
   box-sizing: border-box;
+  position: relative;
 }
 
 .white-box {
   background-color: #FFFFFF;
   border-radius: 5px;
+}
+
+.dark-grey-box {
+  background-color: #B3A4C1;
+  width: 100%;
+  border-radius: 10px;
+  padding: 30px;
+  box-sizing: border-box;
+  position: relative;
 }
 
 .pl-30 {
@@ -72,6 +82,10 @@ a {
 
 .ml-15 {
   margin-left: 15px;
+}
+
+.mt-30 {
+  margin-top: 30px;
 }
 
 .mt-40 {

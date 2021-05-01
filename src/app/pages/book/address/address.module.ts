@@ -8,6 +8,7 @@ import {AddressComponent} from './address.component';
 
 @NgModule({
   declarations: [AddressComponent],
+  exports: [AddressComponent],
   imports: [
     CommonModule,
     SharedModule,

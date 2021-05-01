@@ -8,6 +8,7 @@ import {AgGridModule} from 'ag-grid-angular';
 
 @NgModule({
   declarations: [ContactsComponent],
+  exports: [ContactsComponent],
   imports: [
     CommonModule,
     SharedModule,

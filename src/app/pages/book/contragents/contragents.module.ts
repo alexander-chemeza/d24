@@ -8,6 +8,7 @@ import {AgGridModule} from 'ag-grid-angular';
 
 @NgModule({
   declarations: [ContragentsComponent],
+  exports: [ContragentsComponent],
   imports: [
     CommonModule,
     SharedModule,
