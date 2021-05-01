@@ -6,10 +6,281 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  gridApi: any;
+  gridColumnApi: any;
+  columnDefs: any;
+  rowData: any;
+  defaultColDef: any;
+  rowSelection: any;
+  paginationPageSize: any;
 
-  constructor() { }
+  constructor() {
+    this.columnDefs = [
+      {
+        headerName: 'Логин',
+        field: 'login',
+        sortable: false,
+        flex: 1,
+        minWidth: 100,
+        maxWidth: 150
+      },
+      {
+        headerName: 'Название группы',
+        field: 'groupName',
+        sortable: true,
+        flex: 1,
+        minWidth: 150,
+        maxWidth: 200
+      },
+      {
+        headerName: 'Имя',
+        field: 'name',
+        sortable: true,
+        flex: 1,
+        minWidth: 120,
+        maxWidth: 170
+      },
+      {
+        headerName: 'Email',
+        field: 'email',
+        sortable: true,
+        flex: 1,
+        minWidth: 200,
+        maxWidth: 250
+      },
+      {
+        headerName: 'Телефон',
+        field: 'phone',
+        sortable: true,
+        flex: 1,
+        minWidth: 200,
+        maxWidth: 250
+      },
+      {
+        headerName: 'Статус блокировки',
+        field: 'status',
+        sortable: true,
+        flex: 1,
+        minWidth: 200,
+        maxWidth: 220
+      },
+      {
+        headerName: 'Статус блокировки',
+        field: 'status',
+        sortable: true,
+        flex: 1,
+        minWidth: 200,
+        maxWidth: 220
+      },
+      {
+        headerName: 'Статус блокировки',
+        field: 'status',
+        sortable: true,
+        flex: 1,
+        minWidth: 200,
+        maxWidth: 220
+      }
+    ];
+    this.rowData = [
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+      {
+        login: 'drunya13',
+        groupName: 'Группа 1',
+        name: 'Andrey',
+        email: 'bartashevich.s@ntt.by',
+        phone: '+375 29 342-5554',
+        status: 'Заблокирован'
+      },
+    ];
+    this.defaultColDef = {
+      flex: 1,
+      minWidth: 100,
+      resizable: true,
+    };
+    this.rowSelection = 'multiple';
+    this.paginationPageSize = 10;
+  }
 
   ngOnInit(): void {
   }
 
+  onGridReady(params: any): void {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+  }
+
+  onPaginationChanged(): void {
+    if (this.gridApi) {
+      setText('#current', this.gridApi.paginationGetCurrentPage() + 1);
+      setText('#total', this.gridApi.paginationGetTotalPages());
+    }
+  }
+
+  onBtNext(): void {
+    this.gridApi.paginationGoToNextPage();
+  }
+
+  onBtPrevious(): void {
+    this.gridApi.paginationGoToPreviousPage();
+  }
+
+  onUserPageGrid(event: any): void {
+    this.gridApi.paginationSetPageSize(Number(event.target.value));
+  }
+
+}
+
+function setText(selector: any, text: any): void {
+  document.querySelector(selector).innerHTML = text;
 }

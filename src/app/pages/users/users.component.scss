@@ -1,0 +1,42 @@
+.users-content {
+  width: 100%;
+  height: 100%;
+
+  display: grid;
+  grid-template-rows: min-content auto min-content;
+  grid-template-columns: 1fr 2fr 2fr;
+  grid-gap: 30px;
+  grid-template-areas: "b1 b2 b3" "b4 b4 b4" "b5 b5 b5";
+
+  & .new {
+    grid-area: b1;
+  }
+
+  & .group {
+    grid-area: b2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & label {
+      white-space: nowrap;
+    }
+  }
+
+  & .access {
+    grid-area: b3;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  & .row-table {
+    grid-area: b4;
+    height: 100%;
+  }
+
+  & .row-controls {
+    grid-area: b5;
+    position: relative;
+  }
+}
