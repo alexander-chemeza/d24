@@ -1,0 +1,34 @@
+.instruction-content {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content calc(100% - 255px);
+  grid-template-areas: "buttons" "main" "controls";
+  grid-gap: 30px;
+
+  & .row-1 {
+    grid-area: buttons;
+    display: grid;
+    grid-template-rows: min-content min-content;
+    grid-template-columns: max-content max-content max-content max-content;
+    grid-gap: 20px 30px;
+
+    & button {
+      width: 265px;
+      padding: 12px 40px;
+    }
+  }
+
+  & .row-2 {
+    grid-area: main;
+  }
+
+  & .row-3 {
+    grid-area: controls;
+
+    & .page-controls {
+      position: relative;
+    }
+  }
+}
