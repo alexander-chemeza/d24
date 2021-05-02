@@ -220,6 +220,20 @@ button {
     background-position: center;
   }
 
+  &.red-btn {
+    background: #D16C65;
+    border-radius: 50px;
+    width: 45px;
+    height: 45px;
+    padding: 0;
+  }
+
+  &.unpin-btn {
+    background-image: url("../../assets/img/common/unpin.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
   &.round-btn {
     border-radius: 40px;
   }
