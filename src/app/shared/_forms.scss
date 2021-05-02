@@ -169,6 +169,23 @@ button {
     }
   }
 
+  &.green-btn {
+    background-color: #ABCF37;
+    transition: all 1s;
+    color: #FFFFFF;
+
+    &:hover {
+      background-color: #95b430;
+    }
+  }
+
+  &.circle-btn {
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    border-radius: 50px;
+  }
+
   &.active-btn {
     background-color: #8D60B5;
     color: #FFFFFF;
@@ -191,6 +208,10 @@ button {
     background-image: url("../../assets/img/common/add.svg");
     background-repeat: no-repeat;
     background-position: center;
+  }
+
+  &.round-btn {
+    border-radius: 40px;
   }
 }
 

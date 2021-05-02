@@ -40,5 +40,58 @@
 
   & .row-form {
     grid-area: form;
+    width: 100%;
+    height: 100%;
+
+    & form {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto min-content;
+      grid-template-areas: "main" "controls";
+
+      & .row-form-content {
+        grid-area: main;
+      }
+
+      & .row-form-controls {
+        grid-area: controls;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: min-content;
+        grid-gap: 30px;
+
+        & .col {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          grid-template-rows: min-content;
+          grid-gap: 30px;
+
+          & .stage {
+            display: flex;
+            justify-content: space-between;
+            background-image: url("../../../assets/img/common/line.svg");
+            background-position: center;
+            background-repeat: repeat-x;
+          }
+
+          & button.white-btn {
+            grid-row: 1;
+            grid-column: 2;
+          }
+
+          & button.green-btn {
+            grid-row: 1;
+            grid-column: 3;
+          }
+
+          & input[type="submit"] {
+            grid-row: 1;
+            grid-column: 3;
+          }
+        }
+      }
+    }
   }
 }
