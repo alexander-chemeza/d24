@@ -1,1 +1,66 @@
-<p>calculator works!</p>
+<div class="calculator-content">
+  <div class="grey-box form-box">
+    <form class="form">
+      <div class="form-row">
+        <div class="control service-control">
+          <label for="serviceType">Тип услуги</label>
+          <input type="text" name="serviceType" id="serviceType">
+        </div>
+      </div>
+      <div class="form-row mt-20">
+        <div class="control from-control">
+          <label for="from">Откуда</label>
+          <input type="text" name="from" id="from" placeholder="Город/ Населенный пункт">
+        </div>
+        <div class="control to-control">
+          <label for="to">Куда</label>
+          <input type="text" name="to" id="to" placeholder="Город/ Населенный пункт">
+        </div>
+      </div>
+      <div class="form-row mt-30">
+        <div class="control w-1-control">
+          <p class="warning-left">
+            <span class="thin-grey-text">Дни обслуживания: </span>
+            <span class="description">ПН-ВТ-СР-ЧТ-ПТ-СБ</span>
+          </p>
+        </div>
+        <div class="control w-2-control">
+          <p class="warning-left">
+            <span class="thin-grey-text">Дни обслуживания: </span>
+            <span class="description">ПН-ВТ-СР-ЧТ-ПТ-СБ</span>
+          </p>
+        </div>
+      </div>
+      <div class="control input-control mt-20">
+        <label for="params">Параметры отправления:</label>
+        <div class="row-params">
+          <input type="text" placeholder="Вес, кг">
+          <input type="text" placeholder="Объем, м3">
+          <span class="grey-header" style="text-align: center">или</span>
+          <input type="text" placeholder="Длина, см">
+          <span class="mr-10 ml-10 multiply"></span>
+          <input type="text" placeholder="Ширина, см">
+          <span class="mr-10 ml-10 multiply"></span>
+          <input type="text" placeholder="Высота, см">
+        </div>
+      </div>
+      <div class="control submit-row mt-50">
+        <input type="submit" style="max-height: 45px; align-self: flex-end" value="Рассчитать стоимость">
+        <p class="warning-left">
+          <span class="high-description">500 BYN</span>
+        </p>
+      </div>
+    </form>
+  </div>
+  <div class="grey-box warning-box">
+    <p class="description" style="max-width: 865px">
+      В случае отсутствия населённого пункта в основном
+      списке (к стоимости может применяться дополнительная
+      плата - платное отклонение. Калькулятор рассчитывает
+      стоимость перевозки грузов до 1500 кг и 6 метров3 (кубических).
+    </p>
+  </div>
+  <div class="grey-box submit-box">
+    <input type="submit" value="Точный расчет веса и объема">
+  </div>
+</div>

@@ -104,12 +104,32 @@ a {
   margin-top: 10px;
 }
 
+.mt-20 {
+  margin-top: 20px;
+}
+
 .mr-15 {
   margin-right: 15px;
 }
 
+.mr-20 {
+  margin-right: 20px;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+
 .ml-15 {
   margin-left: 15px;
+}
+
+.ml-20 {
+  margin-left: 20px;
 }
 
 .mt-30 {
@@ -166,12 +186,55 @@ a {
   color: rgba(0, 0, 0, 0.5);
 }
 
+.thin-grey-text {
+  font-family: "Montserrat-Medium", sans-serif;
+  font-size: 1.4rem;
+  color: rgba(0,0,0,0.5);
+}
+
 .description {
   font-family: "Montserrat-Medium", sans-serif !important;
   font-size: 1.4rem !important;
   color: #000000 !important;
 }
 
+.high-description {
+  font-size: 2.5rem;
+  font-family: "Montserrat-Medium", sans-serif;
+  color: black;
+}
+
 .description-small {
   font-size: 1.2rem;
+}
+
+.multiply {
+  display: block;
+  width: 14px;
+  height: 14px;
+  background-image: url("./assets/img/common/multiply.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.warning-left {
+    width: fit-content;
+    margin: 0;
+    font-size: 14px;
+    font-family: "Montserrat-Medium", sans-serif;
+    padding: 16px 30px;
+    background-color: rgba(192, 165, 217, 0.5);
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: 100%;
+      border: 10px solid transparent;
+      border-bottom: 10px solid rgba(192, 165, 217, 0.5);
+      border-left: 10px solid rgba(192, 165, 217, 0.5);
+    }
 }
