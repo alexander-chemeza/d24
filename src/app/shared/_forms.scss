@@ -67,17 +67,17 @@ input[type="password"],
 input[type="email"],
 input[type="tel"],
 input[type="number"],
-input[type="search"] {
+input[type="search"],
+input[type="date"]{
   width: 100%;
   box-sizing: border-box;
   border: none;
   outline: none;
   border-radius: 5px;
-  color: #000000;
-  font-size: 1.4rem;
   padding: 12px 15px;
   margin-top: 12px;
   font-family: "Montserrat-Medium", sans-serif;
+  font-size: 1.4rem;
   color: rgba(0,0,0,0.5);
 }
 
@@ -236,4 +236,20 @@ button {
     left: 0;
     z-index: 1;
   }
+}
+
+textarea {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  margin-top: 10px;
+  resize: none;
+  overflow: auto;
+  padding: 12px 15px;
+  font-family: "Montserrat-Medium", sans-serif;
+  font-size: 1.4rem;
+  color: rgba(0,0,0,0.5);
+  box-sizing: border-box;
 }

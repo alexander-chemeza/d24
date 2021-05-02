@@ -50,9 +50,68 @@
       grid-template-columns: 1fr;
       grid-template-rows: auto min-content;
       grid-template-areas: "main" "controls";
+      grid-gap: 30px;
 
       & .row-form-content {
         grid-area: main;
+
+        & .form-content-1 {
+          width: 100%;
+          height: 100%;
+
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+          grid-gap: 30px;
+
+          & .col {
+            & .row {
+              margin-top: 17px;
+              display: grid;
+              grid-template-columns: 9fr 1fr;
+              grid-template-rows: min-content;
+              grid-gap: 30px;
+
+              &:first-of-type {
+                margin-top: 0;
+              }
+            }
+
+            & .row-multiple {
+              margin-top: 17px;
+              display: grid;
+              grid-template-columns: 9fr 1fr;
+              grid-template-rows: min-content;
+              grid-gap: 30px;
+
+              & .container {
+                display: grid;
+                grid-template-columns: 1.5fr 1fr 1.5fr 1fr;
+                grid-template-rows: min-content min-content;
+                grid-gap: 0 20px;
+              }
+            }
+
+            & .row-two-items {
+              margin-top: 45px;
+              display: grid;
+              grid-template-columns: 9fr 1fr;
+              grid-template-rows: min-content;
+              grid-gap: 30px;
+
+              & .container {
+                display: grid;
+                grid-template-rows: min-content;
+                grid-template-columns: 1fr 1.5fr;
+
+                & .condition {
+                  display: flex;
+                  align-items: center;
+                }
+              }
+            }
+          }
+        }
       }
 
       & .row-form-controls {
