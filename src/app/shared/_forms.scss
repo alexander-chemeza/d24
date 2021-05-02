@@ -210,6 +210,16 @@ button {
     background-position: center;
   }
 
+  &.minus-btn {
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    border-radius: 45px;
+    background-image: url("../../assets/img/common/minus.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
   &.round-btn {
     border-radius: 40px;
   }
