@@ -351,7 +351,7 @@
 <!--        Form 4-->
         <div style="display: none" class="form-content-4"></div>
 <!--        Form 5-->
-        <div class="form-content-5">
+        <div style="display: none" class="form-content-5">
           <div class="column-main">
             <div class="row-type grey-box">
               <div class="multi-btns">
@@ -459,6 +459,135 @@
                   <span class="checkbox-block-icon"></span>
                 </div>
                 <label for="agreement">Оформление доверенностей на получение груза</label>
+              </div>
+            </div>
+            <div class="grey-box">
+              <button class="green-btn round-btn">
+                Точный расчет веса и объема
+              </button>
+            </div>
+          </div>
+        </div>
+<!--        Form 6-->
+        <div class="form-content-6">
+          <div class="column-main">
+            <div class="row-type grey-box">
+              <div class="multi-btns">
+                <label for="">Тип грузового места</label>
+                <div class="btns-box">
+                  <button class="active-btn">Короб</button>
+                  <button class="white-btn">Негабарит</button>
+                  <button class="white-btn">Мешок</button>
+                </div>
+              </div>
+              <div class="counter mt-27">
+                <button class="minus-btn active-btn"></button>
+                <input class="m-0" type="number">
+                <button class="add-btn active-btn"></button>
+              </div>
+            </div>
+            <div class="row-params">
+              <div class="grey-box">
+                <label for="params">Параметры отправления:</label>
+                <div class="row-params-items">
+                  <input type="text" placeholder="Вес, кг">
+                  <input type="text" placeholder="Объем, м3">
+                  <span class="grey-header" style="text-align: center">или</span>
+                  <input type="text" placeholder="Длина, см">
+                  <span class="mr-10 ml-10 multiply"></span>
+                  <input type="text" placeholder="Ширина, см">
+                  <span class="mr-10 ml-10 multiply"></span>
+                  <input type="text" placeholder="Высота, см">
+                </div>
+              </div>
+            </div>
+            <div class="row-description">
+              <div class="grey-box left">
+                <h2 class="grey-header">Описание вложений :</h2>
+                <div class="row-details">
+                  <div class="item">
+                    <input class="m-0" type="text" placeholder="Вложение">
+                    <input class="m-0" type="text" placeholder="Количество, шт.">
+                    <input class="m-0" type="text" placeholder="Стоимость для получателя">
+                    <button class="red-btn unpin-btn"></button>
+                  </div>
+                  <div class="item">
+                    <input class="m-0" type="text" placeholder="Вложение">
+                    <input class="m-0" type="text" placeholder="Количество, шт.">
+                    <input class="m-0" type="text" placeholder="Стоимость для получателя">
+                    <button class="red-btn unpin-btn"></button>
+                  </div>
+                  <div class="item">
+                    <input class="m-0" type="text" placeholder="Вложение">
+                    <input class="m-0" type="text" placeholder="Количество, шт.">
+                    <input class="m-0" type="text" placeholder="Стоимость для получателя">
+                    <button class="red-btn unpin-btn"></button>
+                  </div>
+                  <div class="item">
+                    <input class="m-0" type="text" placeholder="Вложение">
+                    <input class="m-0" type="text" placeholder="Количество, шт.">
+                    <input class="m-0" type="text" placeholder="Стоимость для получателя">
+                    <button class="red-btn unpin-btn"></button>
+                  </div>
+                  <div class="item">
+                    <input class="m-0" type="text" placeholder="Вложение">
+                    <input class="m-0" type="text" placeholder="Количество, шт.">
+                    <input class="m-0" type="text" placeholder="Стоимость для получателя">
+                    <button class="red-btn unpin-btn"></button>
+                  </div>
+                </div>
+                <div class="row-controls">
+                  <button class="active-btn add-btn"></button>
+                </div>
+              </div>
+              <div class="grey-box right">
+                <p class="warning-left mt-5">
+                  <span class="thin-grey-text">Итого: </span>
+                  <span class="description">500 BYN</span>
+                </p>
+                <label class="mt-5" for="">Объявленная ценность:</label>
+                <input type="text" placeholder="Введите стоимость">
+                <label class="mt-5" for="">Наложенный плёж:</label>
+                <input type="text">
+              </div>
+            </div>
+          </div>
+          <div class="column-side">
+            <div class="grey-box">
+              <div class="row">
+                <div class="checkbox-block" style="margin-right: 15px;">
+                  <input class="checkbox-block-item" type="checkbox" name="ttn" id="ttn" checked>
+                  <span class="checkbox-block-icon"></span>
+                </div>
+                <label for="ttn">Замена ТТН ( 1 шт - 15 руб) </label>
+              </div>
+              <div class="row">
+                <div class="checkbox-block" style="margin-right: 15px;">
+                  <input class="checkbox-block-item" type="checkbox" name="wait" id="wait" checked>
+                  <span class="checkbox-block-icon"></span>
+                </div>
+                <label for="wait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
+              </div>
+              <div class="row">
+                <div class="checkbox-block" style="margin-right: 15px;">
+                  <input class="checkbox-block-item" type="radio" name="readdress" id="readdress" checked>
+                  <span class="checkbox-block-icon"></span>
+                </div>
+                <label for="readdress">Переадресация</label>
+              </div>
+              <div class="row">
+                <div class="checkbox-block" style="margin-right: 15px;">
+                  <input class="checkbox-block-item" type="radio" name="agrement" id="agreement" checked>
+                  <span class="checkbox-block-icon"></span>
+                </div>
+                <label for="agreement">Оформление доверенностей на получение груза</label>
+              </div>
+              <div class="row">
+                <div class="checkbox-block" style="margin-right: 15px;">
+                  <input class="checkbox-block-item" type="radio" name="list" id="list" checked>
+                  <span class="checkbox-block-icon"></span>
+                </div>
+                <label for="list">Опись вложений</label>
               </div>
             </div>
             <div class="grey-box">

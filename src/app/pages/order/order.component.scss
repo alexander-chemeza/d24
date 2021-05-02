@@ -465,6 +465,153 @@
             }
           }
         }
+
+        & .form-content-6 {
+          width: 100%;
+          height: 100%;
+
+          display: grid;
+          grid-template-columns: 3fr 1fr;
+          grid-template-rows: auto;
+          grid-gap: 30px;
+
+          & .column-main {
+            width: 100%;
+            height: 100%;
+
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: min-content min-content auto;
+            grid-gap: 30px;
+
+            & .row-type {
+              display: grid;
+              grid-template-columns: 3fr 1fr;
+              grid-template-rows: min-content;
+              grid-gap: 90px;
+
+              & .multi-btns .btns-box {
+                margin-top: 10px;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-template-rows: min-content;
+                grid-gap: 20px;
+
+                & button {
+                  &:nth-of-type(1) {
+                    background-image: url("../../../assets/img/common/box.svg");
+                    background-position-y: center;
+                    background-position-x: 70px;
+                    background-repeat: no-repeat;
+                  }
+
+                  &:nth-of-type(2) {
+                    background-image: url("../../../assets/img/common/oversize.svg");
+                    background-position-y: center;
+                    background-position-x: 30px;
+                    background-repeat: no-repeat;
+                  }
+
+                  &:nth-of-type(3) {
+                    background-image: url("../../../assets/img/common/bundle.svg");
+                    background-position-y: center;
+                    background-position-x: 30px;
+                    background-repeat: no-repeat;
+                  }
+                }
+              }
+
+              & .counter {
+                display: grid;
+                grid-template-columns: 1fr 2fr 1fr;
+                grid-template-rows: min-content;
+                grid-gap: 15px;
+              }
+            }
+
+            & .row-params .grey-box {
+              display: grid;
+              grid-template-columns: 1fr;
+              grid-template-rows: min-content;
+
+              & .row-params-items {
+                margin-top: 12px;
+                display: grid;
+                grid-template-columns: 1.2fr 1.2fr 80px 1.8fr 30px 1.8fr 30px 1.8fr;
+                grid-template-rows: min-content;
+                align-items: center;
+                grid-gap: 20px;
+
+                & input {
+                  margin-top: 0;
+                }
+              }
+            }
+
+            & .row-description {
+              max-height: 260px;
+              display: grid;
+              grid-template-columns: 2fr 1fr;
+              grid-template-rows: auto;
+              grid-gap: 30px;
+
+              & .left {
+                max-height: 260px;
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: min-content auto min-content;
+                grid-gap: 20px;
+
+                & .row-details {
+                  width: 100%;
+                  overflow: auto;
+                  display: grid;
+                  grid-template-columns: 1fr;
+                  grid-template-rows: min-content;
+                  grid-gap: 20px;
+
+                  & .item {
+                    display: grid;
+                    grid-template-columns: 4fr 4fr 5fr 1fr;
+                    grid-template-rows: min-content;
+                    grid-gap: 20px;
+
+                    & button {
+                      align-self: end;
+                    }
+                  }
+                }
+              }
+
+              & .right {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-template-rows: min-content min-content min-content;
+
+              }
+            }
+          }
+
+          & .column-side {
+            width: 100%;
+            height: 100%;
+
+            display: grid;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto min-content;
+            grid-gap: 30px;
+
+            & .grey-box .row {
+              display: flex;
+              align-items: center;
+              margin-top: 20px;
+
+              &:first-of-type {
+                margin-top: 0;
+              }
+            }
+          }
+        }
       }
 
       & .row-form-controls {
