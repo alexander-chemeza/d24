@@ -1,0 +1,58 @@
+.mat-form-field {
+  margin-top: 12px;
+  width: 100%;
+  background-color: white;
+  border-radius: 5px;
+  display: block;
+  position: relative;
+  text-align: left;
+}
+
+.mat-form-field-wrapper {
+  max-height: 45px;
+}
+
+.mat-select-value-text,
+.mat-option-text {
+  font-family: "Montserrat-Medium", sans-serif;
+  font-size: 14px;
+  color: #000000;
+}
+
+
+.mat-form-field-infix {
+  padding: 0.5em 12px;
+  border-top: 0.6em solid transparent;
+}
+
+.mat-select-arrow {
+  width: 24px !important;
+  height: 24px !important;
+  color: transparent;
+  background-image: url("../../assets/img/common/select.svg");
+  background-repeat: no-repeat;
+}
+
+.mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: transparent;
+}
+
+.mat-option.mat-active {
+  background-color: #A070B5 !important;
+}
+
+.mat-option.mat-active  .mat-option-text {
+  color: #FFFFFF;
+}
+
+.mat-form-field-underline {
+  display: none !important;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0 !important;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-infix {
+  padding: 0.4375em 15px;
+}

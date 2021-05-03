@@ -3,11 +3,23 @@
     <div class="grey-box">
       <div class="control">
         <label for="">Тип услуги</label>
-        <input type="text" placeholder="Выберите услугу">
+        <mat-form-field floatLabel="never">
+          <mat-select [(ngModel)]="serviceType">
+            <mat-option *ngFor="let service of serviceTypes" [value]="service.value">
+              {{service.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div class="control">
         <label for="">Тип доставки</label>
-        <input type="text" placeholder="Выберите тип доставки">
+        <mat-form-field floatLabel="never">
+          <mat-select [(ngModel)]="deliveryType">
+            <mat-option *ngFor="let delivery of deliveryTypes" [value]="delivery.value">
+              {{delivery.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
       <div style="display: none" class="control-wide">
         <label for="">Описание груза</label>
