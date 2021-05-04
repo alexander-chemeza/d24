@@ -39,3 +39,15 @@
     position: relative;
   }
 }
+
+.filter {
+  display: none;
+}
+
+.show-modal {
+  display: block !important;
+}
+
+.hide-modal {
+  display: none !important;
+}

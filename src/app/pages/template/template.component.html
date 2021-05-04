@@ -1,7 +1,7 @@
 <div class="template-content">
   <div class="row-search">
     <input class="m-0" type="search" placeholder="Поиск">
-    <button class="white-btn">Фильтр</button>
+    <button class="white-btn" (click)="showModal($event)" modal="filter">Фильтр</button>
   </div>
   <div class="row-table">
     <ag-grid-angular
@@ -36,4 +36,7 @@
       <span (click)="onBtNext()" class="page-next"></span>
     </div>
   </div>
+</div>
+<div id="filter" class="filter">
+  modal
 </div>

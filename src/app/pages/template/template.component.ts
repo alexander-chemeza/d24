@@ -347,6 +347,19 @@ export class TemplateComponent implements OnInit {
     this.gridApi.paginationSetPageSize(Number(event.target.value));
   }
 
+  showModal(event: any): void {
+    const targetId = event.target.getAttribute('modal');
+    const modal: any = document.getElementById(targetId);
+    modal.classList.add('show-modal');
+  }
+
+  hideModal(event: any): void {
+    const targetId = event.target.getAttribute('modal');
+    const modal: any = document.getElementById(targetId);
+    modal.classList.add('hide-modal');
+    modal.classList.remove('show-modal');
+  }
+
 }
 
 function setText(selector: any, text: any): void {
