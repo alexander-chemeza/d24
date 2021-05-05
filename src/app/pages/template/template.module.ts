@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {SharedModule} from '../../shared/shared.module';
 import {AgGridModule} from 'ag-grid-angular';
 import {TemplateComponent} from './template.component';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -11,7 +12,8 @@ import {TemplateComponent} from './template.component';
   imports: [
     CommonModule,
     SharedModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    MatSelectModule
   ]
 })
 export class TemplateModule { }

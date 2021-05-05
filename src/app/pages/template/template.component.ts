@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
+interface ServiceTypesList {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-template',
   templateUrl: './template.component.html',
@@ -13,6 +18,12 @@ export class TemplateComponent implements OnInit {
   public defaultColDef: any;
   public rowSelection: any;
   public paginationPageSize: any;
+
+  serviceType: string;
+
+  serviceTypes: ServiceTypesList[] = [
+    {value: '0', viewValue: '(все)'},
+  ];
 
   constructor() {
     this.columnDefs = [
@@ -318,9 +329,12 @@ export class TemplateComponent implements OnInit {
     };
     this.rowSelection = 'multiple';
     this.paginationPageSize = 10;
+
+    this.serviceType = this.serviceTypes[0].value;
   }
 
   ngOnInit(): void {
+    this.serviceType = this.serviceTypes[0].value;
   }
 
   onGridReady(params: any): void {
@@ -350,6 +364,7 @@ export class TemplateComponent implements OnInit {
   showModal(event: any): void {
     const targetId = event.target.getAttribute('modal');
     const modal: any = document.getElementById(targetId);
+    modal.classList.remove('hide-modal');
     modal.classList.add('show-modal');
   }
 
