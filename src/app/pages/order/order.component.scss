@@ -19,6 +19,7 @@
 
       & .control-wide {
         grid-column: span 2;
+        display: none;
       }
     }
   }
@@ -868,3 +869,13 @@
     }
   }
 }
+
+.another-form {
+  display: none !important;
+}
+
+.show-control-wide {
+  display: block !important;
+}
+
+

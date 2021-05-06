@@ -4,7 +4,7 @@
       <div class="control">
         <label for="">Тип услуги</label>
         <mat-form-field floatLabel="never">
-          <mat-select [(ngModel)]="serviceType">
+          <mat-select [(ngModel)]="serviceType" (selectionChange)="selectService($event)">
             <mat-option *ngFor="let service of serviceTypes" [value]="service.value">
               {{service.viewValue}}
             </mat-option>
@@ -21,7 +21,7 @@
           </mat-select>
         </mat-form-field>
       </div>
-      <div style="display: none" class="control-wide">
+      <div id="control-wide" class="control-wide">
         <label for="">Описание груза</label>
         <input type="text">
       </div>
@@ -29,19 +29,19 @@
   </div>
   <div class="row-stage">
     <div class="col">
-      <button class="active-btn">Доставка</button>
-      <button class="white-btn">Вес, габариты</button>
+      <button class="stage-btn active-btn" (click)="changeStage($event)" stage="1">Доставка</button>
+      <button class="stage-btn white-btn" (click)="changeStage($event)" stage="2">Вес, габариты</button>
     </div>
     <div class="col">
       <div></div>
-      <button class="white-btn">Дополнительные услуги</button>
+      <button class="stage-btn white-btn" (click)="changeStage($event)" stage="3">Дополнительные услуги</button>
     </div>
   </div>
   <div class="row-form">
     <form>
       <div class="row-form-content">
 <!--        Form 1-->
-        <div class="form-content-1">
+        <div id="form-0" class="form form-content-1">
           <div class="col grey-box">
             <div class="row">
               <div class="control">
@@ -190,7 +190,7 @@
           </div>
         </div>
 <!--        Form 2-->
-        <div style="display: none" class="form-content-2">
+        <div id="form-02" class="form form-content-2 another-form">
           <div class="col col-rows">
             <div class="row row-btns">
               <div class="grey-box">
@@ -247,37 +247,37 @@
             <div class="grey-box">
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="ttn" id="ttn" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="ttn1" id="ttn1" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="ttn">Замена ТТН ( 1 шт - 15 руб) </label>
+                <label for="ttn1">Замена ТТН ( 1 шт - 15 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="wait" id="wait" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="wait1" id="wait1" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="wait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
+                <label for="wait1">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="radio" name="readdress" id="readdress" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="readdress1" id="readdress1" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="readdress">Переадресация</label>
+                <label for="readdress1">Переадресация</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="radio" name="agrement" id="agreement" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="agreement1" id="agreement1" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="agreement">Оформление доверенностей на получение груза</label>
+                <label for="agreement1">Оформление доверенностей на получение груза</label>
               </div>
             </div>
           </div>
         </div>
 <!--        Form 3-->
-        <div style="display: none" class="form-content-3">
+        <div id="form-03" class="form form-content-3 another-form">
           <div class="col col-rows">
             <div class="row row-btns">
               <div class="grey-box">
@@ -331,37 +331,37 @@
             <div class="grey-box">
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="ttn" id="ttn" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="ttn2" id="ttn2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="ttn">Замена ТТН ( 1 шт - 15 руб) </label>
+                <label for="tt2">Замена ТТН ( 1 шт - 15 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="wait" id="wait" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="wait2" id="wait2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="wait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
+                <label for="wait2">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="radio" name="readdress" id="readdress" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="readdress2" id="readdress2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="readdress">Переадресация</label>
+                <label for="readdress2">Переадресация</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="radio" name="agrement" id="agreement" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="agrement2" id="agreement2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="agreement">Оформление доверенностей на получение груза</label>
+                <label for="agreement2">Оформление доверенностей на получение груза</label>
               </div>
             </div>
           </div>
         </div>
 <!--        Form 4-->
-        <div style="display: none" class="form-content-4">
+        <div id="form-1" class="form form-content-4 another-form">
           <div class="col grey-box">
             <div class="row">
               <div class="control">
@@ -485,7 +485,7 @@
           </div>
         </div>
 <!--        Form 5-->
-        <div style="display: none" class="form-content-5">
+        <div id="form-12" class="form form-content-5 another-form">
           <div class="column-main">
             <div class="row-type grey-box">
               <div class="multi-btns">
@@ -568,31 +568,31 @@
             <div class="grey-box">
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="ttn" id="ttn" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="ttn3" id="ttn3" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="ttn">Замена ТТН ( 1 шт - 15 руб) </label>
+                <label for="ttn3">Замена ТТН ( 1 шт - 15 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="wait" id="wait" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="wait3" id="wait3" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="wait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
+                <label for="wait3">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="radio" name="readdress" id="readdress" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="readdress3" id="readdress3" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="readdress">Переадресация</label>
+                <label for="readdress3">Переадресация</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="radio" name="agrement" id="agreement" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="agrement3" id="agreement3" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="agreement">Оформление доверенностей на получение груза</label>
+                <label for="agreement3">Оформление доверенностей на получение груза</label>
               </div>
             </div>
             <div class="grey-box">
@@ -603,7 +603,7 @@
           </div>
         </div>
 <!--        Form 6-->
-        <div style="display: none" class="form-content-6">
+        <div id="form-13" class="form form-content-6 another-form">
           <div class="column-main">
             <div class="row-type grey-box">
               <div class="multi-btns">
@@ -690,38 +690,38 @@
             <div class="grey-box">
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="ttn" id="ttn" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="ttn4" id="ttn4" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="ttn">Замена ТТН ( 1 шт - 15 руб) </label>
+                <label for="ttn4">Замена ТТН ( 1 шт - 15 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="wait" id="wait" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="wait4" id="wait4" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="wait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
+                <label for="wait4">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="radio" name="readdress" id="readdress" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="readdress4" id="readdress4" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="readdress">Переадресация</label>
+                <label for="readdress4">Переадресация</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="radio" name="agrement" id="agreement" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="agreement4" id="agreement4" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="agreement">Оформление доверенностей на получение груза</label>
+                <label for="agreement4">Оформление доверенностей на получение груза</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="radio" name="list" id="list" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="list4" id="list4" checked (change)="checkboxChange($event)">
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="list">Опись вложений</label>
+                <label for="list4">Опись вложений</label>
               </div>
             </div>
             <div class="grey-box">
@@ -732,7 +732,7 @@
           </div>
         </div>
 <!--        Form 7-->
-        <div style="display: none" class="form-content-7">
+        <div id="form-2" class="form form-content-7 another-form">
           <div class="column-main">
             <div class="row-type grey-box">
               <div class="multi-btns">
@@ -778,38 +778,38 @@
             <div class="grey-box">
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="ttn" id="ttn" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="ttn5" id="ttn5" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="ttn">Замена ТТН ( 1 шт - 15 руб) </label>
+                <label for="ttn5">Замена ТТН ( 1 шт - 15 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="wait" id="wait" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="wait5" id="wait5" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="wait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
+                <label for="wait5">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="radio" name="readdress" id="readdress" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="readdress5" id="readdress5" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="readdress">Переадресация</label>
+                <label for="readdress5">Переадресация</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="radio" name="agrement" id="agreement" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="agreement5" id="agreement5" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="agreement">Оформление доверенностей на получение груза</label>
+                <label for="agreement5">Оформление доверенностей на получение груза</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="radio" name="list" id="list" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="list5" id="list5" (change)="checkboxChange($event)">
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="list">Опись</label>
+                <label for="list5">Опись</label>
               </div>
             </div>
           </div>
