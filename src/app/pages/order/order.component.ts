@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RestapiService} from '../../restapi.service';
 
 interface ServiceTypesList {
   value: string;
@@ -6,8 +7,8 @@ interface ServiceTypesList {
 }
 
 interface DeliveryTypesList {
-  value: string;
-  viewValue: string;
+  id: string;
+  name: string;
 }
 
 @Component({
@@ -24,18 +25,20 @@ export class OrderComponent implements OnInit {
     {value: '1', viewValue: 'Курьерская доставка'},
   ];
 
-  deliveryTypes: DeliveryTypesList[] = [
-    {value: '0', viewValue: 'Дверь/дверь'}
-  ];
+  deliveryTypes: DeliveryTypesList[] = [];
 
-  constructor() {
+  constructor(private service: RestapiService) {
     this.serviceType = this.serviceTypes[0].value;
-    this.deliveryType = this.deliveryTypes[0].value;
+    this.deliveryType = '';
   }
 
   ngOnInit(): void {
     this.serviceType = this.serviceTypes[0].value;
-    this.deliveryType = this.deliveryTypes[0].value;
+
+    this.service.deliveryTypes().subscribe(data => {
+      this.deliveryTypes = data;
+      this.deliveryType = this.deliveryTypes[0].id;
+    });
   }
 
 
@@ -83,8 +86,6 @@ export class OrderComponent implements OnInit {
   }
 
   checkboxChange(event: any): void {
-    const list4 = document.getElementById('list4');
-    const list5 = document.getElementById('list5');
     let currentForm: any;
     const status = event.target.checked;
     const forms = document.getElementsByClassName('form') as HTMLCollection;

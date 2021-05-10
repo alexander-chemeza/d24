@@ -61,4 +61,11 @@ export class RestapiService {
   public register(data: UserRegistration): Observable<any> {
     return this.http.post('http://localhost:8080/registration', data);
   }
+
+  public deliveryTypes(): Observable<any> {
+    // const headers = new HttpHeaders({});
+    // headers.append('Set-Cookies', 'JSESSIONID=<jsessionid>');
+    // console.log(headers);
+    return this.http.get('http://localhost:8080/user/deliveryType/getAll', {responseType: 'json', withCredentials: true});
+  }
 }

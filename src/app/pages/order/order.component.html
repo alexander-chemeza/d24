@@ -15,8 +15,8 @@
         <label for="">Тип доставки</label>
         <mat-form-field floatLabel="never">
           <mat-select [(ngModel)]="deliveryType">
-            <mat-option *ngFor="let delivery of deliveryTypes" [value]="delivery.value">
-              {{delivery.viewValue}}
+            <mat-option *ngFor="let delivery of deliveryTypes" [value]="delivery.id">
+              {{delivery.name}}
             </mat-option>
           </mat-select>
         </mat-form-field>
