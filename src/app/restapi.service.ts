@@ -55,7 +55,7 @@ export class RestapiService {
     });
 
     // GET method to login, that returns an object {"name": "value", role: "value"}
-    return this.http.get<User>('http://localhost:8080/login', {headers, responseType: 'json'});
+    return this.http.get<User>('http://localhost:8080/login', {headers, responseType: 'json', withCredentials: true});
   }
 
   public register(data: UserRegistration): Observable<any> {
