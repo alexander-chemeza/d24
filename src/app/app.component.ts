@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
+import {RestapiService} from './restapi.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ export class AppComponent implements OnInit {
 
   state: boolean;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private service: RestapiService) {
     this.state = false;
   }
 
@@ -30,6 +31,9 @@ export class AppComponent implements OnInit {
 
   doLogout(): void {
     localStorage.removeItem('currentUser');
+    this.service.logout().subscribe(data => {
+      console.log(data);
+    });
     this.router.navigate(['login']);
   }
 }

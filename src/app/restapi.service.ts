@@ -68,4 +68,8 @@ export class RestapiService {
     // console.log(headers);
     return this.http.get('http://localhost:8080/user/deliveryType/getAll', {responseType: 'json', withCredentials: true});
   }
+
+  public logout(): Observable<any> {
+    return this.http.get('http://localhost:8080/logout', {withCredentials: true});
+  }
 }
