@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {NavigationEnd, Router} from '@angular/router';
-import {RestapiService} from './restapi.service';
+import {Feedback, RestapiService} from './restapi.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,8 @@ export class AppComponent implements OnInit {
   title = 'd24';
 
   state: boolean;
+
+  feedbackForm: any;
 
   constructor(private router: Router, private service: RestapiService) {
     this.state = false;
@@ -26,6 +29,12 @@ export class AppComponent implements OnInit {
           this.state = false;
         }
       }
+    });
+
+    this.feedbackForm = new FormGroup({
+      description: new FormControl('', [
+        Validators.required
+      ])
     });
   }
 
@@ -47,5 +56,15 @@ export class AppComponent implements OnInit {
     const modal: any = document.getElementById(id);
     modal.classList.add('hide-modal');
     modal.classList.remove('show-modal');
+  }
+
+  sendFeedback(): void {
+    const data: Feedback = {
+      description: this.feedbackForm.value.description as string
+    };
+    this.service.feedback(data).subscribe(response => {
+      console.log(response);
+    });
+    this.hideModal('to-be-better');
   }
 }

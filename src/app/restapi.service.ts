@@ -40,6 +40,10 @@ export interface UserRegistration {
   settlementPersonEmail?: string;
 }
 
+export interface Feedback {
+  description: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -71,5 +75,9 @@ export class RestapiService {
 
   public logout(): Observable<any> {
     return this.http.get('http://localhost:8080/logout', {withCredentials: true});
+  }
+
+  public feedback(data: Feedback): Observable<any> {
+    return  this.http.post('http://localhost:8080/user/sendFeedback', data, {withCredentials: true});
   }
 }

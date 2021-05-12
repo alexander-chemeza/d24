@@ -139,7 +139,7 @@
     <h2 class="modal-header">Помогите нам стать лучше!</h2>
     <p class="description">Будем рады получить от вас обратную связь по личному кабинету!</p>
     <p class="description mt-15">Не стесняйтесь- здесь вы можете написать свои пожелания по улучшению нашего сервиса. Мы принимаем как негативный, так  и положительный фидбэк)</p>
-    <form>
+    <form [formGroup]="feedbackForm" (ngSubmit)="sendFeedback()">
       <label for="description-textarea">Пожелания по доработке и исправлению ошибок</label>
       <textarea id="description-textarea" name="description-textarea"></textarea>
       <input type="submit" value="Отправить">
