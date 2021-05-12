@@ -45,3 +45,65 @@
     grid-area: box-7;
   }
 }
+
+.modal {
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: #A070B5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 5px 5px 28px 14px rgba(0,0,0,0.31);
+  box-shadow: 5px 5px 28px 14px rgba(0,0,0,0.31);
+
+  &.new-contragent {
+    width: 100%;
+    height: 100%;
+    max-width: 640px;
+    max-height: 430px;
+  }
+
+  .new-contragent-content {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content auto;
+    grid-gap: 30px;
+    position: relative;
+
+    & .close-btn {
+      position: absolute !important;
+      top: -100px;
+      right: -25px;
+      -webkit-box-shadow: 5px 5px 28px 14px rgba(0,0,0,0.31);
+      box-shadow: 5px 5px 28px 14px rgba(0,0,0,0.31);
+    }
+
+    & form {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto min-content;
+      grid-gap: 30px;
+
+      & .btns-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: min-content;
+        grid-gap: 30px;
+
+        & button {
+          grid-column: 2;
+          grid-row: 1;
+        }
+
+        & input {
+          grid-column: 3;
+          grid-row: 1;
+        }
+      }
+    }
+  }
+}

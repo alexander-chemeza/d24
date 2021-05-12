@@ -42,7 +42,7 @@ $d24-theme: mat-light-theme((
 @import "./app/shared/material";
 
 h2, h3, p {
-  margin: 0;
+  margin: 0 !important;
 }
 
 html, body {
