@@ -10,6 +10,7 @@ export class BookComponent implements OnInit {
   // Reactive forms
   newContragent: any;
   newContact: any;
+  newAddress: any;
 
   constructor() { }
 
@@ -37,6 +38,48 @@ export class BookComponent implements OnInit {
         Validators.required
       ]),
       email: new FormControl('', [
+        Validators.required
+      ])
+    });
+
+    this.newAddress = new FormGroup({
+      type: new FormControl('', [
+
+      ]),
+      place: new FormControl('', [
+        Validators.required
+      ]),
+      street: new FormControl('', [
+        Validators.required
+      ]),
+      building: new FormControl('', [
+        Validators.required
+      ]),
+      corpus: new FormControl('', [
+        Validators.required
+      ]),
+      house: new FormControl('', [
+        Validators.required
+      ]),
+      office: new FormControl('', [
+        Validators.required
+      ]),
+      apartment: new FormControl('', [
+        Validators.required
+      ]),
+      deliveryFrom: new FormControl('', [
+        Validators.required
+      ]),
+      deliveryTo: new FormControl('', [
+        Validators.required
+      ]),
+      timeoutFrom: new FormControl('', [
+        Validators.required
+      ]),
+      timeoutTo: new FormControl('', [
+        Validators.required
+      ]),
+      description: new FormControl('', [
         Validators.required
       ])
     });

@@ -84,7 +84,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form  (ngSubmit)="createNewAddress()">
+    <form [formGroup]="newAddress" (ngSubmit)="createNewAddress()">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -94,56 +94,56 @@
           <label for="type2">Основной адрес</label>
         </div>
         <label for="place">Населенный пункт:</label>
-        <input type="text" name="place" id="place">
+        <input type="text" name="place" id="place" formControlName="place">
         <label for="street">Улица:</label>
-        <input type="text" name="street" id="street">
+        <input type="text" name="street" id="street" formControlName="street">
         <div class="row-multi mt-15">
           <div class="box">
             <label for="building">Дом:</label>
-            <input type="text" name="building" id="building">
+            <input type="text" name="building" id="building" formControlName="building">
           </div>
           <div class="box">
             <label for="corpus">Корпус:</label>
-            <input type="text" name="corpus" id="corpus">
+            <input type="text" name="corpus" id="corpus" formControlName="corpus">
           </div>
           <div class="box">
             <label for="house">Строение</label>
-            <input type="text" id="house" name="house">
+            <input type="text" id="house" name="house" formControlName="house">
           </div>
           <div class="box">
             <label for="office">Офис:</label>
-            <input type="text" name="office" id="office">
+            <input type="text" name="office" id="office" formControlName="office">
           </div>
           <div class="box">
             <label for="appartment">Квартира</label>
-            <input type="text" name="appartment" id="appartment">
+            <input type="text" name="appartment" id="appartment" formControlName="apartment">
           </div>
         </div>
         <div class="row-some mt-15">
           <div class="box">
             <label for="delivery-from">Время доставки с:</label>
-            <input type="text" name="delivery-from" id="delivery-from">
+            <input type="text" name="delivery-from" id="delivery-from" formControlName="deliveryFrom">
           </div>
           <div class="box">
             <label for="delivery-from">по:</label>
-            <input type="text">
+            <input type="text" formControlName="deliveryTo">
           </div>
         </div>
         <div class="row-some mt-15">
           <div class="box">
             <label for=timeout-from>Время перерыва c:</label>
-            <input type="text" name="timeout-from" id="timeout-from">
+            <input type="text" name="timeout-from" id="timeout-from" formControlName="timeoutFrom">
           </div>
           <div class="box">
             <label for="timeout-to">по:</label>
-            <input type="text" name="timeout-to" id="timeout-to">
+            <input type="text" name="timeout-to" id="timeout-to" formControlName="timeoutTo">
           </div>
         </div>
         <label for="description-area">Примечание</label>
-        <textarea name="description-area" id="description-area"></textarea>
+        <textarea name="description-area" id="description-area" formControlName="description"></textarea>
       </div>
       <div class="row-controls">
-        <button class="white-btn round-btn">Отмена</button>
+        <button class="white-btn round-btn" (click)="hideModal('new-address')">Отмена</button>
         <input type="submit" value="Сохранить">
       </div>
     </form>
