@@ -14,7 +14,7 @@
   <div class="box-3">
     <div class="grey-box">
       <h2 class="grey-header m-0">Контакты</h2>
-      <button class="white-btn mt-30">Новый контакт</button>
+      <button class="white-btn mt-30" (click)="showModal('new-contact')">Новый контакт</button>
     </div>
   </div>
   <div class="box-4">
@@ -35,7 +35,7 @@
   <div class="new-contragent-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-contragent')"></button>
     <h2 class="white-header">Новый контрагент</h2>
-    <form [formGroup]="newContragent" (ngSubmit)="newContragent()">
+    <form [formGroup]="newContragent" (ngSubmit)="createNewContragent()">
       <div class="grey-box">
         <label for="type"> Форма собственности :</label>
         <input type="text" id="type" name="type" formControlName="type">
@@ -44,6 +44,36 @@
       </div>
       <div class="btns-row">
         <button class="white-btn round-btn" (click)="hideModal('new-contragent')">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="new-contact" class="modal new-contact">
+  <div class="new-contact-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-contact')"></button>
+    <h2 class="white-header">Новый контакт</h2>
+    <form [formGroup]="newContact" (ngSubmit)="createNewContact()">
+      <div class="grey-box">
+        <div class="row mb-20">
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="checkbox" name="type" id="type" formControlName="type" checked>
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="type">Основной адрес</label>
+        </div>
+        <label for="contact-name">Имя контакта:</label>
+        <input type="text" name="contact-name" id="contact-name" formControlName="name">
+        <label for="contact-phone-1">Телефон:</label>
+        <input type="text" name="contact-phone-1" id="contact-phone-1" formControlName="tel1">
+        <label for="contact-phone-2"> Телефон 2:</label>
+        <input type="text" name="contact-phone-2" id="contact-phone-2" formControlName="tel2">
+        <label for="contact-email">Email:</label>
+        <input type="text" name="contact-email" id="contact-email" formControlName="email">
+      </div>
+      <div class="row-controls">
+        <button class="white-btn round-btn" (click)="hideModal('new-contact')">Отмена</button>
         <input type="submit" value="Сохранить">
       </div>
     </form>

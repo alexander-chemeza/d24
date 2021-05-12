@@ -9,6 +9,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class BookComponent implements OnInit {
   // Reactive forms
   newContragent: any;
+  newContact: any;
 
   constructor() { }
 
@@ -18,6 +19,24 @@ export class BookComponent implements OnInit {
         Validators.required
       ]),
       name: new FormControl('', [
+        Validators.required
+      ])
+    });
+
+    this.newContact = new FormGroup({
+      type: new FormControl('', [
+
+      ]),
+      name: new FormControl('', [
+        Validators.required
+      ]),
+      tel1: new FormControl('', [
+        Validators.required
+      ]),
+      tel2: new FormControl('', [
+        Validators.required
+      ]),
+      email: new FormControl('', [
         Validators.required
       ])
     });
@@ -39,4 +58,7 @@ export class BookComponent implements OnInit {
     // Write something
   }
 
+  createNewContact(): void {
+    // Write something
+  }
 }
