@@ -40,6 +40,10 @@ export interface UserRegistration {
   settlementPersonEmail?: string;
 }
 
+export interface Feedback {
+  description: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -55,10 +59,25 @@ export class RestapiService {
     });
 
     // GET method to login, that returns an object {"name": "value", role: "value"}
-    return this.http.get<User>('http://localhost:8080/login', {headers, responseType: 'json'});
+    return this.http.get<User>('http://localhost:8080/login', {headers, responseType: 'json', withCredentials: true});
   }
 
   public register(data: UserRegistration): Observable<any> {
     return this.http.post('http://localhost:8080/registration', data);
+  }
+
+  public deliveryTypes(): Observable<any> {
+    // const headers = new HttpHeaders({});
+    // headers.append('Set-Cookies', 'JSESSIONID=<jsessionid>');
+    // console.log(headers);
+    return this.http.get('http://localhost:8080/user/deliveryType/getAll', {responseType: 'json', withCredentials: true});
+  }
+
+  public logout(): Observable<any> {
+    return this.http.get('http://localhost:8080/logout', {withCredentials: true});
+  }
+
+  public feedback(data: Feedback): Observable<any> {
+    return  this.http.post('http://localhost:8080/user/sendFeedback', data, {observe: 'response', withCredentials: true});
   }
 }

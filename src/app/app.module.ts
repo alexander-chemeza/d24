@@ -17,6 +17,7 @@ import {DocumentsModule} from './pages/documents/documents.module';
 import {UsersModule} from './pages/users/users.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {OrderModule} from './pages/order/order.module';
+import {ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {OrderModule} from './pages/order/order.module';
     DocumentsModule,
     UsersModule,
     OrderModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -90,6 +90,7 @@ input[type="submit"] {
   transition: all .5s;
   border: none;
   border-radius: 25px;
+  font-family: "Montserrat-Medium", sans-serif;
 
   &:hover {
     background-color: #95b430;
@@ -161,7 +162,7 @@ button {
     transition: all 1s;
 
     &:hover {
-      background-color: #f5f5f5;
+      background-color: #eeeeee;
     }
 
     &[disabled] {
@@ -184,6 +185,12 @@ button {
     height: 45px;
     padding: 0;
     border-radius: 50px;
+  }
+
+  &.close-btn {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("../../assets/img/common/close.svg");
   }
 
   &.active-btn {
