@@ -351,6 +351,8 @@ export class TemplateComponent implements OnInit {
     const targetId = event.target.getAttribute('modal');
     const modal: any = document.getElementById(targetId);
     modal.classList.add('show-modal');
+
+    console.log('showModal');
   }
 
   hideModal(event: any): void {

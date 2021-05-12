@@ -74,3 +74,78 @@
     grid-area: table-controls;
   }
 }
+
+.filter {
+  display: none;
+
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+
+  &.show-modal {
+    display: flex;
+  }
+}
+
+.filter-journal {
+  width: 100%;
+  height: 85%;
+  background-color: #A070B5;
+  width: 100%;
+  max-width: 900px;
+  border-radius: 10px;
+  padding: 30px;
+  overflow: auto;
+
+  
+
+  & .filter-form {
+    
+
+    & .grey-box {
+      margin-bottom: 30px;
+
+      & .filter-box {
+        width: 48%;
+        // width: 100%;
+        // height: 100%;
+        // display: grid;
+        // grid-template-columns: 1fr 1fr;
+        // grid-template-rows: auto;
+        // grid-gap: 30px;
+      }
+
+      & .row {
+        margin-bottom: 20px;
+      }
+    }
+  }
+}
+
+.filter-title {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #FFFFFF;
+  font-family: "Montserrat-Medium", sans-serif;
+  margin-bottom: 20px;
+}
+
+.flex {
+  display: flex;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.col-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: min-content;
+  grid-gap: 30px
+}

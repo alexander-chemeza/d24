@@ -1,7 +1,7 @@
 <div class="journal-content">
   <div class="row-search">
     <input class="m-0" type="search" placeholder="Поиск">
-    <button class="white-btn">Фильтр</button>
+    <button class="white-btn" (click)="showModal($event)" modal="filter">Фильтр</button>
   </div>
   <div class="row-controls">
     <div class="row-controls-group">
@@ -46,6 +46,135 @@
       <span id="total" class="page-total"></span>
       <span class="page-of">страниц</span>
       <span (click)="onBtNext()" class="page-next"></span>
+    </div>
+  </div>
+</div>
+
+<div id="filter" class="filter">
+  <div class="filter-journal">
+    <div class="filter-title">
+      Выберите одну из дат
+    </div>
+  
+    <div class="filter-form">
+      <div class="col grey-box flex justify-content-between">
+        <div class="filter-box">
+          <div class="row">
+            <div class="control">
+              <label for="">Дата отправления с:</label>
+              <input type="date">
+            </div>
+            <div class="optional">
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="control">
+              <label for="">Дата создания заказа с:</label>
+              <input type="date">
+            </div>
+            <div class="optional">
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="control">
+              <label for="">Дата выдачи заказа с:</label>
+              <input type="date">
+            </div>
+            <div class="optional">
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="control">
+              <label for="">Дата доставки заказа с:</label>
+              <input type="date">
+            </div>
+            <div class="optional">
+            </div>
+          </div>
+        </div>
+  
+        <div class="filter-box">
+          <div class="row">
+            <div class="control">
+              <label for="">Дата отправления по:</label>
+              <input type="date">
+            </div>
+            <div class="optional">
+            </div>
+          </div>
+          
+          <div class="row">
+            <div class="control">
+              <label for="">Дата создания заказа по:</label>
+              <input type="date">
+            </div>
+            <div class="optional">
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="control">
+              <label for="">Дата выдачи заказа по:</label>
+              <input type="date">
+            </div>
+            <div class="optional">
+            </div>
+          </div>
+    
+          <div class="row">
+            <div class="control">
+              <label for="">Дата доставки заказа по:</label>
+              <input type="date">
+            </div>
+            <div class="optional">
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col grey-box flex justify-content-between">
+        <div class="filter-box">
+          <div class="row">
+            <label for="">Отправитель:</label>
+            <input type="text">
+          </div>
+          <div class="row">
+            <label for="">Откуда( населенный пункт):</label>
+            <input type="text">
+          </div>
+          <div class="row">
+            <div class="control">
+              <label for="">Вид услуги</label>
+              <input type="text"> <!-- Select -->
+            </div>
+          </div>
+        </div>
+  
+        <div class="filter-box">
+          <div class="row">
+            <label for="">Получатель:</label>
+            <input type="text">
+          </div>
+          <div class="row">
+            <label for="">Куда( населенный пункт):</label>
+            <input type="text">
+          </div>
+          <div class="row">
+            <div class="control">
+              <label for="">Статус услуги</label>
+              <input type="text"> <!-- Select -->
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col col-buttons">
+        <button class="white-btn round-btn">Очистить</button>
+        <button class="green-btn round-btn">Применить</button>
+      </div>
     </div>
   </div>
 </div>
