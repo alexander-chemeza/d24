@@ -2,7 +2,7 @@
   <div class="box-1">
     <div class="grey-box">
       <h2 class="grey-header m-0">Контрагенты</h2>
-      <button class="white-btn mt-30">Новый контрагент</button>
+      <button class="white-btn mt-30" (click)="showModal('new-contragent')">Новый контрагент</button>
     </div>
   </div>
   <div class="box-2">
@@ -33,17 +33,17 @@
 
 <div id="new-contragent" class="modal new-contragent">
   <div class="new-contragent-content">
-    <button class="active-btn circle-btn close-btn"></button>
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-contragent')"></button>
     <h2 class="white-header">Новый контрагент</h2>
-    <form>
+    <form [formGroup]="newContragent" (ngSubmit)="newContragent()">
       <div class="grey-box">
         <label for="type"> Форма собственности :</label>
-        <input type="text" id="type" name="type">
+        <input type="text" id="type" name="type" formControlName="type">
         <label for="contragent">Наименование контрагента:</label>
-        <input type="text" id="contragent" name="contragent">
+        <input type="text" id="contragent" name="contragent" formControlName="name">
       </div>
       <div class="btns-row">
-        <button class="white-btn round-btn">Отмена</button>
+        <button class="white-btn round-btn" (click)="hideModal('new-contragent')">Отмена</button>
         <input type="submit" value="Сохранить">
       </div>
     </form>

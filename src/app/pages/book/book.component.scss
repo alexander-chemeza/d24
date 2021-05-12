@@ -63,6 +63,7 @@
     height: 100%;
     max-width: 640px;
     max-height: 430px;
+    display: none;
   }
 
   .new-contragent-content {
@@ -106,4 +107,12 @@
       }
     }
   }
+}
+
+.show-modal {
+  display: grid !important;
+}
+
+.hide-modal {
+  display: none !important;
 }
