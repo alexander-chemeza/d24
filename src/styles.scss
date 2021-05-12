@@ -187,7 +187,7 @@ a {
 }
 
 .mt-30 {
-  margin-top: 30px;
+  margin-top: 30px !important;
 }
 
 .mt-40 {
@@ -196,6 +196,10 @@ a {
 
 .mt-50 {
   margin-top: 50px !important;
+}
+
+.mt-15 {
+  margin-top: 15px !important;
 }
 
 .m-0 {
@@ -250,6 +254,12 @@ a {
   font-family: "Montserrat-Medium", sans-serif !important;
   font-size: 1.4rem !important;
   color: #000000 !important;
+}
+
+.description-violet {
+  color: #A070B5;
+  font-family: "Montserrat-Medium", sans-serif !important;
+  font-size: 1.4rem !important;
 }
 
 .high-description {

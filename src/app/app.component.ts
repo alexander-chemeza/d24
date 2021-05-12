@@ -36,4 +36,16 @@ export class AppComponent implements OnInit {
     });
     this.router.navigate(['login']);
   }
+
+  showModal(id: string): void {
+    const modal: any = document.getElementById(id);
+    modal.classList.remove('hide-modal');
+    modal.classList.add('show-modal');
+  }
+
+  hideModal(id: string): void {
+    const modal: any = document.getElementById(id);
+    modal.classList.add('hide-modal');
+    modal.classList.remove('show-modal');
+  }
 }
