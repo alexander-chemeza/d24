@@ -8,7 +8,7 @@
   <div class="box-2">
     <div class="grey-box">
       <h2 class="grey-header m-0">Адреса</h2>
-      <button class="white-btn mt-30">Новый адрес</button>
+      <button class="white-btn mt-30" (click)="showModal('new-address')">Новый адрес</button>
     </div>
   </div>
   <div class="box-3">
@@ -74,6 +74,76 @@
       </div>
       <div class="row-controls">
         <button class="white-btn round-btn" (click)="hideModal('new-contact')">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="new-address" class="modal new-address">
+  <div class="new-address-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-address')"></button>
+    <h2 class="white-header">Новый адрес</h2>
+    <form  (ngSubmit)="createNewAddress()">
+      <div class="grey-box">
+        <div class="row mb-20">
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="checkbox" name="type2" id="type2" formControlName="type" checked>
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="type2">Основной адрес</label>
+        </div>
+        <label for="place">Населенный пункт:</label>
+        <input type="text" name="place" id="place">
+        <label for="street">Улица:</label>
+        <input type="text" name="street" id="street">
+        <div class="row-multi mt-15">
+          <div class="box">
+            <label for="building">Дом:</label>
+            <input type="text" name="building" id="building">
+          </div>
+          <div class="box">
+            <label for="corpus">Корпус:</label>
+            <input type="text" name="corpus" id="corpus">
+          </div>
+          <div class="box">
+            <label for="house">Строение</label>
+            <input type="text" id="house" name="house">
+          </div>
+          <div class="box">
+            <label for="office">Офис:</label>
+            <input type="text" name="office" id="office">
+          </div>
+          <div class="box">
+            <label for="appartment">Квартира</label>
+            <input type="text" name="appartment" id="appartment">
+          </div>
+        </div>
+        <div class="row-some mt-15">
+          <div class="box">
+            <label for="delivery-from">Время доставки с:</label>
+            <input type="text" name="delivery-from" id="delivery-from">
+          </div>
+          <div class="box">
+            <label for="delivery-from">по:</label>
+            <input type="text">
+          </div>
+        </div>
+        <div class="row-some mt-15">
+          <div class="box">
+            <label for=timeout-from>Время перерыва c:</label>
+            <input type="text" name="timeout-from" id="timeout-from">
+          </div>
+          <div class="box">
+            <label for="timeout-to">по:</label>
+            <input type="text" name="timeout-to" id="timeout-to">
+          </div>
+        </div>
+        <label for="description-area">Примечание</label>
+        <textarea name="description-area" id="description-area"></textarea>
+      </div>
+      <div class="row-controls">
+        <button class="white-btn round-btn">Отмена</button>
         <input type="submit" value="Сохранить">
       </div>
     </form>

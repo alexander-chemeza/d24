@@ -61,4 +61,8 @@ export class BookComponent implements OnInit {
   createNewContact(): void {
     // Write something
   }
+
+  createNewAddress(): void {
+    // Write something
+  }
 }
