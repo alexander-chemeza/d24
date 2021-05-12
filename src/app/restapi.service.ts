@@ -78,6 +78,6 @@ export class RestapiService {
   }
 
   public feedback(data: Feedback): Observable<any> {
-    return  this.http.post('http://localhost:8080/user/sendFeedback', data, {withCredentials: true});
+    return  this.http.post('http://localhost:8080/user/sendFeedback', data, {observe: 'response', withCredentials: true});
   }
 }

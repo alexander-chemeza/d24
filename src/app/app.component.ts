@@ -63,7 +63,9 @@ export class AppComponent implements OnInit {
       description: this.feedbackForm.value.description as string
     };
     this.service.feedback(data).subscribe(response => {
-      console.log(response);
+      if (response.status === 200) {
+        this.feedbackForm.setValue({description: ''});
+      }
     });
     this.hideModal('to-be-better');
   }
