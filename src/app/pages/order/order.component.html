@@ -369,7 +369,7 @@
                 <input type="text">
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27"></button>
+                <button class="add-btn active-btn mt-27" (click)="showModal('new-carrier-sender-contact')"></button>
               </div>
             </div>
             <div class="row">
@@ -378,7 +378,7 @@
                 <input type="text">
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27"></button>
+                <button class="add-btn active-btn mt-27" (click)="showModal('new-carrier-sender-address')"></button>
               </div>
             </div>
             <div class="row">
@@ -393,7 +393,7 @@
                 <input type="text">
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27"></button>
+                <button class="add-btn active-btn mt-27" (click)="showModal('new-carrier-sender-contragent')"></button>
               </div>
             </div>
             <div class="row">
@@ -975,7 +975,7 @@
   <div class="new-contact-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-contact')"></button>
     <h2 class="white-header">Новый контакт</h2>
-    <form [formGroup]="newExpressRecipientContact" (ngSubmit)="createNewExpressSenderContact()">
+    <form [formGroup]="newExpressRecipientContact" (ngSubmit)="createNewExpressRecipientContact()">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1005,7 +1005,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewExpressSenderAddress()">
+    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewExpressRecipientAddress()">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1065,6 +1065,126 @@
       </div>
       <div class="row-controls">
         <button class="white-btn round-btn" (click)="hideModal('new-express-recipient-address')">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div id="new-carrier-sender-contragent" class="modal new-contragent">
+  <div class="new-contragent-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-carrier-sender-contragent')"></button>
+    <h2 class="white-header">Новый контрагент</h2>
+    <form [formGroup]="newCarrierSenderContragent" (ngSubmit)="createNewCarrierSenderContragent()">
+      <div class="grey-box">
+        <label for="type-carrier-sender"> Форма собственности :</label>
+        <input type="text" id="type-carrier-sender" name="type-carrier-sender" formControlName="type">
+        <label for="contragent-carrier-sender">Наименование контрагента:</label>
+        <input type="text" id="contragent-carrier-sender" name="contragent-carrier-sender" formControlName="name">
+      </div>
+      <div class="btns-row">
+        <button class="white-btn round-btn" (click)="hideModal('new-carrier-sender-contragent')">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="new-carrier-sender-contact" class="modal new-contact">
+  <div class="new-contact-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-carrier-sender-contact')"></button>
+    <h2 class="white-header">Новый контакт</h2>
+    <form [formGroup]="newCarrierSenderContact" (ngSubmit)="createNewCarrierSenderContact()">
+      <div class="grey-box">
+        <div class="row mb-20">
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="checkbox" name="type-carrier-sender-2" id="type-carrier-sender-2" formControlName="type" checked>
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="type-carrier-sender-2">Основной адрес</label>
+        </div>
+        <label for="contact-carrier-sender-name">Имя контакта:</label>
+        <input type="text" name="contact-carrier-sender-name" id="contact-carrier-sender-name" formControlName="name">
+        <label for="contact-phone-1-carrier-sender">Телефон:</label>
+        <input type="text" name="contact-phone-1-carrier-sender" id="contact-phone-1-carrier-sender" formControlName="tel1">
+        <label for="contact-phone-2-carrier-sender"> Телефон 2:</label>
+        <input type="text" name="contact-phone-2-carrier-sender" id="contact-phone-2-carrier-sender" formControlName="tel2">
+        <label for="contact-email-carrier-sender">Email:</label>
+        <input type="text" name="contact-email-carrier-sender" id="contact-email-carrier-sender" formControlName="email">
+      </div>
+      <div class="row-controls">
+        <button class="white-btn round-btn" (click)="hideModal('new-carrier-sender-contact')">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="new-carrier-sender-address" class="modal new-address">
+  <div class="new-address-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-carrier-sender-address')"></button>
+    <h2 class="white-header">Новый адрес</h2>
+    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewCarrierSenderAddress()">
+      <div class="grey-box">
+        <div class="row mb-20">
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="checkbox" name="checkbox-carrier-sender" id="checkbox-carrier-sender" formControlName="type" checked>
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="checkbox-carrier-sender">Основной адрес</label>
+        </div>
+        <label for="place-carrier-sender">Населенный пункт:</label>
+        <input type="text" name="place-carrier-sender" id="place-carrier-sender" formControlName="place">
+        <label for="street-carrier-sender">Улица:</label>
+        <input type="text" name="street-carrier-sender" id="street-carrier-sender" formControlName="street">
+        <div class="row-multi mt-15">
+          <div class="box">
+            <label for="building-carrier-sender">Дом:</label>
+            <input type="text" name="building-carrier-sender" id="building-carrier-sender" formControlName="building">
+          </div>
+          <div class="box">
+            <label for="corpus-carrier-sender">Корпус:</label>
+            <input type="text" name="corpus-carrier-sender" id="corpus-carrier-sender" formControlName="corpus">
+          </div>
+          <div class="box">
+            <label for="house-carrier-sender">Строение</label>
+            <input type="text" id="house-carrier-sender" name="house-carrier-sender" formControlName="house">
+          </div>
+          <div class="box">
+            <label for="office-carrier-sender">Офис:</label>
+            <input type="text" name="office-carrier-sender" id="office-carrier-sender" formControlName="office">
+          </div>
+          <div class="box">
+            <label for="appartment-carrier-sender">Квартира</label>
+            <input type="text" name="appartment-carrier-sender" id="appartment-carrier-sender" formControlName="apartment">
+          </div>
+        </div>
+        <div class="row-some mt-15">
+          <div class="box">
+            <label for="delivery-from-carrier-sender">Время доставки с:</label>
+            <input type="text" name="delivery-from-carrier-sender" id="delivery-from-carrier-sender" formControlName="deliveryFrom">
+          </div>
+          <div class="box">
+            <label for="delivery-from-carrier-sender">по:</label>
+            <input type="text" name="delivery-from-carrier-sender" id="delivery-from-carrier-sender" formControlName="deliveryTo">
+          </div>
+        </div>
+        <div class="row-some mt-15">
+          <div class="box">
+            <label for="timeout-from-carrier-sender">Время перерыва c:</label>
+            <input type="text" name="timeout-from-carrier-sender" id="timeout-from-carrier-sender" formControlName="timeoutFrom">
+          </div>
+          <div class="box">
+            <label for="timeout-to-carrier-sender">по:</label>
+            <input type="text" name="timeout-to-carrier-sender" id="timeout-to-carrier-sender" formControlName="timeoutTo">
+          </div>
+        </div>
+        <label for="description-area-carrier-sender">Примечание</label>
+        <textarea name="description-area-carrier-sender" id="description-area-carrier-sender" formControlName="description"></textarea>
+      </div>
+      <div class="row-controls">
+        <button class="white-btn round-btn" (click)="hideModal('new-carrier-sender-address')">Отмена</button>
         <input type="submit" value="Сохранить">
       </div>
     </form>
