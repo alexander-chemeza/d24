@@ -80,4 +80,12 @@ export class RestapiService {
   public feedback(data: Feedback): Observable<any> {
     return  this.http.post('http://localhost:8080/user/sendFeedback', data, {observe: 'response', withCredentials: true});
   }
+
+  public contracts(): Observable<any> {
+    return this.http.get('http://localhost:8080/user/contracts', {observe: 'response', withCredentials: true});
+  }
+
+  public address(): Observable<any> {
+    return this.http.get('http://localhost:8080/user/address/getAddressList', {observe: 'response', withCredentials: true});
+  }
 }
