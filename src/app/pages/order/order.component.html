@@ -120,7 +120,7 @@
                 <input type="text">
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27"></button>
+                <button class="add-btn active-btn mt-27" (click)="showModal('new-express-recipient-contragent')"></button>
               </div>
             </div>
             <div class="row">
@@ -129,7 +129,7 @@
                 <input type="text">
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27"></button>
+                <button class="add-btn active-btn mt-27" (click)="showModal('new-express-recipient-address')"></button>
               </div>
             </div>
             <div class="row">
@@ -144,7 +144,7 @@
                 <input type="text">
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27"></button>
+                <button class="add-btn active-btn mt-27" (click)="showModal('new-express-recipient-contact')"></button>
               </div>
             </div>
             <div class="row">
@@ -945,6 +945,126 @@
       </div>
       <div class="row-controls">
         <button class="white-btn round-btn" (click)="hideModal('new-express-sender-address')">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<div id="new-express-recipient-contragent" class="modal new-contragent">
+  <div class="new-contragent-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-contragent')"></button>
+    <h2 class="white-header">Новый контрагент</h2>
+    <form [formGroup]="newExpressRecipientContragent" (ngSubmit)="createNewExpressRecipientContragent()">
+      <div class="grey-box">
+        <label for="type-express-recipient"> Форма собственности :</label>
+        <input type="text" id="type-express-recipient" name="type-express-recipient" formControlName="type">
+        <label for="contragent-express-recipient">Наименование контрагента:</label>
+        <input type="text" id="contragent-express-recipient" name="contragent-express-recipient" formControlName="name">
+      </div>
+      <div class="btns-row">
+        <button class="white-btn round-btn" (click)="hideModal('new-express-recipient-contragent')">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="new-express-recipient-contact" class="modal new-contact">
+  <div class="new-contact-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-contact')"></button>
+    <h2 class="white-header">Новый контакт</h2>
+    <form [formGroup]="newExpressRecipientContact" (ngSubmit)="createNewExpressSenderContact()">
+      <div class="grey-box">
+        <div class="row mb-20">
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="checkbox" name="type-express-recipient-2" id="type-express-recipient-2" formControlName="type" checked>
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="type-express-recipient-2">Основной адрес</label>
+        </div>
+        <label for="contact--express-recipient-name">Имя контакта:</label>
+        <input type="text" name="contact--express-recipient-name" id="contact--express-recipient-name" formControlName="name">
+        <label for="contact-phone-1-express-recipient">Телефон:</label>
+        <input type="text" name="contact-phone-1-express-recipient" id="contact-phone-1-express-recipient" formControlName="tel1">
+        <label for="contact-phone-2-express-recipient"> Телефон 2:</label>
+        <input type="text" name="contact-phone-2-express-recipient" id="contact-phone-2-express-recipient" formControlName="tel2">
+        <label for="contact-email-express-recipient">Email:</label>
+        <input type="text" name="contact-email-express-recipient" id="contact-email-express-recipient" formControlName="email">
+      </div>
+      <div class="row-controls">
+        <button class="white-btn round-btn" (click)="hideModal('new-express-recipient-contact')">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="new-express-recipient-address" class="modal new-address">
+  <div class="new-address-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-address')"></button>
+    <h2 class="white-header">Новый адрес</h2>
+    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewExpressSenderAddress()">
+      <div class="grey-box">
+        <div class="row mb-20">
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="checkbox" name="checkbox-express-recipient" id="checkbox-express-recipient" formControlName="type" checked>
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="checkbox-express-recipient">Основной адрес</label>
+        </div>
+        <label for="place-express-recipient">Населенный пункт:</label>
+        <input type="text" name="place-express-recipient" id="place-express-recipient" formControlName="place">
+        <label for="street-express-recipient">Улица:</label>
+        <input type="text" name="street-express-recipient" id="street-express-recipient" formControlName="street">
+        <div class="row-multi mt-15">
+          <div class="box">
+            <label for="building-express-recipient">Дом:</label>
+            <input type="text" name="building-express-recipient" id="building-express-recipient" formControlName="building">
+          </div>
+          <div class="box">
+            <label for="corpus-express-recipient">Корпус:</label>
+            <input type="text" name="corpus-express-recipient" id="corpus-express-recipient" formControlName="corpus">
+          </div>
+          <div class="box">
+            <label for="house-express-recipient">Строение</label>
+            <input type="text" id="house-express-recipient" name="house-express-recipient" formControlName="house">
+          </div>
+          <div class="box">
+            <label for="office-express-recipient">Офис:</label>
+            <input type="text" name="office-express-recipient" id="office-express-recipient" formControlName="office">
+          </div>
+          <div class="box">
+            <label for="appartment-express-recipient">Квартира</label>
+            <input type="text" name="appartment-express-recipient" id="appartment-express-recipient" formControlName="apartment">
+          </div>
+        </div>
+        <div class="row-some mt-15">
+          <div class="box">
+            <label for="delivery-from-express-recipient">Время доставки с:</label>
+            <input type="text" name="delivery-from-express-recipient" id="delivery-from-express-recipient" formControlName="deliveryFrom">
+          </div>
+          <div class="box">
+            <label for="delivery-from-express-recipient">по:</label>
+            <input type="text" name="delivery-from-express-recipient" id="delivery-from-express-recipient" formControlName="deliveryTo">
+          </div>
+        </div>
+        <div class="row-some mt-15">
+          <div class="box">
+            <label for="timeout-from-express-recipient">Время перерыва c:</label>
+            <input type="text" name="timeout-from-express-recipient" id="timeout-from-express-recipient" formControlName="timeoutFrom">
+          </div>
+          <div class="box">
+            <label for="timeout-to-express-recipient">по:</label>
+            <input type="text" name="timeout-to-express-recipient" id="timeout-to-express-recipient" formControlName="timeoutTo">
+          </div>
+        </div>
+        <label for="description-area-express-recipient">Примечание</label>
+        <textarea name="description-area-express-recipient" id="description-area-express-recipient" formControlName="description"></textarea>
+      </div>
+      <div class="row-controls">
+        <button class="white-btn round-btn" (click)="hideModal('new-express-recipient-address')">Отмена</button>
         <input type="submit" value="Сохранить">
       </div>
     </form>
