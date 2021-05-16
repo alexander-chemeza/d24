@@ -898,9 +898,11 @@
 <!--        <input type="text" name="place-express-sender" id="place-express-sender" formControlName="place">-->
         <mat-form-field floatLabel="never">
           <mat-select formControlName="place">
-            <mat-option *ngFor="let city of citiesList" [value]="city.id">
-              {{city.fullName}}
-            </mat-option>
+            <cdk-virtual-scroll-viewport [itemSize]="42" style="height: 252px">
+              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city.id">
+                {{city.fullName}}
+              </mat-option>
+            </cdk-virtual-scroll-viewport>
           </mat-select>
         </mat-form-field>
 <!--        <select name="" id="">-->

@@ -4,6 +4,7 @@ import {SharedModule} from '../../shared/shared.module';
 import {MatSelectModule} from '@angular/material/select';
 import {OrderComponent} from './order.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 
@@ -13,7 +14,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     CommonModule,
     SharedModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    ScrollingModule
   ]
 })
 export class OrderModule { }

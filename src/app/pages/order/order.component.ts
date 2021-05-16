@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {RestapiService} from '../../restapi.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
@@ -79,8 +79,10 @@ export class OrderComponent implements OnInit {
     });
 
     this.service.cities().subscribe(data => {
-      this.citiesList = data.body;
-      this.currentCity = this.citiesList[0].id;
+      if (data.status === 200) {
+        this.citiesList = data.body;
+        this.currentCity = this.citiesList[0].id;
+      }
       // for (let i = 0; i < 100; i++) {
       //   this.select[i].push([data.body[i]]);
       // }
