@@ -898,8 +898,8 @@
 <!--        <input type="text" name="place-express-sender" id="place-express-sender" formControlName="place">-->
         <mat-form-field floatLabel="never">
           <mat-select formControlName="place">
-            <cdk-virtual-scroll-viewport [itemSize]="42" style="height: 252px">
-              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city.id">
+            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
+              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city.id" class="example-item">
                 {{city.fullName}}
               </mat-option>
             </cdk-virtual-scroll-viewport>
