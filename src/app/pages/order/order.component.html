@@ -895,9 +895,26 @@
           <label for="checkbox-express-sender">Основной адрес</label>
         </div>
         <label for="place-express-sender">Населенный пункт:</label>
-        <input type="text" name="place-express-sender" id="place-express-sender" formControlName="place">
+<!--        <input type="text" name="place-express-sender" id="place-express-sender" formControlName="place">-->
+        <mat-form-field floatLabel="never">
+          <mat-select formControlName="place">
+            <mat-option *ngFor="let city of citiesList" [value]="city.id">
+              {{city.fullName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+<!--        <select name="" id="">-->
+<!--&lt;!&ndash;          <option *ngFor="let city of citiesList" [value]="city.id">{{city.fullName}}</option>&ndash;&gt;-->
+<!--        </select>-->
         <label for="street-express-sender">Улица:</label>
-        <input type="text" name="street-express-sender" id="street-express-sender" formControlName="street">
+<!--        <input type="text" name="street-express-sender" id="street-express-sender" formControlName="street">-->
+        <mat-form-field floatLabel="never">
+          <mat-select formControlName="street">
+            <mat-option *ngFor="let service of serviceTypes" [value]="service.value">
+              {{service.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
         <div class="row-multi mt-15">
           <div class="box">
             <label for="building-express-sender">Дом:</label>

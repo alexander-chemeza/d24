@@ -12,6 +12,25 @@ interface DeliveryTypesList {
   name: string;
 }
 
+interface Cities {
+  id: number;
+  name: string;
+  type: number;
+  abbreviation: string;
+  region_code: string;
+  district_code: string;
+  city_code: string;
+  code: string;
+  locality_code: string;
+  street_code: string;
+  fullName: string;
+}
+
+interface GetStreet {
+  cityCode: string;
+  regionCode: string;
+}
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -20,6 +39,9 @@ interface DeliveryTypesList {
 export class OrderComponent implements OnInit {
   serviceType: string;
   deliveryType: string;
+  currentCity: number;
+
+  select: any;
 
   serviceTypes: ServiceTypesList[] = [
     {value: '0', viewValue: 'Экспресс-доставка грузов'},
@@ -27,6 +49,7 @@ export class OrderComponent implements OnInit {
   ];
 
   deliveryTypes: DeliveryTypesList[] = [];
+  citiesList: Cities[] = [];
 
   // Reactive forms
   newExpressSenderContragent: any;
@@ -44,6 +67,7 @@ export class OrderComponent implements OnInit {
   constructor(private service: RestapiService) {
     this.serviceType = this.serviceTypes[0].value;
     this.deliveryType = '';
+    this.currentCity = 0;
   }
 
   ngOnInit(): void {
@@ -52,6 +76,15 @@ export class OrderComponent implements OnInit {
     this.service.deliveryTypes().subscribe(data => {
       this.deliveryTypes = data;
       this.deliveryType = this.deliveryTypes[0].id;
+    });
+
+    this.service.cities().subscribe(data => {
+      this.citiesList = data.body;
+      this.currentCity = this.citiesList[0].id;
+      // for (let i = 0; i < 100; i++) {
+      //   this.select[i].push([data.body[i]]);
+      // }
+      // console.log(this.select);
     });
 
     this.newExpressSenderContragent = new FormGroup({

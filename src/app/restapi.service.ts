@@ -44,6 +44,11 @@ export interface Feedback {
   description: string;
 }
 
+export interface Street {
+  cityCode: string;
+  regionCode: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -84,8 +89,16 @@ export class RestapiService {
   public contracts(): Observable<any> {
     return this.http.get('http://localhost:8080/user/contracts', {observe: 'response', withCredentials: true});
   }
-
+  // Redundant
   public address(): Observable<any> {
     return this.http.get('http://localhost:8080/user/address/getAddressList', {observe: 'response', withCredentials: true});
+  }
+  // Address controller cities
+  public cities(): Observable<any> {
+    return this.http.get('http://localhost:8080/user/address/getAllCities', {observe: 'response', withCredentials: true});
+  }
+  // Address controller streets
+  public streets(data: Street): Observable<any> {
+    return this.http.post('http://localhost:8080/user/address/getAllStreet', data, {observe: 'response', withCredentials: true});
   }
 }
