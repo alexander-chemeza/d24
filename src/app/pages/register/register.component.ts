@@ -204,7 +204,7 @@ export class RegisterComponent implements OnInit {
         this.service.register(data)
           .subscribe(response => {
             console.log(response);
-            if (response === 0) {
+            if (response.status === 200) {
               this.router.navigate(['login']);
             }
           });

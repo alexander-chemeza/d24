@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {RestapiService, UserRegistration} from '../../restapi.service';
 
 @Component({
   selector: 'app-users',
@@ -16,8 +17,11 @@ export class UsersComponent implements OnInit {
   paginationPageSize: any;
 
   newUserForm: any;
+  passwordEquality: boolean;
 
-  constructor() {
+  constructor(private service: RestapiService) {
+    this.passwordEquality = false;
+
     this.columnDefs = [
       {
         headerName: 'Логин',
@@ -288,7 +292,34 @@ export class UsersComponent implements OnInit {
   }
 
   createNewUser(): void {
+    const data: UserRegistration = {
+      agreement: this.newUserForm.value.agreement as string,
+      userName: this.newUserForm.value.name as string,
+      email: this.newUserForm.value.email as string,
+      phone: this.newUserForm.value.phone as string,
+      phone2: this.newUserForm.value.phone2 as string,
+      login: this.newUserForm.value.login as string,
+      password: this.newUserForm.value.password as string,
+      groupName: this.newUserForm.value.groupName as string
+    };
 
+    if (this.newUserForm.value.password === this.newUserForm.value.passwordRepeat) {
+      this.passwordEquality = true;
+    }
+
+    console.log('Equal:', this.passwordEquality);
+
+    if (this.newUserForm.valid && this.passwordEquality) {
+      console.log(data);
+
+      this.service.addManager(data).subscribe(response => {
+        if (response.status === 200) {
+          console.log('OK');
+        } else {
+          console.log('Bad request');
+        }
+      })
+    }
   }
 
   showModal(id: string): void {

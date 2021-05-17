@@ -38,6 +38,9 @@ export interface UserRegistration {
   account?: string;
   settlementPerson?: string;
   settlementPersonEmail?: string;
+  agreement?: string;
+  phone2?: string;
+  groupName?: string;
 }
 
 export interface Feedback {
@@ -68,7 +71,11 @@ export class RestapiService {
   }
 
   public register(data: UserRegistration): Observable<any> {
-    return this.http.post('http://localhost:8080/registration', data);
+    return this.http.post('http://localhost:8080/registration', data, {observe: 'response', withCredentials: true});
+  }
+
+  public addManager(data: UserRegistration): Observable<any> {
+    return this.http.post('http://localhost:8080/adminUser/addManager', data, {observe: 'response', withCredentials: true});
   }
 
   public deliveryTypes(): Observable<any> {
