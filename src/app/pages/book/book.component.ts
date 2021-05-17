@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {RestapiService} from '../../restapi.service';
 
 @Component({
   selector: 'app-book',
@@ -12,7 +13,7 @@ export class BookComponent implements OnInit {
   newContact: any;
   newAddress: any;
 
-  constructor() { }
+  constructor(private service: RestapiService) { }
 
   ngOnInit(): void {
     this.newContragent = new FormGroup({
@@ -107,5 +108,28 @@ export class BookComponent implements OnInit {
 
   createNewAddress(): void {
     // Write something
+    const data = {
+      building: this.newAddress.value.house,
+      cityName: this.newAddress.value.place as string,
+      description: this.newAddress.value.description as string,
+      house: this.newAddress.value.building as string,
+      housing: this.newAddress.value.corpus as string,
+      mainAddress: this.newAddress.value.type as boolean,
+      office: this.newAddress.value.office as string,
+      pauseFrom: this.newAddress.value.timeoutFrom as string,
+      pauseTo: this.newAddress.value.timeoutTo as string,
+      room: this.newAddress.value.apartment as string,
+      streetName: this.newAddress.value.street as string,
+      timeFrom: this.newAddress.value.deliveryFrom as string,
+      timeTo: this.newAddress.value.deliveryTo as string,
+    };
+    this.service.saveUserCustomerAddress(data).subscribe(response => {
+      if (response.status === 200) {
+        console.log('Data', data);
+        console.log(response.body);
+        this.hideModal('new-address');
+        this.newAddress.reset();
+      }
+    });
   }
 }
