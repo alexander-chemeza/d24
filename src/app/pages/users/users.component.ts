@@ -315,10 +315,11 @@ export class UsersComponent implements OnInit {
       this.service.addManager(data).subscribe(response => {
         if (response.status === 200) {
           console.log('OK');
+          this.hideModal('new-user');
         } else {
           console.log('Bad request');
         }
-      })
+      });
     }
   }
 
