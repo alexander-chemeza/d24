@@ -906,7 +906,7 @@
         </mat-form-field>
         <label for="street-express-sender">Улица:</label>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="street" id="street-select">
+          <mat-select formControlName="street">
             <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
               <mat-option *cdkVirtualFor="let street of streetList" [value]="street.id" class="example-item">
                 {{street.name}}
@@ -1031,9 +1031,25 @@
           <label for="checkbox-express-recipient">Основной адрес</label>
         </div>
         <label for="place-express-recipient">Населенный пункт:</label>
-        <input type="text" name="place-express-recipient" id="place-express-recipient" formControlName="place">
+        <mat-form-field floatLabel="never">
+          <mat-select formControlName="place" (selectionChange)="selectPlace($event, newExpressRecipientAddress)">
+            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
+              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city.id" class="example-item">
+                {{city.fullName}}
+              </mat-option>
+            </cdk-virtual-scroll-viewport>
+          </mat-select>
+        </mat-form-field>
         <label for="street-express-recipient">Улица:</label>
-        <input type="text" name="street-express-recipient" id="street-express-recipient" formControlName="street">
+        <mat-form-field floatLabel="never">
+          <mat-select formControlName="street">
+            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
+              <mat-option *cdkVirtualFor="let street of streetList" [value]="street.id" class="example-item">
+                {{street.name}}
+              </mat-option>
+            </cdk-virtual-scroll-viewport>
+          </mat-select>
+        </mat-form-field>
         <div class="row-multi mt-15">
           <div class="box">
             <label for="building-express-recipient">Дом:</label>
@@ -1151,9 +1167,25 @@
           <label for="checkbox-carrier-sender">Основной адрес</label>
         </div>
         <label for="place-carrier-sender">Населенный пункт:</label>
-        <input type="text" name="place-carrier-sender" id="place-carrier-sender" formControlName="place">
+        <mat-form-field floatLabel="never">
+          <mat-select formControlName="place" (selectionChange)="selectPlace($event, newCarrierSenderAddress)">
+            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
+              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city.id" class="example-item">
+                {{city.fullName}}
+              </mat-option>
+            </cdk-virtual-scroll-viewport>
+          </mat-select>
+        </mat-form-field>
         <label for="street-carrier-sender">Улица:</label>
-        <input type="text" name="street-carrier-sender" id="street-carrier-sender" formControlName="street">
+        <mat-form-field floatLabel="never">
+          <mat-select formControlName="street">
+            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
+              <mat-option *cdkVirtualFor="let street of streetList" [value]="street.id" class="example-item">
+                {{street.name}}
+              </mat-option>
+            </cdk-virtual-scroll-viewport>
+          </mat-select>
+        </mat-form-field>
         <div class="row-multi mt-15">
           <div class="box">
             <label for="building-carrier-sender">Дом:</label>
