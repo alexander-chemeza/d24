@@ -78,6 +78,10 @@ export class RestapiService {
     return this.http.post('http://localhost:8080/adminUser/addManager', data, {observe: 'response', withCredentials: true});
   }
 
+  public getAllManagers(): Observable<any> {
+    return this.http.get('http://localhost:8080/adminUser/getAllManagers', {observe: 'response', withCredentials: true});
+  }
+
   public deliveryTypes(): Observable<any> {
     // const headers = new HttpHeaders({});
     // headers.append('Set-Cookies', 'JSESSIONID=<jsessionid>');

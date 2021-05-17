@@ -21,7 +21,6 @@ export class UsersComponent implements OnInit {
 
   constructor(private service: RestapiService) {
     this.passwordEquality = false;
-
     this.columnDefs = [
       {
         headerName: 'Логин',
@@ -29,7 +28,7 @@ export class UsersComponent implements OnInit {
         sortable: false,
         flex: 1,
         minWidth: 100,
-        maxWidth: 150
+        maxWidth: 250
       },
       {
         headerName: 'Название группы',
@@ -37,7 +36,7 @@ export class UsersComponent implements OnInit {
         sortable: true,
         flex: 1,
         minWidth: 150,
-        maxWidth: 200
+        maxWidth: 400
       },
       {
         headerName: 'Имя',
@@ -45,7 +44,7 @@ export class UsersComponent implements OnInit {
         sortable: true,
         flex: 1,
         minWidth: 120,
-        maxWidth: 170
+        maxWidth: 370
       },
       {
         headerName: 'Email',
@@ -70,186 +69,9 @@ export class UsersComponent implements OnInit {
         flex: 1,
         minWidth: 200,
         maxWidth: 220
-      },
-      {
-        headerName: 'Статус блокировки',
-        field: 'status',
-        sortable: true,
-        flex: 1,
-        minWidth: 200,
-        maxWidth: 220
-      },
-      {
-        headerName: 'Статус блокировки',
-        field: 'status',
-        sortable: true,
-        flex: 1,
-        minWidth: 200,
-        maxWidth: 220
       }
     ];
-    this.rowData = [
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-      {
-        login: 'drunya13',
-        groupName: 'Группа 1',
-        name: 'Andrey',
-        email: 'bartashevich.s@ntt.by',
-        phone: '+375 29 342-5554',
-        status: 'Заблокирован'
-      },
-    ];
+    this.rowData = [];
     this.defaultColDef = {
       flex: 1,
       minWidth: 100,
@@ -338,6 +160,21 @@ export class UsersComponent implements OnInit {
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    this.service.getAllManagers().subscribe(response => {
+      if (response.status === 200) {
+        for (const item of response.body) {
+          this.rowData.push({
+            login: item.login,
+            groupName: item.groupName,
+            name: item.userName,
+            email: item.email,
+            phone: item.phone,
+            status: item.status
+          });
+        }
+        params.api.setRowData(this.rowData);
+      }
+    });
   }
 
   onPaginationChanged(): void {
