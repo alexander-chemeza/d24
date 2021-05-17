@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {RestapiService} from '../../restapi.service';
+import {RestapiService, Street} from '../../restapi.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 interface ServiceTypesList {
@@ -26,9 +26,18 @@ interface Cities {
   fullName: string;
 }
 
-interface GetStreet {
-  cityCode: string;
-  regionCode: string;
+interface StreetsList {
+  abbreviation: string;
+  city_code: string;
+  code: string;
+  district_code: string;
+  fullName: any;
+  id: number;
+  locality_code: string;
+  name: string;
+  region_code: string;
+  street_code: string;
+  type: number;
 }
 
 @Component({
@@ -50,6 +59,11 @@ export class OrderComponent implements OnInit {
 
   deliveryTypes: DeliveryTypesList[] = [];
   citiesList: Cities[] = [];
+  streetList: StreetsList[] = [];
+  street: Street = {
+    cityCode: '',
+    regionCode: ''
+  };
 
   // Reactive forms
   newExpressSenderContragent: any;
@@ -83,10 +97,6 @@ export class OrderComponent implements OnInit {
         this.citiesList = data.body;
         this.currentCity = this.citiesList[0].id;
       }
-      // for (let i = 0; i < 100; i++) {
-      //   this.select[i].push([data.body[i]]);
-      // }
-      // console.log(this.select);
     });
 
     this.newExpressSenderContragent = new FormGroup({
@@ -310,6 +320,27 @@ export class OrderComponent implements OnInit {
     }
     stageBtns[0].classList.add('active-btn');
     currentForm.classList.remove('another-form');
+  }
+
+  selectPlace(event: any, form: any): void {
+    // Get city id
+    const currentCityCode = form.value.place;
+    // Find city by the id
+    const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
+    // Check and build data
+    if (cityInfo) {
+      // The request object
+      this.street = {
+        cityCode: cityInfo.city_code,
+        regionCode: cityInfo.region_code
+      };
+      // Get streets
+      this.service.streets(this.street).subscribe(response => {
+        if (response.status === 200) {
+          this.streetList = response.body;
+        }
+      });
+    }
   }
 
   changeStage(event: any): void {
