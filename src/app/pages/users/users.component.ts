@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-users',
@@ -13,6 +14,8 @@ export class UsersComponent implements OnInit {
   defaultColDef: any;
   rowSelection: any;
   paginationPageSize: any;
+
+  newUserForm: any;
 
   constructor() {
     this.columnDefs = [
@@ -253,6 +256,51 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.newUserForm = new FormGroup({
+      agreement: new FormControl('', [
+        Validators.required
+      ]),
+      name: new FormControl('', [
+        Validators.required
+      ]),
+      email: new FormControl('', [
+        Validators.required
+      ]),
+      phone: new FormControl('', [
+        Validators.required
+      ]),
+      phone2: new FormControl('', [
+        Validators.required
+      ]),
+      login: new FormControl('', [
+        Validators.required
+      ]),
+      password: new FormControl('', [
+        Validators.required
+      ]),
+      passwordRepeat: new FormControl('', [
+        Validators.required
+      ]),
+      groupName: new FormControl('', [
+        Validators.required
+      ])
+    });
+  }
+
+  createNewUser(): void {
+
+  }
+
+  showModal(id: string): void {
+    const modal: any = document.getElementById(id);
+    modal.classList.remove('hide-modal');
+    modal.classList.add('show-modal');
+  }
+
+  hideModal(id: string): void {
+    const modal: any = document.getElementById(id);
+    modal.classList.add('hide-modal');
+    modal.classList.remove('show-modal');
   }
 
   onGridReady(params: any): void {

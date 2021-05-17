@@ -1,6 +1,6 @@
 <div class="users-content dark-grey-box">
   <div class="grey-box new">
-    <input type="submit" value="Новый пользователь">
+    <button class="green-btn round-btn" (click)="showModal('new-user')">Новый пользователь</button>
   </div>
   <div class="grey-box group">
     <label class="mr-15" for="group">Показать группы </label>
@@ -42,5 +42,42 @@
       <span class="page-of">страниц</span>
       <span (click)="onBtNext()" class="page-next"></span>
     </div>
+  </div>
+</div>
+
+<div id="new-user" class="modal new-user">
+  <div class="new-user-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-user')"></button>
+    <h2 class="white-header">Новый пользователь</h2>
+    <form [formGroup]="newUserForm" (ngSubmit)="createNewUser()">
+      <div class="grey-box">
+        <div class="col">
+          <label for="agreement">Договор:</label>
+          <input type="text" name="agreement" id="agreement" formControlName="agreement">
+          <label for="name">Имя:</label>
+          <input type="text" name="name" id="name" formControlName="name">
+          <label for="email">Email:</label>
+          <input type="text" name="email" id="email" formControlName="email">
+          <label for="phone">Телефон:</label>
+          <input type="text" name="phone" id="phone" formControlName="phone">
+          <label for="phone2">Телефон 2:</label>
+          <input type="text" name="phone2" id="phone2" formControlName="phone2">
+        </div>
+        <div class="col">
+          <label for="login">Логин:</label>
+          <input type="text" name="login" id="login" formControlName="login">
+          <label for="password">Пароль:</label>
+          <input type="text" name="passord" id="password" formControlName="password">
+          <label for="password-repeat">Пароль ( повторить):</label>
+          <input type="text" name="password-repeat" id="password-repeat" formControlName="password-repeat">
+          <label for="group-name">Название группы: </label>
+          <input type="text" name="group-name" id="group-name" formControlName="groupName">
+        </div>
+      </div>
+      <div class="form-controls">
+        <button class="white-btn round-btn" (click)="hideModal('new-user')">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
   </div>
 </div>
