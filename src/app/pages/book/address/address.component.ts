@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RestapiService} from '../../../restapi.service';
 
 @Component({
   selector: 'app-address',
@@ -14,7 +15,7 @@ export class AddressComponent implements OnInit {
   public columnDefsAddress: any;
   public rowDataAddress: any;
 
-  constructor() {
+  constructor(private service: RestapiService) {
     this.columnDefsAddress = [
       {headerName: 'Основной',
         field: 'main',
@@ -33,15 +34,6 @@ export class AddressComponent implements OnInit {
       {name: 'г. Брест, УЛ. СОВЕТСКИХ ПОГРАНИЧНИКОВ, д. 1, оф. 1'},
       {name: 'г. Брест, УЛ. СОВЕТСКИХ ПОГРАНИЧНИКОВ, д. 1, оф. 1'},
       {name: 'г. Брест, УЛ. СОВЕТСКИХ ПОГРАНИЧНИКОВ, д. 1, оф. 1'},
-      {name: 'г. Брест, УЛ. СОВЕТСКИХ ПОГРАНИЧНИКОВ, д. 1, оф. 1'},
-      {name: 'г. Брест, УЛ. СОВЕТСКИХ ПОГРАНИЧНИКОВ, д. 1, оф. 1'},
-      {name: 'г. Брест, УЛ. СОВЕТСКИХ ПОГРАНИЧНИКОВ, д. 1, оф. 1'},
-      {name: 'г. Брест, УЛ. СОВЕТСКИХ ПОГРАНИЧНИКОВ, д. 1, оф. 1'},
-      {name: 'г. Брест, УЛ. СОВЕТСКИХ ПОГРАНИЧНИКОВ, д. 1, оф. 1'},
-      {name: 'г. Брест, УЛ. СОВЕТСКИХ ПОГРАНИЧНИКОВ, д. 1, оф. 1'},
-      {name: 'г. Брест, УЛ. СОВЕТСКИХ ПОГРАНИЧНИКОВ, д. 1, оф. 1'},
-      {name: 'г. Брест, УЛ. СОВЕТСКИХ ПОГРАНИЧНИКОВ, д. 1, оф. 1'},
-      {name: 'г. Брест, УЛ. СОВЕТСКИХ ПОГРАНИЧНИКОВ, д. 1, оф. 1'}
     ];
     this.defaultColDef = {
       flex: 1,
@@ -58,6 +50,16 @@ export class AddressComponent implements OnInit {
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    // this.service.getAllUserCustomerAddress().subscribe(response => {
+    //   if (response.status === 200) {
+    //     for (const item of response.body) {
+    //       this.rowDataAddress.push({
+    //         name: item.cityName
+    //       });
+    //     }
+    //     params.api.setRowData(this.rowDataAddress);
+    //   }
+    // });
   }
 
   onPaginationChanged(event: any, space: string): void {

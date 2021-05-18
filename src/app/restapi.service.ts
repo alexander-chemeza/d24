@@ -116,7 +116,7 @@ export class RestapiService {
     // console.log(headers);
     return this.http.get('http://localhost:8080/user/deliveryType/getAll', {responseType: 'json', withCredentials: true});
   }
-  // feedback-controller GET
+  // feedback-controller POST
   public feedback(data: Feedback): Observable<any> {
     return  this.http.post('http://localhost:8080/user/sendFeedback', data, {observe: 'response', withCredentials: true});
   }
