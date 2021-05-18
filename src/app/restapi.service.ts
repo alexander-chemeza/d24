@@ -76,6 +76,18 @@ export interface SaveUserCustomerAddress {
   timeTo: string;
 }
 
+export interface GetUserCustomer {
+  id: number;
+}
+
+
+interface SaveUserCustomer {
+  customerName: string;
+  customerType: string;
+  id?: number;
+  userId?: number;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -143,5 +155,18 @@ export class RestapiService {
   //  user-customer-address-controller POST
   public saveUserCustomerAddress(data: SaveUserCustomerAddress): Observable<any> {
     return this.http.post('http://localhost:8080/user/customerAddress/save', data, {observe: 'response', withCredentials: true});
+  }
+
+  // user-customer-controller POST
+  public deleteUserCustomer(data: GetUserCustomer): Observable<any> {
+    return this.http.post('http://localhost:8080/user/customer/delete', data, {observe: 'response', withCredentials: true});
+  }
+  // user-customer-address-controller GET
+  public getAllUserCustomer(): Observable<any> {
+    return this.http.get('http://localhost:8080/user/customer/getAll', {observe: 'response', withCredentials: true});
+  }
+  //  user-customer-address-controller POST
+  public saveUserCustomer(data: SaveUserCustomer): Observable<any> {
+    return this.http.post('http://localhost:8080/user/customer/save', data, {observe: 'response', withCredentials: true});
   }
 }

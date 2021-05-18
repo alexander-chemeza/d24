@@ -100,6 +100,19 @@ export class BookComponent implements OnInit {
 
   createNewContragent(): void {
     // Write something
+    const data = {
+      customerName: this.newContragent.value.name as string,
+      customerType: this.newContragent.value.type as string
+    };
+
+    this.service.saveUserCustomer(data).subscribe(response => {
+      if (response.status === 200) {
+        console.log('Data', data);
+        console.log(response.body);
+        this.hideModal('new-contragent');
+        this.newContragent.reset();
+      }
+    });
   }
 
   createNewContact(): void {
