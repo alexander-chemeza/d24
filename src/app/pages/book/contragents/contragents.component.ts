@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {RestapiService} from '../../../restapi.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-contragents',
@@ -16,9 +17,13 @@ export class ContragentsComponent implements OnInit {
   public columnDefsContrAgent: any;
   public rowDataContrAgent: any;
 
+  public customerId: any;
+
   constructor(private service: RestapiService) {
+    this.customerId = 0;
+
     this.columnDefsContrAgent = [
-      { headerName: 'Наименование', field: 'name', sortable: true, flex: 1}
+      { headerName: 'Наименование', field: 'name', sortable: true, flex: 1, id: ''}
     ];
     this.rowDataContrAgent = [
       // { name: 'Верхнедвинская районная ветеринарная станция' },
@@ -41,7 +46,7 @@ export class ContragentsComponent implements OnInit {
       minWidth: 100,
       resizable: true,
     };
-    this.rowSelection = 'multiple';
+    this.rowSelection = 'single';
     this.paginationPageSize = 10;
   }
 
@@ -55,9 +60,11 @@ export class ContragentsComponent implements OnInit {
       if (response.status === 200) {
         for (const item of response.body) {
           this.rowDataContrAgent.push({
-            name: item.customerName
+            name: item.customerName,
+            id: item.id
           });
         }
+        console.log(this.rowDataContrAgent);
         params.api.setRowData(this.rowDataContrAgent);
       }
     });
@@ -82,6 +89,12 @@ export class ContragentsComponent implements OnInit {
     this.gridApi.paginationSetPageSize(Number(event.target.value));
   }
 
+  selectedRow(event: any): void{
+    if (event.node.isSelected()) {
+      this.customerId = event.node.data.id;
+      console.log(this.customerId);
+    }
+  }
 }
 
 function setText(selector: any, text: any): void {

@@ -9,6 +9,7 @@
   [defaultColDef]="defaultColDef"
   [suppressRowClickSelection]="false"
   [rowSelection]="rowSelection"
+  (rowSelected)="selectedRow($event)"
   [pagination]="true"
   [paginationPageSize]="paginationPageSize"
   (paginationChanged)="onPaginationChanged($event, 'contr')"
