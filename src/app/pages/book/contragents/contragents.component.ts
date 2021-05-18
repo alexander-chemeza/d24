@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RestapiService} from '../../../restapi.service';
 
 @Component({
   selector: 'app-contragents',
@@ -15,25 +16,25 @@ export class ContragentsComponent implements OnInit {
   public columnDefsContrAgent: any;
   public rowDataContrAgent: any;
 
-  constructor() {
+  constructor(private service: RestapiService) {
     this.columnDefsContrAgent = [
       { headerName: 'Наименование', field: 'name', sortable: true, flex: 1}
     ];
     this.rowDataContrAgent = [
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
-      { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
+      // { name: 'Верхнедвинская районная ветеринарная станция' },
     ];
     this.defaultColDef = {
       flex: 1,
@@ -50,6 +51,16 @@ export class ContragentsComponent implements OnInit {
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    this.service.getAllUserCustomer().subscribe(response => {
+      if (response.status === 200) {
+        for (const item of response.body) {
+          this.rowDataContrAgent.push({
+            name: item.customerName
+          });
+        }
+        params.api.setRowData(this.rowDataContrAgent);
+      }
+    });
   }
 
   onPaginationChanged(event: any, space: string): void {
