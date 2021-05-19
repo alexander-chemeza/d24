@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {RestapiService} from '../../../restapi.service';
+import {AddressList} from '../book.component';
 
 @Component({
   selector: 'app-address',
@@ -7,6 +8,8 @@ import {RestapiService} from '../../../restapi.service';
   styleUrls: ['./address.component.scss']
 })
 export class AddressComponent implements OnInit {
+  @Input() list: AddressList;
+
   public gridApi: any;
   public gridColumnApi: any;
   public defaultColDef: any;
@@ -16,6 +19,27 @@ export class AddressComponent implements OnInit {
   public rowDataAddress: any;
 
   constructor(private service: RestapiService) {
+    this.list = {
+      building: '',
+      cityId: 0,
+      cityName: '',
+      customerId: 0,
+      description: '',
+      house: '',
+      housing: '',
+      id: 0,
+      mainAddress: false,
+      office: '',
+      pauseFrom: '',
+      pauseTo: '',
+      room: '',
+      streetId: 0,
+      streetName: '',
+      timeFrom: '',
+      timeTo: '',
+    };
+
+
     this.columnDefsAddress = [
       {headerName: 'Основной',
         field: 'main',

@@ -11,6 +11,7 @@ import {BookComponent} from './book.component';
 
 @NgModule({
   declarations: [BookComponent],
+  exports: [BookComponent],
   imports: [
     CommonModule,
     SharedModule,

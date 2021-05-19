@@ -1,19 +1,64 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RestapiService} from '../../restapi.service';
+
+export interface AddressList {
+  building: string;
+  cityId?: number;
+  cityName: string;
+  customerId?: number;
+  description: string;
+  house: string;
+  housing: string;
+  id?: number;
+  mainAddress: boolean;
+  office: string;
+  pauseFrom: string;
+  pauseTo: string;
+  room: string;
+  streetId?: number;
+  streetName: string;
+  timeFrom: string;
+  timeTo: string;
+}
 
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
   styleUrls: ['./book.component.scss']
 })
+
 export class BookComponent implements OnInit {
+  // Input decorator to get address list for contragent
+  userAddressList: AddressList[] = [
+    {
+      building: '',
+      cityId: 0,
+      cityName: '',
+      customerId: 0,
+      description: '',
+      house: '',
+      housing: '',
+      id: 0,
+      mainAddress: false,
+      office: '',
+      pauseFrom: '',
+      pauseTo: '',
+      room: '',
+      streetId: 0,
+      streetName: '',
+      timeFrom: '',
+      timeTo: '',
+    }
+  ];
+
   // Reactive forms
   newContragent: any;
   newContact: any;
   newAddress: any;
 
-  constructor(private service: RestapiService) { }
+  constructor(private service: RestapiService) {
+  }
 
   ngOnInit(): void {
     this.newContragent = new FormGroup({
@@ -144,5 +189,9 @@ export class BookComponent implements OnInit {
         this.newAddress.reset();
       }
     });
+  }
+  updateAddressList(list: AddressList): void {
+    this.userAddressList.unshift(list);
+    console.log('Received address list', list);
   }
 }

@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
-import {RestapiService} from '../../../restapi.service';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {RestapiService, SaveUserCustomerAddress} from '../../../restapi.service';
+import {AddressList} from '../book.component';
 
 @Component({
   selector: 'app-contragents',
@@ -7,6 +8,8 @@ import {RestapiService} from '../../../restapi.service';
   styleUrls: ['./contragents.component.scss']
 })
 export class ContragentsComponent implements OnInit {
+  // Output decorator to send address list
+  @Output() onUserAddressListUpdate: EventEmitter<AddressList> = new EventEmitter<AddressList>();
 
   public gridApi: any;
   public gridColumnApi: any;
@@ -46,6 +49,17 @@ export class ContragentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.service.getAllUserCustomerAddress(1).subscribe(response => {
+      console.log('User 1 address', response.body);
+    });
+
+    this.service.getAllUserCustomerAddress(2).subscribe(response => {
+      console.log('User 3 address', response.body);
+    });
+
+    this.service.getAllUserCustomerAddress(3).subscribe(response => {
+      console.log('User 3 address', response.body);
+    });
   }
 
   onGridReady(params: any): void {
@@ -87,7 +101,14 @@ export class ContragentsComponent implements OnInit {
   selectedRow(event: any): void{
     if (event.node.isSelected()) {
       const id = event.node.data.id;
-      console.log(id);
+      console.log('Customer info', event.node.data);
+      this.service.getAllUserCustomerAddress(id).subscribe(response => {
+        if (response.status === 200) {
+          console.log('We have got customer ID, sending this to the another table');
+          console.log('Address list from contragent', response.body);
+          this.onUserAddressListUpdate.emit(response.body);
+        }
+      });
     }
   }
 }

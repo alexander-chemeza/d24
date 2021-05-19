@@ -21,10 +21,13 @@
     <input class="m-0" type="search" placeholder="Поиск">
   </div>
   <div class="box-5">
-    <app-contragents></app-contragents>
+    <app-contragents
+    (onUserAddressListUpdate)="updateAddressList($event)"
+    ></app-contragents>
   </div>
   <div class="box-6">
-    <app-address></app-address>
+    <app-address
+    ></app-address>
   </div>
   <div class="box-7">
     <app-contacts></app-contacts>
