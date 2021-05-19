@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {RestapiService} from '../../../restapi.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-contragents',
@@ -17,11 +16,7 @@ export class ContragentsComponent implements OnInit {
   public columnDefsContrAgent: any;
   public rowDataContrAgent: any;
 
-  public customerId: any;
-
   constructor(private service: RestapiService) {
-    this.customerId = 0;
-
     this.columnDefsContrAgent = [
       { headerName: 'Наименование', field: 'name', sortable: true, flex: 1, id: ''}
     ];
@@ -91,8 +86,8 @@ export class ContragentsComponent implements OnInit {
 
   selectedRow(event: any): void{
     if (event.node.isSelected()) {
-      this.customerId = event.node.data.id;
-      console.log(this.customerId);
+      const id = event.node.data.id;
+      console.log(id);
     }
   }
 }
