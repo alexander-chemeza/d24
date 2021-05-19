@@ -48,7 +48,7 @@ h2, h3, p {
 html, body {
   margin: 0;
   padding: 0;
-  font-family: "Montserrat-Medium", sans-serif;
+  font-family: "Montserrat-Medium", sans-serif !important;
   font-size: 10px;
   color: #000000;
   box-sizing: border-box;
@@ -212,7 +212,7 @@ a {
 
 .grey-header {
   display: block;
-  font-family: "Montserrat-SemiBold", sans-serif;
+  font-family: "Montserrat-SemiBold", sans-serif !important;
   font-size: 1.4rem;
   color: rgba(0,0,0,0.5);
   margin-top: 20px;
@@ -224,32 +224,32 @@ a {
 
 .white-header {
   text-transform: uppercase;
-  font-family: "Montserrat-SemiBold", sans-serif;
+  font-family: "Montserrat-SemiBold", sans-serif !important;
   font-size: 1.4rem;
   color: rgba(255, 255, 255, 0.5);
 }
 
 .small-bold-text {
-  font-family: "Montserrat-SemiBold", sans-serif;
+  font-family: "Montserrat-SemiBold", sans-serif !important;
   font-size: 1.2rem;
   color: rgba(0,0,0,0.5);
 }
 
 .violet-text {
-  font-family: "Montserrat-SemiBold", sans-serif;
+  font-family: "Montserrat-SemiBold", sans-serif !important;
   font-size: 1.4rem;
   color: #82659F;
   text-transform: uppercase;
 }
 
 .grey-text {
-  font-family: "Montserrat-SemiBold", sans-serif;
+  font-family: "Montserrat-SemiBold", sans-serif !important;
   font-size: 1.2rem;
   color: rgba(0, 0, 0, 0.5);
 }
 
 .thin-grey-text {
-  font-family: "Montserrat-Medium", sans-serif;
+  font-family: "Montserrat-Medium", sans-serif !important;
   font-size: 1.4rem;
   color: rgba(0,0,0,0.5);
 }
@@ -268,7 +268,7 @@ a {
 
 .high-description {
   font-size: 2.5rem;
-  font-family: "Montserrat-Medium", sans-serif;
+  font-family: "Montserrat-Medium", sans-serif !important;
   color: black;
 }
 
@@ -289,7 +289,7 @@ a {
   width: fit-content;
   margin: 0;
   font-size: 14px;
-  font-family: "Montserrat-Medium", sans-serif;
+  font-family: "Montserrat-Medium", sans-serif !important;
   padding: 16px 30px;
   background-color: rgba(192, 165, 217, 0.5);
   border-bottom-left-radius: 5px;
@@ -312,7 +312,7 @@ a {
   width: fit-content;
   margin: 0;
   font-size: 14px;
-  font-family: "Montserrat-Medium", sans-serif;
+  font-family: "Montserrat-Medium", sans-serif !important;
   padding: 16px 30px;
   background-color: rgba(192, 165, 217, 0.5);
   border-bottom-left-radius: 5px;
@@ -333,4 +333,4 @@ a {
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: "Montserrat-Medium", sans-serif !important; }

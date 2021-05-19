@@ -26,7 +26,7 @@
 
       & .header {
         font-size: 1.2rem;
-        font-family: "Montserrat-SemiBold", sans-serif;
+        font-family: "Montserrat-SemiBold", sans-serif !important;
         color: #FFFFFF;
         box-sizing: border-box;
         padding: 15px;
@@ -61,7 +61,7 @@
           padding: 10px 20px;
           text-align: center;
           color: #FFFFFF;
-          font-family: "Montserrat-SemiBold", sans-serif;
+          font-family: "Montserrat-SemiBold", sans-serif !important;
           font-size: 1.2rem;
           width: 100%;
 
@@ -127,7 +127,7 @@
         border-radius: 5px;
 
         & .price {
-          font-family: "Montserrat-SemiBold", sans-serif;
+          font-family: "Montserrat-SemiBold", sans-serif !important;
           font-size: 1.6rem;
           color: #000000;
         }
@@ -169,7 +169,7 @@
     }
 
     & .home-header {
-      font-family: "Montserrat-SemiBold", sans-serif;
+      font-family: "Montserrat-SemiBold", sans-serif !important;
       font-size: 1.4rem;
       color: #FFFFFF;
       grid-area: header;
