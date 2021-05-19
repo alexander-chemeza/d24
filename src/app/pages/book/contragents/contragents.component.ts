@@ -7,7 +7,7 @@ import {RestapiService} from '../../../restapi.service';
   styleUrls: ['./contragents.component.scss']
 })
 export class ContragentsComponent implements OnInit {
-  // Output decorator to send address list
+  // Output decorator to store id
   @Output() onSelectCustomerId: EventEmitter<number> = new EventEmitter<number>();
   // AG Grid objects
   public gridApi: any;
