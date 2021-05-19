@@ -2,26 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RestapiService} from '../../restapi.service';
 
-export interface AddressList {
-  building: string;
-  cityId?: number;
-  cityName: string;
-  customerId?: number;
-  description: string;
-  house: string;
-  housing: string;
-  id?: number;
-  mainAddress: boolean;
-  office: string;
-  pauseFrom: string;
-  pauseTo: string;
-  room: string;
-  streetId?: number;
-  streetName: string;
-  timeFrom: string;
-  timeTo: string;
-}
-
 @Component({
   selector: 'app-book',
   templateUrl: './book.component.html',
@@ -29,30 +9,8 @@ export interface AddressList {
 })
 
 export class BookComponent implements OnInit {
+  // Input decorator to get customerID
   @Input() customerId: number;
-  // Input decorator to get address list for contragent
-  userAddressList: AddressList[] = [
-    {
-      building: '',
-      cityId: 0,
-      cityName: '',
-      customerId: 0,
-      description: '',
-      house: '',
-      housing: '',
-      id: 0,
-      mainAddress: false,
-      office: '',
-      pauseFrom: '',
-      pauseTo: '',
-      room: '',
-      streetId: 0,
-      streetName: '',
-      timeFrom: '',
-      timeTo: '',
-    }
-  ];
-
   // Reactive forms
   newContragent: any;
   newContact: any;
@@ -132,40 +90,38 @@ export class BookComponent implements OnInit {
       ])
     });
   }
-
+  // Show modal event
   showModal(id: string): void {
     const modal: any = document.getElementById(id);
     modal.classList.remove('hide-modal');
     modal.classList.add('show-modal');
   }
-
+  // Hide modal event
   hideModal(id: string): void {
     const modal: any = document.getElementById(id);
     modal.classList.add('hide-modal');
     modal.classList.remove('show-modal');
   }
-
+  // New contragent button event
   createNewContragent(): void {
-    // Write something
+    // Received data
     const data = {
       customerName: this.newContragent.value.name as string,
       customerType: this.newContragent.value.type as string
     };
-
+    // POST to backend
     this.service.saveUserCustomer(data).subscribe(response => {
       if (response.status === 200) {
-        console.log('Data', data);
-        console.log(response.body);
         this.hideModal('new-contragent');
         this.newContragent.reset();
       }
     });
   }
-
+  // New contact button event
   createNewContact(): void {
     // Write something
   }
-
+  // New address button event
   createNewAddress(): void {
     // Write something
     const data = {
@@ -193,12 +149,8 @@ export class BookComponent implements OnInit {
       }
     });
   }
-  updateAddressList(list: AddressList): void {
-    this.userAddressList.unshift(list);
-    console.log('Received address list', list);
-  }
-  updateCustomerId(id: number): void {
+  // Get customerID
+  getCustomerId(id: number): void {
     this.customerId = id;
-    console.log('Selected customer id is ' + this.customerId);
   }
 }
