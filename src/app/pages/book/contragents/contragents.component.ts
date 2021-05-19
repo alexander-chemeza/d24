@@ -10,6 +10,7 @@ import {AddressList} from '../book.component';
 export class ContragentsComponent implements OnInit {
   // Output decorator to send address list
   @Output() onUserAddressListUpdate: EventEmitter<AddressList> = new EventEmitter<AddressList>();
+  @Output() onSelectCustomerId: EventEmitter<number> = new EventEmitter<number>();
 
   public gridApi: any;
   public gridColumnApi: any;
@@ -61,7 +62,7 @@ export class ContragentsComponent implements OnInit {
       console.log('User 3 address', response.body);
     });
   }
-
+  // AG Grid event
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -78,22 +79,22 @@ export class ContragentsComponent implements OnInit {
       }
     });
   }
-
+  // Pagination event
   onPaginationChanged(event: any, space: string): void {
     if (this.gridApi) {
       setText(`#current-${space}`, this.gridApi.paginationGetCurrentPage() + 1);
       setText(`#total-${space}`, this.gridApi.paginationGetTotalPages());
     }
   }
-
+  // Controls
   onBtNext(): void {
     this.gridApi.paginationGoToNextPage();
   }
-
+  // Controls
   onBtPrevious(): void {
     this.gridApi.paginationGoToPreviousPage();
   }
-
+  // Pagination event
   onUserPageGrid(event: any): void {
     this.gridApi.paginationSetPageSize(Number(event.target.value));
   }
@@ -101,6 +102,7 @@ export class ContragentsComponent implements OnInit {
   selectedRow(event: any): void{
     if (event.node.isSelected()) {
       const id = event.node.data.id;
+      this.onSelectCustomerId.emit(id);
       console.log('Customer info', event.node.data);
       this.service.getAllUserCustomerAddress(id).subscribe(response => {
         if (response.status === 200) {

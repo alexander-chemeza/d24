@@ -8,13 +8,13 @@
   <div class="box-2">
     <div class="grey-box">
       <h2 class="grey-header m-0">Адреса</h2>
-      <button class="white-btn mt-30" (click)="showModal('new-address')">Новый адрес</button>
+      <button class="white-btn mt-30" [disabled]="customerId === 0" (click)="showModal('new-address')">Новый адрес</button>
     </div>
   </div>
   <div class="box-3">
     <div class="grey-box">
       <h2 class="grey-header m-0">Контакты</h2>
-      <button class="white-btn mt-30" (click)="showModal('new-contact')">Новый контакт</button>
+      <button class="white-btn mt-30" [disabled]="customerId? 0 : null" (click)="showModal('new-contact')">Новый контакт</button>
     </div>
   </div>
   <div class="box-4">
@@ -23,6 +23,7 @@
   <div class="box-5">
     <app-contragents
     (onUserAddressListUpdate)="updateAddressList($event)"
+    (onSelectCustomerId)="updateCustomerId($event)"
     ></app-contragents>
   </div>
   <div class="box-6">

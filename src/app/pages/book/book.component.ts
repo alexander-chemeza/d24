@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RestapiService} from '../../restapi.service';
 
@@ -29,6 +29,7 @@ export interface AddressList {
 })
 
 export class BookComponent implements OnInit {
+  @Input() customerId: number;
   // Input decorator to get address list for contragent
   userAddressList: AddressList[] = [
     {
@@ -58,6 +59,7 @@ export class BookComponent implements OnInit {
   newAddress: any;
 
   constructor(private service: RestapiService) {
+    this.customerId = 0;
   }
 
   ngOnInit(): void {
@@ -180,6 +182,7 @@ export class BookComponent implements OnInit {
       streetName: this.newAddress.value.street as string,
       timeFrom: this.newAddress.value.deliveryFrom as string,
       timeTo: this.newAddress.value.deliveryTo as string,
+      customerId: this.customerId
     };
     this.service.saveUserCustomerAddress(data).subscribe(response => {
       if (response.status === 200) {
@@ -193,5 +196,9 @@ export class BookComponent implements OnInit {
   updateAddressList(list: AddressList): void {
     this.userAddressList.unshift(list);
     console.log('Received address list', list);
+  }
+  updateCustomerId(id: number): void {
+    this.customerId = id;
+    console.log('Selected customer id is ' + this.customerId);
   }
 }
