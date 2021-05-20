@@ -150,9 +150,9 @@ export class RestapiService {
   public deleteUserCustomerAddress(data: GetUserCustomerAddress): Observable<any> {
     return this.http.post(`${this.url}/user/customerAddress/delete`, data, {observe: 'response', withCredentials: true});
   }
-  // user-customer-address-controller GET
-  public getAllUserCustomerAddress(): Observable<any> {
-    return this.http.get(`${this.url}/user/customerAddress/getAll`, {observe: 'response', withCredentials: true});
+  // user-customer-address-controller POST
+  public getAllUserCustomerAddress(customerID: number): Observable<any> {
+    return this.http.post(`${this.url}/user/customerAddress/getAll`, customerID, {observe: 'response', withCredentials: true});
   }
   //  user-customer-address-controller POST
   public saveUserCustomerAddress(data: SaveUserCustomerAddress): Observable<any> {

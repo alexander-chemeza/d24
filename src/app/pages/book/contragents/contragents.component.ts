@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {RestapiService} from '../../../restapi.service';
-import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-contragents',
@@ -8,51 +7,30 @@ import {Observable} from 'rxjs';
   styleUrls: ['./contragents.component.scss']
 })
 export class ContragentsComponent implements OnInit {
-
-  public gridApi: any;
-  public gridColumnApi: any;
-  public defaultColDef: any;
-  public rowSelection: any;
-  public paginationPageSize: any;
-  public columnDefsContrAgent: any;
-  public rowDataContrAgent: any;
-
-  public customerId: any;
+  // Output decorator to store id
+  @Output() onSelectCustomerId: EventEmitter<number> = new EventEmitter<number>();
+  // AG Grid objects
+  gridApi: any;
+  gridColumnApi: any;
+  // Table description
+  columnDefsContrAgent = [
+    { headerName: 'Наименование', field: 'name', sortable: true, flex: 1, id: ''}
+  ];
+  rowDataContrAgent: any = [];
+  defaultColDef = {
+    flex: 1,
+    minWidth: 100,
+    resizable: true,
+  };
+  rowSelection = 'single';
+  paginationPageSize = 10;
 
   constructor(private service: RestapiService) {
-    this.customerId = 0;
-
-    this.columnDefsContrAgent = [
-      { headerName: 'Наименование', field: 'name', sortable: true, flex: 1, id: ''}
-    ];
-    this.rowDataContrAgent = [
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-      // { name: 'Верхнедвинская районная ветеринарная станция' },
-    ];
-    this.defaultColDef = {
-      flex: 1,
-      minWidth: 100,
-      resizable: true,
-    };
-    this.rowSelection = 'single';
-    this.paginationPageSize = 10;
   }
 
   ngOnInit(): void {
   }
-
+  // Table build
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -64,35 +42,35 @@ export class ContragentsComponent implements OnInit {
             id: item.id
           });
         }
-        console.log(this.rowDataContrAgent);
+        // Set new data
         params.api.setRowData(this.rowDataContrAgent);
       }
     });
   }
-
+  // Pagination event
   onPaginationChanged(event: any, space: string): void {
     if (this.gridApi) {
       setText(`#current-${space}`, this.gridApi.paginationGetCurrentPage() + 1);
       setText(`#total-${space}`, this.gridApi.paginationGetTotalPages());
     }
   }
-
+  // Controls
   onBtNext(): void {
     this.gridApi.paginationGoToNextPage();
   }
-
+  // Controls
   onBtPrevious(): void {
     this.gridApi.paginationGoToPreviousPage();
   }
-
+  // Pagination
   onUserPageGrid(event: any): void {
     this.gridApi.paginationSetPageSize(Number(event.target.value));
   }
-
+  // Emit customerID
   selectedRow(event: any): void{
     if (event.node.isSelected()) {
-      this.customerId = event.node.data.id;
-      console.log(this.customerId);
+      const id = event.node.data.id;
+      this.onSelectCustomerId.emit(id);
     }
   }
 }

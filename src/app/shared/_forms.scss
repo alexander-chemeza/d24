@@ -28,7 +28,7 @@ input[type=number] {
 
 label {
   display: block;
-  font-family: "Montserrat-SemiBold", sans-serif;
+  font-family: "Montserrat-SemiBold", sans-serif !important;
   font-size: 1.4rem;
   color: rgba(0,0,0,0.5);
   margin-top: 20px;
@@ -47,11 +47,11 @@ label {
 }
 
 .active-label {
-  font-family: "Montserrat-SemiBold", sans-serif;
+  font-family: "Montserrat-SemiBold", sans-serif !important;
 }
 
 .inactive-label {
-  font-family: "Montserrat-Medium", sans-serif;
+  font-family: "Montserrat-Medium", sans-serif !important;
 }
 
 input:-webkit-autofill,
@@ -76,7 +76,7 @@ input[type="date"]{
   border-radius: 5px;
   padding: 12px 15px;
   margin-top: 12px;
-  font-family: "Montserrat-Medium", sans-serif;
+  font-family: "Montserrat-Medium", sans-serif !important;
   font-size: 1.4rem;
   color: rgba(0,0,0,0.5);
 }
@@ -90,7 +90,7 @@ input[type="submit"] {
   transition: all .5s;
   border: none;
   border-radius: 25px;
-  font-family: "Montserrat-Medium", sans-serif;
+  font-family: "Montserrat-Medium", sans-serif !important;
 
   &:hover {
     background-color: #95b430;
@@ -153,7 +153,7 @@ button {
   border-radius: 5px;
   box-sizing: border-box;
   padding: 15px 60px;
-  font-family: "Montserrat-SemiBold", sans-serif;
+  font-family: "Montserrat-SemiBold", sans-serif !important;
   font-size: 1.4rem;
   cursor: pointer;
 
@@ -290,7 +290,7 @@ textarea {
   resize: none;
   overflow: auto;
   padding: 12px 15px;
-  font-family: "Montserrat-Medium", sans-serif;
+  font-family: "Montserrat-Medium", sans-serif !important;
   font-size: 1.4rem;
   color: rgba(0,0,0,0.5);
   box-sizing: border-box;

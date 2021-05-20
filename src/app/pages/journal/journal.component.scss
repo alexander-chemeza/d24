@@ -102,6 +102,7 @@
   overflow: auto;
   position: relative;
 
+<<<<<<< HEAD
   & .close-btn {
     position: absolute;
     top: 11px;
@@ -109,6 +110,12 @@
   }
 
   & .filter-form {
+=======
+
+
+  & .filter-form {
+
+>>>>>>> 7da9a13d26dd067807ad7052121e0f21a10524a7
 
     & .grey-box {
       margin-bottom: 30px;
@@ -135,7 +142,7 @@
   font-size: 14px;
   line-height: 17px;
   color: #FFFFFF;
-  font-family: "Montserrat-Medium", sans-serif;
+  font-family: "Montserrat-Medium", sans-serif !important;
   margin-bottom: 20px;
 }
 
@@ -153,6 +160,7 @@
   grid-template-rows: min-content;
   grid-gap: 30px
 }
+<<<<<<< HEAD
 
 .mat-h2, .mat-title,
 .mat-typography h2 {
@@ -265,3 +273,5 @@ button {
 .another-form {
   display: none;
 }
+=======
+>>>>>>> 7da9a13d26dd067807ad7052121e0f21a10524a7
