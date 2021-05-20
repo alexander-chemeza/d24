@@ -18,11 +18,12 @@
     </div>
   </div>
   <div class="box-4">
-    <input class="m-0" type="search" placeholder="Поиск">
+    <input class="m-0" type="search" placeholder="Поиск" (keyup)="filter($event)">
   </div>
   <div class="box-5">
     <app-contragents
     (onSelectCustomerId)="getCustomerId($event)"
+    [requestText]="request"
     ></app-contragents>
   </div>
   <div class="box-6">

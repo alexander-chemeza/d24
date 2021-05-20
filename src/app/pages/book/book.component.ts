@@ -17,6 +17,8 @@ export class BookComponent implements OnInit {
   newContact: any;
   newAddress: any;
 
+  request = '';
+
   constructor(private service: RestapiService) {
     this.customerId = 0;
     this.customerAddressId = -1;
@@ -180,5 +182,25 @@ export class BookComponent implements OnInit {
   // Get addressID
   getCustomerAddressId(id: number): void {
     this.customerAddressId = id;
+  }
+
+  filter(event: any): void {
+    if (event.code === 'Enter') {
+      if (event.target.value !== '') {
+        this.request = event.target.value;
+      }
+    }
+
+    if (event.code === 'Backspace') {
+      if (event.target.value === '') {
+        this.request = event.target.value;
+      }
+    }
+
+    if (event.code === 'Delete') {
+      if (event.target.value === '') {
+        this.request = event.target.value;
+      }
+    }
   }
 }

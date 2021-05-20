@@ -1,12 +1,18 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {RestapiService} from '../../../restapi.service';
+
+export interface Contragent {
+  name: string;
+  id: number;
+}
 
 @Component({
   selector: 'app-contragents',
   templateUrl: './contragents.component.html',
   styleUrls: ['./contragents.component.scss']
 })
-export class ContragentsComponent implements OnInit {
+export class ContragentsComponent implements OnInit, OnChanges {
+  @Input() requestText: string;
   // Output decorator to store id
   @Output() onSelectCustomerId: EventEmitter<number> = new EventEmitter<number>();
   // AG Grid objects
@@ -16,7 +22,7 @@ export class ContragentsComponent implements OnInit {
   columnDefsContrAgent = [
     { headerName: 'Наименование', field: 'name', sortable: true, flex: 1, id: ''}
   ];
-  rowDataContrAgent: any = [];
+  rowDataContrAgent: Contragent[] = [];
   defaultColDef = {
     flex: 1,
     minWidth: 100,
@@ -26,10 +32,33 @@ export class ContragentsComponent implements OnInit {
   paginationPageSize = 10;
 
   constructor(private service: RestapiService) {
+    this.requestText = '';
   }
 
   ngOnInit(): void {
   }
+
+  ngOnChanges(): void {
+    if (this.requestText !== '') {
+      this.rowDataContrAgent = this.rowDataContrAgent.filter(item => item.name.includes(this.requestText));
+    } else {
+      this.rowDataContrAgent = [];
+      this.service.getAllUserCustomer().subscribe(response => {
+        if (response.status === 200) {
+          for (const item of response.body) {
+            this.rowDataContrAgent.push({
+              name: item.customerName,
+              id: item.id
+            });
+          }
+          console.log(this.rowDataContrAgent);
+          // Set new data
+          this.gridApi.setRowData(this.rowDataContrAgent);
+        }
+      });
+    }
+  }
+
   // Table build
   onGridReady(params: any): void {
     this.gridApi = params.api;
@@ -42,6 +71,7 @@ export class ContragentsComponent implements OnInit {
             id: item.id
           });
         }
+        console.log(this.rowDataContrAgent);
         // Set new data
         params.api.setRowData(this.rowDataContrAgent);
       }
