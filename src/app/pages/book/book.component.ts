@@ -11,6 +11,7 @@ import {RestapiService} from '../../restapi.service';
 export class BookComponent implements OnInit {
   // Input decorator to get customerID
   @Input() customerId: number;
+  @Input() customerAddressId: number;
   // Reactive forms
   newContragent: any;
   newContact: any;
@@ -18,6 +19,7 @@ export class BookComponent implements OnInit {
 
   constructor(private service: RestapiService) {
     this.customerId = 0;
+    this.customerAddressId = 0;
   }
 
   ngOnInit(): void {
@@ -44,6 +46,9 @@ export class BookComponent implements OnInit {
         Validators.required
       ]),
       email: new FormControl('', [
+        Validators.required
+      ]),
+      position: new FormControl('', [
         Validators.required
       ])
     });
@@ -114,16 +119,38 @@ export class BookComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal('new-contragent');
         this.newContragent.reset();
+        this.service.getAllUserCustomer().subscribe(resp => {
+          console.log(resp.body);
+        });
       }
     });
   }
   // New contact button event
   createNewContact(): void {
-    // Write something
+    // Read fields from popup
+    const data = {
+      customerAddressId: this.customerAddressId,
+      email: this.newContact.value.email as string,
+      mainContact: this.newContact.value.type as boolean,
+      name: this.newContact.value.name as string,
+      phone: this.newContact.value.tel1 as string,
+      phone2: this.newContact.value.tel2 as string,
+      position: this.newContact.value.position as string
+    };
+    console.log('New contact', data);
+    this.service.saveUserCustomerContact(data).subscribe(response => {
+      if (response.status === 200) {
+        this.hideModal('new-contact');
+        this.newContact.reset();
+        this.service.getAllUserCustomerContact(11).subscribe(resp => {
+          console.log('Saved data', resp.body);
+        });
+      }
+    });
   }
   // New address button event
   createNewAddress(): void {
-    // Write something
+    // Read fields from popup
     const data = {
       building: this.newAddress.value.house,
       cityName: this.newAddress.value.place as string,
@@ -140,12 +167,15 @@ export class BookComponent implements OnInit {
       timeTo: this.newAddress.value.deliveryTo as string,
       customerId: this.customerId
     };
+    console.log('New address', data);
+    // Save the data
     this.service.saveUserCustomerAddress(data).subscribe(response => {
       if (response.status === 200) {
-        console.log('Data', data);
-        console.log(response.body);
         this.hideModal('new-address');
         this.newAddress.reset();
+        this.service.getAllUserCustomerAddress(5).subscribe(resp => {
+          console.log('User 1 address', resp.body);
+        });
       }
     });
   }

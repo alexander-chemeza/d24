@@ -14,7 +14,7 @@
   <div class="box-3">
     <div class="grey-box">
       <h2 class="grey-header m-0">Контакты</h2>
-      <button class="white-btn mt-30" [disabled]="customerId === 0" (click)="showModal('new-contact')">Новый контакт</button>
+      <button class="white-btn mt-30" (click)="showModal('new-contact')">Новый контакт</button>
     </div>
   </div>
   <div class="box-4">
@@ -68,6 +68,8 @@
         </div>
         <label for="contact-name">Имя контакта:</label>
         <input type="text" name="contact-name" id="contact-name" formControlName="name">
+        <label for="contact-position">Должность:</label>
+        <input type="text" name="contact-position" id="contact-position" formControlName="position">
         <label for="contact-phone-1">Телефон:</label>
         <input type="text" name="contact-phone-1" id="contact-phone-1" formControlName="tel1">
         <label for="contact-phone-2"> Телефон 2:</label>
