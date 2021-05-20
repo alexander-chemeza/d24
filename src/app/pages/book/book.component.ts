@@ -19,7 +19,7 @@ export class BookComponent implements OnInit {
 
   constructor(private service: RestapiService) {
     this.customerId = 0;
-    this.customerAddressId = 0;
+    this.customerAddressId = -1;
   }
 
   ngOnInit(): void {
@@ -119,9 +119,6 @@ export class BookComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal('new-contragent');
         this.newContragent.reset();
-        this.service.getAllUserCustomer().subscribe(resp => {
-          console.log(resp.body);
-        });
       }
     });
   }
@@ -137,14 +134,11 @@ export class BookComponent implements OnInit {
       phone2: this.newContact.value.tel2 as string,
       position: this.newContact.value.position as string
     };
-    console.log('New contact', data);
+    // Post to backend
     this.service.saveUserCustomerContact(data).subscribe(response => {
       if (response.status === 200) {
         this.hideModal('new-contact');
         this.newContact.reset();
-        this.service.getAllUserCustomerContact(11).subscribe(resp => {
-          console.log('Saved data', resp.body);
-        });
       }
     });
   }
@@ -173,14 +167,15 @@ export class BookComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal('new-address');
         this.newAddress.reset();
-        this.service.getAllUserCustomerAddress(5).subscribe(resp => {
-          console.log('User 1 address', resp.body);
-        });
       }
     });
   }
   // Get customerID
   getCustomerId(id: number): void {
     this.customerId = id;
+  }
+  // Get addressID
+  getCustomerAddressId(id: number): void {
+    this.customerAddressId = id;
   }
 }

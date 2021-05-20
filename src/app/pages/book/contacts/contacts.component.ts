@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {RestapiService} from '../../../restapi.service';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss']
 })
-export class ContactsComponent implements OnInit {
+export class ContactsComponent implements OnInit, OnChanges {
+  @Input() customerAddressId: number;
   // Ag Grid objects
   public gridApi: any;
   public gridColumnApi: any;
@@ -19,7 +21,8 @@ export class ContactsComponent implements OnInit {
       headerCheckboxSelectionFilteredOnly: true,
       checkboxSelection: true,
       minWidth: 200,
-      maxWidth: 250
+      maxWidth: 250,
+      id: ''
     },
     {
       headerName: 'Имя контакта',
@@ -70,24 +73,7 @@ export class ContactsComponent implements OnInit {
       maxWidth: 400
     }
   ];
-  rowDataContacts: any = [
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-    {contactName: 'Анна', employee: '-', phone: '+375 33 865 55 78', tel1: '+375 33 865 55 78', tel2: '+375 33 865 55 78', email: 'mail@mail.com'},
-  ];
+  rowDataContacts: any = [];
   defaultColDef = {
     flex: 1,
     minWidth: 100,
@@ -96,11 +82,38 @@ export class ContactsComponent implements OnInit {
   rowSelection = 'multiple';
   paginationPageSize = 10;
 
-  constructor() {
+  constructor(private service: RestapiService) {
+    this.customerAddressId = -1;
   }
 
   ngOnInit(): void {
   }
+
+  ngOnChanges(): void {
+    this.ngOnInit();
+    // Clear table after previous user actions
+    this.rowDataContacts = [];
+    // Check if we've got addressId
+    console.log('Reading from contacts', this.customerAddressId);
+    // Get row data
+    this.service.getAllUserCustomerContact(this.customerAddressId).subscribe(response => {
+      if (response.status === 200) {
+        for (const item of response.body) {
+          this.rowDataContacts.push({
+            contactName: item.name,
+            employee: item.position,
+            phone: '',
+            tel1: item.phone,
+            tel2: item.phone2,
+            email: item.email,
+            id: item.id
+          });
+        }
+        this.gridApi.setRowData(this.rowDataContacts);
+      }
+    });
+  }
+
   // Table build
   onGridReady(params: any): void {
     this.gridApi = params.api;
