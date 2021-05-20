@@ -51,7 +51,6 @@ export class ContragentsComponent implements OnInit, OnChanges {
               id: item.id
             });
           }
-          console.log(this.rowDataContrAgent);
           // Set new data
           this.gridApi.setRowData(this.rowDataContrAgent);
         }
@@ -63,19 +62,6 @@ export class ContragentsComponent implements OnInit, OnChanges {
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.service.getAllUserCustomer().subscribe(response => {
-      if (response.status === 200) {
-        for (const item of response.body) {
-          this.rowDataContrAgent.push({
-            name: item.customerName,
-            id: item.id
-          });
-        }
-        console.log(this.rowDataContrAgent);
-        // Set new data
-        params.api.setRowData(this.rowDataContrAgent);
-      }
-    });
   }
   // Pagination event
   onPaginationChanged(event: any, space: string): void {

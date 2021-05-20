@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {RestapiService} from '../../restapi.service';
+import {RestapiService, Street} from '../../restapi.service';
+import {Cities, StreetsList} from '../order/order.component';
 
 @Component({
   selector: 'app-book',
@@ -17,6 +18,14 @@ export class BookComponent implements OnInit {
   newContact: any;
   newAddress: any;
 
+  currentCity = 0;
+  citiesList: Cities[] = [];
+  streetList: StreetsList[] = [];
+  street: Street = {
+    cityCode: '',
+    regionCode: ''
+  };
+
   request = '';
 
   constructor(private service: RestapiService) {
@@ -25,6 +34,13 @@ export class BookComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.service.cities().subscribe(data => {
+      if (data.status === 200) {
+        this.citiesList = data.body;
+        this.currentCity = this.citiesList[0].id;
+      }
+    });
+
     this.newContragent = new FormGroup({
       type: new FormControl('', [
         Validators.required
@@ -97,6 +113,28 @@ export class BookComponent implements OnInit {
       ])
     });
   }
+
+  selectPlace(event: any, form: any): void {
+    // Get city id
+    const currentCityCode = form.value.place;
+    // Find city by the id
+    const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
+    // Check and build data
+    if (cityInfo) {
+      // The request object
+      this.street = {
+        cityCode: cityInfo.city_code,
+        regionCode: cityInfo.region_code
+      };
+      // Get streets
+      this.service.streets(this.street).subscribe(response => {
+        if (response.status === 200) {
+          this.streetList = response.body;
+        }
+      });
+    }
+  }
+
   // Show modal event
   showModal(id: string): void {
     const modal: any = document.getElementById(id);

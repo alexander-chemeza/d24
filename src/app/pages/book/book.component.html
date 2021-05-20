@@ -103,10 +103,26 @@
           </div>
           <label for="type2">Основной адрес</label>
         </div>
-        <label for="place">Населенный пункт:</label>
-        <input type="text" name="place" id="place" formControlName="place">
-        <label for="street">Улица:</label>
-        <input type="text" name="street" id="street" formControlName="street">
+        <label for="place-carrier-sender">Населенный пункт:</label>
+        <mat-form-field floatLabel="never">
+          <mat-select formControlName="place" (selectionChange)="selectPlace($event, newAddress)">
+            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
+              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city.id" class="example-item">
+                {{city.fullName}}
+              </mat-option>
+            </cdk-virtual-scroll-viewport>
+          </mat-select>
+        </mat-form-field>
+        <label for="street-carrier-sender">Улица:</label>
+        <mat-form-field floatLabel="never">
+          <mat-select formControlName="street">
+            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
+              <mat-option *cdkVirtualFor="let street of streetList" [value]="street.id" class="example-item">
+                {{street.name}}
+              </mat-option>
+            </cdk-virtual-scroll-viewport>
+          </mat-select>
+        </mat-form-field>
         <div class="row-multi mt-15">
           <div class="box">
             <label for="building">Дом:</label>
