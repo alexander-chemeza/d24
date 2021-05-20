@@ -93,18 +93,29 @@
 
 .filter-journal {
   width: 100%;
-  height: 85%;
+  max-height: 85%;
   background-color: #A070B5;
   width: 100%;
   max-width: 900px;
   border-radius: 10px;
   padding: 30px;
   overflow: auto;
+  position: relative;
 
+<<<<<<< HEAD
+  & .close-btn {
+    position: absolute;
+    top: 11px;
+    right: 30px;
+  }
+
+  & .filter-form {
+=======
 
 
   & .filter-form {
 
+>>>>>>> 7da9a13d26dd067807ad7052121e0f21a10524a7
 
     & .grey-box {
       margin-bottom: 30px;
@@ -149,3 +160,118 @@
   grid-template-rows: min-content;
   grid-gap: 30px
 }
+<<<<<<< HEAD
+
+.mat-h2, .mat-title,
+.mat-typography h2 {
+  font-family: "Montserrat-SemiBold", sans-serif !important;
+}
+
+.filter-form {
+  width: 100%;
+}
+
+#view-request {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.view-request_align {
+  width: 100%;
+  // max-width: 900px;
+  max-width: 1180px;
+  border-radius: 10px;
+  // height: 85%;
+  position: relative;
+  overflow: auto;
+  padding: 30px;
+}
+
+.popup-bg {
+  background-color: #A070B5;
+}
+
+.popup {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-height: 85%;
+
+  & .row-stage {
+    width: 100%;
+    background-image: url("../../../assets/img/common/line.svg");
+    background-position: center;
+    background-repeat: repeat-x;
+
+    & .col {
+      width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    }
+  }
+
+  & .close-btn {
+    position: absolute;
+    top: 11px;
+    right: 30px;
+  }
+
+  &_title {
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
+
+  &_subtitle {
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  &_text {
+    font-size: 14px;
+    line-height: 17px;
+    color: rgba(0, 0, 0, 1);
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+}
+
+.col-33 {
+  width: 33.333333333333336%;
+}
+
+.col-50 {
+  width: 48%;
+}
+
+.col-100 {
+  width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.another-form {
+  display: none;
+}
+=======
+>>>>>>> 7da9a13d26dd067807ad7052121e0f21a10524a7

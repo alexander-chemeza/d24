@@ -69,3 +69,10 @@
 .mat-form-field-appearance-legacy .mat-form-field-infix {
   padding: 0.4375em 15px;
 }
+
+.mat-h2, .mat-title,
+.mat-typography h2,
+.mat-body, .mat-body-1,
+.mat-typography {
+  font-family: "Montserrat-SemiBold", sans-serif;
+}

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-journal',
   templateUrl: './journal.component.html',
@@ -382,6 +383,34 @@ export class JournalComponent implements OnInit {
     const modal: any = document.getElementById(targetId);
     modal.classList.add('hide-modal');
     modal.classList.remove('show-modal');
+  }
+
+  changeStage(event: any): void {
+    const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;
+    let currentForm: any;
+    const currentStage: string = event.target.getAttribute('stage');
+    const forms = document.getElementsByClassName('form') as HTMLCollection;
+
+    if (currentStage === '1') {
+      currentForm = document.getElementById('form-0');
+    } else if (currentStage === '2') {
+      currentForm = document.getElementById('form-02');
+    } else {
+      currentForm = document.getElementById('form-03');
+    }
+    
+    for (let i = 0; i < forms.length; i++) {
+      forms[i].classList.add('another-form');
+    }
+    console.log(currentForm);
+
+    currentForm.classList.remove('another-form');
+
+    for (let i = 0; i < stageBtns.length; i++) {
+      stageBtns[i].classList.remove('active-btn');
+    }
+    event.target.classList.add('active-btn');
+    
   }
 
 }
