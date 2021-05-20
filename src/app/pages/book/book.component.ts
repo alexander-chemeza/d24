@@ -119,6 +119,7 @@ export class BookComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal('new-contragent');
         this.newContragent.reset();
+        window.location.reload();
       }
     });
   }
@@ -139,6 +140,7 @@ export class BookComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal('new-contact');
         this.newContact.reset();
+        window.location.reload();
       }
     });
   }
@@ -167,6 +169,7 @@ export class BookComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal('new-address');
         this.newAddress.reset();
+        window.location.reload();
       }
     });
   }
