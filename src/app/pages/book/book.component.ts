@@ -117,8 +117,10 @@ export class BookComponent implements OnInit {
   selectPlace(event: any, form: any): void {
     // Get city id
     const currentCityCode = form.value.place;
+    console.log('Selected city code', currentCityCode);
     // Find city by the id
     const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
+    console.log('City info', cityInfo);
     // Check and build data
     if (cityInfo) {
       // The request object
@@ -126,10 +128,12 @@ export class BookComponent implements OnInit {
         cityCode: cityInfo.city_code,
         regionCode: cityInfo.region_code
       };
+      console.log('Street search data', this.street);
       // Get streets
       this.service.streets(this.street).subscribe(response => {
         if (response.status === 200) {
           this.streetList = response.body;
+          console.log('Street list', this.streetList);
         }
       });
     }
@@ -186,32 +190,44 @@ export class BookComponent implements OnInit {
   }
   // New address button event
   createNewAddress(): void {
-    // Read fields from popup
-    const data = {
-      building: this.newAddress.value.house,
-      cityName: this.newAddress.value.place as string,
-      description: this.newAddress.value.description as string,
-      house: this.newAddress.value.building as string,
-      housing: this.newAddress.value.corpus as string,
-      mainAddress: this.newAddress.value.type as boolean,
-      office: this.newAddress.value.office as string,
-      pauseFrom: this.newAddress.value.timeoutFrom as string,
-      pauseTo: this.newAddress.value.timeoutTo as string,
-      room: this.newAddress.value.apartment as string,
-      streetName: this.newAddress.value.street as string,
-      timeFrom: this.newAddress.value.deliveryFrom as string,
-      timeTo: this.newAddress.value.deliveryTo as string,
-      customerId: this.customerId
-    };
-    console.log('New address', data);
-    // Save the data
-    this.service.saveUserCustomerAddress(data).subscribe(response => {
-      if (response.status === 200) {
-        this.hideModal('new-address');
-        this.newAddress.reset();
-        window.location.reload();
-      }
-    });
+    // This vars will get correct name of city and street
+    let city: string;
+    let street: string;
+    // This constants will get the objects describing city and street
+    const cityCorrectName = this.citiesList.find(item => item.id === this.newAddress.value.place);
+    const streetCorrectName = this.streetList.find(item => item.id === this.newAddress.value.street);
+    if (cityCorrectName && streetCorrectName) {
+      // Get correct names
+      city = cityCorrectName.fullName;
+      street = streetCorrectName.name;
+
+      // Read fields from popup
+      const data = {
+        building: this.newAddress.value.house,
+        cityName: city,
+        description: this.newAddress.value.description as string,
+        house: this.newAddress.value.building as string,
+        housing: this.newAddress.value.corpus as string,
+        mainAddress: this.newAddress.value.type as boolean,
+        office: this.newAddress.value.office as string,
+        pauseFrom: this.newAddress.value.timeoutFrom as string,
+        pauseTo: this.newAddress.value.timeoutTo as string,
+        room: this.newAddress.value.apartment as string,
+        streetName: street,
+        timeFrom: this.newAddress.value.deliveryFrom as string,
+        timeTo: this.newAddress.value.deliveryTo as string,
+        customerId: this.customerId
+      };
+      console.log('New address', data);
+      // Save the data
+      this.service.saveUserCustomerAddress(data).subscribe(response => {
+        if (response.status === 200) {
+          this.hideModal('new-address');
+          this.newAddress.reset();
+          window.location.reload();
+        }
+      });
+    }
   }
   // Get customerID
   getCustomerId(id: number): void {
