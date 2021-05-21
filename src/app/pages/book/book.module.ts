@@ -5,6 +5,9 @@ import {AddressModule} from './address/address.module';
 import {ContactsModule} from './contacts/contacts.module';
 import {ContragentsModule} from './contragents/contragents.module';
 import {BookComponent} from './book.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {ScrollingModule} from '@angular/cdk/scrolling';
 
 
 
@@ -17,7 +20,10 @@ import {BookComponent} from './book.component';
     SharedModule,
     AddressModule,
     ContactsModule,
-    ContragentsModule
+    ContragentsModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    ScrollingModule
   ]
 })
 export class BookModule { }

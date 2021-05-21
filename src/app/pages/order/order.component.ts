@@ -12,7 +12,7 @@ interface DeliveryTypesList {
   name: string;
 }
 
-interface Cities {
+export interface Cities {
   id: number;
   name: string;
   type: number;
@@ -26,7 +26,7 @@ interface Cities {
   fullName: string;
 }
 
-interface StreetsList {
+export interface StreetsList {
   abbreviation: string;
   city_code: string;
   code: string;

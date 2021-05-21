@@ -52,10 +52,30 @@ export interface Street {
   regionCode: string;
 }
 
-export interface GetUserCustomerAddress {
-  id: string;
+// Interface to delete customer
+export interface GetUserCustomer {
+  id: number;
 }
 
+// Interface to delete customer address
+export interface GetUserCustomerAddress {
+  id: number;
+}
+
+// Interface to delete customer contact
+export interface GetUserCustomerContact {
+  id: number;
+}
+
+// Interface to save address book contagent
+export interface SaveUserCustomer {
+  customerName: string;
+  customerType: string;
+  id?: number;
+  userId?: number;
+}
+
+// Interface to save address book address
 export interface SaveUserCustomerAddress {
   building: string;
   cityId?: number;
@@ -76,16 +96,15 @@ export interface SaveUserCustomerAddress {
   timeTo: string;
 }
 
-export interface GetUserCustomer {
-  id: number;
-}
-
-
-interface SaveUserCustomer {
-  customerName: string;
-  customerType: string;
-  id?: number;
-  userId?: number;
+// Interface to save address book contact
+export interface SaveUserCustomerContact {
+  customerAddressId: number;
+  email: string;
+  mainContact: boolean;
+  name: string;
+  phone: string;
+  phone2: string;
+  position: string;
 }
 
 @Injectable({
@@ -170,5 +189,18 @@ export class RestapiService {
   //  user-customer-address-controller POST
   public saveUserCustomer(data: SaveUserCustomer): Observable<any> {
     return this.http.post(`${this.url}/user/customer/save`, data, {observe: 'response', withCredentials: true});
+  }
+
+  // user-customer-contact-controller POST
+  public deleteUserCustomerContact(data: GetUserCustomerContact): Observable<any> {
+    return this.http.post(`${this.url}/user/customerContact/delete`, data, {observe: 'response', withCredentials: true});
+  }
+  // user-customer-contact-controller POST
+  public getAllUserCustomerContact(customerAddressId: number): Observable<any> {
+    return this.http.post(`${this.url}/user/customerContact/getAll`, customerAddressId, {observe: 'response', withCredentials: true});
+  }
+  //  user-customer-contact-controller POST
+  public saveUserCustomerContact(data: SaveUserCustomerContact): Observable<any> {
+    return this.http.post(`${this.url}/user/customerContact/save`, data, {observe: 'response', withCredentials: true});
   }
 }
