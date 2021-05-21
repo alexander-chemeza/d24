@@ -26,7 +26,7 @@ export class JournalComponent implements OnInit {
         headerCheckboxSelectionFilteredOnly: true,
         checkboxSelection: true,
         minWidth: 150,
-        maxWidth: 200
+        maxWidth: 200,
       },
       {
         headerName: 'Номер',
@@ -90,7 +90,22 @@ export class JournalComponent implements OnInit {
         sortable: true,
         flex: 1,
         minWidth: 150,
-        maxWidth: 200
+        maxWidth: 200,
+        cellRenderer: function(params: any) {
+          return (
+            "<div class='table-buttons_container'>" +
+              "<div class='table-value'>" +
+                params.value +
+              "</div>" +
+              "<div class='table-buttons_box'>" +
+                "<button id='copy' class='buttons-copy'></button>" + 
+                "<button id='edit' class='buttons-edit'></button>" +
+                "<button id='view' class='buttons-view'></button>" +
+                "<button id='remove' class='buttons-remove'></button>" +
+              "</div>" +
+            "</div>"
+          );
+        }
       }
     ];
     this.rowData = [
