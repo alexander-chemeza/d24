@@ -71,12 +71,12 @@
 }
 
 .ag-wrapper.ag-input-wrapper.ag-checkbox-input-wrapper {
-  background-image: url("../../assets/img/common/unchecked.svg");
+  background-image: url("/assets/img/common/unchecked.svg");
   outline: none;
 }
 
 .ag-wrapper.ag-input-wrapper.ag-checkbox-input-wrapper.ag-checked {
-  background-image: url("../../assets/img/common/checked.svg");
+  background-image: url("/assets/img/common/checked.svg");
   outline: none;
 
 }
@@ -288,3 +288,72 @@
 .table-icon:hover .table-icon .list-icon-dark {
   display: none !important;
 }
+
+.ag-cell span {
+  display: flex;
+  align-items: center;
+}
+
+.table-buttons {
+  display: flex;
+
+  &_box {
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 5px;
+    background: linear-gradient(270deg, rgba(161, 54, 255, 0.255) 0%, rgba(161, 54, 255, 0) 102.51%);
+    backdrop-filter: blur(9px);
+
+    button {
+      background: none;
+      padding: 0;
+      width: 24px;
+      height: 24px;
+      margin-left: 16px;
+      opacity: .7;
+      transition: .2s;
+      background-size: contain;
+      background-repeat: no-repeat;
+
+      @media (max-width: 1600px) {
+        width: 20px;
+        height: 20px;;
+      }
+
+      &:hover {
+        opacity: 1;
+      }
+    }
+  
+    .buttons-copy {
+      background-image: url("/assets/img/common/icon-copy.svg");
+    }
+    
+    .buttons-edit {
+      background-image: url("/assets/img/common/icon-edit.svg");
+    }
+    
+    .buttons-view {
+      background-image: url("/assets/img/common/icon-view.svg");
+    }
+    
+    .buttons-remove {
+      background-image: url("/assets/img/common/icon-trash.svg");
+    }
+  }
+}
+
+.ag-row {
+
+  &:hover {
+    .table-buttons_box {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
