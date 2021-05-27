@@ -105,7 +105,8 @@
         </div>
         <label for="place-carrier-sender">Населенный пункт:</label>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="place" (selectionChange)="selectPlace($event, newAddress)">
+          <mat-select formControlName="place" (keyup)="$event.stopPropagation()" (selectionChange)="selectPlace($event, newAddress)">
+            <input type="text" placeholder="Поиск" (input)="onKey($event)" (keydown)="$event.stopPropagation()">
             <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
               <mat-option *cdkVirtualFor="let city of citiesList" [value]="city.id" class="example-item">
                 {{city.fullName}}

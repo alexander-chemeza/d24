@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.getItem('currentUser')) {
+    if (sessionStorage.getItem('currentUser')) {
       this.router.navigate(['home']);
     } else {
       this.router.navigate(['login']);
@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     this.service.login(this.loginForm.value.userName as string, this.loginForm.value.password as string)
       .subscribe(data => {
         if (data) {
-          localStorage.setItem('currentUser', JSON.stringify(data));
+          sessionStorage.setItem('currentUser', JSON.stringify(data));
           this.router.navigate(['home']);
         } else {
           alert('No such user or invalid password');

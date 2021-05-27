@@ -20,10 +20,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // On hashchange check if user have this item in the localStorage, true - full sidebar, false - basic
+    // On hashchange check if user have this item in the sessionStorage, true - full sidebar, false - basic
     this.router.events.forEach(event => {
       if (event instanceof NavigationEnd) {
-        if (localStorage.getItem('currentUser')) {
+        if (sessionStorage.getItem('currentUser')) {
           this.state = true;
         } else {
           this.state = false;
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
   }
 
   doLogout(): void {
-    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
     this.service.logout().subscribe(data => {
       console.log(data);
     });

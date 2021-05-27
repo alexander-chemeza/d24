@@ -257,4 +257,17 @@ export class BookComponent implements OnInit {
       }
     }
   }
+
+  onKey(event: any): void {
+    if (event.target.value === '' || this.citiesList.length === 0) {
+      this.ngOnInit();
+    } else {
+      this.citiesList = this.search(event.target.value);
+    }
+  }
+
+  private search(value: string): any {
+    const filter = value.toLowerCase();
+    return this.citiesList.filter(option => option.fullName.toLowerCase().includes(filter));
+  }
 }
