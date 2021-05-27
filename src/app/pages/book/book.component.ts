@@ -270,4 +270,22 @@ export class BookComponent implements OnInit {
     const filter = value.toLowerCase();
     return this.citiesList.filter(option => option.fullName.toLowerCase().includes(filter));
   }
+
+  onKey2(event: any): void {
+    console.log('from search', this.streetList);
+    if (event.target.value === '' || this.streetList.length === 0) {
+      this.service.streets(this.street).subscribe(response => {
+        if (response.status === 200) {
+          this.streetList = response.body;
+        }
+      });
+    } else {
+      this.streetList = this.search2(event.target.value);
+    }
+  }
+
+  private search2(value: string): any {
+    const filter = value.toLowerCase();
+    return this.streetList.filter(option => option.name.toLowerCase().includes(filter));
+  }
 }
