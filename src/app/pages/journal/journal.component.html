@@ -1,18 +1,119 @@
 <div class="journal-content">
   <div class="row-search">
     <input class="m-0" type="search" placeholder="Поиск">
-    <button class="white-btn" (click)="showModal($event)" modal="filter">Фильтр</button>
+    <button class="white-btn b-plus" (click)="showModal($event)" modal="filter">Фильтр</button>
   </div>
   <div class="row-controls">
     <div class="row-controls-group">
       <button class="white-btn">Бланк доставки</button>
       <button class="white-btn">Этикетки</button>
-      <button class="white-btn">Отправить на Email</button>
-      <button class="white-btn">Выбрать все</button>
+      <button class="white-btn" (click)="showModal($event)" modal="order-log">Отправить на Email</button>
+      <button class="white-btn" (click)="selectAll($event)">Выбрать все</button>
       <button class="white-btn">Экспорт в эксель</button>
     </div>
     <div class="row-controls-single">
-      <button class="white-btn">Отображение столбцов в таблице</button>
+      <button class="white-btn b-plus" (click)="showModal($event)" modal="filter-table-columns">Отображение столбцов в таблице</button>
+
+      <div id="filter-table-columns" class="filter-table-columns">
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="status" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="status">Статус заявки</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="date_status" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="status">Дата / время изменения статуса заявки</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="service" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="service">Услуга</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="tth" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="tth">ТТН</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="sender" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="sender">Отправитель</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="delivery-address" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="delivery-address">Адрес выдачи груза</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="date-of-delivery" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="date-of-delivery">Дата выдачи груза</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="delivery-time-from" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="delivery-time-from">Время  выдачи груза с</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="delivery-time-to" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="delivery-time-top">Время  выдачи груза по</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="delivery-time-to" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="shipping-address">Адрес доставки груза</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="delivery-date" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="delivery-date">Дата доставки груза</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="delivery-date-to" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="delivery-date-to">Время доставки груза по</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="number-of-cargo-places" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="number-of-cargo-places">Кол-во грузовых мест</label>
+        </div>
+        <div class="row flex">
+          <div class="checkbox-block">
+            <input type="checkbox" name="document-author" class="checkbox-block-item">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="document-author">Автор документа</label>
+        </div>
+      </div>
     </div>
   </div>
   <div class="row-table">
@@ -57,124 +158,132 @@
     </div>
   
     <div class="filter-form">
-      <div class="col grey-box flex justify-content-between">
-        <div class="filter-box">
-          <div class="row">
-            <div class="control">
-              <label for="">Дата отправления с:</label>
-              <input type="date">
+      <div class="flex justify-content-between">
+        <div class="col grey-box flex justify-content-between col-50">
+          <div class="filter-box">
+            <div class="row">
+              <div class="control">
+                <label for="">Дата отправления с:</label>
+                <input type="date">
+              </div>
+              <div class="optional">
+              </div>
             </div>
-            <div class="optional">
+            
+            <div class="row">
+              <div class="control">
+                <label for="">Дата создания заказа с:</label>
+                <input type="date">
+              </div>
+              <div class="optional">
+              </div>
             </div>
-          </div>
-          
-          <div class="row">
-            <div class="control">
-              <label for="">Дата создания заказа с:</label>
-              <input type="date">
+      
+            <div class="row">
+              <div class="control">
+                <label for="">Дата выдачи заказа с:</label>
+                <input type="date">
+              </div>
+              <div class="optional">
+              </div>
             </div>
-            <div class="optional">
+      
+            <div class="row">
+              <div class="control">
+                <label for="">Дата доставки заказа с:</label>
+                <input type="date">
+              </div>
+              <div class="optional">
+              </div>
             </div>
           </div>
     
-          <div class="row">
-            <div class="control">
-              <label for="">Дата выдачи заказа с:</label>
-              <input type="date">
+          <div class="filter-box">
+            <div class="row">
+              <div class="control">
+                <label for="">Дата отправления по:</label>
+                <input type="date">
+              </div>
+              <div class="optional">
+              </div>
             </div>
-            <div class="optional">
+            
+            <div class="row">
+              <div class="control">
+                <label for="">Дата создания заказа по:</label>
+                <input type="date">
+              </div>
+              <div class="optional">
+              </div>
             </div>
-          </div>
-    
-          <div class="row">
-            <div class="control">
-              <label for="">Дата доставки заказа с:</label>
-              <input type="date">
+      
+            <div class="row">
+              <div class="control">
+                <label for="">Дата выдачи заказа по:</label>
+                <input type="date">
+              </div>
+              <div class="optional">
+              </div>
             </div>
-            <div class="optional">
+      
+            <div class="row">
+              <div class="control">
+                <label for="">Дата доставки заказа по:</label>
+                <input type="date">
+              </div>
+              <div class="optional">
+              </div>
             </div>
           </div>
         </div>
-  
-        <div class="filter-box">
-          <div class="row">
-            <div class="control">
-              <label for="">Дата отправления по:</label>
-              <input type="date">
-            </div>
-            <div class="optional">
-            </div>
-          </div>
-          
-          <div class="row">
-            <div class="control">
-              <label for="">Дата создания заказа по:</label>
-              <input type="date">
-            </div>
-            <div class="optional">
-            </div>
-          </div>
     
-          <div class="row">
-            <div class="control">
-              <label for="">Дата выдачи заказа по:</label>
-              <input type="date">
+        <div class="col flex justify-content-between col-50 flex-column">
+          <div class="grey-box flex justify-content-between">
+            <div class="filter-box w-50">
+              <div class="row">
+                <label for="">Отправитель:</label>
+                <input type="text">
+              </div>
+              <div class="row">
+                <label for="">Откуда( населенный пункт):</label>
+                <input type="text">
+              </div>
+              <div class="row">
+                <div class="control">
+                  <label for="">Вид услуги</label>
+                  <input type="text"> <!-- Select -->
+                </div>
+              </div>
             </div>
-            <div class="optional">
+      
+            <div class="filter-box w-50">
+              <div class="row">
+                <label for="">Получатель:</label>
+                <input type="text">
+              </div>
+              <div class="row">
+                <label for="">Куда( населенный пункт):</label>
+                <input type="text">
+              </div>
+              <div class="row">
+                <div class="control">
+                  <label for="">Статус услуги</label>
+                  <input type="text"> <!-- Select -->
+                </div>
+              </div>
             </div>
           </div>
-    
-          <div class="row">
-            <div class="control">
-              <label for="">Дата доставки заказа по:</label>
-              <input type="date">
-            </div>
-            <div class="optional">
+
+          <div class="grey-box">
+            <div class="col col-buttons">
+              <button class="white-btn round-btn">Очистить</button>
+              <button class="green-btn round-btn">Применить</button>
             </div>
           </div>
         </div>
       </div>
   
-      <div class="col grey-box flex justify-content-between">
-        <div class="filter-box">
-          <div class="row">
-            <label for="">Отправитель:</label>
-            <input type="text">
-          </div>
-          <div class="row">
-            <label for="">Откуда( населенный пункт):</label>
-            <input type="text">
-          </div>
-          <div class="row">
-            <div class="control">
-              <label for="">Вид услуги</label>
-              <input type="text"> <!-- Select -->
-            </div>
-          </div>
-        </div>
-  
-        <div class="filter-box">
-          <div class="row">
-            <label for="">Получатель:</label>
-            <input type="text">
-          </div>
-          <div class="row">
-            <label for="">Куда( населенный пункт):</label>
-            <input type="text">
-          </div>
-          <div class="row">
-            <div class="control">
-              <label for="">Статус услуги</label>
-              <input type="text"> <!-- Select -->
-            </div>
-          </div>
-        </div>
-      </div>
-  
-      <div class="col col-buttons">
-        <button class="white-btn round-btn">Очистить</button>
-        <button class="green-btn round-btn">Применить</button>
-      </div>
+      
     </div>
 
     <button class="active-btn circle-btn close-btn" (click)="hideModal($event)" modal="filter"></button>
@@ -182,7 +291,7 @@
 </div>
 
 <div id="view-request">
-  <div class="view-request_align popup popup-bg">
+  <div class="popup-align popup popup-bg">
     <div class="popup_title">Просмотр заявки</div>
 
     <div class="grey-box mb-30">
@@ -343,5 +452,166 @@
     </div>
 
     <button class="active-btn circle-btn close-btn" (click)="hideModal($event)" modal="view-request"></button>
+  </div>
+</div>
+
+<div id="order-log" class="order-log">
+  <div class="popup-align popup popup-bg">
+    <div class="popup_title">Отправить на Email</div>
+
+    <div class="col-100">
+      <div class="grey-box mb-30">
+        <div class="popup_subtitle">Номера заказов:</div>
+        <div class="popup_text">
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+          <span class="num-order">123345678900;</span>
+        </div>
+      </div>
+      <div class="grey-box mb-30">
+        <div class="row flex mb-50">
+          <div class="col-30">
+            <div class="popup_subtitle mb-20">Формировать и отправлять на Email</div>
+            <div class="row flex mb-15">
+              <div class="checkbox-block">
+                <input type="checkbox" name="letterheads" class="checkbox-block-item">
+                <span class="checkbox-block-icon"></span>
+              </div>
+              <label for="letterheads">Бланки</label>
+            </div>
+            <div class="row flex">
+              <div class="checkbox-block">
+                <input type="checkbox" name="labels" class="checkbox-block-item">
+                <span class="checkbox-block-icon"></span>
+              </div>
+              <label for="labels">Этикетки</label>
+            </div>
+          </div>
+          <div class="col-70 flex justify-content-between pb-50 bbw">
+            <div class="col-50">
+              <div class="popup_subtitle">Email для бланков</div>
+
+              <div class="flex flex-column">
+                <div class="control mb-15">
+                  <input type="text">
+                </div>
+                <p class="warning-left mt-20">
+                  <span class="thin-grey-text">Ваши данные отправлены!</span>
+                </p>
+              </div>
+            </div>
+            <div class="col-50">
+              <div class="popup_subtitle">Email для бланков</div>
+
+              <div class="row">
+                <div class="control">
+                  <input type="text">
+                </div>
+                <div class="optional flex justify-content-end">
+                  <button class="add-btn active-btn mt-27" (click)="showModal('new-express-sender-contragent')"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row flex">
+          <div class="col-30">
+            <div class="popup_subtitle mb-20 cb">Отправлять с  каждым заказом</div>
+            <div class="row flex mb-15">
+              <label class="switch">
+                <input type="checkbox">
+                <span class="switch-btn round"></span>
+              </label>
+            </div>
+          </div>
+          <div class="col-70 flex justify-content-between">
+            <div class="col-50">
+              <div class="popup_subtitle">Email для бланков</div>
+
+              <div class="flex flex-column">
+                <div class="control mb-15">
+                  <input type="text">
+                </div>
+                <p class="warning-left mt-20">
+                  <span class="thin-grey-text">Ваши данные отправлены!</span>
+                </p>
+              </div>
+            </div>
+            <div class="col-50">
+              <div class="popup_subtitle">Email для бланков</div>
+
+              <div class="row">
+                <div class="control">
+                  <input type="text">
+                </div>
+                <div class="optional flex justify-content-end">
+                  <button class="add-btn active-btn mt-27" (click)="showModal('new-express-sender-contragent')"></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grey-box">
+        <div class="row flex">
+          <div class="col-30">
+            <div class="row flex mb-15 align-items-center">
+              <div class="checkbox-block">
+                <input type="checkbox" name="barcode-printer" class="checkbox-block-item">
+                <span class="checkbox-block-icon"></span>
+              </div>
+              <label for="barcode-printer">Формирование этикетки <br> для принтера штрихкодов</label>
+            </div>
+          </div>
+          <div class="col-70 flex justify-content-between">
+            <div class="col-50">
+              <div class="flex justify-content-between">
+                <div class="col-50">
+                  <div class="popup_subtitle">Высота этикетки, мм</div>
+    
+                  <div class="flex flex-column">
+                    <div class="control mb-15">
+                      <input type="text">
+                    </div>
+                    <p class="warning-left mt-20">
+                      <span class="thin-grey-text">Готово!</span>
+                    </p>
+                  </div>
+                </div>
+                <div class="col-50">
+                  <div class="popup_subtitle">Ширина этикетки, мм</div>
+    
+                  <div class="row">
+                    <div class="control">
+                      <input type="text">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-50">
+              <div class="popup_subtitle">Важно!</div>
+              <div class="popup_subtitle fw-400">Мах. допустимые значения этикетки составляют  100 Х 100 мм</div>
+              <div class="popup_subtitle fw-400">Min. допустимые значения этикетки составляют  100 Х 100 мм</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="active-btn circle-btn close-btn" (click)="hideModal($event)" modal="order-log"></button>
   </div>
 </div>

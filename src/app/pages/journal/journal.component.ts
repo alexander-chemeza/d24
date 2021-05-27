@@ -100,7 +100,7 @@ export class JournalComponent implements OnInit {
               "<div class='table-buttons_box'>" +
                 "<button id='copy' class='buttons-copy'></button>" + 
                 "<button id='edit' class='buttons-edit'></button>" +
-                "<button id='view' class='buttons-view'></button>" +
+                "<button id='view' class='buttons-view' (click)='showModal($event)' modal='view-request'></button>" +
                 "<button id='remove' class='buttons-remove'></button>" +
               "</div>" +
             "</div>"
@@ -389,8 +389,7 @@ export class JournalComponent implements OnInit {
   showModal(event: any): void {
     const targetId = event.target.getAttribute('modal');
     const modal: any = document.getElementById(targetId);
-    modal.classList.add('show-modal');
-
+    modal.classList.toggle('show-modal');
   }
 
   hideModal(event: any): void {
@@ -398,6 +397,10 @@ export class JournalComponent implements OnInit {
     const modal: any = document.getElementById(targetId);
     modal.classList.add('hide-modal');
     modal.classList.remove('show-modal');
+  }
+
+  selectAll(event: any): void {
+    this.gridApi.selectAll();
   }
 
   changeStage(event: any): void {
@@ -433,3 +436,4 @@ export class JournalComponent implements OnInit {
 function setText(selector: any, text: any): void {
   document.querySelector(selector).innerHTML = text;
 }
+
