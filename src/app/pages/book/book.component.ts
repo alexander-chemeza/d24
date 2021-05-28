@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RestapiService, Street} from '../../restapi.service';
 import {Cities, StreetsList} from '../order/order.component';
 import {ContragentsComponent} from './contragents/contragents.component';
+import {AddressComponent} from './address/address.component';
+import {ContactsComponent} from './contacts/contacts.component';
 
 @Component({
   selector: 'app-book',
@@ -13,6 +15,12 @@ import {ContragentsComponent} from './contragents/contragents.component';
 export class BookComponent implements OnInit {
   // @ts-ignore
   @ViewChild(ContragentsComponent) contragents: ContragentsComponent;
+
+  // @ts-ignore
+  @ViewChild(AddressComponent) addresslist: AddressComponent;
+
+  // @ts-ignore
+  @ViewChild(ContactsComponent) contactslist: ContactsComponent;
 
   // Input decorator to get customerID
   @Input() customerId: number;
@@ -189,7 +197,8 @@ export class BookComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal('new-contact');
         this.newContact.reset();
-        window.location.reload();
+        // window.location.reload();
+        this.contactslist.ngOnChanges();
       }
     });
   }
@@ -229,7 +238,8 @@ export class BookComponent implements OnInit {
         if (response.status === 200) {
           this.hideModal('new-address');
           this.newAddress.reset();
-          window.location.reload();
+          // window.location.reload();
+          this.addresslist.ngOnChanges();
         }
       });
     }
