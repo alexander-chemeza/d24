@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RestapiService, Street} from '../../restapi.service';
 import {Cities, StreetsList} from '../order/order.component';
+import {ContragentsComponent} from './contragents/contragents.component';
 
 @Component({
   selector: 'app-book',
@@ -10,6 +11,9 @@ import {Cities, StreetsList} from '../order/order.component';
 })
 
 export class BookComponent implements OnInit {
+  // @ts-ignore
+  @ViewChild(ContragentsComponent) contragents: ContragentsComponent;
+
   // Input decorator to get customerID
   @Input() customerId: number;
   @Input() customerAddressId: number;
@@ -163,7 +167,8 @@ export class BookComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal('new-contragent');
         this.newContragent.reset();
-        window.location.reload();
+        this.contragents.ngOnChanges();
+        // window.location.reload();
       }
     });
   }
