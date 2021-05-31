@@ -1,7 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RestapiService, Street} from '../../restapi.service';
 import {Cities, StreetsList} from '../order/order.component';
+import {ContragentsComponent} from './contragents/contragents.component';
+import {AddressComponent} from './address/address.component';
+import {ContactsComponent} from './contacts/contacts.component';
 
 @Component({
   selector: 'app-book',
@@ -10,6 +13,15 @@ import {Cities, StreetsList} from '../order/order.component';
 })
 
 export class BookComponent implements OnInit {
+  // @ts-ignore
+  @ViewChild(ContragentsComponent) contragents: ContragentsComponent;
+
+  // @ts-ignore
+  @ViewChild(AddressComponent) addresslist: AddressComponent;
+
+  // @ts-ignore
+  @ViewChild(ContactsComponent) contactslist: ContactsComponent;
+
   // Input decorator to get customerID
   @Input() customerId: number;
   @Input() customerAddressId: number;
@@ -163,7 +175,8 @@ export class BookComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal('new-contragent');
         this.newContragent.reset();
-        window.location.reload();
+        this.contragents.ngOnChanges();
+        // window.location.reload();
       }
     });
   }
@@ -184,7 +197,8 @@ export class BookComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal('new-contact');
         this.newContact.reset();
-        window.location.reload();
+        // window.location.reload();
+        this.contactslist.ngOnChanges();
       }
     });
   }
@@ -224,7 +238,8 @@ export class BookComponent implements OnInit {
         if (response.status === 200) {
           this.hideModal('new-address');
           this.newAddress.reset();
-          window.location.reload();
+          // window.location.reload();
+          this.addresslist.ngOnChanges();
         }
       });
     }
@@ -269,5 +284,23 @@ export class BookComponent implements OnInit {
   private search(value: string): any {
     const filter = value.toLowerCase();
     return this.citiesList.filter(option => option.fullName.toLowerCase().includes(filter));
+  }
+
+  onKey2(event: any): void {
+    console.log('from search', this.streetList);
+    if (event.target.value === '' || this.streetList.length === 0) {
+      this.service.streets(this.street).subscribe(response => {
+        if (response.status === 200) {
+          this.streetList = response.body;
+        }
+      });
+    } else {
+      this.streetList = this.search2(event.target.value);
+    }
+  }
+
+  private search2(value: string): any {
+    const filter = value.toLowerCase();
+    return this.streetList.filter(option => option.name.toLowerCase().includes(filter));
   }
 }

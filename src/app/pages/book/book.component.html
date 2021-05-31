@@ -116,7 +116,8 @@
         </mat-form-field>
         <label for="street-carrier-sender">Улица:</label>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="street">
+          <mat-select formControlName="street" (keyup)="$event.stopPropagation()">
+            <input type="text" placeholder="Поиск" (input)="onKey2($event)" (keydown)="$event.stopPropagation()">
             <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
               <mat-option *cdkVirtualFor="let street of streetList" [value]="street.id" class="example-item">
                 {{street.name}}
