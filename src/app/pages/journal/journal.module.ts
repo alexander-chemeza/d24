@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import {SharedModule} from '../../shared/shared.module';
 import {AgGridModule} from 'ag-grid-angular';
 import {JournalComponent} from './journal.component';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 
 
 
@@ -11,7 +12,8 @@ import {JournalComponent} from './journal.component';
   imports: [
     CommonModule,
     SharedModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    NgxQRCodeModule
   ]
 })
 export class JournalModule { }

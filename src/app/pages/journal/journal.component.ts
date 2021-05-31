@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 
 
 @Component({
@@ -428,12 +429,17 @@ export class JournalComponent implements OnInit {
       stageBtns[i].classList.remove('active-btn');
     }
     event.target.classList.add('active-btn');
-    
   }
 
+  elementType = NgxQrcodeElementTypes.URL;
+  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  value = 'https://www.test.com/';
+
 }
+
 
 function setText(selector: any, text: any): void {
   document.querySelector(selector).innerHTML = text;
 }
+
 

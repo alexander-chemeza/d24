@@ -411,6 +411,10 @@
   padding-bottom: 50px;
 }
 
+.ml-30 {
+  margin-left: 30px;
+}
+
 .justify-content-end {
   justify-content: flex-end;
 }
@@ -481,10 +485,33 @@ input:checked + .switch-btn:before {
   border-radius: 50%;
 }
 
+.align-items-start {
+  align-items: flex-start;
+}
+
 .align-items-center {
   align-items: center;
 }
 
+.align-items-end {
+  align-items: flex-end;
+}
+
 .fw-400 {
   font-weight: 400;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.bbb {
+  border-bottom: 1px solid #000;
+}
+
+.grey-box {
+  
+  @media print {
+    display: none !important;
+  }
 }
