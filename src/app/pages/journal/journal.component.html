@@ -6,7 +6,7 @@
   <div class="row-controls">
     <div class="row-controls-group">
       <button class="white-btn">Бланк доставки</button>
-      <button class="white-btn">Этикетки</button>
+      <button class="white-btn" (click)="showModal($event)" modal="sticker-printing">Этикетки</button>
       <button class="white-btn" (click)="showModal($event)" modal="order-log">Отправить на Email</button>
       <button class="white-btn" (click)="selectAll($event)">Выбрать все</button>
       <button class="white-btn">Экспорт в эксель</button>
@@ -616,7 +616,7 @@
   </div>
 </div>
 
-<div id="sticker-printing" class="sticker-printing show-modal">
+<div id="sticker-printing" class="sticker-printing"> 
   <div class="popup-align popup popup-bg">
     <div class="popup_title">Печать наклеек</div>
 
