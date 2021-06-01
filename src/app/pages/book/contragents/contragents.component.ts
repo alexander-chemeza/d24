@@ -33,18 +33,22 @@ export class ContragentsComponent implements OnInit, OnChanges {
       pinned: 'right',
       cellRenderer: 'btnCellRenderer',
       cellRendererParams: {
-        clicked: (field: any): void => {
+        clicked: (target: any): void => {
           // alert(`${field} was clicked`);
-          const id = this.rowDataContrAgent[Number(this.gridApi.getFocusedCell().rowIndex)].id;
-          console.log(id);
-          this.service.deleteUserCustomer(id).subscribe(response => {
-            if (response.status === 200) {
-              this.ngOnChanges();
-            }
-          });
+          if (target === 'delete') {
+            const id = this.rowDataContrAgent[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+            console.log(id);
+            this.service.deleteUserCustomer(id).subscribe(response => {
+              if (response.status === 200) {
+                this.ngOnChanges();
+              }
+            });
+          } else if (target === 'edit') {
+            console.log('edit');
+          }
         }
       },
-      minWidth: 150,
+      maxWidth: 150,
     }
   ];
   rowDataContrAgent: Contragent[] = [];
@@ -61,7 +65,7 @@ export class ContragentsComponent implements OnInit, OnChanges {
     this.requestText = '';
 
     this.frameworkComponents = {
-      btnCellRenderer: ContragentButtonsComponent
+      btnCellRenderer: ContragentButtonsComponent,
     };
   }
 

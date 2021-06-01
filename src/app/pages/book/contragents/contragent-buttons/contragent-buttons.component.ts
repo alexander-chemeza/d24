@@ -16,7 +16,12 @@ export class ContragentButtonsComponent implements ICellRendererAngularComp, OnD
   }
 
   btnClickedHandler(event: any): void {
-    this.params.clicked(event);
+    const target = event.target.getAttribute('btntype');
+    if (target) {
+      this.params.clicked(target);
+    } else {
+      console.log('No attribute');
+    }
   }
 
   constructor() { }
