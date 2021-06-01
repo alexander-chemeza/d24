@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {RestapiService} from '../../../restapi.service';
+import {ContragentButtonsComponent} from './contragent-buttons/contragent-buttons.component';
 
 export interface Contragent {
   name: string;
@@ -15,12 +16,36 @@ export class ContragentsComponent implements OnInit, OnChanges {
   @Input() requestText: string;
   // Output decorator to store id
   @Output() onSelectCustomerId: EventEmitter<number> = new EventEmitter<number>();
+
   // AG Grid objects
   gridApi: any;
   gridColumnApi: any;
   // Table description
   columnDefsContrAgent = [
-    { headerName: 'Наименование', field: 'name', sortable: true, flex: 1, id: ''}
+    { headerName: 'Наименование',
+      field: 'name',
+      sortable: true,
+      flex: 1,
+      id: ''
+    },
+    {
+      headerName: 'Управление',
+      field: 'controls',
+      cellRenderer: 'btnCellRenderer',
+      cellRendererParams: {
+        clicked: (field: any): void => {
+          // alert(`${field} was clicked`);
+          const id = this.rowDataContrAgent[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+          console.log(id);
+          this.service.deleteUserCustomer(id).subscribe(response => {
+            if (response.status === 200) {
+              this.ngOnChanges();
+            }
+          });
+        }
+      },
+      minWidth: 150,
+    }
   ];
   rowDataContrAgent: Contragent[] = [];
   defaultColDef = {
@@ -30,9 +55,14 @@ export class ContragentsComponent implements OnInit, OnChanges {
   };
   rowSelection = 'single';
   paginationPageSize = 10;
+  frameworkComponents: any;
 
   constructor(private service: RestapiService) {
     this.requestText = '';
+
+    this.frameworkComponents = {
+      btnCellRenderer: ContragentButtonsComponent
+    };
   }
 
   ngOnInit(): void {
@@ -45,6 +75,7 @@ export class ContragentsComponent implements OnInit, OnChanges {
       this.rowDataContrAgent = [];
       this.service.getAllUserCustomer().subscribe(response => {
         if (response.status === 200) {
+          console.log(response.body);
           for (const item of response.body) {
             this.rowDataContrAgent.push({
               name: item.customerName,

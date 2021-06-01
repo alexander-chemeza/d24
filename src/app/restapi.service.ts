@@ -188,7 +188,7 @@ export class RestapiService {
   }
 
   // user-customer-controller POST
-  public deleteUserCustomer(data: GetUserCustomer): Observable<any> {
+  public deleteUserCustomer(data: number): Observable<any> {
     return this.http.post(`${this.url}/user/customer/delete`, data, {observe: 'response', withCredentials: true});
   }
   // user-customer-address-controller GET
