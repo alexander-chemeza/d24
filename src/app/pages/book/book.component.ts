@@ -25,6 +25,7 @@ export class BookComponent implements OnInit {
   // Input decorator to get customerID
   @Input() customerId: number;
   @Input() customerAddressId: number;
+  @Input() selectedCustomer: any;
   // Reactive forms
   newContragent: any;
   newContact: any;
@@ -302,5 +303,34 @@ export class BookComponent implements OnInit {
   private search2(value: string): any {
     const filter = value.toLowerCase();
     return this.streetList.filter(option => option.name.toLowerCase().includes(filter));
+  }
+
+  showCustomer(data: any): void {
+    this.selectedCustomer = data;
+    console.log('Void in book', this.selectedCustomer);
+    this.newContragent.patchValue({
+      name: this.selectedCustomer[0].customerName,
+      type: this.selectedCustomer[0].customerType
+    });
+    this.showModal('edit-contragent');
+    console.log('Name', this.newContragent.value.name);
+  }
+
+  editCustomer(): void {
+    // Received data
+    const data = {
+      customerName: this.newContragent.value.name as string,
+      customerType: this.newContragent.value.type as string,
+      id: this.selectedCustomer[0].id
+    };
+    // POST to backend
+    this.service.saveUserCustomer(data).subscribe(response => {
+      if (response.status === 200) {
+        this.hideModal('edit-contragent');
+        this.newContragent.reset();
+        this.contragents.ngOnChanges();
+        // window.location.reload();
+      }
+    });
   }
 }

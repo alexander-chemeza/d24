@@ -24,6 +24,7 @@
     <app-contragents
     (onSelectCustomerId)="getCustomerId($event)"
     [requestText]="request"
+    (onCustomerEdit)="showCustomer($event)"
     ></app-contragents>
   </div>
   <div class="box-6">
@@ -52,6 +53,25 @@
       </div>
       <div class="btns-row">
         <button class="white-btn round-btn" (click)="hideModal('new-contragent')">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="edit-contragent" class="modal new-contragent">
+  <div class="new-contragent-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('edit-contragent')"></button>
+    <h2 class="white-header">Изменить данные контрагента</h2>
+    <form [formGroup]="newContragent" (ngSubmit)="editCustomer()">
+      <div class="grey-box">
+        <label for="type-edit"> Форма собственности :</label>
+        <input type="text" id="type-edit" name="type-edit" formControlName="type">
+        <label for="contragent-edit">Наименование контрагента:</label>
+        <input type="text" id="contragent-edit" name="contragent-edit" formControlName="name">
+      </div>
+      <div class="btns-row">
+        <button class="white-btn round-btn" (click)="hideModal('edit-contragent')">Отмена</button>
         <input type="submit" value="Сохранить">
       </div>
     </form>

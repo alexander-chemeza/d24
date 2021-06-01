@@ -16,6 +16,7 @@ export class ContragentsComponent implements OnInit, OnChanges {
   @Input() requestText: string;
   // Output decorator to store id
   @Output() onSelectCustomerId: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onCustomerEdit: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
 
   // AG Grid objects
   gridApi: any;
@@ -47,10 +48,11 @@ export class ContragentsComponent implements OnInit, OnChanges {
           } else if (target === 'edit') {
             console.log('edit');
             const id = this.rowDataContrAgent[Number(this.gridApi.getFocusedCell().rowIndex)].id;
-            const customers = this.service.getAllUserCustomer().subscribe(response => {
+            this.service.getAllUserCustomer().subscribe(response => {
               if (response.status === 200) {
                 const selectedAgent = response.body.filter((item: any) => item.id === id);
                 console.log('Selected user info', selectedAgent);
+                this.onCustomerEdit.emit(selectedAgent);
               }
             });
           }
