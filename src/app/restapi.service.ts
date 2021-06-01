@@ -10,6 +10,7 @@ export interface User {
 
 // Registration user data interface
 export interface UserRegistration {
+  id?: string;
   passportNumber?: string;
   userName?: string;
   email?: string;
@@ -135,8 +136,16 @@ export class RestapiService {
     return this.http.post(`${this.url}/adminUser/addManager`, data, {observe: 'response', withCredentials: true});
   }
   // user-controller GET
-  public getAllManagers(): Observable<any> {
-    return this.http.get(`${this.url}/adminUser/getAllManagers`, {observe: 'response', withCredentials: true});
+  public getAllManagers(params: any): Observable<any> {
+    return this.http.get(`${this.url}/adminUser/getAllManagers`, {observe: 'response', withCredentials: true, params});
+  }
+  // user-controller GET
+  public getUserById(params: any): Observable<any> {
+    return this.http.get(`${this.url}/adminUser/getUserById`, {observe: 'response', withCredentials: true, params});
+  }
+  // user controller get groups GET
+  public getGroups(): Observable<any> {
+    return this.http.get(`${this.url}/user/group/getAll`, {observe: 'response', withCredentials: true});
   }
   // user-controller GET
   public logout(): Observable<any> {
