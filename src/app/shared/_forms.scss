@@ -182,6 +182,25 @@ button {
     }
   }
 
+  &.transparent-btn {
+    background-color: transparent;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate(0, -50%);
+    display: block;
+  }
+
+  &.delete-btn {
+    width: 20px;
+    height: 20px;
+    background-image: url("../../assets/img/common/icon-trash.svg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+
   &.circle-btn {
     width: 45px;
     height: 45px;

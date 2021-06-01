@@ -30,7 +30,7 @@ export class ContragentsComponent implements OnInit, OnChanges {
     },
     {
       headerName: 'Управление',
-      field: 'controls',
+      pinned: 'right',
       cellRenderer: 'btnCellRenderer',
       cellRendererParams: {
         clicked: (field: any): void => {
