@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, OnChanges, Output} from '@angular/core';
 import {RestapiService} from '../../../restapi.service';
+import {AddressButtonsComponent} from './address-buttons/address-buttons.component';
 
 @Component({
   selector: 'app-address',
@@ -17,7 +18,8 @@ export class AddressComponent implements OnInit, OnChanges {
   noRowsTemplate = `<span>Для отображения адресов выберите контрагента</span>`;
   // Table description
   columnDefsAddress = [
-    {headerName: 'Основной',
+    {
+      headerName: 'Основной',
       field: 'main',
       sortable: true,
       flex: 1,
@@ -27,7 +29,25 @@ export class AddressComponent implements OnInit, OnChanges {
       minWidth: 150,
       maxWidth: 200
     },
-    {headerName: 'Наименование', field: 'name', sortable: true, filter: true, flex: 3, id: ''}
+    {
+      headerName: 'Наименование',
+      field: 'name',
+      sortable: true,
+      filter: true,
+      flex: 3,
+      id: ''
+    },
+    {
+      headerName: 'Управление',
+      pinned: 'right',
+      cellRenderer: 'btnCellRenderer',
+      cellRendererParams: {
+        clicked: (target: any): void => {
+          console.log('address');
+        }
+      },
+      maxWidth: 150
+    }
   ];
   rowDataAddress: any = [];
   defaultColDef = {
@@ -37,10 +57,15 @@ export class AddressComponent implements OnInit, OnChanges {
   };
   rowSelection = 'single';
   paginationPageSize = 10;
+  frameworkComponents: any;
 
   constructor(private service: RestapiService) {
     // Default value of customerID --> if default - no access to create address popup
     this.customerId = 0;
+
+    this.frameworkComponents = {
+      btnCellRenderer: AddressButtonsComponent,
+    };
   }
 
   ngOnInit(): void {

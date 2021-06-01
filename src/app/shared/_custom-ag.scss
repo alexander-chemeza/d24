@@ -540,7 +540,7 @@ input:checked + .switch-btn:before {
 /* Add absolute position so that action buttons column will appear on top of other columns. pointer-events: none to pass on mousemove event to behind columns */
 .ag-pinned-right-cols-container {
   position: absolute !important;
-  right: 30px;
+  right: 17px;
   pointer-events: none;
 }
 /* Reset pointer-events so that click can happen on action buttons */
