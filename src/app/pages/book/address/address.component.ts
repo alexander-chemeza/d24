@@ -43,7 +43,15 @@ export class AddressComponent implements OnInit, OnChanges {
       cellRenderer: 'btnCellRenderer',
       cellRendererParams: {
         clicked: (target: any): void => {
-          console.log('address');
+          if (target === 'delete') {
+            const id = this.rowDataAddress[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+            console.log(id);
+            this.service.deleteUserCustomerAddress(id).subscribe(response => {
+              if (response.status === 200) {
+                this.ngOnChanges();
+              }
+            });
+          }
         }
       },
       maxWidth: 150
