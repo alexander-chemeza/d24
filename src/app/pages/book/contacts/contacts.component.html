@@ -11,6 +11,7 @@
   [rowSelection]="rowSelection"
   [pagination]="true"
   [paginationPageSize]="paginationPageSize"
+  [overlayNoRowsTemplate]="noRowsTemplate"
   (paginationChanged)="onPaginationChanged($event, 'contacts')"
   (gridReady)="onGridReady($event)"
 >

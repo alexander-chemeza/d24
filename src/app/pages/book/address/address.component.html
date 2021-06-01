@@ -12,6 +12,7 @@
   (rowSelected)="selectedRow($event)"
   [pagination]="true"
   [paginationPageSize]="paginationPageSize"
+  [overlayNoRowsTemplate]="noRowsTemplate"
   (paginationChanged)="onPaginationChanged($event, 'address')"
   (gridReady)="onGridReady($event)"
 >

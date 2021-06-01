@@ -11,6 +11,7 @@ export class ContactsComponent implements OnInit, OnChanges {
   // Ag Grid objects
   public gridApi: any;
   public gridColumnApi: any;
+  noRowsTemplate = `<span>Для отображения контактов выберите контрагента и его адрес</span>`;
   // Table description
   columnDefsContacts = [
     { headerName: 'Имя контакта',

@@ -20,6 +20,7 @@ export class ContragentsComponent implements OnInit, OnChanges {
   // AG Grid objects
   gridApi: any;
   gridColumnApi: any;
+  noRowsTemplate = `<span>Список контрагентов пуст</span>`;
   // Table description
   columnDefsContrAgent = [
     { headerName: 'Наименование',

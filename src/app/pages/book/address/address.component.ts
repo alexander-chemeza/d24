@@ -14,6 +14,7 @@ export class AddressComponent implements OnInit, OnChanges {
   // AG Grid objects
   gridApi: any;
   gridColumnApi: any;
+  noRowsTemplate = `<span>Для отображения адресов выберите контрагента</span>`;
   // Table description
   columnDefsAddress = [
     {headerName: 'Основной',
