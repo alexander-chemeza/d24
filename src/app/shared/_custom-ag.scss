@@ -559,3 +559,7 @@ input:checked + .switch-btn:before {
   width: 0 !important;
   padding: 0 !important;
 }
+
+.ag-theme-alpine .ag-pinned-right-header {
+  display: none;
+}
