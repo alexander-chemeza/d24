@@ -26,6 +26,7 @@ export class BookComponent implements OnInit {
   @Input() customerId: number;
   @Input() customerAddressId: number;
   @Input() selectedCustomer: any;
+  @Input() selectedCustomerAddress: any;
   // Reactive forms
   newContragent: any;
   newContact: any;
@@ -159,10 +160,11 @@ export class BookComponent implements OnInit {
     modal.classList.add('show-modal');
   }
   // Hide modal event
-  hideModal(id: string): void {
+  hideModal(id: string, form: any): void {
     const modal: any = document.getElementById(id);
     modal.classList.add('hide-modal');
     modal.classList.remove('show-modal');
+    form.reset();
   }
   // New contragent button event
   createNewContragent(): void {
@@ -174,7 +176,7 @@ export class BookComponent implements OnInit {
     // POST to backend
     this.service.saveUserCustomer(data).subscribe(response => {
       if (response.status === 200) {
-        this.hideModal('new-contragent');
+        this.hideModal('new-contragent', this.newContragent);
         this.newContragent.reset();
         this.contragents.ngOnChanges();
         // window.location.reload();
@@ -196,7 +198,7 @@ export class BookComponent implements OnInit {
     // Post to backend
     this.service.saveUserCustomerContact(data).subscribe(response => {
       if (response.status === 200) {
-        this.hideModal('new-contact');
+        this.hideModal('new-contact', this.newContact);
         this.newContact.reset();
         // window.location.reload();
         this.contactslist.ngOnChanges();
@@ -237,7 +239,7 @@ export class BookComponent implements OnInit {
       // Save the data
       this.service.saveUserCustomerAddress(data).subscribe(response => {
         if (response.status === 200) {
-          this.hideModal('new-address');
+          this.hideModal('new-address', this.newAddress);
           this.newAddress.reset();
           // window.location.reload();
           this.addresslist.ngOnChanges();
@@ -316,6 +318,28 @@ export class BookComponent implements OnInit {
     console.log('Name', this.newContragent.value.name);
   }
 
+  showCustomerAddress(data: any): void {
+    this.selectedCustomerAddress = data;
+    console.log('Selected address info', this.selectedCustomerAddress);
+    this.newAddress.patchValue({
+      type: this.selectedCustomerAddress[0].mainAddress,
+      place: this.selectedCustomerAddress[0].cityName,
+      street: this.selectedCustomerAddress[0].streetName,
+      building: this.selectedCustomerAddress[0].house,
+      corpus: this.selectedCustomerAddress[0].housing,
+      house: this.selectedCustomerAddress[0].building,
+      office: this.selectedCustomerAddress[0].office,
+      apartment: this.selectedCustomerAddress[0].room,
+      deliveryFrom: this.selectedCustomerAddress[0].timeFrom,
+      deliveryTo: this.selectedCustomerAddress[0].timeTo,
+      timeoutFrom: this.selectedCustomerAddress[0].pauseFrom,
+      timeoutTo: this.selectedCustomerAddress[0].pauseTo,
+      description: this.selectedCustomerAddress[0].description
+    });
+    this.showModal('edit-address');
+
+  }
+
   editCustomer(): void {
     // Received data
     const data = {
@@ -326,11 +350,54 @@ export class BookComponent implements OnInit {
     // POST to backend
     this.service.saveUserCustomer(data).subscribe(response => {
       if (response.status === 200) {
-        this.hideModal('edit-contragent');
+        this.hideModal('edit-contragent', this.newContragent);
         this.newContragent.reset();
         this.contragents.ngOnChanges();
         // window.location.reload();
       }
     });
+  }
+
+  editNewAddress(): void {
+    // This vars will get correct name of city and street
+    let city: string;
+    let street: string;
+    // This constants will get the objects describing city and street
+    const cityCorrectName = this.citiesList.find(item => item.id === this.newAddress.value.place);
+    const streetCorrectName = this.streetList.find(item => item.id === this.newAddress.value.street);
+    if (cityCorrectName && streetCorrectName) {
+      // Get correct names
+      city = cityCorrectName.fullName;
+      street = streetCorrectName.name;
+
+      // Read fields from popup
+      const data = {
+        building: this.newAddress.value.house,
+        cityName: city,
+        description: this.newAddress.value.description as string,
+        house: this.newAddress.value.building as string,
+        housing: this.newAddress.value.corpus as string,
+        mainAddress: this.newAddress.value.type as boolean,
+        office: this.newAddress.value.office as string,
+        pauseFrom: this.newAddress.value.timeoutFrom as string,
+        pauseTo: this.newAddress.value.timeoutTo as string,
+        room: this.newAddress.value.apartment as string,
+        streetName: street,
+        timeFrom: this.newAddress.value.deliveryFrom as string,
+        timeTo: this.newAddress.value.deliveryTo as string,
+        customerId: this.customerId,
+        id: this.selectedCustomerAddress[0].id
+      };
+      console.log('Edit address', data);
+      // Save the data
+      this.service.saveUserCustomerAddress(data).subscribe(response => {
+        if (response.status === 200) {
+          this.hideModal('edit-address', this.newAddress);
+          this.newAddress.reset();
+          // window.location.reload();
+          this.addresslist.ngOnChanges();
+        }
+      });
+    }
   }
 }

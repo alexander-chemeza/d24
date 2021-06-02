@@ -12,6 +12,7 @@ export class AddressComponent implements OnInit, OnChanges {
   @Input() customerId: number;
   // Setter of addressID
   @Output() onSelectAddressId: EventEmitter<number> = new EventEmitter<number>();
+  @Output() onCustomerAddressEdit: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
   // AG Grid objects
   gridApi: any;
   gridColumnApi: any;
@@ -51,6 +52,15 @@ export class AddressComponent implements OnInit, OnChanges {
                 this.ngOnChanges();
               }
             });
+          } else if (target === 'edit') {
+            const id = this.rowDataAddress[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+            console.log('Address id', id);
+            this.service.getAllUserCustomerAddress(this.customerId).subscribe(response => {
+              if (response.status === 200) {
+                const selectedAgentAddress = response.body.filter((item: any) => item.id === id);
+                this.onCustomerAddressEdit.emit(selectedAgentAddress);
+              }
+            });
           }
         }
       },
@@ -87,12 +97,14 @@ export class AddressComponent implements OnInit, OnChanges {
     // Get data from database
     this.service.getAllUserCustomerAddress(this.customerId).subscribe(response => {
       if (response.status === 200) {
+        console.log('Addresslisting', response.body);
         for (const item of response.body) {
           this.rowDataAddress.push({
             name: `${item.cityName}, ${item.streetName}`,
             id: item.id
           });
         }
+        console.log('We have got', this.rowDataAddress);
         this.gridApi.setRowData(this.rowDataAddress);
       }
     });
