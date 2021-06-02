@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {RestapiService} from '../../../restapi.service';
 import {ContactsButtonsComponent} from './contacts-buttons/contacts-buttons.component';
 
@@ -9,6 +9,7 @@ import {ContactsButtonsComponent} from './contacts-buttons/contacts-buttons.comp
 })
 export class ContactsComponent implements OnInit, OnChanges {
   @Input() customerAddressId: number;
+  @Output() onCustomerContactEdit: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
   // Ag Grid objects
   public gridApi: any;
   public gridColumnApi: any;
@@ -80,11 +81,20 @@ export class ContactsComponent implements OnInit, OnChanges {
       cellRenderer: 'btnCellRenderer',
       cellRendererParams: {
         clicked: (target: any): void => {
+          const id = this.rowDataContacts[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+          console.log('Contact id', id);
           if (target === 'delete') {
-            const id = this.rowDataContacts[Number(this.gridApi.getFocusedCell().rowIndex)].id;
             this.service.deleteUserCustomerContact(id).subscribe(response => {
               if (response.status === 200) {
                 this.ngOnChanges();
+              }
+            });
+          } else if (target === 'edit') {
+            this.service.getAllUserCustomerContact(this.customerAddressId).subscribe(response => {
+              if (response.status === 200) {
+                const selectedAgentContact = response.body.filter((item: any) => item.id === id);
+                console.log(selectedAgentContact);
+                this.onCustomerContactEdit.emit(selectedAgentContact);
               }
             });
           }
