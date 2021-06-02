@@ -1,5 +1,6 @@
 import {Component, Input, OnChanges, OnInit} from '@angular/core';
 import {RestapiService} from '../../../restapi.service';
+import {ContactsButtonsComponent} from './contacts-buttons/contacts-buttons.component';
 
 @Component({
   selector: 'app-contacts',
@@ -72,6 +73,16 @@ export class ContactsComponent implements OnInit, OnChanges {
       flex: 1,
       minWidth: 250,
       maxWidth: 400
+    },
+    {
+      headerName: 'Управление',
+      pinned: 'right',
+      cellRenderer: 'btnCellRenderer',
+      cellRendererParams: {
+        clicked: (target: any): void => {
+          console.log('It is clicked');
+        }
+      }
     }
   ];
   rowDataContacts: any = [];
@@ -82,9 +93,14 @@ export class ContactsComponent implements OnInit, OnChanges {
   };
   rowSelection = 'multiple';
   paginationPageSize = 10;
+  frameworkComponents: any;
 
   constructor(private service: RestapiService) {
     this.customerAddressId = -1;
+
+    this.frameworkComponents = {
+      btnCellRenderer: ContactsButtonsComponent,
+    };
   }
 
   ngOnInit(): void {
