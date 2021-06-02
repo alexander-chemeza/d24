@@ -80,7 +80,14 @@ export class ContactsComponent implements OnInit, OnChanges {
       cellRenderer: 'btnCellRenderer',
       cellRendererParams: {
         clicked: (target: any): void => {
-          console.log('It is clicked');
+          if (target === 'delete') {
+            const id = this.rowDataContacts[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+            this.service.deleteUserCustomerContact(id).subscribe(response => {
+              if (response.status === 200) {
+                this.ngOnChanges();
+              }
+            });
+          }
         }
       }
     }
@@ -107,7 +114,6 @@ export class ContactsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.ngOnInit();
     // Clear table after previous user actions
     this.rowDataContacts = [];
     // Check if we've got addressId
