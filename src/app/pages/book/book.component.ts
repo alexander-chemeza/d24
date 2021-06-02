@@ -27,6 +27,7 @@ export class BookComponent implements OnInit {
   @Input() customerAddressId: number;
   @Input() selectedCustomer: any;
   @Input() selectedCustomerAddress: any;
+  @Input() selectedCustomerContact: any;
   // Reactive forms
   newContragent: any;
   newContact: any;
@@ -399,5 +400,40 @@ export class BookComponent implements OnInit {
         }
       });
     }
+  }
+
+  showCustomerContact(data: any): void {
+    this.selectedCustomerContact = data;
+    console.log('selected', this.selectedCustomerContact);
+    this.newContact.patchValue({
+      type: this.selectedCustomerContact[0].mainContact,
+      name: this.selectedCustomerContact[0].name,
+      tel1: this.selectedCustomerContact[0].phone,
+      tel2: this.selectedCustomerContact[0].phone2,
+      email: this.selectedCustomerContact[0].email,
+      position: this.selectedCustomerContact[0].position
+    });
+    this.showModal('edit-contact');
+  }
+
+  editContact(): void {
+    // Read fields from popup
+    const data = {
+      customerAddressId: this.customerAddressId,
+      email: this.newContact.value.email as string,
+      id: this.selectedCustomerContact[0].id,
+      mainContact: this.newContact.value.type as boolean,
+      name: this.newContact.value.name as string,
+      phone: this.newContact.value.tel1 as string,
+      phone2: this.newContact.value.tel2 as string,
+      position: this.newContact.value.position as string
+    };
+    // Post to backend
+    this.service.saveUserCustomerContact(data).subscribe(response => {
+      if (response.status === 200) {
+        this.hideModal('edit-contact', this.newContact);
+        this.contactslist.ngOnChanges();
+      }
+    });
   }
 }

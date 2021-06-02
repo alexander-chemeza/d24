@@ -37,6 +37,7 @@
   <div class="box-7">
     <app-contacts
     [customerAddressId]="customerAddressId"
+    (onCustomerContactEdit)="showCustomerContact($event)"
     ></app-contacts>
   </div>
 </div>
@@ -105,6 +106,38 @@
       </div>
       <div class="row-controls">
         <button class="white-btn round-btn" (click)="hideModal('new-contact', newContact)">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="edit-contact" class="modal new-contact">
+  <div class="new-contact-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('edit-contact', newContact)"></button>
+    <h2 class="white-header">Изменить контакт</h2>
+    <form [formGroup]="newContact" (ngSubmit)="editContact()">
+      <div class="grey-box">
+        <div class="row mb-20">
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="checkbox" name="type-edit" id="type-edit" formControlName="type" checked>
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="type-edit">Основной адрес</label>
+        </div>
+        <label for="contact-name-edit">Имя контакта:</label>
+        <input type="text" name="contact-name-edit" id="contact-name-edit" formControlName="name">
+        <label for="contact-position-edit">Должность:</label>
+        <input type="text" name="contact-position-edit" id="contact-position-edit" formControlName="position">
+        <label for="contact-phone-1-edit">Телефон:</label>
+        <input type="text" name="contact-phone-1-edit" id="contact-phone-1-edit" formControlName="tel1">
+        <label for="contact-phone-2-edit"> Телефон 2:</label>
+        <input type="text" name="contact-phone-2-edit" id="contact-phone-2-edit" formControlName="tel2">
+        <label for="contact-email-edit">Email:</label>
+        <input type="text" name="contact-email-edit" id="contact-email-edit" formControlName="email">
+      </div>
+      <div class="row-controls">
+        <button class="white-btn round-btn" (click)="hideModal('edit-contact', newContact)">Отмена</button>
         <input type="submit" value="Сохранить">
       </div>
     </form>
