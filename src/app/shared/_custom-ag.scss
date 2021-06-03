@@ -509,13 +509,6 @@ input:checked + .switch-btn:before {
   border-bottom: 1px solid #000;
 }
 
-.grey-box {
-
-  @media print {
-    display: none !important;
-  }
-}
-
 //.test-container {
 //  height: 100%;
 //  display: flex;
