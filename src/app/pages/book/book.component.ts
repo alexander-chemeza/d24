@@ -222,6 +222,7 @@ export class BookComponent implements OnInit {
       // Read fields from popup
       const data = {
         building: this.newAddress.value.house,
+        cityId: this.newAddress.value.place,
         cityName: city,
         description: this.newAddress.value.description as string,
         house: this.newAddress.value.building as string,
@@ -231,6 +232,7 @@ export class BookComponent implements OnInit {
         pauseFrom: this.newAddress.value.timeoutFrom as string,
         pauseTo: this.newAddress.value.timeoutTo as string,
         room: this.newAddress.value.apartment as string,
+        streetId: this.newAddress.value.street,
         streetName: street,
         timeFrom: this.newAddress.value.deliveryFrom as string,
         timeTo: this.newAddress.value.deliveryTo as string,
