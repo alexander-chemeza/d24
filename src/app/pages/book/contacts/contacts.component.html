@@ -6,11 +6,13 @@
   [suppressScrollOnNewData]="true"
   [rowData]="rowDataContacts"
   [columnDefs]="columnDefsContacts"
+  [frameworkComponents]="frameworkComponents"
   [defaultColDef]="defaultColDef"
   [suppressRowClickSelection]="true"
   [rowSelection]="rowSelection"
   [pagination]="true"
   [paginationPageSize]="paginationPageSize"
+  [overlayNoRowsTemplate]="noRowsTemplate"
   (paginationChanged)="onPaginationChanged($event, 'contacts')"
   (gridReady)="onGridReady($event)"
 >

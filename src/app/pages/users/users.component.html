@@ -3,8 +3,12 @@
     <button class="green-btn round-btn" (click)="showModal('new-user')">Новый пользователь</button>
   </div>
   <div class="grey-box group">
-    <label class="mr-15" for="group">Показать группы </label>
-    <input class="m-0" type="text" placeholder="Выберите группу" id="group" name="group">
+    <label class="mr-15" for="group">Показать группы</label>
+    <select name="selectedGroups" [(ngModel)]="selectedGroups" multiple (change)="changeGroup($event)">
+      <option selected="selected">-- Выберите группу --</option>
+      <option *ngFor="let group of groupsList">{{group.name}}</option> 
+    </select>
+    <!-- <input class="m-0" type="text" placeholder="Выберите группу" id="group" name="group"> -->
   </div>
   <div class="grey-box access">
     <label for="submit">Доступ группе пользователей <br>к адресной книге и шаблонам:</label>
@@ -26,6 +30,7 @@
       [paginationPageSize]="paginationPageSize"
       (paginationChanged)="onPaginationChanged()"
       (gridReady)="onGridReady($event)"
+      (rowClicked)="onRowClicked($event)"
     >
     </ag-grid-angular>
   </div>

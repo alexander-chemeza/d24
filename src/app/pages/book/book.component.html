@@ -24,24 +24,27 @@
     <app-contragents
     (onSelectCustomerId)="getCustomerId($event)"
     [requestText]="request"
+    (onCustomerEdit)="showCustomer($event)"
     ></app-contragents>
   </div>
   <div class="box-6">
     <app-address
       [customerId]="customerId"
       (onSelectAddressId)="getCustomerAddressId($event)"
+      (onCustomerAddressEdit)="showCustomerAddress($event)"
     ></app-address>
   </div>
   <div class="box-7">
     <app-contacts
     [customerAddressId]="customerAddressId"
+    (onCustomerContactEdit)="showCustomerContact($event)"
     ></app-contacts>
   </div>
 </div>
 
 <div id="new-contragent" class="modal new-contragent">
   <div class="new-contragent-content">
-    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-contragent')"></button>
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-contragent', newContragent)"></button>
     <h2 class="white-header">Новый контрагент</h2>
     <form [formGroup]="newContragent" (ngSubmit)="createNewContragent()">
       <div class="grey-box">
@@ -51,7 +54,26 @@
         <input type="text" id="contragent" name="contragent" formControlName="name">
       </div>
       <div class="btns-row">
-        <button class="white-btn round-btn" (click)="hideModal('new-contragent')">Отмена</button>
+        <button class="white-btn round-btn" (click)="hideModal('new-contragent', newContragent)">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="edit-contragent" class="modal new-contragent">
+  <div class="new-contragent-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('edit-contragent', newContragent)"></button>
+    <h2 class="white-header">Изменить данные контрагента</h2>
+    <form [formGroup]="newContragent" (ngSubmit)="editCustomer()">
+      <div class="grey-box">
+        <label for="type-edit"> Форма собственности :</label>
+        <input type="text" id="type-edit" name="type-edit" formControlName="type">
+        <label for="contragent-edit">Наименование контрагента:</label>
+        <input type="text" id="contragent-edit" name="contragent-edit" formControlName="name">
+      </div>
+      <div class="btns-row">
+        <button class="white-btn round-btn" (click)="hideModal('edit-contragent', newContragent)">Отмена</button>
         <input type="submit" value="Сохранить">
       </div>
     </form>
@@ -60,7 +82,7 @@
 
 <div id="new-contact" class="modal new-contact">
   <div class="new-contact-content">
-    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-contact')"></button>
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-contact', newContact)"></button>
     <h2 class="white-header">Новый контакт</h2>
     <form [formGroup]="newContact" (ngSubmit)="createNewContact()">
       <div class="grey-box">
@@ -83,7 +105,39 @@
         <input type="text" name="contact-email" id="contact-email" formControlName="email">
       </div>
       <div class="row-controls">
-        <button class="white-btn round-btn" (click)="hideModal('new-contact')">Отмена</button>
+        <button class="white-btn round-btn" (click)="hideModal('new-contact', newContact)">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="edit-contact" class="modal new-contact">
+  <div class="new-contact-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('edit-contact', newContact)"></button>
+    <h2 class="white-header">Изменить контакт</h2>
+    <form [formGroup]="newContact" (ngSubmit)="editContact()">
+      <div class="grey-box">
+        <div class="row mb-20">
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="checkbox" name="type-edit" id="type-edit" formControlName="type" checked>
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="type-edit">Основной адрес</label>
+        </div>
+        <label for="contact-name-edit">Имя контакта:</label>
+        <input type="text" name="contact-name-edit" id="contact-name-edit" formControlName="name">
+        <label for="contact-position-edit">Должность:</label>
+        <input type="text" name="contact-position-edit" id="contact-position-edit" formControlName="position">
+        <label for="contact-phone-1-edit">Телефон:</label>
+        <input type="text" name="contact-phone-1-edit" id="contact-phone-1-edit" formControlName="tel1">
+        <label for="contact-phone-2-edit"> Телефон 2:</label>
+        <input type="text" name="contact-phone-2-edit" id="contact-phone-2-edit" formControlName="tel2">
+        <label for="contact-email-edit">Email:</label>
+        <input type="text" name="contact-email-edit" id="contact-email-edit" formControlName="email">
+      </div>
+      <div class="row-controls">
+        <button class="white-btn round-btn" (click)="hideModal('edit-contact', newContact)">Отмена</button>
         <input type="submit" value="Сохранить">
       </div>
     </form>
@@ -92,7 +146,7 @@
 
 <div id="new-address" class="modal new-address">
   <div class="new-address-content">
-    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-address')"></button>
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('new-address', newAddress)"></button>
     <h2 class="white-header">Новый адрес</h2>
     <form [formGroup]="newAddress" (ngSubmit)="createNewAddress()">
       <div class="grey-box">
@@ -171,7 +225,95 @@
         <textarea name="description-area" id="description-area" formControlName="description"></textarea>
       </div>
       <div class="row-controls">
-        <button class="white-btn round-btn" (click)="hideModal('new-address')">Отмена</button>
+        <button class="white-btn round-btn" (click)="hideModal('new-address', newAddress)">Отмена</button>
+        <input type="submit" value="Сохранить">
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="edit-address" class="modal new-address">
+  <div class="new-address-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('edit-address', newAddress)"></button>
+    <h2 class="white-header">Редактирование адреса</h2>
+    <form [formGroup]="newAddress" (ngSubmit)="editNewAddress()">
+      <div class="grey-box">
+        <div class="row mb-20">
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="checkbox" name="type2-edit" id="type2-edit" formControlName="type" checked>
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="type2-edit">Основной адрес</label>
+        </div>
+        <label for="place-carrier-sender-edit">Населенный пункт:</label>
+        <mat-form-field floatLabel="never">
+          <mat-select formControlName="place" (keyup)="$event.stopPropagation()" (selectionChange)="selectPlace($event, newAddress)">
+            <input type="text" placeholder="Поиск" (input)="onKey($event)" (keydown)="$event.stopPropagation()">
+            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
+              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city.id" class="example-item">
+                {{city.fullName}}
+              </mat-option>
+            </cdk-virtual-scroll-viewport>
+          </mat-select>
+        </mat-form-field>
+        <label for="street-carrier-sender-edit">Улица:</label>
+        <mat-form-field floatLabel="never">
+          <mat-select formControlName="street" (keyup)="$event.stopPropagation()">
+            <input type="text" placeholder="Поиск" (input)="onKey2($event)" (keydown)="$event.stopPropagation()">
+            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
+              <mat-option *cdkVirtualFor="let street of streetList" [value]="street.id" class="example-item">
+                {{street.name}}
+              </mat-option>
+            </cdk-virtual-scroll-viewport>
+          </mat-select>
+        </mat-form-field>
+        <div class="row-multi mt-15">
+          <div class="box">
+            <label for="building-edit">Дом:</label>
+            <input type="text" name="building-edit" id="building-edit" formControlName="building">
+          </div>
+          <div class="box">
+            <label for="corpus-edit">Корпус:</label>
+            <input type="text" name="corpus-edit" id="corpus-edit" formControlName="corpus">
+          </div>
+          <div class="box">
+            <label for="house-edit">Строение</label>
+            <input type="text" id="house-edit" name="house-edit" formControlName="house">
+          </div>
+          <div class="box">
+            <label for="office-edit">Офис:</label>
+            <input type="text" name="office-edit" id="office-edit" formControlName="office">
+          </div>
+          <div class="box">
+            <label for="appartment-edit">Квартира</label>
+            <input type="text" name="appartment-edit" id="appartment-edit" formControlName="apartment">
+          </div>
+        </div>
+        <div class="row-some mt-15">
+          <div class="box">
+            <label for="delivery-from-edit">Время доставки с:</label>
+            <input type="text" name="delivery-from-edit" id="delivery-from-edit" formControlName="deliveryFrom">
+          </div>
+          <div class="box">
+            <label for="delivery-from-edit">по:</label>
+            <input type="text" formControlName="deliveryTo">
+          </div>
+        </div>
+        <div class="row-some mt-15">
+          <div class="box">
+            <label for=timeout-from-edit>Время перерыва c:</label>
+            <input type="text" name="timeout-from-edit" id="timeout-from-edit" formControlName="timeoutFrom">
+          </div>
+          <div class="box">
+            <label for="timeout-to-edit">по:</label>
+            <input type="text" name="timeout-to-edit" id="timeout-to-edit" formControlName="timeoutTo">
+          </div>
+        </div>
+        <label for="description-area-edit">Примечание</label>
+        <textarea name="description-area-edit" id="description-area-edit" formControlName="description"></textarea>
+      </div>
+      <div class="row-controls">
+        <button class="white-btn round-btn" (click)="hideModal('new-address', newAddress)">Отмена</button>
         <input type="submit" value="Сохранить">
       </div>
     </form>

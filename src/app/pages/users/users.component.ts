@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RestapiService, UserRegistration} from '../../restapi.service';
@@ -18,6 +19,9 @@ export class UsersComponent implements OnInit {
 
   newUserForm: any;
   passwordEquality: boolean;
+
+  groupsList: any;
+  selectedGroups = [];
 
   constructor(private service: RestapiService) {
     this.passwordEquality = false;
@@ -83,6 +87,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit(): void {
     this.newUserForm = new FormGroup({
+      id: new FormControl('', []),
       agreement: new FormControl('', [
         Validators.required
       ]),
@@ -111,10 +116,13 @@ export class UsersComponent implements OnInit {
         Validators.required
       ])
     });
+
+    this.getGroups();
   }
 
   createNewUser(): void {
     const data: UserRegistration = {
+      id: this.newUserForm.value.id as string,
       agreement: this.newUserForm.value.agreement as string,
       userName: this.newUserForm.value.name as string,
       email: this.newUserForm.value.email as string,
@@ -132,17 +140,19 @@ export class UsersComponent implements OnInit {
     console.log('Equal:', this.passwordEquality);
 
     if (this.newUserForm.valid && this.passwordEquality) {
-      console.log(data);
-
       this.service.addManager(data).subscribe(response => {
         if (response.status === 200) {
           console.log('OK');
-          this.hideModal('new-user');
+          this.clearAllManagers();
+          this.getAllManagers();
         } else {
           console.log('Bad request');
         }
-      });
+      });  
     }
+
+    this.hideModal('new-user');
+    this.clearForm();
   }
 
   showModal(id: string): void {
@@ -160,21 +170,7 @@ export class UsersComponent implements OnInit {
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
-    this.service.getAllManagers().subscribe(response => {
-      if (response.status === 200) {
-        for (const item of response.body) {
-          this.rowData.push({
-            login: item.login,
-            groupName: item.groupName,
-            name: item.userName,
-            email: item.email,
-            phone: item.phone,
-            status: item.status
-          });
-        }
-        params.api.setRowData(this.rowData);
-      }
-    });
+    this.getAllManagers();
   }
 
   onPaginationChanged(): void {
@@ -196,6 +192,92 @@ export class UsersComponent implements OnInit {
     this.gridApi.paginationSetPageSize(Number(event.target.value));
   }
 
+  onRowClicked(event: any): void {
+    this.clearForm();
+    this.getUser(event.data.id);
+    this.showModal('new-user');
+  }
+
+  clearAllManagers(): void {
+    this.rowData = [];
+  }
+
+  getUser(id: any) {
+    let params = new HttpParams();
+    params = params.set('id', id);
+
+    this.service.getUserById(params).subscribe(response => {
+      if (response.status === 200) {
+        const user = response.body;
+
+        this.newUserForm.patchValue({
+          id: user.id,
+          agreement: user.agreement,
+          name: user.userName,
+          email: user.email,
+          phone: user.phone,
+          phone2: user.phone2,
+          login: user.login,
+          password: user.password,
+          passwordRepeat: user.passwordRepeat,
+          groupName: user.groupName
+        });
+      }
+    });
+  }
+
+  getAllManagers(): void {
+    let params = new HttpParams();
+    if (this.selectedGroups.length != 0) {
+      let groupIds = this.groupsList.filter((g: any) => this.selectedGroups.find(s => s === g.name)).map((g: any) => g.id);
+      params = params.set('groups', groupIds.join());
+    }
+
+    this.service.getAllManagers(params).subscribe(response => {
+      if (response.status === 200) {
+        for (const item of response.body) {
+          this.rowData.push({
+            id: item.id,
+            login: item.login,
+            groupName: item.groupName,
+            name: item.userName,
+            email: item.email,
+            phone: item.phone,
+            status: item.status
+          });
+        }
+        this.gridApi.setRowData(this.rowData);
+      }
+    });
+  }
+
+  getGroups() {
+    this.service.getGroups().subscribe(response => {
+      if (response.status === 200) {
+        this.groupsList = response.body;
+      }
+    });
+  }
+
+  changeGroup(e: any) {
+    this.clearAllManagers();
+    this.getAllManagers();    
+  }
+
+  clearForm() {
+    this.newUserForm.patchValue({
+      id: '',
+      agreement: '',
+      name: '',
+      email: '',
+      phone: '',
+      phone2: '',
+      login: '',
+      password: '',
+      passwordRepeat: '',
+      groupName: ''
+    });
+  }
 }
 
 function setText(selector: any, text: any): void {

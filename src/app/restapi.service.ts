@@ -10,6 +10,7 @@ export interface User {
 
 // Registration user data interface
 export interface UserRegistration {
+  id?: string;
   passportNumber?: string;
   userName?: string;
   email?: string;
@@ -135,8 +136,16 @@ export class RestapiService {
     return this.http.post(`${this.url}/adminUser/addManager`, data, {observe: 'response', withCredentials: true});
   }
   // user-controller GET
-  public getAllManagers(): Observable<any> {
-    return this.http.get(`${this.url}/adminUser/getAllManagers`, {observe: 'response', withCredentials: true});
+  public getAllManagers(params: any): Observable<any> {
+    return this.http.get(`${this.url}/adminUser/getAllManagers`, {observe: 'response', withCredentials: true, params});
+  }
+  // user-controller GET
+  public getUserById(params: any): Observable<any> {
+    return this.http.get(`${this.url}/adminUser/getUserById`, {observe: 'response', withCredentials: true, params});
+  }
+  // user controller get groups GET
+  public getGroups(): Observable<any> {
+    return this.http.get(`${this.url}/user/group/getAll`, {observe: 'response', withCredentials: true});
   }
   // user-controller GET
   public logout(): Observable<any> {
@@ -166,7 +175,7 @@ export class RestapiService {
     return this.http.post(`${this.url}/user/address/getAllStreet`, data, {observe: 'response', withCredentials: true});
   }
   // user-customer-address-controller POST
-  public deleteUserCustomerAddress(data: GetUserCustomerAddress): Observable<any> {
+  public deleteUserCustomerAddress(data: number): Observable<any> {
     return this.http.post(`${this.url}/user/customerAddress/delete`, data, {observe: 'response', withCredentials: true});
   }
   // user-customer-address-controller POST
@@ -179,7 +188,7 @@ export class RestapiService {
   }
 
   // user-customer-controller POST
-  public deleteUserCustomer(data: GetUserCustomer): Observable<any> {
+  public deleteUserCustomer(data: number): Observable<any> {
     return this.http.post(`${this.url}/user/customer/delete`, data, {observe: 'response', withCredentials: true});
   }
   // user-customer-address-controller GET

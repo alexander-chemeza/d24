@@ -1,5 +1,6 @@
-import {Component, Input, OnChanges, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 import {RestapiService} from '../../../restapi.service';
+import {ContactsButtonsComponent} from './contacts-buttons/contacts-buttons.component';
 
 @Component({
   selector: 'app-contacts',
@@ -8,9 +9,11 @@ import {RestapiService} from '../../../restapi.service';
 })
 export class ContactsComponent implements OnInit, OnChanges {
   @Input() customerAddressId: number;
+  @Output() onCustomerContactEdit: EventEmitter<MouseEvent> = new EventEmitter<MouseEvent>();
   // Ag Grid objects
   public gridApi: any;
   public gridColumnApi: any;
+  noRowsTemplate = `<span>Для отображения контактов выберите контрагента и его адрес</span>`;
   // Table description
   columnDefsContacts = [
     { headerName: 'Имя контакта',
@@ -71,6 +74,32 @@ export class ContactsComponent implements OnInit, OnChanges {
       flex: 1,
       minWidth: 250,
       maxWidth: 400
+    },
+    {
+      headerName: 'Управление',
+      pinned: 'right',
+      cellRenderer: 'btnCellRenderer',
+      cellRendererParams: {
+        clicked: (target: any): void => {
+          const id = this.rowDataContacts[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+          console.log('Contact id', id);
+          if (target === 'delete') {
+            this.service.deleteUserCustomerContact(id).subscribe(response => {
+              if (response.status === 200) {
+                this.ngOnChanges();
+              }
+            });
+          } else if (target === 'edit') {
+            this.service.getAllUserCustomerContact(this.customerAddressId).subscribe(response => {
+              if (response.status === 200) {
+                const selectedAgentContact = response.body.filter((item: any) => item.id === id);
+                console.log(selectedAgentContact);
+                this.onCustomerContactEdit.emit(selectedAgentContact);
+              }
+            });
+          }
+        }
+      }
     }
   ];
   rowDataContacts: any = [];
@@ -81,16 +110,20 @@ export class ContactsComponent implements OnInit, OnChanges {
   };
   rowSelection = 'multiple';
   paginationPageSize = 10;
+  frameworkComponents: any;
 
   constructor(private service: RestapiService) {
     this.customerAddressId = -1;
+
+    this.frameworkComponents = {
+      btnCellRenderer: ContactsButtonsComponent,
+    };
   }
 
   ngOnInit(): void {
   }
 
   ngOnChanges(): void {
-    this.ngOnInit();
     // Clear table after previous user actions
     this.rowDataContacts = [];
     // Check if we've got addressId

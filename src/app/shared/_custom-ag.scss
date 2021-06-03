@@ -328,19 +328,19 @@
         opacity: 1;
       }
     }
-  
+
     .buttons-copy {
       background-image: url("/assets/img/common/icon-copy.svg");
     }
-    
+
     .buttons-edit {
       background-image: url("/assets/img/common/icon-edit.svg");
     }
-    
+
     .buttons-view {
       background-image: url("/assets/img/common/icon-view.svg");
     }
-    
+
     .buttons-remove {
       background-image: url("/assets/img/common/icon-trash.svg");
     }
@@ -509,24 +509,50 @@ input:checked + .switch-btn:before {
   border-bottom: 1px solid #000;
 }
 
-.grey-box {
-  
-  @media print {
-    display: none !important;
-  }
+//.test-container {
+//  height: 100%;
+//  display: flex;
+//  flex-direction: column;
+//}
+
+/*
+ Ag-grid's default row hover and row selected colour have some transparency. But, since our action buttons column is placed absolutely over other columns, its background looks darker because of the way those transparent colours blend. So, it is better to use background colours with no transparency in this method.
+*/
+//.ag-theme-alpine {
+//  --ag-row-hover-color: hsl(207, 90%, 94%);
+//  --ag-selected-row-background-color: hsl(207, 87%, 86%);
+//}
+
+/* Hide right header and spacer */
+.ag-pinned-right-header,
+.ag-horizontal-right-spacer {
+  width: 0 !important;
+  min-width: 0 !important;
 }
 
-.bshadow {
-  img {
-    width: 100px;
-  }
+/* Add absolute position so that action buttons column will appear on top of other columns. pointer-events: none to pass on mousemove event to behind columns */
+.ag-pinned-right-cols-container {
+  position: absolute !important;
+  right: 17px;
+  pointer-events: none;
+}
+/* Reset pointer-events so that click can happen on action buttons */
+.ag-pinned-right-cols-container * {
+  pointer-events: initial;
 }
 
-@media print {
-  .journal-content,
-  .navigation,
-  .close-btn,
-  .popup_title {
-    display: none !important;
-  }
+/* Hide border of right-cols-container */
+.ag-pinned-right-cols-container .ag-cell {
+  border: none !important;
+}
+
+/* Show action buttons only for row that is being hovered. For rows which are not being hovered, hide them by setting their width and padding to 0.*/
+.ag-pinned-right-cols-container .ag-row:not(.ag-row-hover),
+.ag-pinned-right-cols-container .ag-row:not(.ag-row-hover) .ag-cell {
+  width: 0 !important;
+  padding: 0 !important;
+}
+
+.ag-theme-alpine .ag-pinned-right-header {
+  display: none;
 }
