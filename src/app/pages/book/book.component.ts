@@ -156,6 +156,7 @@ export class BookComponent implements OnInit {
 
   // Show modal event
   showModal(id: string): void {
+
     const modal: any = document.getElementById(id);
     modal.classList.remove('hide-modal');
     modal.classList.add('show-modal');
@@ -166,7 +167,9 @@ export class BookComponent implements OnInit {
     modal.classList.add('hide-modal');
     modal.classList.remove('show-modal');
     form.reset();
+    // this.citiesList = [];
     this.streetList = [];
+    this.selectedCustomerAddress = null;
   }
   // New contragent button event
   createNewContragent(): void {
@@ -323,7 +326,9 @@ export class BookComponent implements OnInit {
   }
 
   showCustomerAddress(data: any): void {
+    console.log('Our cities list', this.citiesList);
     this.selectedCustomerAddress = data;
+    console.log('Our selected address data', this.selectedCustomerAddress);
     const currentCityCode = this.selectedCustomerAddress[0].cityId;
     console.log('Current city code', currentCityCode);
     // Find city by the id
@@ -336,29 +341,34 @@ export class BookComponent implements OnInit {
         cityCode: cityInfo.city_code,
         regionCode: cityInfo.region_code
       };
+      console.log('Selected city street search data', this.street);
       // Get streets
       this.service.streets(this.street).subscribe(resp => {
         if (resp.status === 200) {
           this.streetList = resp.body;
+          console.log('Our street list', this.streetList);
+          const patch = {
+            type: this.selectedCustomerAddress[0].mainAddress,
+            place: this.selectedCustomerAddress[0].cityId,
+            street: this.selectedCustomerAddress[0].streetId,
+            building: this.selectedCustomerAddress[0].house,
+            corpus: this.selectedCustomerAddress[0].housing,
+            house: this.selectedCustomerAddress[0].building,
+            office: this.selectedCustomerAddress[0].office,
+            apartment: this.selectedCustomerAddress[0].room,
+            deliveryFrom: this.selectedCustomerAddress[0].timeFrom,
+            deliveryTo: this.selectedCustomerAddress[0].timeTo,
+            timeoutFrom: this.selectedCustomerAddress[0].pauseFrom,
+            timeoutTo: this.selectedCustomerAddress[0].pauseTo,
+            description: this.selectedCustomerAddress[0].description
+          };
+          console.log('Patch data', patch);
+          this.newAddress.patchValue(patch);
+          console.log('Patched');
+          this.showModal('edit-address');
+          console.log('Modal is shown');
         }
       });
-
-      this.newAddress.patchValue({
-        type: this.selectedCustomerAddress[0].mainAddress,
-        place: this.selectedCustomerAddress[0].cityId,
-        street: this.selectedCustomerAddress[0].streetId,
-        building: this.selectedCustomerAddress[0].house,
-        corpus: this.selectedCustomerAddress[0].housing,
-        house: this.selectedCustomerAddress[0].building,
-        office: this.selectedCustomerAddress[0].office,
-        apartment: this.selectedCustomerAddress[0].room,
-        deliveryFrom: this.selectedCustomerAddress[0].timeFrom,
-        deliveryTo: this.selectedCustomerAddress[0].timeTo,
-        timeoutFrom: this.selectedCustomerAddress[0].pauseFrom,
-        timeoutTo: this.selectedCustomerAddress[0].pauseTo,
-        description: this.selectedCustomerAddress[0].description
-      });
-      this.showModal('edit-address');
     }
   }
 
