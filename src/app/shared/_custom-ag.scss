@@ -515,3 +515,18 @@ input:checked + .switch-btn:before {
     display: none !important;
   }
 }
+
+.bshadow {
+  img {
+    width: 100px;
+  }
+}
+
+@media print {
+  .journal-content,
+  .navigation,
+  .close-btn,
+  .popup_title {
+    display: none !important;
+  }
+}

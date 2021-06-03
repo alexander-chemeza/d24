@@ -775,3 +775,1975 @@
     <button class="active-btn circle-btn close-btn" (click)="hideModal($event)" modal="sticker-printing"></button>
   </div>
 </div>
+
+<div id="report-blank" class="report-blank show-modal"> 
+  <div class="popup-align popup popup-bg">
+    <div class="popup_title">Печать Бланка</div>
+
+    <div class="grey-box flex justify-content-between mb-30">
+      <div>
+        <div class="popup_subtitle">Номер:</div>
+        <div class="popup_text">123345678900</div>
+      </div>
+
+      <div class="flex">
+        <input type="submit" value="Распечатать">
+        <input type="submit" value="Сохранить в PDF" class="ml-30">
+      </div>
+    </div>
+
+    <div class="report-box">
+      <div class="width-a4" style="display: none;"> <!-- БЛАНК ЭКСПРЕСС-ДОСТАВКИ -->
+        <div class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
+          <div class="blank">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="7" style="text-align: left;">
+                    <img src="../../assets/img/menu/logo-blank.svg" alt="">
+                  </th>
+                  <th colspan="5" style="font-size: 24px; line-height: 30px;">
+                    БЛАНК  ДОСТАВКИ  № <br> (НОМЕР ЗАКАЗА)
+                  </th>
+                  <th colspan="6" style="text-align: right;">
+                    <ngx-qrcode
+                      [elementType]="elementType"
+                      [errorCorrectionLevel]="correctionLevel"
+                      [value]="value"
+                      cssClass="bshadow">
+                    </ngx-qrcode>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="report-header">
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="6">Грузоотправитель</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="6">Грузополучатель</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Организация</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Организация</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Область, район</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Область, район</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Населенный пункт</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Населенный пункт</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Улица, <br>дом/корпус/квартира</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Улица, <br>дом/корпус/квартира</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Контактное лицо <br>(ФИО)</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Контактное лицо <br>(ФИО)</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Телефон</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Телефон</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <strong>Незаконных вложений нет, с условиями доставки ознакомлен</strong>
+                  </td>
+                  <td colspan="6">
+                    <strong>Подпись, штамп</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>Отметка грузополучателя о доставке</strong>
+                  </td>
+                  <td colspan="6">
+                    <strong>Подпись, штамп</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Описание отправки</td>
+                  <td colspan="9">Контроль отправки</td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Количество грузовых мест указанных в заявке на перевозку</strong>
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="3">
+                    <strong>Общий вес, указанный в заявке на перевозку, кг</strong>
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Общее количество грузовых мест</strong> <br> (без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4" class="td-has-child">
+                    <table class="inner-table">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <strong>Физический вес, кг</strong>
+                          </td>
+                          <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <strong>Объем м3</strong>
+                          </td>
+                          <td>&nbsp;</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Количество грузовых мест принятых к доставке</strong> <br>(без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Наименование содержимого</strong>
+                  </td>
+                  <td colspan="4">
+                    <strong>Количество объединенных грузовых мест</strong>
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="2">
+                    <strong>Объемный вес, кг</strong> <br> (1 м<sup>3</sup> = 250 кг.)
+                  </td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Из них с грузовых мест принятых с повреждениями упаковки</strong> <br>(без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Характер повреждения упаковки</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дополнительная упаковка</strong> <br> (КОД) 
+                  </td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="5">
+                    <strong>Примечания</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <strong>Сопроводительные документы</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="1">
+                    <strong>Время</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>ФИО кладовщика</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>Подпись  кладовщика</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Получение отправки</td>
+                  <td colspan="9">Доставка отправки</td>
+                </tr>
+                <tr style="height: 14mm;">
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время прибытия</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время убытия</strong>
+                  </td>
+                  <td colspan="3" rowspan="2">
+                    <strong>Штамп</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время прибытия</strong>
+                  </td>
+                  <td colspan="5">
+                    <strong>Время убытия</strong>
+                  </td>
+                </tr>
+                <tr style="height: 14mm;">
+                  <td colspan="4">
+                    <strong>ФИО</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Подпись</strong>
+                  </td>
+                  <td colspan="4">
+                    <strong>ФИО</strong>
+                  </td>
+                  <td colspan="5">
+                    <strong>Подпись</strong>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4"><strong>www.dostavka24.by</strong></td>
+                  <td colspan="4"><strong>тел.:  +375 (29/33) 671 90 90</strong></td>
+                  <td colspan="5"><strong>e-mail: info@dostavka24.by</strong></td>
+                  <td colspan="5"><strong><i>ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ</i></strong></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <div class="pdf-page"> <!-- ЭКЗЕМПЛЯР ПЕРЕВОЗЧИКА -->
+          <div class="blank">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="7" style="text-align: left;">
+                    <img src="../../assets/img/menu/logo-blank.svg" alt="">
+                  </th>
+                  <th colspan="5" style="font-size: 24px; line-height: 30px;">
+                    БЛАНК  ДОСТАВКИ  № <br> (НОМЕР ЗАКАЗА)
+                  </th>
+                  <th colspan="6" style="text-align: right;">
+                    <ngx-qrcode
+                      [elementType]="elementType"
+                      [errorCorrectionLevel]="correctionLevel"
+                      [value]="value"
+                      cssClass="bshadow">
+                    </ngx-qrcode>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="report-header">
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="6">Грузоотправитель</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="6">Грузополучатель</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Организация</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Организация</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Область, район</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Область, район</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Населенный пункт</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Населенный пункт</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Улица, <br>дом/корпус/квартира</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Улица, <br>дом/корпус/квартира</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Контактное лицо <br>(ФИО)</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Контактное лицо <br>(ФИО)</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Телефон</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Телефон</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <strong>Незаконных вложений нет, с условиями доставки ознакомлен</strong>
+                  </td>
+                  <td colspan="6">
+                    <strong>Подпись, штамп</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>Отметка грузополучателя о доставке</strong>
+                  </td>
+                  <td colspan="6">
+                    <strong>Подпись, штамп</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Описание отправки</td>
+                  <td colspan="9">Контроль отправки</td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Количество грузовых мест указанных в заявке на перевозку</strong>
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="3">
+                    <strong>Общий вес, указанный в заявке на перевозку, кг</strong>
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Общее количество грузовых мест</strong> <br> (без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4" class="td-has-child">
+                    <table class="inner-table">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <strong>Физический вес, кг</strong>
+                          </td>
+                          <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <strong>Объем м3</strong>
+                          </td>
+                          <td>&nbsp;</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Количество грузовых мест принятых к доставке</strong> <br>(без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Наименование содержимого</strong>
+                  </td>
+                  <td colspan="4">
+                    <strong>Количество объединенных грузовых мест</strong>
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="2">
+                    <strong>Объемный вес, кг</strong> <br> (1 м<sup>3</sup> = 250 кг.)
+                  </td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Из них с грузовых мест принятых с повреждениями упаковки</strong> <br>(без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Характер повреждения упаковки</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дополнительная упаковка</strong> <br> (КОД) 
+                  </td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="5">
+                    <strong>Примечания</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <strong>Сопроводительные документы</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="1">
+                    <strong>Время</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>ФИО кладовщика</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>Подпись  кладовщика</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Получение отправки</td>
+                  <td colspan="9">Доставка отправки</td>
+                </tr>
+                <tr style="height: 14mm;">
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время прибытия</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время убытия</strong>
+                  </td>
+                  <td colspan="3" rowspan="2">
+                    <strong>Штамп</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время прибытия</strong>
+                  </td>
+                  <td colspan="5">
+                    <strong>Время убытия</strong>
+                  </td>
+                </tr>
+                <tr style="height: 14mm;">
+                  <td colspan="4">
+                    <strong>ФИО</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Подпись</strong>
+                  </td>
+                  <td colspan="4">
+                    <strong>ФИО</strong>
+                  </td>
+                  <td colspan="5">
+                    <strong>Подпись</strong>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4"><strong>www.dostavka24.by</strong></td>
+                  <td colspan="4"><strong>тел.:  +375 (29/33) 671 90 90</strong></td>
+                  <td colspan="5"><strong>e-mail: info@dostavka24.by</strong></td>
+                  <td colspan="5"><strong><i>ЭКЗЕМПЛЯР ПЕРЕВОЗЧИКА</i></strong></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <div class="pdf-page"> <!-- ЭКЗЕМПЛЯР ОТПРАВИТЕЛЯ -->
+          <div class="blank">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="7" style="text-align: left;">
+                    <img src="../../assets/img/menu/logo-blank.svg" alt="">
+                  </th>
+                  <th colspan="5" style="font-size: 24px; line-height: 30px;">
+                    БЛАНК  ДОСТАВКИ  № <br> (НОМЕР ЗАКАЗА)
+                  </th>
+                  <th colspan="6" style="text-align: right;">
+                    <ngx-qrcode
+                      [elementType]="elementType"
+                      [errorCorrectionLevel]="correctionLevel"
+                      [value]="value"
+                      cssClass="bshadow">
+                    </ngx-qrcode>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="report-header">
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="6">Грузоотправитель</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="6">Грузополучатель</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Организация</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Организация</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Область, район</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Область, район</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Населенный пункт</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Населенный пункт</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Улица, <br>дом/корпус/квартира</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Улица, <br>дом/корпус/квартира</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Контактное лицо <br>(ФИО)</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Контактное лицо <br>(ФИО)</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">Телефон</td>
+                  <td colspan="6"></td>
+                  <td colspan="3">Телефон</td>
+                  <td colspan="6"></td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <strong>Незаконных вложений нет, с условиями доставки ознакомлен</strong>
+                  </td>
+                  <td colspan="6">
+                    <strong>Подпись, штамп</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>Отметка грузополучателя о доставке</strong>
+                  </td>
+                  <td colspan="6">
+                    <strong>Подпись, штамп</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Описание отправки</td>
+                  <td colspan="9">Контроль отправки</td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Количество грузовых мест указанных в заявке на перевозку</strong>
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="3">
+                    <strong>Общий вес, указанный в заявке на перевозку, кг</strong>
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Общее количество грузовых мест</strong> <br> (без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4" class="td-has-child">
+                    <table class="inner-table">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <strong>Физический вес, кг</strong>
+                          </td>
+                          <td>&nbsp;</td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <strong>Объем м3</strong>
+                          </td>
+                          <td>&nbsp;</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Количество грузовых мест принятых к доставке</strong> <br>(без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Наименование содержимого</strong>
+                  </td>
+                  <td colspan="4">
+                    <strong>Количество объединенных грузовых мест</strong>
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="2">
+                    <strong>Объемный вес, кг</strong> <br> (1 м<sup>3</sup> = 250 кг.)
+                  </td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Из них с грузовых мест принятых с повреждениями упаковки</strong> <br>(без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Характер повреждения упаковки</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дополнительная упаковка</strong> <br> (КОД) 
+                  </td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="5">
+                    <strong>Примечания</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <strong>Сопроводительные документы</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="1">
+                    <strong>Время</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>ФИО кладовщика</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>Подпись  кладовщика</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Получение отправки</td>
+                  <td colspan="9">Доставка отправки</td>
+                </tr>
+                <tr style="height: 14mm;">
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время прибытия</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время убытия</strong>
+                  </td>
+                  <td colspan="3" rowspan="2">
+                    <strong>Штамп</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время прибытия</strong>
+                  </td>
+                  <td colspan="5">
+                    <strong>Время убытия</strong>
+                  </td>
+                </tr>
+                <tr style="height: 14mm;">
+                  <td colspan="4">
+                    <strong>ФИО</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Подпись</strong>
+                  </td>
+                  <td colspan="4">
+                    <strong>ФИО</strong>
+                  </td>
+                  <td colspan="5">
+                    <strong>Подпись</strong>
+                  </td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4"><strong>www.dostavka24.by</strong></td>
+                  <td colspan="4"><strong>тел.:  +375 (29/33) 671 90 90</strong></td>
+                  <td colspan="5"><strong>e-mail: info@dostavka24.by</strong></td>
+                  <td colspan="5"><strong><i>ЭКЗЕМПЛЯР ОТПРАВИТЕЛЯ</i></strong></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="width-a4" style="display: none;"> <!-- БЛАНК КУРЬЕРСКАЯ КВИТАНЦИЯ -->
+        <div class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
+          <div class="blank">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="7" style="text-align: left;">
+                    <img src="../../assets/img/menu/logo-blank.svg" alt="">
+                  </th>
+                  <th colspan="5" style="font-size: 24px; line-height: 30px;">
+                    КУРЬЕРСКАЯ КВИТАНЦИЯ № <br> (НОМЕР ЗАКАЗА)
+                  </th>
+                  <th colspan="6" style="text-align: right;">
+                    <ngx-qrcode
+                      [elementType]="elementType"
+                      [errorCorrectionLevel]="correctionLevel"
+                      [value]="value"
+                      cssClass="bshadow">
+                    </ngx-qrcode>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="report-header">
+                  <td colspan="9" style="vertical-align: middle;"><strong>Отправитель</strong></td>
+                  <td colspan="3" style="vertical-align: middle;"><strong>Тип вложения</strong></td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="3" style="vertical-align: middle;"><strong>Масса отправления, кг</strong> <br>(заполняется отправителем)</td>
+                </tr>
+                <tr>
+                  <td colspan="9"><i>Наименование организации</i></td>
+                  <td colspan="2"><i>С документами</i></td>
+                  <td colspan="4" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="3">
+                    <i>Масса &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; кг</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9"><i>ФИО</i></td>
+                  <td colspan="2"><i>С товарным вложением</i></td>
+                  <td colspan="4" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="3">
+                    <i>Размер &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; м<sup>3</sup></i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <i>Область</i>
+                  </td>
+                  <td colspan="5">
+                    <i>Район</i>
+                  </td>
+                  <td colspan="3"><strong>Объявленная стоимость</strong></td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="3" rowspan="4" style="font-size: 10px; vertical-align: bottom;">
+                    <i>Подпись ответственного лица</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Населенный пункт</i>
+                  </td>
+                  <td colspan="6">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;руб&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.коп.</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Улица&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;дом&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;корпус&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;к</i>
+                  </td>
+                  <td colspan="6">
+                    <strong>Наложенный платеж</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Телефон (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</i>
+                  </td>
+                  <td colspan="6">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;руб&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.коп.</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Вид пересылки</td>
+                  <td colspan="9">Получатель</td>
+                </tr>
+                <tr>
+                  <td colspan="3">дверь - дверь</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td colspan="3">терминал - дверь</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td>&nbsp;</td>
+                  <td colspan="9"><i>ФИО</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">дверь - терминал</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td colspan="3">терминал - терминал</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td>&nbsp;</td> 
+                  <td colspan="5"><i>Область</i></td>
+                  <td colspan="4"><i>Район</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9" class="report-header">Дополнительные услуги</td>
+                  <td colspan="9"><i>Населенный пункт</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="9">
+                    <i>Улица&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;дом&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;корпус&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;к</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">Код услуги</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">Код услуги</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="6"><i>ППС г.</i></td>
+                  <td colspan="3"><i>№</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="9" rowspan="2" style="vertical-align: bottom;">
+                    <i>Телефон (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">Код услуги</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">Код услуги</td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Прием отправления</td>
+                  <td colspan="9">Вручение отправления <i>(заполняется получателем)</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="vertical-align: middle;">Предметов и веществ запрещенных к пересылке нет. С условиями перевозки или Правилами доставки, размещенными на сайте www.dostavka24.by, ознакомлен</td>
+                  <td colspan="9" style="vertical-align: middle;">Я подтверждаю, что отправка поступила в закрытом виде,отсуствуют внешние повреждения упаковки. Количество мест отправки соответствует количеству мест, указанных в бланке доставки. Я подтверждаю, что обладаю полномочиями, необходимыми для получения груза.</td>
+                </tr>
+                <tr>
+                  <td colspan="9" rowspan="2"></td>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">____________________________________Серия ____________________________ №________________</td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="font-size: 10px; vertical-align: top;">Документ подтверждающий личность</td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">Отправитель_________/________________________________</td>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">Доверенность____________________     дата ____________ время________</td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="5" style="font-size: 10px; vertical-align: top;"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                  <td colspan="4" style="font-size: 10px; vertical-align: bottom;text-align:center"><i>Печать, штамп</i></td>
+                  <td colspan="9"></td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="9">&nbsp;</td>
+                  <td colspan="6" style="vertical-align: bottom;">Получатель______________/___________________________</td>
+                  <td colspan="3" style="vertical-align: bottom;"><i>Печать, штамп</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9"></td>
+                  <td colspan="9" style="font-size: 10px; vertical-align: top;"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9" style="vertical-align: middle;">Принял ( заполняется исполнителем)</td>
+                  <td colspan="4" style="vertical-align: middle;">Дата поступления в ППС <i>(заполняется получателем)</i></td>
+                  <td colspan="5" style="vertical-align: middle;">Выдал  <i>(заполняется исполнителем)</i></td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="2" style="vertical-align: bottom;">Дата</td>
+                  <td colspan="2" style="vertical-align: bottom;">Время</td>
+                  <td colspan="5" style="vertical-align: bottom;">__________________/______________________________</td>
+                  <td colspan="4"></td>
+                  <td colspan="5" style="vertical-align: bottom;">__________________/_______________________________</td>
+                </tr>
+                <tr>
+                  <td colspan="4"></td>
+                  <td colspan="5"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                  <td colspan="4"></td>
+                  <td colspan="5"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                </tr>
+                <tr>
+                  <td colspan="5">ППС, г</td>
+                  <td colspan="4">№</td>
+                  <td colspan="9"></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4"><strong>www.dostavka24.by</strong></td>
+                  <td colspan="4"><strong>тел.:  +375 (29/33) 671 90 90</strong></td>
+                  <td colspan="5"><strong>e-mail: info@dostavka24.by</strong></td>
+                  <td colspan="5"><strong><i>ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ</i></strong></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <div class="pdf-page"> <!-- ЭКЗЕМПЛЯР ПЕРЕВОЗЧИКА -->
+          <div class="blank">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="7" style="text-align: left;">
+                    <img src="../../assets/img/menu/logo-blank.svg" alt="">
+                  </th>
+                  <th colspan="5" style="font-size: 24px; line-height: 30px;">
+                    КУРЬЕРСКАЯ КВИТАНЦИЯ № <br> (НОМЕР ЗАКАЗА)
+                  </th>
+                  <th colspan="6" style="text-align: right;">
+                    <ngx-qrcode
+                      [elementType]="elementType"
+                      [errorCorrectionLevel]="correctionLevel"
+                      [value]="value"
+                      cssClass="bshadow">
+                    </ngx-qrcode>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="report-header">
+                  <td colspan="9" style="vertical-align: middle;"><strong>Отправитель</strong></td>
+                  <td colspan="3" style="vertical-align: middle;"><strong>Тип вложения</strong></td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="3" style="vertical-align: middle;"><strong>Масса отправления, кг</strong> <br>(заполняется отправителем)</td>
+                </tr>
+                <tr>
+                  <td colspan="9"><i>Наименование организации</i></td>
+                  <td colspan="2"><i>С документами</i></td>
+                  <td colspan="4" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="3">
+                    <i>Масса &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; кг</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9"><i>ФИО</i></td>
+                  <td colspan="2"><i>С товарным вложением</i></td>
+                  <td colspan="4" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="3">
+                    <i>Размер &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; м<sup>3</sup></i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <i>Область</i>
+                  </td>
+                  <td colspan="5">
+                    <i>Район</i>
+                  </td>
+                  <td colspan="3"><strong>Объявленная стоимость</strong></td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="3" rowspan="4" style="font-size: 10px; vertical-align: bottom;">
+                    <i>Подпись ответственного лица</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Населенный пункт</i>
+                  </td>
+                  <td colspan="6">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;руб&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.коп.</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Улица&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;дом&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;корпус&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;к</i>
+                  </td>
+                  <td colspan="6">
+                    <strong>Наложенный платеж</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Телефон (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</i>
+                  </td>
+                  <td colspan="6">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;руб&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.коп.</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Вид пересылки</td>
+                  <td colspan="9">Получатель</td>
+                </tr>
+                <tr>
+                  <td colspan="3">дверь - дверь</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td colspan="3">терминал - дверь</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td>&nbsp;</td>
+                  <td colspan="9"><i>ФИО</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">дверь - терминал</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td colspan="3">терминал - терминал</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td>&nbsp;</td> 
+                  <td colspan="5"><i>Область</i></td>
+                  <td colspan="4"><i>Район</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9" class="report-header">Дополнительные услуги</td>
+                  <td colspan="9"><i>Населенный пункт</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="9">
+                    <i>Улица&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;дом&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;корпус&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;к</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">Код услуги</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">Код услуги</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="6"><i>ППС г.</i></td>
+                  <td colspan="3"><i>№</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="9" rowspan="2" style="vertical-align: bottom;">
+                    <i>Телефон (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">Код услуги</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">Код услуги</td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Прием отправления</td>
+                  <td colspan="9">Вручение отправления <i>(заполняется получателем)</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="vertical-align: middle;">Предметов и веществ запрещенных к пересылке нет. С условиями перевозки или Правилами доставки, размещенными на сайте www.dostavka24.by, ознакомлен</td>
+                  <td colspan="9" style="vertical-align: middle;">Я подтверждаю, что отправка поступила в закрытом виде,отсуствуют внешние повреждения упаковки. Количество мест отправки соответствует количеству мест, указанных в бланке доставки. Я подтверждаю, что обладаю полномочиями, необходимыми для получения груза.</td>
+                </tr>
+                <tr>
+                  <td colspan="9" rowspan="2"></td>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">____________________________________Серия ____________________________ №________________</td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="font-size: 10px; vertical-align: top;">Документ подтверждающий личность</td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">Отправитель_________/________________________________</td>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">Доверенность____________________     дата ____________ время________</td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="5" style="font-size: 10px; vertical-align: top;"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                  <td colspan="4" style="font-size: 10px; vertical-align: bottom;text-align:center"><i>Печать, штамп</i></td>
+                  <td colspan="9"></td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="9">&nbsp;</td>
+                  <td colspan="6" style="vertical-align: bottom;">Получатель______________/___________________________</td>
+                  <td colspan="3" style="vertical-align: bottom;"><i>Печать, штамп</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9"></td>
+                  <td colspan="9" style="font-size: 10px; vertical-align: top;"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9" style="vertical-align: middle;">Принял ( заполняется исполнителем)</td>
+                  <td colspan="4" style="vertical-align: middle;">Дата поступления в ППС <i>(заполняется получателем)</i></td>
+                  <td colspan="5" style="vertical-align: middle;">Выдал  <i>(заполняется исполнителем)</i></td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="2" style="vertical-align: bottom;">Дата</td>
+                  <td colspan="2" style="vertical-align: bottom;">Время</td>
+                  <td colspan="5" style="vertical-align: bottom;">__________________/______________________________</td>
+                  <td colspan="4"></td>
+                  <td colspan="5" style="vertical-align: bottom;">__________________/_______________________________</td>
+                </tr>
+                <tr>
+                  <td colspan="4"></td>
+                  <td colspan="5"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                  <td colspan="4"></td>
+                  <td colspan="5"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                </tr>
+                <tr>
+                  <td colspan="5">ППС, г</td>
+                  <td colspan="4">№</td>
+                  <td colspan="9"></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4"><strong>www.dostavka24.by</strong></td>
+                  <td colspan="4"><strong>тел.:  +375 (29/33) 671 90 90</strong></td>
+                  <td colspan="5"><strong>e-mail: info@dostavka24.by</strong></td>
+                  <td colspan="5"><strong><i>ЭКЗЕМПЛЯР ПЕРЕВОЗЧИКА</i></strong></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <div class="pdf-page"> <!-- ЭКЗЕМПЛЯР ОТПРАВИТЕЛЯ -->
+          <div class="blank">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="7" style="text-align: left;">
+                    <img src="../../assets/img/menu/logo-blank.svg" alt="">
+                  </th>
+                  <th colspan="5" style="font-size: 24px; line-height: 30px;">
+                    КУРЬЕРСКАЯ КВИТАНЦИЯ № <br> (НОМЕР ЗАКАЗА)
+                  </th>
+                  <th colspan="6" style="text-align: right;">
+                    <ngx-qrcode
+                      [elementType]="elementType"
+                      [errorCorrectionLevel]="correctionLevel"
+                      [value]="value"
+                      cssClass="bshadow">
+                    </ngx-qrcode>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="report-header">
+                  <td colspan="9" style="vertical-align: middle;"><strong>Отправитель</strong></td>
+                  <td colspan="3" style="vertical-align: middle;"><strong>Тип вложения</strong></td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="3" style="vertical-align: middle;"><strong>Масса отправления, кг</strong> <br>(заполняется отправителем)</td>
+                </tr>
+                <tr>
+                  <td colspan="9"><i>Наименование организации</i></td>
+                  <td colspan="2"><i>С документами</i></td>
+                  <td colspan="4" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="3">
+                    <i>Масса &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; кг</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9"><i>ФИО</i></td>
+                  <td colspan="2"><i>С товарным вложением</i></td>
+                  <td colspan="4" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="3">
+                    <i>Размер &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; м<sup>3</sup></i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <i>Область</i>
+                  </td>
+                  <td colspan="5">
+                    <i>Район</i>
+                  </td>
+                  <td colspan="3"><strong>Объявленная стоимость</strong></td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="3" rowspan="4" style="font-size: 10px; vertical-align: bottom;">
+                    <i>Подпись ответственного лица</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Населенный пункт</i>
+                  </td>
+                  <td colspan="6">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;руб&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.коп.</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Улица&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;дом&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;корпус&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;к</i>
+                  </td>
+                  <td colspan="6">
+                    <strong>Наложенный платеж</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Телефон (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</i>
+                  </td>
+                  <td colspan="6">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;руб&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.коп.</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Вид пересылки</td>
+                  <td colspan="9">Получатель</td>
+                </tr>
+                <tr>
+                  <td colspan="3">дверь - дверь</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td colspan="3">терминал - дверь</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td>&nbsp;</td>
+                  <td colspan="9"><i>ФИО</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">дверь - терминал</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td colspan="3">терминал - терминал</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td>&nbsp;</td> 
+                  <td colspan="5"><i>Область</i></td>
+                  <td colspan="4"><i>Район</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9" class="report-header">Дополнительные услуги</td>
+                  <td colspan="9"><i>Населенный пункт</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="9">
+                    <i>Улица&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;дом&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;корпус&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;к</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">Код услуги</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">Код услуги</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="6"><i>ППС г.</i></td>
+                  <td colspan="3"><i>№</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="9" rowspan="2" style="vertical-align: bottom;">
+                    <i>Телефон (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">Код услуги</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">Код услуги</td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Прием отправления</td>
+                  <td colspan="9">Вручение отправления <i>(заполняется получателем)</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="vertical-align: middle;">Предметов и веществ запрещенных к пересылке нет. С условиями перевозки или Правилами доставки, размещенными на сайте www.dostavka24.by, ознакомлен</td>
+                  <td colspan="9" style="vertical-align: middle;">Я подтверждаю, что отправка поступила в закрытом виде,отсуствуют внешние повреждения упаковки. Количество мест отправки соответствует количеству мест, указанных в бланке доставки. Я подтверждаю, что обладаю полномочиями, необходимыми для получения груза.</td>
+                </tr>
+                <tr>
+                  <td colspan="9" rowspan="2"></td>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">____________________________________Серия ____________________________ №________________</td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="font-size: 10px; vertical-align: top;">Документ подтверждающий личность</td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">Отправитель_________/________________________________</td>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">Доверенность____________________     дата ____________ время________</td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="5" style="font-size: 10px; vertical-align: top;"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                  <td colspan="4" style="font-size: 10px; vertical-align: bottom;text-align:center"><i>Печать, штамп</i></td>
+                  <td colspan="9"></td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="9">&nbsp;</td>
+                  <td colspan="6" style="vertical-align: bottom;">Получатель______________/___________________________</td>
+                  <td colspan="3" style="vertical-align: bottom;"><i>Печать, штамп</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9"></td>
+                  <td colspan="9" style="font-size: 10px; vertical-align: top;"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9" style="vertical-align: middle;">Принял ( заполняется исполнителем)</td>
+                  <td colspan="4" style="vertical-align: middle;">Дата поступления в ППС <i>(заполняется получателем)</i></td>
+                  <td colspan="5" style="vertical-align: middle;">Выдал  <i>(заполняется исполнителем)</i></td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="2" style="vertical-align: bottom;">Дата</td>
+                  <td colspan="2" style="vertical-align: bottom;">Время</td>
+                  <td colspan="5" style="vertical-align: bottom;">__________________/______________________________</td>
+                  <td colspan="4"></td>
+                  <td colspan="5" style="vertical-align: bottom;">__________________/_______________________________</td>
+                </tr>
+                <tr>
+                  <td colspan="4"></td>
+                  <td colspan="5"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                  <td colspan="4"></td>
+                  <td colspan="5"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                </tr>
+                <tr>
+                  <td colspan="5">ППС, г</td>
+                  <td colspan="4">№</td>
+                  <td colspan="9"></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4"><strong>www.dostavka24.by</strong></td>
+                  <td colspan="4"><strong>тел.:  +375 (29/33) 671 90 90</strong></td>
+                  <td colspan="5"><strong>e-mail: info@dostavka24.by</strong></td>
+                  <td colspan="5"><strong><i>ЭКЗЕМПЛЯР ОТПРАВИТЕЛЯ</i></strong></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="width-a4"> <!-- БЛАНК ПОЧТОВАЯ КВИТАНЦИЯ -->
+        <div class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
+          <div class="blank">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="7" style="text-align: left;">
+                    <img src="../../assets/img/menu/logo-blank.svg" alt="">
+                  </th>
+                  <th colspan="5" style="font-size: 24px; line-height: 30px;">
+                    КУРЬЕРСКАЯ КВИТАНЦИЯ № <br> (НОМЕР ЗАКАЗА)
+                  </th>
+                  <th colspan="6" style="text-align: right;">
+                    <ngx-qrcode
+                      [elementType]="elementType"
+                      [errorCorrectionLevel]="correctionLevel"
+                      [value]="value"
+                      cssClass="bshadow">
+                    </ngx-qrcode>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="report-header">
+                  <td colspan="9" style="vertical-align: middle;"><strong>Отправитель</strong></td>
+                  <td colspan="3" style="vertical-align: middle;"><strong>Тип вложения</strong></td>
+                  <td colspan="4" style="vertical-align: middle;"> <strong>Размер отправления </strong><i>(заполняется отправителем)</i></td>
+                  <td colspan="2" style="vertical-align: middle;"><strong>Масса отправления, кг</strong> <br>(заполняется отправителем)</td>
+                </tr>
+                <tr>
+                  <td colspan="9"><i>Наименование организации</i></td>
+                  <td colspan="2"><i>С документами</i></td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    XXS
+                  </td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    M 
+                  </td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="2">
+                    <i>Масса &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; кг</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9"><i>ФИО</i></td>
+                  <td colspan="2"><i>С товарным вложением</i></td>
+                  <td colspan="5" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="2">
+                    <i>Размер &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; м<sup>3</sup></i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <i>Область</i>
+                  </td>
+                  <td colspan="5">
+                    <i>Район</i>
+                  </td>
+                  <td colspan="3"><strong>Объявленная стоимость</strong></td>
+                  <td colspan="4">&nbsp;</td>
+                  <td colspan="2" rowspan="4" style="font-size: 10px; vertical-align: bottom;">
+                    <i>Подпись ответственного лица</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Населенный пункт</i>
+                  </td>
+                  <td colspan="7">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;руб&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.коп.</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Улица&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;дом&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;корпус&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;к</i>
+                  </td>
+                  <td colspan="7">
+                    <strong>Наложенный платеж</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Телефон (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</i>
+                  </td>
+                  <td colspan="7">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;руб&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.коп.</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Вид пересылки</td>
+                  <td colspan="9">Получатель</td>
+                </tr>
+                <tr>
+                  <td colspan="3">дверь - дверь</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td colspan="3">терминал - дверь</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td>&nbsp;</td>
+                  <td colspan="9"><i>ФИО</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">дверь - терминал</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td colspan="3">терминал - терминал</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td>&nbsp;</td> 
+                  <td colspan="5"><i>Область</i></td>
+                  <td colspan="4"><i>Район</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9" class="report-header">Дополнительные услуги</td>
+                  <td colspan="9"><i>Населенный пункт</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="9">
+                    <i>Улица&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;дом&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;корпус&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;к</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">Код услуги</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">Код услуги</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="6"><i>ППС г.</i></td>
+                  <td colspan="3"><i>№</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="9" rowspan="2" style="vertical-align: bottom;">
+                    <i>Телефон (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">Код услуги</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">Код услуги</td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Прием отправления</td>
+                  <td colspan="9">Вручение отправления <i>(заполняется получателем)</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="vertical-align: middle;">Предметов и веществ запрещенных к пересылке нет. С условиями перевозки или Правилами доставки, размещенными на сайте www.dostavka24.by, ознакомлен</td>
+                  <td colspan="9" style="vertical-align: middle;">Я подтверждаю, что отправка поступила в закрытом виде,отсуствуют внешние повреждения упаковки. Количество мест отправки соответствует количеству мест, указанных в бланке доставки. Я подтверждаю, что обладаю полномочиями, необходимыми для получения груза.</td>
+                </tr>
+                <tr>
+                  <td colspan="9" rowspan="2"></td>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">____________________________________Серия ____________________________ №________________</td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="font-size: 10px; vertical-align: top;">Документ подтверждающий личность</td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">Отправитель_________/________________________________</td>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">Доверенность____________________     дата ____________ время________</td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="5" style="font-size: 10px; vertical-align: top;"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                  <td colspan="4" style="font-size: 10px; vertical-align: bottom;text-align:center"><i>Печать, штамп</i></td>
+                  <td colspan="6" style="vertical-align: bottom;">Получатель______________/___________________________</td>
+                  <td colspan="3" style="vertical-align: bottom;"><i>Печать, штамп</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9"></td>
+                  <td colspan="9" style="font-size: 10px; vertical-align: top;"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9" style="vertical-align: middle;">Принял ( заполняется исполнителем)</td>
+                  <td colspan="4" style="vertical-align: middle;">Дата поступления в ППС <i>(заполняется получателем)</i></td>
+                  <td colspan="5" style="vertical-align: middle;">Выдал  <i>(заполняется исполнителем)</i></td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="2" style="vertical-align: bottom;">Дата</td>
+                  <td colspan="2" style="vertical-align: bottom;">Время</td>
+                  <td colspan="5" style="vertical-align: bottom;">__________________/______________________________</td>
+                  <td colspan="4"></td>
+                  <td colspan="5" style="vertical-align: bottom;">__________________/_______________________________</td>
+                </tr>
+                <tr>
+                  <td colspan="4"></td>
+                  <td colspan="5"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                  <td colspan="4"></td>
+                  <td colspan="5"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                </tr>
+                <tr>
+                  <td colspan="5">ППС, г</td>
+                  <td colspan="4">№</td>
+                  <td colspan="9"></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4"><strong>www.dostavka24.by</strong></td>
+                  <td colspan="4"><strong>тел.:  +375 (29/33) 671 90 90</strong></td>
+                  <td colspan="5"><strong>e-mail: info@dostavka24.by</strong></td>
+                  <td colspan="5"><strong><i>ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ</i></strong></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <div class="pdf-page"> <!-- ЭКЗЕМПЛЯР ПЕРЕВОЗЧИКА -->
+          <div class="blank">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="7" style="text-align: left;">
+                    <img src="../../assets/img/menu/logo-blank.svg" alt="">
+                  </th>
+                  <th colspan="5" style="font-size: 24px; line-height: 30px;">
+                    КУРЬЕРСКАЯ КВИТАНЦИЯ № <br> (НОМЕР ЗАКАЗА)
+                  </th>
+                  <th colspan="6" style="text-align: right;">
+                    <ngx-qrcode
+                      [elementType]="elementType"
+                      [errorCorrectionLevel]="correctionLevel"
+                      [value]="value"
+                      cssClass="bshadow">
+                    </ngx-qrcode>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="report-header">
+                  <td colspan="9" style="vertical-align: middle;"><strong>Отправитель</strong></td>
+                  <td colspan="3" style="vertical-align: middle;"><strong>Тип вложения</strong></td>
+                  <td colspan="4" style="vertical-align: middle;"> <strong>Размер отправления </strong><i>(заполняется отправителем)</i></td>
+                  <td colspan="2" style="vertical-align: middle;"><strong>Масса отправления, кг</strong> <br>(заполняется отправителем)</td>
+                </tr>
+                <tr>
+                  <td colspan="9"><i>Наименование организации</i></td>
+                  <td colspan="2"><i>С документами</i></td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    XXS
+                  </td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    M 
+                  </td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="2">
+                    <i>Масса &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; кг</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9"><i>ФИО</i></td>
+                  <td colspan="2"><i>С товарным вложением</i></td>
+                  <td colspan="5" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="2">
+                    <i>Размер &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; м<sup>3</sup></i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <i>Область</i>
+                  </td>
+                  <td colspan="5">
+                    <i>Район</i>
+                  </td>
+                  <td colspan="3"><strong>Объявленная стоимость</strong></td>
+                  <td colspan="4">&nbsp;</td>
+                  <td colspan="2" rowspan="4" style="font-size: 10px; vertical-align: bottom;">
+                    <i>Подпись ответственного лица</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Населенный пункт</i>
+                  </td>
+                  <td colspan="7">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;руб&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.коп.</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Улица&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;дом&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;корпус&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;к</i>
+                  </td>
+                  <td colspan="7">
+                    <strong>Наложенный платеж</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Телефон (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</i>
+                  </td>
+                  <td colspan="7">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;руб&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.коп.</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Вид пересылки</td>
+                  <td colspan="9">Получатель</td>
+                </tr>
+                <tr>
+                  <td colspan="3">дверь - дверь</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td colspan="3">терминал - дверь</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td>&nbsp;</td>
+                  <td colspan="9"><i>ФИО</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">дверь - терминал</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td colspan="3">терминал - терминал</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td>&nbsp;</td> 
+                  <td colspan="5"><i>Область</i></td>
+                  <td colspan="4"><i>Район</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9" class="report-header">Дополнительные услуги</td>
+                  <td colspan="9"><i>Населенный пункт</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="9">
+                    <i>Улица&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;дом&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;корпус&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;к</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">Код услуги</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">Код услуги</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="6"><i>ППС г.</i></td>
+                  <td colspan="3"><i>№</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="9" rowspan="2" style="vertical-align: bottom;">
+                    <i>Телефон (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">Код услуги</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">Код услуги</td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Прием отправления</td>
+                  <td colspan="9">Вручение отправления <i>(заполняется получателем)</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="vertical-align: middle;">Предметов и веществ запрещенных к пересылке нет. С условиями перевозки или Правилами доставки, размещенными на сайте www.dostavka24.by, ознакомлен</td>
+                  <td colspan="9" style="vertical-align: middle;">Я подтверждаю, что отправка поступила в закрытом виде,отсуствуют внешние повреждения упаковки. Количество мест отправки соответствует количеству мест, указанных в бланке доставки. Я подтверждаю, что обладаю полномочиями, необходимыми для получения груза.</td>
+                </tr>
+                <tr>
+                  <td colspan="9" rowspan="2"></td>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">____________________________________Серия ____________________________ №________________</td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="font-size: 10px; vertical-align: top;">Документ подтверждающий личность</td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">Отправитель_________/________________________________</td>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">Доверенность____________________     дата ____________ время________</td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="5" style="font-size: 10px; vertical-align: top;"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                  <td colspan="4" style="font-size: 10px; vertical-align: bottom;text-align:center"><i>Печать, штамп</i></td>
+                  <td colspan="6" style="vertical-align: bottom;">Получатель______________/___________________________</td>
+                  <td colspan="3" style="vertical-align: bottom;"><i>Печать, штамп</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9"></td>
+                  <td colspan="9" style="font-size: 10px; vertical-align: top;"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9" style="vertical-align: middle;">Принял ( заполняется исполнителем)</td>
+                  <td colspan="4" style="vertical-align: middle;">Дата поступления в ППС <i>(заполняется получателем)</i></td>
+                  <td colspan="5" style="vertical-align: middle;">Выдал  <i>(заполняется исполнителем)</i></td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="2" style="vertical-align: bottom;">Дата</td>
+                  <td colspan="2" style="vertical-align: bottom;">Время</td>
+                  <td colspan="5" style="vertical-align: bottom;">__________________/______________________________</td>
+                  <td colspan="4"></td>
+                  <td colspan="5" style="vertical-align: bottom;">__________________/_______________________________</td>
+                </tr>
+                <tr>
+                  <td colspan="4"></td>
+                  <td colspan="5"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                  <td colspan="4"></td>
+                  <td colspan="5"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                </tr>
+                <tr>
+                  <td colspan="5">ППС, г</td>
+                  <td colspan="4">№</td>
+                  <td colspan="9"></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4"><strong>www.dostavka24.by</strong></td>
+                  <td colspan="4"><strong>тел.:  +375 (29/33) 671 90 90</strong></td>
+                  <td colspan="5"><strong>e-mail: info@dostavka24.by</strong></td>
+                  <td colspan="5"><strong><i>ЭКЗЕМПЛЯР ПЕРЕВОЗЧИКА</i></strong></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+        <div class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
+          <div class="blank">
+            <table>
+              <thead>
+                <tr>
+                  <th colspan="7" style="text-align: left;">
+                    <img src="../../assets/img/menu/logo-blank.svg" alt="">
+                  </th>
+                  <th colspan="5" style="font-size: 24px; line-height: 30px;">
+                    КУРЬЕРСКАЯ КВИТАНЦИЯ № <br> (НОМЕР ЗАКАЗА)
+                  </th>
+                  <th colspan="6" style="text-align: right;">
+                    <ngx-qrcode
+                      [elementType]="elementType"
+                      [errorCorrectionLevel]="correctionLevel"
+                      [value]="value"
+                      cssClass="bshadow">
+                    </ngx-qrcode>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="report-header">
+                  <td colspan="9" style="vertical-align: middle;"><strong>Отправитель</strong></td>
+                  <td colspan="3" style="vertical-align: middle;"><strong>Тип вложения</strong></td>
+                  <td colspan="4" style="vertical-align: middle;"> <strong>Размер отправления </strong><i>(заполняется отправителем)</i></td>
+                  <td colspan="2" style="vertical-align: middle;"><strong>Масса отправления, кг</strong> <br>(заполняется отправителем)</td>
+                </tr>
+                <tr>
+                  <td colspan="9"><i>Наименование организации</i></td>
+                  <td colspan="2"><i>С документами</i></td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    XXS
+                  </td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    M 
+                  </td>
+                  <td colspan="1" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="2">
+                    <i>Масса &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; кг</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9"><i>ФИО</i></td>
+                  <td colspan="2"><i>С товарным вложением</i></td>
+                  <td colspan="5" style="vertical-align: middle;">
+                    <div class="td-square"></div>
+                  </td>
+                  <td colspan="2">
+                    <i>Размер &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; м<sup>3</sup></i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <i>Область</i>
+                  </td>
+                  <td colspan="5">
+                    <i>Район</i>
+                  </td>
+                  <td colspan="3"><strong>Объявленная стоимость</strong></td>
+                  <td colspan="4">&nbsp;</td>
+                  <td colspan="2" rowspan="4" style="font-size: 10px; vertical-align: bottom;">
+                    <i>Подпись ответственного лица</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Населенный пункт</i>
+                  </td>
+                  <td colspan="7">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;руб&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.коп.</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Улица&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;дом&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;корпус&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;к</i>
+                  </td>
+                  <td colspan="7">
+                    <strong>Наложенный платеж</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <i>Телефон (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</i>
+                  </td>
+                  <td colspan="7">
+                    <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;руб&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.коп.</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Вид пересылки</td>
+                  <td colspan="9">Получатель</td>
+                </tr>
+                <tr>
+                  <td colspan="3">дверь - дверь</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td colspan="3">терминал - дверь</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td>&nbsp;</td>
+                  <td colspan="9"><i>ФИО</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">дверь - терминал</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td colspan="3">терминал - терминал</td>
+                  <td colspan="1"><div class="td-square"></div></td>
+                  <td>&nbsp;</td> 
+                  <td colspan="5"><i>Область</i></td>
+                  <td colspan="4"><i>Район</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9" class="report-header">Дополнительные услуги</td>
+                  <td colspan="9"><i>Населенный пункт</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="9">
+                    <i>Улица&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;дом&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;корпус&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;к</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">Код услуги</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">Код услуги</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="6"><i>ППС г.</i></td>
+                  <td colspan="3"><i>№</i></td>
+                </tr>
+                <tr>
+                  <td colspan="3">&nbsp;</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="9" rowspan="2" style="vertical-align: bottom;">
+                    <i>Телефон (&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)</i>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="3">Код услуги</td>
+                  <td>&nbsp;</td>
+                  <td colspan="3">Код услуги</td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Прием отправления</td>
+                  <td colspan="9">Вручение отправления <i>(заполняется получателем)</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="vertical-align: middle;">Предметов и веществ запрещенных к пересылке нет. С условиями перевозки или Правилами доставки, размещенными на сайте www.dostavka24.by, ознакомлен</td>
+                  <td colspan="9" style="vertical-align: middle;">Я подтверждаю, что отправка поступила в закрытом виде,отсуствуют внешние повреждения упаковки. Количество мест отправки соответствует количеству мест, указанных в бланке доставки. Я подтверждаю, что обладаю полномочиями, необходимыми для получения груза.</td>
+                </tr>
+                <tr>
+                  <td colspan="9" rowspan="2"></td>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">____________________________________Серия ____________________________ №________________</td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="font-size: 10px; vertical-align: top;">Документ подтверждающий личность</td>
+                </tr>
+                <tr>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">Отправитель_________/________________________________</td>
+                  <td colspan="9" style="height: 30px; vertical-align: bottom;">Доверенность____________________     дата ____________ время________</td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="5" style="font-size: 10px; vertical-align: top;"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                  <td colspan="4" style="font-size: 10px; vertical-align: bottom;text-align:center"><i>Печать, штамп</i></td>
+                  <td colspan="6" style="vertical-align: bottom;">Получатель______________/___________________________</td>
+                  <td colspan="3" style="vertical-align: bottom;"><i>Печать, штамп</i></td>
+                </tr>
+                <tr>
+                  <td colspan="9"></td>
+                  <td colspan="9" style="font-size: 10px; vertical-align: top;"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9" style="vertical-align: middle;">Принял ( заполняется исполнителем)</td>
+                  <td colspan="4" style="vertical-align: middle;">Дата поступления в ППС <i>(заполняется получателем)</i></td>
+                  <td colspan="5" style="vertical-align: middle;">Выдал  <i>(заполняется исполнителем)</i></td>
+                </tr>
+                <tr style="height: 60px;">
+                  <td colspan="2" style="vertical-align: bottom;">Дата</td>
+                  <td colspan="2" style="vertical-align: bottom;">Время</td>
+                  <td colspan="5" style="vertical-align: bottom;">__________________/______________________________</td>
+                  <td colspan="4"></td>
+                  <td colspan="5" style="vertical-align: bottom;">__________________/_______________________________</td>
+                </tr>
+                <tr>
+                  <td colspan="4"></td>
+                  <td colspan="5"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                  <td colspan="4"></td>
+                  <td colspan="5"><i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Подпись&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ФИО</i></td>
+                </tr>
+                <tr>
+                  <td colspan="5">ППС, г</td>
+                  <td colspan="4">№</td>
+                  <td colspan="9"></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4"><strong>www.dostavka24.by</strong></td>
+                  <td colspan="4"><strong>тел.:  +375 (29/33) 671 90 90</strong></td>
+                  <td colspan="5"><strong>e-mail: info@dostavka24.by</strong></td>
+                  <td colspan="5"><strong><i>ЭКЗЕМПЛЯР ОТПРАВИТЕЛЯ</i></strong></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="active-btn circle-btn close-btn" (click)="hideModal($event)" modal="report-blank"></button>
+  </div>
+</div>
