@@ -49,12 +49,7 @@ export class BookComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.service.cities().subscribe(data => {
-      if (data.status === 200) {
-        this.citiesList = data.body;
-        this.currentCity = this.citiesList[0].id;
-      }
-    });
+
 
     this.newContragent = new FormGroup({
       type: new FormControl('', [
@@ -156,6 +151,12 @@ export class BookComponent implements OnInit {
 
   // Show modal event
   showModal(id: string): void {
+    this.service.cities().subscribe(data => {
+      if (data.status === 200) {
+        this.citiesList = data.body;
+        this.currentCity = this.citiesList[0].id;
+      }
+    });
     const modal: any = document.getElementById(id);
     modal.classList.remove('hide-modal');
     modal.classList.add('show-modal');
@@ -166,6 +167,8 @@ export class BookComponent implements OnInit {
     modal.classList.add('hide-modal');
     modal.classList.remove('show-modal');
     form.reset();
+    this.citiesList = [];
+    this.streetList = [];
   }
   // New contragent button event
   createNewContragent(): void {
@@ -323,23 +326,52 @@ export class BookComponent implements OnInit {
 
   showCustomerAddress(data: any): void {
     this.selectedCustomerAddress = data;
-    console.log('Selected address info', this.selectedCustomerAddress);
-    this.newAddress.patchValue({
-      type: this.selectedCustomerAddress[0].mainAddress,
-      place: this.selectedCustomerAddress[0].cityName,
-      street: this.selectedCustomerAddress[0].streetName,
-      building: this.selectedCustomerAddress[0].house,
-      corpus: this.selectedCustomerAddress[0].housing,
-      house: this.selectedCustomerAddress[0].building,
-      office: this.selectedCustomerAddress[0].office,
-      apartment: this.selectedCustomerAddress[0].room,
-      deliveryFrom: this.selectedCustomerAddress[0].timeFrom,
-      deliveryTo: this.selectedCustomerAddress[0].timeTo,
-      timeoutFrom: this.selectedCustomerAddress[0].pauseFrom,
-      timeoutTo: this.selectedCustomerAddress[0].pauseTo,
-      description: this.selectedCustomerAddress[0].description
+    this.service.cities().subscribe(response => {
+      if (response.status) {
+        this.citiesList = response.body;
+        console.log('response', response.body);
+        // Get city id
+        const currentCityCode = this.selectedCustomerAddress[0].cityId;
+        console.log('Current city code', currentCityCode);
+        // Find city by the id
+        const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
+        console.log('Info about selected city', cityInfo);
+        // Check and build data
+        if (cityInfo) {
+          // The request object
+          this.street = {
+            cityCode: cityInfo.city_code,
+            regionCode: cityInfo.region_code
+          };
+          // Get streets
+          this.service.streets(this.street).subscribe(resp => {
+            if (resp.status === 200) {
+              this.streetList = resp.body;
+              console.log('selected city streets', this.streetList);
+
+
+              console.log('Selected address info', this.selectedCustomerAddress);
+              this.newAddress.patchValue({
+                type: this.selectedCustomerAddress[0].mainAddress,
+                place: this.selectedCustomerAddress[0].cityId,
+                street: this.selectedCustomerAddress[0].streetId,
+                building: this.selectedCustomerAddress[0].house,
+                corpus: this.selectedCustomerAddress[0].housing,
+                house: this.selectedCustomerAddress[0].building,
+                office: this.selectedCustomerAddress[0].office,
+                apartment: this.selectedCustomerAddress[0].room,
+                deliveryFrom: this.selectedCustomerAddress[0].timeFrom,
+                deliveryTo: this.selectedCustomerAddress[0].timeTo,
+                timeoutFrom: this.selectedCustomerAddress[0].pauseFrom,
+                timeoutTo: this.selectedCustomerAddress[0].pauseTo,
+                description: this.selectedCustomerAddress[0].description
+              });
+              this.showModal('edit-address');
+            }
+          });
+        }
+      }
     });
-    this.showModal('edit-address');
 
   }
 
