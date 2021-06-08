@@ -1,14 +1,17 @@
 <div class="profile-content">
   <div class="box-1">
-    <h2 class="white-header">Общее</h2>
-    <div class="grey-box">
-      <h2 class="grey-header">Имя:</h2>
-      <h2 class="grey-header m-0">Email:</h2>
-      <h2 class="grey-header m-0">Телефон</h2>
-      <p class="description mt-10">Andrey</p>
-      <p class="description mt-10">bartashevich.s@ntt.by</p>
-      <p class="description mt-10">+375 29 342-5554 </p>
-    </div>
+    <form>
+      <h2 class="white-header">Общее</h2>
+      <div class="grey-box">
+        <h2 class="grey-header">Имя:</h2>
+        <h2 class="grey-header m-0">Email:</h2>
+        <h2 class="grey-header m-0">Телефон</h2>
+        <p class="description mt-10">Andrey</p>
+        <p class="description mt-10">bartashevich.s@ntt.by</p>
+        <p class="description mt-10">+375 29 342-5554 </p>
+      </div>
+      <input type="submit" class="btn-green" value="Сохранить">
+    </form>
   </div>
   <div class="box-2">
     <form>
@@ -17,6 +20,27 @@
         <h2 class="grey-header">Отправитель:</h2>
         <p class="description mt-10">ООО "НТТ Импорт"</p>
         <h2 class="grey-header">Адрес выдачи груза:</h2>
+        <p style="max-width: 515px" class="description mt-10">МИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2</p>
+        <h2 class="grey-header">Контакт (по адресу выдачи груза):</h2>
+        <p class="description mt-10">Артём</p>
+        <div class="row">
+          <label class="mr-15" style="display: inline-block" for="use-as-main">Использовать как основной: </label>
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="checkbox" name="use-as-main" id="use-as-main" checked>
+            <span class="checkbox-block-icon"></span>
+          </div>
+        </div>
+      </div>
+      <input type="submit" value="Сохранить">
+    </form>
+  </div>
+  <div class="box-4">
+    <form>
+      <h2 class="white-header">Настройки получателя</h2>
+      <div class="grey-box">
+        <h2 class="grey-header">Получатель:</h2>
+        <p class="description mt-10">ООО "НТТ Импорт"</p>
+        <h2 class="grey-header">Адрес получателя груза:</h2>
         <p style="max-width: 515px" class="description mt-10">МИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2</p>
         <h2 class="grey-header">Контакт (по адресу доставки груза):</h2>
         <p class="description mt-10">Артём</p>
