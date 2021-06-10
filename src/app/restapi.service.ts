@@ -222,4 +222,8 @@ export class RestapiService {
   public getUserInfo(): Observable<any> {
     return this.http.get(`${this.url}/user/userInfo`, {observe: 'response', withCredentials: true});
   }
+
+  public updateUser(data: any): Observable<any> {
+    return this.http.post(`${this.url}/user/updateUser`, data, {observe: 'response', withCredentials: true});
+  }
 }

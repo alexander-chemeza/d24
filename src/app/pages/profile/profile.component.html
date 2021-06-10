@@ -1,6 +1,6 @@
 <div class="profile-content">
   <div class="box-1">
-    <form [formGroup]="commonForm">
+    <form [formGroup]="commonForm" (ngSubmit)="updateCommon($event)">
       <h2 class="white-header">Общее</h2>
       <div class="grey-box">
         <h2 class="grey-header">Имя:</h2>

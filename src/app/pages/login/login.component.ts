@@ -37,11 +37,11 @@ export class LoginComponent implements OnInit {
       .subscribe(data => {
         if (data) {
           sessionStorage.setItem('currentUser', JSON.stringify(data));
-          this.service.getUserInfo().subscribe(resp => {
-            if (resp.status === 200) {
-              sessionStorage.setItem('userInfo', JSON.stringify(resp.body));
-            }
-          });
+          // this.service.getUserInfo().subscribe(resp => {
+          //   if (resp.status === 200) {
+          //     sessionStorage.setItem('userInfo', JSON.stringify(resp.body));
+          //   }
+          // });
           this.router.navigate(['home']);
         } else {
           alert('No such user or invalid password');
