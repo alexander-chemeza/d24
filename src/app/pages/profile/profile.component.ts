@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {RestapiService, UserInfo} from '../../restapi.service';
+import {RestapiService, SaveUserCustomer, UserInfo} from '../../restapi.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,6 +8,11 @@ import {RestapiService, UserInfo} from '../../restapi.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  agents: any;
+  addresses: {id: number, name: string}[] = [];
+  contacts: {id: number, name: string}[] = [];
+  currentAgentId: any;
+  currentAddressId: any;
 
   commonForm = new FormGroup({
     userName: new FormControl('', [
@@ -22,9 +27,40 @@ export class ProfileComponent implements OnInit {
     ])
   });
 
+  senderForm = new FormGroup({
+    sender: new FormControl('', [
+      Validators.required
+    ]),
+    address: new FormControl('', [
+      Validators.required
+    ]),
+    contact: new FormControl('', [
+      Validators.required
+    ]),
+    mainAddress: new FormControl('', [
+
+    ])
+  });
+
+  recipientForm = new FormGroup({
+    sender: new FormControl('', [
+      Validators.required
+    ]),
+    address: new FormControl('', [
+      Validators.required
+    ]),
+    contact: new FormControl('', [
+      Validators.required
+    ]),
+    mainAddress: new FormControl('', [
+
+    ])
+  });
+
   constructor(private service: RestapiService) { }
 
   ngOnInit(): void {
+    // User common data reception
     const userInfo: any = sessionStorage.getItem('currentUser');
     let user: any;
     if (userInfo) {
@@ -35,6 +71,13 @@ export class ProfileComponent implements OnInit {
       userEmail: user.email,
       userPhone: user.phone
     });
+
+    this.service.getAllUserCustomer().subscribe(response => {
+      if(response.status === 200) {
+        this.agents = response.body;
+        console.log('Agents', this.agents);
+      }
+    })
   }
 
   updateCommon($event: any): void {
@@ -66,5 +109,46 @@ export class ProfileComponent implements OnInit {
         console.log('OK');
       }
     });
+  }
+
+  selectAgent($event: any, form: any): void {
+    if (form.value.sender) {
+      this.currentAgentId = form.value.sender;
+      this.service.getAllUserCustomerAddress(this.currentAgentId).subscribe(response => {
+        if (response.status === 200) {
+          console.log('AddressList', response.body);
+          this.addresses = [];
+          for (let address of response.body) {
+            this.addresses.push({
+              id: address.id,
+              name: `${address.cityName}, ${address.streetName}`
+            });
+          }
+          console.log('Pushed', this.addresses);
+        }
+      })
+    }
+  }
+
+  selectAddress($event: any, form: any): void {
+    if(form.value.address) {
+      this.currentAddressId = form.value.address;
+      this.service.getAllUserCustomerContact(this.currentAddressId).subscribe(response => {
+        if (response.status === 200) {
+          console.log('Contacts', response.body);
+          this.contacts = [];
+          for (let contact of response.body) {
+            this.contacts.push({
+              id: contact.id,
+              name: contact.name
+            });
+          }
+        }
+      });
+    }
+  }
+
+  updateSender($event: any): void {
+
   }
 }

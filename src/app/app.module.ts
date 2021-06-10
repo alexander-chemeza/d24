@@ -18,13 +18,13 @@ import {UsersModule} from './pages/users/users.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {OrderModule} from './pages/order/order.module';
 import {ReactiveFormsModule} from '@angular/forms';
+import {ProfileModule} from './pages/profile/profile.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalculatorComponent,
     InstructionComponent,
-    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,6 +36,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     JournalModule,
     TemplateModule,
     BookModule,
+    ProfileModule,
     DocumentsModule,
     UsersModule,
     OrderModule,
