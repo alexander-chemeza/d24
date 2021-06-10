@@ -8,6 +8,12 @@ export interface User {
   role: string;
 }
 
+export interface UserInfo {
+  userName: string;
+  userEmail: string;
+  userPhone: string;
+}
+
 // Registration user data interface
 export interface UserRegistration {
   id?: string;
@@ -211,5 +217,9 @@ export class RestapiService {
   //  user-customer-contact-controller POST
   public saveUserCustomerContact(data: SaveUserCustomerContact): Observable<any> {
     return this.http.post(`${this.url}/user/customerContact/save`, data, {observe: 'response', withCredentials: true});
+  }
+
+  public getUserInfo(): Observable<any> {
+    return this.http.get(`${this.url}/user/userInfo`, {observe: 'response', withCredentials: true});
   }
 }
