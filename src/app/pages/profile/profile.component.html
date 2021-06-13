@@ -22,7 +22,7 @@
       <div class="grey-box">
         <h2 class="grey-header">Отправитель:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="sender" (selectionChange)="selectAgent($event, senderForm)">
+          <mat-select formControlName="sender" (selectionChange)="selectAgent($event, senderForm, currentSenderAgentId, senderAddresses)">
             <input type="text" placeholder="Поиск">
             <cdk-virtual-scroll-viewport *ngIf="agents" [itemSize]="42" class="example-viewport">
               <mat-option *cdkVirtualFor="let agent of agents" [value]="agent.id" class="example-item">
@@ -33,9 +33,9 @@
         </mat-form-field>
         <h2 class="grey-header">Адрес выдачи груза:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="address" (selectionChange)="selectAddress($event, senderForm)">
+          <mat-select formControlName="address" (selectionChange)="selectAddress($event, senderForm, currentSenderAddressId, senderContacts)">
             <input type="text" placeholder="Поиск">
-            <mat-option *ngFor="let address of addresses" [value]="address.id" class="example-item">
+            <mat-option *ngFor="let address of senderAddresses" [value]="address.id" class="example-item">
               {{address.name}}
             </mat-option>
           </mat-select>
@@ -44,7 +44,7 @@
         <mat-form-field floatLabel="never">
           <mat-select formControlName="contact">
             <input type="text" placeholder="Поиск">
-            <mat-option *ngFor="let contact of contacts" [value]="contact.id" class="example-item">
+            <mat-option *ngFor="let contact of senderContacts" [value]="contact.id" class="example-item">
               {{contact.name}}
             </mat-option>
           </mat-select>
@@ -66,7 +66,7 @@
       <div class="grey-box">
         <h2 class="grey-header">Получатель:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="sender" (selectionChange)="selectAgent($event, recipientForm)">
+          <mat-select formControlName="sender" (selectionChange)="selectAgent($event, recipientForm, currentReceiverAgentId, receiverAddresses)">
             <input type="text" placeholder="Поиск">
             <cdk-virtual-scroll-viewport *ngIf="agents" [itemSize]="42" class="example-viewport">
               <mat-option *cdkVirtualFor="let agent of agents" [value]="agent.id" class="example-item">
@@ -77,9 +77,9 @@
         </mat-form-field>
         <h2 class="grey-header">Адрес получателя груза:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="address" (selectionChange)="selectAddress($event, recipientForm)">
+          <mat-select formControlName="address" (selectionChange)="selectAddress($event, recipientForm, currentReceiverAddressId, receiverContacts)">
             <input type="text" placeholder="Поиск">
-            <mat-option *ngFor="let address of addresses" [value]="address.id" class="example-item">
+            <mat-option *ngFor="let address of receiverAddresses" [value]="address.id" class="example-item">
               {{address.name}}
             </mat-option>
           </mat-select>
@@ -88,7 +88,7 @@
         <mat-form-field floatLabel="never">
           <mat-select formControlName="contact">
             <input type="text" placeholder="Поиск">
-            <mat-option *ngFor="let contact of contacts" [value]="contact.id" class="example-item">
+            <mat-option *ngFor="let contact of receiverContacts" [value]="contact.id" class="example-item">
               {{contact.name}}
             </mat-option>
           </mat-select>

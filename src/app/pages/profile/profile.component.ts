@@ -8,11 +8,20 @@ import {RestapiService, SaveUserCustomer, UserInfo} from '../../restapi.service'
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  // Agents array (common)
   agents: any;
-  addresses: {id: number, name: string}[] = [];
-  contacts: {id: number, name: string}[] = [];
-  currentAgentId: any;
-  currentAddressId: any;
+  // Address arrays
+  senderAddresses: {id: number, name: string}[] = [];
+  receiverAddresses: {id: number, name: string}[] = [];
+  // Contacts arrays
+  senderContacts: {id: number, name: string}[] = [];
+  receiverContacts: {id: number, name: string}[] = [];
+  // Agents IDs
+  currentSenderAgentId: any;
+  currentReceiverAgentId: any;
+  // Addresses IDs
+  currentSenderAddressId: any;
+  currentReceiverAddressId: any;
 
   commonForm = new FormGroup({
     userName: new FormControl('', [
@@ -111,34 +120,35 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  selectAgent($event: any, form: any): void {
+  selectAgent($event: any, form: any, agentId: any, addresses: any): void {
     if (form.value.sender) {
-      this.currentAgentId = form.value.sender;
-      this.service.getAllUserCustomerAddress(this.currentAgentId).subscribe(response => {
-        if (response.status === 200) {
+      addresses.pop();
+      agentId = form.value.sender;
+      this.service.getAllUserCustomerAddress(agentId).subscribe(response => {
+        if (response.status === 200 && addresses.length === 0) {
           console.log('AddressList', response.body);
-          this.addresses = [];
           for (let address of response.body) {
-            this.addresses.push({
+            addresses.push({
               id: address.id,
               name: `${address.cityName}, ${address.streetName}`
             });
           }
-          console.log('Pushed', this.addresses);
+          console.log('Pushed', addresses);
         }
       })
     }
+    console.log('Sender', this.senderAddresses);
   }
 
-  selectAddress($event: any, form: any): void {
+  selectAddress($event: any, form: any, addressId: any, contacts: any): void {
     if(form.value.address) {
-      this.currentAddressId = form.value.address;
-      this.service.getAllUserCustomerContact(this.currentAddressId).subscribe(response => {
+      contacts.pop();
+      addressId = form.value.address;
+      this.service.getAllUserCustomerContact(addressId).subscribe(response => {
         if (response.status === 200) {
           console.log('Contacts', response.body);
-          this.contacts = [];
           for (let contact of response.body) {
-            this.contacts.push({
+            contacts.push({
               id: contact.id,
               name: contact.name
             });
