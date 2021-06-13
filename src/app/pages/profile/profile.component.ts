@@ -84,7 +84,6 @@ export class ProfileComponent implements OnInit {
     this.service.getAllUserCustomer().subscribe(response => {
       if(response.status === 200) {
         this.agents = response.body;
-        console.log('Agents', this.agents);
       }
     })
   }
@@ -101,7 +100,6 @@ export class ProfileComponent implements OnInit {
     user.phone = this.commonForm.value.userPhone;
     sessionStorage.setItem('currentUser', JSON.stringify(user));
     delete user.password;
-    console.log(user);
 
     const data = {
       adminUserId: user.adminUserId,
@@ -110,8 +108,6 @@ export class ProfileComponent implements OnInit {
       email: user.email as string,
       phone: user.phone as string
     }
-
-    console.log('Data', data)
 
     this.service.updateUser(user).subscribe(response => {
       if (response.status === 200) {
@@ -126,18 +122,15 @@ export class ProfileComponent implements OnInit {
       agentId = form.value.sender;
       this.service.getAllUserCustomerAddress(agentId).subscribe(response => {
         if (response.status === 200 && addresses.length === 0) {
-          console.log('AddressList', response.body);
           for (let address of response.body) {
             addresses.push({
               id: address.id,
               name: `${address.cityName}, ${address.streetName}`
             });
           }
-          console.log('Pushed', addresses);
         }
       })
     }
-    console.log('Sender', this.senderAddresses);
   }
 
   selectAddress($event: any, form: any, addressId: any, contacts: any): void {
@@ -146,7 +139,6 @@ export class ProfileComponent implements OnInit {
       addressId = form.value.address;
       this.service.getAllUserCustomerContact(addressId).subscribe(response => {
         if (response.status === 200) {
-          console.log('Contacts', response.body);
           for (let contact of response.body) {
             contacts.push({
               id: contact.id,
