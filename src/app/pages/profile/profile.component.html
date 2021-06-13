@@ -22,8 +22,8 @@
       <div class="grey-box">
         <h2 class="grey-header">Отправитель:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="sender" (selectionChange)="selectAgent($event, senderForm, currentSenderAgentId, senderAddresses)">
-            <input type="text" placeholder="Поиск">
+          <mat-select formControlName="sender" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, senderForm, currentSenderAgentId, senderAddresses)">
+            <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey($event)">
             <cdk-virtual-scroll-viewport *ngIf="agents" [itemSize]="42" class="example-viewport">
               <mat-option *cdkVirtualFor="let agent of agents" [value]="agent.id" class="example-item">
                 {{agent.customerName}}
@@ -33,8 +33,8 @@
         </mat-form-field>
         <h2 class="grey-header">Адрес выдачи груза:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="address" (selectionChange)="selectAddress($event, senderForm, currentSenderAddressId, senderContacts)">
-            <input type="text" placeholder="Поиск">
+          <mat-select formControlName="address" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, senderForm, currentSenderAddressId, senderContacts)">
+            <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey2($event)">
             <mat-option *ngFor="let address of senderAddresses" [value]="address.id" class="example-item">
               {{address.name}}
             </mat-option>
@@ -42,8 +42,8 @@
         </mat-form-field>
         <h2 class="grey-header">Контакт (по адресу выдачи груза):</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="contact">
-            <input type="text" placeholder="Поиск">
+          <mat-select formControlName="contact" (keyup)="$event.stopPropagation()">
+            <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey3($event)">
             <mat-option *ngFor="let contact of senderContacts" [value]="contact.id" class="example-item">
               {{contact.name}}
             </mat-option>

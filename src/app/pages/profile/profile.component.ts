@@ -120,6 +120,7 @@ export class ProfileComponent implements OnInit {
               name: `${address.cityName}, ${address.streetName}`
             });
           }
+          console.log(addresses);
         }
       })
     }
@@ -173,5 +174,49 @@ export class ProfileComponent implements OnInit {
 
 
 
+  }
+
+  onKey(event: any): void {
+    if (event.target.value === '' || this.agents.length === 0) {
+      this.ngOnInit();
+    } else {
+      this.agents = this.agents.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
+    }
+  }
+
+  onKey2(event: any): void {
+    if (event.target.value === '' || this.senderAddresses.length === 0) {
+      this.senderAddresses.pop();
+      this.service.getAllUserCustomerAddress(this.senderForm.value.sender).subscribe(response => {
+        if (response.status === 200) {
+          for (let address of response.body) {
+            this.senderAddresses.push({
+              id: address.id,
+              name: `${address.cityName}, ${address.streetName}`
+            });
+          }
+        }
+      })
+    } else {
+      this.senderAddresses = this.senderAddresses.filter((option: any) => option.name.toLowerCase().includes(event.target.value.toLowerCase()));
+    }
+  }
+
+  onKey3(event: any): void {
+    if (event.target.value === '' || this.senderContacts.length === 0) {
+      this.senderContacts.pop();
+      this.service.getAllUserCustomerContact(this.senderForm.value.address).subscribe(response => {
+        if (response.status === 200) {
+          for (let contact of response.body) {
+            this.senderContacts.push({
+              id: contact.id,
+              name: contact.name
+            });
+          }
+        }
+      })
+    } else {
+      this.senderContacts = this.senderContacts.filter((option: any) => option.name.toLowerCase().includes(event.target.value.toLowerCase()));
+    }
   }
 }
