@@ -111,9 +111,31 @@
         grid-template-rows: min-content;
         grid-gap: 30px;
 
-        & button {
+        & a {
+          text-align: center;
           grid-column: 2;
           grid-row: 1;
+          display: inline-block;
+          border: none;
+          box-sizing: border-box;
+          padding: 15px 60px;
+          font-family: "Montserrat-SemiBold", sans-serif !important;
+          font-size: 1.4rem;
+          cursor: pointer;
+
+          background-color: #FFFFFF;
+          color: rgba(0,0,0,0.5);
+          transition: all 1s;
+
+          border-radius: 40px;
+
+          &:hover {
+            background-color: #eeeeee;
+          }
+
+          &[disabled] {
+            background-color: #FFFFFF;
+          }
         }
 
         & input {
@@ -156,9 +178,31 @@
         grid-template-columns: 1fr 1fr 1fr;
         grid-gap: 30px;
 
-        & button {
+        & a {
           grid-column: 2;
           grid-row: 1;
+          display: inline-block;
+          border: none;
+          box-sizing: border-box;
+          padding: 15px 60px;
+          font-family: "Montserrat-SemiBold", sans-serif !important;
+          font-size: 1.4rem;
+          cursor: pointer;
+          text-align: center;
+
+          background-color: #FFFFFF;
+          color: rgba(0,0,0,0.5);
+          transition: all 1s;
+
+          border-radius: 40px;
+
+          &:hover {
+            background-color: #eeeeee;
+          }
+
+          &[disabled] {
+            background-color: #FFFFFF;
+          }
         }
 
         & input {
@@ -214,9 +258,31 @@
         grid-template-rows: min-content;
         grid-gap: 30px;
 
-        & button {
+        & a {
           grid-column: 2;
           grid-row: 1;
+          display: inline-block;
+          border: none;
+          box-sizing: border-box;
+          padding: 15px 60px;
+          font-family: "Montserrat-SemiBold", sans-serif !important;
+          font-size: 1.4rem;
+          cursor: pointer;
+          text-align: center;
+
+          background-color: #FFFFFF;
+          color: rgba(0,0,0,0.5);
+          transition: all 1s;
+
+          border-radius: 40px;
+
+          &:hover {
+            background-color: #eeeeee;
+          }
+
+          &[disabled] {
+            background-color: #FFFFFF;
+          }
         }
 
         & input {
