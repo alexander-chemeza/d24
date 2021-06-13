@@ -101,14 +101,6 @@ export class ProfileComponent implements OnInit {
     sessionStorage.setItem('currentUser', JSON.stringify(user));
     delete user.password;
 
-    const data = {
-      adminUserId: user.adminUserId,
-      id: user.id,
-      userName: user.userName as string,
-      email: user.email as string,
-      phone: user.phone as string
-    }
-
     this.service.updateUser(user).subscribe(response => {
       if (response.status === 200) {
         console.log('OK');
@@ -151,6 +143,35 @@ export class ProfileComponent implements OnInit {
   }
 
   updateSender($event: any): void {
+    // Получаю заготовку отправляемого объекта
+    const userInfo: any = sessionStorage.getItem('currentUser');
+    let user: any;
+    if (userInfo) {
+      user = JSON.parse(userInfo);
+    }
+    // Получаю адресс
+    let address;
+    this.service.getAllUserCustomerAddress(this.senderForm.value.sender).subscribe(response => {
+      if (response.status === 200) {
+        // Фильтруюю до конкретного адреса
+        address = response.body.filter((item: any) => item.id === this.senderForm.value.address);
+        // Присваиваю значения полей
+        user.senderAddress = address[0];
+        console.log('Текущий адресс', user.senderAddress)
+        // Ввожу изменения в сессии
+        sessionStorage.setItem('currentUser', JSON.stringify(user));
+        // Убираю пароль чтоб не запороть пользователя
+        delete user.password;
+        // Меняю данные на сервере
+        this.service.updateUser(user).subscribe(response => {
+          if (response.status === 200) {
+            console.log('OK sender updated');
+          }
+        });
+      }
+    })
+
+
 
   }
 }
