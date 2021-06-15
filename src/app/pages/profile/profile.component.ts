@@ -150,14 +150,26 @@ export class ProfileComponent implements OnInit {
     if (userInfo) {
       user = JSON.parse(userInfo);
     }
+
+    user.senderCustomer = this.agents.filter((item: any) => item.id === this.senderForm.value.sender)[0];
+
     // Получаю адресс
     let address;
+    let contacts;
     this.service.getAllUserCustomerAddress(this.senderForm.value.sender).subscribe(response => {
       if (response.status === 200) {
         // Фильтруюю до конкретного адреса
         address = response.body.filter((item: any) => item.id === this.senderForm.value.address);
         // Присваиваю значения полей
         user.senderAddress = address[0];
+        console.log('Address ID', address[0].id);
+        this.service.getAllUserCustomerContact(address[0].id).subscribe(response => {
+          if (response.status === 200) {
+            user.senderCustomerContact = response.body.filter((item: any) => item.id === this.senderForm.value.address)[0]
+            console.log('Contact', user.senderCustomerContact);
+          }
+        })
+
         console.log('Текущий адресс', user.senderAddress)
         // Ввожу изменения в сессии
         sessionStorage.setItem('currentUser', JSON.stringify(user));
