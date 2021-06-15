@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {RestapiService, SaveUserCustomer, UserInfo} from '../../restapi.service';
+import {RestapiService} from '../../restapi.service';
 
 @Component({
   selector: 'app-profile',
@@ -82,10 +82,10 @@ export class ProfileComponent implements OnInit {
     });
 
     this.service.getAllUserCustomer().subscribe(response => {
-      if(response.status === 200) {
+      if (response.status === 200) {
         this.agents = response.body;
       }
-    })
+    });
   }
 
   updateCommon($event: any): void {
@@ -108,13 +108,16 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  selectAgent($event: any, form: any, agentId: any, addresses: any): void {
+  selectAgent($event: any, form: any, agentId: any, addresses: any, contacts: any): void {
+    addresses.pop();
+    contacts.pop();
     if (form.value.sender) {
       addresses.pop();
+      contacts.pop();
       agentId = form.value.sender;
       this.service.getAllUserCustomerAddress(agentId).subscribe(response => {
         if (response.status === 200 && addresses.length === 0) {
-          for (let address of response.body) {
+          for (const address of response.body) {
             addresses.push({
               id: address.id,
               name: `${address.cityName}, ${address.streetName}`
@@ -122,17 +125,18 @@ export class ProfileComponent implements OnInit {
           }
           console.log(addresses);
         }
-      })
+      });
     }
   }
 
   selectAddress($event: any, form: any, addressId: any, contacts: any): void {
-    if(form.value.address) {
+    contacts.pop();
+    if (form.value.address) {
       contacts.pop();
       addressId = form.value.address;
       this.service.getAllUserCustomerContact(addressId).subscribe(response => {
         if (response.status === 200) {
-          for (let contact of response.body) {
+          for (const contact of response.body) {
             contacts.push({
               id: contact.id,
               name: contact.name
@@ -164,7 +168,7 @@ export class ProfileComponent implements OnInit {
         console.log('Address ID', address[0].id);
         this.service.getAllUserCustomerContact(address[0].id).subscribe(resp => {
           if (resp.status === 200) {
-            user.senderCustomerContact = resp.body.filter((item: any) => item.id === this.senderForm.value.address)[0]
+            user.senderCustomerContact = resp.body.filter((item: any) => item.id === this.senderForm.value.address)[0];
             console.log('Contact', user.senderCustomerContact);
             console.log('Текущий адресс', user.senderAddress);
             // Ввожу изменения в сессии
@@ -196,16 +200,18 @@ export class ProfileComponent implements OnInit {
       this.senderAddresses.pop();
       this.service.getAllUserCustomerAddress(this.senderForm.value.sender).subscribe(response => {
         if (response.status === 200) {
-          for (let address of response.body) {
+          for (const address of response.body) {
             this.senderAddresses.push({
               id: address.id,
               name: `${address.cityName}, ${address.streetName}`
             });
           }
         }
-      })
+      });
     } else {
-      this.senderAddresses = this.senderAddresses.filter((option: any) => option.name.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.senderAddresses = this.senderAddresses.filter((option: any) => {
+        option.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
     }
   }
 
@@ -214,16 +220,18 @@ export class ProfileComponent implements OnInit {
       this.senderContacts.pop();
       this.service.getAllUserCustomerContact(this.senderForm.value.address).subscribe(response => {
         if (response.status === 200) {
-          for (let contact of response.body) {
+          for (const contact of response.body) {
             this.senderContacts.push({
               id: contact.id,
               name: contact.name
             });
           }
         }
-      })
+      });
     } else {
-      this.senderContacts = this.senderContacts.filter((option: any) => option.name.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.senderContacts = this.senderContacts.filter((option: any) => {
+        option.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
     }
   }
 }
