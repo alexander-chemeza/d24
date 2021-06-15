@@ -155,7 +155,6 @@ export class ProfileComponent implements OnInit {
 
     // Получаю адресс
     let address;
-    let contacts;
     this.service.getAllUserCustomerAddress(this.senderForm.value.sender).subscribe(response => {
       if (response.status === 200) {
         // Фильтруюю до конкретного адреса
@@ -163,29 +162,25 @@ export class ProfileComponent implements OnInit {
         // Присваиваю значения полей
         user.senderAddress = address[0];
         console.log('Address ID', address[0].id);
-        this.service.getAllUserCustomerContact(address[0].id).subscribe(response => {
-          if (response.status === 200) {
-            user.senderCustomerContact = response.body.filter((item: any) => item.id === this.senderForm.value.address)[0]
+        this.service.getAllUserCustomerContact(address[0].id).subscribe(resp => {
+          if (resp.status === 200) {
+            user.senderCustomerContact = resp.body.filter((item: any) => item.id === this.senderForm.value.address)[0]
             console.log('Contact', user.senderCustomerContact);
-          }
-        })
-
-        console.log('Текущий адресс', user.senderAddress)
-        // Ввожу изменения в сессии
-        sessionStorage.setItem('currentUser', JSON.stringify(user));
-        // Убираю пароль чтоб не запороть пользователя
-        delete user.password;
-        // Меняю данные на сервере
-        this.service.updateUser(user).subscribe(response => {
-          if (response.status === 200) {
-            console.log('OK sender updated');
+            console.log('Текущий адресс', user.senderAddress);
+            // Ввожу изменения в сессии
+            sessionStorage.setItem('currentUser', JSON.stringify(user));
+            // Убираю пароль чтоб не запороть пользователя
+            delete user.password;
+            // Меняю данные на сервере
+            this.service.updateUser(user).subscribe(r => {
+              if (r.status === 200) {
+                console.log('OK sender updated');
+              }
+            });
           }
         });
       }
-    })
-
-
-
+    });
   }
 
   onKey(event: any): void {
