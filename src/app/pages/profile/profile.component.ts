@@ -24,6 +24,49 @@ export class ProfileComponent implements OnInit {
   currentSenderAddressId: any;
   currentReceiverAddressId: any;
 
+  profileForm = new FormGroup({
+    userName: new FormControl('', [
+      Validators.required
+    ]),
+    userEmail: new FormControl('', [
+      Validators.required,
+      Validators.email
+    ]),
+    userPhone: new FormControl('', [
+      Validators.required
+    ]),
+    sender: new FormControl('', [
+      Validators.required
+    ]),
+    senderAddress: new FormControl('', [
+      Validators.required
+    ]),
+    senderContact: new FormControl('', [
+      Validators.required
+    ]),
+    senderMainAddress: new FormControl('', [
+      // Validators.required
+    ]),
+    receiver: new FormControl('', [
+      Validators.required
+    ]),
+    receiverAddress: new FormControl('', [
+      Validators.required
+    ]),
+    receiverContact: new FormControl('', [
+      Validators.required
+    ]),
+    receiverMainAddress: new FormControl('', [
+      // Validators.required
+    ]),
+    costNotification: new FormControl('', [
+      // Validators.required
+    ]),
+    smsNotification: new FormControl('', [
+      // Validators.required
+    ])
+  });
+
   commonForm = new FormGroup({
     userName: new FormControl('', [
       Validators.required

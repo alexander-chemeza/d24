@@ -158,6 +158,10 @@ a {
   margin-top: 5px;
 }
 
+.mb-5 {
+  margin-bottom: 5px !important;
+}
+
 .mt-45 {
   margin-top: 45px !important;
 }
@@ -228,6 +232,7 @@ a {
   font-family: "Montserrat-SemiBold", sans-serif !important;
   font-size: 1.4rem;
   color: rgba(255, 255, 255, 0.5);
+  line-height: 1 !important;
 }
 
 .small-bold-text {

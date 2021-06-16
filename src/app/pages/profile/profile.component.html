@@ -1,7 +1,7 @@
 <div class="profile-content">
-  <div class="box-1">
-    <form [formGroup]="commonForm" (ngSubmit)="updateCommon($event)">
-      <h2 class="white-header">Общее</h2>
+  <form [formGroup]="profileForm">
+    <div class="box-1">
+      <h2 class="white-header mb-5">Общее</h2>
       <div class="grey-box">
         <h2 class="grey-header">Имя:</h2>
         <h2 class="grey-header m-0">Email:</h2>
@@ -9,16 +9,10 @@
         <input formControlName="userName" class="m-0" type="text" placeholder="Введите имя">
         <input formControlName="userEmail" class="m-0" type="email" placeholder="Введите email">
         <input formControlName="userPhone" class="m-0" type="tel" placeholder="Введите номер телефона">
-<!--        <p class="description mt-10">Andrey</p>-->
-<!--        <p class="description mt-10">bartashevich.s@ntt.by</p>-->
-<!--        <p class="description mt-10">+375 29 342-5554 </p>-->
       </div>
-      <input type="submit" class="btn-green" value="Сохранить">
-    </form>
-  </div>
-  <div class="box-2">
-    <form [formGroup]="senderForm" (ngSubmit)="updateSender($event)">
-      <h2 class="white-header">Настройки отправителя</h2>
+    </div>
+    <div class="box-2">
+      <h2 class="white-header mb-5">Настройки отправителя</h2>
       <div class="grey-box">
         <h2 class="grey-header">Отправитель:</h2>
         <mat-form-field floatLabel="never">
@@ -57,12 +51,9 @@
           </div>
         </div>
       </div>
-      <input type="submit" value="Сохранить">
-    </form>
-  </div>
-  <div class="box-4">
-    <form [formGroup]="recipientForm">
-      <h2 class="white-header">Настройки получателя</h2>
+    </div>
+    <div class="box-3">
+      <h2 class="white-header mb-5">Настройки получателя</h2>
       <div class="grey-box">
         <h2 class="grey-header">Получатель:</h2>
         <mat-form-field floatLabel="never">
@@ -101,12 +92,9 @@
           </div>
         </div>
       </div>
-      <input type="submit" value="Сохранить">
-    </form>
-  </div>
-  <div class="box-3">
-    <form>
-      <h2 class="white-header">Уведомления</h2>
+    </div>
+    <div class="box-4">
+      <h2 class="white-header mb-5">Уведомления</h2>
       <div class="grey-box">
         <div class="row m-0">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -122,15 +110,32 @@
           </div>
           <label class="description mt-10" style="display: inline" for="sms">Смс-оповещение о приходе груза</label>
         </div>
-        <div class="row">
-          <div class="checkbox-block" style="margin-right: 15px;">
-            <input class="checkbox-block-item" type="checkbox" name="cost" id="cost" checked>
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label class="description mt-10" style="display: inline" for="cost">Уведомлять о предварительной стоимости доставки груза по заявке</label>
-        </div>
       </div>
-      <input type="submit" value="Сохранить">
-    </form>
-  </div>
+    </div>
+    <input type="submit" value="Сохранить">
+  </form>
+<!--  <div class="box-1">-->
+<!--    <form [formGroup]="commonForm" (ngSubmit)="updateCommon($event)">-->
+<!--      -->
+<!--      <input type="submit" class="btn-green" value="Сохранить">-->
+<!--    </form>-->
+<!--  </div>-->
+<!--  <div class="box-2">-->
+<!--    <form [formGroup]="senderForm" (ngSubmit)="updateSender($event)">-->
+<!--      -->
+<!--      <input type="submit" value="Сохранить">-->
+<!--    </form>-->
+<!--  </div>-->
+<!--  <div class="box-4">-->
+<!--    <form [formGroup]="recipientForm">-->
+<!--      -->
+<!--      <input type="submit" value="Сохранить">-->
+<!--    </form>-->
+<!--  </div>-->
+<!--  <div class="box-3">-->
+<!--    <form>-->
+<!--      -->
+<!--      <input type="submit" value="Сохранить">-->
+<!--    </form>-->
+<!--  </div>-->
 </div>
