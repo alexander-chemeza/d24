@@ -23,9 +23,9 @@
         <h2 class="grey-header">Отправитель:</h2>
         <mat-form-field floatLabel="never">
           <mat-select formControlName="sender" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, senderForm, currentSenderAgentId, senderAddresses, senderContacts)">
-            <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey($event)">
-            <cdk-virtual-scroll-viewport *ngIf="agents" [itemSize]="42" class="example-viewport">
-              <mat-option *cdkVirtualFor="let agent of agents" [value]="agent.id" class="example-item">
+            <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey($event, senderAgents)">
+            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
+              <mat-option *cdkVirtualFor="let agent of senderAgents" [value]="agent.id" class="example-item">
                 {{agent.customerName}}
               </mat-option>
             </cdk-virtual-scroll-viewport>
@@ -68,8 +68,8 @@
         <mat-form-field floatLabel="never">
           <mat-select formControlName="sender" (selectionChange)="selectAgent($event, recipientForm, currentReceiverAgentId, receiverAddresses, receiverContacts)">
             <input type="text" placeholder="Поиск">
-            <cdk-virtual-scroll-viewport *ngIf="agents" [itemSize]="42" class="example-viewport">
-              <mat-option *cdkVirtualFor="let agent of agents" [value]="agent.id" class="example-item">
+            <cdk-virtual-scroll-viewport *ngIf="receiverAgents" [itemSize]="42" class="example-viewport">
+              <mat-option *cdkVirtualFor="let agent of receiverAgents" [value]="agent.id" class="example-item">
                 {{agent.customerName}}
               </mat-option>
             </cdk-virtual-scroll-viewport>

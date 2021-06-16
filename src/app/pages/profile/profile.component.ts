@@ -8,8 +8,9 @@ import {RestapiService} from '../../restapi.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  // Agents array (common)
-  agents: any;
+  // Agents arrayы
+  public senderAgents: any;
+  public receiverAgents: any;
   // Address arrays
   senderAddresses: {id: number, name: string}[] = [];
   receiverAddresses: {id: number, name: string}[] = [];
@@ -69,6 +70,8 @@ export class ProfileComponent implements OnInit {
   constructor(private service: RestapiService) { }
 
   ngOnInit(): void {
+    this.senderAgents = [];
+    this.receiverAgents = [];
     // User common data reception
     const userInfo: any = sessionStorage.getItem('currentUser');
     let user: any;
@@ -83,7 +86,8 @@ export class ProfileComponent implements OnInit {
 
     this.service.getAllUserCustomer().subscribe(response => {
       if (response.status === 200) {
-        this.agents = response.body;
+        this.senderAgents = response.body;
+        this.receiverAgents = response.body;
       }
     });
   }
@@ -155,7 +159,7 @@ export class ProfileComponent implements OnInit {
       user = JSON.parse(userInfo);
     }
 
-    user.senderCustomer = this.agents.filter((item: any) => item.id === this.senderForm.value.sender)[0];
+    user.senderCustomer = this.senderAgents.filter((item: any) => item.id === this.senderForm.value.sender)[0];
 
     // Получаю адресс
     let address;
@@ -169,8 +173,6 @@ export class ProfileComponent implements OnInit {
         this.service.getAllUserCustomerContact(address[0].id).subscribe(resp => {
           if (resp.status === 200) {
             user.senderCustomerContact = resp.body.filter((item: any) => item.id === this.senderForm.value.address)[0];
-            console.log('Contact', user.senderCustomerContact);
-            console.log('Текущий адресс', user.senderAddress);
             // Ввожу изменения в сессии
             sessionStorage.setItem('currentUser', JSON.stringify(user));
             // Убираю пароль чтоб не запороть пользователя
@@ -179,6 +181,7 @@ export class ProfileComponent implements OnInit {
             this.service.updateUser(user).subscribe(r => {
               if (r.status === 200) {
                 console.log('OK sender updated');
+                console.log('Updating data', user);
               }
             });
           }
@@ -187,11 +190,12 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  onKey(event: any): void {
-    if (event.target.value === '' || this.agents.length === 0) {
+  onKey(event: any, agentsArray: any): void {
+    if (event.target.value === '' || agentsArray.length === 0) {
       this.ngOnInit();
     } else {
-      this.agents = this.agents.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
+      agentsArray = agentsArray.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
+      console.log('Filtered', agentsArray);
     }
   }
 
