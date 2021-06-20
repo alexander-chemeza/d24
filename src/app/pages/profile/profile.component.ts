@@ -91,6 +91,26 @@ export class ProfileComponent implements OnInit {
           this.receiverAgents = response.body;
           console.log('sender agents', this.senderAgents);
           console.log('receiver agents', this.receiverAgents);
+          this.service.getAllUserCustomerAddress(this.user.senderCustomer.id).subscribe(addresses => {
+            if (addresses.status === 200) {
+              for (const address of addresses.body) {
+                this.senderAddresses.push({
+                  id: address.id,
+                  name: `${address.cityName}, ${address.streetName}`
+                });
+              }
+              this.service.getAllUserCustomerContact(this.user.senderAddress.id).subscribe(contacts => {
+                if (contacts.status === 200) {
+                  for (const contact of contacts.body) {
+                    this.senderContacts.push({
+                      id: contact.id,
+                      name: contact.name
+                    });
+                  }
+                }
+              });
+            }
+          });
         }
       });
       // Put some logic to get some user info
@@ -101,6 +121,10 @@ export class ProfileComponent implements OnInit {
         userPhone: this.user.phone,
         senderMainAddress: this.user.senderAddress.mainAddress,
         receiverMainAddress: this.user.recipientAddress.mainAddress,
+        sender: this.user.senderCustomer.id,
+        senderAddress: this.user.senderAddress.id,
+        senderContact: this.user.senderCustomerContact.id,
+        receiver: this.user.recipientCustomer.id
       });
     }
 
