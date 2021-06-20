@@ -111,6 +111,27 @@ export class ProfileComponent implements OnInit {
               });
             }
           });
+
+          this.service.getAllUserCustomerAddress(this.user.recipientCustomer.id).subscribe(addresses => {
+            if (addresses.status === 200) {
+              for (const address of addresses.body) {
+                this.receiverAddresses.push({
+                  id: address.id,
+                  name: `${address.cityName}, ${address.streetName}`
+                });
+              }
+              this.service.getAllUserCustomerContact(this.user.recipientAddress.id).subscribe(contacts => {
+                if (contacts.status === 200) {
+                  for (const contact of contacts.body) {
+                    this.receiverContacts.push({
+                      id: contact.id,
+                      name: contact.name
+                    });
+                  }
+                }
+              });
+            }
+          });
         }
       });
       // Put some logic to get some user info
@@ -124,7 +145,11 @@ export class ProfileComponent implements OnInit {
         sender: this.user.senderCustomer.id,
         senderAddress: this.user.senderAddress.id,
         senderContact: this.user.senderCustomerContact.id,
-        receiver: this.user.recipientCustomer.id
+        receiver: this.user.recipientCustomer.id,
+        receiverAddress: this.user.recipientAddress.id,
+        receiverContact: this.user.recipientCustomerContact.id,
+        costNotification: this.user.costNotification,
+        smsNotification: this.user.smsNotification
       });
     }
 
