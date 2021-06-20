@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RestapiService} from '../../restapi.service';
 
@@ -8,9 +8,11 @@ import {RestapiService} from '../../restapi.service';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  // Agents arrayы
-  public senderAgents: any;
-  public receiverAgents: any;
+  userOldInfo: any = sessionStorage.getItem('currentUser');
+  user: any;
+  // Agents array
+  senderAgents: any;
+  receiverAgents: any;
   // Address arrays
   senderAddresses: {id: number, name: string}[] = [];
   receiverAddresses: {id: number, name: string}[] = [];
@@ -67,101 +69,49 @@ export class ProfileComponent implements OnInit {
     ])
   });
 
-  commonForm = new FormGroup({
-    userName: new FormControl('', [
-      Validators.required
-    ]),
-    userEmail: new FormControl('', [
-      Validators.required,
-      Validators.email
-    ]),
-    userPhone: new FormControl('', [
-      Validators.required
-    ])
-  });
-
-  senderForm = new FormGroup({
-    sender: new FormControl('', [
-      Validators.required
-    ]),
-    address: new FormControl('', [
-      Validators.required
-    ]),
-    contact: new FormControl('', [
-      Validators.required
-    ]),
-    mainAddress: new FormControl('', [
-
-    ])
-  });
-
-  recipientForm = new FormGroup({
-    sender: new FormControl('', [
-      Validators.required
-    ]),
-    address: new FormControl('', [
-      Validators.required
-    ]),
-    contact: new FormControl('', [
-      Validators.required
-    ]),
-    mainAddress: new FormControl('', [
-
-    ])
-  });
-
   constructor(private service: RestapiService) { }
 
   ngOnInit(): void {
-    this.senderAgents = [];
-    this.receiverAgents = [];
+    // Make user object with his data
+    if (this.userOldInfo) {
+      this.user = JSON.parse(this.userOldInfo);
+      delete this.user.password;
+    }
+    // Clear data if exists
+    if (this.senderAgents || this.receiverAgents) {
+      this.senderAgents.pop();
+      this.receiverAgents.pop();
+    }
     // User common data reception
-    const userInfo: any = sessionStorage.getItem('currentUser');
-    let user: any;
-    if (userInfo) {
-      user = JSON.parse(userInfo);
-    }
-    this.commonForm.patchValue({
-      userName: user.userName,
-      userEmail: user.email,
-      userPhone: user.phone
-    });
-
-    this.service.getAllUserCustomer().subscribe(response => {
-      if (response.status === 200) {
-        this.senderAgents = response.body;
-        this.receiverAgents = response.body;
-      }
-    });
-  }
-
-  updateCommon($event: any): void {
-    const userInfo: any = sessionStorage.getItem('currentUser');
-    let user: any;
-    if (userInfo) {
-      user = JSON.parse(userInfo);
+    if (this.user) {
+      // Get agents from address book and split it into divided arrays
+      this.service.getAllUserCustomer().subscribe(response => {
+        if (response.status === 200) {
+          this.senderAgents = response.body;
+          this.receiverAgents = response.body;
+          console.log('sender agents', this.senderAgents);
+          console.log('receiver agents', this.receiverAgents);
+        }
+      });
+      // Put some logic to get some user info
+      // Put some data in fields
+      this.profileForm.patchValue({
+        userName: this.user.userName,
+        userEmail: this.user.email,
+        userPhone: this.user.phone,
+        senderMainAddress: this.user.senderAddress.mainAddress,
+        receiverMainAddress: this.user.recipientAddress.mainAddress,
+      });
     }
 
-    user.userName = this.commonForm.value.userName;
-    user.email = this.commonForm.value.userEmail;
-    user.phone = this.commonForm.value.userPhone;
-    sessionStorage.setItem('currentUser', JSON.stringify(user));
-    delete user.password;
-
-    this.service.updateUser(user).subscribe(response => {
-      if (response.status === 200) {
-        console.log('OK');
-      }
-    });
   }
 
-  selectAgent($event: any, form: any, agentId: any, addresses: any, contacts: any): void {
+  selectAgent($event: any, agentId: any, addresses: any, contacts: any): void {
     addresses.pop();
     contacts.pop();
-    if (form.value.sender) {
+    if (agentId) {
       addresses.pop();
       contacts.pop();
-      agentId = form.value.sender;
       this.service.getAllUserCustomerAddress(agentId).subscribe(response => {
         if (response.status === 200 && addresses.length === 0) {
           for (const address of response.body) {
@@ -170,17 +120,18 @@ export class ProfileComponent implements OnInit {
               name: `${address.cityName}, ${address.streetName}`
             });
           }
-          console.log(addresses);
         }
       });
     }
   }
 
-  selectAddress($event: any, form: any, addressId: any, contacts: any): void {
+  selectAddress($event: any, addressId: any, contacts: any): void {
     contacts.pop();
-    if (form.value.address) {
-      contacts.pop();
-      addressId = form.value.address;
+    if (addressId) {
+      console.log('addressID', addressId);
+      if (contacts) {
+        contacts.pop();
+      }
       this.service.getAllUserCustomerContact(addressId).subscribe(response => {
         if (response.status === 200) {
           for (const contact of response.body) {
@@ -202,20 +153,20 @@ export class ProfileComponent implements OnInit {
       user = JSON.parse(userInfo);
     }
 
-    user.senderCustomer = this.senderAgents.filter((item: any) => item.id === this.senderForm.value.sender)[0];
+    user.senderCustomer = this.senderAgents.filter((item: any) => item.id === this.profileForm.value.sender)[0];
 
     // Получаю адресс
     let address;
-    this.service.getAllUserCustomerAddress(this.senderForm.value.sender).subscribe(response => {
+    this.service.getAllUserCustomerAddress(this.profileForm.value.sender).subscribe(response => {
       if (response.status === 200) {
         // Фильтруюю до конкретного адреса
-        address = response.body.filter((item: any) => item.id === this.senderForm.value.address);
+        address = response.body.filter((item: any) => item.id === this.profileForm.value.address);
         // Присваиваю значения полей
         user.senderAddress = address[0];
         console.log('Address ID', address[0].id);
         this.service.getAllUserCustomerContact(address[0].id).subscribe(resp => {
           if (resp.status === 200) {
-            user.senderCustomerContact = resp.body.filter((item: any) => item.id === this.senderForm.value.address)[0];
+            user.senderCustomerContact = resp.body.filter((item: any) => item.id === this.profileForm.value.address)[0];
             // Ввожу изменения в сессии
             sessionStorage.setItem('currentUser', JSON.stringify(user));
             // Убираю пароль чтоб не запороть пользователя
@@ -233,19 +184,18 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  onKey(event: any, agentsArray: any): void {
-    if (event.target.value === '' || agentsArray.length === 0) {
+  onKey(event: any): void {
+    if (event.target.value === '' || this.senderAgents.length === 0) {
       this.ngOnInit();
     } else {
-      agentsArray = agentsArray.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
-      console.log('Filtered', agentsArray);
+      this.senderAgents = this.senderAgents.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
     }
   }
 
   onKey2(event: any): void {
     if (event.target.value === '' || this.senderAddresses.length === 0) {
       this.senderAddresses.pop();
-      this.service.getAllUserCustomerAddress(this.senderForm.value.sender).subscribe(response => {
+      this.service.getAllUserCustomerAddress(this.profileForm.value.sender).subscribe(response => {
         if (response.status === 200) {
           for (const address of response.body) {
             this.senderAddresses.push({
@@ -257,7 +207,7 @@ export class ProfileComponent implements OnInit {
       });
     } else {
       this.senderAddresses = this.senderAddresses.filter((option: any) => {
-        option.name.toLowerCase().includes(event.target.value.toLowerCase());
+        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
       });
     }
   }
@@ -265,7 +215,7 @@ export class ProfileComponent implements OnInit {
   onKey3(event: any): void {
     if (event.target.value === '' || this.senderContacts.length === 0) {
       this.senderContacts.pop();
-      this.service.getAllUserCustomerContact(this.senderForm.value.address).subscribe(response => {
+      this.service.getAllUserCustomerContact(this.profileForm.value.senderAddress).subscribe(response => {
         if (response.status === 200) {
           for (const contact of response.body) {
             this.senderContacts.push({
@@ -277,8 +227,72 @@ export class ProfileComponent implements OnInit {
       });
     } else {
       this.senderContacts = this.senderContacts.filter((option: any) => {
-        option.name.toLowerCase().includes(event.target.value.toLowerCase());
+        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
       });
     }
+  }
+
+  onKey4(event: any): void {
+    if (event.target.value === '' || this.receiverAgents.length === 0) {
+      this.ngOnInit();
+    } else {
+      this.receiverAgents = this.receiverAgents.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
+    }
+  }
+
+  onKey5(event: any): void {
+    if (event.target.value === '' || this.receiverAddresses.length === 0) {
+      this.receiverAddresses.pop();
+      this.service.getAllUserCustomerAddress(this.profileForm.value.receiver).subscribe(response => {
+        if (response.status === 200) {
+          for (const address of response.body) {
+            this.receiverAddresses.push({
+              id: address.id,
+              name: `${address.cityName}, ${address.streetName}`
+            });
+          }
+        }
+      });
+    } else {
+      this.receiverAddresses = this.receiverAddresses.filter((option: any) => {
+        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
+    }
+  }
+
+  onKey6(event: any): void {
+    if (event.target.value === '' || this.receiverContacts.length === 0) {
+      this.receiverContacts.pop();
+      this.service.getAllUserCustomerContact(this.profileForm.value.receiverAddress).subscribe(response => {
+        if (response.status === 200) {
+          for (const contact of response.body) {
+            this.receiverContacts.push({
+              id: contact.id,
+              name: contact.name
+            });
+          }
+        }
+      });
+    } else {
+      this.receiverContacts = this.receiverContacts.filter((option: any) => {
+        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
+    }
+  }
+
+  updateUser(event: any): void {
+    // Get common data
+    this.user.userName = this.profileForm.value.userName;
+    this.user.email = this.profileForm.value.userEmail;
+    this.user.phone = this.profileForm.value.userPhone;
+    this.user.senderAddress.mainAddress = this.profileForm.value.senderMainAddress;
+    this.user.recipientAddress.mainAddress = this.profileForm.value.receiverMainAddress;
+
+    // Update user info
+    this.service.updateUser(this.user).subscribe(response => {
+      if (response.status === 200) {
+        sessionStorage.setItem('currentUser', JSON.stringify(this.user));
+      }
+    });
   }
 }

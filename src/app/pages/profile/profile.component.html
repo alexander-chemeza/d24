@@ -1,5 +1,5 @@
 <div class="profile-content">
-  <form [formGroup]="profileForm">
+  <form [formGroup]="profileForm" (ngSubmit)="updateUser($event)">
     <div class="box-1">
       <h2 class="white-header mb-5">Общее</h2>
       <div class="grey-box">
@@ -16,8 +16,8 @@
       <div class="grey-box">
         <h2 class="grey-header">Отправитель:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="sender" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, senderForm, currentSenderAgentId, senderAddresses, senderContacts)">
-            <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey($event, senderAgents)">
+          <mat-select formControlName="sender" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, profileForm.value.sender, senderAddresses, senderContacts)">
+            <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey($event)">
             <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
               <mat-option *cdkVirtualFor="let agent of senderAgents" [value]="agent.id" class="example-item">
                 {{agent.customerName}}
@@ -27,7 +27,7 @@
         </mat-form-field>
         <h2 class="grey-header">Адрес выдачи груза:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="address" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, senderForm, currentSenderAddressId, senderContacts)">
+          <mat-select formControlName="senderAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, profileForm.value.senderAddress, senderContacts)">
             <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey2($event)">
             <mat-option *ngFor="let address of senderAddresses" [value]="address.id" class="example-item">
               {{address.name}}
@@ -36,7 +36,7 @@
         </mat-form-field>
         <h2 class="grey-header">Контакт (по адресу выдачи груза):</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="contact" (keyup)="$event.stopPropagation()">
+          <mat-select formControlName="senderContact" (keyup)="$event.stopPropagation()">
             <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey3($event)">
             <mat-option *ngFor="let contact of senderContacts" [value]="contact.id" class="example-item">
               {{contact.name}}
@@ -46,7 +46,7 @@
         <div class="row">
           <label class="mr-15" style="display: inline-block" for="use-as-main">Использовать как основной: </label>
           <div class="checkbox-block" style="margin-right: 15px;">
-            <input class="checkbox-block-item" type="checkbox" name="use-as-main" id="use-as-main" checked>
+            <input formControlName="senderMainAddress" class="checkbox-block-item" type="checkbox" name="use-as-main" id="use-as-main">
             <span class="checkbox-block-icon"></span>
           </div>
         </div>
@@ -57,8 +57,8 @@
       <div class="grey-box">
         <h2 class="grey-header">Получатель:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="sender" (selectionChange)="selectAgent($event, recipientForm, currentReceiverAgentId, receiverAddresses, receiverContacts)">
-            <input type="text" placeholder="Поиск">
+          <mat-select formControlName="receiver" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, profileForm.value.receiver, receiverAddresses, receiverContacts)">
+            <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey4($event)">
             <cdk-virtual-scroll-viewport *ngIf="receiverAgents" [itemSize]="42" class="example-viewport">
               <mat-option *cdkVirtualFor="let agent of receiverAgents" [value]="agent.id" class="example-item">
                 {{agent.customerName}}
@@ -68,8 +68,8 @@
         </mat-form-field>
         <h2 class="grey-header">Адрес получателя груза:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="address" (selectionChange)="selectAddress($event, recipientForm, currentReceiverAddressId, receiverContacts)">
-            <input type="text" placeholder="Поиск">
+          <mat-select formControlName="receiverAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, profileForm.value.receiverAddress, receiverContacts)">
+            <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey5($event)">
             <mat-option *ngFor="let address of receiverAddresses" [value]="address.id" class="example-item">
               {{address.name}}
             </mat-option>
@@ -77,8 +77,8 @@
         </mat-form-field>
         <h2 class="grey-header">Контакт (по адресу доставки груза):</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="contact">
-            <input type="text" placeholder="Поиск">
+          <mat-select formControlName="receiverContact" (keyup)="$event.stopPropagation()">
+            <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey6($event)">
             <mat-option *ngFor="let contact of receiverContacts" [value]="contact.id" class="example-item">
               {{contact.name}}
             </mat-option>
@@ -87,7 +87,7 @@
         <div class="row">
           <label class="mr-15" style="display: inline-block" for="use-as-main">Использовать как основной: </label>
           <div class="checkbox-block" style="margin-right: 15px;">
-            <input class="checkbox-block-item" type="checkbox" name="use-as-main" id="use-as-main" checked>
+            <input formControlName="receiverMainAddress" class="checkbox-block-item" type="checkbox" name="use-as-main" id="use-as-main" checked>
             <span class="checkbox-block-icon"></span>
           </div>
         </div>
@@ -98,14 +98,14 @@
       <div class="grey-box">
         <div class="row m-0">
           <div class="checkbox-block" style="margin-right: 15px;">
-            <input class="checkbox-block-item" type="checkbox" name="notify" id="notify" checked>
+            <input formControlName="costNotification" class="checkbox-block-item" type="checkbox" name="notify" id="notify" checked>
             <span class="checkbox-block-icon"></span>
           </div>
           <label class="description mt-10" style="display: inline" for="notify">Уведомлять о предварительной стоимости доставки груза по заявке</label>
         </div>
         <div class="row">
           <div class="checkbox-block" style="margin-right: 15px;">
-            <input class="checkbox-block-item" type="checkbox" name="sms" id="sms" checked>
+            <input formControlName="smsNotification" class="checkbox-block-item" type="checkbox" name="sms" id="sms" checked>
             <span class="checkbox-block-icon"></span>
           </div>
           <label class="description mt-10" style="display: inline" for="sms">Смс-оповещение о приходе груза</label>
@@ -114,28 +114,4 @@
     </div>
     <input type="submit" value="Сохранить">
   </form>
-<!--  <div class="box-1">-->
-<!--    <form [formGroup]="commonForm" (ngSubmit)="updateCommon($event)">-->
-<!--      -->
-<!--      <input type="submit" class="btn-green" value="Сохранить">-->
-<!--    </form>-->
-<!--  </div>-->
-<!--  <div class="box-2">-->
-<!--    <form [formGroup]="senderForm" (ngSubmit)="updateSender($event)">-->
-<!--      -->
-<!--      <input type="submit" value="Сохранить">-->
-<!--    </form>-->
-<!--  </div>-->
-<!--  <div class="box-4">-->
-<!--    <form [formGroup]="recipientForm">-->
-<!--      -->
-<!--      <input type="submit" value="Сохранить">-->
-<!--    </form>-->
-<!--  </div>-->
-<!--  <div class="box-3">-->
-<!--    <form>-->
-<!--      -->
-<!--      <input type="submit" value="Сохранить">-->
-<!--    </form>-->
-<!--  </div>-->
 </div>
