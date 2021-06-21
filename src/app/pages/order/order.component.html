@@ -38,15 +38,15 @@
     </div>
   </div>
   <div class="row-form">
-    <form>
+    <form [formGroup]="oderForm">
       <div class="row-form-content">
 <!--        Form 1-->
         <div id="form-0" class="form form-content-1">
           <div class="col grey-box">
             <div class="row">
               <div class="control">
-                <label for="">Отправитель:</label>
-                <input type="text">
+                <label for="expressSender">Отправитель:</label>
+                <input type="text" name="expressSender" id="expressSender" formControlName="expressSender">
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-express-sender-contragent')"></button>
@@ -54,8 +54,8 @@
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Адрес выдачи груза:</label>
-                <input type="text">
+                <label for="expressSenderAddress">Адрес выдачи груза:</label>
+                <input type="text" id="expressSenderAddress" name="expressSenderAddress" formControlName="expressSenderAddress">
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-express-sender-address')"></button>
@@ -69,8 +69,8 @@
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Контакт (по адресу выдачи груза):</label>
-                <input type="text">
+                <label for="expressSenderContact">Контакт (по адресу выдачи груза):</label>
+                <input type="text" id="expressSenderContact" name="expressSenderContact" formControlName="expressSenderContact">
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-express-sender-contact')"></button>
@@ -78,36 +78,36 @@
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Дата выдачи груза:</label>
-                <input type="date">
+                <label for="expressSenderDeliveryDate">Дата выдачи груза:</label>
+                <input type="date" name="expressSenderDeliveryDate" id="expressSenderDeliveryDate" formControlName="expressSenderDeliveryDate">
               </div>
               <div class="optional">
               </div>
             </div>
             <div class="row-multiple">
               <div class="container">
-                <label class="m-0" for="">Дата выдачи груза c:</label>
-                <label class="m-0" for="">по:</label>
-                <label class="m-0" for="">Время перерыва c:</label>
-                <label class="m-0" for="">по:</label>
-                <input type="text">
-                <input type="text">
-                <input type="text">
-                <input type="text">
+                <label class="m-0" for="expressSenderDeliverFrom">Дата выдачи груза c:</label>
+                <label class="m-0" for="expressSenderDeliverTo">по:</label>
+                <label class="m-0" for="expressSenderTimeoutFrom">Время перерыва c:</label>
+                <label class="m-0" for="expressSenderTimeoutTo">по:</label>
+                <input type="text" name="expressSenderDeliverFrom" id="expressSenderDeliverFrom" formControlName="expressSenderDeliverFrom">
+                <input type="text" name="expressSenderDeliverTo" id="expressSenderDeliverTo" formControlName="expressSenderDeliverTo">
+                <input type="text" name="expressSenderTimeoutFrom" id="expressSenderTimeoutFrom" formControlName="expressSenderTimeoutFrom">
+                <input type="text" name="expressSenderTimeoutTo" id="expressSenderTimeoutTo" formControlName="expressSenderTimeoutTo">
               </div>
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Серия и номер ТТН:</label>
-                <input type="text">
+                <label for="expressSenderTTN">Серия и номер ТТН:</label>
+                <input type="text" name="expressSenderTTN" id="expressSenderTTN" formControlName="expressSenderTTN">
               </div>
               <div class="optional">
               </div>
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Примечание (по адресу выдачи груза):</label>
-                <textarea></textarea>
+                <label for="expressSenderDescription">Примечание (по адресу выдачи груза):</label>
+                <textarea name="expressSenderDescription" id="expressSenderDescription" formControlName="expressSenderDescription"></textarea>
               </div>
               <div class="optional">
               </div>
@@ -116,8 +116,8 @@
           <div class="col grey-box">
             <div class="row">
               <div class="control">
-                <label for="">Получатель:</label>
-                <input type="text">
+                <label for="expressRecipient">Получатель:</label>
+                <input type="text" name="expressRecipient" id="expressRecipient" formControlName="expressRecipient">
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-express-recipient-contragent')"></button>
@@ -125,8 +125,8 @@
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Адрес доставки груза:</label>
-                <input type="text">
+                <label for="expressRecipientAddress">Адрес доставки груза:</label>
+                <input type="text" name="expressRecipientAddress" id="expressRecipientAddress" formControlName="expressRecipientAddress">
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-express-recipient-address')"></button>
@@ -140,8 +140,8 @@
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Контакт (по адресу  доставки груза):</label>
-                <input type="text">
+                <label for="expressRecipientContact">Контакт (по адресу  доставки груза):</label>
+                <input type="text" name="expressRecipientContact" id="expressRecipientContact" formControlName="expressRecipientContact">
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-express-recipient-contact')"></button>
@@ -149,40 +149,41 @@
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Дата доставки груза:</label>
-                <input type="date">
+                <label for="expressRecipientDeliveryDate">Дата доставки груза:</label>
+                <input type="date" name="expressRecipientDeliveryDate" id="expressRecipientDeliveryDate" formControlName="expressRecipientDeliveryDate">
               </div>
               <div class="optional">
               </div>
             </div>
             <div class="row-multiple">
               <div class="container">
-                <label class="m-0" for="">Дата выдачи груза c:</label>
-                <label class="m-0" for="">по:</label>
-                <label class="m-0" for="">Время перерыва c:</label>
-                <label class="m-0" for="">по:</label>
-                <input type="text">
-                <input type="text">
-                <input type="text">
-                <input type="text">
+                <label class="m-0" for="expressRecipientDeliverFrom">Дата выдачи груза c:</label>
+                <label class="m-0" for="expressRecipientDeliverTo">по:</label>
+                <label class="m-0" for="expressRecipientTimeoutFrom">Время перерыва c:</label>
+                <label class="m-0" for="expressRecipientTimeoutTo">по:</label>
+                <input type="text" name="expressRecipientDeliverFrom" id="expressRecipientDeliverFrom" formControlName="expressRecipientDeliverFrom">
+                <input type="text" name="expressRecipientDeliverTo" id="expressRecipientDeliverTo" formControlName="expressRecipientDeliverTo">
+                <input type="text" name="expressRecipientTimeoutFrom" id="expressRecipientTimeoutFrom" formControlName="expressRecipientTimeoutFrom">
+                <input type="text" name="expressRecipientTimeoutTo" id="expressRecipientTimeoutTo" formControlName="expressRecipientTimeoutTo">
               </div>
             </div>
             <div class="row-two-items">
               <div class="container">
                 <div class="condition">
                   <div class="checkbox-block" style="margin-right: 15px;">
-                    <input class="checkbox-block-item" type="checkbox" name="notification" id="notification" checked>
+                    <input class="checkbox-block-item" type="checkbox" name="expressRecipientNotification" id="expressRecipientNotification" formControlName="expressRecipientNotification" checked>
                     <span class="checkbox-block-icon"></span>
                   </div>
-                  <label for="notification">Email оповещение получателя</label>
+                  <label for="expressRecipientNotification">Email оповещение получателя</label>
                 </div>
-                <input type="text" class="m-0">
+                <label for="expressRecipientNotificationEmail" hidden></label>
+                <input type="text" class="m-0" name="expressRecipientNotificationEmail" id="expressRecipientNotificationEmail" formControlName="expressRecipientNotificationEmail">
               </div>
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Примечание (по адресу выдачи груза):</label>
-                <textarea></textarea>
+                <label for="expressRecipientDescription">Примечание (по адресу выдачи груза):</label>
+                <textarea name="expressRecipientDescription" id="expressRecipientDescription" formControlName="expressRecipientDescription"></textarea>
               </div>
               <div class="optional">
               </div>
