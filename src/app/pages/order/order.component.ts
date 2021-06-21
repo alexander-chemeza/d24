@@ -78,6 +78,79 @@ export class OrderComponent implements OnInit {
   newCarrierSenderContact: any;
   newCarrierSenderAddress: any;
 
+  // Form
+  oderForm = new FormGroup({
+    serviceType: new FormControl('', [
+      Validators.required
+    ]),
+    deliveryType: new FormControl('', [
+      Validators.required
+    ]),
+    expressSender: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipient: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderAddress: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientAddress: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderContact: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientContact: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderDeliveryDate: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientDeliveryDate: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderDeliverFrom: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientDeliverFrom: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderDeliverTo: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientDeliverTo: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderTimeoutFrom: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientTimeoutFrom: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderTimeoutTo: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientTimeoutTo: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderTTN: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientNotification: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientNotificationEmail: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderDescription: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientDescription: new FormControl('', [
+      Validators.required
+    ]),
+  });
+
   constructor(private service: RestapiService) {
     this.serviceType = this.serviceTypes[0].value;
     this.deliveryType = '';
