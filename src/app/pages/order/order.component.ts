@@ -68,7 +68,7 @@ export class OrderComponent implements OnInit {
   userOldInfo: any = sessionStorage.getItem('currentUser');
   user: any;
 
-  expressSenderAgents: any;
+  public expressSenderAgents: any;
   expressSenderAddresses: {id: number, name: string}[] = [];
   expressSenderContacts: {id: number, name: string}[] = [];
 
@@ -149,7 +149,7 @@ export class OrderComponent implements OnInit {
     ]),
   });
 
-  newExpressSenderContragent = new FormGroup({
+  public newExpressSenderContragent = new FormGroup({
     type: new FormControl('', [
       Validators.required
     ]),
@@ -589,5 +589,24 @@ export class OrderComponent implements OnInit {
 
   createNewCarrierSenderAddress(): void {
     // Write something
+  }
+
+  createContragent(form: FormGroup, modalId: string, array: any): void {
+    const data = {
+      customerName: form.value.name as string,
+      customerType: form.value.type as string
+    };
+    this.service.saveUserCustomer(data).subscribe(response => {
+      if (response.status === 200) {
+        this.hideModal(modalId);
+        form.reset();
+        array.pop();
+        this.service.getAllUserCustomer().subscribe(agents => {
+          if (agents.status === 200) {
+            array = agents.body;
+          }
+        });
+      }
+    });
   }
 }
