@@ -540,6 +540,23 @@ export class OrderComponent implements OnInit {
 
   createNewExpressSenderContragent(): void {
     // Write something
+    const data = {
+      customerName: this.newExpressSenderContragent.value.name as string,
+      customerType: this.newExpressSenderContragent.value.type as string
+    };
+
+    this.service.saveUserCustomer(data).subscribe(response => {
+      if (response.status === 200) {
+        this.hideModal('new-express-sender-contragent');
+        this.newExpressSenderContragent.reset();
+        this.expressSenderAgents.pop();
+        this.service.getAllUserCustomer().subscribe(agents => {
+          if (agents.status === 200) {
+            this.expressSenderAgents = agents.body;
+          }
+        });
+      }
+    });
   }
 
   createNewExpressSenderContact(): void {
