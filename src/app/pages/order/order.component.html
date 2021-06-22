@@ -46,7 +46,14 @@
             <div class="row">
               <div class="control">
                 <label for="expressSender">Отправитель:</label>
-                <input type="text" name="expressSender" id="expressSender" formControlName="expressSender">
+                <mat-form-field floatLabel="never">
+                  <mat-select formControlName="expressSender" id="expressSender" (keyup)="$event.stopPropagation()">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                    <mat-option *ngFor="let expressSenderAgent of expressSenderAgents" [value]="expressSenderAgent.id" class="example-item">
+                      {{expressSenderAgent.customerName}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-express-sender-contragent')"></button>
@@ -55,7 +62,14 @@
             <div class="row">
               <div class="control">
                 <label for="expressSenderAddress">Адрес выдачи груза:</label>
-                <input type="text" id="expressSenderAddress" name="expressSenderAddress" formControlName="expressSenderAddress">
+                <mat-form-field floatLabel="never">
+                  <mat-select formControlName="expressSenderAddress" id="expressSenderAddress" (keyup)="$event.stopPropagation()">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                    <mat-option *ngFor="let expressSenderAddress of expressSenderAddresses" [value]="expressSenderAddress.id" class="example-item">
+                      {{expressSenderAddress.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-express-sender-address')"></button>
@@ -70,7 +84,14 @@
             <div class="row">
               <div class="control">
                 <label for="expressSenderContact">Контакт (по адресу выдачи груза):</label>
-                <input type="text" id="expressSenderContact" name="expressSenderContact" formControlName="expressSenderContact">
+                <mat-form-field floatLabel="never">
+                  <mat-select formControlName="expressSenderContact" id="expressSenderContact" (keyup)="$event.stopPropagation()">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                    <mat-option *ngFor="let expressSenderContact of expressSenderContacts" [value]="expressSenderContact.id" class="example-item">
+                      {{expressSenderContact.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-express-sender-contact')"></button>
@@ -117,7 +138,16 @@
             <div class="row">
               <div class="control">
                 <label for="expressRecipient">Получатель:</label>
-                <input type="text" name="expressRecipient" id="expressRecipient" formControlName="expressRecipient">
+                <mat-form-field floatLabel="never">
+                  <mat-select formControlName="expressRecipient" (keyup)="$event.stopPropagation()">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                    <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
+                      <mat-option *cdkVirtualFor="let expressReceiverAgent of expressReceiverAgents" [value]="expressReceiverAgent.id" class="example-item">
+                        {{expressReceiverAgent.customerName}}
+                      </mat-option>
+                    </cdk-virtual-scroll-viewport>
+                  </mat-select>
+                </mat-form-field>
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-express-recipient-contragent')"></button>
@@ -126,7 +156,14 @@
             <div class="row">
               <div class="control">
                 <label for="expressRecipientAddress">Адрес доставки груза:</label>
-                <input type="text" name="expressRecipientAddress" id="expressRecipientAddress" formControlName="expressRecipientAddress">
+                <mat-form-field floatLabel="never">
+                  <mat-select formControlName="expressRecipientAddress" id="expressRecipientAddress" (keyup)="$event.stopPropagation()">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                    <mat-option *ngFor="let expressReceiverAddress of expressReceiverAddresses" [value]="expressReceiverAddress.id" class="example-item">
+                      {{expressReceiverAddress.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-express-recipient-address')"></button>
@@ -141,7 +178,14 @@
             <div class="row">
               <div class="control">
                 <label for="expressRecipientContact">Контакт (по адресу  доставки груза):</label>
-                <input type="text" name="expressRecipientContact" id="expressRecipientContact" formControlName="expressRecipientContact">
+                <mat-form-field floatLabel="never">
+                  <mat-select formControlName="expressRecipientContact" id="expressRecipientContact" (keyup)="$event.stopPropagation()">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                    <mat-option *ngFor="let expressReceiverContact of expressReceiverContacts" [value]="expressReceiverContact.id" class="example-item">
+                      {{expressReceiverContact.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-express-recipient-contact')"></button>
