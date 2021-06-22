@@ -599,13 +599,8 @@ export class OrderComponent implements OnInit {
     this.service.saveUserCustomer(data).subscribe(response => {
       if (response.status === 200) {
         this.hideModal(modalId);
+        array.push(data);
         form.reset();
-        array.pop();
-        this.service.getAllUserCustomer().subscribe(agents => {
-          if (agents.status === 200) {
-            array = agents.body;
-          }
-        });
       }
     });
   }
