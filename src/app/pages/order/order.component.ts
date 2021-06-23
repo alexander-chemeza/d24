@@ -65,18 +65,296 @@ export class OrderComponent implements OnInit {
     regionCode: ''
   };
 
-  // Reactive forms
-  newExpressSenderContragent: any;
-  newExpressSenderContact: any;
-  newExpressSenderAddress: any;
+  userOldInfo: any = sessionStorage.getItem('currentUser');
+  user: any;
 
-  newExpressRecipientContragent: any;
-  newExpressRecipientContact: any;
-  newExpressRecipientAddress: any;
+  public expressSenderAgents: any;
+  expressSenderAddresses: {id: number, name: string}[] = [];
+  expressSenderContacts: {id: number, name: string}[] = [];
 
-  newCarrierSenderContragent: any;
-  newCarrierSenderContact: any;
-  newCarrierSenderAddress: any;
+  expressReceiverAgents: any;
+  expressReceiverAddresses: {id: number, name: string}[] = [];
+  expressReceiverContacts: {id: number, name: string}[] = [];
+
+  // Forms
+  oderForm = new FormGroup({
+    serviceType: new FormControl('', [
+      Validators.required
+    ]),
+    deliveryType: new FormControl('', [
+      Validators.required
+    ]),
+    expressSender: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipient: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderAddress: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientAddress: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderContact: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientContact: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderDeliveryDate: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientDeliveryDate: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderDeliverFrom: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientDeliverFrom: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderDeliverTo: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientDeliverTo: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderTimeoutFrom: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientTimeoutFrom: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderTimeoutTo: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientTimeoutTo: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderTTN: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientNotification: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientNotificationEmail: new FormControl('', [
+      Validators.required
+    ]),
+    expressSenderDescription: new FormControl('', [
+      Validators.required
+    ]),
+    expressRecipientDescription: new FormControl('', [
+      Validators.required
+    ]),
+  });
+
+  public newExpressSenderContragent = new FormGroup({
+    type: new FormControl('', [
+      Validators.required
+    ]),
+    name: new FormControl('', [
+      Validators.required
+    ])
+  });
+
+  newExpressSenderContact = new FormGroup({
+    type: new FormControl('', [
+
+    ]),
+    name: new FormControl('', [
+      Validators.required
+    ]),
+    tel1: new FormControl('', [
+      Validators.required
+    ]),
+    tel2: new FormControl('', [
+      Validators.required
+    ]),
+    email: new FormControl('', [
+      Validators.required
+    ])
+  });
+
+  newExpressSenderAddress = new FormGroup({
+    type: new FormControl('', [
+
+    ]),
+    place: new FormControl('', [
+      Validators.required
+    ]),
+    street: new FormControl('', [
+      Validators.required
+    ]),
+    building: new FormControl('', [
+      Validators.required
+    ]),
+    corpus: new FormControl('', [
+      Validators.required
+    ]),
+    house: new FormControl('', [
+      Validators.required
+    ]),
+    office: new FormControl('', [
+      Validators.required
+    ]),
+    apartment: new FormControl('', [
+      Validators.required
+    ]),
+    deliveryFrom: new FormControl('', [
+      Validators.required
+    ]),
+    deliveryTo: new FormControl('', [
+      Validators.required
+    ]),
+    timeoutFrom: new FormControl('', [
+      Validators.required
+    ]),
+    timeoutTo: new FormControl('', [
+      Validators.required
+    ]),
+    description: new FormControl('', [
+      Validators.required
+    ])
+  });
+
+  newExpressRecipientContragent = new FormGroup({
+    type: new FormControl('', [
+      Validators.required
+    ]),
+    name: new FormControl('', [
+      Validators.required
+    ])
+  });
+
+  newExpressRecipientContact = new FormGroup({
+    type: new FormControl('', [
+
+    ]),
+    name: new FormControl('', [
+      Validators.required
+    ]),
+    tel1: new FormControl('', [
+      Validators.required
+    ]),
+    tel2: new FormControl('', [
+      Validators.required
+    ]),
+    email: new FormControl('', [
+      Validators.required
+    ])
+  });
+
+  newExpressRecipientAddress = new FormGroup({
+    type: new FormControl('', [
+
+    ]),
+    place: new FormControl('', [
+      Validators.required
+    ]),
+    street: new FormControl('', [
+      Validators.required
+    ]),
+    building: new FormControl('', [
+      Validators.required
+    ]),
+    corpus: new FormControl('', [
+      Validators.required
+    ]),
+    house: new FormControl('', [
+      Validators.required
+    ]),
+    office: new FormControl('', [
+      Validators.required
+    ]),
+    apartment: new FormControl('', [
+      Validators.required
+    ]),
+    deliveryFrom: new FormControl('', [
+      Validators.required
+    ]),
+    deliveryTo: new FormControl('', [
+      Validators.required
+    ]),
+    timeoutFrom: new FormControl('', [
+      Validators.required
+    ]),
+    timeoutTo: new FormControl('', [
+      Validators.required
+    ]),
+    description: new FormControl('', [
+      Validators.required
+    ])
+  });
+
+  newCarrierSenderContragent = new FormGroup({
+    type: new FormControl('', [
+      Validators.required
+    ]),
+    name: new FormControl('', [
+      Validators.required
+    ])
+  });
+
+  newCarrierSenderContact = new FormGroup({
+    type: new FormControl('', [
+
+    ]),
+    name: new FormControl('', [
+      Validators.required
+    ]),
+    tel1: new FormControl('', [
+      Validators.required
+    ]),
+    tel2: new FormControl('', [
+      Validators.required
+    ]),
+    email: new FormControl('', [
+      Validators.required
+    ])
+  });
+
+  newCarrierSenderAddress = new FormGroup({
+    type: new FormControl('', [
+
+    ]),
+    place: new FormControl('', [
+      Validators.required
+    ]),
+    street: new FormControl('', [
+      Validators.required
+    ]),
+    building: new FormControl('', [
+      Validators.required
+    ]),
+    corpus: new FormControl('', [
+      Validators.required
+    ]),
+    house: new FormControl('', [
+      Validators.required
+    ]),
+    office: new FormControl('', [
+      Validators.required
+    ]),
+    apartment: new FormControl('', [
+      Validators.required
+    ]),
+    deliveryFrom: new FormControl('', [
+      Validators.required
+    ]),
+    deliveryTo: new FormControl('', [
+      Validators.required
+    ]),
+    timeoutFrom: new FormControl('', [
+      Validators.required
+    ]),
+    timeoutTo: new FormControl('', [
+      Validators.required
+    ]),
+    description: new FormControl('', [
+      Validators.required
+    ])
+  });
 
   constructor(private service: RestapiService) {
     this.serviceType = this.serviceTypes[0].value;
@@ -85,6 +363,12 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    // Make user object with his data
+    if (this.userOldInfo) {
+      this.user = JSON.parse(this.userOldInfo);
+      delete this.user.password;
+    }
+
     this.serviceType = this.serviceTypes[0].value;
 
     this.service.deliveryTypes().subscribe(data => {
@@ -99,212 +383,67 @@ export class OrderComponent implements OnInit {
       }
     });
 
-    this.newExpressSenderContragent = new FormGroup({
-      type: new FormControl('', [
-        Validators.required
-      ]),
-      name: new FormControl('', [
-        Validators.required
-      ])
-    });
+    // User common data reception
+    if (this.user) {
+      // Express form fields
+      this.service.getAllUserCustomer().subscribe(response => {
+        if (response.status === 200) {
+          this.expressSenderAgents = response.body;
+          this.expressReceiverAgents = response.body;
+          this.service.getAllUserCustomerAddress(this.user.senderCustomer.id).subscribe(addresses => {
+            if (addresses.status === 200) {
+              for (const address of addresses.body) {
+                this.expressSenderAddresses.push({
+                  id: address.id,
+                  name: `${address.cityName}, ${address.streetName}`
+                });
+              }
+              console.log('expressSenderAddresses', this.expressSenderAddresses);
+              this.service.getAllUserCustomerContact(this.user.senderAddress.id).subscribe(contacts => {
+                if (contacts.status === 200) {
+                  for (const contact of contacts.body) {
+                    this.expressSenderContacts.push({
+                      id: contact.id,
+                      name: contact.name
+                    });
+                  }
+                }
+              });
+            }
+          });
 
-    this.newExpressSenderContact = new FormGroup({
-      type: new FormControl('', [
+          this.service.getAllUserCustomerAddress(this.user.recipientCustomer.id).subscribe(addresses => {
+            if (addresses.status === 200) {
+              for (const address of addresses.body) {
+                this.expressReceiverAddresses.push({
+                  id: address.id,
+                  name: `${address.cityName}, ${address.streetName}`
+                });
+              }
+              this.service.getAllUserCustomerContact(this.user.recipientAddress.id).subscribe(contacts => {
+                if (contacts.status === 200) {
+                  for (const contact of contacts.body) {
+                    this.expressReceiverContacts.push({
+                      id: contact.id,
+                      name: contact.name
+                    });
+                  }
+                }
+              });
+            }
+          });
+        }
+      });
 
-      ]),
-      name: new FormControl('', [
-        Validators.required
-      ]),
-      tel1: new FormControl('', [
-        Validators.required
-      ]),
-      tel2: new FormControl('', [
-        Validators.required
-      ]),
-      email: new FormControl('', [
-        Validators.required
-      ])
-    });
-
-    this.newExpressSenderAddress = new FormGroup({
-      type: new FormControl('', [
-
-      ]),
-      place: new FormControl('', [
-        Validators.required
-      ]),
-      street: new FormControl('', [
-        Validators.required
-      ]),
-      building: new FormControl('', [
-        Validators.required
-      ]),
-      corpus: new FormControl('', [
-        Validators.required
-      ]),
-      house: new FormControl('', [
-        Validators.required
-      ]),
-      office: new FormControl('', [
-        Validators.required
-      ]),
-      apartment: new FormControl('', [
-        Validators.required
-      ]),
-      deliveryFrom: new FormControl('', [
-        Validators.required
-      ]),
-      deliveryTo: new FormControl('', [
-        Validators.required
-      ]),
-      timeoutFrom: new FormControl('', [
-        Validators.required
-      ]),
-      timeoutTo: new FormControl('', [
-        Validators.required
-      ]),
-      description: new FormControl('', [
-        Validators.required
-      ])
-    });
-
-    this.newExpressRecipientContragent = new FormGroup({
-      type: new FormControl('', [
-        Validators.required
-      ]),
-      name: new FormControl('', [
-        Validators.required
-      ])
-    });
-
-    this.newExpressRecipientContact = new FormGroup({
-      type: new FormControl('', [
-
-      ]),
-      name: new FormControl('', [
-        Validators.required
-      ]),
-      tel1: new FormControl('', [
-        Validators.required
-      ]),
-      tel2: new FormControl('', [
-        Validators.required
-      ]),
-      email: new FormControl('', [
-        Validators.required
-      ])
-    });
-
-    this.newExpressRecipientAddress = new FormGroup({
-      type: new FormControl('', [
-
-      ]),
-      place: new FormControl('', [
-        Validators.required
-      ]),
-      street: new FormControl('', [
-        Validators.required
-      ]),
-      building: new FormControl('', [
-        Validators.required
-      ]),
-      corpus: new FormControl('', [
-        Validators.required
-      ]),
-      house: new FormControl('', [
-        Validators.required
-      ]),
-      office: new FormControl('', [
-        Validators.required
-      ]),
-      apartment: new FormControl('', [
-        Validators.required
-      ]),
-      deliveryFrom: new FormControl('', [
-        Validators.required
-      ]),
-      deliveryTo: new FormControl('', [
-        Validators.required
-      ]),
-      timeoutFrom: new FormControl('', [
-        Validators.required
-      ]),
-      timeoutTo: new FormControl('', [
-        Validators.required
-      ]),
-      description: new FormControl('', [
-        Validators.required
-      ])
-    });
-
-    this.newCarrierSenderContragent = new FormGroup({
-      type: new FormControl('', [
-        Validators.required
-      ]),
-      name: new FormControl('', [
-        Validators.required
-      ])
-    });
-
-    this.newCarrierSenderContact = new FormGroup({
-      type: new FormControl('', [
-
-      ]),
-      name: new FormControl('', [
-        Validators.required
-      ]),
-      tel1: new FormControl('', [
-        Validators.required
-      ]),
-      tel2: new FormControl('', [
-        Validators.required
-      ]),
-      email: new FormControl('', [
-        Validators.required
-      ])
-    });
-
-    this.newCarrierSenderAddress = new FormGroup({
-      type: new FormControl('', [
-
-      ]),
-      place: new FormControl('', [
-        Validators.required
-      ]),
-      street: new FormControl('', [
-        Validators.required
-      ]),
-      building: new FormControl('', [
-        Validators.required
-      ]),
-      corpus: new FormControl('', [
-        Validators.required
-      ]),
-      house: new FormControl('', [
-        Validators.required
-      ]),
-      office: new FormControl('', [
-        Validators.required
-      ]),
-      apartment: new FormControl('', [
-        Validators.required
-      ]),
-      deliveryFrom: new FormControl('', [
-        Validators.required
-      ]),
-      deliveryTo: new FormControl('', [
-        Validators.required
-      ]),
-      timeoutFrom: new FormControl('', [
-        Validators.required
-      ]),
-      timeoutTo: new FormControl('', [
-        Validators.required
-      ]),
-      description: new FormControl('', [
-        Validators.required
-      ])
-    });
+      this.oderForm.patchValue({
+        expressSender: this.user.senderCustomer.id,
+        expressSenderAddress: this.user.senderAddress.id,
+        expressSenderContact: this.user.senderCustomerContact.id,
+        expressRecipient: this.user.recipientCustomer.id,
+        expressRecipientAddress: this.user.recipientAddress.id,
+        expressRecipientContact: this.user.recipientCustomerContact.id,
+      });
+    }
   }
 
 
@@ -401,6 +540,23 @@ export class OrderComponent implements OnInit {
 
   createNewExpressSenderContragent(): void {
     // Write something
+    const data = {
+      customerName: this.newExpressSenderContragent.value.name as string,
+      customerType: this.newExpressSenderContragent.value.type as string
+    };
+
+    this.service.saveUserCustomer(data).subscribe(response => {
+      if (response.status === 200) {
+        this.hideModal('new-express-sender-contragent');
+        this.newExpressSenderContragent.reset();
+        this.expressSenderAgents.pop();
+        this.service.getAllUserCustomer().subscribe(agents => {
+          if (agents.status === 200) {
+            this.expressSenderAgents = agents.body;
+          }
+        });
+      }
+    });
   }
 
   createNewExpressSenderContact(): void {
@@ -433,5 +589,19 @@ export class OrderComponent implements OnInit {
 
   createNewCarrierSenderAddress(): void {
     // Write something
+  }
+
+  createContragent(form: FormGroup, modalId: string, array: any): void {
+    const data = {
+      customerName: form.value.name as string,
+      customerType: form.value.type as string
+    };
+    this.service.saveUserCustomer(data).subscribe(response => {
+      if (response.status === 200) {
+        this.hideModal(modalId);
+        array.push(data);
+        form.reset();
+      }
+    });
   }
 }
