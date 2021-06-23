@@ -17,7 +17,7 @@
   width: 100px;
   grid-area: sidebar;
   grid-row: 1;
-  transition: all 1s;
+  transition: .8s;
   transition-delay: 0.2s;
 
   & .logo {
@@ -37,8 +37,8 @@
     background-image: url("../assets/img/menu/logo-short.svg");
     background-position-x: 10px;
     background-repeat: no-repeat;
-    transition: all 1s;
-    transition-delay: 0.2s;
+    transition: all .5s;
+    transition-delay: 0.1s;
   }
 
   &:hover {
@@ -56,13 +56,11 @@
   &:hover .new-order-btn {
     width: 100%;
     max-width: 175px;
-    transition: all 1s;
-    transition-delay: 0.2s;
   }
 
-  &:hover .new-order-btn img {
-    margin-right: 15px !important;
-  }
+  // &:hover .new-order-btn img {
+  //   margin-right: 15px !important;
+  // }
 
   & ul {
     font-family: "Montserrat-SemiBold", sans-serif !important;
@@ -76,11 +74,11 @@
 
       &.new-order {
         box-sizing: border-box;
-        transition: all 1s;
-        transition-delay: 0.2s;
+        // transition: all 1s;
+        // transition-delay: 0.2s;
         & .new-order-link {
-          transition: all 1s;
-          transition-delay: 0.2s;
+          // transition: all 1s;
+          // transition-delay: 0.2s;
           padding: 7px;
 
           & .new-order-btn {
@@ -89,8 +87,9 @@
             padding: 15px;
             background-color: #ABCF37;
             border-radius: 25px;
-            transition: all 1s;
-            transition-delay: 0.2s;
+            width: 70%;
+            // transition: all 1s;
+            // transition-delay: 0.2s;
 
             & img {
               margin-right: 0;
@@ -104,7 +103,8 @@
         left: 60px;
         opacity: 0;
         white-space: nowrap;
-        transition: opacity 0.5s;
+        transition: opacity 0.2s;
+        transition-delay: .3s;
       }
 
       & a {
@@ -115,7 +115,7 @@
         white-space: nowrap;
         display: flex;
         align-items: center;
-        transition: all .5s;
+        transition: all .2s;
 
         & .icon {
           display: inline-block;
@@ -133,7 +133,7 @@
         background-color: #A070B5;
         border-top-left-radius: 63px;
         border-bottom-left-radius: 63px;
-        transition: all .5s;
+        // transition: all .5s;
 
         &::after,
         &::before {
@@ -142,21 +142,21 @@
           position: absolute;
           width: 14px;
           height: 15px;
-          transition: all 1s;
+          // transition: all 1s;
         }
 
         &::before {
           right: 0;
           bottom: 100%;
           background-image: radial-gradient(circle at 0 0, transparent 14px, #A070B5 15px);
-          transition: all 1s;
+          // transition: all 1s;
         }
 
         &::after {
           right: 0;
           top: 100%;
           background-image: radial-gradient(circle at 0 100%, transparent 14px, #A070B5 15px);
-          transition: all 1s;
+          // transition: all 1s;
         }
 
         & .white-icon {
