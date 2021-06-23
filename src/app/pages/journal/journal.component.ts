@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
-
+import {JournalButtonsComponent} from './journal-buttons/journal-buttons.component';
 
 @Component({
   selector: 'app-journal',
@@ -16,8 +16,67 @@ export class JournalComponent implements OnInit {
   public rowSelection: any;
   public paginationPageSize: any;
 
+  // columnDefs = [
+  //   { headerName: 'Наименование',
+  //     field: 'name',
+  //     sortable: true,
+  //     flex: 1,
+  //     id: ''
+  //   },
+  //   {
+  //     headerName: 'Управление',
+  //     pinned: 'right',
+  //     cellRenderer: 'btnCellRenderer',
+  //     cellRendererParams: {
+  //       clicked: (target: any): void => {
+  //         // alert(`${field} was clicked`);
+  //         if (target === 'delete') {
+  //           const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+  //           console.log(id);
+            
+  //         } else if (target === 'edit') {
+  //           console.log('edit');
+  //           const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+  //         }
+  //       }
+  //     },
+  //     maxWidth: 150,
+  //   }
+  // ];
+
+  frameworkComponents: any;
+
   constructor() {
+    this.frameworkComponents = {
+      btnCellRenderer: JournalButtonsComponent,
+    };
+
     this.columnDefs = [
+      { headerName: 'Наименование',
+      field: 'name',
+      sortable: true,
+      flex: 1,
+      id: ''
+    },
+    {
+      headerName: 'Управление',
+      pinned: 'right',
+      cellRenderer: 'btnCellRenderer',
+      cellRendererParams: {
+        clicked: (target: any): void => {
+          // alert(`${field} was clicked`);
+          if (target === 'delete') {
+            const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+            console.log(id);
+            
+          } else if (target === 'edit') {
+            console.log('edit');
+            const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+          }
+        }
+      },
+      maxWidth: 150,
+    },
       {
         headerName: 'Выбрать',
         field: 'select',
@@ -92,21 +151,21 @@ export class JournalComponent implements OnInit {
         flex: 1,
         minWidth: 150,
         maxWidth: 200,
-        cellRenderer: function(params: any) {
-          return (
-            "<div class='table-buttons_container'>" +
-              "<div class='table-value'>" +
-                params.value +
-              "</div>" +
-              "<div class='table-buttons_box'>" +
-                "<button id='copy' class='buttons-copy'></button>" + 
-                "<button id='edit' class='buttons-edit'></button>" +
-                "<button id='view' class='buttons-view' (click)='showModal($event)' modal='view-request'></button>" +
-                "<button id='remove' class='buttons-remove'></button>" +
-              "</div>" +
-            "</div>"
-          );
-        }
+        // cellRenderer: function(params: any) {
+        //   return (
+        //     "<div class='table-buttons_container'>" +
+        //       "<div class='table-value'>" +
+        //         params.value +
+        //       "</div>" +
+        //       "<div class='table-buttons_box'>" +
+        //         "<button id='copy' class='buttons-copy'></button>" + 
+        //         "<button id='edit' class='buttons-edit'></button>" +
+        //         "<button id='view' class='buttons-view' (click)='showModal($event)' modal='view-request'></button>" +
+        //         "<button id='remove' class='buttons-remove'></button>" +
+        //       "</div>" +
+        //     "</div>"
+        //   );
+        // }
       }
     ];
     this.rowData = [
