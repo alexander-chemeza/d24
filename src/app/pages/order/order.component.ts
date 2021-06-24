@@ -76,8 +76,9 @@ export class OrderComponent implements OnInit {
   expressReceiverAddresses: {id: number, name: string}[] = [];
   expressReceiverContacts: {id: number, name: string}[] = [];
 
+
   // Forms
-  oderForm = new FormGroup({
+  orderForm = new FormGroup({
     serviceType: new FormControl('', [
       Validators.required
     ]),
@@ -435,7 +436,7 @@ export class OrderComponent implements OnInit {
         }
       });
 
-      this.oderForm.patchValue({
+      this.orderForm.patchValue({
         expressSender: this.user.senderCustomer.id,
         expressSenderAddress: this.user.senderAddress.id,
         expressSenderContact: this.user.senderCustomerContact.id,
