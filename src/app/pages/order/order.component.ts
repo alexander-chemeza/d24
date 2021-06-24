@@ -68,7 +68,7 @@ export class OrderComponent implements OnInit {
   userOldInfo: any = sessionStorage.getItem('currentUser');
   user: any;
 
-  public expressSenderAgents: any;
+  expressSenderAgents: any;
   expressSenderAddresses: {id: number, name: string}[] = [];
   expressSenderContacts: {id: number, name: string}[] = [];
 
@@ -150,7 +150,7 @@ export class OrderComponent implements OnInit {
     ]),
   });
 
-  public newExpressSenderContragent = new FormGroup({
+  newExpressSenderContragent = new FormGroup({
     type: new FormControl('', [
       Validators.required
     ]),
@@ -485,6 +485,102 @@ export class OrderComponent implements OnInit {
       });
     }
   }
+
+  onKey(event: any): void {
+    if (event.target.value === '' || this.expressSenderAgents.length === 0) {
+      this.ngOnInit();
+    } else {
+      this.expressSenderAgents = this.expressSenderAgents.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
+    }
+  }
+
+  // onKey2(event: any): void {
+  //   if (event.target.value === '' || this.senderAddresses.length === 0) {
+  //     this.senderAddresses.pop();
+  //     this.service.getAllUserCustomerAddress(this.profileForm.value.sender).subscribe(response => {
+  //       if (response.status === 200) {
+  //         for (const address of response.body) {
+  //           this.senderAddresses.push({
+  //             id: address.id,
+  //             name: `${address.cityName}, ${address.streetName}`
+  //           });
+  //         }
+  //       }
+  //     });
+  //   } else {
+  //     this.senderAddresses = this.senderAddresses.filter((option: any) => {
+  //       return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+  //     });
+  //   }
+  // }
+  //
+  // onKey3(event: any): void {
+  //   if (event.target.value === '' || this.senderContacts.length === 0) {
+  //     this.senderContacts.pop();
+  //     this.service.getAllUserCustomerContact(this.profileForm.value.senderAddress).subscribe(response => {
+  //       if (response.status === 200) {
+  //         for (const contact of response.body) {
+  //           this.senderContacts.push({
+  //             id: contact.id,
+  //             name: contact.name
+  //           });
+  //         }
+  //       }
+  //     });
+  //   } else {
+  //     this.senderContacts = this.senderContacts.filter((option: any) => {
+  //       return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+  //     });
+  //   }
+  // }
+  //
+  onKey4(event: any): void {
+    if (event.target.value === '' || this.expressReceiverAgents.length === 0) {
+      this.ngOnInit();
+    } else {
+      this.expressReceiverAgents = this.expressReceiverAgents.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
+    }
+  }
+  //
+  // onKey5(event: any): void {
+  //   if (event.target.value === '' || this.receiverAddresses.length === 0) {
+  //     this.receiverAddresses.pop();
+  //     this.service.getAllUserCustomerAddress(this.profileForm.value.receiver).subscribe(response => {
+  //       if (response.status === 200) {
+  //         for (const address of response.body) {
+  //           this.receiverAddresses.push({
+  //             id: address.id,
+  //             name: `${address.cityName}, ${address.streetName}`
+  //           });
+  //         }
+  //       }
+  //     });
+  //   } else {
+  //     this.receiverAddresses = this.receiverAddresses.filter((option: any) => {
+  //       return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+  //     });
+  //   }
+  // }
+  //
+  // onKey6(event: any): void {
+  //   if (event.target.value === '' || this.receiverContacts.length === 0) {
+  //     this.receiverContacts.pop();
+  //     this.service.getAllUserCustomerContact(this.profileForm.value.receiverAddress).subscribe(response => {
+  //       if (response.status === 200) {
+  //         for (const contact of response.body) {
+  //           this.receiverContacts.push({
+  //             id: contact.id,
+  //             name: contact.name
+  //           });
+  //         }
+  //       }
+  //     });
+  //   } else {
+  //     this.receiverContacts = this.receiverContacts.filter((option: any) => {
+  //       return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+  //     });
+  //   }
+  // }
 
   selectService(event: any): void {
     const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;

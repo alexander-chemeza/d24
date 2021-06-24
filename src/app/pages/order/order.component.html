@@ -48,7 +48,7 @@
                 <label for="expressSender">Отправитель:</label>
                 <mat-form-field floatLabel="never">
                   <mat-select formControlName="expressSender" id="expressSender" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, orderForm.value.expressSender, expressSenderAddresses, expressSenderContacts)">
-                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey($event)">
                     <mat-option *ngFor="let expressSenderAgent of expressSenderAgents" [value]="expressSenderAgent.id" class="example-item">
                       {{expressSenderAgent.customerName}}
                     </mat-option>
@@ -140,7 +140,7 @@
                 <label for="expressRecipient">Получатель:</label>
                 <mat-form-field floatLabel="never">
                   <mat-select formControlName="expressRecipient" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, orderForm.value.expressRecipient, expressReceiverAddresses, expressReceiverContacts)">
-                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey4($event)">
                     <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
                       <mat-option *cdkVirtualFor="let expressReceiverAgent of expressReceiverAgents" [value]="expressReceiverAgent.id" class="example-item">
                         {{expressReceiverAgent.customerName}}
