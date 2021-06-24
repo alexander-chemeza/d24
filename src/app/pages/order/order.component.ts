@@ -446,6 +446,44 @@ export class OrderComponent implements OnInit {
     }
   }
 
+  selectAgent($event: any, agentId: any, addresses: any, contacts: any): void {
+    addresses.pop();
+    contacts.pop();
+    if (agentId) {
+      addresses.pop();
+      contacts.pop();
+      this.service.getAllUserCustomerAddress(agentId).subscribe(response => {
+        if (response.status === 200 && addresses.length === 0) {
+          for (const address of response.body) {
+            addresses.push({
+              id: address.id,
+              name: `${address.cityName}, ${address.streetName}`
+            });
+          }
+        }
+      });
+    }
+  }
+
+  selectAddress($event: any, addressId: any, contacts: any): void {
+    contacts.pop();
+    if (addressId) {
+      console.log('addressID', addressId);
+      if (contacts) {
+        contacts.pop();
+      }
+      this.service.getAllUserCustomerContact(addressId).subscribe(response => {
+        if (response.status === 200) {
+          for (const contact of response.body) {
+            contacts.push({
+              id: contact.id,
+              name: contact.name
+            });
+          }
+        }
+      });
+    }
+  }
 
   selectService(event: any): void {
     const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;

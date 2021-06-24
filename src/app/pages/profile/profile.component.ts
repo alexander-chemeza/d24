@@ -19,12 +19,6 @@ export class ProfileComponent implements OnInit {
   // Contacts arrays
   senderContacts: {id: number, name: string}[] = [];
   receiverContacts: {id: number, name: string}[] = [];
-  // Agents IDs
-  currentSenderAgentId: any;
-  currentReceiverAgentId: any;
-  // Addresses IDs
-  currentSenderAddressId: any;
-  currentReceiverAddressId: any;
 
   profileForm = new FormGroup({
     userName: new FormControl('', [
