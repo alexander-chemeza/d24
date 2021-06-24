@@ -898,7 +898,7 @@
   <div class="new-contact-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-sender-contact')"></button>
     <h2 class="white-header">Новый контакт</h2>
-    <form [formGroup]="newExpressSenderContact" (ngSubmit)="createNewExpressSenderContact()">
+    <form [formGroup]="newExpressSenderContact" (ngSubmit)="createNewContact(newExpressSenderContact, 'new-express-sender-contact', orderForm.value.expressSenderAddress)">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1034,7 +1034,7 @@
   <div class="new-contact-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-contact')"></button>
     <h2 class="white-header">Новый контакт</h2>
-    <form [formGroup]="newExpressRecipientContact">
+    <form [formGroup]="newExpressRecipientContact" (ngSubmit)="createNewContact(newExpressRecipientContact, 'new-express-recipient-contact', orderForm.value.expressRecipientAddress)">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1151,7 +1151,7 @@
   <div class="new-contragent-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-carrier-sender-contragent')"></button>
     <h2 class="white-header">Новый контрагент</h2>
-    <form [formGroup]="newCarrierSenderContragent" (ngSubmit)="createNewCarrierSenderContragent()">
+    <form [formGroup]="newCarrierSenderContragent">
       <div class="grey-box">
         <label for="type-carrier-sender"> Форма собственности :</label>
         <input type="text" id="type-carrier-sender" name="type-carrier-sender" formControlName="type">
@@ -1170,7 +1170,7 @@
   <div class="new-contact-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-carrier-sender-contact')"></button>
     <h2 class="white-header">Новый контакт</h2>
-    <form [formGroup]="newCarrierSenderContact" (ngSubmit)="createNewCarrierSenderContact()">
+    <form [formGroup]="newCarrierSenderContact">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1200,7 +1200,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-carrier-sender-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewCarrierSenderAddress()">
+    <form [formGroup]="newExpressSenderAddress">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">

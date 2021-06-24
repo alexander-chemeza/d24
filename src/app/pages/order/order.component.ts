@@ -673,59 +673,6 @@ export class OrderComponent implements OnInit {
     modal.classList.remove('show-modal');
   }
 
-  createNewExpressSenderContragent(): void {
-    // Write something
-    const data = {
-      customerName: this.newExpressSenderContragent.value.name as string,
-      customerType: this.newExpressSenderContragent.value.type as string
-    };
-
-    this.service.saveUserCustomer(data).subscribe(response => {
-      if (response.status === 200) {
-        this.hideModal('new-express-sender-contragent');
-        this.newExpressSenderContragent.reset();
-        this.expressSenderAgents.pop();
-        this.service.getAllUserCustomer().subscribe(agents => {
-          if (agents.status === 200) {
-            this.expressSenderAgents = agents.body;
-          }
-        });
-      }
-    });
-  }
-
-  createNewExpressSenderContact(): void {
-    // Write something
-  }
-
-  createNewExpressSenderAddress(): void {
-    // Write something
-  }
-
-  createNewExpressRecipientContragent(): void {
-    // Write something
-  }
-
-  createNewExpressRecipientContact(): void {
-    // Write something
-  }
-
-  createNewExpressRecipientAddress(): void {
-    // Write something
-  }
-
-  createNewCarrierSenderContragent(): void {
-    // Write something
-  }
-
-  createNewCarrierSenderContact(): void {
-    // Write something
-  }
-
-  createNewCarrierSenderAddress(): void {
-    // Write something
-  }
-
   createContragent(form: FormGroup, modalId: string, array: any): void {
     const data = {
       customerName: form.value.name as string,
@@ -793,5 +740,25 @@ export class OrderComponent implements OnInit {
         }
       });
     }
+  }
+
+  createNewContact(form: any, modalId: string, addressId: number): void {
+    // Read fields from popup
+    const data = {
+      customerAddressId: addressId,
+      email: form.value.email as string,
+      mainContact: form.value.type as boolean,
+      name: form.value.name as string,
+      phone: form.value.tel1 as string,
+      phone2: form.value.tel2 as string,
+      position: form.value.position as string
+    };
+    // Post to backend
+    this.service.saveUserCustomerContact(data).subscribe(response => {
+      if (response.status === 200) {
+        this.hideModal(modalId);
+        form.reset();
+      }
+    });
   }
 }
