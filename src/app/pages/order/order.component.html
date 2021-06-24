@@ -141,11 +141,9 @@
                 <mat-form-field floatLabel="never">
                   <mat-select formControlName="expressRecipient" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, orderForm.value.expressRecipient, expressReceiverAddresses, expressReceiverContacts)">
                     <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey4($event)">
-                    <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
-                      <mat-option *cdkVirtualFor="let expressReceiverAgent of expressReceiverAgents" [value]="expressReceiverAgent.id" class="example-item">
-                        {{expressReceiverAgent.customerName}}
-                      </mat-option>
-                    </cdk-virtual-scroll-viewport>
+                    <mat-option *ngFor="let expressReceiverAgent of expressReceiverAgents" [value]="expressReceiverAgent.id" class="example-item">
+                      {{expressReceiverAgent.customerName}}
+                    </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -1017,7 +1015,7 @@
   <div class="new-contragent-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-contragent')"></button>
     <h2 class="white-header">Новый контрагент</h2>
-    <form [formGroup]="newExpressRecipientContragent" (ngSubmit)="createNewExpressRecipientContragent()">
+    <form [formGroup]="newExpressRecipientContragent" (ngSubmit)="createContragent(newExpressRecipientContragent, 'new-express-recipient-contragent', expressReceiverAgents)">
       <div class="grey-box">
         <label for="type-express-recipient"> Форма собственности :</label>
         <input type="text" id="type-express-recipient" name="type-express-recipient" formControlName="type">
