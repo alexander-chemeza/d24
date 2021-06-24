@@ -494,46 +494,46 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  // onKey2(event: any): void {
-  //   if (event.target.value === '' || this.senderAddresses.length === 0) {
-  //     this.senderAddresses.pop();
-  //     this.service.getAllUserCustomerAddress(this.profileForm.value.sender).subscribe(response => {
-  //       if (response.status === 200) {
-  //         for (const address of response.body) {
-  //           this.senderAddresses.push({
-  //             id: address.id,
-  //             name: `${address.cityName}, ${address.streetName}`
-  //           });
-  //         }
-  //       }
-  //     });
-  //   } else {
-  //     this.senderAddresses = this.senderAddresses.filter((option: any) => {
-  //       return option.name.toLowerCase().includes(event.target.value.toLowerCase());
-  //     });
-  //   }
-  // }
-  //
-  // onKey3(event: any): void {
-  //   if (event.target.value === '' || this.senderContacts.length === 0) {
-  //     this.senderContacts.pop();
-  //     this.service.getAllUserCustomerContact(this.profileForm.value.senderAddress).subscribe(response => {
-  //       if (response.status === 200) {
-  //         for (const contact of response.body) {
-  //           this.senderContacts.push({
-  //             id: contact.id,
-  //             name: contact.name
-  //           });
-  //         }
-  //       }
-  //     });
-  //   } else {
-  //     this.senderContacts = this.senderContacts.filter((option: any) => {
-  //       return option.name.toLowerCase().includes(event.target.value.toLowerCase());
-  //     });
-  //   }
-  // }
-  //
+  onKey2(event: any): void {
+    if (event.target.value === '' || this.expressSenderAddresses.length === 0) {
+      this.expressSenderAddresses.pop();
+      this.service.getAllUserCustomerAddress(this.orderForm.value.expressSender).subscribe(response => {
+        if (response.status === 200) {
+          for (const address of response.body) {
+            this.expressSenderAddresses.push({
+              id: address.id,
+              name: `${address.cityName}, ${address.streetName}`
+            });
+          }
+        }
+      });
+    } else {
+      this.expressSenderAddresses = this.expressSenderAddresses.filter((option: any) => {
+        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
+    }
+  }
+
+  onKey3(event: any): void {
+    if (event.target.value === '' || this.expressSenderContacts.length === 0) {
+      this.expressSenderContacts.pop();
+      this.service.getAllUserCustomerContact(this.orderForm.value.expressSenderAddress).subscribe(response => {
+        if (response.status === 200) {
+          for (const contact of response.body) {
+            this.expressSenderContacts.push({
+              id: contact.id,
+              name: contact.name
+            });
+          }
+        }
+      });
+    } else {
+      this.expressSenderContacts = this.expressSenderContacts.filter((option: any) => {
+        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
+    }
+  }
+
   onKey4(event: any): void {
     if (event.target.value === '' || this.expressReceiverAgents.length === 0) {
       this.ngOnInit();
@@ -541,46 +541,46 @@ export class OrderComponent implements OnInit {
       this.expressReceiverAgents = this.expressReceiverAgents.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
     }
   }
-  //
-  // onKey5(event: any): void {
-  //   if (event.target.value === '' || this.receiverAddresses.length === 0) {
-  //     this.receiverAddresses.pop();
-  //     this.service.getAllUserCustomerAddress(this.profileForm.value.receiver).subscribe(response => {
-  //       if (response.status === 200) {
-  //         for (const address of response.body) {
-  //           this.receiverAddresses.push({
-  //             id: address.id,
-  //             name: `${address.cityName}, ${address.streetName}`
-  //           });
-  //         }
-  //       }
-  //     });
-  //   } else {
-  //     this.receiverAddresses = this.receiverAddresses.filter((option: any) => {
-  //       return option.name.toLowerCase().includes(event.target.value.toLowerCase());
-  //     });
-  //   }
-  // }
-  //
-  // onKey6(event: any): void {
-  //   if (event.target.value === '' || this.receiverContacts.length === 0) {
-  //     this.receiverContacts.pop();
-  //     this.service.getAllUserCustomerContact(this.profileForm.value.receiverAddress).subscribe(response => {
-  //       if (response.status === 200) {
-  //         for (const contact of response.body) {
-  //           this.receiverContacts.push({
-  //             id: contact.id,
-  //             name: contact.name
-  //           });
-  //         }
-  //       }
-  //     });
-  //   } else {
-  //     this.receiverContacts = this.receiverContacts.filter((option: any) => {
-  //       return option.name.toLowerCase().includes(event.target.value.toLowerCase());
-  //     });
-  //   }
-  // }
+
+  onKey5(event: any): void {
+    if (event.target.value === '' || this.expressReceiverAddresses.length === 0) {
+      this.expressReceiverAddresses.pop();
+      this.service.getAllUserCustomerAddress(this.orderForm.value.expressRecipient).subscribe(response => {
+        if (response.status === 200) {
+          for (const address of response.body) {
+            this.expressReceiverAddresses.push({
+              id: address.id,
+              name: `${address.cityName}, ${address.streetName}`
+            });
+          }
+        }
+      });
+    } else {
+      this.expressReceiverAddresses = this.expressReceiverAddresses.filter((option: any) => {
+        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
+    }
+  }
+
+  onKey6(event: any): void {
+    if (event.target.value === '' || this.expressReceiverContacts.length === 0) {
+      this.expressReceiverContacts.pop();
+      this.service.getAllUserCustomerContact(this.orderForm.value.expressRecipientAddress).subscribe(response => {
+        if (response.status === 200) {
+          for (const contact of response.body) {
+            this.expressReceiverContacts.push({
+              id: contact.id,
+              name: contact.name
+            });
+          }
+        }
+      });
+    } else {
+      this.expressReceiverContacts = this.expressReceiverContacts.filter((option: any) => {
+        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
+    }
+  }
 
   selectService(event: any): void {
     const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;
