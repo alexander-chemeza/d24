@@ -739,4 +739,59 @@ export class OrderComponent implements OnInit {
       }
     });
   }
+
+  createNewAddress(form: any, id: number, modalId: string, addresses: any, agentId: number): void {
+    // addresses.pop();
+    // This vars will get correct name of city and street
+    let city: string;
+    let street: string;
+    // This constants will get the objects describing city and street
+    const cityCorrectName = this.citiesList.find(item => item.id === form.value.place);
+    const streetCorrectName = this.streetList.find(item => item.id === form.value.street);
+    if (cityCorrectName && streetCorrectName) {
+      // Get correct names
+      city = cityCorrectName.fullName;
+      street = streetCorrectName.name;
+
+      // Read fields from popup
+      const data = {
+        building: form.value.house,
+        cityId: form.value.place,
+        cityName: city,
+        description: form.value.description as string,
+        house: form.value.building as string,
+        housing: form.value.corpus as string,
+        mainAddress: form.value.type as boolean,
+        office: form.value.office as string,
+        pauseFrom: form.value.timeoutFrom as string,
+        pauseTo: form.value.timeoutTo as string,
+        room: form.value.apartment as string,
+        streetId: form.value.street,
+        streetName: street,
+        timeFrom: form.value.deliveryFrom as string,
+        timeTo: form.value.deliveryTo as string,
+        customerId: id
+      };
+      // Save the data
+      this.service.saveUserCustomerAddress(data).subscribe(response => {
+        // addresses.pop();
+        if (response.status === 200) {
+          this.hideModal(modalId);
+          form.reset();
+          // this.service.getAllUserCustomerAddress(agentId).subscribe(resp => {
+          //   if (response.status === 200) {
+          //     addresses.pop();
+          //     for (const address of resp.body) {
+          //       addresses.push({
+          //         id: address.id,
+          //         name: `${address.cityName}, ${address.streetName}`
+          //       });
+          //     }
+          //     console.log('Updated', addresses);
+          //   }
+          // });
+        }
+      });
+    }
+  }
 }

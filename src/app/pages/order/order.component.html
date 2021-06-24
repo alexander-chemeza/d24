@@ -928,7 +928,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-sender-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewExpressSenderAddress()">
+    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewAddress(newExpressSenderAddress, orderForm.value.expressSender, 'new-express-sender-address', expressSenderAddresses, orderForm.value.expressSenderAddress)">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1034,7 +1034,7 @@
   <div class="new-contact-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-contact')"></button>
     <h2 class="white-header">Новый контакт</h2>
-    <form [formGroup]="newExpressRecipientContact" (ngSubmit)="createNewExpressRecipientContact()">
+    <form [formGroup]="newExpressRecipientContact">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1064,7 +1064,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewExpressRecipientAddress()">
+    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewAddress(newExpressRecipientAddress, orderForm.value.expressRecipient, 'new-express-recipient-address', expressReceiverAddresses, orderForm.value.expressRecipientAddress)">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
