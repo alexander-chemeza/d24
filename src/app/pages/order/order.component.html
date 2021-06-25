@@ -38,7 +38,7 @@
     </div>
   </div>
   <div class="row-form">
-    <form [formGroup]="oderForm">
+    <form [formGroup]="orderForm">
       <div class="row-form-content">
 <!--        Form 1-->
         <div id="form-0" class="form form-content-1">
@@ -47,8 +47,8 @@
               <div class="control">
                 <label for="expressSender">Отправитель:</label>
                 <mat-form-field floatLabel="never">
-                  <mat-select formControlName="expressSender" id="expressSender" (keyup)="$event.stopPropagation()">
-                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                  <mat-select formControlName="expressSender" id="expressSender" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, orderForm.value.expressSender, expressSenderAddresses, expressSenderContacts)">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey($event)">
                     <mat-option *ngFor="let expressSenderAgent of expressSenderAgents" [value]="expressSenderAgent.id" class="example-item">
                       {{expressSenderAgent.customerName}}
                     </mat-option>
@@ -63,8 +63,8 @@
               <div class="control">
                 <label for="expressSenderAddress">Адрес выдачи груза:</label>
                 <mat-form-field floatLabel="never">
-                  <mat-select formControlName="expressSenderAddress" id="expressSenderAddress" (keyup)="$event.stopPropagation()">
-                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                  <mat-select formControlName="expressSenderAddress" id="expressSenderAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, orderForm.value.expressSenderAddress, expressSenderContacts)">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey2($event)">
                     <mat-option *ngFor="let expressSenderAddress of expressSenderAddresses" [value]="expressSenderAddress.id" class="example-item">
                       {{expressSenderAddress.name}}
                     </mat-option>
@@ -86,7 +86,7 @@
                 <label for="expressSenderContact">Контакт (по адресу выдачи груза):</label>
                 <mat-form-field floatLabel="never">
                   <mat-select formControlName="expressSenderContact" id="expressSenderContact" (keyup)="$event.stopPropagation()">
-                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey3($event)">
                     <mat-option *ngFor="let expressSenderContact of expressSenderContacts" [value]="expressSenderContact.id" class="example-item">
                       {{expressSenderContact.name}}
                     </mat-option>
@@ -139,13 +139,11 @@
               <div class="control">
                 <label for="expressRecipient">Получатель:</label>
                 <mat-form-field floatLabel="never">
-                  <mat-select formControlName="expressRecipient" (keyup)="$event.stopPropagation()">
-                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
-                    <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
-                      <mat-option *cdkVirtualFor="let expressReceiverAgent of expressReceiverAgents" [value]="expressReceiverAgent.id" class="example-item">
-                        {{expressReceiverAgent.customerName}}
-                      </mat-option>
-                    </cdk-virtual-scroll-viewport>
+                  <mat-select formControlName="expressRecipient" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, orderForm.value.expressRecipient, expressReceiverAddresses, expressReceiverContacts)">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey4($event)">
+                    <mat-option *ngFor="let expressReceiverAgent of expressReceiverAgents" [value]="expressReceiverAgent.id" class="example-item">
+                      {{expressReceiverAgent.customerName}}
+                    </mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -157,8 +155,8 @@
               <div class="control">
                 <label for="expressRecipientAddress">Адрес доставки груза:</label>
                 <mat-form-field floatLabel="never">
-                  <mat-select formControlName="expressRecipientAddress" id="expressRecipientAddress" (keyup)="$event.stopPropagation()">
-                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                  <mat-select formControlName="expressRecipientAddress" id="expressRecipientAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, orderForm.value.expressRecipientAddress, expressReceiverContacts)">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey5($event)">
                     <mat-option *ngFor="let expressReceiverAddress of expressReceiverAddresses" [value]="expressReceiverAddress.id" class="example-item">
                       {{expressReceiverAddress.name}}
                     </mat-option>
@@ -180,7 +178,7 @@
                 <label for="expressRecipientContact">Контакт (по адресу  доставки груза):</label>
                 <mat-form-field floatLabel="never">
                   <mat-select formControlName="expressRecipientContact" id="expressRecipientContact" (keyup)="$event.stopPropagation()">
-                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()">
+                    <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey6($event)">
                     <mat-option *ngFor="let expressReceiverContact of expressReceiverContacts" [value]="expressReceiverContact.id" class="example-item">
                       {{expressReceiverContact.name}}
                     </mat-option>
@@ -900,7 +898,7 @@
   <div class="new-contact-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-sender-contact')"></button>
     <h2 class="white-header">Новый контакт</h2>
-    <form [formGroup]="newExpressSenderContact" (ngSubmit)="createNewExpressSenderContact()">
+    <form [formGroup]="newExpressSenderContact" (ngSubmit)="createNewContact(newExpressSenderContact, 'new-express-sender-contact', orderForm.value.expressSenderAddress)">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -930,7 +928,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-sender-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewExpressSenderAddress()">
+    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewAddress(newExpressSenderAddress, orderForm.value.expressSender, 'new-express-sender-address', expressSenderAddresses, orderForm.value.expressSenderAddress)">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1017,7 +1015,7 @@
   <div class="new-contragent-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-contragent')"></button>
     <h2 class="white-header">Новый контрагент</h2>
-    <form [formGroup]="newExpressRecipientContragent" (ngSubmit)="createNewExpressRecipientContragent()">
+    <form [formGroup]="newExpressRecipientContragent" (ngSubmit)="createContragent(newExpressRecipientContragent, 'new-express-recipient-contragent', expressReceiverAgents)">
       <div class="grey-box">
         <label for="type-express-recipient"> Форма собственности :</label>
         <input type="text" id="type-express-recipient" name="type-express-recipient" formControlName="type">
@@ -1036,7 +1034,7 @@
   <div class="new-contact-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-contact')"></button>
     <h2 class="white-header">Новый контакт</h2>
-    <form [formGroup]="newExpressRecipientContact" (ngSubmit)="createNewExpressRecipientContact()">
+    <form [formGroup]="newExpressRecipientContact" (ngSubmit)="createNewContact(newExpressRecipientContact, 'new-express-recipient-contact', orderForm.value.expressRecipientAddress)">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1066,7 +1064,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewExpressRecipientAddress()">
+    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewAddress(newExpressRecipientAddress, orderForm.value.expressRecipient, 'new-express-recipient-address', expressReceiverAddresses, orderForm.value.expressRecipientAddress)">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1153,7 +1151,7 @@
   <div class="new-contragent-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-carrier-sender-contragent')"></button>
     <h2 class="white-header">Новый контрагент</h2>
-    <form [formGroup]="newCarrierSenderContragent" (ngSubmit)="createNewCarrierSenderContragent()">
+    <form [formGroup]="newCarrierSenderContragent">
       <div class="grey-box">
         <label for="type-carrier-sender"> Форма собственности :</label>
         <input type="text" id="type-carrier-sender" name="type-carrier-sender" formControlName="type">
@@ -1172,7 +1170,7 @@
   <div class="new-contact-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-carrier-sender-contact')"></button>
     <h2 class="white-header">Новый контакт</h2>
-    <form [formGroup]="newCarrierSenderContact" (ngSubmit)="createNewCarrierSenderContact()">
+    <form [formGroup]="newCarrierSenderContact">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1202,7 +1200,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-carrier-sender-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewCarrierSenderAddress()">
+    <form [formGroup]="newExpressSenderAddress">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">

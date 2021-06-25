@@ -68,7 +68,7 @@ export class OrderComponent implements OnInit {
   userOldInfo: any = sessionStorage.getItem('currentUser');
   user: any;
 
-  public expressSenderAgents: any;
+  expressSenderAgents: any;
   expressSenderAddresses: {id: number, name: string}[] = [];
   expressSenderContacts: {id: number, name: string}[] = [];
 
@@ -76,8 +76,9 @@ export class OrderComponent implements OnInit {
   expressReceiverAddresses: {id: number, name: string}[] = [];
   expressReceiverContacts: {id: number, name: string}[] = [];
 
+
   // Forms
-  oderForm = new FormGroup({
+  orderForm = new FormGroup({
     serviceType: new FormControl('', [
       Validators.required
     ]),
@@ -149,7 +150,7 @@ export class OrderComponent implements OnInit {
     ]),
   });
 
-  public newExpressSenderContragent = new FormGroup({
+  newExpressSenderContragent = new FormGroup({
     type: new FormControl('', [
       Validators.required
     ]),
@@ -435,7 +436,7 @@ export class OrderComponent implements OnInit {
         }
       });
 
-      this.oderForm.patchValue({
+      this.orderForm.patchValue({
         expressSender: this.user.senderCustomer.id,
         expressSenderAddress: this.user.senderAddress.id,
         expressSenderContact: this.user.senderCustomerContact.id,
@@ -446,6 +447,140 @@ export class OrderComponent implements OnInit {
     }
   }
 
+  selectAgent($event: any, agentId: any, addresses: any, contacts: any): void {
+    addresses.pop();
+    contacts.pop();
+    if (agentId) {
+      addresses.pop();
+      contacts.pop();
+      this.service.getAllUserCustomerAddress(agentId).subscribe(response => {
+        if (response.status === 200 && addresses.length === 0) {
+          for (const address of response.body) {
+            addresses.push({
+              id: address.id,
+              name: `${address.cityName}, ${address.streetName}`
+            });
+          }
+        }
+      });
+    }
+  }
+
+  selectAddress($event: any, addressId: any, contacts: any): void {
+    contacts.pop();
+    if (addressId) {
+      console.log('addressID', addressId);
+      if (contacts) {
+        contacts.pop();
+      }
+      this.service.getAllUserCustomerContact(addressId).subscribe(response => {
+        if (response.status === 200) {
+          for (const contact of response.body) {
+            contacts.push({
+              id: contact.id,
+              name: contact.name
+            });
+          }
+        }
+      });
+    }
+  }
+
+  onKey(event: any): void {
+    if (event.target.value === '' || this.expressSenderAgents.length === 0) {
+      this.ngOnInit();
+    } else {
+      this.expressSenderAgents = this.expressSenderAgents.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
+    }
+  }
+
+  onKey2(event: any): void {
+    if (event.target.value === '' || this.expressSenderAddresses.length === 0) {
+      this.expressSenderAddresses.pop();
+      this.service.getAllUserCustomerAddress(this.orderForm.value.expressSender).subscribe(response => {
+        if (response.status === 200) {
+          for (const address of response.body) {
+            this.expressSenderAddresses.push({
+              id: address.id,
+              name: `${address.cityName}, ${address.streetName}`
+            });
+          }
+        }
+      });
+    } else {
+      this.expressSenderAddresses = this.expressSenderAddresses.filter((option: any) => {
+        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
+    }
+  }
+
+  onKey3(event: any): void {
+    if (event.target.value === '' || this.expressSenderContacts.length === 0) {
+      this.expressSenderContacts.pop();
+      this.service.getAllUserCustomerContact(this.orderForm.value.expressSenderAddress).subscribe(response => {
+        if (response.status === 200) {
+          for (const contact of response.body) {
+            this.expressSenderContacts.push({
+              id: contact.id,
+              name: contact.name
+            });
+          }
+        }
+      });
+    } else {
+      this.expressSenderContacts = this.expressSenderContacts.filter((option: any) => {
+        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
+    }
+  }
+
+  onKey4(event: any): void {
+    if (event.target.value === '' || this.expressReceiverAgents.length === 0) {
+      this.ngOnInit();
+    } else {
+      this.expressReceiverAgents = this.expressReceiverAgents.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
+    }
+  }
+
+  onKey5(event: any): void {
+    if (event.target.value === '' || this.expressReceiverAddresses.length === 0) {
+      this.expressReceiverAddresses.pop();
+      this.service.getAllUserCustomerAddress(this.orderForm.value.expressRecipient).subscribe(response => {
+        if (response.status === 200) {
+          for (const address of response.body) {
+            this.expressReceiverAddresses.push({
+              id: address.id,
+              name: `${address.cityName}, ${address.streetName}`
+            });
+          }
+        }
+      });
+    } else {
+      this.expressReceiverAddresses = this.expressReceiverAddresses.filter((option: any) => {
+        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
+    }
+  }
+
+  onKey6(event: any): void {
+    if (event.target.value === '' || this.expressReceiverContacts.length === 0) {
+      this.expressReceiverContacts.pop();
+      this.service.getAllUserCustomerContact(this.orderForm.value.expressRecipientAddress).subscribe(response => {
+        if (response.status === 200) {
+          for (const contact of response.body) {
+            this.expressReceiverContacts.push({
+              id: contact.id,
+              name: contact.name
+            });
+          }
+        }
+      });
+    } else {
+      this.expressReceiverContacts = this.expressReceiverContacts.filter((option: any) => {
+        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+      });
+    }
+  }
 
   selectService(event: any): void {
     const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;
@@ -538,59 +673,6 @@ export class OrderComponent implements OnInit {
     modal.classList.remove('show-modal');
   }
 
-  createNewExpressSenderContragent(): void {
-    // Write something
-    const data = {
-      customerName: this.newExpressSenderContragent.value.name as string,
-      customerType: this.newExpressSenderContragent.value.type as string
-    };
-
-    this.service.saveUserCustomer(data).subscribe(response => {
-      if (response.status === 200) {
-        this.hideModal('new-express-sender-contragent');
-        this.newExpressSenderContragent.reset();
-        this.expressSenderAgents.pop();
-        this.service.getAllUserCustomer().subscribe(agents => {
-          if (agents.status === 200) {
-            this.expressSenderAgents = agents.body;
-          }
-        });
-      }
-    });
-  }
-
-  createNewExpressSenderContact(): void {
-    // Write something
-  }
-
-  createNewExpressSenderAddress(): void {
-    // Write something
-  }
-
-  createNewExpressRecipientContragent(): void {
-    // Write something
-  }
-
-  createNewExpressRecipientContact(): void {
-    // Write something
-  }
-
-  createNewExpressRecipientAddress(): void {
-    // Write something
-  }
-
-  createNewCarrierSenderContragent(): void {
-    // Write something
-  }
-
-  createNewCarrierSenderContact(): void {
-    // Write something
-  }
-
-  createNewCarrierSenderAddress(): void {
-    // Write something
-  }
-
   createContragent(form: FormGroup, modalId: string, array: any): void {
     const data = {
       customerName: form.value.name as string,
@@ -600,6 +682,81 @@ export class OrderComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal(modalId);
         array.push(data);
+        form.reset();
+      }
+    });
+  }
+
+  createNewAddress(form: any, id: number, modalId: string, addresses: any, agentId: number): void {
+    // addresses.pop();
+    // This vars will get correct name of city and street
+    let city: string;
+    let street: string;
+    // This constants will get the objects describing city and street
+    const cityCorrectName = this.citiesList.find(item => item.id === form.value.place);
+    const streetCorrectName = this.streetList.find(item => item.id === form.value.street);
+    if (cityCorrectName && streetCorrectName) {
+      // Get correct names
+      city = cityCorrectName.fullName;
+      street = streetCorrectName.name;
+
+      // Read fields from popup
+      const data = {
+        building: form.value.house,
+        cityId: form.value.place,
+        cityName: city,
+        description: form.value.description as string,
+        house: form.value.building as string,
+        housing: form.value.corpus as string,
+        mainAddress: form.value.type as boolean,
+        office: form.value.office as string,
+        pauseFrom: form.value.timeoutFrom as string,
+        pauseTo: form.value.timeoutTo as string,
+        room: form.value.apartment as string,
+        streetId: form.value.street,
+        streetName: street,
+        timeFrom: form.value.deliveryFrom as string,
+        timeTo: form.value.deliveryTo as string,
+        customerId: id
+      };
+      // Save the data
+      this.service.saveUserCustomerAddress(data).subscribe(response => {
+        // addresses.pop();
+        if (response.status === 200) {
+          this.hideModal(modalId);
+          form.reset();
+          // this.service.getAllUserCustomerAddress(agentId).subscribe(resp => {
+          //   if (response.status === 200) {
+          //     addresses.pop();
+          //     for (const address of resp.body) {
+          //       addresses.push({
+          //         id: address.id,
+          //         name: `${address.cityName}, ${address.streetName}`
+          //       });
+          //     }
+          //     console.log('Updated', addresses);
+          //   }
+          // });
+        }
+      });
+    }
+  }
+
+  createNewContact(form: any, modalId: string, addressId: number): void {
+    // Read fields from popup
+    const data = {
+      customerAddressId: addressId,
+      email: form.value.email as string,
+      mainContact: form.value.type as boolean,
+      name: form.value.name as string,
+      phone: form.value.tel1 as string,
+      phone2: form.value.tel2 as string,
+      position: form.value.position as string
+    };
+    // Post to backend
+    this.service.saveUserCustomerContact(data).subscribe(response => {
+      if (response.status === 200) {
+        this.hideModal(modalId);
         form.reset();
       }
     });
