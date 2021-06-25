@@ -558,3 +558,26 @@ input:checked + .switch-btn:before {
 .ag-theme-alpine .ag-pinned-right-header {
   display: none;
 }
+
+*::-webkit-scrollbar {
+  width: 12px;
+}
+
+*::-webkit-scrollbar-track {
+  background-color: #C6AFDA;
+  border-radius: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color:#48206B;
+}
+
+* {
+  scrollbar-color: #48206B #C6AFDA;
+  scrollbar-width: thin;
+}
+
+.ag-header-cell-menu-button {
+  opacity: 1 !important;
+}

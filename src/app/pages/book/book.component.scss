@@ -1,3 +1,7 @@
+.relative {
+  position: relative;
+}
+
 .book-content {
   display: grid;
   grid-template-rows: min-content min-content 485px;
@@ -5,11 +9,16 @@
   grid-template-areas: "box-1 box-2 box-3" "box-4 box-4 box-4" "box-5 box-6 box-7";
   grid-gap: 30px;
 
+  h2 {
+    font-size: 14px;
+  }
+
   & .box-1 {
     grid-area: box-1;
 
     & .grey-box .white-btn {
       padding: 12px 23px;
+      color: #000;
     }
   }
 
@@ -18,6 +27,7 @@
 
     & .grey-box .white-btn {
       padding: 12px 42px;
+      color: #000;
     }
   }
 
@@ -26,11 +36,25 @@
 
     & .grey-box .white-btn {
       padding: 12px 36px;
+      color: #000;
     }
   }
 
   & .box-4 {
     grid-area: box-4;
+
+    .btn-search {
+      color: transparent;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      width: 24px;
+      height: 24px;
+      background: url("/assets/img/common/search.svg");
+      padding: 0;
+      margin-top: -12px;
+      background-repeat: no-repeat;
+    }
   }
 
   & .box-5 {
@@ -55,8 +79,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  -webkit-box-shadow: 5px 5px 28px 14px rgba(0,0,0,0.31);
-  box-shadow: 5px 5px 28px 14px rgba(0,0,0,0.31);
+  -webkit-box-shadow: 5px 5px 28px 9999px rgba(0,0,0,0.31);
+  box-shadow: 0px 5px 28px 9999px rgba(0,0,0,0.31);
 
   &.new-contragent {
     width: 100%;
@@ -64,6 +88,10 @@
     max-width: 640px;
     max-height: 430px;
     display: none;
+
+    h2 {
+      font-size: 14px;
+    }
   }
 
   &.new-contact {
@@ -155,6 +183,10 @@
     grid-gap: 30px;
     position: relative;
 
+    h2 {
+      font-size: 14px;
+    }
+
     & .close-btn {
       position: absolute;
       top: -100px;
@@ -221,6 +253,10 @@
     grid-template-columns: 1fr;
     grid-gap: 30px;
     position: relative;
+
+    h2 {
+      font-size: 14px;
+    }
 
     & .close-btn {
       position: absolute;
@@ -293,6 +329,8 @@
     }
   }
 }
+
+
 
 .show-modal {
   display: grid !important;

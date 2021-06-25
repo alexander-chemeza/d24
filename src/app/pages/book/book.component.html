@@ -1,24 +1,27 @@
 <div class="book-content">
   <div class="box-1">
     <div class="grey-box">
-      <h2 class="grey-header m-0">Контрагенты</h2>
+      <h2 class="grey-header m-0">КОНТРАГЕНТЫ</h2>
       <button class="white-btn mt-10" (click)="showModal('new-contragent')">Новый контрагент</button>
     </div>
   </div>
   <div class="box-2">
     <div class="grey-box">
-      <h2 class="grey-header m-0">Адреса</h2>
+      <h2 class="grey-header m-0">АДРЕСА</h2>
       <button class="white-btn mt-10" [disabled]="customerId === 0" (click)="showModal('new-address')">Новый адрес</button>
     </div>
   </div>
   <div class="box-3">
     <div class="grey-box">
-      <h2 class="grey-header m-0">Контакты</h2>
+      <h2 class="grey-header m-0">КОНТАКТЫ</h2>
       <button class="white-btn mt-10" [disabled]="customerAddressId === -1" (click)="showModal('new-contact')">Новый контакт</button>
     </div>
   </div>
   <div class="box-4">
-    <input class="m-0" type="search" placeholder="Поиск" (keyup)="filter($event)">
+    <form action="" class="relative">
+      <input class="m-0" type="search" placeholder="Поиск" (keyup)="filter($event)">
+      <input type="submit" class="btn-search" value="Поиск">
+    </form>
   </div>
   <div class="box-5">
     <app-contragents

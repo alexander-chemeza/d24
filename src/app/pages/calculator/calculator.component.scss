@@ -1,14 +1,15 @@
 .calculator-content {
-  width: 100%;
+  // width: 100%;
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: min-content min-content min-content;
   grid-gap: 30px;
   grid-template-areas: "form" "warning" "popup";
+  margin: 0 40px;
 
   & .grey-box {
-    padding: 30px 100px;
+    padding: 30px 30px;
   }
 
   & .form-box {

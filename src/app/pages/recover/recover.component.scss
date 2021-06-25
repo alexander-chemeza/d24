@@ -4,6 +4,7 @@
   grid-template-rows: 1fr 15fr;
   grid-template-areas: "preheader" "form";
   box-sizing: border-box;
+  height: 100%;
 
   & .preheader {
     max-width: 590px;
@@ -11,7 +12,7 @@
     font-size: 1.8rem;
     color: #FFFFFF;
     box-sizing: border-box;
-    margin: 40px 0 0 40px;
+    margin: 40px 0 0 40px !important;
   }
 
   & .form {

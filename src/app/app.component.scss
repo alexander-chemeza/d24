@@ -182,6 +182,8 @@
 }
 
 .content {
+  scrollbar-color: #48206B #C6AFDA;
+  scrollbar-width: thin;
   grid-row: 1;
   grid-area: content;
   background-color: #A070B5;
@@ -270,3 +272,5 @@
 ul.signed li a {
   cursor: pointer;
 }
+
+

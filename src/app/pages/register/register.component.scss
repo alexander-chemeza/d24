@@ -23,15 +23,41 @@
   display: none !important;
 }
 
+.flex {
+  display: flex;
+}
+
 .register-content {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: min-content min-content;
   grid-template-areas: "controls" "forms";
   grid-gap: 30px;
+  margin: 0 40px;
+
+  h2 {
+    font-size: 14px;
+  }
 
   &-controls {
     grid-area: controls;
+
+    & .column-controls {
+      grid-area: column-controls;
+      display: grid;
+      grid-template-rows: 1fr;
+      grid-template-columns: 1fr 1fr;
+      grid-template-areas: "item-1 item-2";
+      grid-gap: 30px;
+
+      & .item-1 {
+        grid-area: item-1;
+      }
+
+      & .item-2 {
+        grid-area: item-2;
+      }
+    }
 
     &-row {
       display: flex;
@@ -124,7 +150,7 @@
           grid-template-rows: min-content min-content;
           grid-template-columns: 1fr 1fr;
           grid-template-areas: "col-1 col-2" "col-3 col-4";
-          grid-gap: 65px 30px;
+          grid-gap: 85px 30px;
 
           & .col-1 {
             grid-area: col-1;
@@ -165,7 +191,7 @@
 
   & .mark {
     position: absolute;
-    top: -50px;
+    top: -40px;
     left: 0;
     font-family: "Montserrat-SemiBold", sans-serif !important;
     font-size: 1.4rem;

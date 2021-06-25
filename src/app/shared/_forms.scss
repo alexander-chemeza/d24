@@ -77,8 +77,10 @@ input[type="date"]{
   margin-top: 12px;
   font-family: "Montserrat-Medium", sans-serif !important;
   font-size: 1.4rem;
-  color: rgba(0,0,0,0.5);
+  // color: rgba(0,0,0,0.5);
+  color: #000;
 }
+
 
 input[type="submit"] {
   padding: 15px 60px;
@@ -90,6 +92,7 @@ input[type="submit"] {
   border: none;
   border-radius: 25px;
   font-family: "Montserrat-Medium", sans-serif !important;
+  cursor: pointer;
 
   &:hover {
     background-color: #95b430;
@@ -294,6 +297,7 @@ button {
   &-item {
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
 
   & input[type="file"] {

@@ -1,19 +1,24 @@
 <div class="register-content">
   <div class="register-content-controls">
-    <div class="grey-box">
-      <h2 class="grey-header">Наличие транспортного договора</h2>
-      <div class="register-content-controls-row">
-        <div class="checkbox-block" style="margin-right: 15px;">
-          <input class="checkbox-block-item" type="radio" name="type" id="type1" (change)="agreement = !agreement" checked>
-          <span class="checkbox-block-icon"></span>
+    <div class="grey-box column-controls">
+      <div class="item-1">
+        <h2 class="grey-header">Наличие транспортного договора</h2>
+        <div class="register-content-controls-row">
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="radio" name="type" id="type1" (change)="agreement = !agreement" checked>
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="type1" [ngClass]="{'active-label': !agreement, 'inactive-label': agreement}">Есть договор</label>
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="radio" name="type" id="type2" (change)="agreement = !agreement">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="type2" [ngClass]="{'active-label': agreement, 'inactive-label': !agreement}">Нет договора</label>
         </div>
-        <label for="type1" [ngClass]="{'active-label': !agreement, 'inactive-label': agreement}">Есть договор</label>
-        <div class="checkbox-block" style="margin-right: 15px;">
-          <input class="checkbox-block-item" type="radio" name="type" id="type2" (change)="agreement = !agreement">
-          <span class="checkbox-block-icon"></span>
-        </div>
-        <label for="type2" [ngClass]="{'active-label': agreement, 'inactive-label': !agreement}">Нет договора</label>
       </div>
+      <p class="warning-left mt-20 item-2">
+        <span class="thin-black-text">Заполните ,пожалуйста, форму  для заключения договора</span>
+      </p>
     </div>
   </div>
   <div class="register-content-forms">
