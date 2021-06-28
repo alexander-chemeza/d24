@@ -148,6 +148,153 @@ export class OrderComponent implements OnInit {
     expressRecipientDescription: new FormControl('', [
       Validators.required
     ]),
+    expressDeliveryDescription: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryType: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryCounter1: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryWeight: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryVolume: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryLength: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryWidth: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryHeight: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryTTN: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryWait: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryRelocate: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryAgreement: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryCounter2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSender: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderAddress: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderContact: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderDate: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderDateFrom: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderDateTo: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderTimeFrom: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderTimeTo: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderDescription: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipient: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientAddress: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientStreet: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientHome: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientPart: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientBuilding: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientOffice: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientApartament: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientContactPhone: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientContactPhone2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientDate: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientDescription: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryType: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryCounter: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWeight: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryVolume: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryLength: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWidth: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryHeight: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryCost: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryTTN: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWait: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryRelocate: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryAgreement: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryCounter2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryPayment: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryListing: new FormControl('', [
+      Validators.required
+    ]),
   });
 
   newExpressSenderContragent = new FormGroup({
