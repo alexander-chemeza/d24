@@ -154,6 +154,9 @@ export class OrderComponent implements OnInit {
     expressDeliveryType: new FormControl('', [
       Validators.required
     ]),
+    expressDeliveryType2: new FormControl('', [
+      Validators.required
+    ]),
     expressDeliveryCounter1: new FormControl('', [
       Validators.required
     ]),
@@ -185,6 +188,33 @@ export class OrderComponent implements OnInit {
       Validators.required
     ]),
     expressDeliveryCounter2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryWeight2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryVolume2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryLength2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryWidth2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryHeight2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryTTN2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryWait2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryRelocate2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryAgreement2: new FormControl('', [
       Validators.required
     ]),
     carrierSender: new FormControl('', [

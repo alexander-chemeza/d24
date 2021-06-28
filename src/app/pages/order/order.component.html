@@ -22,8 +22,8 @@
         </mat-form-field>
       </div>
       <div id="control-wide" class="control-wide">
-        <label for="">Описание груза</label>
-        <input type="text">
+        <label for="expressDeliveryDescription">Описание груза</label>
+        <input type="text" name="expressDeliveryDescription" id="expressDeliveryDescription" formControlName="expressDeliveryDescription">
       </div>
     </div>
   </div>
@@ -238,7 +238,8 @@
             <div class="row row-btns">
               <div class="grey-box">
                 <div class="multi-btns">
-                  <label for="">Тип грузового места</label>
+                  <label for="expressDeliveryType">Тип грузового места</label>
+<!--                  make as radio buttons-->
                   <div class="btns-box">
                     <button class="active-btn">Короб</button>
                     <button class="white-btn">Палета</button>
@@ -248,7 +249,7 @@
                 </div>
                 <div class="counter">
                   <button class="minus-btn active-btn"></button>
-                  <input class="m-0" type="number">
+                  <input class="m-0" type="number" name="expressDeliveryCounter1" id="expressDeliveryCounter1" formControlName="expressDeliveryCounter1">
                   <button class="add-btn active-btn"></button>
                 </div>
               </div>
@@ -257,14 +258,14 @@
               <div class="grey-box">
                 <label for="params">Параметры отправления:</label>
                 <div class="row-params-items">
-                  <input type="text" placeholder="Вес, кг">
-                  <input type="text" placeholder="Объем, м3">
+                  <input type="text" placeholder="Вес, кг" name="expressDeliveryWeight" id="expressDeliveryWeight" formControlName="expressDeliveryWeight">
+                  <input type="text" placeholder="Объем, м3" name="expressDeliveryVolume" id="expressDeliveryVolume" formControlName="expressDeliveryVolume">
                   <span class="grey-header" style="text-align: center">или</span>
-                  <input type="text" placeholder="Длина, см">
+                  <input type="text" placeholder="Длина, см" name="expressDeliveryLength" id="expressDeliveryLength" formControlName="expressDeliveryLength">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Ширина, см">
+                  <input type="text" placeholder="Ширина, см" name="expressDeliveryWidth" id="expressDeliveryWidth" formControlName="expressDeliveryWidth">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Высота, см">
+                  <input type="text" placeholder="Высота, см" name="expressDeliveryHeight" id="expressDeliveryHeight" formControlName="expressDeliveryHeight">
                 </div>
               </div>
             </div>
@@ -290,31 +291,31 @@
             <div class="grey-box">
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="ttn1" id="ttn1" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryTTN" id="expressDeliveryTTN" formControlName="expressDeliveryTTN" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="ttn1">Замена ТТН ( 1 шт - 15 руб) </label>
+                <label for="expressDeliveryTTN">Замена ТТН ( 1 шт - 15 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="wait1" id="wait1" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryWait" id="expressDeliveryWait" formControlName="expressDeliveryWait" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="wait1">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
+                <label for="expressDeliveryWait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="readdress1" id="readdress1" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryRelocate" id="expressDeliveryRelocate" formControlName="expressDeliveryRelocate" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="readdress1">Переадресация</label>
+                <label for="expressDeliveryRelocate">Переадресация</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="agreement1" id="agreement1" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryAgreement" id="expressDeliveryAgreement" formControlName="expressDeliveryAgreement" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="agreement1">Оформление доверенностей на получение груза</label>
+                <label for="expressDeliveryAgreement">Оформление доверенностей на получение груза</label>
               </div>
             </div>
           </div>
@@ -325,14 +326,15 @@
             <div class="row row-btns">
               <div class="grey-box">
                 <div class="multi-btns">
-                  <label for="">Тип грузового места</label>
+                  <label for="expressDeliveryType2">Тип грузового места</label>
+<!--                  make it as radio-->
                   <div class="btns-box">
                     <button class="active-btn">Конверт</button>
                   </div>
                 </div>
                 <div class="counter">
                   <button class="minus-btn active-btn"></button>
-                  <input class="m-0" type="number">
+                  <input class="m-0" type="number" name="expressDeliveryCounter2" id="expressDeliveryCounter2" formControlName="expressDeliveryCounter2">
                   <button class="add-btn active-btn"></button>
                 </div>
               </div>
@@ -341,14 +343,14 @@
               <div class="grey-box">
                 <label for="params">Параметры отправления:</label>
                 <div class="row-params-items">
-                  <input type="text" placeholder="Вес, кг">
-                  <input type="text" placeholder="Объем, м3">
+                  <input type="text" placeholder="Вес, кг" name="expressDeliveryWeight2" id="expressDeliveryWeight2" formControlName="expressDeliveryWeight2">
+                  <input type="text" placeholder="Объем, м3" name="expressDeliveryVolume2" id="expressDeliveryVolume2" formControlName="expressDeliveryVolume2">
                   <span class="grey-header" style="text-align: center">или</span>
-                  <input type="text" placeholder="Длина, см">
+                  <input type="text" placeholder="Длина, см" name="expressDeliveryLength2" id="expressDeliveryLength2" formControlName="expressDeliveryLength2">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Ширина, см">
+                  <input type="text" placeholder="Ширина, см" name="expressDeliveryWidth2" id="expressDeliveryWidth2" formControlName="expressDeliveryWidth2">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Высота, см">
+                  <input type="text" placeholder="Высота, см" name="expressDeliveryHeight2" id="expressDeliveryHeight2" formControlName="expressDeliveryHeight2">
                 </div>
               </div>
             </div>
@@ -374,31 +376,31 @@
             <div class="grey-box">
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="ttn2" id="ttn2" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryTTN2" id="expressDeliveryTTN2" formControlName="expressDeliveryTTN2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="tt2">Замена ТТН ( 1 шт - 15 руб) </label>
+                <label for="expressDeliveryTTN2">Замена ТТН ( 1 шт - 15 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="wait2" id="wait2" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryWait2" id="expressDeliveryWait2" formControlName="expressDeliveryWait2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
                 <label for="wait2">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="readdress2" id="readdress2" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryRelocate2" id="expressDeliveryRelocate2" formControlName="expressDeliveryRelocate2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="readdress2">Переадресация</label>
+                <label for="expressDeliveryRelocate2">Переадресация</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="agrement2" id="agreement2" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryAgreement2" id="expressDeliveryAgreement2" formControlName="expressDeliveryAgreement2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="agreement2">Оформление доверенностей на получение груза</label>
+                <label for="expressDeliveryAgreement2">Оформление доверенностей на получение груза</label>
               </div>
             </div>
           </div>
