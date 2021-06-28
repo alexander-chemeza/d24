@@ -319,10 +319,79 @@ export class OrderComponent implements OnInit {
     carrierDeliveryCounter2: new FormControl('', [
       Validators.required
     ]),
+    carrierDeliveryType2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWeight2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryVolume2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryLength2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWidth2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryHeight2: new FormControl('', [
+      Validators.required
+    ]),
     carrierDeliveryPayment: new FormControl('', [
       Validators.required
     ]),
+    carrierDeliveryTTN2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWait2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryRelocate2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryAgreement2: new FormControl('', [
+      Validators.required
+    ]),
     carrierDeliveryListing: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryCost2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryType3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWeight3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryVolume3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryLength3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWidth3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryHeight3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryTTN3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWait3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryRelocate3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryAgreement3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryListing2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryCost3: new FormControl('', [
       Validators.required
     ]),
   });
