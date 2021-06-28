@@ -2,6 +2,64 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
+// New order
+export interface NewOrder {
+  amount_packages?: number;
+  client_type?: number;
+  contact_customer?: string;
+  cost?: number;
+  credit?: number;
+  credit_type?: number;
+  deal_type: number;
+  delivery_placing_type: number;
+  delivery_size_x: number;
+  delivery_size_y: number;
+  delivery_size_z: number;
+  delivery_type: string;
+  delivery_volume: number;
+  delivery_weight: number;
+  description_delivery?: string;
+  email_customer: string;
+  identification_number: string;
+  number?: string;
+  payment_status?: number;
+  payment_type?: number;
+  phone_customer: string;
+  recipient_accept_from: string;
+  recipient_accept_to: string;
+  recipient_address: string;
+  recipient_apartment: string;
+  recipient_city: string;
+  recipient_contact_phone: string;
+  recipient_description: string;
+  recipient_district: string;
+  recipient_email: string;
+  recipient_house: string;
+  recipient_house_segment: string;
+  recipient_latitude: string;
+  recipient_longitude: string;
+  recipient_name: string;
+  recipient_region: string;
+  recipient_street: string;
+  sender_address: string;
+  sender_apartment: string;
+  sender_city: string;
+  sender_contact_phone: string;
+  sender_delivery_from: string;
+  sender_delivery_to: string;
+  sender_description: string;
+  sender_district: string;
+  sender_email: string;
+  sender_house: string;
+  sender_house_segment: string;
+  sender_latitude: string;
+  sender_longitude: string;
+  sender_name: string;
+  sender_region: string;
+  sender_street: string;
+  status?: string;
+}
+
 // Login user data interface
 export interface User {
   name: string;
@@ -226,5 +284,10 @@ export class RestapiService {
 
   public updateUser(data: any): Observable<any> {
     return this.http.post(`${this.url}/user/updateUser`, data, {observe: 'response', withCredentials: true});
+  }
+
+  // New order
+  public placeNewOrder(data: NewOrder): Observable<any> {
+    return this.http.post(`${this.url}/user/order/addNew`, data, {observe: 'response', withCredentials: true});
   }
 }
