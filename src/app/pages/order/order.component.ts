@@ -673,16 +673,32 @@ export class OrderComponent implements OnInit {
     modal.classList.remove('show-modal');
   }
 
-  createContragent(form: FormGroup, modalId: string, array: any): void {
+  createContragent(form: FormGroup, modalId: string, array: any, field: any): void {
     const data = {
       customerName: form.value.name as string,
       customerType: form.value.type as string
     };
     this.service.saveUserCustomer(data).subscribe(response => {
       if (response.status === 200) {
-        this.hideModal(modalId);
-        array.push(data);
-        form.reset();
+        this.service.getAllUserCustomer().subscribe(resp => {
+          if (resp.status === 200) {
+            array = resp.body;
+            form.reset();
+            this.hideModal(modalId);
+            console.log('New contragent', array);
+            console.log('Last', );
+            if (field === 'expressSender') {
+              this.orderForm.patchValue({
+                expressSender: array[array.length - 1].id
+
+              });
+            } else if (field === 'expressRecipient') {
+              this.orderForm.patchValue({
+                expressRecipient: array[array.length - 1].id
+              });
+            }
+          }
+        });
       }
     });
   }

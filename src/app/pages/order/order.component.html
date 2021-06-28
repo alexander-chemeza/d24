@@ -879,7 +879,7 @@
   <div class="new-contragent-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-sender-contragent')"></button>
     <h2 class="white-header">Новый контрагент</h2>
-    <form [formGroup]="newExpressSenderContragent" (ngSubmit)="createContragent(newExpressSenderContragent, 'new-express-sender-contragent', expressSenderAgents)">
+    <form [formGroup]="newExpressSenderContragent" (ngSubmit)="createContragent(newExpressSenderContragent, 'new-express-sender-contragent', expressSenderAgents, 'expressSender')">
       <div class="grey-box">
         <label for="type-express-sender"> Форма собственности :</label>
         <input type="text" id="type-express-sender" name="type-express-sender" formControlName="type">
@@ -1015,7 +1015,7 @@
   <div class="new-contragent-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-contragent')"></button>
     <h2 class="white-header">Новый контрагент</h2>
-    <form [formGroup]="newExpressRecipientContragent" (ngSubmit)="createContragent(newExpressRecipientContragent, 'new-express-recipient-contragent', expressReceiverAgents)">
+    <form [formGroup]="newExpressRecipientContragent" (ngSubmit)="createContragent(newExpressRecipientContragent, 'new-express-recipient-contragent', expressReceiverAgents, 'expressRecipient')">
       <div class="grey-box">
         <label for="type-express-recipient"> Форма собственности :</label>
         <input type="text" id="type-express-recipient" name="type-express-recipient" formControlName="type">
