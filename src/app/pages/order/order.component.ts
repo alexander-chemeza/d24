@@ -829,15 +829,33 @@ export class OrderComponent implements OnInit {
   }
 
   selectService(event: any): void {
+    const submitRows = document.getElementsByClassName('submit-row');
     const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;
     const currentForm = document.getElementById(`form-${this.serviceType}`) as HTMLElement;
     const forms = document.getElementsByClassName('form') as HTMLCollection;
+    const stage0 = document.getElementById('control-0');
+    const stage1 = document.getElementById('control-1');
+
     for (let i = 0; i < forms.length; i++) {
       forms[i].classList.add('another-form');
     }
+
+    for (let i = 0; i < submitRows.length; i++) {
+      submitRows[i].classList.add('another-form');
+    }
+
     for (let i = 0; i < stageBtns.length; i++) {
       stageBtns[i].classList.remove('active-btn');
     }
+
+    if (stage0 && stage1) {
+      if (this.serviceType === '0') {
+        stage0.classList.remove('another-form');
+      } else {
+        stage1.classList.remove('another-form');
+      }
+    }
+
     stageBtns[0].classList.add('active-btn');
     currentForm.classList.remove('another-form');
   }
@@ -864,28 +882,38 @@ export class OrderComponent implements OnInit {
   }
 
   changeStage(event: any): void {
+    const submitRows = document.getElementsByClassName('submit-row') as HTMLCollection;
     const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;
     const controlWide = document.getElementById('control-wide') as HTMLElement;
     let currentForm: any;
+    let currentControl: any;
     const currentStage: string = event.target.getAttribute('stage');
     const forms = document.getElementsByClassName('form') as HTMLCollection;
     if (this.serviceType === '0' && currentStage === '1') {
       currentForm = document.getElementById(`form-${this.serviceType}`);
+      currentControl = document.getElementById(`control-${this.serviceType}`);
       controlWide.classList.remove('show-control-wide');
     } else if (this.serviceType === '0' && currentStage === '2') {
       currentForm = document.getElementById(`form-${this.serviceType}${currentStage}`);
+      currentControl = document.getElementById(`control-${this.serviceType}${currentStage}`);
       controlWide.classList.add('show-control-wide');
     } else if (this.serviceType === '1' && currentStage === '1') {
       currentForm = document.getElementById(`form-${this.serviceType}`);
+      currentControl = document.getElementById(`control-${this.serviceType}`);
       controlWide.classList.remove('show-control-wide');
     } else {
       currentForm = document.getElementById(`form-${this.serviceType}${currentStage}`);
+      currentControl = document.getElementById(`control-${this.serviceType}${currentStage}`);
       controlWide.classList.remove('show-control-wide');
     }
     for (let i = 0; i < forms.length; i++) {
       forms[i].classList.add('another-form');
     }
+    for (let i = 0; i < submitRows.length; i++) {
+      submitRows[i].classList.add('another-form');
+    }
     currentForm.classList.remove('another-form');
+    currentControl.classList.remove('another-form');
     for (let i = 0; i < stageBtns.length; i++) {
       stageBtns[i].classList.remove('active-btn');
     }
