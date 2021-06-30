@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {RestapiService, Street} from '../../restapi.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {DatePipe} from '@angular/common';
 
 interface ServiceTypesList {
   value: string;
@@ -46,6 +47,8 @@ export interface StreetsList {
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
+  pipe = new DatePipe('en-US');
+  cargoDescription = '';
   serviceType: string;
   deliveryType: string;
   currentCity: number;
@@ -1048,6 +1051,59 @@ export class OrderComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal(modalId);
         form.reset();
+      }
+    });
+  }
+
+  newOrder(event: any, type: string): any {
+    let data: any;
+    if (type === 'express') {
+      data = {
+        // Step 1
+        deal_type: this.serviceType,
+        delivery_type: this.deliveryType,
+        senderCustomerId: this.orderForm.value.expressSender,
+        senderCustomerAddressId: this.orderForm.value.expressSenderAddress,
+        senderCustomerContactId: this.orderForm.value.expressSenderContact,
+        recipientCustomerId: this.orderForm.value.expressRecipient,
+        recipientCustomerAddressId: this.orderForm.value.expressRecipientAddress,
+        recipientCustomerContactId: this.orderForm.value.expressRecipientContact,
+        sender_delivery_from: `${this.pipe.transform(this.orderForm.value.expressSenderDeliverFrom, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderTimeoutFrom}`,
+        sender_delivery_to: `${this.pipe.transform(this.orderForm.value.expressSenderDeliverTo, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderTimeoutTo}`,
+        sender_description: this.orderForm.value.expressSenderDescription,
+        recipient_accept_from: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliverFrom, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutFrom}`,
+        recipient_accept_to: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliverTo, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutTo}`,
+        recipient_description: this.orderForm.value.expressRecipientDescription,
+
+        // Missed
+        // senderDate: this.orderForm.value.expressSenderDeliveryDate,
+        // senderTTN: this.orderForm.value.expressSenderTTN,
+        // recipientDate: this.orderForm.value.expressRecipientDeliveryDate,
+        // recipientNotification: this.orderForm.value.expressRecipientNotification,
+        // recipientNotificationEmail: this.orderForm.value.expressRecipientNotificationEmail,
+
+        // Step 2
+        description_delivery: this.cargoDescription,
+        delivery_placing_type: this.orderForm.value.expressDeliveryType,
+        delivery_weight: this.orderForm.value.expressDeliveryWeight,
+        delivery_volume: this.orderForm.value.expressDeliveryVolume,
+        delivery_size_x: this.orderForm.value.expressDeliveryLength,
+        delivery_size_y: this.orderForm.value.expressDeliveryWidth,
+        delivery_size_z: this.orderForm.value.expressDeliveryHeight,
+        amount_packages: this.orderForm.value.expressDeliveryCounter1,
+
+        // Missed
+        // ttnChange: this.orderForm.value.expressDeliveryTTN,
+        // await: this.orderForm.value.expressDeliveryWait,
+        // relocation: this.orderForm.value.expressDeliveryRelocate,
+        // agreement: this.orderForm.value.expressDeliveryAgreement
+      };
+    }
+    console.log('Data', data);
+
+    this.service.placeNewOrder(data).subscribe(response => {
+      if (response.status === 200) {
+        console.log('Saved', data);
       }
     });
   }

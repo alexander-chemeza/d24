@@ -23,7 +23,7 @@
       </div>
       <div id="control-wide" class="control-wide">
         <label for="expressDeliveryDescription">Описание груза</label>
-        <input type="text" name="expressDeliveryDescription" id="expressDeliveryDescription" formControlName="expressDeliveryDescription">
+        <input type="text" name="expressDeliveryDescription" id="expressDeliveryDescription" [(ngModel)]="cargoDescription">
       </div>
     </div>
   </div>
@@ -111,10 +111,10 @@
                 <label class="m-0" for="expressSenderDeliverTo">по:</label>
                 <label class="m-0" for="expressSenderTimeoutFrom">Время перерыва c:</label>
                 <label class="m-0" for="expressSenderTimeoutTo">по:</label>
-                <input type="text" name="expressSenderDeliverFrom" id="expressSenderDeliverFrom" formControlName="expressSenderDeliverFrom">
-                <input type="text" name="expressSenderDeliverTo" id="expressSenderDeliverTo" formControlName="expressSenderDeliverTo">
-                <input type="text" name="expressSenderTimeoutFrom" id="expressSenderTimeoutFrom" formControlName="expressSenderTimeoutFrom">
-                <input type="text" name="expressSenderTimeoutTo" id="expressSenderTimeoutTo" formControlName="expressSenderTimeoutTo">
+                <input type="date" name="expressSenderDeliverFrom" id="expressSenderDeliverFrom" formControlName="expressSenderDeliverFrom">
+                <input type="date" name="expressSenderDeliverTo" id="expressSenderDeliverTo" formControlName="expressSenderDeliverTo">
+                <input type="time" name="expressSenderTimeoutFrom" id="expressSenderTimeoutFrom" formControlName="expressSenderTimeoutFrom">
+                <input type="time" name="expressSenderTimeoutTo" id="expressSenderTimeoutTo" formControlName="expressSenderTimeoutTo">
               </div>
             </div>
             <div class="row">
@@ -203,10 +203,10 @@
                 <label class="m-0" for="expressRecipientDeliverTo">по:</label>
                 <label class="m-0" for="expressRecipientTimeoutFrom">Время перерыва c:</label>
                 <label class="m-0" for="expressRecipientTimeoutTo">по:</label>
-                <input type="text" name="expressRecipientDeliverFrom" id="expressRecipientDeliverFrom" formControlName="expressRecipientDeliverFrom">
-                <input type="text" name="expressRecipientDeliverTo" id="expressRecipientDeliverTo" formControlName="expressRecipientDeliverTo">
-                <input type="text" name="expressRecipientTimeoutFrom" id="expressRecipientTimeoutFrom" formControlName="expressRecipientTimeoutFrom">
-                <input type="text" name="expressRecipientTimeoutTo" id="expressRecipientTimeoutTo" formControlName="expressRecipientTimeoutTo">
+                <input type="date" name="expressRecipientDeliverFrom" id="expressRecipientDeliverFrom" formControlName="expressRecipientDeliverFrom">
+                <input type="date" name="expressRecipientDeliverTo" id="expressRecipientDeliverTo" formControlName="expressRecipientDeliverTo">
+                <input type="time" name="expressRecipientTimeoutFrom" id="expressRecipientTimeoutFrom" formControlName="expressRecipientTimeoutFrom">
+                <input type="time" name="expressRecipientTimeoutTo" id="expressRecipientTimeoutTo" formControlName="expressRecipientTimeoutTo">
               </div>
             </div>
             <div class="row-two-items">
@@ -258,14 +258,14 @@
               <div class="grey-box">
                 <label for="params">Параметры отправления:</label>
                 <div class="row-params-items">
-                  <input type="text" placeholder="Вес, кг" name="expressDeliveryWeight" id="expressDeliveryWeight" formControlName="expressDeliveryWeight">
-                  <input type="text" placeholder="Объем, м3" name="expressDeliveryVolume" id="expressDeliveryVolume" formControlName="expressDeliveryVolume">
+                  <input type="number" placeholder="Вес, кг" name="expressDeliveryWeight" id="expressDeliveryWeight" formControlName="expressDeliveryWeight">
+                  <input type="number" placeholder="Объем, м3" name="expressDeliveryVolume" id="expressDeliveryVolume" formControlName="expressDeliveryVolume">
                   <span class="grey-header" style="text-align: center">или</span>
-                  <input type="text" placeholder="Длина, см" name="expressDeliveryLength" id="expressDeliveryLength" formControlName="expressDeliveryLength">
+                  <input type="number" placeholder="Длина, см" name="expressDeliveryLength" id="expressDeliveryLength" formControlName="expressDeliveryLength">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Ширина, см" name="expressDeliveryWidth" id="expressDeliveryWidth" formControlName="expressDeliveryWidth">
+                  <input type="number" placeholder="Ширина, см" name="expressDeliveryWidth" id="expressDeliveryWidth" formControlName="expressDeliveryWidth">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Высота, см" name="expressDeliveryHeight" id="expressDeliveryHeight" formControlName="expressDeliveryHeight">
+                  <input type="number" placeholder="Высота, см" name="expressDeliveryHeight" id="expressDeliveryHeight" formControlName="expressDeliveryHeight">
                 </div>
               </div>
             </div>
@@ -886,7 +886,7 @@
         </div>
         <div class="col">
           <button class="white-btn round-btn">Назад</button>
-          <button class="green-btn round-btn">Оформить</button>
+          <button class="green-btn round-btn" (click)="newOrder($event, 'express')">Оформить</button>
           <input type="submit" value="Оформить" hidden>
         </div>
       </div>
