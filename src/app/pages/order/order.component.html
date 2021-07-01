@@ -241,10 +241,10 @@
                   <label for="expressDeliveryType">Тип грузового места</label>
 <!--                  make as radio buttons-->
                   <div class="btns-box">
-                    <button class="express-placing-type active-btn">Короб</button>
-                    <button class="express-placing-type white-btn">Палета</button>
-                    <button class="express-placing-type white-btn">Негабарит</button>
-                    <button class="express-placing-type white-btn">Мешок</button>
+                    <button class="express-placing-type active-btn" (click)="swtchDeliveryPlacing($event, 'express-placing-type')">Короб</button>
+                    <button class="express-placing-type white-btn" (click)="swtchDeliveryPlacing($event, 'express-placing-type')">Палета</button>
+                    <button class="express-placing-type white-btn" (click)="swtchDeliveryPlacing($event, 'express-placing-type')">Негабарит</button>
+                    <button class="express-placing-type white-btn" (click)="swtchDeliveryPlacing($event, 'express-placing-type')">Мешок</button>
                   </div>
                 </div>
                 <div class="counter">

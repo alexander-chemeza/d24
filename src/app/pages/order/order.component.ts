@@ -1143,4 +1143,12 @@ export class OrderComponent implements OnInit {
       }
     });
   }
+
+  swtchDeliveryPlacing(event: any, placingType: any): void {
+    const btns = document.getElementsByClassName(placingType);
+    for (let i = 0; i < btns.length; i++) {
+      btns[i].classList.remove('active-btn');
+    }
+    event.target.classList.add('active-btn');
+  }
 }
