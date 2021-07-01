@@ -17,8 +17,9 @@
   width: 100px;
   grid-area: sidebar;
   grid-row: 1;
-  transition: .8s;
-  transition-delay: 0.2s;
+  transition: .1s;
+  // transition: .8s; 30.06
+  // transition-delay: 0.2s; 30.06
 
   & .logo {
     width: 100%;
@@ -37,8 +38,8 @@
     background-image: url("../assets/img/menu/logo-short.svg");
     background-position-x: 10px;
     background-repeat: no-repeat;
-    transition: all .5s;
-    transition-delay: 0.1s;
+    transition: all .1s;
+    // transition-delay: 0.1s;
   }
 
   &:hover {
@@ -103,8 +104,8 @@
         left: 60px;
         opacity: 0;
         white-space: nowrap;
-        transition: opacity 0.2s;
-        transition-delay: .3s;
+        transition: opacity 0.1s;
+        // transition-delay: .3s;
       }
 
       & a {
