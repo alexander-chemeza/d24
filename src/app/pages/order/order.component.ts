@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {RestapiService, Street} from '../../restapi.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {DatePipe} from '@angular/common';
 
 interface ServiceTypesList {
   value: string;
@@ -46,6 +47,8 @@ export interface StreetsList {
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
+  pipe = new DatePipe('en-US');
+  cargoDescription = '';
   serviceType: string;
   deliveryType: string;
   currentCity: number;
@@ -146,6 +149,252 @@ export class OrderComponent implements OnInit {
       Validators.required
     ]),
     expressRecipientDescription: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryDescription: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryType: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryType2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryCounter1: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryWeight: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryVolume: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryLength: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryWidth: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryHeight: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryTTN: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryWait: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryRelocate: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryAgreement: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryCounter2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryWeight2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryVolume2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryLength2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryWidth2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryHeight2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryTTN2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryWait2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryRelocate2: new FormControl('', [
+      Validators.required
+    ]),
+    expressDeliveryAgreement2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSender: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderAddress: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderContact: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderDate: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderDateFrom: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderDateTo: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderTimeFrom: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderTimeTo: new FormControl('', [
+      Validators.required
+    ]),
+    carrierSenderDescription: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipient: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientAddress: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientStreet: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientHome: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientPart: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientBuilding: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientOffice: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientApartament: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientContactPhone: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientContactPhone2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientDate: new FormControl('', [
+      Validators.required
+    ]),
+    carrierRecipientDescription: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryType: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryCounter: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWeight: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryVolume: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryLength: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWidth: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryHeight: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryCost: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryTTN: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWait: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryRelocate: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryAgreement: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryCounter2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryType2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWeight2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryVolume2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryLength2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWidth2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryHeight2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryPayment: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryTTN2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWait2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryRelocate2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryAgreement2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryListing: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryCost2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryType3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWeight3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryVolume3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryLength3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWidth3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryHeight3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryTTN3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryWait3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryRelocate3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryAgreement3: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryListing2: new FormControl('', [
+      Validators.required
+    ]),
+    carrierDeliveryCost3: new FormControl('', [
       Validators.required
     ]),
   });
@@ -583,15 +832,33 @@ export class OrderComponent implements OnInit {
   }
 
   selectService(event: any): void {
+    const submitRows = document.getElementsByClassName('submit-row');
     const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;
     const currentForm = document.getElementById(`form-${this.serviceType}`) as HTMLElement;
     const forms = document.getElementsByClassName('form') as HTMLCollection;
+    const stage0 = document.getElementById('control-0');
+    const stage1 = document.getElementById('control-1');
+
     for (let i = 0; i < forms.length; i++) {
       forms[i].classList.add('another-form');
     }
+
+    for (let i = 0; i < submitRows.length; i++) {
+      submitRows[i].classList.add('another-form');
+    }
+
     for (let i = 0; i < stageBtns.length; i++) {
       stageBtns[i].classList.remove('active-btn');
     }
+
+    if (stage0 && stage1) {
+      if (this.serviceType === '0') {
+        stage0.classList.remove('another-form');
+      } else {
+        stage1.classList.remove('another-form');
+      }
+    }
+
     stageBtns[0].classList.add('active-btn');
     currentForm.classList.remove('another-form');
   }
@@ -618,28 +885,38 @@ export class OrderComponent implements OnInit {
   }
 
   changeStage(event: any): void {
+    const submitRows = document.getElementsByClassName('submit-row') as HTMLCollection;
     const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;
     const controlWide = document.getElementById('control-wide') as HTMLElement;
     let currentForm: any;
+    let currentControl: any;
     const currentStage: string = event.target.getAttribute('stage');
     const forms = document.getElementsByClassName('form') as HTMLCollection;
     if (this.serviceType === '0' && currentStage === '1') {
       currentForm = document.getElementById(`form-${this.serviceType}`);
+      currentControl = document.getElementById(`control-${this.serviceType}`);
       controlWide.classList.remove('show-control-wide');
     } else if (this.serviceType === '0' && currentStage === '2') {
       currentForm = document.getElementById(`form-${this.serviceType}${currentStage}`);
+      currentControl = document.getElementById(`control-${this.serviceType}${currentStage}`);
       controlWide.classList.add('show-control-wide');
     } else if (this.serviceType === '1' && currentStage === '1') {
       currentForm = document.getElementById(`form-${this.serviceType}`);
+      currentControl = document.getElementById(`control-${this.serviceType}`);
       controlWide.classList.remove('show-control-wide');
     } else {
       currentForm = document.getElementById(`form-${this.serviceType}${currentStage}`);
+      currentControl = document.getElementById(`control-${this.serviceType}${currentStage}`);
       controlWide.classList.remove('show-control-wide');
     }
     for (let i = 0; i < forms.length; i++) {
       forms[i].classList.add('another-form');
     }
+    for (let i = 0; i < submitRows.length; i++) {
+      submitRows[i].classList.add('another-form');
+    }
     currentForm.classList.remove('another-form');
+    currentControl.classList.remove('another-form');
     for (let i = 0; i < stageBtns.length; i++) {
       stageBtns[i].classList.remove('active-btn');
     }
@@ -673,16 +950,32 @@ export class OrderComponent implements OnInit {
     modal.classList.remove('show-modal');
   }
 
-  createContragent(form: FormGroup, modalId: string, array: any): void {
+  createContragent(form: FormGroup, modalId: string, array: any, field: any): void {
     const data = {
       customerName: form.value.name as string,
       customerType: form.value.type as string
     };
     this.service.saveUserCustomer(data).subscribe(response => {
       if (response.status === 200) {
-        this.hideModal(modalId);
-        array.push(data);
-        form.reset();
+        this.service.getAllUserCustomer().subscribe(resp => {
+          if (resp.status === 200) {
+            array = resp.body;
+            form.reset();
+            this.hideModal(modalId);
+            console.log('New contragent', array);
+            console.log('Last', );
+            if (field === 'expressSender') {
+              this.orderForm.patchValue({
+                expressSender: array[array.length - 1].id
+
+              });
+            } else if (field === 'expressRecipient') {
+              this.orderForm.patchValue({
+                expressRecipient: array[array.length - 1].id
+              });
+            }
+          }
+        });
       }
     });
   }
@@ -758,6 +1051,59 @@ export class OrderComponent implements OnInit {
       if (response.status === 200) {
         this.hideModal(modalId);
         form.reset();
+      }
+    });
+  }
+
+  newOrder(event: any, type: string): any {
+    let data: any;
+    if (type === 'express') {
+      data = {
+        // Step 1
+        deal_type: this.serviceType,
+        delivery_type: this.deliveryType,
+        senderCustomerId: this.orderForm.value.expressSender,
+        senderCustomerAddressId: this.orderForm.value.expressSenderAddress,
+        senderCustomerContactId: this.orderForm.value.expressSenderContact,
+        recipientCustomerId: this.orderForm.value.expressRecipient,
+        recipientCustomerAddressId: this.orderForm.value.expressRecipientAddress,
+        recipientCustomerContactId: this.orderForm.value.expressRecipientContact,
+        sender_delivery_from: `${this.pipe.transform(this.orderForm.value.expressSenderDeliverFrom, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderTimeoutFrom}`,
+        sender_delivery_to: `${this.pipe.transform(this.orderForm.value.expressSenderDeliverTo, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderTimeoutTo}`,
+        sender_description: this.orderForm.value.expressSenderDescription,
+        recipient_accept_from: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliverFrom, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutFrom}`,
+        recipient_accept_to: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliverTo, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutTo}`,
+        recipient_description: this.orderForm.value.expressRecipientDescription,
+
+        // Missed
+        // senderDate: this.orderForm.value.expressSenderDeliveryDate,
+        // senderTTN: this.orderForm.value.expressSenderTTN,
+        // recipientDate: this.orderForm.value.expressRecipientDeliveryDate,
+        // recipientNotification: this.orderForm.value.expressRecipientNotification,
+        // recipientNotificationEmail: this.orderForm.value.expressRecipientNotificationEmail,
+
+        // Step 2
+        description_delivery: this.cargoDescription,
+        delivery_placing_type: this.orderForm.value.expressDeliveryType,
+        delivery_weight: this.orderForm.value.expressDeliveryWeight,
+        delivery_volume: this.orderForm.value.expressDeliveryVolume,
+        delivery_size_x: this.orderForm.value.expressDeliveryLength,
+        delivery_size_y: this.orderForm.value.expressDeliveryWidth,
+        delivery_size_z: this.orderForm.value.expressDeliveryHeight,
+        amount_packages: this.orderForm.value.expressDeliveryCounter1,
+
+        // Missed
+        // ttnChange: this.orderForm.value.expressDeliveryTTN,
+        // await: this.orderForm.value.expressDeliveryWait,
+        // relocation: this.orderForm.value.expressDeliveryRelocate,
+        // agreement: this.orderForm.value.expressDeliveryAgreement
+      };
+    }
+    console.log('Data', data);
+
+    this.service.placeNewOrder(data).subscribe(response => {
+      if (response.status === 200) {
+        console.log('Saved', data);
       }
     });
   }

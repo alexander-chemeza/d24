@@ -22,8 +22,8 @@
         </mat-form-field>
       </div>
       <div id="control-wide" class="control-wide">
-        <label for="">Описание груза</label>
-        <input type="text">
+        <label for="expressDeliveryDescription">Описание груза</label>
+        <input type="text" name="expressDeliveryDescription" id="expressDeliveryDescription" [(ngModel)]="cargoDescription">
       </div>
     </div>
   </div>
@@ -111,10 +111,10 @@
                 <label class="m-0" for="expressSenderDeliverTo">по:</label>
                 <label class="m-0" for="expressSenderTimeoutFrom">Время перерыва c:</label>
                 <label class="m-0" for="expressSenderTimeoutTo">по:</label>
-                <input type="text" name="expressSenderDeliverFrom" id="expressSenderDeliverFrom" formControlName="expressSenderDeliverFrom">
-                <input type="text" name="expressSenderDeliverTo" id="expressSenderDeliverTo" formControlName="expressSenderDeliverTo">
-                <input type="text" name="expressSenderTimeoutFrom" id="expressSenderTimeoutFrom" formControlName="expressSenderTimeoutFrom">
-                <input type="text" name="expressSenderTimeoutTo" id="expressSenderTimeoutTo" formControlName="expressSenderTimeoutTo">
+                <input type="date" name="expressSenderDeliverFrom" id="expressSenderDeliverFrom" formControlName="expressSenderDeliverFrom">
+                <input type="date" name="expressSenderDeliverTo" id="expressSenderDeliverTo" formControlName="expressSenderDeliverTo">
+                <input type="time" name="expressSenderTimeoutFrom" id="expressSenderTimeoutFrom" formControlName="expressSenderTimeoutFrom">
+                <input type="time" name="expressSenderTimeoutTo" id="expressSenderTimeoutTo" formControlName="expressSenderTimeoutTo">
               </div>
             </div>
             <div class="row">
@@ -203,10 +203,10 @@
                 <label class="m-0" for="expressRecipientDeliverTo">по:</label>
                 <label class="m-0" for="expressRecipientTimeoutFrom">Время перерыва c:</label>
                 <label class="m-0" for="expressRecipientTimeoutTo">по:</label>
-                <input type="text" name="expressRecipientDeliverFrom" id="expressRecipientDeliverFrom" formControlName="expressRecipientDeliverFrom">
-                <input type="text" name="expressRecipientDeliverTo" id="expressRecipientDeliverTo" formControlName="expressRecipientDeliverTo">
-                <input type="text" name="expressRecipientTimeoutFrom" id="expressRecipientTimeoutFrom" formControlName="expressRecipientTimeoutFrom">
-                <input type="text" name="expressRecipientTimeoutTo" id="expressRecipientTimeoutTo" formControlName="expressRecipientTimeoutTo">
+                <input type="date" name="expressRecipientDeliverFrom" id="expressRecipientDeliverFrom" formControlName="expressRecipientDeliverFrom">
+                <input type="date" name="expressRecipientDeliverTo" id="expressRecipientDeliverTo" formControlName="expressRecipientDeliverTo">
+                <input type="time" name="expressRecipientTimeoutFrom" id="expressRecipientTimeoutFrom" formControlName="expressRecipientTimeoutFrom">
+                <input type="time" name="expressRecipientTimeoutTo" id="expressRecipientTimeoutTo" formControlName="expressRecipientTimeoutTo">
               </div>
             </div>
             <div class="row-two-items">
@@ -238,7 +238,8 @@
             <div class="row row-btns">
               <div class="grey-box">
                 <div class="multi-btns">
-                  <label for="">Тип грузового места</label>
+                  <label for="expressDeliveryType">Тип грузового места</label>
+<!--                  make as radio buttons-->
                   <div class="btns-box">
                     <button class="active-btn">Короб</button>
                     <button class="white-btn">Палета</button>
@@ -248,7 +249,7 @@
                 </div>
                 <div class="counter">
                   <button class="minus-btn active-btn"></button>
-                  <input class="m-0" type="number">
+                  <input class="m-0" type="number" name="expressDeliveryCounter1" id="expressDeliveryCounter1" formControlName="expressDeliveryCounter1">
                   <button class="add-btn active-btn"></button>
                 </div>
               </div>
@@ -257,14 +258,14 @@
               <div class="grey-box">
                 <label for="params">Параметры отправления:</label>
                 <div class="row-params-items">
-                  <input type="text" placeholder="Вес, кг">
-                  <input type="text" placeholder="Объем, м3">
+                  <input type="number" placeholder="Вес, кг" name="expressDeliveryWeight" id="expressDeliveryWeight" formControlName="expressDeliveryWeight">
+                  <input type="number" placeholder="Объем, м3" name="expressDeliveryVolume" id="expressDeliveryVolume" formControlName="expressDeliveryVolume">
                   <span class="grey-header" style="text-align: center">или</span>
-                  <input type="text" placeholder="Длина, см">
+                  <input type="number" placeholder="Длина, см" name="expressDeliveryLength" id="expressDeliveryLength" formControlName="expressDeliveryLength">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Ширина, см">
+                  <input type="number" placeholder="Ширина, см" name="expressDeliveryWidth" id="expressDeliveryWidth" formControlName="expressDeliveryWidth">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Высота, см">
+                  <input type="number" placeholder="Высота, см" name="expressDeliveryHeight" id="expressDeliveryHeight" formControlName="expressDeliveryHeight">
                 </div>
               </div>
             </div>
@@ -290,31 +291,31 @@
             <div class="grey-box">
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="ttn1" id="ttn1" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryTTN" id="expressDeliveryTTN" formControlName="expressDeliveryTTN" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="ttn1">Замена ТТН ( 1 шт - 15 руб) </label>
+                <label for="expressDeliveryTTN">Замена ТТН ( 1 шт - 15 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="wait1" id="wait1" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryWait" id="expressDeliveryWait" formControlName="expressDeliveryWait" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="wait1">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
+                <label for="expressDeliveryWait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="readdress1" id="readdress1" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryRelocate" id="expressDeliveryRelocate" formControlName="expressDeliveryRelocate" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="readdress1">Переадресация</label>
+                <label for="expressDeliveryRelocate">Переадресация</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="agreement1" id="agreement1" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryAgreement" id="expressDeliveryAgreement" formControlName="expressDeliveryAgreement" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="agreement1">Оформление доверенностей на получение груза</label>
+                <label for="expressDeliveryAgreement">Оформление доверенностей на получение груза</label>
               </div>
             </div>
           </div>
@@ -325,14 +326,15 @@
             <div class="row row-btns">
               <div class="grey-box">
                 <div class="multi-btns">
-                  <label for="">Тип грузового места</label>
+                  <label for="expressDeliveryType2">Тип грузового места</label>
+<!--                  make it as radio-->
                   <div class="btns-box">
                     <button class="active-btn">Конверт</button>
                   </div>
                 </div>
                 <div class="counter">
                   <button class="minus-btn active-btn"></button>
-                  <input class="m-0" type="number">
+                  <input class="m-0" type="number" name="expressDeliveryCounter2" id="expressDeliveryCounter2" formControlName="expressDeliveryCounter2">
                   <button class="add-btn active-btn"></button>
                 </div>
               </div>
@@ -341,14 +343,14 @@
               <div class="grey-box">
                 <label for="params">Параметры отправления:</label>
                 <div class="row-params-items">
-                  <input type="text" placeholder="Вес, кг">
-                  <input type="text" placeholder="Объем, м3">
+                  <input type="text" placeholder="Вес, кг" name="expressDeliveryWeight2" id="expressDeliveryWeight2" formControlName="expressDeliveryWeight2">
+                  <input type="text" placeholder="Объем, м3" name="expressDeliveryVolume2" id="expressDeliveryVolume2" formControlName="expressDeliveryVolume2">
                   <span class="grey-header" style="text-align: center">или</span>
-                  <input type="text" placeholder="Длина, см">
+                  <input type="text" placeholder="Длина, см" name="expressDeliveryLength2" id="expressDeliveryLength2" formControlName="expressDeliveryLength2">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Ширина, см">
+                  <input type="text" placeholder="Ширина, см" name="expressDeliveryWidth2" id="expressDeliveryWidth2" formControlName="expressDeliveryWidth2">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Высота, см">
+                  <input type="text" placeholder="Высота, см" name="expressDeliveryHeight2" id="expressDeliveryHeight2" formControlName="expressDeliveryHeight2">
                 </div>
               </div>
             </div>
@@ -374,31 +376,31 @@
             <div class="grey-box">
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="ttn2" id="ttn2" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryTTN2" id="expressDeliveryTTN2" formControlName="expressDeliveryTTN2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="tt2">Замена ТТН ( 1 шт - 15 руб) </label>
+                <label for="expressDeliveryTTN2">Замена ТТН ( 1 шт - 15 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="wait2" id="wait2" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryWait2" id="expressDeliveryWait2" formControlName="expressDeliveryWait2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
                 <label for="wait2">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="readdress2" id="readdress2" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryRelocate2" id="expressDeliveryRelocate2" formControlName="expressDeliveryRelocate2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="readdress2">Переадресация</label>
+                <label for="expressDeliveryRelocate2">Переадресация</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="agrement2" id="agreement2" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryAgreement2" id="expressDeliveryAgreement2" formControlName="expressDeliveryAgreement2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="agreement2">Оформление доверенностей на получение груза</label>
+                <label for="expressDeliveryAgreement2">Оформление доверенностей на получение груза</label>
               </div>
             </div>
           </div>
@@ -408,8 +410,8 @@
           <div class="col grey-box">
             <div class="row">
               <div class="control">
-                <label for="">Отправитель:</label>
-                <input type="text">
+                <label for="carrierSender">Отправитель:</label>
+                <input type="text" name="carrierSender" id="carrierSender" formControlName="carrierSender">
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-carrier-sender-contact')"></button>
@@ -417,8 +419,8 @@
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Адрес выдачи груза:</label>
-                <input type="text">
+                <label for="carrierSenderAddress">Адрес выдачи груза:</label>
+                <input type="text" name="carrierSenderAddress" id="carrierSenderAddress" formControlName="carrierSenderAddress">
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-carrier-sender-address')"></button>
@@ -432,8 +434,8 @@
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Контакт (по адресу выдачи груза):</label>
-                <input type="text">
+                <label for="carrierSenderContact">Контакт (по адресу выдачи груза):</label>
+                <input type="text" name="carrierSenderContact" id="carrierSenderContact" formControlName="carrierSenderContact">
               </div>
               <div class="optional">
                 <button class="add-btn active-btn mt-27" (click)="showModal('new-carrier-sender-contragent')"></button>
@@ -441,28 +443,28 @@
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Дата выдачи груза:</label>
-                <input type="date">
+                <label for="carrierSenderDate">Дата выдачи груза:</label>
+                <input type="date" name="carrierSenderDate" id="carrierSenderDate" formControlName="carrierSenderDate">
               </div>
               <div class="optional">
               </div>
             </div>
             <div class="row-multiple">
               <div class="container">
-                <label class="m-0" for="">Дата выдачи груза c:</label>
-                <label class="m-0" for="">по:</label>
-                <label class="m-0" for="">Время перерыва c:</label>
-                <label class="m-0" for="">по:</label>
-                <input type="text">
-                <input type="text">
-                <input type="text">
-                <input type="text">
+                <label class="m-0" for="carrierSenderDateFrom">Дата выдачи груза c:</label>
+                <label class="m-0" for="carrierSenderDateTo">по:</label>
+                <label class="m-0" for="carrierSenderTimeFrom">Время перерыва c:</label>
+                <label class="m-0" for="carrierSenderTimeTo">по:</label>
+                <input type="text" name="carrierSenderDateFrom" id="carrierSenderDateFrom" formControlName="carrierSenderDateFrom">
+                <input type="text" name="carrierSenderDateTo" id="carrierSenderDateTo" formControlName="carrierSenderDateTo">
+                <input type="text" name="carrierSenderTimeFrom" id="carrierSenderTimeFrom" formControlName="carrierSenderTimeFrom">
+                <input type="text" name="carrierSenderTimeTo" id="carrierSenderTimeTo" formControlName="carrierSenderTimeTo">
               </div>
             </div>
             <div class="row">
               <div class="control">
-                <label for="">Примечание (по адресу выдачи груза):</label>
-                <textarea></textarea>
+                <label for="carrierSenderDescription">Примечание (по адресу выдачи груза):</label>
+                <textarea name="carrierSenderDescription" id="carrierSenderDescription" formControlName="carrierSenderDescription" m></textarea>
               </div>
               <div class="optional">
               </div>
@@ -472,14 +474,14 @@
           <div class="col grey-box">
             <div class="row-full">
               <div class="control">
-                <label for="">Отправитель:</label>
-                <input type="text">
+                <label for="carrierRecipient">Отправитель:</label>
+                <input type="text" name="carrierRecipient" id="carrierRecipient" formControlName="carrierRecipient">
               </div>
             </div>
             <div class="row-full">
               <div class="control">
-                <label for="">Населенный пункт:</label>
-                <input type="text">
+                <label for="carrierRecipientAddress">Населенный пункт:</label>
+                <input type="text" name="carrierRecipientAddress" id="carrierRecipientAddress" formControlName="carrierRecipientAddress">
               </div>
 
             </div>
@@ -491,38 +493,38 @@
             </div>
             <div class="row-full">
               <div class="control">
-                <label for="">Улица</label>
-                <input type="text">
+                <label for="carrierRecipientStreet">Улица</label>
+                <input type="text" name="carrierRecipientStreet" id="carrierRecipientStreet" formControlName="carrierRecipientStreet">
               </div>
             </div>
             <div class="row-full-multiple">
-              <label for="">Дом:</label>
-              <label for="">Корпус:</label>
-              <label for="">Строение:</label>
-              <label for="">Офис:</label>
-              <label for="">Квартира:</label>
-              <input type="text">
-              <input type="text">
-              <input type="text">
-              <input type="text">
-              <input type="text">
+              <label for="carrierRecipientHome">Дом:</label>
+              <label for="carrierRecipientPart">Корпус:</label>
+              <label for="carrierRecipientBuilding">Строение:</label>
+              <label for="carrierRecipientOffice">Офис:</label>
+              <label for="carrierRecipientApartament">Квартира:</label>
+              <input type="text" name="carrierRecipientHome" id="carrierRecipientHome" formControlName="carrierRecipientHome">
+              <input type="text" name="carrierRecipientPart" id="carrierRecipientPart" formControlName="carrierRecipientPart">
+              <input type="text" name="carrierRecipientBuilding" id="carrierRecipientBuilding" formControlName="carrierRecipientBuilding">
+              <input type="text" name="carrierRecipientOffice" id="carrierRecipientOffice" formControlName="carrierRecipientOffice">
+              <input type="text" name="carrierRecipientApartament" id="carrierRecipientApartament" formControlName="carrierRecipientApartament">
             </div>
             <div class="row-two-items">
               <div class="item">
-                <label for="">Телефон контакта:*</label>
-                <input type="tel">
+                <label for="carrierRecipientContactPhone">Телефон контакта:*</label>
+                <input type="tel" name="carrierRecipientContactPhone" id="carrierRecipientContactPhone" formControlName="carrierRecipientContactPhone">
               </div>
               <div class="item">
-                <label for="">Телефон контакта:*</label>
-                <input type="tel">
+                <label for="carrierRecipientContactPhone2">Телефон контакта:*</label>
+                <input type="tel" name="carrierRecipientContactPhone2" id="carrierRecipientContactPhone2" formControlName="carrierRecipientContactPhone2">
               </div>
               <div class="item">
-                <label for="">Дата доставки груза:</label>
-                <input type="date">
+                <label for="carrierRecipientDate">Дата доставки груза:</label>
+                <input type="date" name="carrierRecipientDate" id="carrierRecipientDate" formControlName="carrierRecipientDate">
               </div>
               <div class="item">
-                <label for="">Примечание (по адресу выдачи груза):</label>
-                <textarea></textarea>
+                <label for="carrierRecipientDescription">Примечание (по адресу выдачи груза):</label>
+                <textarea name="carrierRecipientDescription" formControlName="carrierRecipientDescription" id="carrierRecipientDescription"></textarea>
               </div>
             </div>
           </div>
@@ -532,14 +534,15 @@
           <div class="column-main">
             <div class="row-type grey-box">
               <div class="multi-btns">
-                <label for="">Тип грузового места</label>
+                <label for="carrierDeliveryType">Тип грузового места</label>
+<!--                make as radio-->
                 <div class="btns-box">
                   <button class="active-btn">Товарное вложение</button>
                 </div>
               </div>
               <div class="counter mt-27">
                 <button class="minus-btn active-btn"></button>
-                <input class="m-0" type="number">
+                <input class="m-0" type="number" name="carrierDeliveryCounter" id="carrierDeliveryCounter" formControlName="carrierDeliveryCounter">
                 <button class="add-btn active-btn"></button>
               </div>
             </div>
@@ -547,14 +550,14 @@
               <div class="grey-box">
                 <label for="params">Параметры отправления:</label>
                 <div class="row-params-items">
-                  <input type="text" placeholder="Вес, кг">
-                  <input type="text" placeholder="Объем, м3">
+                  <input type="text" placeholder="Вес, кг" name="carrierDeliveryWeight" id="carrierDeliveryWeight" formControlName="carrierDeliveryWeight">
+                  <input type="text" placeholder="Объем, м3" name="carrierDeliveryVolume" id="carrierDeliveryVolume" formControlName="carrierDeliveryVolume">
                   <span class="grey-header" style="text-align: center">или</span>
-                  <input type="text" placeholder="Длина, см">
+                  <input type="text" placeholder="Длина, см" name="carrierDeliveryLength" id="carrierDeliveryLength" formControlName="carrierDeliveryLength">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Ширина, см">
+                  <input type="text" placeholder="Ширина, см" name="carrierDeliveryWidth" id="carrierDeliveryWidth" formControlName="carrierDeliveryWidth">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Высота, см">
+                  <input type="text" placeholder="Высота, см" name="carrierDeliveryHeight" id="carrierDeliveryHeight" formControlName="carrierDeliveryHeight">
                 </div>
               </div>
             </div>
@@ -602,8 +605,8 @@
                   <span class="thin-grey-text">Итого: </span>
                   <span class="description">500 BYN</span>
                 </p>
-                <label class="mt-27" for="">Стоимость для получателя:</label>
-                <input type="text" placeholder="Введите стоимость">
+                <label class="mt-27" for="carrierDeliveryCost">Стоимость для получателя:</label>
+                <input type="text" placeholder="Введите стоимость" name="carrierDeliveryCost" id="carrierDeliveryCost" formControlName="carrierDeliveryCost">
               </div>
             </div>
           </div>
@@ -611,31 +614,31 @@
             <div class="grey-box">
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="ttn3" id="ttn3" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryTTN" id="carrierDeliveryTTN" formControlName="carrierDeliveryTTN" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="ttn3">Замена ТТН ( 1 шт - 15 руб) </label>
+                <label for="carrierDeliveryTTN">Замена ТТН ( 1 шт - 15 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="wait3" id="wait3" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryWait" id="carrierDeliveryWait" formControlName="carrierDeliveryWait" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="wait3">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
+                <label for="carrierDeliveryWait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="readdress3" id="readdress3" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryRelocate" id="carrierDeliveryRelocate" formControlName="carrierDeliveryRelocate" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="readdress3">Переадресация</label>
+                <label for="carrierDeliveryRelocate">Переадресация</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="agrement3" id="agreement3" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryAgreement" id="carrierDeliveryAgreement" formControlName="carrierDeliveryAgreement" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="agreement3">Оформление доверенностей на получение груза</label>
+                <label for="carrierDeliveryAgreement">Оформление доверенностей на получение груза</label>
               </div>
             </div>
             <div class="grey-box">
@@ -650,7 +653,8 @@
           <div class="column-main">
             <div class="row-type grey-box">
               <div class="multi-btns">
-                <label for="">Тип грузового места</label>
+                <label for="carrierDeliveryType2">Тип грузового места</label>
+<!--                make as radio-->
                 <div class="btns-box">
                   <button class="active-btn">Короб</button>
                   <button class="white-btn">Негабарит</button>
@@ -659,7 +663,7 @@
               </div>
               <div class="counter mt-27">
                 <button class="minus-btn active-btn"></button>
-                <input class="m-0" type="number">
+                <input class="m-0" type="number" name="carrierDeliveryCounter2" id="carrierDeliveryCounter2" formControlName="carrierDeliveryCounter2">
                 <button class="add-btn active-btn"></button>
               </div>
             </div>
@@ -667,14 +671,14 @@
               <div class="grey-box">
                 <label for="params">Параметры отправления:</label>
                 <div class="row-params-items">
-                  <input type="text" placeholder="Вес, кг">
-                  <input type="text" placeholder="Объем, м3">
+                  <input type="text" placeholder="Вес, кг" name="carrierDeliveryWeight2" id="carrierDeliveryWeight2" formControlName="carrierDeliveryWeight2">
+                  <input type="text" placeholder="Объем, м3" name="carrierDeliveryVolume2" id="carrierDeliveryVolume2" formControlName="carrierDeliveryVolume2">
                   <span class="grey-header" style="text-align: center">или</span>
-                  <input type="text" placeholder="Длина, см">
+                  <input type="text" placeholder="Длина, см" name="carrierDeliveryLength2" id="carrierDeliveryLength2" formControlName="carrierDeliveryLength2">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Ширина, см">
+                  <input type="text" placeholder="Ширина, см" name="carrierDeliveryWidth2" id="carrierDeliveryWidth2" formControlName="carrierDeliveryWidth2">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Высота, см">
+                  <input type="text" placeholder="Высота, см" name="carrierDeliveryHeight2" id="carrierDeliveryHeight2" formControlName="carrierDeliveryHeight2">
                 </div>
               </div>
             </div>
@@ -722,10 +726,10 @@
                   <span class="thin-grey-text">Итого: </span>
                   <span class="description">500 BYN</span>
                 </p>
-                <label class="mt-5" for="">Объявленная ценность:</label>
-                <input type="text" placeholder="Введите стоимость">
-                <label class="mt-5" for="">Наложенный плёж:</label>
-                <input type="text">
+                <label class="mt-5" for="carrierDeliveryCost2">Объявленная ценность:</label>
+                <input type="text" placeholder="Введите стоимость" name="carrierDeliveryCost2" id="carrierDeliveryCost2" formControlName="carrierDeliveryCost2">
+                <label class="mt-5" for="carrierDeliveryPayment">Наложенный плёж:</label>
+                <input type="text" name="carrierDeliveryPayment" id="carrierDeliveryPayment" formControlName="carrierDeliveryPayment">
               </div>
             </div>
           </div>
@@ -733,38 +737,38 @@
             <div class="grey-box">
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="ttn4" id="ttn4" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryTTN2" id="carrierDeliveryTTN2" formControlName="carrierDeliveryTTN2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="ttn4">Замена ТТН ( 1 шт - 15 руб) </label>
+                <label for="carrierDeliveryTTN2">Замена ТТН ( 1 шт - 15 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="wait4" id="wait4" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryWait2" id="carrierDeliveryWait2" formControlName="carrierDeliveryWait2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="wait4">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
+                <label for="carrierDeliveryWait2">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="readdress4" id="readdress4" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryRelocate2" id="carrierDeliveryRelocate2" formControlName="carrierDeliveryRelocate2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="readdress4">Переадресация</label>
+                <label for="carrierDeliveryRelocate2">Переадресация</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="agreement4" id="agreement4" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryAgreement2" id="carrierDeliveryAgreement2" formControlName="carrierDeliveryAgreement2" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="agreement4">Оформление доверенностей на получение груза</label>
+                <label for="carrierDeliveryAgreement2">Оформление доверенностей на получение груза</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="list4" id="list4" checked (change)="checkboxChange($event)">
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryListing" id="carrierDeliveryListing" formControlName="carrierDeliveryListing" checked (change)="checkboxChange($event)">
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="list4">Опись вложений</label>
+                <label for="carrierDeliveryListing">Опись вложений</label>
               </div>
             </div>
             <div class="grey-box">
@@ -779,7 +783,8 @@
           <div class="column-main">
             <div class="row-type grey-box">
               <div class="multi-btns">
-                <label for="">Тип грузового места</label>
+                <label for="carrierDeliveryType3">Тип грузового места</label>
+<!--                make as radio-->
                 <div class="btns-box">
                   <button class="active-btn">Короб</button>
                   <button class="white-btn">Негабарит</button>
@@ -796,14 +801,14 @@
               <div class="grey-box">
                 <label for="params">Параметры отправления:</label>
                 <div class="row-params-items">
-                  <input type="text" placeholder="Вес, кг">
-                  <input type="text" placeholder="Объем, м3">
+                  <input type="text" placeholder="Вес, кг" name="carrierDeliveryWeight3" id="carrierDeliveryWeight3" formControlName="carrierDeliveryWeight3">
+                  <input type="text" placeholder="Объем, м3" name="carrierDeliveryVolume3" id="carrierDeliveryVolume3" formControlName="carrierDeliveryVolume3">
                   <span class="grey-header" style="text-align: center">или</span>
-                  <input type="text" placeholder="Длина, см">
+                  <input type="text" placeholder="Длина, см" name="carrierDeliveryLength3" id="carrierDeliveryLength3" formControlName="carrierDeliveryLength3">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Ширина, см">
+                  <input type="text" placeholder="Ширина, см" name="carrierDeliveryWidth3" id="carrierDeliveryWidth3" formControlName="carrierDeliveryWidth3">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="text" placeholder="Высота, см">
+                  <input type="text" placeholder="Высота, см" name="carrierDeliveryHeight3" id="carrierDeliveryHeight3" formControlName="carrierDeliveryHeight3">
                 </div>
               </div>
             </div>
@@ -812,8 +817,8 @@
                 <button style="max-width: 300px; padding: 15px 30px" class="green-btn round-btn">Точный расчет веса и объема</button>
               </div>
               <div class="grey-box right">
-                <label class="mt-5" for="">Объявленная ценность:</label>
-                <input type="text" placeholder="Введите стоимость">
+                <label class="mt-5" for="carrierDeliveryCost3">Объявленная ценность:</label>
+                <input type="text" placeholder="Введите стоимость" name="carrierDeliveryCost3" id="carrierDeliveryCost3"  formControlName="carrierDeliveryCost3">
               </div>
             </div>
           </div>
@@ -821,44 +826,44 @@
             <div class="grey-box">
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="ttn5" id="ttn5" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryTTN3" id="carrierDeliveryTTN3" formControlName="carrierDeliveryTTN3" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="ttn5">Замена ТТН ( 1 шт - 15 руб) </label>
+                <label for="carrierDeliveryTTN3">Замена ТТН ( 1 шт - 15 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="wait5" id="wait5" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryWait3" id="carrierDeliveryWait3" formControlName="carrierDeliveryWait3" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="wait5">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
+                <label for="carrierDeliveryWait3">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="readdress5" id="readdress5" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryRelocate3" id="carrierDeliveryRelocate3" formControlName="carrierDeliveryRelocate3" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="readdress5">Переадресация</label>
+                <label for="carrierDeliveryRelocate3">Переадресация</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="agreement5" id="agreement5" checked>
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryAgreement3" id="carrierDeliveryAgreement3" formControlName="carrierDeliveryAgreement3" checked>
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="agreement5">Оформление доверенностей на получение груза</label>
+                <label for="carrierDeliveryAgreement3">Оформление доверенностей на получение груза</label>
               </div>
               <div class="row">
                 <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="list5" id="list5" (change)="checkboxChange($event)">
+                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryListing2" id="carrierDeliveryListing2" formControlName="carrierDeliveryListing2" (change)="checkboxChange($event)">
                   <span class="checkbox-block-icon"></span>
                 </div>
-                <label for="list5">Опись</label>
+                <label for="carrierDeliveryListing2">Опись</label>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="row-form-controls mb-30">
+      <div id="control-0" class="submit-row row-form-controls mb-30">
         <div class="col">
           <div class="stage">
             <button class="active-btn circle-btn">1</button>
@@ -871,6 +876,90 @@
           <input type="submit" value="Оформить" hidden>
         </div>
       </div>
+
+      <div id="control-02" class="another-form submit-row row-form-controls mb-30">
+        <div class="col">
+          <div class="stage">
+            <button class="active-btn circle-btn">1</button>
+            <button class="circle-btn">2</button>
+          </div>
+        </div>
+        <div class="col">
+          <button class="white-btn round-btn">Назад</button>
+          <button class="green-btn round-btn" (click)="newOrder($event, 'express')">Оформить</button>
+          <input type="submit" value="Оформить" hidden>
+        </div>
+      </div>
+
+      <div id="control-03" class="another-form submit-row row-form-controls mb-30">
+        <div class="col">
+          <div class="stage">
+            <button class="active-btn circle-btn">1</button>
+            <button class="circle-btn">2</button>
+          </div>
+        </div>
+        <div class="col">
+          <button class="white-btn round-btn">Назад</button>
+          <button class="green-btn round-btn">Оформить</button>
+          <input type="submit" value="Оформить" hidden>
+        </div>
+      </div>
+
+      <div id="control-1" class="another-form submit-row row-form-controls mb-30">
+        <div class="col">
+          <div class="stage">
+            <button class="active-btn circle-btn">1</button>
+            <button class="circle-btn">2</button>
+          </div>
+        </div>
+        <div class="col">
+          <button class="white-btn round-btn" style="display: none">Назад</button>
+          <button class="green-btn round-btn">Далее</button>
+          <input type="submit" value="Оформить" hidden>
+        </div>
+      </div>
+
+      <div id="control-12" class="another-form submit-row row-form-controls mb-30">
+        <div class="col">
+          <div class="stage">
+            <button class="active-btn circle-btn">1</button>
+            <button class="circle-btn">2</button>
+          </div>
+        </div>
+        <div class="col">
+          <button class="white-btn round-btn">Назад</button>
+          <button class="green-btn round-btn">Оформить</button>
+          <input type="submit" value="Оформить" hidden>
+        </div>
+      </div>
+
+      <div id="control-13" class="another-form submit-row row-form-controls mb-30">
+        <div class="col">
+          <div class="stage">
+            <button class="active-btn circle-btn">1</button>
+            <button class="circle-btn">2</button>
+          </div>
+        </div>
+        <div class="col">
+          <button class="white-btn round-btn">Назад</button>
+          <button class="green-btn round-btn">Оформить</button>
+          <input type="submit" value="Оформить" hidden>
+        </div>
+      </div>
+
+      <div id="control-2" class="another-form submit-row row-form-controls mb-30">
+        <div class="col">
+          <div class="stage">
+            <button class="active-btn circle-btn">1</button>
+            <button class="circle-btn">2</button>
+          </div>
+        </div>
+        <div class="col">
+          <button class="white-btn round-btn">Назад</button>
+          <button class="green-btn round-btn">Оформить</button>
+          <input type="submit" value="Оформить" hidden>
+        </div>
+      </div>
     </form>
   </div>
 </div>
@@ -879,7 +968,7 @@
   <div class="new-contragent-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-sender-contragent')"></button>
     <h2 class="white-header">Новый контрагент</h2>
-    <form [formGroup]="newExpressSenderContragent" (ngSubmit)="createContragent(newExpressSenderContragent, 'new-express-sender-contragent', expressSenderAgents)">
+    <form [formGroup]="newExpressSenderContragent" (ngSubmit)="createContragent(newExpressSenderContragent, 'new-express-sender-contragent', expressSenderAgents, 'expressSender')">
       <div class="grey-box">
         <label for="type-express-sender"> Форма собственности :</label>
         <input type="text" id="type-express-sender" name="type-express-sender" formControlName="type">
@@ -1015,7 +1104,7 @@
   <div class="new-contragent-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-contragent')"></button>
     <h2 class="white-header">Новый контрагент</h2>
-    <form [formGroup]="newExpressRecipientContragent" (ngSubmit)="createContragent(newExpressRecipientContragent, 'new-express-recipient-contragent', expressReceiverAgents)">
+    <form [formGroup]="newExpressRecipientContragent" (ngSubmit)="createContragent(newExpressRecipientContragent, 'new-express-recipient-contragent', expressReceiverAgents, 'expressRecipient')">
       <div class="grey-box">
         <label for="type-express-recipient"> Форма собственности :</label>
         <input type="text" id="type-express-recipient" name="type-express-recipient" formControlName="type">
