@@ -241,10 +241,10 @@
                   <label for="expressDeliveryType">Тип грузового места</label>
 <!--                  make as radio buttons-->
                   <div class="btns-box">
-                    <button class="active-btn">Короб</button>
-                    <button class="white-btn">Палета</button>
-                    <button class="white-btn">Негабарит</button>
-                    <button class="white-btn">Мешок</button>
+                    <button class="express-placing-type active-btn">Короб</button>
+                    <button class="express-placing-type white-btn">Палета</button>
+                    <button class="express-placing-type white-btn">Негабарит</button>
+                    <button class="express-placing-type white-btn">Мешок</button>
                   </div>
                 </div>
                 <div class="counter">
@@ -886,7 +886,7 @@
         </div>
         <div class="col">
           <button class="white-btn round-btn">Назад</button>
-          <button class="green-btn round-btn" (click)="newOrder($event, 'express')">Оформить</button>
+          <button class="green-btn round-btn" (click)="newOrder($event, 'express', 'express-placing-type')">Оформить</button>
           <input type="submit" value="Оформить" hidden>
         </div>
       </div>

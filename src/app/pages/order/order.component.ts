@@ -1083,8 +1083,16 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  newOrder(event: any, type: string): any {
+  newOrder(event: any, type: string, placingType: string): any {
     let data: any;
+    const container = document.getElementsByClassName(placingType);
+    let currentContainerValue: any;
+    for (let i = 0; i < container.length; i++) {
+      if (container[i].classList.contains('active-btn')) {
+        currentContainerValue = container[i].innerHTML;
+      }
+    }
+
     if (type === 'express') {
       data = {
         // Step 1
@@ -1112,7 +1120,7 @@ export class OrderComponent implements OnInit {
 
         // Step 2
         description_delivery: this.cargoDescription,
-        delivery_placing_type: this.orderForm.value.expressDeliveryType,
+        delivery_placing_type: currentContainerValue,
         delivery_weight: this.orderForm.value.expressDeliveryWeight,
         delivery_volume: this.orderForm.value.expressDeliveryVolume,
         delivery_size_x: this.orderForm.value.expressDeliveryLength,
