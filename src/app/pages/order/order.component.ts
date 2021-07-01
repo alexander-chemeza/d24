@@ -614,6 +614,7 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.orderForm.controls.expressDeliveryCounter1.setValue(0);
+    this.orderForm.controls.expressDeliveryCounter2.setValue(0);
 
     // Make user object with his data
     if (this.userOldInfo) {

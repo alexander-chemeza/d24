@@ -333,9 +333,9 @@
                   </div>
                 </div>
                 <div class="counter">
-                  <button class="minus-btn active-btn"></button>
-                  <input class="m-0" type="number" name="expressDeliveryCounter2" id="expressDeliveryCounter2" formControlName="expressDeliveryCounter2">
-                  <button class="add-btn active-btn"></button>
+                  <button class="minus-btn active-btn" (click)="decrease('expressDeliveryCounter2', orderForm.controls.expressDeliveryCounter2)"></button>
+                  <input class="m-0" type="number" name="expressDeliveryCounter2" id="expressDeliveryCounter2" formControlName="expressDeliveryCounter2" min="0" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57">
+                  <button class="add-btn active-btn" (click)="increase('expressDeliveryCounter2', orderForm.controls.expressDeliveryCounter2)"></button>
                 </div>
               </div>
             </div>
