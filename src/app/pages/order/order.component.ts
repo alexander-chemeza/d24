@@ -613,6 +613,8 @@ export class OrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.orderForm.controls.expressDeliveryCounter1.setValue(0);
+
     // Make user object with his data
     if (this.userOldInfo) {
       this.user = JSON.parse(this.userOldInfo);
@@ -1053,6 +1055,31 @@ export class OrderComponent implements OnInit {
         form.reset();
       }
     });
+  }
+
+  decrease(field: string, formValue: any): void {
+    const input = document.getElementById(field) as HTMLInputElement;
+    let inputValue: any;
+    if (input) {
+      inputValue = input.value;
+
+      if (inputValue > 0) {
+        inputValue--;
+        formValue.setValue(inputValue);
+      } else if (inputValue === 0) {
+        formValue.setValue(0);
+      }
+    }
+  }
+
+  increase(field: string, formValue: any): void {
+    const input = document.getElementById(field) as HTMLInputElement;
+    let inputValue: any;
+    if (input) {
+      inputValue = input.value;
+      inputValue++;
+      formValue.setValue(inputValue);
+    }
   }
 
   newOrder(event: any, type: string): any {
