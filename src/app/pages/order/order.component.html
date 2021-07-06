@@ -34,7 +34,7 @@
     </div>
     <div class="col">
       <div></div>
-      <button class="stage-btn white-btn" (click)="changeStage($event)" stage="3">Дополнительные услуги</button>
+      <button class="stage-btn white-btn">Дополнительные услуги</button>
     </div>
   </div>
   <div class="row-form">
@@ -117,14 +117,14 @@
                 <input type="time" name="expressSenderTimeoutTo" id="expressSenderTimeoutTo" formControlName="expressSenderTimeoutTo">
               </div>
             </div>
-            <div class="row">
-              <div class="control">
-                <label for="expressSenderTTN">Серия и номер ТТН:</label>
-                <input type="text" name="expressSenderTTN" id="expressSenderTTN" formControlName="expressSenderTTN">
-              </div>
-              <div class="optional">
-              </div>
-            </div>
+<!--            <div class="row">-->
+<!--              <div class="control">-->
+<!--                <label for="expressSenderTTN">Серия и номер ТТН:</label>-->
+<!--                <input type="text" name="expressSenderTTN" id="expressSenderTTN" formControlName="expressSenderTTN">-->
+<!--              </div>-->
+<!--              <div class="optional">-->
+<!--              </div>-->
+<!--            </div>-->
             <div class="row">
               <div class="control">
                 <label for="expressSenderDescription">Примечание (по адресу выдачи груза):</label>
@@ -225,7 +225,7 @@
             <div class="row">
               <div class="control">
                 <label for="expressRecipientDescription">Примечание (по адресу выдачи груза):</label>
-                <textarea name="expressRecipientDescription" id="expressRecipientDescription" formControlName="expressRecipientDescription"></textarea>
+                <textarea name="expressRecipientDescription" id="expressRecipientDescription" formControlName="expressRecipientDescription" style="min-height: auto"></textarea>
               </div>
               <div class="optional">
               </div>
@@ -871,36 +871,7 @@
           </div>
         </div>
         <div class="col">
-          <button class="white-btn round-btn" style="display: none">Назад</button>
           <button class="green-btn round-btn">Далее</button>
-          <input type="submit" value="Оформить" hidden>
-        </div>
-      </div>
-
-      <div id="control-02" class="another-form submit-row row-form-controls mb-30">
-        <div class="col">
-          <div class="stage">
-            <button class="active-btn circle-btn">1</button>
-            <button class="circle-btn">2</button>
-          </div>
-        </div>
-        <div class="col">
-          <button class="white-btn round-btn">Назад</button>
-          <button class="green-btn round-btn" (click)="newOrder($event, 'express', 'express-placing-type')">Оформить</button>
-          <input type="submit" value="Оформить" hidden>
-        </div>
-      </div>
-
-      <div id="control-03" class="another-form submit-row row-form-controls mb-30">
-        <div class="col">
-          <div class="stage">
-            <button class="active-btn circle-btn">1</button>
-            <button class="circle-btn">2</button>
-          </div>
-        </div>
-        <div class="col">
-          <button class="white-btn round-btn">Назад</button>
-          <button class="green-btn round-btn">Оформить</button>
           <input type="submit" value="Оформить" hidden>
         </div>
       </div>
@@ -913,50 +884,8 @@
           </div>
         </div>
         <div class="col">
-          <button class="white-btn round-btn" style="display: none">Назад</button>
-          <button class="green-btn round-btn">Далее</button>
-          <input type="submit" value="Оформить" hidden>
-        </div>
-      </div>
-
-      <div id="control-12" class="another-form submit-row row-form-controls mb-30">
-        <div class="col">
-          <div class="stage">
-            <button class="active-btn circle-btn">1</button>
-            <button class="circle-btn">2</button>
-          </div>
-        </div>
-        <div class="col">
           <button class="white-btn round-btn">Назад</button>
-          <button class="green-btn round-btn">Оформить</button>
-          <input type="submit" value="Оформить" hidden>
-        </div>
-      </div>
-
-      <div id="control-13" class="another-form submit-row row-form-controls mb-30">
-        <div class="col">
-          <div class="stage">
-            <button class="active-btn circle-btn">1</button>
-            <button class="circle-btn">2</button>
-          </div>
-        </div>
-        <div class="col">
-          <button class="white-btn round-btn">Назад</button>
-          <button class="green-btn round-btn">Оформить</button>
-          <input type="submit" value="Оформить" hidden>
-        </div>
-      </div>
-
-      <div id="control-2" class="another-form submit-row row-form-controls mb-30">
-        <div class="col">
-          <div class="stage">
-            <button class="active-btn circle-btn">1</button>
-            <button class="circle-btn">2</button>
-          </div>
-        </div>
-        <div class="col">
-          <button class="white-btn round-btn">Назад</button>
-          <button class="green-btn round-btn">Оформить</button>
+          <button class="green-btn round-btn" (click)="newOrder($event, 'express', 'express-placing-type')">Оформить</button>
           <input type="submit" value="Оформить" hidden>
         </div>
       </div>

@@ -57,6 +57,7 @@ export class OrderComponent implements OnInit {
 
   serviceTypes: ServiceTypesList[] = [
     {value: '0', viewValue: 'Экспресс-доставка грузов'},
+    {value: '2', viewValue: 'Экспресс - доставка документов'},
     {value: '1', viewValue: 'Курьерская доставка'},
   ];
 
@@ -837,7 +838,7 @@ export class OrderComponent implements OnInit {
   selectService(event: any): void {
     const submitRows = document.getElementsByClassName('submit-row');
     const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;
-    const currentForm = document.getElementById(`form-${this.serviceType}`) as HTMLElement;
+    let currentForm: any;
     const forms = document.getElementsByClassName('form') as HTMLCollection;
     const stage0 = document.getElementById('control-0');
     const stage1 = document.getElementById('control-1');
@@ -857,8 +858,13 @@ export class OrderComponent implements OnInit {
     if (stage0 && stage1) {
       if (this.serviceType === '0') {
         stage0.classList.remove('another-form');
+        currentForm = document.getElementById('form-0');
+      } else if (this.serviceType === '2') {
+        stage0.classList.remove('another-form');
+        currentForm = document.getElementById('form-0');
       } else {
         stage1.classList.remove('another-form');
+        currentForm = document.getElementById('form-1');
       }
     }
 
@@ -896,20 +902,28 @@ export class OrderComponent implements OnInit {
     const currentStage: string = event.target.getAttribute('stage');
     const forms = document.getElementsByClassName('form') as HTMLCollection;
     if (this.serviceType === '0' && currentStage === '1') {
-      currentForm = document.getElementById(`form-${this.serviceType}`);
-      currentControl = document.getElementById(`control-${this.serviceType}`);
+      currentForm = document.getElementById(`form-0`);
+      currentControl = document.getElementById(`control-0`);
       controlWide.classList.remove('show-control-wide');
     } else if (this.serviceType === '0' && currentStage === '2') {
       currentForm = document.getElementById(`form-${this.serviceType}${currentStage}`);
-      currentControl = document.getElementById(`control-${this.serviceType}${currentStage}`);
+      currentControl = document.getElementById(`control-1`);
       controlWide.classList.add('show-control-wide');
+    } else if (this.serviceType === '2' && currentStage === '1') {
+      currentForm = document.getElementById(`form-0`);
+      currentControl = document.getElementById(`control-0`);
+      controlWide.classList.remove('show-control-wide');
+    } else if (this.serviceType === '2' && currentStage === '2') {
+      currentForm = document.getElementById(`form-03`);
+      currentControl = document.getElementById(`control-1`);
+      controlWide.classList.remove('show-control-wide');
     } else if (this.serviceType === '1' && currentStage === '1') {
       currentForm = document.getElementById(`form-${this.serviceType}`);
-      currentControl = document.getElementById(`control-${this.serviceType}`);
+      currentControl = document.getElementById(`control-0`);
       controlWide.classList.remove('show-control-wide');
     } else {
       currentForm = document.getElementById(`form-${this.serviceType}${currentStage}`);
-      currentControl = document.getElementById(`control-${this.serviceType}${currentStage}`);
+      currentControl = document.getElementById(`control-1`);
       controlWide.classList.remove('show-control-wide');
     }
     for (let i = 0; i < forms.length; i++) {
