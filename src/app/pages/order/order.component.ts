@@ -896,50 +896,73 @@ export class OrderComponent implements OnInit {
   }
 
   changeStage(event: any): void {
+    // 0. Variables and constants
     const submitRows = document.getElementsByClassName('submit-row') as HTMLCollection;
     const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;
     const controlWide = document.getElementById('control-wide') as HTMLElement;
+    const forms = document.getElementsByClassName('form') as HTMLCollection;
+    const circleBtns = document.getElementsByClassName('step-mark') as HTMLCollection;
     let currentForm: any;
     let currentControl: any;
-    const currentStage: string = event.target.getAttribute('stage');
-    const forms = document.getElementsByClassName('form') as HTMLCollection;
-    if (this.serviceType === '0' && currentStage === '1') {
-      currentForm = document.getElementById(`form-0`);
-      currentControl = document.getElementById(`control-0`);
-      controlWide.classList.remove('show-control-wide');
-    } else if (this.serviceType === '0' && currentStage === '2') {
-      currentForm = document.getElementById(`form-${this.serviceType}${currentStage}`);
-      currentControl = document.getElementById(`control-1`);
-      controlWide.classList.add('show-control-wide');
-    } else if (this.serviceType === '2' && currentStage === '1') {
-      currentForm = document.getElementById(`form-0`);
-      currentControl = document.getElementById(`control-0`);
-      controlWide.classList.remove('show-control-wide');
-    } else if (this.serviceType === '2' && currentStage === '2') {
-      currentForm = document.getElementById(`form-03`);
-      currentControl = document.getElementById(`control-1`);
-      controlWide.classList.remove('show-control-wide');
-    } else if (this.serviceType === '1' && currentStage === '1') {
-      currentForm = document.getElementById(`form-${this.serviceType}`);
-      currentControl = document.getElementById(`control-0`);
-      controlWide.classList.remove('show-control-wide');
-    } else {
-      currentForm = document.getElementById(`form-${this.serviceType}${currentStage}`);
-      currentControl = document.getElementById(`control-1`);
-      controlWide.classList.remove('show-control-wide');
-    }
+    // 1. Hide all forms
     for (let i = 0; i < forms.length; i++) {
       forms[i].classList.add('another-form');
     }
+    // 2. Hide all controls
     for (let i = 0; i < submitRows.length; i++) {
       submitRows[i].classList.add('another-form');
     }
-    currentForm.classList.remove('another-form');
-    currentControl.classList.remove('another-form');
+    // 3. Make stage buttons inactive
     for (let i = 0; i < stageBtns.length; i++) {
       stageBtns[i].classList.remove('active-btn');
     }
-    event.target.classList.add('active-btn');
+    // 4. Make all circle step marks inactive
+    for (let i = 0; i < circleBtns.length; i++) {
+      circleBtns[i].classList.remove('active-btn');
+    }
+    // 5. Set stage
+    this.stage = Number(event.target.getAttribute('stage'));
+    // 6. Detect forms and controls and change its view
+    if (this.serviceType === '0' && this.stage === 1) { // express delivery stage 1
+      currentForm = document.getElementById(`form-0`);
+      currentControl = document.getElementById(`control-0`);
+      controlWide.classList.remove('show-control-wide');
+      stageBtns[0].classList.add('active-btn');
+      circleBtns[0].classList.add('active-btn');
+    } else if (this.serviceType === '0' && this.stage === 2) { // express delivery stage 2
+      currentForm = document.getElementById(`form-${this.serviceType}${this.stage}`);
+      currentControl = document.getElementById(`control-1`);
+      controlWide.classList.add('show-control-wide');
+      stageBtns[1].classList.add('active-btn');
+      circleBtns[1].classList.add('active-btn');
+    } else if (this.serviceType === '2' && this.stage === 1) { // express document stage 1
+      currentForm = document.getElementById(`form-0`);
+      currentControl = document.getElementById(`control-0`);
+      controlWide.classList.remove('show-control-wide');
+      stageBtns[0].classList.add('active-btn');
+      circleBtns[0].classList.add('active-btn');
+    } else if (this.serviceType === '2' && this.stage === 2) { // express document stage 2
+      currentForm = document.getElementById(`form-03`);
+      currentControl = document.getElementById(`control-1`);
+      controlWide.classList.remove('show-control-wide');
+      stageBtns[1].classList.add('active-btn');
+      circleBtns[1].classList.add('active-btn');
+    } else if (this.serviceType === '1' && this.stage === 1) { // carrier stage 1. !!! It may change its view if we have some kind of agreement
+      currentForm = document.getElementById(`form-${this.serviceType}`);
+      currentControl = document.getElementById(`control-0`);
+      controlWide.classList.remove('show-control-wide');
+      stageBtns[0].classList.add('active-btn');
+      circleBtns[0].classList.add('active-btn');
+    } else { // carrier stage 2
+      currentForm = document.getElementById(`form-${this.serviceType}${this.stage}`);
+      currentControl = document.getElementById(`control-1`);
+      controlWide.classList.remove('show-control-wide');
+      stageBtns[1].classList.add('active-btn');
+      circleBtns[1].classList.add('active-btn');
+    }
+    // 6. Show detected form, controls and make detected stage active
+    currentForm.classList.remove('another-form');
+    currentControl.classList.remove('another-form');
   }
 
   checkboxChange(event: any): void {

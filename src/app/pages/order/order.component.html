@@ -871,7 +871,7 @@
           </div>
         </div>
         <div class="col">
-          <button class="green-btn round-btn">Далее</button>
+          <button class="green-btn round-btn" (click)="changeStage($event)" stage="2">Далее</button>
           <input type="submit" value="Оформить" hidden>
         </div>
       </div>
@@ -879,12 +879,12 @@
       <div id="control-1" class="another-form submit-row row-form-controls mb-30">
         <div class="col">
           <div class="stage">
-            <button class="active-btn circle-btn">1</button>
-            <button class="circle-btn">2</button>
+            <button class="step-mark active-btn circle-btn">1</button>
+            <button class="step-mark circle-btn">2</button>
           </div>
         </div>
         <div class="col">
-          <button class="white-btn round-btn">Назад</button>
+          <button class="white-btn round-btn" (click)="changeStage($event)" stage="1">Назад</button>
           <button class="green-btn round-btn" (click)="newOrder($event, 'express', 'express-placing-type')">Оформить</button>
           <input type="submit" value="Оформить" hidden>
         </div>
