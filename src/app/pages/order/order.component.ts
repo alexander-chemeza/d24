@@ -47,10 +47,14 @@ export interface StreetsList {
   styleUrls: ['./order.component.scss']
 })
 export class OrderComponent implements OnInit {
-  pipe = new DatePipe('en-US');
-  cargoDescription = '';
+  // Cap type and stage detection
   serviceType: string;
   deliveryType: string;
+  stage = 1;
+
+  pipe = new DatePipe('en-US');
+  cargoDescription = '';
+
   currentCity: number;
 
   select: any;
@@ -836,39 +840,37 @@ export class OrderComponent implements OnInit {
   }
 
   selectService(event: any): void {
-    const submitRows = document.getElementsByClassName('submit-row');
+    // 0. Variables and constants
     const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;
-    let currentForm: any;
+    const submitRows = document.getElementsByClassName('submit-row');
     const forms = document.getElementsByClassName('form') as HTMLCollection;
-    const stage0 = document.getElementById('control-0');
-    const stage1 = document.getElementById('control-1');
-
-    for (let i = 0; i < forms.length; i++) {
-      forms[i].classList.add('another-form');
-    }
-
-    for (let i = 0; i < submitRows.length; i++) {
-      submitRows[i].classList.add('another-form');
-    }
-
+    let currentForm: any;
+    // 1. Our stage will be 1 on change of service type
+    this.stage = 1;
+    // 2. We clear order form on change of service type
+    this.orderForm.reset();
+    // 3. Set button stage 1 as a default
     for (let i = 0; i < stageBtns.length; i++) {
       stageBtns[i].classList.remove('active-btn');
     }
-
-    if (stage0 && stage1) {
-      if (this.serviceType === '0') {
-        stage0.classList.remove('another-form');
-        currentForm = document.getElementById('form-0');
-      } else if (this.serviceType === '2') {
-        stage0.classList.remove('another-form');
-        currentForm = document.getElementById('form-0');
-      } else {
-        stage1.classList.remove('another-form');
-        currentForm = document.getElementById('form-1');
-      }
-    }
-
     stageBtns[0].classList.add('active-btn');
+    // 4. Set bottom controls type 1 as a default
+    for (let i = 0; i < submitRows.length; i++) {
+      submitRows[i].classList.add('another-form');
+    }
+    submitRows[0].classList.remove('another-form');
+    // 5. Hide all forms
+    for (let i = 0; i < forms.length; i++) {
+      forms[i].classList.add('another-form');
+    }
+    // 6. Detect current form
+    if (this.serviceType === '0') {
+      currentForm = document.getElementById('form-0');
+    } else if (this.serviceType === '2') {
+      currentForm = document.getElementById('form-0');
+    } else {
+      currentForm = document.getElementById('form-1');
+    }
     currentForm.classList.remove('another-form');
   }
 

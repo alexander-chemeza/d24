@@ -226,7 +226,7 @@ button {
     background-image: url("../../assets/img/common/close.svg");
   }
 
-  &.active-btn {
+  &.active-btn, &.purple-btn {
     background-color: #8D60B5;
     color: #FFFFFF;
     transition: all 1s;
