@@ -306,4 +306,9 @@ export class RestapiService {
   public placeNewOrder(data: NewOrder): Observable<any> {
     return this.http.post(`${this.url}/user/order/addNew`, data, {observe: 'response', withCredentials: true});
   }
+
+  // Get delivery schedule
+  public getDeliveryCalendar(deliveryZoneId: string): Observable<any> {
+    return this.http.get(`${this.url}/user/deliveryCalendar/get?deliverZoneId=${deliveryZoneId}`, {observe: 'response', withCredentials: true});
+  }
 }

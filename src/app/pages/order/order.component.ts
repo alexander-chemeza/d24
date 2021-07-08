@@ -51,6 +51,14 @@ export interface StreetsList {
   type: number;
 }
 
+interface DeliverySchedulte {
+  delivery: string;
+  deliveryActive: boolean;
+  delivery_day: string;
+  delivery_zone_id: string;
+  id: number;
+}
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -65,6 +73,15 @@ export class OrderComponent implements OnChanges, OnInit {
   agreementWithWarrantor = false; // Договор с поручителем
   agreementWithPost = false; // Почтовые отправления
   serviceTypes: ServiceTypesList[] = []; // Экспресс-доставка, экспресс-доставка документов, курьерская доставка
+
+  // Delivery schedule
+  deliverySchedules: DeliverySchedulte[] = [];
+
+  // Delivery schedules
+  expressSenderSchedule = '';
+  expressRecipientSchedule = '';
+  carrierSenderSchedule = '';
+  carrierRecipientSchedule = '';
 
   currentContractId = 0;
   // Cap type and stage detection
@@ -696,6 +713,7 @@ export class OrderComponent implements OnChanges, OnInit {
     this.service.cities().subscribe(data => {
       if (data.status === 200) {
         this.citiesList = data.body;
+        console.log('Cities', this.citiesList);
       }
     });
     // User common data reception
@@ -758,6 +776,25 @@ export class OrderComponent implements OnChanges, OnInit {
         expressRecipientContact: this.user.recipientCustomerContact.id,
       });
     }
+  }
+
+  getSchedule(deliveryZoneId: string, field: any): void {
+    this.service.getDeliveryCalendar(deliveryZoneId).subscribe(response => {
+      if (response.status === 200) {
+        let schedules: any;
+        schedules = response.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
+        schedules[0].delivery_day = 'ПН';
+        schedules[1].delivery_day = 'ВТ';
+        schedules[2].delivery_day = 'СР';
+        schedules[3].delivery_day = 'ЧТ';
+        schedules[4].delivery_day = 'ПТ';
+        schedules[5].delivery_day = 'СБ';
+        schedules[6].delivery_day = 'ВС';
+        field = schedules.filter((item: any) => item.deliveryActive)
+          .map((a: any) => a.delivery_day).join('-');
+        console.log('Schedules active:' + field);
+      }
+    });
   }
 
   selectAgent($event: any, agentId: any, addresses: any, contacts: any): void {
