@@ -83,6 +83,9 @@ export class OrderComponent implements OnChanges, OnInit {
   carrierSenderSchedule = '';
   carrierRecipientSchedule = '';
 
+  // Packages
+  expressDeliveryPackage = ['pt0', 'pt1', 'pt2', 'pt4'];
+
   currentContractId = 0;
   // Cap type and stage detection
   serviceType = '0';
@@ -1219,20 +1222,22 @@ export class OrderComponent implements OnChanges, OnInit {
     }
   }
 
-  newOrder(event: any, type: string, placingType: string): any {
+  newOrder(event: any): any {
     let data: any;
-    const container: any = document.getElementsByClassName(placingType);
+    let container: any;
     let currentContainerValue: any;
-    for (const item of container) {
-      if (item.classList.contains('active-btn')) {
-        currentContainerValue = item.innerHTML;
-      }
-    }
 
-    if (type === 'express') {
+    if (this.serviceType === '0') {
+      container = document.getElementsByClassName('express-placing-type');
+      for (const item of container) {
+        if (item.classList.contains('active-btn')) {
+          currentContainerValue = item.getAttribute('package');
+        }
+      }
+
       data = {
         // Step 1
-        deal_type: this.serviceType,
+        deal_type: 1,
         delivery_type: this.deliveryType,
         senderCustomerId: this.orderForm.value.expressSender,
         senderCustomerAddressId: this.orderForm.value.expressSenderAddress,
@@ -1246,6 +1251,7 @@ export class OrderComponent implements OnChanges, OnInit {
         recipient_accept_from: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliverFrom, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutFrom}`,
         recipient_accept_to: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliverTo, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutTo}`,
         recipient_description: this.orderForm.value.expressRecipientDescription,
+        recipient_email: this.orderForm.value.expressRecipientNotificationEmail,
 
         // Missed
         // senderDate: this.orderForm.value.expressSenderDeliveryDate,
@@ -1276,6 +1282,12 @@ export class OrderComponent implements OnChanges, OnInit {
     this.service.placeNewOrder(data).subscribe(response => {
       if (response.status === 200) {
         console.log('Saved', data);
+        this.orderForm.reset();
+        for (const item of container) {
+          item.classList.remove('active-btn');
+        }
+        container[0].classList.add('active-btn');
+        this.cargoDescription = '';
       }
     });
   }
