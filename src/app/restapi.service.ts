@@ -121,6 +121,7 @@ export interface UserRegistration {
   agreement?: string;
   phone2?: string;
   groupName?: string;
+  userType?: string;
 }
 
 export interface Feedback {
