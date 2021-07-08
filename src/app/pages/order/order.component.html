@@ -4,7 +4,7 @@
       <div class="control">
         <label for="">Тип услуги</label>
         <mat-form-field floatLabel="never">
-          <mat-select [(ngModel)]="serviceType" (selectionChange)="selectService($event)">
+          <mat-select [(ngModel)]="serviceType" (selectionChange)="selectService()">
             <mat-option *ngFor="let service of serviceTypes" [value]="service.value">
               {{service.viewValue}}
             </mat-option>
@@ -946,7 +946,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-sender-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewAddress(newExpressSenderAddress, orderForm.value.expressSender, 'new-express-sender-address', expressSenderAddresses, orderForm.value.expressSenderAddress)">
+    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewAddress(newExpressSenderAddress, orderForm.value.expressSender, 'new-express-sender-address')">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1082,7 +1082,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewAddress(newExpressRecipientAddress, orderForm.value.expressRecipient, 'new-express-recipient-address', expressReceiverAddresses, orderForm.value.expressRecipientAddress)">
+    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewAddress(newExpressRecipientAddress, orderForm.value.expressRecipient, 'new-express-recipient-address')">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1299,3 +1299,15 @@
     </form>
   </div>
 </div>
+
+<!--<div id="select-contract" class="modal" style="display: none">-->
+<!--  <h2>Укажите, пожалуйста, от какого договора будет Курьерская доставка </h2>-->
+<!--  <div *ngFor="let contract of contractList">-->
+<!--    <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--      <input class="selected-contract checkbox-block-item" type="checkbox" name="contract" [checked]="contract.contractActive" (change)="changeContract($event)" [attr.ourId]="contract.ourId">-->
+<!--      <span class="checkbox-block-icon"></span>-->
+<!--    </div>-->
+<!--    <label for="">Номер {{contract.contractNumber}} от {{pipe.transform(contract.contractEndDate, 'dd.MM.yyyy')}}</label>-->
+<!--  </div>-->
+<!--  <button (click)="updateActiveContract($event)">Log</button>-->
+<!--</div>-->
