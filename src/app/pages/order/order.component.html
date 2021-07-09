@@ -56,7 +56,7 @@
                 </mat-form-field>
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27" (click)="showModal('new-express-sender-contragent')"></button>
+                <button class="add-btn active-btn" (click)="showModal('new-express-sender-contragent')"></button>
               </div>
             </div>
             <div class="row">
@@ -72,7 +72,7 @@
                 </mat-form-field>
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27" (click)="showModal('new-express-sender-address')"></button>
+                <button class="add-btn active-btn" (click)="showModal('new-express-sender-address')"></button>
               </div>
             </div>
             <div class="row">
@@ -94,7 +94,7 @@
                 </mat-form-field>
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27" (click)="showModal('new-express-sender-contact')"></button>
+                <button class="add-btn active-btn" (click)="showModal('new-express-sender-contact')"></button>
               </div>
             </div>
             <div class="row">
@@ -107,7 +107,7 @@
             </div>
             <div class="row-multiple">
               <div class="container">
-                <label class="m-0" for="expressSenderDeliverFrom">Дата выдачи груза c:</label>
+                <label class="m-0" for="expressSenderDeliverFrom">Время выдачи груза c:</label>
                 <label class="m-0" for="expressSenderDeliverTo">по:</label>
                 <label class="m-0" for="expressSenderTimeoutFrom">Время перерыва c:</label>
                 <label class="m-0" for="expressSenderTimeoutTo">по:</label>
@@ -117,17 +117,17 @@
                 <input type="time" name="expressSenderTimeoutTo" id="expressSenderTimeoutTo" formControlName="expressSenderTimeoutTo">
               </div>
             </div>
-<!--            <div class="row">-->
-<!--              <div class="control">-->
-<!--                <label for="expressSenderTTN">Серия и номер ТТН:</label>-->
-<!--                <input type="text" name="expressSenderTTN" id="expressSenderTTN" formControlName="expressSenderTTN">-->
-<!--              </div>-->
-<!--              <div class="optional">-->
-<!--              </div>-->
-<!--            </div>-->
+           <div class="row">
+             <div class="control">
+               <label for="expressSenderTTN">Серия и номер ТТН:</label>
+               <input type="text" name="expressSenderTTN" id="expressSenderTTN" formControlName="expressSenderTTN">
+             </div>
+             <div class="optional">
+             </div>
+           </div>
             <div class="row">
               <div class="control">
-                <label for="expressSenderDescription">Примечание (по адресу выдачи груза):</label>
+                <label for="expressSenderDescription">Примечание (по адресу забора груза):</label>
                 <textarea name="expressSenderDescription" id="expressSenderDescription" formControlName="expressSenderDescription"></textarea>
               </div>
               <div class="optional">
@@ -148,7 +148,7 @@
                 </mat-form-field>
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27" (click)="showModal('new-express-recipient-contragent')"></button>
+                <button class="add-btn active-btn" (click)="showModal('new-express-recipient-contragent')"></button>
               </div>
             </div>
             <div class="row">
@@ -164,7 +164,7 @@
                 </mat-form-field>
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27" (click)="showModal('new-express-recipient-address')"></button>
+                <button class="add-btn active-btn" (click)="showModal('new-express-recipient-address')"></button>
               </div>
             </div>
             <div class="row">
@@ -186,7 +186,7 @@
                 </mat-form-field>
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27" (click)="showModal('new-express-recipient-contact')"></button>
+                <button class="add-btn active-btn" (click)="showModal('new-express-recipient-contact')"></button>
               </div>
             </div>
             <div class="row">
@@ -199,7 +199,7 @@
             </div>
             <div class="row-multiple">
               <div class="container">
-                <label class="m-0" for="expressRecipientDeliverFrom">Дата выдачи груза c:</label>
+                <label class="m-0" for="expressRecipientDeliverFrom">Время выдачи груза c:</label>
                 <label class="m-0" for="expressRecipientDeliverTo">по:</label>
                 <label class="m-0" for="expressRecipientTimeoutFrom">Время перерыва c:</label>
                 <label class="m-0" for="expressRecipientTimeoutTo">по:</label>
@@ -224,7 +224,7 @@
             </div>
             <div class="row">
               <div class="control">
-                <label for="expressRecipientDescription">Примечание (по адресу выдачи груза):</label>
+                <label for="expressRecipientDescription">Примечание (по адресу доставки груза):</label>
                 <textarea name="expressRecipientDescription" id="expressRecipientDescription" formControlName="expressRecipientDescription" style="min-height: auto"></textarea>
               </div>
               <div class="optional">
@@ -414,7 +414,7 @@
                 <input type="text" name="carrierSender" id="carrierSender" formControlName="carrierSender">
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27" (click)="showModal('new-carrier-sender-contact')"></button>
+                <button class="add-btn active-btn" (click)="showModal('new-carrier-sender-contact')"></button>
               </div>
             </div>
             <div class="row">
@@ -423,7 +423,7 @@
                 <input type="text" name="carrierSenderAddress" id="carrierSenderAddress" formControlName="carrierSenderAddress">
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27" (click)="showModal('new-carrier-sender-address')"></button>
+                <button class="add-btn active-btn" (click)="showModal('new-carrier-sender-address')"></button>
               </div>
             </div>
             <div class="row">
@@ -438,7 +438,7 @@
                 <input type="text" name="carrierSenderContact" id="carrierSenderContact" formControlName="carrierSenderContact">
               </div>
               <div class="optional">
-                <button class="add-btn active-btn mt-27" (click)="showModal('new-carrier-sender-contragent')"></button>
+                <button class="add-btn active-btn" (click)="showModal('new-carrier-sender-contragent')"></button>
               </div>
             </div>
             <div class="row">

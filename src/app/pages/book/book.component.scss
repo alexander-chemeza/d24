@@ -9,8 +9,21 @@
   grid-template-areas: "box-1 box-2 box-3" "box-4 box-4 box-4" "box-5 box-6 box-7";
   grid-gap: 30px;
 
+  @media (max-width: 2000px) {
+    & {
+      grid-gap: 20px;
+    }
+  }
+
   h2 {
     font-size: 14px;
+
+    @media (max-width: 2000px) {
+      & {
+        font-size: 12px;
+        line-height: 12px;
+      }
+    }
   }
 
   & .box-1 {
@@ -91,6 +104,10 @@
 
     h2 {
       font-size: 14px;
+
+      @media (max-width: 2000px) {
+        font-size: 12px;
+      }
     }
   }
 
@@ -125,6 +142,14 @@
       right: -25px;
       -webkit-box-shadow: 5px 5px 28px 14px rgba(0,0,0,0.31);
       box-shadow: 5px 5px 28px 14px rgba(0,0,0,0.31);
+
+      @media (max-width: 2000px) {
+        & {
+          box-shadow: 1px 0px 15px 2px rgb(0 0 0 / 31%);
+          top: -13px;
+          right: -5px;
+        }
+      }
     }
 
     & form {
@@ -133,11 +158,24 @@
       grid-template-rows: auto min-content;
       grid-gap: 30px;
 
+      @media (max-width: 2000px) {
+        & {
+          grid-gap: 20px;
+        }
+      }
+
       & .btns-row {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: min-content;
         grid-gap: 30px;
+
+        @media (max-width: 2000px) {
+          display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          grid-gap: 20px;
+        }
 
         & a {
           text-align: center;
@@ -157,6 +195,18 @@
 
           border-radius: 40px;
 
+          @media (max-width: 2000px) {
+            & {
+              font-size: 1.2rem;
+              // padding: 20px 40px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              max-width: 150px;
+              max-height: 40px;
+            }
+          }
+
           &:hover {
             background-color: #eeeeee;
           }
@@ -169,6 +219,18 @@
         & input {
           grid-column: 3;
           grid-row: 1;
+
+          @media (max-width: 2000px) {
+            & {
+              font-size: 1.2rem;
+              // padding: 20px 40px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              max-width: 150px;
+              max-height: 40px;
+            }
+          }
         }
       }
     }

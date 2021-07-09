@@ -274,4 +274,34 @@ ul.signed li a {
   cursor: pointer;
 }
 
+@media (max-width: 2000px) {
+  .navigation {
+    padding-left: 0;
+    width: 80px;
+  }
+  .navigation {
+    ul {
+      font-size: 1.3rem;
 
+      li {
+        .menu-text {
+          left: 50px;
+        }
+
+        a {
+          padding: 15px 0 15px 20px;
+        }
+
+        img {
+          max-width: 18px;
+        }
+      }
+    }
+  }
+  .navigation {
+    &:hover {
+      width: 200px;
+    }
+  }
+
+}

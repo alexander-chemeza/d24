@@ -243,6 +243,11 @@
   font-size: 12px;
   color: #5A5A5A;
   text-align: center;
+
+  @media (max-width: 2000px) {
+    padding: 5px 15px;
+    width: 53px;
+  }
 }
 
 .page-of, .page-total {

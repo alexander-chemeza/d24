@@ -85,6 +85,12 @@ a {
   padding: 30px;
   box-sizing: border-box;
   position: relative;
+
+  @media (max-width: 2000px) {
+    & {
+      padding: 15px 20px;
+    }
+  }
 }
 
 .white-box {
@@ -100,6 +106,10 @@ a {
   padding: 30px;
   box-sizing: border-box;
   position: relative;
+
+  @media (max-width: 2000px) {
+    padding: 12px;
+  }
 }
 
 .pl-30 {
@@ -196,6 +206,10 @@ a {
 
 .mt-30 {
   margin-top: 30px !important;
+
+  @media (max-width: 2000px) {
+    margin-top: 20px !important;
+  }
 }
 
 .mt-40 {
@@ -204,6 +218,10 @@ a {
 
 .mt-50 {
   margin-top: 50px !important;
+
+  @media (max-width: 2000px) {
+    margin-top: 30px !important;
+  }
 }
 
 .mt-15 {
@@ -258,24 +276,46 @@ a {
   font-family: "Montserrat-Medium", sans-serif !important;
   font-size: 1.4rem;
   color: rgba(0,0,0,0.5);
+
+  @media (max-width: 2000px) {
+    & {
+      font-size: 1.2rem;
+    }
+  }
 }
 
 .description {
   font-family: "Montserrat-Medium", sans-serif !important;
   font-size: 1.4rem !important;
   color: #000000 !important;
+
+  @media (max-width: 2000px) {
+    & {
+      font-size: 1.2rem !important;
+    }
+  }
 }
 
 .description-violet {
   color: #A070B5;
   font-family: "Montserrat-Medium", sans-serif !important;
   font-size: 1.4rem !important;
+
+  @media (max-width: 2000px) {
+    & {
+      font-size: 1.2rem !important;
+    }
+  }
 }
 
 .high-description {
   font-size: 2.5rem;
   font-family: "Montserrat-Medium", sans-serif !important;
   color: black;
+
+  @media (max-width: 2000px) {
+    font-size: 1.2rem;
+  }
 }
 
 .description-small {
@@ -304,6 +344,13 @@ a {
   position: relative;
   box-sizing: border-box;
 
+  @media (max-width: 2000px) {
+    & {
+      font-size: 12px;
+      padding: 9px 20px;
+    }
+  }
+
   &::after {
     content: '';
     position: absolute;
@@ -326,6 +373,12 @@ a {
   border-top-left-radius: 5px;
   position: relative;
   box-sizing: border-box;
+
+  @media (max-width: 2000px) {
+    & {
+      padding: 9px 20px;
+    }
+  }
 
   &::after {
     content: '';

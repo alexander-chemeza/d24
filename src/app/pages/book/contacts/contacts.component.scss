@@ -1,3 +1,15 @@
 .dark-grey-box .page-controls {
   left: 75%;
+  
+  @media (max-width: 2000px) {
+    & {
+      left: 73%;
+    }
+  }
+}
+
+@media (max-width: 2000px) {
+  .ag-theme-alpine {
+    height: 87% !important;
+  }
 }

@@ -8,8 +8,18 @@
   grid-template-areas: "form" "warning" "popup";
   margin: 0 40px;
 
+  @media (max-width: 2000px) {
+    grid-gap: 20px;
+  }
+
   & .grey-box {
     padding: 30px 30px;
+
+    @media (max-width: 2000px) {
+      & {
+        padding: 15px 20px;
+      }
+    }
   }
 
   & .form-box {

@@ -23,4 +23,27 @@
   max-height: 320px;
   grid-area: form;
   box-sizing: border-box;
+
+  @media (max-width: 2000px) {
+    & {
+      max-height: 260px;
+      max-width: 530px;
+    }
+  }
+}
+
+@media (max-width: 2000px) {
+  
+}
+
+@media (max-width: 2000px) {
+  .preheader {
+    font-size: 1.6rem;
+  }
+  .form {
+    margin: 40px 0 0 40px;
+  }
+  .recover-content .preheader {
+    font-size: 1.6rem;
+  }
 }
