@@ -10,7 +10,7 @@
 
   @media (max-width: 2000px) {
     & {
-      grid-gap: 20px;
+      grid-gap: 15px;
     }
   }
 
@@ -71,6 +71,25 @@
       grid-template-areas: "main" "controls";
       grid-gap: 30px;
 
+      @media (max-width: 2000px) {
+        & {
+          grid-gap: 15px;
+        }
+      }
+
+      .control-flex {
+        @media (max-width: 2000px) {
+          & {
+            display: flex;
+            align-items: center;
+
+            label {
+              margin-right: 15px;
+            }
+          }
+        }
+      }
+
       & .row-form-content {
         grid-area: main;
 
@@ -123,6 +142,12 @@
               grid-template-columns: 9fr 1fr;
               grid-template-rows: min-content;
               grid-gap: 30px;
+
+              @media (max-width: 2000px) {
+                & {
+                  margin-top: 25px;
+                }
+              }
 
               & .container {
                 display: grid;

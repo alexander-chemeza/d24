@@ -44,7 +44,7 @@
         <div id="form-0" class="form form-content-1">
           <div class="col grey-box">
             <div class="row">
-              <div class="control">
+              <div class="control control-flex">
                 <label for="expressSender">Отправитель:</label>
                 <mat-form-field floatLabel="never">
                   <mat-select formControlName="expressSender" id="expressSender" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, orderForm.value.expressSender, expressSenderAddresses, expressSenderContacts)">
@@ -82,7 +82,7 @@
               </p>
             </div>
             <div class="row">
-              <div class="control">
+              <div class="control control-flex">
                 <label for="expressSenderContact">Контакт (по адресу выдачи груза):</label>
                 <mat-form-field floatLabel="never">
                   <mat-select formControlName="expressSenderContact" id="expressSenderContact" (keyup)="$event.stopPropagation()">
@@ -98,7 +98,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="control">
+              <div class="control control-flex">
                 <label for="expressSenderDeliveryDate">Дата выдачи груза:</label>
                 <input type="date" name="expressSenderDeliveryDate" id="expressSenderDeliveryDate" formControlName="expressSenderDeliveryDate">
               </div>
@@ -117,7 +117,7 @@
                 <input type="time" name="expressSenderTimeoutTo" id="expressSenderTimeoutTo" formControlName="expressSenderTimeoutTo">
               </div>
             </div>
-           <div class="row">
+           <div class="row" style="display: none;">
              <div class="control">
                <label for="expressSenderTTN">Серия и номер ТТН:</label>
                <input type="text" name="expressSenderTTN" id="expressSenderTTN" formControlName="expressSenderTTN">
@@ -136,7 +136,7 @@
           </div>
           <div class="col grey-box">
             <div class="row">
-              <div class="control">
+              <div class="control control-flex">
                 <label for="expressRecipient">Получатель:</label>
                 <mat-form-field floatLabel="never">
                   <mat-select formControlName="expressRecipient" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, orderForm.value.expressRecipient, expressReceiverAddresses, expressReceiverContacts)">
@@ -174,7 +174,7 @@
               </p>
             </div>
             <div class="row">
-              <div class="control">
+              <div class="control control-flex">
                 <label for="expressRecipientContact">Контакт (по адресу  доставки груза):</label>
                 <mat-form-field floatLabel="never">
                   <mat-select formControlName="expressRecipientContact" id="expressRecipientContact" (keyup)="$event.stopPropagation()">
@@ -190,7 +190,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="control">
+              <div class="control control-flex">
                 <label for="expressRecipientDeliveryDate">Дата доставки груза:</label>
                 <input type="date" name="expressRecipientDeliveryDate" id="expressRecipientDeliveryDate" formControlName="expressRecipientDeliveryDate">
               </div>
@@ -209,7 +209,7 @@
                 <input type="time" name="expressRecipientTimeoutTo" id="expressRecipientTimeoutTo" formControlName="expressRecipientTimeoutTo">
               </div>
             </div>
-            <div class="row-two-items">
+            <div class="row-two-items" style="display: none;">
               <div class="container">
                 <div class="condition">
                   <div class="checkbox-block" style="margin-right: 15px;">

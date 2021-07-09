@@ -9,6 +9,12 @@
   padding: 30px;
   box-sizing: border-box;
   overflow: auto;
+
+  @media (max-width: 2000px) {
+    & {
+      padding: 10px;
+    }
+  }
 }
 
 .navigation {
@@ -194,6 +200,12 @@
   transition-delay: 0.2s;
   border-radius: 10px;
   overflow: auto;
+
+  @media (max-width: 2000px) {
+    & {
+      padding: 20px;
+    }
+  }
 
   background-image: url("../assets/img/background/Vector.svg"),
   url("../assets/img/background/Vector-3.svg"),
