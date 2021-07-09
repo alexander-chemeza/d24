@@ -4,7 +4,7 @@
       <div class="control">
         <label for="">Тип услуги</label>
         <mat-form-field floatLabel="never">
-          <mat-select [(ngModel)]="serviceType" (selectionChange)="selectService($event)">
+          <mat-select [(ngModel)]="serviceType" (selectionChange)="selectService()">
             <mat-option *ngFor="let service of serviceTypes" [value]="service.value">
               {{service.viewValue}}
             </mat-option>
@@ -34,7 +34,7 @@
     </div>
     <div class="col">
       <div></div>
-      <button class="stage-btn white-btn">Дополнительные услуги</button>
+      <button class="purple-btn white-btn">Дополнительные услуги</button>
     </div>
   </div>
   <div class="row-form">
@@ -241,10 +241,10 @@
                   <label for="expressDeliveryType">Тип грузового места</label>
 <!--                  make as radio buttons-->
                   <div class="btns-box">
-                    <button class="express-placing-type active-btn" (click)="swtchDeliveryPlacing($event, 'express-placing-type')">Короб</button>
-                    <button class="express-placing-type white-btn" (click)="swtchDeliveryPlacing($event, 'express-placing-type')">Палета</button>
-                    <button class="express-placing-type white-btn" (click)="swtchDeliveryPlacing($event, 'express-placing-type')">Негабарит</button>
-                    <button class="express-placing-type white-btn" (click)="swtchDeliveryPlacing($event, 'express-placing-type')">Мешок</button>
+                    <button class="express-placing-type active-btn" (click)="swtchDeliveryPlacing($event, 'express-placing-type')" [attr.package]="expressDeliveryPackage[0]">Короб</button>
+                    <button class="express-placing-type white-btn" (click)="swtchDeliveryPlacing($event, 'express-placing-type')" [attr.package]="expressDeliveryPackage[1]">Палета</button>
+                    <button class="express-placing-type white-btn" (click)="swtchDeliveryPlacing($event, 'express-placing-type')" [attr.package]="expressDeliveryPackage[2]">Негабарит</button>
+                    <button class="express-placing-type white-btn" (click)="swtchDeliveryPlacing($event, 'express-placing-type')" [attr.package]="expressDeliveryPackage[3]">Мешок</button>
                   </div>
                 </div>
                 <div class="counter">
@@ -871,7 +871,7 @@
           </div>
         </div>
         <div class="col">
-          <button class="green-btn round-btn">Далее</button>
+          <button class="green-btn round-btn" (click)="changeStage($event)" stage="2">Далее</button>
           <input type="submit" value="Оформить" hidden>
         </div>
       </div>
@@ -879,13 +879,13 @@
       <div id="control-1" class="another-form submit-row row-form-controls mb-30">
         <div class="col">
           <div class="stage">
-            <button class="active-btn circle-btn">1</button>
-            <button class="circle-btn">2</button>
+            <button class="step-mark active-btn circle-btn">1</button>
+            <button class="step-mark circle-btn">2</button>
           </div>
         </div>
         <div class="col">
-          <button class="white-btn round-btn">Назад</button>
-          <button class="green-btn round-btn" (click)="newOrder($event, 'express', 'express-placing-type')">Оформить</button>
+          <button class="white-btn round-btn" (click)="changeStage($event)" stage="1">Назад</button>
+          <button class="green-btn round-btn" (click)="newOrder($event)">Оформить</button>
           <input type="submit" value="Оформить" hidden>
         </div>
       </div>
@@ -946,7 +946,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-sender-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewAddress(newExpressSenderAddress, orderForm.value.expressSender, 'new-express-sender-address', expressSenderAddresses, orderForm.value.expressSenderAddress)">
+    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewAddress(newExpressSenderAddress, orderForm.value.expressSender, 'new-express-sender-address')">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1082,7 +1082,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewAddress(newExpressRecipientAddress, orderForm.value.expressRecipient, 'new-express-recipient-address', expressReceiverAddresses, orderForm.value.expressRecipientAddress)">
+    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewAddress(newExpressRecipientAddress, orderForm.value.expressRecipient, 'new-express-recipient-address')">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1299,3 +1299,15 @@
     </form>
   </div>
 </div>
+
+<!--<div id="select-contract" class="modal" style="display: none">-->
+<!--  <h2>Укажите, пожалуйста, от какого договора будет Курьерская доставка </h2>-->
+<!--  <div *ngFor="let contract of contractList">-->
+<!--    <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--      <input class="selected-contract checkbox-block-item" type="checkbox" name="contract" [checked]="contract.contractActive" (change)="changeContract($event)" [attr.ourId]="contract.ourId">-->
+<!--      <span class="checkbox-block-icon"></span>-->
+<!--    </div>-->
+<!--    <label for="">Номер {{contract.contractNumber}} от {{pipe.transform(contract.contractEndDate, 'dd.MM.yyyy')}}</label>-->
+<!--  </div>-->
+<!--  <button (click)="updateActiveContract($event)">Log</button>-->
+<!--</div>-->

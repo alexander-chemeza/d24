@@ -193,6 +193,7 @@ export class RegisterComponent implements OnInit {
         password: this.entityUserWithAgreementForm.value.password as string,
         companyName: this.entityUserWithAgreementForm.value.companyName as string,
         unp: this.entityUserWithAgreementForm.value.unp as string,
+        userType: 'Юр.лицо'
       };
 
       this.passwordEquality = data.password !== passwordRepeat;
@@ -227,7 +228,8 @@ export class RegisterComponent implements OnInit {
         bankCode: this.entityUserWithoutAgreementForm.value.bankCode as string,
         account: this.entityUserWithoutAgreementForm.value.account as string,
         settlementPerson: this.entityUserWithoutAgreementForm.value.settlementPerson as string,
-        settlementPersonEmail: this.entityUserWithoutAgreementForm.value.settlementPersonEmail as string
+        settlementPersonEmail: this.entityUserWithoutAgreementForm.value.settlementPersonEmail as string,
+        userType: 'Юр.лицо'
       };
 
       if (this.entityUserWithoutAgreementForm.valid) {
@@ -242,6 +244,7 @@ export class RegisterComponent implements OnInit {
         phone: this.individualUserWithAgreementForm.value.phone as string,
         login: this.individualUserWithAgreementForm.value.login as string,
         password: this.individualUserWithAgreementForm.value.password as string,
+        userType: 'Физ.лицо'
       };
 
       if (this.individualUserWithAgreementForm.valid) {
@@ -262,6 +265,7 @@ export class RegisterComponent implements OnInit {
         homeAddress: this.individualUserWithoutAgreementForm.value.homeAddress,
         deliveryFrequency: this.individualUserWithoutAgreementForm.value.deliveryFrequency,
         cargoDescription: this.individualUserWithoutAgreementForm.value.cargoDescription,
+        userType: 'Физ.лицо'
       };
 
       if (this.individualUserWithoutAgreementForm.valid) {

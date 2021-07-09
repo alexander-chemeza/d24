@@ -121,6 +121,7 @@ export interface UserRegistration {
   agreement?: string;
   phone2?: string;
   groupName?: string;
+  userType?: string;
 }
 
 export interface Feedback {
@@ -304,5 +305,10 @@ export class RestapiService {
   // New order
   public placeNewOrder(data: NewOrder): Observable<any> {
     return this.http.post(`${this.url}/user/order/addNew`, data, {observe: 'response', withCredentials: true});
+  }
+
+  // Get delivery schedule
+  public getDeliveryCalendar(deliveryZoneId: string): Observable<any> {
+    return this.http.get(`${this.url}/user/deliveryCalendar/get?deliverZoneId=${deliveryZoneId}`, {observe: 'response', withCredentials: true});
   }
 }

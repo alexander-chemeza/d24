@@ -1,7 +1,17 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {RestapiService, Street} from '../../restapi.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+
+interface ContractList {
+  contractActive: string | boolean;
+  contractEndDate: string;
+  contractNumber: string;
+  contractType: string;
+  contractUNP: string;
+  id?: any;
+  ourId: number;
+}
 
 interface ServiceTypesList {
   value: string;
@@ -41,25 +51,56 @@ export interface StreetsList {
   type: number;
 }
 
+interface DeliverySchedulte {
+  delivery: string;
+  deliveryActive: boolean;
+  delivery_day: string;
+  delivery_zone_id: string;
+  id: number;
+}
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.scss']
 })
-export class OrderComponent implements OnInit {
+export class OrderComponent implements OnChanges, OnInit {
+  // Work with user contracts
+  userType = ''; // Юр.лицо / Физ.лицо
+  contractList: ContractList[] = []; // List of available contracts of the user
+  contractTypes: string[] = []; // List of contract types
+  agreementWithCustomer = false; // Договор с покупателем
+  agreementWithWarrantor = false; // Договор с поручителем
+  agreementWithPost = false; // Почтовые отправления
+  serviceTypes: ServiceTypesList[] = []; // Экспресс-доставка, экспресс-доставка документов, курьерская доставка
+
+  // Delivery schedule
+  deliverySchedules: DeliverySchedulte[] = [];
+
+  // Delivery schedules
+  expressSenderSchedule = '';
+  expressRecipientSchedule = '';
+  carrierSenderSchedule = '';
+  carrierRecipientSchedule = '';
+
+  // Packages
+  expressDeliveryPackage = ['pt0', 'pt1', 'pt2', 'pt4'];
+
+  currentContractId = 0;
+  // Cap type and stage detection
+  serviceType = '0';
+  deliveryType: string;
+  stage = 1;
+
+
   pipe = new DatePipe('en-US');
   cargoDescription = '';
-  serviceType: string;
-  deliveryType: string;
+
   currentCity: number;
 
   select: any;
+  // It depends on contracts type
 
-  serviceTypes: ServiceTypesList[] = [
-    {value: '0', viewValue: 'Экспресс-доставка грузов'},
-    {value: '2', viewValue: 'Экспресс - доставка документов'},
-    {value: '1', viewValue: 'Курьерская доставка'},
-  ];
 
   deliveryTypes: DeliveryTypesList[] = [];
   citiesList: Cities[] = [];
@@ -608,35 +649,76 @@ export class OrderComponent implements OnInit {
   });
 
   constructor(private service: RestapiService) {
-    this.serviceType = this.serviceTypes[0].value;
+    // this.serviceType = this.serviceTypes[0].value;
     this.deliveryType = '';
     this.currentCity = 0;
+    this.ngOnChanges();
   }
 
-  ngOnInit(): void {
-    this.orderForm.controls.expressDeliveryCounter1.setValue(0);
-    this.orderForm.controls.expressDeliveryCounter2.setValue(0);
-
-    // Make user object with his data
+  ngOnChanges(): void {
+    // 0. Get user data
     if (this.userOldInfo) {
       this.user = JSON.parse(this.userOldInfo);
       delete this.user.password;
     }
+    // 1. Define available contracts types
+    this.contractList = this.user.contractList;
+    for (const item of this.contractList) {
+      this.contractTypes.push(item.contractType);
+    }
+    this.contractTypes = this.contractTypes.filter((e: any, i: any) => this.contractTypes.indexOf(e) === i);
+    for (const item of this.contractTypes) {
+      if (item === 'Договор с покупателем') {
+        this.agreementWithCustomer = true;
+      } else if (item === 'С поручителем') {
+        this.agreementWithWarrantor = true;
+      } else {
+        this.agreementWithPost = true;
+      }
+    }
+    // 2. Define user type
+    if (this.user.unp) {
+      this.userType = 'Юр.лицо';
+      if (this.agreementWithCustomer && !this.agreementWithWarrantor && !this.agreementWithPost) {
+        this.serviceTypes = [
+          {value: '0', viewValue: 'Экспресс-доставка грузов'},
+          {value: '2', viewValue: 'Экспресс - доставка документов'}
+        ];
+      } else if (!this.agreementWithCustomer && this.agreementWithWarrantor && !this.agreementWithPost) {
+        this.serviceTypes = [
+          {value: '1', viewValue: 'Курьерская доставка'},
+        ];
+      } else if (this.agreementWithCustomer && this.agreementWithWarrantor && !this.agreementWithPost) {
+        this.serviceTypes = [
+          {value: '0', viewValue: 'Экспресс-доставка грузов'},
+          {value: '2', viewValue: 'Экспресс - доставка документов'},
+          {value: '1', viewValue: 'Курьерская доставка'},
+        ];
+      }
+    } else {
+      this.userType = 'Физ.лицо';
+      this.serviceTypes = [
+        {value: '1', viewValue: 'Курьерская доставка'}
+      ];
+    }
+  }
 
-    this.serviceType = this.serviceTypes[0].value;
-
+  ngOnInit(): void {
+    // Set value to amount counters
+    this.orderForm.controls.expressDeliveryCounter1.setValue(0);
+    this.orderForm.controls.expressDeliveryCounter2.setValue(0);
+    // Get delivery types from database
     this.service.deliveryTypes().subscribe(data => {
       this.deliveryTypes = data;
       this.deliveryType = this.deliveryTypes[0].id;
     });
-
+    // Get cities list from database
     this.service.cities().subscribe(data => {
       if (data.status === 200) {
         this.citiesList = data.body;
-        this.currentCity = this.citiesList[0].id;
+        console.log('Cities', this.citiesList);
       }
     });
-
     // User common data reception
     if (this.user) {
       // Express form fields
@@ -652,7 +734,6 @@ export class OrderComponent implements OnInit {
                   name: `${address.cityName}, ${address.streetName}`
                 });
               }
-              console.log('expressSenderAddresses', this.expressSenderAddresses);
               this.service.getAllUserCustomerContact(this.user.senderAddress.id).subscribe(contacts => {
                 if (contacts.status === 200) {
                   for (const contact of contacts.body) {
@@ -700,6 +781,25 @@ export class OrderComponent implements OnInit {
     }
   }
 
+  getSchedule(deliveryZoneId: string, field: any): void {
+    this.service.getDeliveryCalendar(deliveryZoneId).subscribe(response => {
+      if (response.status === 200) {
+        let schedules: any;
+        schedules = response.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
+        schedules[0].delivery_day = 'ПН';
+        schedules[1].delivery_day = 'ВТ';
+        schedules[2].delivery_day = 'СР';
+        schedules[3].delivery_day = 'ЧТ';
+        schedules[4].delivery_day = 'ПТ';
+        schedules[5].delivery_day = 'СБ';
+        schedules[6].delivery_day = 'ВС';
+        field = schedules.filter((item: any) => item.deliveryActive)
+          .map((a: any) => a.delivery_day).join('-');
+        console.log('Schedules active:' + field);
+      }
+    });
+  }
+
   selectAgent($event: any, agentId: any, addresses: any, contacts: any): void {
     addresses.pop();
     contacts.pop();
@@ -743,7 +843,9 @@ export class OrderComponent implements OnInit {
     if (event.target.value === '' || this.expressSenderAgents.length === 0) {
       this.ngOnInit();
     } else {
-      this.expressSenderAgents = this.expressSenderAgents.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.expressSenderAgents = this.expressSenderAgents.filter((option: any) => {
+        return option.customerName.toLowerCase().includes(event.target.value.toLowerCase());
+      });
     }
   }
 
@@ -791,7 +893,9 @@ export class OrderComponent implements OnInit {
     if (event.target.value === '' || this.expressReceiverAgents.length === 0) {
       this.ngOnInit();
     } else {
-      this.expressReceiverAgents = this.expressReceiverAgents.filter((option: any) => option.customerName.toLowerCase().includes(event.target.value.toLowerCase()));
+      this.expressReceiverAgents = this.expressReceiverAgents.filter((option: any) => {
+        return option.customerName.toLowerCase().includes(event.target.value.toLowerCase());
+      });
     }
   }
 
@@ -835,40 +939,38 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  selectService(event: any): void {
-    const submitRows = document.getElementsByClassName('submit-row');
-    const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;
+  selectService(): void {
+    // 0. Variables and constants
+    const stageBtns: any = document.getElementsByClassName('stage-btn');
+    const submitRows: any = document.getElementsByClassName('submit-row');
+    const forms: any = document.getElementsByClassName('form');
     let currentForm: any;
-    const forms = document.getElementsByClassName('form') as HTMLCollection;
-    const stage0 = document.getElementById('control-0');
-    const stage1 = document.getElementById('control-1');
-
-    for (let i = 0; i < forms.length; i++) {
-      forms[i].classList.add('another-form');
+    // 1. Our stage will be 1 on change of service type
+    this.stage = 1;
+    // 2. We clear order form on change of service type
+    this.orderForm.reset();
+    // 3. Set button stage 1 as a default
+    for (const item of stageBtns) {
+     item.classList.remove('active-btn');
     }
-
-    for (let i = 0; i < submitRows.length; i++) {
-      submitRows[i].classList.add('another-form');
-    }
-
-    for (let i = 0; i < stageBtns.length; i++) {
-      stageBtns[i].classList.remove('active-btn');
-    }
-
-    if (stage0 && stage1) {
-      if (this.serviceType === '0') {
-        stage0.classList.remove('another-form');
-        currentForm = document.getElementById('form-0');
-      } else if (this.serviceType === '2') {
-        stage0.classList.remove('another-form');
-        currentForm = document.getElementById('form-0');
-      } else {
-        stage1.classList.remove('another-form');
-        currentForm = document.getElementById('form-1');
-      }
-    }
-
     stageBtns[0].classList.add('active-btn');
+    // 4. Set bottom controls type 1 as a default
+    for (const item of submitRows) {
+      item.classList.add('another-form');
+    }
+    submitRows[0].classList.remove('another-form');
+    // 5. Hide all forms
+    for (const item of forms) {
+      item.classList.add('another-form');
+    }
+    // 6. Detect current form
+    if (this.serviceType === '0') {
+      currentForm = document.getElementById('form-0');
+    } else if (this.serviceType === '2') {
+      currentForm = document.getElementById('form-0');
+    } else {
+      currentForm = document.getElementById('form-1');
+    }
     currentForm.classList.remove('another-form');
   }
 
@@ -894,63 +996,86 @@ export class OrderComponent implements OnInit {
   }
 
   changeStage(event: any): void {
-    const submitRows = document.getElementsByClassName('submit-row') as HTMLCollection;
-    const stageBtns = document.getElementsByClassName('stage-btn') as HTMLCollection;
-    const controlWide = document.getElementById('control-wide') as HTMLElement;
+    // 0. Variables and constants
+    const submitRows: any = document.getElementsByClassName('submit-row');
+    const stageBtns: any = document.getElementsByClassName('stage-btn');
+    const controlWide: any = document.getElementById('control-wide');
+    const forms: any = document.getElementsByClassName('form');
+    const circleBtns: any = document.getElementsByClassName('step-mark');
     let currentForm: any;
     let currentControl: any;
-    const currentStage: string = event.target.getAttribute('stage');
-    const forms = document.getElementsByClassName('form') as HTMLCollection;
-    if (this.serviceType === '0' && currentStage === '1') {
+    // 1. Hide all forms
+    for (const item of forms) {
+      item.classList.add('another-form');
+    }
+    // 2. Hide all controls
+    for (const item of submitRows) {
+      item.classList.add('another-form');
+    }
+    // 3. Make stage buttons inactive
+    for (const item of stageBtns) {
+      item.classList.remove('active-btn');
+    }
+    // 4. Make all circle step marks inactive
+    for (const item of circleBtns) {
+      item.classList.remove('active-btn');
+    }
+    // 5. Set stage
+    this.stage = Number(event.target.getAttribute('stage'));
+    // 6. Detect forms and controls and change its view
+    if (this.serviceType === '0' && this.stage === 1) { // express delivery stage 1
       currentForm = document.getElementById(`form-0`);
       currentControl = document.getElementById(`control-0`);
       controlWide.classList.remove('show-control-wide');
-    } else if (this.serviceType === '0' && currentStage === '2') {
-      currentForm = document.getElementById(`form-${this.serviceType}${currentStage}`);
+      stageBtns[0].classList.add('active-btn');
+      circleBtns[0].classList.add('active-btn');
+    } else if (this.serviceType === '0' && this.stage === 2) { // express delivery stage 2
+      currentForm = document.getElementById(`form-${this.serviceType}${this.stage}`);
       currentControl = document.getElementById(`control-1`);
       controlWide.classList.add('show-control-wide');
-    } else if (this.serviceType === '2' && currentStage === '1') {
+      stageBtns[1].classList.add('active-btn');
+      circleBtns[1].classList.add('active-btn');
+    } else if (this.serviceType === '2' && this.stage === 1) { // express document stage 1
       currentForm = document.getElementById(`form-0`);
       currentControl = document.getElementById(`control-0`);
       controlWide.classList.remove('show-control-wide');
-    } else if (this.serviceType === '2' && currentStage === '2') {
+      stageBtns[0].classList.add('active-btn');
+      circleBtns[0].classList.add('active-btn');
+    } else if (this.serviceType === '2' && this.stage === 2) { // express document stage 2
       currentForm = document.getElementById(`form-03`);
       currentControl = document.getElementById(`control-1`);
       controlWide.classList.remove('show-control-wide');
-    } else if (this.serviceType === '1' && currentStage === '1') {
+      stageBtns[1].classList.add('active-btn');
+      circleBtns[1].classList.add('active-btn');
+    } else if (this.serviceType === '1' && this.stage === 1) { // ! It may change its view if we have some kind of agreement
       currentForm = document.getElementById(`form-${this.serviceType}`);
       currentControl = document.getElementById(`control-0`);
       controlWide.classList.remove('show-control-wide');
-    } else {
-      currentForm = document.getElementById(`form-${this.serviceType}${currentStage}`);
+      stageBtns[0].classList.add('active-btn');
+      circleBtns[0].classList.add('active-btn');
+    } else { // carrier stage 2
+      currentForm = document.getElementById(`form-${this.serviceType}${this.stage}`);
       currentControl = document.getElementById(`control-1`);
       controlWide.classList.remove('show-control-wide');
+      stageBtns[1].classList.add('active-btn');
+      circleBtns[1].classList.add('active-btn');
     }
-    for (let i = 0; i < forms.length; i++) {
-      forms[i].classList.add('another-form');
-    }
-    for (let i = 0; i < submitRows.length; i++) {
-      submitRows[i].classList.add('another-form');
-    }
+    // 6. Show detected form, controls and make detected stage active
     currentForm.classList.remove('another-form');
     currentControl.classList.remove('another-form');
-    for (let i = 0; i < stageBtns.length; i++) {
-      stageBtns[i].classList.remove('active-btn');
-    }
-    event.target.classList.add('active-btn');
   }
 
   checkboxChange(event: any): void {
     let currentForm: any;
     const status = event.target.checked;
-    const forms = document.getElementsByClassName('form') as HTMLCollection;
+    const forms: any = document.getElementsByClassName('form');
     if (status === false) {
       currentForm = document.getElementById(`form-2`);
     } else {
       currentForm = document.getElementById(`form-13`);
     }
-    for (let i = 0; i < forms.length; i++) {
-      forms[i].classList.add('another-form');
+    for (const item of forms) {
+      item.classList.add('another-form');
     }
     currentForm.classList.remove('another-form');
   }
@@ -997,7 +1122,7 @@ export class OrderComponent implements OnInit {
     });
   }
 
-  createNewAddress(form: any, id: number, modalId: string, addresses: any, agentId: number): void {
+  createNewAddress(form: any, id: number, modalId: string): void {
     // addresses.pop();
     // This vars will get correct name of city and street
     let city: string;
@@ -1097,20 +1222,22 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  newOrder(event: any, type: string, placingType: string): any {
+  newOrder(event: any): any {
     let data: any;
-    const container = document.getElementsByClassName(placingType);
+    let container: any;
     let currentContainerValue: any;
-    for (let i = 0; i < container.length; i++) {
-      if (container[i].classList.contains('active-btn')) {
-        currentContainerValue = container[i].innerHTML;
-      }
-    }
 
-    if (type === 'express') {
+    if (this.serviceType === '0') {
+      container = document.getElementsByClassName('express-placing-type');
+      for (const item of container) {
+        if (item.classList.contains('active-btn')) {
+          currentContainerValue = item.getAttribute('package');
+        }
+      }
+
       data = {
         // Step 1
-        deal_type: this.serviceType,
+        deal_type: 1,
         delivery_type: this.deliveryType,
         senderCustomerId: this.orderForm.value.expressSender,
         senderCustomerAddressId: this.orderForm.value.expressSenderAddress,
@@ -1124,6 +1251,7 @@ export class OrderComponent implements OnInit {
         recipient_accept_from: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliverFrom, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutFrom}`,
         recipient_accept_to: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliverTo, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutTo}`,
         recipient_description: this.orderForm.value.expressRecipientDescription,
+        recipient_email: this.orderForm.value.expressRecipientNotificationEmail,
 
         // Missed
         // senderDate: this.orderForm.value.expressSenderDeliveryDate,
@@ -1154,14 +1282,20 @@ export class OrderComponent implements OnInit {
     this.service.placeNewOrder(data).subscribe(response => {
       if (response.status === 200) {
         console.log('Saved', data);
+        this.orderForm.reset();
+        for (const item of container) {
+          item.classList.remove('active-btn');
+        }
+        container[0].classList.add('active-btn');
+        this.cargoDescription = '';
       }
     });
   }
 
   swtchDeliveryPlacing(event: any, placingType: any): void {
-    const btns = document.getElementsByClassName(placingType);
-    for (let i = 0; i < btns.length; i++) {
-      btns[i].classList.remove('active-btn');
+    const btns: any = document.getElementsByClassName(placingType);
+    for (const item of btns) {
+      item.classList.remove('active-btn');
     }
     event.target.classList.add('active-btn');
   }
