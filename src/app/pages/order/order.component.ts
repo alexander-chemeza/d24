@@ -737,30 +737,30 @@ export class OrderComponent implements OnChanges, OnInit {
                       name: `${address.cityName}, ${address.streetName}`
                     });
                   }
-                  console.log('my cities', this.citiesList);
                   const currentAddress = addresses.body.find((item: any) => item.id === this.user.senderAddress.id);
-                  console.log('We got fucking address', currentAddress);
                   const currentCity = this.citiesList.find((item: any) => item.id === currentAddress.cityId);
                   let deliveryZone = '';
                   if (currentCity) {
                     deliveryZone = currentCity.delivery_zone_id;
-                    // this.getSchedule(deliveryZone, this.expressSenderSchedule);
-                    this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
-                      if (deliveryZoneId.status === 200) {
-                        let schedules: any;
-                        schedules = deliveryZoneId.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
-                        schedules[0].delivery_day = 'ПН';
-                        schedules[1].delivery_day = 'ВТ';
-                        schedules[2].delivery_day = 'СР';
-                        schedules[3].delivery_day = 'ЧТ';
-                        schedules[4].delivery_day = 'ПТ';
-                        schedules[5].delivery_day = 'СБ';
-                        schedules[6].delivery_day = 'ВС';
-                        this.expressSenderSchedule = schedules.filter((item: any) => item.deliveryActive)
-                          .map((a: any) => a.delivery_day).join('-');
-                        console.log('Schedules active:' + this.expressSenderSchedule);
-                      }
-                    });
+                    if (deliveryZone) {
+                      this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
+                        if (deliveryZoneId.status === 200) {
+                          let schedules: any;
+                          schedules = deliveryZoneId.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
+                          schedules[0].delivery_day = 'ПН';
+                          schedules[1].delivery_day = 'ВТ';
+                          schedules[2].delivery_day = 'СР';
+                          schedules[3].delivery_day = 'ЧТ';
+                          schedules[4].delivery_day = 'ПТ';
+                          schedules[5].delivery_day = 'СБ';
+                          schedules[6].delivery_day = 'ВС';
+                          this.expressSenderSchedule = schedules.filter((item: any) => item.deliveryActive)
+                            .map((a: any) => a.delivery_day).join('-');
+                        }
+                      });
+                    } else {
+                      this.expressSenderSchedule = 'Данный адрес не обслуживается';
+                    }
                   }
 
                   this.service.getAllUserCustomerContact(this.user.senderAddress.id).subscribe(contacts => {
@@ -784,6 +784,33 @@ export class OrderComponent implements OnChanges, OnInit {
                       name: `${address.cityName}, ${address.streetName}`
                     });
                   }
+
+                  const currentAddress = addresses.body.find((item: any) => item.id === this.user.recipientAddress.id);
+                  const currentCity = this.citiesList.find((item: any) => item.id === currentAddress.cityId);
+                  let deliveryZone = '';
+                  if (currentCity) {
+                    deliveryZone = currentCity.delivery_zone_id;
+                    if (deliveryZone) {
+                      this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
+                        if (deliveryZoneId.status === 200) {
+                          let schedules: any;
+                          schedules = deliveryZoneId.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
+                          schedules[0].delivery_day = 'ПН';
+                          schedules[1].delivery_day = 'ВТ';
+                          schedules[2].delivery_day = 'СР';
+                          schedules[3].delivery_day = 'ЧТ';
+                          schedules[4].delivery_day = 'ПТ';
+                          schedules[5].delivery_day = 'СБ';
+                          schedules[6].delivery_day = 'ВС';
+                          this.expressRecipientSchedule = schedules.filter((item: any) => item.deliveryActive)
+                            .map((a: any) => a.delivery_day).join('-');
+                        }
+                      });
+                    } else {
+                      this.expressRecipientSchedule = 'Данный адрес не обслуживается';
+                    }
+                  }
+
                   this.service.getAllUserCustomerContact(this.user.recipientAddress.id).subscribe(contacts => {
                     if (contacts.status === 200) {
                       for (const contact of contacts.body) {
@@ -825,7 +852,6 @@ export class OrderComponent implements OnChanges, OnInit {
         schedules[6].delivery_day = 'ВС';
         field = schedules.filter((item: any) => item.deliveryActive)
           .map((a: any) => a.delivery_day).join('-');
-        console.log('Schedules active:' + field);
       }
     });
   }
@@ -852,7 +878,6 @@ export class OrderComponent implements OnChanges, OnInit {
   selectAddress($event: any, addressId: any, contacts: any): void {
     contacts.pop();
     if (addressId) {
-      console.log('addressID', addressId);
       if (contacts) {
         contacts.pop();
       }
@@ -1134,8 +1159,6 @@ export class OrderComponent implements OnChanges, OnInit {
             array = resp.body;
             form.reset();
             this.hideModal(modalId);
-            console.log('New contragent', array);
-            console.log('Last', );
             if (field === 'expressSender') {
               this.orderForm.patchValue({
                 expressSender: array[array.length - 1].id
@@ -1199,7 +1222,6 @@ export class OrderComponent implements OnChanges, OnInit {
           //         name: `${address.cityName}, ${address.streetName}`
           //       });
           //     }
-          //     console.log('Updated', addresses);
           //   }
           // });
         }
@@ -1311,11 +1333,9 @@ export class OrderComponent implements OnChanges, OnInit {
         // agreement: this.orderForm.value.expressDeliveryAgreement
       };
     }
-    console.log('Data', data);
 
     this.service.placeNewOrder(data).subscribe(response => {
       if (response.status === 200) {
-        console.log('Saved', data);
         this.orderForm.reset();
         for (const item of container) {
           item.classList.remove('active-btn');

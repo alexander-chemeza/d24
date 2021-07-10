@@ -170,7 +170,7 @@
             <div class="row">
               <p class="warning-left mt-20">
                 <span class="thin-grey-text">Дни обслуживания: </span>
-                <span class="description">ПН-ВТ-СР-ЧТ-ПТ-СБ</span>
+                <span class="description" [innerHTML]="expressRecipientSchedule"></span>
               </p>
             </div>
             <div class="row">
@@ -1003,8 +1003,8 @@
             <input type="text" name="delivery-from-express-sender" id="delivery-from-express-sender" formControlName="deliveryFrom">
           </div>
           <div class="box">
-            <label for="delivery-from-express-sender">по:</label>
-            <input type="text" name="delivery-from-express-sender" id="delivery-from-express-sender" formControlName="deliveryTo">
+            <label for="delivery-to-express-sender">по:</label>
+            <input type="text" name="delivery-to-express-sender" id="delivery-to-express-sender" formControlName="deliveryTo">
           </div>
         </div>
         <div class="row-some mt-15">
@@ -1139,8 +1139,8 @@
             <input type="text" name="delivery-from-express-recipient" id="delivery-from-express-recipient" formControlName="deliveryFrom">
           </div>
           <div class="box">
-            <label for="delivery-from-express-recipient">по:</label>
-            <input type="text" name="delivery-from-express-recipient" id="delivery-from-express-recipient" formControlName="deliveryTo">
+            <label for="delivery-to-express-recipient">по:</label>
+            <input type="text" name="delivery-to-express-recipient" id="delivery-to-express-recipient" formControlName="deliveryTo">
           </div>
         </div>
         <div class="row-some mt-15">
@@ -1275,8 +1275,8 @@
             <input type="text" name="delivery-from-carrier-sender" id="delivery-from-carrier-sender" formControlName="deliveryFrom">
           </div>
           <div class="box">
-            <label for="delivery-from-carrier-sender">по:</label>
-            <input type="text" name="delivery-from-carrier-sender" id="delivery-from-carrier-sender" formControlName="deliveryTo">
+            <label for="delivery-to-carrier-sender">по:</label>
+            <input type="text" name="delivery-to-carrier-sender" id="delivery-to-carrier-sender" formControlName="deliveryTo">
           </div>
         </div>
         <div class="row-some mt-15">
