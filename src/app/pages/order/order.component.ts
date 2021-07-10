@@ -735,6 +735,26 @@ export class OrderComponent implements OnChanges, OnInit {
                     this.expressSenderAddresses.push(address);
                   }
 
+                  for (const item of this.expressSenderAddresses) {
+                    let housing = '';
+                    let building = '';
+                    let office = '';
+                    let room = '';
+                    if (item.housing !== '') {
+                      housing = `корп. ${item.housing}, `;
+                    }
+                    if (item.building !== '') {
+                      building = `строение ${item.building}, `;
+                    }
+                    if (item.office !== '') {
+                      office = `офис ${item.office}, `;
+                    }
+                    if (item.room !== '') {
+                      room = `кв. ${item.room}`;
+                    }
+                    item.fullName = `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`;
+                  }
+
                   this.schedule(addresses.body, 'expressSender', this.user.senderAddress.id);
 
                   this.service.getAllUserCustomerContact(this.user.senderAddress.id).subscribe(contacts => {
@@ -754,6 +774,26 @@ export class OrderComponent implements OnChanges, OnInit {
                 if (addresses.status === 200) {
                   for (const address of addresses.body) {
                     this.expressReceiverAddresses.push(address);
+                  }
+
+                  for (const item of this.expressReceiverAddresses) {
+                    let housing = '';
+                    let building = '';
+                    let office = '';
+                    let room = '';
+                    if (item.housing !== '') {
+                      housing = `корп. ${item.housing}, `;
+                    }
+                    if (item.building !== '') {
+                      building = `строение ${item.building}, `;
+                    }
+                    if (item.office !== '') {
+                      office = `офис ${item.office}, `;
+                    }
+                    if (item.room !== '') {
+                      room = `кв. ${item.room}`;
+                    }
+                    item.fullName = `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`;
                   }
 
                   this.schedule(addresses.body, 'expressRecipient', this.user.recipientAddress.id);
@@ -786,24 +826,11 @@ export class OrderComponent implements OnChanges, OnInit {
   }
 
   schedule(arr: any, field: any, id: any): void {
-    console.log('Array', arr);
-    console.log('Field', field);
-    console.log('Select value', id);
-    // let address: any;
-    //
-    // if (field === 'expressSender') {
-    //   address = this.user.senderAddress.id;
-    // } else if (field === 'expressRecipient') {
-    //   address = this.user.recipientAddress.id;
-    // }
     const currentAddress = arr.find((item: any) => item.id === id);
-    console.log('Current address', currentAddress);
     const currentCity = this.citiesList.find((item: any) => item.id === currentAddress.cityId);
-    console.log('Current city', currentCity);
     let deliveryZone = '';
     if (currentCity) {
       deliveryZone = currentCity.delivery_zone_id;
-      console.log('Delivery zone', deliveryZone);
       if (deliveryZone !== '') {
         this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
           if (deliveryZoneId.status === 200) {
@@ -845,6 +872,26 @@ export class OrderComponent implements OnChanges, OnInit {
         if (response.status === 200 && addresses.length === 0) {
           for (const address of response.body) {
             addresses.push(address);
+          }
+
+          for (const item of addresses) {
+            let housing = '';
+            let building = '';
+            let office = '';
+            let room = '';
+            if (item.housing !== '') {
+              housing = `корп. ${item.housing}, `;
+            }
+            if (item.building !== '') {
+              building = `строение ${item.building}, `;
+            }
+            if (item.office !== '') {
+              office = `офис ${item.office}, `;
+            }
+            if (item.room !== '') {
+              room = `кв. ${item.room}`;
+            }
+            item.fullName = `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`;
           }
         }
       });
@@ -888,6 +935,26 @@ export class OrderComponent implements OnChanges, OnInit {
         if (response.status === 200) {
           for (const address of response.body) {
             this.expressSenderAddresses.push(address);
+          }
+
+          for (const item of this.expressSenderAddresses) {
+            let housing = '';
+            let building = '';
+            let office = '';
+            let room = '';
+            if (item.housing !== '') {
+              housing = `корп. ${item.housing}, `;
+            }
+            if (item.building !== '') {
+              building = `строение ${item.building}, `;
+            }
+            if (item.office !== '') {
+              office = `офис ${item.office}, `;
+            }
+            if (item.room !== '') {
+              room = `кв. ${item.room}`;
+            }
+            item.fullName = `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`;
           }
         }
       });
@@ -935,6 +1002,26 @@ export class OrderComponent implements OnChanges, OnInit {
         if (response.status === 200) {
           for (const address of response.body) {
             this.expressReceiverAddresses.push(address);
+          }
+
+          for (const item of this.expressReceiverAddresses) {
+            let housing = '';
+            let building = '';
+            let office = '';
+            let room = '';
+            if (item.housing !== '') {
+              housing = `корп. ${item.housing}, `;
+            }
+            if (item.building !== '') {
+              building = `строение ${item.building}, `;
+            }
+            if (item.office !== '') {
+              office = `офис ${item.office}, `;
+            }
+            if (item.room !== '') {
+              room = `кв. ${item.room}`;
+            }
+            item.fullName = `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`;
           }
         }
       });

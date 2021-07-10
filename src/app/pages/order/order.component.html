@@ -66,7 +66,7 @@
                   <mat-select formControlName="expressSenderAddress" id="expressSenderAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, orderForm.value.expressSenderAddress, expressSenderContacts, expressSenderAddresses, 'expressSender')">
                     <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey2($event)">
                     <mat-option *ngFor="let expressSenderAddress of expressSenderAddresses" [value]="expressSenderAddress.id" class="example-item">
-                      {{expressSenderAddress.cityId}}
+                      {{expressSenderAddress.fullName}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -158,7 +158,7 @@
                   <mat-select formControlName="expressRecipientAddress" id="expressRecipientAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, orderForm.value.expressRecipientAddress, expressReceiverContacts, expressReceiverAddresses, 'expressRecipient')">
                     <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey5($event)">
                     <mat-option *ngFor="let expressReceiverAddress of expressReceiverAddresses" [value]="expressReceiverAddress.id" class="example-item">
-                      {{expressReceiverAddress.cityId}}
+                      {{expressReceiverAddress.fullName}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>

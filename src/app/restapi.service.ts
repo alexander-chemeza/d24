@@ -176,6 +176,7 @@ export interface SaveUserCustomerAddress {
   streetName: string;
   timeFrom: string;
   timeTo: string;
+  fullName?: string;
 }
 
 // Interface to save address book contact
