@@ -2,7 +2,6 @@ import {Component, OnChanges, OnInit} from '@angular/core';
 import {RestapiService, Street} from '../../restapi.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {SharedComponent} from '../../shared/shared.component';
 
 interface ContractList {
   contractActive: string | boolean;
@@ -85,7 +84,7 @@ export class OrderComponent implements OnChanges, OnInit {
   deliverySchedules: DeliverySchedulte[] = [];
 
   // Delivery schedules
-  public expressSenderSchedule = 'fucking shit';
+  expressSenderSchedule = 'fucking shit';
   expressRecipientSchedule = '';
   carrierSenderSchedule = '';
   carrierRecipientSchedule = '';
@@ -655,7 +654,7 @@ export class OrderComponent implements OnChanges, OnInit {
     ])
   });
 
-  constructor(private service: RestapiService, private shared: SharedComponent) {
+  constructor(private service: RestapiService) {
     // this.serviceType = this.serviceTypes[0].value;
     this.deliveryType = '';
     this.currentCity = 0;
@@ -746,7 +745,6 @@ export class OrderComponent implements OnChanges, OnInit {
                   if (currentCity) {
                     deliveryZone = currentCity.delivery_zone_id;
                     // this.getSchedule(deliveryZone, this.expressSenderSchedule);
-                    // this.shared.getSchedule(deliveryZone, this.expressSenderSchedule);
                     this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
                       if (deliveryZoneId.status === 200) {
                         let schedules: any;
@@ -813,24 +811,24 @@ export class OrderComponent implements OnChanges, OnInit {
     });
   }
 
-  // getSchedule(deliveryZoneId: string, field: any): void {
-  //   this.service.getDeliveryCalendar(deliveryZoneId).subscribe(response => {
-  //     if (response.status === 200) {
-  //       let schedules: any;
-  //       schedules = response.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
-  //       schedules[0].delivery_day = 'ПН';
-  //       schedules[1].delivery_day = 'ВТ';
-  //       schedules[2].delivery_day = 'СР';
-  //       schedules[3].delivery_day = 'ЧТ';
-  //       schedules[4].delivery_day = 'ПТ';
-  //       schedules[5].delivery_day = 'СБ';
-  //       schedules[6].delivery_day = 'ВС';
-  //       field = schedules.filter((item: any) => item.deliveryActive)
-  //         .map((a: any) => a.delivery_day).join('-');
-  //       console.log('Schedules active:' + field);
-  //     }
-  //   });
-  // }
+  getSchedule(deliveryZoneId: string, field: any): void {
+    this.service.getDeliveryCalendar(deliveryZoneId).subscribe(response => {
+      if (response.status === 200) {
+        let schedules: any;
+        schedules = response.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
+        schedules[0].delivery_day = 'ПН';
+        schedules[1].delivery_day = 'ВТ';
+        schedules[2].delivery_day = 'СР';
+        schedules[3].delivery_day = 'ЧТ';
+        schedules[4].delivery_day = 'ПТ';
+        schedules[5].delivery_day = 'СБ';
+        schedules[6].delivery_day = 'ВС';
+        field = schedules.filter((item: any) => item.deliveryActive)
+          .map((a: any) => a.delivery_day).join('-');
+        console.log('Schedules active:' + field);
+      }
+    });
+  }
 
   selectAgent($event: any, agentId: any, addresses: any, contacts: any): void {
     addresses.pop();
