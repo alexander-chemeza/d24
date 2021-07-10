@@ -737,31 +737,8 @@ export class OrderComponent implements OnChanges, OnInit {
                       name: `${address.cityName}, ${address.streetName}`
                     });
                   }
-                  const currentAddress = addresses.body.find((item: any) => item.id === this.user.senderAddress.id);
-                  const currentCity = this.citiesList.find((item: any) => item.id === currentAddress.cityId);
-                  let deliveryZone = '';
-                  if (currentCity) {
-                    deliveryZone = currentCity.delivery_zone_id;
-                    if (deliveryZone) {
-                      this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
-                        if (deliveryZoneId.status === 200) {
-                          let schedules: any;
-                          schedules = deliveryZoneId.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
-                          schedules[0].delivery_day = 'ПН';
-                          schedules[1].delivery_day = 'ВТ';
-                          schedules[2].delivery_day = 'СР';
-                          schedules[3].delivery_day = 'ЧТ';
-                          schedules[4].delivery_day = 'ПТ';
-                          schedules[5].delivery_day = 'СБ';
-                          schedules[6].delivery_day = 'ВС';
-                          this.expressSenderSchedule = schedules.filter((item: any) => item.deliveryActive)
-                            .map((a: any) => a.delivery_day).join('-');
-                        }
-                      });
-                    } else {
-                      this.expressSenderSchedule = 'Данный адрес не обслуживается';
-                    }
-                  }
+
+                  this.schedule(addresses.body, this.user.senderAddress.id, 'expressSender');
 
                   this.service.getAllUserCustomerContact(this.user.senderAddress.id).subscribe(contacts => {
                     if (contacts.status === 200) {
@@ -785,31 +762,7 @@ export class OrderComponent implements OnChanges, OnInit {
                     });
                   }
 
-                  const currentAddress = addresses.body.find((item: any) => item.id === this.user.recipientAddress.id);
-                  const currentCity = this.citiesList.find((item: any) => item.id === currentAddress.cityId);
-                  let deliveryZone = '';
-                  if (currentCity) {
-                    deliveryZone = currentCity.delivery_zone_id;
-                    if (deliveryZone) {
-                      this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
-                        if (deliveryZoneId.status === 200) {
-                          let schedules: any;
-                          schedules = deliveryZoneId.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
-                          schedules[0].delivery_day = 'ПН';
-                          schedules[1].delivery_day = 'ВТ';
-                          schedules[2].delivery_day = 'СР';
-                          schedules[3].delivery_day = 'ЧТ';
-                          schedules[4].delivery_day = 'ПТ';
-                          schedules[5].delivery_day = 'СБ';
-                          schedules[6].delivery_day = 'ВС';
-                          this.expressRecipientSchedule = schedules.filter((item: any) => item.deliveryActive)
-                            .map((a: any) => a.delivery_day).join('-');
-                        }
-                      });
-                    } else {
-                      this.expressRecipientSchedule = 'Данный адрес не обслуживается';
-                    }
-                  }
+                  this.schedule(addresses.body, this.user.recipientAddress.id, 'expressRecipient');
 
                   this.service.getAllUserCustomerContact(this.user.recipientAddress.id).subscribe(contacts => {
                     if (contacts.status === 200) {
@@ -838,22 +791,41 @@ export class OrderComponent implements OnChanges, OnInit {
     });
   }
 
-  getSchedule(deliveryZoneId: string, field: any): void {
-    this.service.getDeliveryCalendar(deliveryZoneId).subscribe(response => {
-      if (response.status === 200) {
-        let schedules: any;
-        schedules = response.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
-        schedules[0].delivery_day = 'ПН';
-        schedules[1].delivery_day = 'ВТ';
-        schedules[2].delivery_day = 'СР';
-        schedules[3].delivery_day = 'ЧТ';
-        schedules[4].delivery_day = 'ПТ';
-        schedules[5].delivery_day = 'СБ';
-        schedules[6].delivery_day = 'ВС';
-        field = schedules.filter((item: any) => item.deliveryActive)
-          .map((a: any) => a.delivery_day).join('-');
+  schedule(arr: any, addressId: any, field: any): void {
+    const currentAddress = arr.find((item: any) => item.id === addressId);
+    const currentCity = this.citiesList.find((item: any) => item.id === currentAddress.cityId);
+    let deliveryZone = '';
+    if (currentCity) {
+      deliveryZone = currentCity.delivery_zone_id;
+      if (deliveryZone !== '') {
+        this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
+          if (deliveryZoneId.status === 200) {
+            let schedules: any;
+            schedules = deliveryZoneId.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
+            schedules[0].delivery_day = 'ПН';
+            schedules[1].delivery_day = 'ВТ';
+            schedules[2].delivery_day = 'СР';
+            schedules[3].delivery_day = 'ЧТ';
+            schedules[4].delivery_day = 'ПТ';
+            schedules[5].delivery_day = 'СБ';
+            schedules[6].delivery_day = 'ВС';
+            if (field === 'expressSender') {
+              this.expressSenderSchedule = schedules.filter((item: any) => item.deliveryActive)
+                .map((a: any) => a.delivery_day).join('-') || 'Данный адрес не поддерживается';
+            } else if (field === 'expressRecipient') {
+              this.expressRecipientSchedule = schedules.filter((item: any) => item.deliveryActive)
+                .map((a: any) => a.delivery_day).join('-');
+            }
+          }
+        });
+      } else {
+        if (field === 'expressSender') {
+          this.expressSenderSchedule = 'Данный адрес не обслуживается';
+        } else if (field === 'expressRecipient') {
+          this.expressRecipientSchedule = 'Данный адрес не обслуживается';
+        }
       }
-    });
+    }
   }
 
   selectAgent($event: any, agentId: any, addresses: any, contacts: any): void {
