@@ -63,10 +63,10 @@
               <div class="control">
                 <label for="expressSenderAddress">Адрес выдачи груза:</label>
                 <mat-form-field floatLabel="never">
-                  <mat-select formControlName="expressSenderAddress" id="expressSenderAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, orderForm.value.expressSenderAddress, expressSenderContacts)">
+                  <mat-select formControlName="expressSenderAddress" id="expressSenderAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, orderForm.value.expressSenderAddress, expressSenderContacts, expressSenderAddresses, 'expressSender')">
                     <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey2($event)">
                     <mat-option *ngFor="let expressSenderAddress of expressSenderAddresses" [value]="expressSenderAddress.id" class="example-item">
-                      {{expressSenderAddress.name}}
+                      {{expressSenderAddress.cityId}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -155,10 +155,10 @@
               <div class="control">
                 <label for="expressRecipientAddress">Адрес доставки груза:</label>
                 <mat-form-field floatLabel="never">
-                  <mat-select formControlName="expressRecipientAddress" id="expressRecipientAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, orderForm.value.expressRecipientAddress, expressReceiverContacts)">
+                  <mat-select formControlName="expressRecipientAddress" id="expressRecipientAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, orderForm.value.expressRecipientAddress, expressReceiverContacts, expressReceiverAddresses, 'expressRecipient')">
                     <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey5($event)">
                     <mat-option *ngFor="let expressReceiverAddress of expressReceiverAddresses" [value]="expressReceiverAddress.id" class="example-item">
-                      {{expressReceiverAddress.name}}
+                      {{expressReceiverAddress.cityId}}
                     </mat-option>
                   </mat-select>
                 </mat-form-field>

@@ -162,6 +162,7 @@ export interface SaveUserCustomerAddress {
   cityId?: number;
   cityName: string;
   customerId?: number;
+  deliveryZoneId?: string;
   description: string;
   house: string;
   housing: string;

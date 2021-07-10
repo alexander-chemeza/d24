@@ -1,5 +1,5 @@
-import {Component, OnChanges, OnInit} from '@angular/core';
-import {RestapiService, Street} from '../../restapi.service';
+import {ChangeDetectionStrategy, Component, OnChanges, OnInit} from '@angular/core';
+import {RestapiService, SaveUserCustomerAddress, Street} from '../../restapi.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
 
@@ -68,7 +68,7 @@ interface DeliverySchedulte {
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
-  styleUrls: ['./order.component.scss']
+  styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent implements OnChanges, OnInit {
   // Work with user contracts
@@ -120,11 +120,11 @@ export class OrderComponent implements OnChanges, OnInit {
   user: any;
 
   expressSenderAgents: any;
-  public expressSenderAddresses: {id: number, name: string}[] = [];
+  expressSenderAddresses: SaveUserCustomerAddress[] = [];
   expressSenderContacts: {id: number, name: string}[] = [];
 
   expressReceiverAgents: any;
-  expressReceiverAddresses: {id: number, name: string}[] = [];
+  expressReceiverAddresses: SaveUserCustomerAddress[] = [];
   expressReceiverContacts: {id: number, name: string}[] = [];
 
 
@@ -732,13 +732,10 @@ export class OrderComponent implements OnChanges, OnInit {
               this.service.getAllUserCustomerAddress(this.user.senderCustomer.id).subscribe(addresses => {
                 if (addresses.status === 200) {
                   for (const address of addresses.body) {
-                    this.expressSenderAddresses.push({
-                      id: address.id,
-                      name: `${address.cityName}, ${address.streetName}`
-                    });
+                    this.expressSenderAddresses.push(address);
                   }
 
-                  this.schedule(addresses.body, this.user.senderAddress.id, 'expressSender');
+                  this.schedule(addresses.body, 'expressSender', this.user.senderAddress.id);
 
                   this.service.getAllUserCustomerContact(this.user.senderAddress.id).subscribe(contacts => {
                     if (contacts.status === 200) {
@@ -756,13 +753,10 @@ export class OrderComponent implements OnChanges, OnInit {
               this.service.getAllUserCustomerAddress(this.user.recipientCustomer.id).subscribe(addresses => {
                 if (addresses.status === 200) {
                   for (const address of addresses.body) {
-                    this.expressReceiverAddresses.push({
-                      id: address.id,
-                      name: `${address.cityName}, ${address.streetName}`
-                    });
+                    this.expressReceiverAddresses.push(address);
                   }
 
-                  this.schedule(addresses.body, this.user.recipientAddress.id, 'expressRecipient');
+                  this.schedule(addresses.body, 'expressRecipient', this.user.recipientAddress.id);
 
                   this.service.getAllUserCustomerContact(this.user.recipientAddress.id).subscribe(contacts => {
                     if (contacts.status === 200) {
@@ -791,12 +785,25 @@ export class OrderComponent implements OnChanges, OnInit {
     });
   }
 
-  schedule(arr: any, addressId: any, field: any): void {
-    const currentAddress = arr.find((item: any) => item.id === addressId);
+  schedule(arr: any, field: any, id: any): void {
+    console.log('Array', arr);
+    console.log('Field', field);
+    console.log('Select value', id);
+    // let address: any;
+    //
+    // if (field === 'expressSender') {
+    //   address = this.user.senderAddress.id;
+    // } else if (field === 'expressRecipient') {
+    //   address = this.user.recipientAddress.id;
+    // }
+    const currentAddress = arr.find((item: any) => item.id === id);
+    console.log('Current address', currentAddress);
     const currentCity = this.citiesList.find((item: any) => item.id === currentAddress.cityId);
+    console.log('Current city', currentCity);
     let deliveryZone = '';
     if (currentCity) {
       deliveryZone = currentCity.delivery_zone_id;
+      console.log('Delivery zone', deliveryZone);
       if (deliveryZone !== '') {
         this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
           if (deliveryZoneId.status === 200) {
@@ -811,7 +818,7 @@ export class OrderComponent implements OnChanges, OnInit {
             schedules[6].delivery_day = 'ВС';
             if (field === 'expressSender') {
               this.expressSenderSchedule = schedules.filter((item: any) => item.deliveryActive)
-                .map((a: any) => a.delivery_day).join('-') || 'Данный адрес не поддерживается';
+                .map((a: any) => a.delivery_day).join('-');
             } else if (field === 'expressRecipient') {
               this.expressRecipientSchedule = schedules.filter((item: any) => item.deliveryActive)
                 .map((a: any) => a.delivery_day).join('-');
@@ -837,17 +844,15 @@ export class OrderComponent implements OnChanges, OnInit {
       this.service.getAllUserCustomerAddress(agentId).subscribe(response => {
         if (response.status === 200 && addresses.length === 0) {
           for (const address of response.body) {
-            addresses.push({
-              id: address.id,
-              name: `${address.cityName}, ${address.streetName}`
-            });
+            addresses.push(address);
           }
         }
       });
     }
   }
 
-  selectAddress($event: any, addressId: any, contacts: any): void {
+  selectAddress($event: any, addressId: any, contacts: any, arr: any, field: string): void {
+    this.schedule(arr, field, addressId);
     contacts.pop();
     if (addressId) {
       if (contacts) {
@@ -882,10 +887,7 @@ export class OrderComponent implements OnChanges, OnInit {
       this.service.getAllUserCustomerAddress(this.orderForm.value.expressSender).subscribe(response => {
         if (response.status === 200) {
           for (const address of response.body) {
-            this.expressSenderAddresses.push({
-              id: address.id,
-              name: `${address.cityName}, ${address.streetName}`
-            });
+            this.expressSenderAddresses.push(address);
           }
         }
       });
@@ -932,10 +934,7 @@ export class OrderComponent implements OnChanges, OnInit {
       this.service.getAllUserCustomerAddress(this.orderForm.value.expressRecipient).subscribe(response => {
         if (response.status === 200) {
           for (const address of response.body) {
-            this.expressReceiverAddresses.push({
-              id: address.id,
-              name: `${address.cityName}, ${address.streetName}`
-            });
+            this.expressReceiverAddresses.push(address);
           }
         }
       });
