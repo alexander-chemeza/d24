@@ -2,6 +2,7 @@ import {Component, OnChanges, OnInit} from '@angular/core';
 import {RestapiService, Street} from '../../restapi.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+import {SharedComponent} from '../../shared/shared.component';
 
 interface ContractList {
   contractActive: string | boolean;
@@ -11,6 +12,11 @@ interface ContractList {
   contractUNP: string;
   id?: any;
   ourId: number;
+}
+
+interface AddressList {
+  id: number;
+  name: string;
 }
 
 interface ServiceTypesList {
@@ -35,6 +41,7 @@ export interface Cities {
   locality_code: string;
   street_code: string;
   fullName: string;
+  delivery_zone_id: string;
 }
 
 export interface StreetsList {
@@ -78,7 +85,7 @@ export class OrderComponent implements OnChanges, OnInit {
   deliverySchedules: DeliverySchedulte[] = [];
 
   // Delivery schedules
-  expressSenderSchedule = '';
+  public expressSenderSchedule = 'fucking shit';
   expressRecipientSchedule = '';
   carrierSenderSchedule = '';
   carrierRecipientSchedule = '';
@@ -114,7 +121,7 @@ export class OrderComponent implements OnChanges, OnInit {
   user: any;
 
   expressSenderAgents: any;
-  expressSenderAddresses: {id: number, name: string}[] = [];
+  public expressSenderAddresses: {id: number, name: string}[] = [];
   expressSenderContacts: {id: number, name: string}[] = [];
 
   expressReceiverAgents: any;
@@ -648,7 +655,7 @@ export class OrderComponent implements OnChanges, OnInit {
     ])
   });
 
-  constructor(private service: RestapiService) {
+  constructor(private service: RestapiService, private shared: SharedComponent) {
     // this.serviceType = this.serviceTypes[0].value;
     this.deliveryType = '';
     this.currentCity = 0;
@@ -716,89 +723,114 @@ export class OrderComponent implements OnChanges, OnInit {
     this.service.cities().subscribe(data => {
       if (data.status === 200) {
         this.citiesList = data.body;
-        console.log('Cities', this.citiesList);
-      }
-    });
-    // User common data reception
-    if (this.user) {
-      // Express form fields
-      this.service.getAllUserCustomer().subscribe(response => {
-        if (response.status === 200) {
-          this.expressSenderAgents = response.body;
-          this.expressReceiverAgents = response.body;
-          this.service.getAllUserCustomerAddress(this.user.senderCustomer.id).subscribe(addresses => {
-            if (addresses.status === 200) {
-              for (const address of addresses.body) {
-                this.expressSenderAddresses.push({
-                  id: address.id,
-                  name: `${address.cityName}, ${address.streetName}`
-                });
-              }
-              this.service.getAllUserCustomerContact(this.user.senderAddress.id).subscribe(contacts => {
-                if (contacts.status === 200) {
-                  for (const contact of contacts.body) {
-                    this.expressSenderContacts.push({
-                      id: contact.id,
-                      name: contact.name
+        // User common data reception
+        if (this.user) {
+          // Express form fields
+          this.service.getAllUserCustomer().subscribe(response => {
+            if (response.status === 200) {
+              this.expressSenderAgents = response.body;
+              this.expressReceiverAgents = response.body;
+              this.service.getAllUserCustomerAddress(this.user.senderCustomer.id).subscribe(addresses => {
+                if (addresses.status === 200) {
+                  for (const address of addresses.body) {
+                    this.expressSenderAddresses.push({
+                      id: address.id,
+                      name: `${address.cityName}, ${address.streetName}`
                     });
                   }
+                  console.log('my cities', this.citiesList);
+                  const currentAddress = addresses.body.find((item: any) => item.id === this.user.senderAddress.id);
+                  console.log('We got fucking address', currentAddress);
+                  const currentCity = this.citiesList.find((item: any) => item.id === currentAddress.cityId);
+                  let deliveryZone = '';
+                  if (currentCity) {
+                    deliveryZone = currentCity.delivery_zone_id;
+                    // this.getSchedule(deliveryZone, this.expressSenderSchedule);
+                    // this.shared.getSchedule(deliveryZone, this.expressSenderSchedule);
+                    this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
+                      if (deliveryZoneId.status === 200) {
+                        let schedules: any;
+                        schedules = deliveryZoneId.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
+                        schedules[0].delivery_day = 'ПН';
+                        schedules[1].delivery_day = 'ВТ';
+                        schedules[2].delivery_day = 'СР';
+                        schedules[3].delivery_day = 'ЧТ';
+                        schedules[4].delivery_day = 'ПТ';
+                        schedules[5].delivery_day = 'СБ';
+                        schedules[6].delivery_day = 'ВС';
+                        this.expressSenderSchedule = schedules.filter((item: any) => item.deliveryActive)
+                          .map((a: any) => a.delivery_day).join('-');
+                        console.log('Schedules active:' + this.expressSenderSchedule);
+                      }
+                    });
+                  }
+
+                  this.service.getAllUserCustomerContact(this.user.senderAddress.id).subscribe(contacts => {
+                    if (contacts.status === 200) {
+                      for (const contact of contacts.body) {
+                        this.expressSenderContacts.push({
+                          id: contact.id,
+                          name: contact.name
+                        });
+                      }
+                    }
+                  });
+                }
+              });
+
+              this.service.getAllUserCustomerAddress(this.user.recipientCustomer.id).subscribe(addresses => {
+                if (addresses.status === 200) {
+                  for (const address of addresses.body) {
+                    this.expressReceiverAddresses.push({
+                      id: address.id,
+                      name: `${address.cityName}, ${address.streetName}`
+                    });
+                  }
+                  this.service.getAllUserCustomerContact(this.user.recipientAddress.id).subscribe(contacts => {
+                    if (contacts.status === 200) {
+                      for (const contact of contacts.body) {
+                        this.expressReceiverContacts.push({
+                          id: contact.id,
+                          name: contact.name
+                        });
+                      }
+                    }
+                  });
                 }
               });
             }
           });
-
-          this.service.getAllUserCustomerAddress(this.user.recipientCustomer.id).subscribe(addresses => {
-            if (addresses.status === 200) {
-              for (const address of addresses.body) {
-                this.expressReceiverAddresses.push({
-                  id: address.id,
-                  name: `${address.cityName}, ${address.streetName}`
-                });
-              }
-              this.service.getAllUserCustomerContact(this.user.recipientAddress.id).subscribe(contacts => {
-                if (contacts.status === 200) {
-                  for (const contact of contacts.body) {
-                    this.expressReceiverContacts.push({
-                      id: contact.id,
-                      name: contact.name
-                    });
-                  }
-                }
-              });
-            }
+          this.orderForm.patchValue({
+            expressSender: this.user.senderCustomer.id,
+            expressSenderAddress: this.user.senderAddress.id,
+            expressSenderContact: this.user.senderCustomerContact.id,
+            expressRecipient: this.user.recipientCustomer.id,
+            expressRecipientAddress: this.user.recipientAddress.id,
+            expressRecipientContact: this.user.recipientCustomerContact.id,
           });
         }
-      });
-
-      this.orderForm.patchValue({
-        expressSender: this.user.senderCustomer.id,
-        expressSenderAddress: this.user.senderAddress.id,
-        expressSenderContact: this.user.senderCustomerContact.id,
-        expressRecipient: this.user.recipientCustomer.id,
-        expressRecipientAddress: this.user.recipientAddress.id,
-        expressRecipientContact: this.user.recipientCustomerContact.id,
-      });
-    }
-  }
-
-  getSchedule(deliveryZoneId: string, field: any): void {
-    this.service.getDeliveryCalendar(deliveryZoneId).subscribe(response => {
-      if (response.status === 200) {
-        let schedules: any;
-        schedules = response.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
-        schedules[0].delivery_day = 'ПН';
-        schedules[1].delivery_day = 'ВТ';
-        schedules[2].delivery_day = 'СР';
-        schedules[3].delivery_day = 'ЧТ';
-        schedules[4].delivery_day = 'ПТ';
-        schedules[5].delivery_day = 'СБ';
-        schedules[6].delivery_day = 'ВС';
-        field = schedules.filter((item: any) => item.deliveryActive)
-          .map((a: any) => a.delivery_day).join('-');
-        console.log('Schedules active:' + field);
       }
     });
   }
+
+  // getSchedule(deliveryZoneId: string, field: any): void {
+  //   this.service.getDeliveryCalendar(deliveryZoneId).subscribe(response => {
+  //     if (response.status === 200) {
+  //       let schedules: any;
+  //       schedules = response.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
+  //       schedules[0].delivery_day = 'ПН';
+  //       schedules[1].delivery_day = 'ВТ';
+  //       schedules[2].delivery_day = 'СР';
+  //       schedules[3].delivery_day = 'ЧТ';
+  //       schedules[4].delivery_day = 'ПТ';
+  //       schedules[5].delivery_day = 'СБ';
+  //       schedules[6].delivery_day = 'ВС';
+  //       field = schedules.filter((item: any) => item.deliveryActive)
+  //         .map((a: any) => a.delivery_day).join('-');
+  //       console.log('Schedules active:' + field);
+  //     }
+  //   });
+  // }
 
   selectAgent($event: any, agentId: any, addresses: any, contacts: any): void {
     addresses.pop();
