@@ -84,7 +84,7 @@ export class OrderComponent implements OnChanges, OnInit {
   deliverySchedules: DeliverySchedulte[] = [];
 
   // Delivery schedules
-  expressSenderSchedule = 'fucking shit';
+  expressSenderSchedule = '';
   expressRecipientSchedule = '';
   carrierSenderSchedule = '';
   carrierRecipientSchedule = '';
