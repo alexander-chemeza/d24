@@ -827,9 +827,9 @@ export class OrderComponent implements OnChanges, OnInit {
       }
     });
 
-    this.expressSenderDate = (d: Date | null): boolean => {
-      const day = (d || new Date()).getDay();
-      console.log(day);
+
+    this.expressSenderDate = (d: Date): boolean => {
+      const day = d.getDay();
       // Prevent Saturday and Sunday from being selected.
       return day !== 0 && day !== 6;
     };
