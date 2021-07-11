@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnChanges, OnInit} from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {RestapiService, SaveUserCustomerAddress, Street} from '../../restapi.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
@@ -826,6 +826,13 @@ export class OrderComponent implements OnChanges, OnInit {
         }
       }
     });
+
+    this.expressSenderDate = (d: Date | null): boolean => {
+      const day = (d || new Date()).getDay();
+      console.log(day);
+      // Prevent Saturday and Sunday from being selected.
+      return day !== 0 && day !== 6;
+    };
   }
 
   schedule(arr: any, field: any, id: any): void {
