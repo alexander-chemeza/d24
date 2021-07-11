@@ -960,7 +960,7 @@ export class OrderComponent implements OnChanges, OnInit {
       });
     } else {
       this.expressSenderAddresses = this.expressSenderAddresses.filter((option: any) => {
-        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+        return option.fullName.toLowerCase().includes(event.target.value.toLowerCase());
       });
     }
   }
@@ -1027,7 +1027,7 @@ export class OrderComponent implements OnChanges, OnInit {
       });
     } else {
       this.expressReceiverAddresses = this.expressReceiverAddresses.filter((option: any) => {
-        return option.name.toLowerCase().includes(event.target.value.toLowerCase());
+        return option.fullName.toLowerCase().includes(event.target.value.toLowerCase());
       });
     }
   }
