@@ -89,6 +89,9 @@ export class OrderComponent implements OnChanges, OnInit {
   carrierSenderSchedule = '';
   carrierRecipientSchedule = '';
 
+  // Dates
+  expressSenderDate: any;
+
   // Packages
   expressDeliveryPackage = ['pt0', 'pt1', 'pt2', 'pt4'];
 
