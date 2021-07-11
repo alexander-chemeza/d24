@@ -34,7 +34,7 @@
     </div>
     <div class="col">
       <div></div>
-      <button class="purple-btn white-btn">Дополнительные услуги</button>
+      <button class="purple-btn white-btn" *ngIf="stage === 2">Дополнительные услуги</button>
     </div>
   </div>
   <div class="row-form">
@@ -111,11 +111,220 @@
                 <label class="m-0" for="expressSenderDeliverTo">по:</label>
                 <label class="m-0" for="expressSenderTimeoutFrom">Время перерыва c:</label>
                 <label class="m-0" for="expressSenderTimeoutTo">по:</label>
-                <input type="time" name="expressSenderDeliverFrom" id="expressSenderDeliverFrom" formControlName="expressSenderDeliverFrom">
-                <input type="time" name="expressSenderDeliverTo" id="expressSenderDeliverTo" formControlName="expressSenderDeliverTo">
-                <input type="time" name="expressSenderTimeoutFrom" id="expressSenderTimeoutFrom" formControlName="expressSenderTimeoutFrom">
-                <input type="time" name="expressSenderTimeoutTo" id="expressSenderTimeoutTo" formControlName="expressSenderTimeoutTo">
+<!--                <input type="time" name="expressSenderDeliverFrom" id="expressSenderDeliverFrom" formControlName="expressSenderDeliverFrom">-->
+                <mat-form-field floatLabel="never" class="time-select">
+                  <mat-select formControlName="expressSenderDeliverFrom" id="expressSenderDeliverFrom" class="select-time">
+                    <mat-option value="00:00" class="example-item">00:00</mat-option>
+                    <mat-option value="00:30" class="example-item">00:30</mat-option>
+                    <mat-option value="01:00" class="example-item">01:00</mat-option>
+                    <mat-option value="01:30" class="example-item">01:30</mat-option>
+                    <mat-option value="02:00" class="example-item">02:00</mat-option>
+                    <mat-option value="02:30" class="example-item">02:30</mat-option>
+                    <mat-option value="03:00" class="example-item">03:00</mat-option>
+                    <mat-option value="03:30" class="example-item">03:30</mat-option>
+                    <mat-option value="04:00" class="example-item">04:00</mat-option>
+                    <mat-option value="04:30" class="example-item">04:30</mat-option>
+                    <mat-option value="05:00" class="example-item">05:00</mat-option>
+                    <mat-option value="05:30" class="example-item">05:30</mat-option>
+                    <mat-option value="06:00" class="example-item">06:00</mat-option>
+                    <mat-option value="06:30" class="example-item">06:30</mat-option>
+                    <mat-option value="07:00" class="example-item">07:00</mat-option>
+                    <mat-option value="07:30" class="example-item">07:30</mat-option>
+                    <mat-option value="08:00" class="example-item">08:00</mat-option>
+                    <mat-option value="08:30" class="example-item">08:30</mat-option>
+                    <mat-option value="09:00" class="example-item">09:00</mat-option>
+                    <mat-option value="09:30" class="example-item">09:30</mat-option>
+                    <mat-option value="10:00" class="example-item">10:00</mat-option>
+                    <mat-option value="10:30" class="example-item">10:30</mat-option>
+                    <mat-option value="11:00" class="example-item">11:00</mat-option>
+                    <mat-option value="11:30" class="example-item">11:30</mat-option>
+                    <mat-option value="12:00" class="example-item">12:00</mat-option>
+                    <mat-option value="12:30" class="example-item">12:30</mat-option>
+                    <mat-option value="13:00" class="example-item">13:00</mat-option>
+                    <mat-option value="13:30" class="example-item">13:30</mat-option>
+                    <mat-option value="14:00" class="example-item">14:00</mat-option>
+                    <mat-option value="14:30" class="example-item">14:30</mat-option>
+                    <mat-option value="15:00" class="example-item">15:00</mat-option>
+                    <mat-option value="15:30" class="example-item">15:30</mat-option>
+                    <mat-option value="16:00" class="example-item">16:00</mat-option>
+                    <mat-option value="16:30" class="example-item">16:30</mat-option>
+                    <mat-option value="17:00" class="example-item">17:00</mat-option>
+                    <mat-option value="17:30" class="example-item">17:30</mat-option>
+                    <mat-option value="18:00" class="example-item">18:00</mat-option>
+                    <mat-option value="18:30" class="example-item">18:30</mat-option>
+                    <mat-option value="19:00" class="example-item">19:00</mat-option>
+                    <mat-option value="19:30" class="example-item">19:30</mat-option>
+                    <mat-option value="20:00" class="example-item">20:00</mat-option>
+                    <mat-option value="20:30" class="example-item">20:30</mat-option>
+                    <mat-option value="21:00" class="example-item">21:00</mat-option>
+                    <mat-option value="21:30" class="example-item">21:30</mat-option>
+                    <mat-option value="22:00" class="example-item">22:00</mat-option>
+                    <mat-option value="22:30" class="example-item">22:30</mat-option>
+                    <mat-option value="23:00" class="example-item">23:00</mat-option>
+                    <mat-option value="23:30" class="example-item">23:30</mat-option>
+                  </mat-select>
+                </mat-form-field>
+<!--                <input type="time" name="expressSenderDeliverTo" id="expressSenderDeliverTo" formControlName="expressSenderDeliverTo">-->
+                <mat-form-field style="max-width: 118px;" floatLabel="never" class="time-select">
+                  <mat-select formControlName="expressSenderDeliverTo" id="expressSenderDeliverTo" class="select-time">
+                    <mat-option value="00:00" class="example-item">00:00</mat-option>
+                    <mat-option value="00:30" class="example-item">00:30</mat-option>
+                    <mat-option value="01:00" class="example-item">01:00</mat-option>
+                    <mat-option value="01:30" class="example-item">01:30</mat-option>
+                    <mat-option value="02:00" class="example-item">02:00</mat-option>
+                    <mat-option value="02:30" class="example-item">02:30</mat-option>
+                    <mat-option value="03:00" class="example-item">03:00</mat-option>
+                    <mat-option value="03:30" class="example-item">03:30</mat-option>
+                    <mat-option value="04:00" class="example-item">04:00</mat-option>
+                    <mat-option value="04:30" class="example-item">04:30</mat-option>
+                    <mat-option value="05:00" class="example-item">05:00</mat-option>
+                    <mat-option value="05:30" class="example-item">05:30</mat-option>
+                    <mat-option value="06:00" class="example-item">06:00</mat-option>
+                    <mat-option value="06:30" class="example-item">06:30</mat-option>
+                    <mat-option value="07:00" class="example-item">07:00</mat-option>
+                    <mat-option value="07:30" class="example-item">07:30</mat-option>
+                    <mat-option value="08:00" class="example-item">08:00</mat-option>
+                    <mat-option value="08:30" class="example-item">08:30</mat-option>
+                    <mat-option value="09:00" class="example-item">09:00</mat-option>
+                    <mat-option value="09:30" class="example-item">09:30</mat-option>
+                    <mat-option value="10:00" class="example-item">10:00</mat-option>
+                    <mat-option value="10:30" class="example-item">10:30</mat-option>
+                    <mat-option value="11:00" class="example-item">11:00</mat-option>
+                    <mat-option value="11:30" class="example-item">11:30</mat-option>
+                    <mat-option value="12:00" class="example-item">12:00</mat-option>
+                    <mat-option value="12:30" class="example-item">12:30</mat-option>
+                    <mat-option value="13:00" class="example-item">13:00</mat-option>
+                    <mat-option value="13:30" class="example-item">13:30</mat-option>
+                    <mat-option value="14:00" class="example-item">14:00</mat-option>
+                    <mat-option value="14:30" class="example-item">14:30</mat-option>
+                    <mat-option value="15:00" class="example-item">15:00</mat-option>
+                    <mat-option value="15:30" class="example-item">15:30</mat-option>
+                    <mat-option value="16:00" class="example-item">16:00</mat-option>
+                    <mat-option value="16:30" class="example-item">16:30</mat-option>
+                    <mat-option value="17:00" class="example-item">17:00</mat-option>
+                    <mat-option value="17:30" class="example-item">17:30</mat-option>
+                    <mat-option value="18:00" class="example-item">18:00</mat-option>
+                    <mat-option value="18:30" class="example-item">18:30</mat-option>
+                    <mat-option value="19:00" class="example-item">19:00</mat-option>
+                    <mat-option value="19:30" class="example-item">19:30</mat-option>
+                    <mat-option value="20:00" class="example-item">20:00</mat-option>
+                    <mat-option value="20:30" class="example-item">20:30</mat-option>
+                    <mat-option value="21:00" class="example-item">21:00</mat-option>
+                    <mat-option value="21:30" class="example-item">21:30</mat-option>
+                    <mat-option value="22:00" class="example-item">22:00</mat-option>
+                    <mat-option value="22:30" class="example-item">22:30</mat-option>
+                    <mat-option value="23:00" class="example-item">23:00</mat-option>
+                    <mat-option value="23:30" class="example-item">23:30</mat-option>
+                  </mat-select>
+                </mat-form-field>
+<!--                <input type="time" name="expressSenderTimeoutFrom" id="expressSenderTimeoutFrom" formControlName="expressSenderTimeoutFrom">-->
+                <mat-form-field floatLabel="never" class="time-select">
+                  <mat-select formControlName="expressSenderTimeoutFrom" id="expressSenderTimeoutFrom" class="select-time">
+                    <mat-option value="00:00" class="example-item">00:00</mat-option>
+                    <mat-option value="00:30" class="example-item">00:30</mat-option>
+                    <mat-option value="01:00" class="example-item">01:00</mat-option>
+                    <mat-option value="01:30" class="example-item">01:30</mat-option>
+                    <mat-option value="02:00" class="example-item">02:00</mat-option>
+                    <mat-option value="02:30" class="example-item">02:30</mat-option>
+                    <mat-option value="03:00" class="example-item">03:00</mat-option>
+                    <mat-option value="03:30" class="example-item">03:30</mat-option>
+                    <mat-option value="04:00" class="example-item">04:00</mat-option>
+                    <mat-option value="04:30" class="example-item">04:30</mat-option>
+                    <mat-option value="05:00" class="example-item">05:00</mat-option>
+                    <mat-option value="05:30" class="example-item">05:30</mat-option>
+                    <mat-option value="06:00" class="example-item">06:00</mat-option>
+                    <mat-option value="06:30" class="example-item">06:30</mat-option>
+                    <mat-option value="07:00" class="example-item">07:00</mat-option>
+                    <mat-option value="07:30" class="example-item">07:30</mat-option>
+                    <mat-option value="08:00" class="example-item">08:00</mat-option>
+                    <mat-option value="08:30" class="example-item">08:30</mat-option>
+                    <mat-option value="09:00" class="example-item">09:00</mat-option>
+                    <mat-option value="09:30" class="example-item">09:30</mat-option>
+                    <mat-option value="10:00" class="example-item">10:00</mat-option>
+                    <mat-option value="10:30" class="example-item">10:30</mat-option>
+                    <mat-option value="11:00" class="example-item">11:00</mat-option>
+                    <mat-option value="11:30" class="example-item">11:30</mat-option>
+                    <mat-option value="12:00" class="example-item">12:00</mat-option>
+                    <mat-option value="12:30" class="example-item">12:30</mat-option>
+                    <mat-option value="13:00" class="example-item">13:00</mat-option>
+                    <mat-option value="13:30" class="example-item">13:30</mat-option>
+                    <mat-option value="14:00" class="example-item">14:00</mat-option>
+                    <mat-option value="14:30" class="example-item">14:30</mat-option>
+                    <mat-option value="15:00" class="example-item">15:00</mat-option>
+                    <mat-option value="15:30" class="example-item">15:30</mat-option>
+                    <mat-option value="16:00" class="example-item">16:00</mat-option>
+                    <mat-option value="16:30" class="example-item">16:30</mat-option>
+                    <mat-option value="17:00" class="example-item">17:00</mat-option>
+                    <mat-option value="17:30" class="example-item">17:30</mat-option>
+                    <mat-option value="18:00" class="example-item">18:00</mat-option>
+                    <mat-option value="18:30" class="example-item">18:30</mat-option>
+                    <mat-option value="19:00" class="example-item">19:00</mat-option>
+                    <mat-option value="19:30" class="example-item">19:30</mat-option>
+                    <mat-option value="20:00" class="example-item">20:00</mat-option>
+                    <mat-option value="20:30" class="example-item">20:30</mat-option>
+                    <mat-option value="21:00" class="example-item">21:00</mat-option>
+                    <mat-option value="21:30" class="example-item">21:30</mat-option>
+                    <mat-option value="22:00" class="example-item">22:00</mat-option>
+                    <mat-option value="22:30" class="example-item">22:30</mat-option>
+                    <mat-option value="23:00" class="example-item">23:00</mat-option>
+                    <mat-option value="23:30" class="example-item">23:30</mat-option>
+                  </mat-select>
+                </mat-form-field>
+<!--                <input type="time" name="expressSenderTimeoutTo" id="expressSenderTimeoutTo" formControlName="expressSenderTimeoutTo">-->
+                <mat-form-field style="max-width: 125px" floatLabel="never" class="time-select">
+                  <mat-select formControlName="expressSenderTimeoutTo" id="expressSenderTimeoutTo" class="select-time">
+                    <mat-option value="00:00" class="example-item">00:00</mat-option>
+                    <mat-option value="00:30" class="example-item">00:30</mat-option>
+                    <mat-option value="01:00" class="example-item">01:00</mat-option>
+                    <mat-option value="01:30" class="example-item">01:30</mat-option>
+                    <mat-option value="02:00" class="example-item">02:00</mat-option>
+                    <mat-option value="02:30" class="example-item">02:30</mat-option>
+                    <mat-option value="03:00" class="example-item">03:00</mat-option>
+                    <mat-option value="03:30" class="example-item">03:30</mat-option>
+                    <mat-option value="04:00" class="example-item">04:00</mat-option>
+                    <mat-option value="04:30" class="example-item">04:30</mat-option>
+                    <mat-option value="05:00" class="example-item">05:00</mat-option>
+                    <mat-option value="05:30" class="example-item">05:30</mat-option>
+                    <mat-option value="06:00" class="example-item">06:00</mat-option>
+                    <mat-option value="06:30" class="example-item">06:30</mat-option>
+                    <mat-option value="07:00" class="example-item">07:00</mat-option>
+                    <mat-option value="07:30" class="example-item">07:30</mat-option>
+                    <mat-option value="08:00" class="example-item">08:00</mat-option>
+                    <mat-option value="08:30" class="example-item">08:30</mat-option>
+                    <mat-option value="09:00" class="example-item">09:00</mat-option>
+                    <mat-option value="09:30" class="example-item">09:30</mat-option>
+                    <mat-option value="10:00" class="example-item">10:00</mat-option>
+                    <mat-option value="10:30" class="example-item">10:30</mat-option>
+                    <mat-option value="11:00" class="example-item">11:00</mat-option>
+                    <mat-option value="11:30" class="example-item">11:30</mat-option>
+                    <mat-option value="12:00" class="example-item">12:00</mat-option>
+                    <mat-option value="12:30" class="example-item">12:30</mat-option>
+                    <mat-option value="13:00" class="example-item">13:00</mat-option>
+                    <mat-option value="13:30" class="example-item">13:30</mat-option>
+                    <mat-option value="14:00" class="example-item">14:00</mat-option>
+                    <mat-option value="14:30" class="example-item">14:30</mat-option>
+                    <mat-option value="15:00" class="example-item">15:00</mat-option>
+                    <mat-option value="15:30" class="example-item">15:30</mat-option>
+                    <mat-option value="16:00" class="example-item">16:00</mat-option>
+                    <mat-option value="16:30" class="example-item">16:30</mat-option>
+                    <mat-option value="17:00" class="example-item">17:00</mat-option>
+                    <mat-option value="17:30" class="example-item">17:30</mat-option>
+                    <mat-option value="18:00" class="example-item">18:00</mat-option>
+                    <mat-option value="18:30" class="example-item">18:30</mat-option>
+                    <mat-option value="19:00" class="example-item">19:00</mat-option>
+                    <mat-option value="19:30" class="example-item">19:30</mat-option>
+                    <mat-option value="20:00" class="example-item">20:00</mat-option>
+                    <mat-option value="20:30" class="example-item">20:30</mat-option>
+                    <mat-option value="21:00" class="example-item">21:00</mat-option>
+                    <mat-option value="21:30" class="example-item">21:30</mat-option>
+                    <mat-option value="22:00" class="example-item">22:00</mat-option>
+                    <mat-option value="22:30" class="example-item">22:30</mat-option>
+                    <mat-option value="23:00" class="example-item">23:00</mat-option>
+                    <mat-option value="23:30" class="example-item">23:30</mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
+              <div class="optional"></div>
             </div>
            <div class="row" style="display: none;">
              <div class="control">
@@ -203,10 +412,218 @@
                 <label class="m-0" for="expressRecipientDeliverTo">по:</label>
                 <label class="m-0" for="expressRecipientTimeoutFrom">Время перерыва c:</label>
                 <label class="m-0" for="expressRecipientTimeoutTo">по:</label>
-                <input type="time" name="expressRecipientDeliverFrom" id="expressRecipientDeliverFrom" formControlName="expressRecipientDeliverFrom">
-                <input type="time" name="expressRecipientDeliverTo" id="expressRecipientDeliverTo" formControlName="expressRecipientDeliverTo">
-                <input type="time" name="expressRecipientTimeoutFrom" id="expressRecipientTimeoutFrom" formControlName="expressRecipientTimeoutFrom">
-                <input type="time" name="expressRecipientTimeoutTo" id="expressRecipientTimeoutTo" formControlName="expressRecipientTimeoutTo">
+<!--                <input type="time" name="expressRecipientDeliverFrom" id="expressRecipientDeliverFrom" formControlName="expressRecipientDeliverFrom">-->
+                <mat-form-field floatLabel="never" class="time-select">
+                  <mat-select formControlName="expressRecipientDeliverFrom" id="expressRecipientDeliverFrom" class="select-time">
+                    <mat-option value="00:00" class="example-item">00:00</mat-option>
+                    <mat-option value="00:30" class="example-item">00:30</mat-option>
+                    <mat-option value="01:00" class="example-item">01:00</mat-option>
+                    <mat-option value="01:30" class="example-item">01:30</mat-option>
+                    <mat-option value="02:00" class="example-item">02:00</mat-option>
+                    <mat-option value="02:30" class="example-item">02:30</mat-option>
+                    <mat-option value="03:00" class="example-item">03:00</mat-option>
+                    <mat-option value="03:30" class="example-item">03:30</mat-option>
+                    <mat-option value="04:00" class="example-item">04:00</mat-option>
+                    <mat-option value="04:30" class="example-item">04:30</mat-option>
+                    <mat-option value="05:00" class="example-item">05:00</mat-option>
+                    <mat-option value="05:30" class="example-item">05:30</mat-option>
+                    <mat-option value="06:00" class="example-item">06:00</mat-option>
+                    <mat-option value="06:30" class="example-item">06:30</mat-option>
+                    <mat-option value="07:00" class="example-item">07:00</mat-option>
+                    <mat-option value="07:30" class="example-item">07:30</mat-option>
+                    <mat-option value="08:00" class="example-item">08:00</mat-option>
+                    <mat-option value="08:30" class="example-item">08:30</mat-option>
+                    <mat-option value="09:00" class="example-item">09:00</mat-option>
+                    <mat-option value="09:30" class="example-item">09:30</mat-option>
+                    <mat-option value="10:00" class="example-item">10:00</mat-option>
+                    <mat-option value="10:30" class="example-item">10:30</mat-option>
+                    <mat-option value="11:00" class="example-item">11:00</mat-option>
+                    <mat-option value="11:30" class="example-item">11:30</mat-option>
+                    <mat-option value="12:00" class="example-item">12:00</mat-option>
+                    <mat-option value="12:30" class="example-item">12:30</mat-option>
+                    <mat-option value="13:00" class="example-item">13:00</mat-option>
+                    <mat-option value="13:30" class="example-item">13:30</mat-option>
+                    <mat-option value="14:00" class="example-item">14:00</mat-option>
+                    <mat-option value="14:30" class="example-item">14:30</mat-option>
+                    <mat-option value="15:00" class="example-item">15:00</mat-option>
+                    <mat-option value="15:30" class="example-item">15:30</mat-option>
+                    <mat-option value="16:00" class="example-item">16:00</mat-option>
+                    <mat-option value="16:30" class="example-item">16:30</mat-option>
+                    <mat-option value="17:00" class="example-item">17:00</mat-option>
+                    <mat-option value="17:30" class="example-item">17:30</mat-option>
+                    <mat-option value="18:00" class="example-item">18:00</mat-option>
+                    <mat-option value="18:30" class="example-item">18:30</mat-option>
+                    <mat-option value="19:00" class="example-item">19:00</mat-option>
+                    <mat-option value="19:30" class="example-item">19:30</mat-option>
+                    <mat-option value="20:00" class="example-item">20:00</mat-option>
+                    <mat-option value="20:30" class="example-item">20:30</mat-option>
+                    <mat-option value="21:00" class="example-item">21:00</mat-option>
+                    <mat-option value="21:30" class="example-item">21:30</mat-option>
+                    <mat-option value="22:00" class="example-item">22:00</mat-option>
+                    <mat-option value="22:30" class="example-item">22:30</mat-option>
+                    <mat-option value="23:00" class="example-item">23:00</mat-option>
+                    <mat-option value="23:30" class="example-item">23:30</mat-option>
+                  </mat-select>
+                </mat-form-field>
+<!--                <input type="time" name="expressRecipientDeliverTo" id="expressRecipientDeliverTo" formControlName="expressRecipientDeliverTo">-->
+                <mat-form-field style="max-width: 118px;" floatLabel="never" class="time-select">
+                  <mat-select formControlName="expressRecipientDeliverTo" id="expressRecipientDeliverTo" class="select-time">
+                    <mat-option value="00:00" class="example-item">00:00</mat-option>
+                    <mat-option value="00:30" class="example-item">00:30</mat-option>
+                    <mat-option value="01:00" class="example-item">01:00</mat-option>
+                    <mat-option value="01:30" class="example-item">01:30</mat-option>
+                    <mat-option value="02:00" class="example-item">02:00</mat-option>
+                    <mat-option value="02:30" class="example-item">02:30</mat-option>
+                    <mat-option value="03:00" class="example-item">03:00</mat-option>
+                    <mat-option value="03:30" class="example-item">03:30</mat-option>
+                    <mat-option value="04:00" class="example-item">04:00</mat-option>
+                    <mat-option value="04:30" class="example-item">04:30</mat-option>
+                    <mat-option value="05:00" class="example-item">05:00</mat-option>
+                    <mat-option value="05:30" class="example-item">05:30</mat-option>
+                    <mat-option value="06:00" class="example-item">06:00</mat-option>
+                    <mat-option value="06:30" class="example-item">06:30</mat-option>
+                    <mat-option value="07:00" class="example-item">07:00</mat-option>
+                    <mat-option value="07:30" class="example-item">07:30</mat-option>
+                    <mat-option value="08:00" class="example-item">08:00</mat-option>
+                    <mat-option value="08:30" class="example-item">08:30</mat-option>
+                    <mat-option value="09:00" class="example-item">09:00</mat-option>
+                    <mat-option value="09:30" class="example-item">09:30</mat-option>
+                    <mat-option value="10:00" class="example-item">10:00</mat-option>
+                    <mat-option value="10:30" class="example-item">10:30</mat-option>
+                    <mat-option value="11:00" class="example-item">11:00</mat-option>
+                    <mat-option value="11:30" class="example-item">11:30</mat-option>
+                    <mat-option value="12:00" class="example-item">12:00</mat-option>
+                    <mat-option value="12:30" class="example-item">12:30</mat-option>
+                    <mat-option value="13:00" class="example-item">13:00</mat-option>
+                    <mat-option value="13:30" class="example-item">13:30</mat-option>
+                    <mat-option value="14:00" class="example-item">14:00</mat-option>
+                    <mat-option value="14:30" class="example-item">14:30</mat-option>
+                    <mat-option value="15:00" class="example-item">15:00</mat-option>
+                    <mat-option value="15:30" class="example-item">15:30</mat-option>
+                    <mat-option value="16:00" class="example-item">16:00</mat-option>
+                    <mat-option value="16:30" class="example-item">16:30</mat-option>
+                    <mat-option value="17:00" class="example-item">17:00</mat-option>
+                    <mat-option value="17:30" class="example-item">17:30</mat-option>
+                    <mat-option value="18:00" class="example-item">18:00</mat-option>
+                    <mat-option value="18:30" class="example-item">18:30</mat-option>
+                    <mat-option value="19:00" class="example-item">19:00</mat-option>
+                    <mat-option value="19:30" class="example-item">19:30</mat-option>
+                    <mat-option value="20:00" class="example-item">20:00</mat-option>
+                    <mat-option value="20:30" class="example-item">20:30</mat-option>
+                    <mat-option value="21:00" class="example-item">21:00</mat-option>
+                    <mat-option value="21:30" class="example-item">21:30</mat-option>
+                    <mat-option value="22:00" class="example-item">22:00</mat-option>
+                    <mat-option value="22:30" class="example-item">22:30</mat-option>
+                    <mat-option value="23:00" class="example-item">23:00</mat-option>
+                    <mat-option value="23:30" class="example-item">23:30</mat-option>
+                  </mat-select>
+                </mat-form-field>
+<!--                <input type="time" name="expressRecipientTimeoutFrom" id="expressRecipientTimeoutFrom" formControlName="expressRecipientTimeoutFrom">-->
+                <mat-form-field floatLabel="never" class="time-select">
+                  <mat-select formControlName="expressRecipientTimeoutFrom" id="expressRecipientTimeoutFrom" class="select-time">
+                    <mat-option value="00:00" class="example-item">00:00</mat-option>
+                    <mat-option value="00:30" class="example-item">00:30</mat-option>
+                    <mat-option value="01:00" class="example-item">01:00</mat-option>
+                    <mat-option value="01:30" class="example-item">01:30</mat-option>
+                    <mat-option value="02:00" class="example-item">02:00</mat-option>
+                    <mat-option value="02:30" class="example-item">02:30</mat-option>
+                    <mat-option value="03:00" class="example-item">03:00</mat-option>
+                    <mat-option value="03:30" class="example-item">03:30</mat-option>
+                    <mat-option value="04:00" class="example-item">04:00</mat-option>
+                    <mat-option value="04:30" class="example-item">04:30</mat-option>
+                    <mat-option value="05:00" class="example-item">05:00</mat-option>
+                    <mat-option value="05:30" class="example-item">05:30</mat-option>
+                    <mat-option value="06:00" class="example-item">06:00</mat-option>
+                    <mat-option value="06:30" class="example-item">06:30</mat-option>
+                    <mat-option value="07:00" class="example-item">07:00</mat-option>
+                    <mat-option value="07:30" class="example-item">07:30</mat-option>
+                    <mat-option value="08:00" class="example-item">08:00</mat-option>
+                    <mat-option value="08:30" class="example-item">08:30</mat-option>
+                    <mat-option value="09:00" class="example-item">09:00</mat-option>
+                    <mat-option value="09:30" class="example-item">09:30</mat-option>
+                    <mat-option value="10:00" class="example-item">10:00</mat-option>
+                    <mat-option value="10:30" class="example-item">10:30</mat-option>
+                    <mat-option value="11:00" class="example-item">11:00</mat-option>
+                    <mat-option value="11:30" class="example-item">11:30</mat-option>
+                    <mat-option value="12:00" class="example-item">12:00</mat-option>
+                    <mat-option value="12:30" class="example-item">12:30</mat-option>
+                    <mat-option value="13:00" class="example-item">13:00</mat-option>
+                    <mat-option value="13:30" class="example-item">13:30</mat-option>
+                    <mat-option value="14:00" class="example-item">14:00</mat-option>
+                    <mat-option value="14:30" class="example-item">14:30</mat-option>
+                    <mat-option value="15:00" class="example-item">15:00</mat-option>
+                    <mat-option value="15:30" class="example-item">15:30</mat-option>
+                    <mat-option value="16:00" class="example-item">16:00</mat-option>
+                    <mat-option value="16:30" class="example-item">16:30</mat-option>
+                    <mat-option value="17:00" class="example-item">17:00</mat-option>
+                    <mat-option value="17:30" class="example-item">17:30</mat-option>
+                    <mat-option value="18:00" class="example-item">18:00</mat-option>
+                    <mat-option value="18:30" class="example-item">18:30</mat-option>
+                    <mat-option value="19:00" class="example-item">19:00</mat-option>
+                    <mat-option value="19:30" class="example-item">19:30</mat-option>
+                    <mat-option value="20:00" class="example-item">20:00</mat-option>
+                    <mat-option value="20:30" class="example-item">20:30</mat-option>
+                    <mat-option value="21:00" class="example-item">21:00</mat-option>
+                    <mat-option value="21:30" class="example-item">21:30</mat-option>
+                    <mat-option value="22:00" class="example-item">22:00</mat-option>
+                    <mat-option value="22:30" class="example-item">22:30</mat-option>
+                    <mat-option value="23:00" class="example-item">23:00</mat-option>
+                    <mat-option value="23:30" class="example-item">23:30</mat-option>
+                  </mat-select>
+                </mat-form-field>
+<!--                <input type="time" name="expressRecipientTimeoutTo" id="expressRecipientTimeoutTo" formControlName="expressRecipientTimeoutTo">-->
+                <mat-form-field style="max-width: 125px" floatLabel="never" class="time-select">
+                  <mat-select formControlName="expressRecipientTimeoutTo" id="expressRecipientTimeoutTo" class="select-time">
+                    <mat-option value="00:00" class="example-item">00:00</mat-option>
+                    <mat-option value="00:30" class="example-item">00:30</mat-option>
+                    <mat-option value="01:00" class="example-item">01:00</mat-option>
+                    <mat-option value="01:30" class="example-item">01:30</mat-option>
+                    <mat-option value="02:00" class="example-item">02:00</mat-option>
+                    <mat-option value="02:30" class="example-item">02:30</mat-option>
+                    <mat-option value="03:00" class="example-item">03:00</mat-option>
+                    <mat-option value="03:30" class="example-item">03:30</mat-option>
+                    <mat-option value="04:00" class="example-item">04:00</mat-option>
+                    <mat-option value="04:30" class="example-item">04:30</mat-option>
+                    <mat-option value="05:00" class="example-item">05:00</mat-option>
+                    <mat-option value="05:30" class="example-item">05:30</mat-option>
+                    <mat-option value="06:00" class="example-item">06:00</mat-option>
+                    <mat-option value="06:30" class="example-item">06:30</mat-option>
+                    <mat-option value="07:00" class="example-item">07:00</mat-option>
+                    <mat-option value="07:30" class="example-item">07:30</mat-option>
+                    <mat-option value="08:00" class="example-item">08:00</mat-option>
+                    <mat-option value="08:30" class="example-item">08:30</mat-option>
+                    <mat-option value="09:00" class="example-item">09:00</mat-option>
+                    <mat-option value="09:30" class="example-item">09:30</mat-option>
+                    <mat-option value="10:00" class="example-item">10:00</mat-option>
+                    <mat-option value="10:30" class="example-item">10:30</mat-option>
+                    <mat-option value="11:00" class="example-item">11:00</mat-option>
+                    <mat-option value="11:30" class="example-item">11:30</mat-option>
+                    <mat-option value="12:00" class="example-item">12:00</mat-option>
+                    <mat-option value="12:30" class="example-item">12:30</mat-option>
+                    <mat-option value="13:00" class="example-item">13:00</mat-option>
+                    <mat-option value="13:30" class="example-item">13:30</mat-option>
+                    <mat-option value="14:00" class="example-item">14:00</mat-option>
+                    <mat-option value="14:30" class="example-item">14:30</mat-option>
+                    <mat-option value="15:00" class="example-item">15:00</mat-option>
+                    <mat-option value="15:30" class="example-item">15:30</mat-option>
+                    <mat-option value="16:00" class="example-item">16:00</mat-option>
+                    <mat-option value="16:30" class="example-item">16:30</mat-option>
+                    <mat-option value="17:00" class="example-item">17:00</mat-option>
+                    <mat-option value="17:30" class="example-item">17:30</mat-option>
+                    <mat-option value="18:00" class="example-item">18:00</mat-option>
+                    <mat-option value="18:30" class="example-item">18:30</mat-option>
+                    <mat-option value="19:00" class="example-item">19:00</mat-option>
+                    <mat-option value="19:30" class="example-item">19:30</mat-option>
+                    <mat-option value="20:00" class="example-item">20:00</mat-option>
+                    <mat-option value="20:30" class="example-item">20:30</mat-option>
+                    <mat-option value="21:00" class="example-item">21:00</mat-option>
+                    <mat-option value="21:30" class="example-item">21:30</mat-option>
+                    <mat-option value="22:00" class="example-item">22:00</mat-option>
+                    <mat-option value="22:30" class="example-item">22:30</mat-option>
+                    <mat-option value="23:00" class="example-item">23:00</mat-option>
+                    <mat-option value="23:30" class="example-item">23:30</mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
             </div>
             <div class="row-two-items" style="display: none;">
