@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {RestapiService} from '../../restapi.service';
 
 @Component({
   selector: 'app-home',
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
   public columnDefs: any;
   public rowData: any;
 
-  constructor() {
+  constructor(private service: RestapiService) {
     this.columnDefs = [
       {
         headerName: 'Номер',
@@ -25,29 +26,8 @@ export class HomeComponent implements OnInit {
         maxWidth: 200
       },
       {
-        headerName: 'Статусы',
+        headerName: 'Статус',
         field: 'status',
-        sortable: true,
-        filter: true,
-        flex: 3
-      },
-      {
-        headerName: 'Дата выдачи груза',
-        field: 'date1',
-        sortable: true,
-        filter: true,
-        flex: 3
-      },
-      {
-        headerName: 'Дата поставки груза',
-        field: 'date2',
-        sortable: true,
-        filter: true,
-        flex: 3
-      },
-      {
-        headerName: 'Услуга',
-        field: 'service',
         sortable: true,
         filter: true,
         flex: 3
@@ -60,143 +40,35 @@ export class HomeComponent implements OnInit {
         flex: 3
       },
       {
-        headerName: 'Адрес выдачи груза',
-        field: 'address1',
+        headerName: 'Дата выдачи груза',
+        field: 'date1',
         sortable: true,
         filter: true,
         flex: 3
       },
       {
-        headerName: 'Адрес доставки груза',
-        field: 'address2',
+        headerName: 'Получатель',
+        field: 'recipient',
         sortable: true,
         filter: true,
         flex: 3
       },
+      {
+        headerName: 'Дата доставки груза',
+        field: 'date2',
+        sortable: true,
+        filter: true,
+        flex: 3
+      },
+      {
+        headerName: 'Автор',
+        field: 'author',
+        sortable: true,
+        filter: true,
+        flex: 3
+      }
     ];
-    this.rowData = [
-      {
-        number: '12345678910',
-        status: 'Груз',
-        date1: '21.10.2020',
-        date2: '25.10.2020',
-        service: 'Экспресс-доставка грузов',
-        sender: 'ООО "НТТ Импорт"',
-        address1: 'АМИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2',
-        address2: 'г. Брест, УЛ. КАТИН БОР, д. 103'
-      },
-      {
-        number: '12345678910',
-        status: 'Груз',
-        date1: '21.10.2020',
-        date2: '25.10.2020',
-        service: 'Экспресс-доставка грузов',
-        sender: 'ООО "НТТ Импорт"',
-        address1: 'АМИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2',
-        address2: 'г. Брест, УЛ. КАТИН БОР, д. 103'
-      },
-      {
-        number: '12345678910',
-        status: 'Груз',
-        date1: '21.10.2020',
-        date2: '25.10.2020',
-        service: 'Экспресс-доставка грузов',
-        sender: 'ООО "НТТ Импорт"',
-        address1: 'АМИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2',
-        address2: 'г. Брест, УЛ. КАТИН БОР, д. 103'
-      },
-      {
-        number: '12345678910',
-        status: 'Груз',
-        date1: '21.10.2020',
-        date2: '25.10.2020',
-        service: 'Экспресс-доставка грузов',
-        sender: 'ООО "НТТ Импорт"',
-        address1: 'АМИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2',
-        address2: 'г. Брест, УЛ. КАТИН БОР, д. 103'
-      },
-      {
-        number: '12345678910',
-        status: 'Груз',
-        date1: '21.10.2020',
-        date2: '25.10.2020',
-        service: 'Экспресс-доставка грузов',
-        sender: 'ООО "НТТ Импорт"',
-        address1: 'АМИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2',
-        address2: 'г. Брест, УЛ. КАТИН БОР, д. 103'
-      },
-      {
-        number: '12345678910',
-        status: 'Груз',
-        date1: '21.10.2020',
-        date2: '25.10.2020',
-        service: 'Экспресс-доставка грузов',
-        sender: 'ООО "НТТ Импорт"',
-        address1: 'АМИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2',
-        address2: 'г. Брест, УЛ. КАТИН БОР, д. 103'
-      },
-      {
-        number: '12345678910',
-        status: 'Груз',
-        date1: '21.10.2020',
-        date2: '25.10.2020',
-        service: 'Экспресс-доставка грузов',
-        sender: 'ООО "НТТ Импорт"',
-        address1: 'АМИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2',
-        address2: 'г. Брест, УЛ. КАТИН БОР, д. 103'
-      },
-      {
-        number: '12345678910',
-        status: 'Груз',
-        date1: '21.10.2020',
-        date2: '25.10.2020',
-        service: 'Экспресс-доставка грузов',
-        sender: 'ООО "НТТ Импорт"',
-        address1: 'АМИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2',
-        address2: 'г. Брест, УЛ. КАТИН БОР, д. 103'
-      },
-      {
-        number: '12345678910',
-        status: 'Груз',
-        date1: '21.10.2020',
-        date2: '25.10.2020',
-        service: 'Экспресс-доставка грузов',
-        sender: 'ООО "НТТ Импорт"',
-        address1: 'АМИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2',
-        address2: 'г. Брест, УЛ. КАТИН БОР, д. 103'
-      },
-      {
-        number: '12345678910',
-        status: 'Груз',
-        date1: '21.10.2020',
-        date2: '25.10.2020',
-        service: 'Экспресс-доставка грузов',
-        sender: 'ООО "НТТ Импорт"',
-        address1: 'АМИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2',
-        address2: 'г. Брест, УЛ. КАТИН БОР, д. 103'
-      },
-      {
-        number: '12345678910',
-        status: 'Груз',
-        date1: '21.10.2020',
-        date2: '25.10.2020',
-        service: 'Экспресс-доставка грузов',
-        sender: 'ООО "НТТ Импорт"',
-        address1: 'АМИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2',
-        address2: 'г. Брест, УЛ. КАТИН БОР, д. 103'
-      },
-      {
-        number: '12345678910',
-        status: 'Груз',
-        date1: '21.10.2020',
-        date2: '25.10.2020',
-        service: 'Экспресс-доставка грузов',
-        sender: 'ООО "НТТ Импорт"',
-        address1: 'АМИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2',
-        address2: 'г. Брест, УЛ. КАТИН БОР, д. 103'
-      },
-
-    ];
+    this.rowData = [];
     this.defaultColDef = {
       flex: 1,
       minWidth: 100,
@@ -207,6 +79,27 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getTable();
+  }
+
+  getTable(): void {
+    this.rowData = [];
+    this.service.getAllUserOrders().subscribe(response => {
+      if (response.status === 200) {
+        for (const item of response.body) {
+          this.rowData.push({
+            number: item.order_number,
+            status: item.status,
+            sender: item.sender_name,
+            date1: item.sender_delivery_from.split(' ')[0],
+            recipient: item.recipient_name,
+            date2: item.recipient_accept_from.split(' ')[0],
+            author: item.userId,
+          });
+        }
+        this.gridApi.setRowData(this.rowData);
+      }
+    });
   }
 
   onGridReady(params: any): void {
