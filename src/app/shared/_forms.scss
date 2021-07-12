@@ -284,6 +284,7 @@ button {
     background-position: center;
     background-repeat: no-repeat;
     background-image: url("../../assets/img/common/close.svg");
+    background-size: cover;
   }
 
   &.active-btn, &.purple-btn {
@@ -337,11 +338,16 @@ button {
   }
 
   &.red-btn {
-    background: #D16C65;
+    background-color: #D16C65;
     border-radius: 50px;
     width: 45px;
     height: 45px;
     padding: 0;
+  }
+
+  &.small-btn {
+    width: 20px;
+    height: 20px;
   }
 
   &.change-btn {
