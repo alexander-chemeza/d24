@@ -405,7 +405,11 @@
             <div class="row">
               <div class="control control-flex">
                 <label for="expressRecipientDeliveryDate">Дата доставки груза:</label>
-                <input type="date" name="expressRecipientDeliveryDate" id="expressRecipientDeliveryDate" formControlName="expressRecipientDeliveryDate">
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <input id="expressRecipientDeliveryDate" formControlName="expressRecipientDeliveryDate" matInput [matDatepickerFilter]="expressRecipientDate" [matDatepicker]="expressRecipientDatePicker">
+                  <mat-datepicker-toggle matSuffix [for]="expressRecipientDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #expressRecipientDatePicker></mat-datepicker>
+                </mat-form-field>
               </div>
               <div class="optional">
               </div>

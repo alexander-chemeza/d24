@@ -92,6 +92,7 @@ export class OrderComponent implements OnChanges, OnInit {
 
   // Dates
   expressSenderDate: any;
+  expressRecipientDate: any;
 
   // Packages
   expressDeliveryPackage = ['pt0', 'pt1', 'pt2', 'pt4'];
@@ -829,11 +830,7 @@ export class OrderComponent implements OnChanges, OnInit {
     });
 
     const arr = [1, 3, 6];
-    this.expressSenderDate = (d: Date): boolean => {
-      const day = (d || new Date()).getDay();
-      // Prevent Saturday and Sunday from being selected.
-        return arr.indexOf(day) !== -1;
-      };
+
   }
 
   schedule(arr: any, field: any, id: any): void {
@@ -847,19 +844,30 @@ export class OrderComponent implements OnChanges, OnInit {
           if (deliveryZoneId.status === 200) {
             let schedules: any;
             schedules = deliveryZoneId.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
-            schedules[0].delivery_day = 'ПН';
-            schedules[1].delivery_day = 'ВТ';
-            schedules[2].delivery_day = 'СР';
-            schedules[3].delivery_day = 'ЧТ';
-            schedules[4].delivery_day = 'ПТ';
-            schedules[5].delivery_day = 'СБ';
-            schedules[6].delivery_day = 'ВС';
+            schedules[0].day = 'ПН';
+            schedules[1].day = 'ВТ';
+            schedules[2].day = 'СР';
+            schedules[3].day = 'ЧТ';
+            schedules[4].day = 'ПТ';
+            schedules[5].day = 'СБ';
+            schedules[6].day = 'ВС';
+            const activeArray = schedules.filter((item: any) => item.deliveryActive).map((item: any) => Number(item.delivery_day));
             if (field === 'expressSender') {
+              this.expressSenderDate = (d: Date): boolean => {
+                const day = (d || new Date()).getDay();
+                // Prevent Saturday and Sunday from being selected.
+                return activeArray.indexOf(day) !== -1;
+              };
               this.expressSenderSchedule = schedules.filter((item: any) => item.deliveryActive)
-                .map((a: any) => a.delivery_day).join('-');
+                .map((a: any) => a.day).join('-');
             } else if (field === 'expressRecipient') {
+              this.expressRecipientDate = (d: Date): boolean => {
+                const day = (d || new Date()).getDay();
+                // Prevent Saturday and Sunday from being selected.
+                return activeArray.indexOf(day) !== -1;
+              };
               this.expressRecipientSchedule = schedules.filter((item: any) => item.deliveryActive)
-                .map((a: any) => a.delivery_day).join('-');
+                .map((a: any) => a.day).join('-');
             }
           }
         });
