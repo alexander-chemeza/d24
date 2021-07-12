@@ -333,7 +333,6 @@ export class ProfileComponent implements OnInit {
     const currentSenderAgent = this.senderAgents.filter((item: any) => item.id === this.profileForm.value.sender);
     let currentSenderAddress: any;
     let currentSenderContact: any;
-    console.log(currentSenderAgent[0]);
     this.service.getAllUserCustomerAddress(currentSenderAgent[0].id).subscribe(response => {
       if (response.status === 200) {
         currentSenderAddress = response.body.filter((item: any) => item.id === this.profileForm.value.senderAddress);
@@ -352,7 +351,7 @@ export class ProfileComponent implements OnInit {
                     this.user.senderCustomer = currentSenderAgent[0];
                     this.user.senderAddress = currentSenderAddress[0];
                     this.user.senderCustomerContact = currentSenderContact[0];
-                    this.user.recipientCustomer = currentReceiverAgent[0];
+                    this.user.recipientCustomer = currentReceiverAgent[0] || null;
                     this.user.recipientAddress = currentReceiverAddress[0];
                     this.user.recipientCustomerContact = currentReceiverContact[0];
                     this.user.senderAddress.mainAddress = this.profileForm.value.senderMainAddress;
@@ -374,5 +373,13 @@ export class ProfileComponent implements OnInit {
         });
       }
     });
+  }
+
+  clearFields(event: any): void {
+    this.profileForm.patchValue({
+      receiver: ''
+    });
+    this.receiverAddresses = [];
+    this.receiverContacts = [];
   }
 }
