@@ -313,4 +313,8 @@ export class RestapiService {
   public getDeliveryCalendar(deliveryZoneId: string): Observable<any> {
     return this.http.get(`${this.url}/user/deliveryCalendar/get?deliverZoneId=${deliveryZoneId}`, {observe: 'response', withCredentials: true});
   }
+
+  public getAllUserOrders(): Observable<any> {
+    return this.http.get(`${this.url}/user/order/getAllOrders`, {observe: 'response', withCredentials: true});
+  }
 }
