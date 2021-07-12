@@ -691,7 +691,7 @@ export class OrderComponent implements OnChanges, OnInit {
       if (this.agreementWithCustomer && !this.agreementWithWarrantor && !this.agreementWithPost) {
         this.serviceTypes = [
           {value: '0', viewValue: 'Экспресс-доставка грузов'},
-          {value: '2', viewValue: 'Экспресс - доставка документов'}
+          // {value: '2', viewValue: 'Экспресс - доставка документов'}
         ];
       } else if (!this.agreementWithCustomer && this.agreementWithWarrantor && !this.agreementWithPost) {
         this.serviceTypes = [
@@ -700,14 +700,14 @@ export class OrderComponent implements OnChanges, OnInit {
       } else if (this.agreementWithCustomer && this.agreementWithWarrantor && !this.agreementWithPost) {
         this.serviceTypes = [
           {value: '0', viewValue: 'Экспресс-доставка грузов'},
-          {value: '2', viewValue: 'Экспресс - доставка документов'},
-          {value: '1', viewValue: 'Курьерская доставка'},
+          // {value: '2', viewValue: 'Экспресс - доставка документов'},
+          // {value: '1', viewValue: 'Курьерская доставка'},
         ];
       }
     } else {
       this.userType = 'Физ.лицо';
       this.serviceTypes = [
-        {value: '1', viewValue: 'Курьерская доставка'}
+        // {value: '1', viewValue: 'Курьерская доставка'}
       ];
     }
   }
@@ -827,12 +827,12 @@ export class OrderComponent implements OnChanges, OnInit {
       }
     });
 
-
+    const arr = [1, 3, 6];
     this.expressSenderDate = (d: Date): boolean => {
-      const day = d.getDay();
+      const day = (d || new Date()).getDay();
       // Prevent Saturday and Sunday from being selected.
-      return day !== 0 && day !== 6;
-    };
+        return arr.indexOf(day) !== -1;
+      };
   }
 
   schedule(arr: any, field: any, id: any): void {

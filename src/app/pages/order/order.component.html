@@ -100,12 +100,11 @@
             <div class="row">
               <div class="control control-flex">
                 <label for="expressSenderDeliveryDate">Дата выдачи груза:</label>
-                <input type="date" name="expressSenderDeliveryDate" id="expressSenderDeliveryDate" formControlName="expressSenderDeliveryDate">
-<!--                <mat-form-field class="example-full-width" appearance="fill">-->
-<!--                  <input id="expressSenderDeliveryDate" formControlName="expressSenderDeliveryDate" matInput [matDatepickerFilter]="expressSenderDate" [matDatepicker]="expressSenderDatePicker">-->
-<!--                  <mat-datepicker-toggle matSuffix [for]="expressSenderDatePicker"></mat-datepicker-toggle>-->
-<!--                  <mat-datepicker #expressSenderDatePicker></mat-datepicker>-->
-<!--                </mat-form-field>-->
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <input id="expressSenderDeliveryDate" formControlName="expressSenderDeliveryDate" matInput [matDatepickerFilter]="expressSenderDate" [matDatepicker]="expressSenderDatePicker">
+                  <mat-datepicker-toggle matSuffix [for]="expressSenderDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #expressSenderDatePicker></mat-datepicker>
+                </mat-form-field>
               </div>
               <div class="optional">
               </div>
@@ -711,34 +710,34 @@
           </div>
           <div class="col col-checkboxes">
             <div class="grey-box">
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryTTN" id="expressDeliveryTTN" formControlName="expressDeliveryTTN" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="expressDeliveryTTN">Замена ТТН ( 1 шт - 15 руб) </label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryWait" id="expressDeliveryWait" formControlName="expressDeliveryWait" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="expressDeliveryWait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryRelocate" id="expressDeliveryRelocate" formControlName="expressDeliveryRelocate" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="expressDeliveryRelocate">Переадресация</label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryAgreement" id="expressDeliveryAgreement" formControlName="expressDeliveryAgreement" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="expressDeliveryAgreement">Оформление доверенностей на получение груза</label>
-              </div>
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryTTN" id="expressDeliveryTTN" formControlName="expressDeliveryTTN" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="expressDeliveryTTN">Замена ТТН ( 1 шт - 15 руб) </label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryWait" id="expressDeliveryWait" formControlName="expressDeliveryWait" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="expressDeliveryWait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryRelocate" id="expressDeliveryRelocate" formControlName="expressDeliveryRelocate" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="expressDeliveryRelocate">Переадресация</label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryAgreement" id="expressDeliveryAgreement" formControlName="expressDeliveryAgreement" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="expressDeliveryAgreement">Оформление доверенностей на получение груза</label>-->
+<!--              </div>-->
             </div>
           </div>
         </div>
@@ -796,34 +795,34 @@
           </div>
           <div class="col col-checkboxes">
             <div class="grey-box">
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryTTN2" id="expressDeliveryTTN2" formControlName="expressDeliveryTTN2" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="expressDeliveryTTN2">Замена ТТН ( 1 шт - 15 руб) </label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryWait2" id="expressDeliveryWait2" formControlName="expressDeliveryWait2" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="wait2">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryRelocate2" id="expressDeliveryRelocate2" formControlName="expressDeliveryRelocate2" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="expressDeliveryRelocate2">Переадресация</label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryAgreement2" id="expressDeliveryAgreement2" formControlName="expressDeliveryAgreement2" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="expressDeliveryAgreement2">Оформление доверенностей на получение груза</label>
-              </div>
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryTTN2" id="expressDeliveryTTN2" formControlName="expressDeliveryTTN2" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="expressDeliveryTTN2">Замена ТТН ( 1 шт - 15 руб) </label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryWait2" id="expressDeliveryWait2" formControlName="expressDeliveryWait2" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="wait2">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryRelocate2" id="expressDeliveryRelocate2" formControlName="expressDeliveryRelocate2" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="expressDeliveryRelocate2">Переадресация</label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="expressDeliveryAgreement2" id="expressDeliveryAgreement2" formControlName="expressDeliveryAgreement2" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="expressDeliveryAgreement2">Оформление доверенностей на получение груза</label>-->
+<!--              </div>-->
             </div>
           </div>
         </div>
@@ -1034,34 +1033,34 @@
           </div>
           <div class="column-side">
             <div class="grey-box">
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryTTN" id="carrierDeliveryTTN" formControlName="carrierDeliveryTTN" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryTTN">Замена ТТН ( 1 шт - 15 руб) </label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryWait" id="carrierDeliveryWait" formControlName="carrierDeliveryWait" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryWait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryRelocate" id="carrierDeliveryRelocate" formControlName="carrierDeliveryRelocate" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryRelocate">Переадресация</label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryAgreement" id="carrierDeliveryAgreement" formControlName="carrierDeliveryAgreement" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryAgreement">Оформление доверенностей на получение груза</label>
-              </div>
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryTTN" id="carrierDeliveryTTN" formControlName="carrierDeliveryTTN" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryTTN">Замена ТТН ( 1 шт - 15 руб) </label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryWait" id="carrierDeliveryWait" formControlName="carrierDeliveryWait" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryWait">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryRelocate" id="carrierDeliveryRelocate" formControlName="carrierDeliveryRelocate" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryRelocate">Переадресация</label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryAgreement" id="carrierDeliveryAgreement" formControlName="carrierDeliveryAgreement" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryAgreement">Оформление доверенностей на получение груза</label>-->
+<!--              </div>-->
             </div>
             <div class="grey-box">
               <button class="green-btn round-btn">
@@ -1157,41 +1156,41 @@
           </div>
           <div class="column-side">
             <div class="grey-box">
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryTTN2" id="carrierDeliveryTTN2" formControlName="carrierDeliveryTTN2" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryTTN2">Замена ТТН ( 1 шт - 15 руб) </label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryWait2" id="carrierDeliveryWait2" formControlName="carrierDeliveryWait2" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryWait2">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryRelocate2" id="carrierDeliveryRelocate2" formControlName="carrierDeliveryRelocate2" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryRelocate2">Переадресация</label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryAgreement2" id="carrierDeliveryAgreement2" formControlName="carrierDeliveryAgreement2" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryAgreement2">Оформление доверенностей на получение груза</label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryListing" id="carrierDeliveryListing" formControlName="carrierDeliveryListing" checked (change)="checkboxChange($event)">
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryListing">Опись вложений</label>
-              </div>
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryTTN2" id="carrierDeliveryTTN2" formControlName="carrierDeliveryTTN2" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryTTN2">Замена ТТН ( 1 шт - 15 руб) </label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryWait2" id="carrierDeliveryWait2" formControlName="carrierDeliveryWait2" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryWait2">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryRelocate2" id="carrierDeliveryRelocate2" formControlName="carrierDeliveryRelocate2" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryRelocate2">Переадресация</label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryAgreement2" id="carrierDeliveryAgreement2" formControlName="carrierDeliveryAgreement2" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryAgreement2">Оформление доверенностей на получение груза</label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryListing" id="carrierDeliveryListing" formControlName="carrierDeliveryListing" checked (change)="checkboxChange($event)">-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryListing">Опись вложений</label>-->
+<!--              </div>-->
             </div>
             <div class="grey-box">
               <button class="green-btn round-btn">
@@ -1246,41 +1245,41 @@
           </div>
           <div class="column-side">
             <div class="grey-box">
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryTTN3" id="carrierDeliveryTTN3" formControlName="carrierDeliveryTTN3" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryTTN3">Замена ТТН ( 1 шт - 15 руб) </label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryWait3" id="carrierDeliveryWait3" formControlName="carrierDeliveryWait3" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryWait3">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryRelocate3" id="carrierDeliveryRelocate3" formControlName="carrierDeliveryRelocate3" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryRelocate3">Переадресация</label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryAgreement3" id="carrierDeliveryAgreement3" formControlName="carrierDeliveryAgreement3" checked>
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryAgreement3">Оформление доверенностей на получение груза</label>
-              </div>
-              <div class="row">
-                <div class="checkbox-block" style="margin-right: 15px;">
-                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryListing2" id="carrierDeliveryListing2" formControlName="carrierDeliveryListing2" (change)="checkboxChange($event)">
-                  <span class="checkbox-block-icon"></span>
-                </div>
-                <label for="carrierDeliveryListing2">Опись</label>
-              </div>
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryTTN3" id="carrierDeliveryTTN3" formControlName="carrierDeliveryTTN3" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryTTN3">Замена ТТН ( 1 шт - 15 руб) </label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryWait3" id="carrierDeliveryWait3" formControlName="carrierDeliveryWait3" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryWait3">Ожидание разгрузки ( 1 мин - 0,70 руб) </label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryRelocate3" id="carrierDeliveryRelocate3" formControlName="carrierDeliveryRelocate3" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryRelocate3">Переадресация</label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryAgreement3" id="carrierDeliveryAgreement3" formControlName="carrierDeliveryAgreement3" checked>-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryAgreement3">Оформление доверенностей на получение груза</label>-->
+<!--              </div>-->
+<!--              <div class="row">-->
+<!--                <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--                  <input class="checkbox-block-item" type="checkbox" name="carrierDeliveryListing2" id="carrierDeliveryListing2" formControlName="carrierDeliveryListing2" (change)="checkboxChange($event)">-->
+<!--                  <span class="checkbox-block-icon"></span>-->
+<!--                </div>-->
+<!--                <label for="carrierDeliveryListing2">Опись</label>-->
+<!--              </div>-->
             </div>
           </div>
         </div>
