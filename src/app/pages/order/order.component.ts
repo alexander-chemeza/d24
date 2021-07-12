@@ -1421,4 +1421,32 @@ export class OrderComponent implements OnChanges, OnInit {
     }
     event.target.classList.add('active-btn');
   }
+
+  toggleFields (event: any): void {
+    const fields: any = document.getElementsByClassName('size');
+    if (event.target.value !== '') {
+      for (const item of fields) {
+        item.value = '';
+        item.disabled = true;
+      }
+    } else {
+      for (const item of fields) {
+        item.value = '';
+        item.disabled = false;
+      }
+    }
+  }
+
+  calcVolume (event: any): void {
+    const fields: any = document.getElementsByClassName('size');
+    if (fields[0].value !== '' && fields[1].value !== '' && fields[2].value !== '') {
+      this.orderForm.patchValue({
+        expressDeliveryVolume: Number(fields[0].value) * Number(fields[1].value) * Number(fields[2].value)
+      });
+    } else {
+      this.orderForm.patchValue({
+        expressDeliveryVolume: ''
+      });
+    }
+  }
 }

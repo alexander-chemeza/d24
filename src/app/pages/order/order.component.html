@@ -680,13 +680,13 @@
                 <label for="params">Параметры отправления:</label>
                 <div class="row-params-items">
                   <input type="number" placeholder="Вес, кг" name="expressDeliveryWeight" id="expressDeliveryWeight" formControlName="expressDeliveryWeight">
-                  <input type="number" placeholder="Объем, м3" name="expressDeliveryVolume" id="expressDeliveryVolume" formControlName="expressDeliveryVolume">
+                  <input type="number" (keyup)="toggleFields($event)" placeholder="Объем, м3" name="expressDeliveryVolume" id="expressDeliveryVolume" formControlName="expressDeliveryVolume">
                   <span class="grey-header" style="text-align: center">или</span>
-                  <input type="number" placeholder="Длина, см" name="expressDeliveryLength" id="expressDeliveryLength" formControlName="expressDeliveryLength">
+                  <input (keyup)="calcVolume($event)" class="size" type="number" placeholder="Длина, см" name="expressDeliveryLength" id="expressDeliveryLength" formControlName="expressDeliveryLength">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="number" placeholder="Ширина, см" name="expressDeliveryWidth" id="expressDeliveryWidth" formControlName="expressDeliveryWidth">
+                  <input (keyup)="calcVolume($event)" class="size" type="number" placeholder="Ширина, см" name="expressDeliveryWidth" id="expressDeliveryWidth" formControlName="expressDeliveryWidth">
                   <span class="mr-10 ml-10 multiply"></span>
-                  <input type="number" placeholder="Высота, см" name="expressDeliveryHeight" id="expressDeliveryHeight" formControlName="expressDeliveryHeight">
+                  <input (keyup)="calcVolume($event)" class="size" type="number" placeholder="Высота, см" name="expressDeliveryHeight" id="expressDeliveryHeight" formControlName="expressDeliveryHeight">
                 </div>
               </div>
             </div>
