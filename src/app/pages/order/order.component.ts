@@ -2,6 +2,7 @@ import {Component, OnChanges, OnInit} from '@angular/core';
 import {RestapiService, SaveUserCustomerAddress, Street} from '../../restapi.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
+import {Router} from '@angular/router';
 
 interface ContractList {
   contractActive: string | boolean;
@@ -657,7 +658,7 @@ export class OrderComponent implements OnChanges, OnInit {
     ])
   });
 
-  constructor(private service: RestapiService) {
+  constructor(private service: RestapiService, private router: Router) {
     // this.serviceType = this.serviceTypes[0].value;
     this.deliveryType = '';
     this.currentCity = 0;
@@ -1410,6 +1411,7 @@ export class OrderComponent implements OnChanges, OnInit {
         }
         container[0].classList.add('active-btn');
         this.cargoDescription = '';
+        this.router.navigate(['journal']);
       }
     });
   }
