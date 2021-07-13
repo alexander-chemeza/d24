@@ -241,48 +241,40 @@ export class JournalComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.getTable();
   }
 
   ngOnInit(): void {
   }
 
   getTable(): void {
-    console.log('Before any change', this.rowData);
-    this.rowData = [];
-    console.log('After clear', this.rowData);
-    if (this.rowData.length === 0) {
-      this.service.getAllUserOrders().subscribe(response => {
-        if (response.status === 200) {
-          for (const item of response.body) {
-            this.rowData.push({
-              number: item.order_number,
-              status: item.status,
-              service: item.deal_type,
-              delivery: item.delivery_type,
-              ttn: '',
-              sender: item.sender_name,
-              recipient: item.recipient_name,
-              place: item.delivery_placing_type,
-              amount: item.amount_packages,
-              address1: item.sender_address,
-              date1: item.sender_delivery_from.split(' ')[0],
-              time11: item.sender_delivery_from.split(' ')[1],
-              time12: item.sender_delivery_to.split(' ')[1],
-              address2: item.recipient_address,
-              date2: item.recipient_accept_from.split(' ')[0],
-              time21: item.recipient_accept_from.split(' ')[1],
-              time22: item.recipient_accept_to.split(' ')[1],
-              author: item.userId,
-              id: item.id
-            });
-          }
-          console.log('ORDERS', response.body);
-          this.gridApi.setRowData(this.rowData);
-          console.log('Refreshed', this.rowData);
+    this.service.getAllUserOrders().subscribe(response => {
+      if (response.status === 200) {
+        for (const item of response.body) {
+          this.rowData.push({
+            number: item.order_number,
+            status: item.status,
+            service: item.deal_type,
+            delivery: item.delivery_type,
+            ttn: '',
+            sender: item.sender_name,
+            recipient: item.recipient_name,
+            place: item.delivery_placing_type,
+            amount: item.amount_packages,
+            address1: item.sender_address,
+            date1: item.sender_delivery_from.split(' ')[0],
+            time11: item.sender_delivery_from.split(' ')[1],
+            time12: item.sender_delivery_to.split(' ')[1],
+            address2: item.recipient_address,
+            date2: item.recipient_accept_from.split(' ')[0],
+            time21: item.recipient_accept_from.split(' ')[1],
+            time22: item.recipient_accept_to.split(' ')[1],
+            author: item.userId,
+            id: item.id
+          });
         }
-      });
-    }
+        this.gridApi.setRowData(this.rowData);
+      }
+    });
   }
 
   onGridReady(params: any): void {
@@ -376,7 +368,7 @@ export class JournalComponent implements OnInit, OnChanges {
         }
       });
     }
-    this.ngOnChanges();
+    window.location.reload();
   }
 
   elementType = NgxQrcodeElementTypes.URL;
