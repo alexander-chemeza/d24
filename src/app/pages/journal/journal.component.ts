@@ -239,7 +239,6 @@ export class JournalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getTable();
   }
 
   getTable(): void {
@@ -276,6 +275,7 @@ export class JournalComponent implements OnInit {
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    this.getTable();
   }
 
   onPaginationChanged(): void {

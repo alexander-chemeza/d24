@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import {RestapiService} from '../../restapi.service';
 
 @Component({
@@ -6,7 +6,7 @@ import {RestapiService} from '../../restapi.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnChanges {
   public gridApi: any;
   public gridColumnApi: any;
   public defaultColDef: any;
@@ -78,8 +78,11 @@ export class HomeComponent implements OnInit {
     this.paginationPageSize = 10;
   }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     this.getTable();
+  }
+
+  ngOnInit(): void {
   }
 
   getTable(): void {
@@ -105,6 +108,7 @@ export class HomeComponent implements OnInit {
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    this.getTable();
   }
 
   onPaginationChanged(event: any, space: string): void {
