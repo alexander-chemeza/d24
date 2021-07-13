@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import {JournalButtonsComponent} from './journal-buttons/journal-buttons.component';
 import {RestapiService} from '../../restapi.service';
@@ -8,7 +8,7 @@ import {RestapiService} from '../../restapi.service';
   templateUrl: './journal.component.html',
   styleUrls: ['./journal.component.scss']
 })
-export class JournalComponent implements OnInit {
+export class JournalComponent implements OnInit, OnChanges {
   public gridApi: any;
   public gridColumnApi: any;
   public rowData: any;
@@ -16,6 +16,7 @@ export class JournalComponent implements OnInit {
   public defaultColDef: any;
   public rowSelection: any;
   public paginationPageSize: any;
+  public selectedOrderRows: number[] = [];
 
   // columnDefs = [
   //   { headerName: 'Наименование',
@@ -82,6 +83,7 @@ export class JournalComponent implements OnInit {
         checkboxSelection: true,
         minWidth: 150,
         maxWidth: 200,
+        id: '',
       },
       {
         headerName: 'Номер',
@@ -238,38 +240,49 @@ export class JournalComponent implements OnInit {
     this.paginationPageSize = 20;
   }
 
+  ngOnChanges(): void {
+    this.getTable();
+  }
+
   ngOnInit(): void {
   }
 
   getTable(): void {
+    console.log('Before any change', this.rowData);
     this.rowData = [];
-    this.service.getAllUserOrders().subscribe(response => {
-      if (response.status === 200) {
-        for (const item of response.body) {
-          this.rowData.push({
-            number: item.order_number,
-            status: item.status,
-            service: item.deal_type,
-            delivery: item.delivery_type,
-            ttn: '',
-            sender: item.sender_name,
-            recipient: item.recipient_name,
-            place: item.delivery_placing_type,
-            amount: item.amount_packages,
-            address1: item.sender_address,
-            date1: item.sender_delivery_from.split(' ')[0],
-            time11: item.sender_delivery_from.split(' ')[1],
-            time12: item.sender_delivery_to.split(' ')[1],
-            address2: item.recipient_address,
-            date2: item.recipient_accept_from.split(' ')[0],
-            time21: item.recipient_accept_from.split(' ')[1],
-            time22: item.recipient_accept_to.split(' ')[1],
-            author: item.userId,
-          });
+    console.log('After clear', this.rowData);
+    if (this.rowData.length === 0) {
+      this.service.getAllUserOrders().subscribe(response => {
+        if (response.status === 200) {
+          for (const item of response.body) {
+            this.rowData.push({
+              number: item.order_number,
+              status: item.status,
+              service: item.deal_type,
+              delivery: item.delivery_type,
+              ttn: '',
+              sender: item.sender_name,
+              recipient: item.recipient_name,
+              place: item.delivery_placing_type,
+              amount: item.amount_packages,
+              address1: item.sender_address,
+              date1: item.sender_delivery_from.split(' ')[0],
+              time11: item.sender_delivery_from.split(' ')[1],
+              time12: item.sender_delivery_to.split(' ')[1],
+              address2: item.recipient_address,
+              date2: item.recipient_accept_from.split(' ')[0],
+              time21: item.recipient_accept_from.split(' ')[1],
+              time22: item.recipient_accept_to.split(' ')[1],
+              author: item.userId,
+              id: item.id
+            });
+          }
+          console.log('ORDERS', response.body);
+          this.gridApi.setRowData(this.rowData);
+          console.log('Refreshed', this.rowData);
         }
-        this.gridApi.setRowData(this.rowData);
-      }
-    });
+      });
+    }
   }
 
   onGridReady(params: any): void {
@@ -339,6 +352,31 @@ export class JournalComponent implements OnInit {
       stageBtns[i].classList.remove('active-btn');
     }
     event.target.classList.add('active-btn');
+  }
+
+  selectedRows(event: any): void {
+    this.selectedOrderRows = [];
+    for (const item of event.api.getSelectedNodes()) {
+      if (item.data.status === 'Черновик') {
+        this.selectedOrderRows.push(item.data.id);
+      } else {
+        this.gridApi.getRowNode(item.rowIndex).setSelected(false);
+      }
+    }
+    console.log(event.api.getSelectedNodes());
+    console.log('Selected rows', this.selectedOrderRows);
+  }
+
+  sendOrders(event: any): void {
+    for (const item of this.selectedOrderRows) {
+      console.log('ITEM:', item);
+      this.service.sendOrder(item).subscribe(response => {
+        if (response.status === 200) {
+          console.log('Order id ' + item + ' is sent');
+        }
+      });
+    }
+    this.ngOnChanges();
   }
 
   elementType = NgxQrcodeElementTypes.URL;
