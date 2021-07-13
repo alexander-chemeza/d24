@@ -90,15 +90,17 @@ export class HomeComponent implements OnInit, OnChanges {
     this.service.getAllUserOrders().subscribe(response => {
       if (response.status === 200) {
         for (const item of response.body) {
-          this.rowData.push({
-            number: item.order_number,
-            status: item.status,
-            sender: item.sender_name,
-            date1: item.sender_delivery_from.split(' ')[0],
-            recipient: item.recipient_name,
-            date2: item.recipient_accept_from.split(' ')[0],
-            author: item.userId,
-          });
+          if (item.status !== 'Черновик') {
+            this.rowData.push({
+              number: item.order_number,
+              status: item.status,
+              sender: item.sender_name,
+              date1: item.sender_delivery_from.split(' ')[0],
+              recipient: item.recipient_name,
+              date2: item.recipient_accept_from.split(' ')[0],
+              author: item.userId,
+            });
+          }
         }
         this.gridApi.setRowData(this.rowData);
       }
