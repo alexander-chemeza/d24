@@ -6,8 +6,9 @@ import {OrderComponent} from './order.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
+import {CustomDateAdapter} from './CustomDateAdapter';
 
 
 
@@ -23,6 +24,9 @@ import {MatInputModule} from '@angular/material/input';
     MatNativeDateModule,
     ScrollingModule
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'ru-RU'}]
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'ru-RU'},
+    {provide: DateAdapter, useClass: CustomDateAdapter}
+  ]
 })
 export class OrderModule { }
