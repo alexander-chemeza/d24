@@ -1522,4 +1522,36 @@ export class OrderComponent implements OnChanges, OnInit {
       });
     }
   }
+
+  filterCities(value: string): Cities[] {
+    return this.citiesList.filter(option => option.fullName.toLowerCase().includes(value.toLowerCase()));
+  }
+
+  getCities(): void {
+    this.service.cities().subscribe(response => {
+      if (response.status === 200) {
+        this.citiesList = response.body;
+      }
+    });
+  }
+
+  searchCities(event: any): void {
+    if (event.target.value === '' || this.citiesList.length === 0) {
+      this.getCities();
+    } else {
+      this.citiesList = this.filterCities(event.target.value);
+    }
+  }
+
+  searchStreets(event: any): void {
+    if (event.target.value === '' || this.streetList.length === 0) {
+      this.service.streets(this.street).subscribe(response => {
+        if (response.status === 200) {
+          this.streetList = response.body;
+        }
+      });
+    } else {
+      this.streetList = this.streetList.filter(option => option.name.toLowerCase().includes(event.target.value));
+    }
+  }
 }
