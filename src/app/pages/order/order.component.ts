@@ -859,7 +859,7 @@ export class OrderComponent implements OnChanges, OnInit {
                 return activeArray.indexOf(day) !== -1;
               };
               this.expressSenderSchedule = schedules.filter((item: any) => item.deliveryActive)
-                .map((a: any) => a.day).join('-');
+                .map((a: any) => a.day).join(', ');
             } else if (field === 'expressRecipient') {
               this.expressRecipientDate = (d: Date): boolean => {
                 const day = (d || new Date()).getDay();
@@ -867,14 +867,24 @@ export class OrderComponent implements OnChanges, OnInit {
                 return activeArray.indexOf(day) !== -1;
               };
               this.expressRecipientSchedule = schedules.filter((item: any) => item.deliveryActive)
-                .map((a: any) => a.day).join('-');
+                .map((a: any) => a.day).join(', ');
             }
           }
         });
       } else {
         if (field === 'expressSender') {
+          this.expressSenderDate = (d: Date): boolean => {
+            const day = (d || new Date()).getDay();
+            // Prevent Saturday and Sunday from being selected.
+            return day !== 0 && day !== 1 && day !== 2 && day !== 3 && day !== 4 && day !== 5 && day !== 6;
+          };
           this.expressSenderSchedule = 'Данный адрес не обслуживается';
         } else if (field === 'expressRecipient') {
+          this.expressRecipientDate = (d: Date): boolean => {
+            const day = (d || new Date()).getDay();
+            // Prevent Saturday and Sunday from being selected.
+            return day !== 0 && day !== 1 && day !== 2 && day !== 3 && day !== 4 && day !== 5 && day !== 6;
+          };
           this.expressRecipientSchedule = 'Данный адрес не обслуживается';
         }
       }

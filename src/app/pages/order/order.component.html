@@ -30,7 +30,7 @@
   <div class="row-stage">
     <div class="col">
       <button class="stage-btn active-btn" (click)="changeStage($event)" stage="1">Доставка</button>
-      <button class="stage-btn white-btn" (click)="changeStage($event)" stage="2">Вес, габариты</button>
+      <button class="stage-btn white-btn" (click)="changeStage($event)" stage="2" [disabled]="expressSenderSchedule === 'Данный адрес не обслуживается' || expressRecipientSchedule === 'Данный адрес не обслуживается'">Вес, габариты</button>
     </div>
     <div class="col">
       <div></div>
@@ -1296,7 +1296,7 @@
           </div>
         </div>
         <div class="col">
-          <button class="green-btn round-btn" (click)="changeStage($event)" stage="2">Далее</button>
+          <button class="green-btn round-btn" (click)="changeStage($event)" stage="2" [disabled]="expressSenderSchedule === 'Данный адрес не обслуживается' || expressRecipientSchedule === 'Данный адрес не обслуживается'">Далее</button>
           <input type="submit" value="Оформить" hidden>
         </div>
       </div>
