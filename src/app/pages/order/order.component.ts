@@ -1451,7 +1451,7 @@ export class OrderComponent implements OnChanges, OnInit {
     const fields: any = document.getElementsByClassName('size');
     if (fields[0].value !== '' && fields[1].value !== '' && fields[2].value !== '') {
       this.orderForm.patchValue({
-        expressDeliveryVolume: Number(fields[0].value) * Number(fields[1].value) * Number(fields[2].value)
+        expressDeliveryVolume: Number(fields[0].value) * Number(fields[1].value) * Number(fields[2].value) / 1000000
       });
     } else {
       this.orderForm.patchValue({

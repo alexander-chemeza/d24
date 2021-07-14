@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnChanges, OnInit} from '@angular/core';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import {JournalButtonsComponent} from './journal-buttons/journal-buttons.component';
 import {RestapiService} from '../../restapi.service';
@@ -8,7 +8,7 @@ import {RestapiService} from '../../restapi.service';
   templateUrl: './journal.component.html',
   styleUrls: ['./journal.component.scss']
 })
-export class JournalComponent implements OnInit {
+export class JournalComponent implements OnInit, OnChanges {
   public gridApi: any;
   public gridColumnApi: any;
   public rowData: any;
@@ -16,6 +16,7 @@ export class JournalComponent implements OnInit {
   public defaultColDef: any;
   public rowSelection: any;
   public paginationPageSize: any;
+  public selectedOrderRows: number[] = [];
 
   // columnDefs = [
   //   { headerName: 'Наименование',
@@ -82,6 +83,7 @@ export class JournalComponent implements OnInit {
         checkboxSelection: true,
         minWidth: 150,
         maxWidth: 200,
+        id: '',
       },
       {
         headerName: 'Номер',
@@ -238,12 +240,13 @@ export class JournalComponent implements OnInit {
     this.paginationPageSize = 20;
   }
 
+  ngOnChanges(): void {
+  }
+
   ngOnInit(): void {
-    this.getTable();
   }
 
   getTable(): void {
-    this.rowData = [];
     this.service.getAllUserOrders().subscribe(response => {
       if (response.status === 200) {
         for (const item of response.body) {
@@ -266,6 +269,7 @@ export class JournalComponent implements OnInit {
             time21: item.recipient_accept_from.split(' ')[1],
             time22: item.recipient_accept_to.split(' ')[1],
             author: item.userId,
+            id: item.id
           });
         }
         this.gridApi.setRowData(this.rowData);
@@ -276,6 +280,7 @@ export class JournalComponent implements OnInit {
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    this.getTable();
   }
 
   onPaginationChanged(): void {
@@ -339,6 +344,31 @@ export class JournalComponent implements OnInit {
       stageBtns[i].classList.remove('active-btn');
     }
     event.target.classList.add('active-btn');
+  }
+
+  selectedRows(event: any): void {
+    this.selectedOrderRows = [];
+    for (const item of event.api.getSelectedNodes()) {
+      if (item.data.status === 'Черновик') {
+        this.selectedOrderRows.push(item.data.id);
+      } else {
+        this.gridApi.getRowNode(item.rowIndex).setSelected(false);
+      }
+    }
+    console.log(event.api.getSelectedNodes());
+    console.log('Selected rows', this.selectedOrderRows);
+  }
+
+  sendOrders(event: any): void {
+    for (const item of this.selectedOrderRows) {
+      console.log('ITEM:', item);
+      this.service.sendOrder(item).subscribe(response => {
+        if (response.status === 200) {
+          console.log('Order id ' + item + ' is sent');
+        }
+      });
+    }
+    window.location.reload();
   }
 
   elementType = NgxQrcodeElementTypes.URL;

@@ -317,4 +317,8 @@ export class RestapiService {
   public getAllUserOrders(): Observable<any> {
     return this.http.get(`${this.url}/user/order/getAllOrders`, {observe: 'response', withCredentials: true});
   }
+
+  public sendOrder(id: number): Observable<any> {
+    return this.http.post(`${this.url}/user/order/send?id=${id}`, id, {observe: 'response', withCredentials: true});
+  }
 }

@@ -10,6 +10,7 @@
       <button class="white-btn" (click)="showModal($event)" modal="order-log">Отправить на Email</button>
       <button class="white-btn" (click)="selectAll($event)">Выбрать все</button>
       <button class="white-btn">Экспорт в эксель</button>
+      <button class="white-btn" (click)="sendOrders($event)" *ngIf="selectedOrderRows.length !== 0">Отправить запрос</button>
     </div>
     <div class="row-controls-single">
       <button class="white-btn b-plus" (click)="showModal($event)" modal="filter-table-columns">Отображение столбцов в таблице</button>
@@ -129,6 +130,7 @@
       [suppressRowClickSelection]="true"
       [frameworkComponents]="frameworkComponents"
       [rowSelection]="rowSelection"
+      (selectionChanged)="selectedRows($event)"
       [pagination]="true"
       [paginationPageSize]="paginationPageSize"
       (paginationChanged)="onPaginationChanged()"
@@ -157,7 +159,7 @@
     <div class="filter-title">
       Выберите одну из дат
     </div>
-  
+
     <div class="filter-form">
       <div class="flex justify-content-between">
         <div class="col grey-box flex justify-content-between col-50">
@@ -170,7 +172,7 @@
               <div class="optional">
               </div>
             </div>
-            
+
             <div class="row">
               <div class="control">
                 <label for="">Дата создания заказа с:</label>
@@ -179,7 +181,7 @@
               <div class="optional">
               </div>
             </div>
-      
+
             <div class="row">
               <div class="control">
                 <label for="">Дата выдачи заказа с:</label>
@@ -188,7 +190,7 @@
               <div class="optional">
               </div>
             </div>
-      
+
             <div class="row">
               <div class="control">
                 <label for="">Дата доставки заказа с:</label>
@@ -198,7 +200,7 @@
               </div>
             </div>
           </div>
-    
+
           <div class="filter-box">
             <div class="row">
               <div class="control">
@@ -208,7 +210,7 @@
               <div class="optional">
               </div>
             </div>
-            
+
             <div class="row">
               <div class="control">
                 <label for="">Дата создания заказа по:</label>
@@ -217,7 +219,7 @@
               <div class="optional">
               </div>
             </div>
-      
+
             <div class="row">
               <div class="control">
                 <label for="">Дата выдачи заказа по:</label>
@@ -226,7 +228,7 @@
               <div class="optional">
               </div>
             </div>
-      
+
             <div class="row">
               <div class="control">
                 <label for="">Дата доставки заказа по:</label>
@@ -237,7 +239,7 @@
             </div>
           </div>
         </div>
-    
+
         <div class="col flex justify-content-between col-50 flex-column">
           <div class="grey-box flex justify-content-between">
             <div class="filter-box w-50">
@@ -256,7 +258,7 @@
                 </div>
               </div>
             </div>
-      
+
             <div class="filter-box w-50">
               <div class="row">
                 <label for="">Получатель:</label>
@@ -283,8 +285,8 @@
           </div>
         </div>
       </div>
-  
-      
+
+
     </div>
 
     <button class="active-btn circle-btn close-btn" (click)="hideModal($event)" modal="filter"></button>
@@ -331,7 +333,7 @@
 
                 <div class="popup_subtitle">Адрес выдачи груза:</div>
                 <div class="popup_text">МИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2</div>
-                
+
                 <div class="popup_subtitle">Контакт (по адресу доставки груза):</div>
                 <div class="popup_text">Артём</div>
 
@@ -358,7 +360,7 @@
 
                 <div class="popup_subtitle">Адрес доставки груза:</div>
                 <div class="popup_text">г. Витебск, УЛ. ЛЕНИНГРАДСКАЯ, д. 134</div>
-                
+
                 <div class="popup_subtitle">Контакт (по адресу доставки груза):</div>
                 <div class="popup_text">ОАО "Витебскмясомолпром"</div>
 
@@ -386,7 +388,7 @@
 
                 <div class="popup_subtitle">Кол-во грузовых мест:</div>
                 <div class="popup_text">МИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2</div>
-                
+
                 <div class="popup_subtitle">Вес груза (кг):</div>
                 <div class="popup_text">1</div>
 
@@ -401,7 +403,7 @@
 
                 <div class="popup_subtitle">Адрес доставки груза:</div>
                 <div class="popup_text">...</div>
-                
+
                 <div class="popup_subtitle">Ширина груза (см):</div>
                 <div class="popup_text">...</div>
 
@@ -419,7 +421,7 @@
 
                 <div class="popup_subtitle">Владелец автомобиля:</div>
                 <div class="popup_text">...</div>
-                
+
                 <div class="popup_subtitle">Автомобиль:</div>
                 <div class="popup_text">...</div>
 
@@ -436,7 +438,7 @@
 
                 <div class="popup_subtitle">Владелец автомобиля:</div>
                 <div class="popup_text">...</div>
-                
+
                 <div class="popup_subtitle">Автомобиль:</div>
                 <div class="popup_text">...</div>
 
@@ -590,7 +592,7 @@
               <div class="flex justify-content-between">
                 <div class="col-50">
                   <div class="popup_subtitle">Высота этикетки, мм</div>
-    
+
                   <div class="flex flex-column">
                     <div class="control mb-15">
                       <input type="text">
@@ -602,7 +604,7 @@
                 </div>
                 <div class="col-50">
                   <div class="popup_subtitle">Ширина этикетки, мм</div>
-    
+
                   <div class="row">
                     <div class="control">
                       <input type="text">
@@ -624,7 +626,7 @@
   </div>
 </div>
 
-<div id="sticker-printing" class="sticker-printing"> 
+<div id="sticker-printing" class="sticker-printing">
   <div class="popup-align popup popup-bg">
     <div class="popup_title">Печать наклеек</div>
 
@@ -661,7 +663,7 @@
               Наименование организации, которая формирует заказ
             </div>
             <div class="sticker_angle">
-              
+
             </div>
           </div>
         </div>
@@ -684,7 +686,7 @@
               Наименование организации, которая формирует заказ
             </div>
             <div class="sticker_angle">
-              
+
             </div>
           </div>
         </div>
@@ -707,7 +709,7 @@
               Наименование организации, которая формирует заказ
             </div>
             <div class="sticker_angle">
-              
+
             </div>
           </div>
         </div>
@@ -730,7 +732,7 @@
               Наименование организации, которая формирует заказ
             </div>
             <div class="sticker_angle">
-              
+
             </div>
           </div>
         </div>
@@ -753,7 +755,7 @@
               Наименование организации, которая формирует заказ
             </div>
             <div class="sticker_angle">
-              
+
             </div>
           </div>
         </div>
@@ -784,7 +786,7 @@
   </div>
 </div>
 
-<div id="report-blank" class="report-blank"> 
+<div id="report-blank" class="report-blank">
   <div class="popup-align popup popup-bg">
     <div class="popup_title">Печать Бланка</div>
 
@@ -942,7 +944,7 @@
                     <strong>Характер повреждения упаковки</strong>
                   </td>
                   <td colspan="2">
-                    <strong>Дополнительная упаковка</strong> <br> (КОД) 
+                    <strong>Дополнительная упаковка</strong> <br> (КОД)
                   </td>
                   <td colspan="2">&nbsp;</td>
                   <td colspan="5">
@@ -1162,7 +1164,7 @@
                     <strong>Характер повреждения упаковки</strong>
                   </td>
                   <td colspan="2">
-                    <strong>Дополнительная упаковка</strong> <br> (КОД) 
+                    <strong>Дополнительная упаковка</strong> <br> (КОД)
                   </td>
                   <td colspan="2">&nbsp;</td>
                   <td colspan="5">
@@ -1382,7 +1384,7 @@
                     <strong>Характер повреждения упаковки</strong>
                   </td>
                   <td colspan="2">
-                    <strong>Дополнительная упаковка</strong> <br> (КОД) 
+                    <strong>Дополнительная упаковка</strong> <br> (КОД)
                   </td>
                   <td colspan="2">&nbsp;</td>
                   <td colspan="5">
@@ -1566,7 +1568,7 @@
                   <td colspan="1"><div class="td-square"></div></td>
                   <td colspan="3">терминал - терминал</td>
                   <td colspan="1"><div class="td-square"></div></td>
-                  <td>&nbsp;</td> 
+                  <td>&nbsp;</td>
                   <td colspan="5"><i>Область</i></td>
                   <td colspan="4"><i>Район</i></td>
                 </tr>
@@ -1776,7 +1778,7 @@
                   <td colspan="1"><div class="td-square"></div></td>
                   <td colspan="3">терминал - терминал</td>
                   <td colspan="1"><div class="td-square"></div></td>
-                  <td>&nbsp;</td> 
+                  <td>&nbsp;</td>
                   <td colspan="5"><i>Область</i></td>
                   <td colspan="4"><i>Район</i></td>
                 </tr>
@@ -1986,7 +1988,7 @@
                   <td colspan="1"><div class="td-square"></div></td>
                   <td colspan="3">терминал - терминал</td>
                   <td colspan="1"><div class="td-square"></div></td>
-                  <td>&nbsp;</td> 
+                  <td>&nbsp;</td>
                   <td colspan="5"><i>Область</i></td>
                   <td colspan="4"><i>Район</i></td>
                 </tr>
@@ -2137,7 +2139,7 @@
                     <div class="td-square"></div>
                   </td>
                   <td colspan="1" style="vertical-align: middle;">
-                    M 
+                    M
                   </td>
                   <td colspan="1" style="vertical-align: middle;">
                     <div class="td-square"></div>
@@ -2210,7 +2212,7 @@
                   <td colspan="1"><div class="td-square"></div></td>
                   <td colspan="3">терминал - терминал</td>
                   <td colspan="1"><div class="td-square"></div></td>
-                  <td>&nbsp;</td> 
+                  <td>&nbsp;</td>
                   <td colspan="5"><i>Область</i></td>
                   <td colspan="4"><i>Район</i></td>
                 </tr>
@@ -2355,7 +2357,7 @@
                     <div class="td-square"></div>
                   </td>
                   <td colspan="1" style="vertical-align: middle;">
-                    M 
+                    M
                   </td>
                   <td colspan="1" style="vertical-align: middle;">
                     <div class="td-square"></div>
@@ -2428,7 +2430,7 @@
                   <td colspan="1"><div class="td-square"></div></td>
                   <td colspan="3">терминал - терминал</td>
                   <td colspan="1"><div class="td-square"></div></td>
-                  <td>&nbsp;</td> 
+                  <td>&nbsp;</td>
                   <td colspan="5"><i>Область</i></td>
                   <td colspan="4"><i>Район</i></td>
                 </tr>
@@ -2573,7 +2575,7 @@
                     <div class="td-square"></div>
                   </td>
                   <td colspan="1" style="vertical-align: middle;">
-                    M 
+                    M
                   </td>
                   <td colspan="1" style="vertical-align: middle;">
                     <div class="td-square"></div>
@@ -2646,7 +2648,7 @@
                   <td colspan="1"><div class="td-square"></div></td>
                   <td colspan="3">терминал - терминал</td>
                   <td colspan="1"><div class="td-square"></div></td>
-                  <td>&nbsp;</td> 
+                  <td>&nbsp;</td>
                   <td colspan="5"><i>Область</i></td>
                   <td colspan="4"><i>Район</i></td>
                 </tr>
