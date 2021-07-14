@@ -251,11 +251,26 @@
               }
 
               & .counter {
-                padding-top: 30px;
+                width: 100%;
                 display: grid;
-                grid-template-columns: 45px auto 45px;
-                grid-template-rows: min-content;
+                grid-template-columns: auto;
+                grid-template-rows: min-content min-content;
                 grid-gap: 15px;
+                grid-template-areas: "label" "controls";
+
+                & label {
+                  width: 100%;
+                  grid-area: label;
+                  grid-template-rows: min-content;
+                  grid-template-columns: auto;
+                }
+
+                &-controls {
+                  grid-area: controls;
+                  display: grid;
+                  grid-template-columns: 45px auto 45px;
+                  grid-template-rows: min-content;
+                }
 
                 @media (max-width: 2000px) {
                   & {
