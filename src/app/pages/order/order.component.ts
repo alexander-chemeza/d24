@@ -178,16 +178,16 @@ export class OrderComponent implements OnChanges, OnInit {
       Validators.required
     ]),
     expressSenderTimeoutFrom: new FormControl('', [
-      Validators.required
+      // Validators.required
     ]),
     expressRecipientTimeoutFrom: new FormControl('', [
-      Validators.required
+      // Validators.required
     ]),
     expressSenderTimeoutTo: new FormControl('', [
-      Validators.required
+      // Validators.required
     ]),
     expressRecipientTimeoutTo: new FormControl('', [
-      Validators.required
+      // Validators.required
     ]),
     expressSenderTTN: new FormControl('', [
       Validators.required
@@ -1362,6 +1362,7 @@ export class OrderComponent implements OnChanges, OnInit {
   }
 
   newOrder(event: any): any {
+    let checkIfEmpty = 0;
     let data: any;
     let container: any;
     let currentContainerValue: any;
@@ -1374,51 +1375,103 @@ export class OrderComponent implements OnChanges, OnInit {
         }
       }
 
-      data = {
-        // Step 1
-        deal_type: 1,
-        delivery_type: this.deliveryType,
-        senderCustomerId: this.orderForm.value.expressSender,
-        senderCustomerAddressId: this.orderForm.value.expressSenderAddress,
-        senderCustomerContactId: this.orderForm.value.expressSenderContact,
-        recipientCustomerId: this.orderForm.value.expressRecipient,
-        recipientCustomerAddressId: this.orderForm.value.expressRecipientAddress,
-        recipientCustomerContactId: this.orderForm.value.expressRecipientContact,
-        sender_delivery_from: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderDeliverFrom}`,
-        sender_delivery_to: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderDeliverTo}`,
-        sender_lunch_break_start: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderTimeoutFrom}`,
-        sender_lunch_break_finish: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderTimeoutTo}`,
-        sender_description: this.orderForm.value.expressSenderDescription,
-        recipient_accept_from: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientDeliverFrom}`,
-        recipient_accept_to: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientDeliverTo}`,
-        recipient_description: this.orderForm.value.expressRecipientDescription,
-        recipient_email: this.orderForm.value.expressRecipientNotificationEmail,
-        recipient_lunch_break_start: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutFrom}`,
-        recipient_lunch_break_finish: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutTo}`,
+      if (this.orderForm.value.expressSenderTimeoutFrom === '' ||
+        this.orderForm.value.expressSenderTimeoutTo === '' ||
+        this.orderForm.value.expressRecipientTimeoutFrom === '' ||
+        this.orderForm.value.expressRecipientTimeoutTo === ''
+      ) {
+        checkIfEmpty = 1;
+      }
 
-        // Missed
-        // senderDate: this.orderForm.value.expressSenderDeliveryDate,
-        // senderTTN: this.orderForm.value.expressSenderTTN,
-        // recipientDate: this.orderForm.value.expressRecipientDeliveryDate,
-        // recipientNotification: this.orderForm.value.expressRecipientNotification,
-        // recipientNotificationEmail: this.orderForm.value.expressRecipientNotificationEmail,
+      if (checkIfEmpty === 0) {
+        data = {
+          // Step 1
+          deal_type: 1,
+          delivery_type: this.deliveryType,
+          senderCustomerId: this.orderForm.value.expressSender,
+          senderCustomerAddressId: this.orderForm.value.expressSenderAddress,
+          senderCustomerContactId: this.orderForm.value.expressSenderContact,
+          recipientCustomerId: this.orderForm.value.expressRecipient,
+          recipientCustomerAddressId: this.orderForm.value.expressRecipientAddress,
+          recipientCustomerContactId: this.orderForm.value.expressRecipientContact,
+          sender_delivery_from: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderDeliverFrom}`,
+          sender_delivery_to: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderDeliverTo}`,
+          sender_lunch_break_start: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderTimeoutFrom}`,
+          sender_lunch_break_finish: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderTimeoutTo}`,
+          sender_description: this.orderForm.value.expressSenderDescription,
+          recipient_accept_from: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientDeliverFrom}`,
+          recipient_accept_to: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientDeliverTo}`,
+          recipient_description: this.orderForm.value.expressRecipientDescription,
+          recipient_email: this.orderForm.value.expressRecipientNotificationEmail,
+          recipient_lunch_break_start: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutFrom}`,
+          recipient_lunch_break_finish: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutTo}`,
 
-        // Step 2
-        description_delivery: this.cargoDescription,
-        delivery_placing_type: currentContainerValue,
-        delivery_weight: this.orderForm.value.expressDeliveryWeight,
-        delivery_volume: this.orderForm.value.expressDeliveryVolume,
-        delivery_size_x: this.orderForm.value.expressDeliveryLength,
-        delivery_size_y: this.orderForm.value.expressDeliveryWidth,
-        delivery_size_z: this.orderForm.value.expressDeliveryHeight,
-        amount_packages: this.orderForm.value.expressDeliveryCounter1,
+          // Missed
+          // senderDate: this.orderForm.value.expressSenderDeliveryDate,
+          // senderTTN: this.orderForm.value.expressSenderTTN,
+          // recipientDate: this.orderForm.value.expressRecipientDeliveryDate,
+          // recipientNotification: this.orderForm.value.expressRecipientNotification,
+          // recipientNotificationEmail: this.orderForm.value.expressRecipientNotificationEmail,
 
-        // Missed
-        // ttnChange: this.orderForm.value.expressDeliveryTTN,
-        // await: this.orderForm.value.expressDeliveryWait,
-        // relocation: this.orderForm.value.expressDeliveryRelocate,
-        // agreement: this.orderForm.value.expressDeliveryAgreement
-      };
+          // Step 2
+          description_delivery: this.cargoDescription,
+          delivery_placing_type: currentContainerValue,
+          delivery_weight: this.orderForm.value.expressDeliveryWeight,
+          delivery_volume: this.orderForm.value.expressDeliveryVolume,
+          delivery_size_x: this.orderForm.value.expressDeliveryLength,
+          delivery_size_y: this.orderForm.value.expressDeliveryWidth,
+          delivery_size_z: this.orderForm.value.expressDeliveryHeight,
+          amount_packages: this.orderForm.value.expressDeliveryCounter1,
+
+          // Missed
+          // ttnChange: this.orderForm.value.expressDeliveryTTN,
+          // await: this.orderForm.value.expressDeliveryWait,
+          // relocation: this.orderForm.value.expressDeliveryRelocate,
+          // agreement: this.orderForm.value.expressDeliveryAgreement
+        };
+      } else {
+        data = {
+          // Step 1
+          deal_type: 1,
+          delivery_type: this.deliveryType,
+          senderCustomerId: this.orderForm.value.expressSender,
+          senderCustomerAddressId: this.orderForm.value.expressSenderAddress,
+          senderCustomerContactId: this.orderForm.value.expressSenderContact,
+          recipientCustomerId: this.orderForm.value.expressRecipient,
+          recipientCustomerAddressId: this.orderForm.value.expressRecipientAddress,
+          recipientCustomerContactId: this.orderForm.value.expressRecipientContact,
+          sender_delivery_from: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderDeliverFrom}`,
+          sender_delivery_to: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderDeliverTo}`,
+          sender_description: this.orderForm.value.expressSenderDescription,
+          recipient_accept_from: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientDeliverFrom}`,
+          recipient_accept_to: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientDeliverTo}`,
+          recipient_description: this.orderForm.value.expressRecipientDescription,
+          recipient_email: this.orderForm.value.expressRecipientNotificationEmail,
+
+          // Missed
+          // senderDate: this.orderForm.value.expressSenderDeliveryDate,
+          // senderTTN: this.orderForm.value.expressSenderTTN,
+          // recipientDate: this.orderForm.value.expressRecipientDeliveryDate,
+          // recipientNotification: this.orderForm.value.expressRecipientNotification,
+          // recipientNotificationEmail: this.orderForm.value.expressRecipientNotificationEmail,
+
+          // Step 2
+          description_delivery: this.cargoDescription,
+          delivery_placing_type: currentContainerValue,
+          delivery_weight: this.orderForm.value.expressDeliveryWeight,
+          delivery_volume: this.orderForm.value.expressDeliveryVolume,
+          delivery_size_x: this.orderForm.value.expressDeliveryLength,
+          delivery_size_y: this.orderForm.value.expressDeliveryWidth,
+          delivery_size_z: this.orderForm.value.expressDeliveryHeight,
+          amount_packages: this.orderForm.value.expressDeliveryCounter1,
+
+          // Missed
+          // ttnChange: this.orderForm.value.expressDeliveryTTN,
+          // await: this.orderForm.value.expressDeliveryWait,
+          // relocation: this.orderForm.value.expressDeliveryRelocate,
+          // agreement: this.orderForm.value.expressDeliveryAgreement
+        };
+      }
     }
 
     this.service.placeNewOrder(data).subscribe(response => {
