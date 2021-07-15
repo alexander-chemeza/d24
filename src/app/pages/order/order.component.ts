@@ -1134,12 +1134,13 @@ export class OrderComponent implements OnChanges, OnInit {
       // The request object
       this.street = {
         cityCode: cityInfo.city_code,
-        regionCode: cityInfo.region_code
+        regionCode: cityInfo.region_code,
+        districtCode: cityInfo.district_code
       };
       // Get streets
       this.service.streets(this.street).subscribe(response => {
         if (response.status === 200) {
-          this.streetList = response.body;
+          this.streetList = response.body.filter((item: any) => item.district_code === cityInfo.district_code);
         }
       });
     }
@@ -1635,10 +1636,10 @@ export class OrderComponent implements OnChanges, OnInit {
   }
 
   searchStreets(event: any): void {
-    if (event.target.value === '' || this.streetList.length === 0) {
+    if (event.target.value === '') {
       this.service.streets(this.street).subscribe(response => {
         if (response.status === 200) {
-          this.streetList = response.body;
+          this.streetList = response.body.filter((item: any) => item.district_code === this.street.districtCode);
         }
       });
     } else {
