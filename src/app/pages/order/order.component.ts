@@ -1244,16 +1244,18 @@ export class OrderComponent implements OnChanges, OnInit {
         this.service.getAllUserCustomer().subscribe(resp => {
           if (resp.status === 200) {
             array = resp.body;
+            console.log(resp.body);
             form.reset();
+            this.expressSenderAgents = resp.body.sort((a: any, b: any) => a.id > b.id ? 1 : -1);
+            this.expressReceiverAgents = resp.body.sort((a: any, b: any) => a.id > b.id ? 1 : -1);
             this.hideModal(modalId);
             if (field === 'expressSender') {
               this.orderForm.patchValue({
-                expressSender: array[array.length - 1].id
-
+                expressSender: this.expressSenderAgents[this.expressSenderAgents.length - 1].id
               });
             } else if (field === 'expressRecipient') {
               this.orderForm.patchValue({
-                expressRecipient: array[array.length - 1].id
+                expressRecipient: this.expressReceiverAgents[this.expressReceiverAgents.length - 1].id
               });
             }
           }
