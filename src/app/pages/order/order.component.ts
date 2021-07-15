@@ -718,6 +718,14 @@ export class OrderComponent implements OnChanges, OnInit {
     // Set value to amount counters
     this.orderForm.controls.expressDeliveryCounter1.setValue(0);
     this.orderForm.controls.expressDeliveryCounter2.setValue(0);
+
+    this.orderForm.patchValue({
+      expressSenderTimeoutFrom: '00:00',
+      expressSenderTimeoutTo: '00:00',
+      expressRecipientTimeoutFrom: '00:00',
+      expressRecipientTimeoutTo: '00:00',
+    });
+
     // Get delivery types from database
     this.service.deliveryTypes().subscribe(data => {
       this.deliveryTypes = data;
