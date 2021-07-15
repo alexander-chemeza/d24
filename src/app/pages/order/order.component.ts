@@ -1337,6 +1337,35 @@ export class OrderComponent implements OnChanges, OnInit {
                 });
                 this.schedule(this.expressSenderAddresses, 'expressSender', this.orderForm.value.expressSenderAddress);
                 this.expressSenderContacts = [];
+              } else if (modalId === 'new-express-recipient-address') {
+                this.expressReceiverAddresses = [];
+                for (const item of resp.body) {
+                  let housing = '';
+                  let building = '';
+                  let office = '';
+                  let room = '';
+                  if (item.housing !== '') {
+                    housing = `корп. ${item.housing}, `;
+                  }
+                  if (item.building !== '') {
+                    building = `строение ${item.building}, `;
+                  }
+                  if (item.office !== '') {
+                    office = `офис ${item.office}, `;
+                  }
+                  if (item.room !== '') {
+                    room = `кв. ${item.room}`;
+                  }
+                  this.expressReceiverAddresses.push({
+                    id: item.id,
+                    fullName: `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`
+                  });
+                }
+                this.orderForm.patchValue({
+                  expressRecipientAddress: this.expressReceiverAddresses.sort((a: any, b: any) => a.id > b.id ? 1 : -1)[this.expressReceiverAddresses.length - 1].id
+                });
+                this.schedule(this.expressReceiverAddresses, 'expressRecipient', this.orderForm.value.expressRecipientAddress);
+                this.expressReceiverContacts = [];
               }
             }
           });
