@@ -159,25 +159,26 @@ export interface SaveUserCustomer {
 
 // Interface to save address book address
 export interface SaveUserCustomerAddress {
-  building: string;
+  building?: string;
   cityId?: number;
-  cityName: string;
+  cityName?: string;
   customerId?: number;
   deliveryZoneId?: string;
-  description: string;
-  house: string;
-  housing: string;
+  description?: string;
+  house?: string;
+  housing?: string;
   id?: number;
-  mainAddress: boolean;
-  office: string;
-  pauseFrom: string;
-  pauseTo: string;
-  room: string;
+  mainAddress?: boolean;
+  office?: string;
+  pauseFrom?: string;
+  pauseTo?: string;
+  room?: string;
   streetId?: number;
-  streetName: string;
-  timeFrom: string;
-  timeTo: string;
+  streetName?: string;
+  timeFrom?: string;
+  timeTo?: string;
   fullName?: string;
+  name?: string;
 }
 
 // Interface to save address book contact

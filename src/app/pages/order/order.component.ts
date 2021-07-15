@@ -1253,10 +1253,14 @@ export class OrderComponent implements OnChanges, OnInit {
               this.orderForm.patchValue({
                 expressSender: this.expressSenderAgents[this.expressSenderAgents.length - 1].id
               });
+              this.expressSenderAddresses = [];
+              this.expressSenderContacts = [];
             } else if (field === 'expressRecipient') {
               this.orderForm.patchValue({
                 expressRecipient: this.expressReceiverAgents[this.expressReceiverAgents.length - 1].id
               });
+              this.expressReceiverAddresses = [];
+              this.expressReceiverContacts = [];
             }
           }
         });
@@ -1302,17 +1306,40 @@ export class OrderComponent implements OnChanges, OnInit {
         if (response.status === 200) {
           this.hideModal(modalId);
           form.reset();
-          // this.service.getAllUserCustomerAddress(agentId).subscribe(resp => {
-          //   if (response.status === 200) {
-          //     addresses.pop();
-          //     for (const address of resp.body) {
-          //       addresses.push({
-          //         id: address.id,
-          //         name: `${address.cityName}, ${address.streetName}`
-          //       });
-          //     }
-          //   }
-          // });
+          this.service.getAllUserCustomerAddress(id).subscribe(resp => {
+            if (response.status === 200) {
+              if (modalId === 'new-express-sender-address') {
+                this.expressSenderAddresses = [];
+                for (const item of resp.body) {
+                  let housing = '';
+                  let building = '';
+                  let office = '';
+                  let room = '';
+                  if (item.housing !== '') {
+                    housing = `корп. ${item.housing}, `;
+                  }
+                  if (item.building !== '') {
+                    building = `строение ${item.building}, `;
+                  }
+                  if (item.office !== '') {
+                    office = `офис ${item.office}, `;
+                  }
+                  if (item.room !== '') {
+                    room = `кв. ${item.room}`;
+                  }
+                  this.expressSenderAddresses.push({
+                    id: item.id,
+                    fullName: `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`
+                  });
+                }
+                this.orderForm.patchValue({
+                  expressSenderAddress: this.expressSenderAddresses.sort((a: any, b: any) => a.id > b.id ? 1 : -1)[this.expressSenderAddresses.length - 1].id
+                });
+                this.schedule(this.expressSenderAddresses, 'expressSender', this.orderForm.value.expressSenderAddress);
+                this.expressSenderContacts = [];
+              }
+            }
+          });
         }
       });
     }
