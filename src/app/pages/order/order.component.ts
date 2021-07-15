@@ -1390,6 +1390,31 @@ export class OrderComponent implements OnChanges, OnInit {
       if (response.status === 200) {
         this.hideModal(modalId);
         form.reset();
+        this.service.getAllUserCustomerContact(addressId).subscribe(resp => {
+          if (modalId === 'new-express-sender-contact') {
+            this.expressSenderContacts = [];
+            for (const item of resp.body) {
+              this.expressSenderContacts.push({
+                id: item.id,
+                name: item.name
+              });
+            }
+            this.orderForm.patchValue({
+              expressSenderContact: this.expressSenderContacts.sort((a: any, b: any) => a.id > b.id ? 1 : -1)[this.expressSenderContacts.length - 1].id
+            });
+          } else if (modalId === 'new-express-recipient-contact') {
+            this.expressReceiverContacts = [];
+            for (const item of resp.body) {
+              this.expressReceiverContacts.push({
+                id: item.id,
+                name: item.name
+              });
+            }
+            this.orderForm.patchValue({
+              expressRecipientContact: this.expressReceiverContacts.sort((a: any, b: any) => a.id > b.id ? 1 : -1)[this.expressReceiverContacts.length - 1].id
+            });
+          }
+        });
       }
     });
   }
