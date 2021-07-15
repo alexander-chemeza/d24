@@ -38,7 +38,7 @@ export class BookComponent implements OnInit {
   streetList: StreetsList[] = [];
   street: Street = {
     cityCode: '',
-    regionCode: ''
+    regionCode: '',
   };
 
   request = '';
@@ -141,13 +141,14 @@ export class BookComponent implements OnInit {
       // The request object
       this.street = {
         cityCode: cityInfo.city_code,
-        regionCode: cityInfo.region_code
+        regionCode: cityInfo.region_code,
+        districtCode: cityInfo.district_code
       };
       console.log('Street search data', this.street);
       // Get streets
       this.service.streets(this.street).subscribe(response => {
         if (response.status === 200) {
-          this.streetList = response.body;
+          this.streetList = response.body.filter((item: any) => item.district_code === cityInfo.district_code);
           console.log('Street list', this.streetList);
         }
       });
@@ -298,14 +299,15 @@ export class BookComponent implements OnInit {
 
   onKey2(event: any): void {
     console.log('from search', this.streetList);
-    if (event.target.value === '' || this.streetList.length === 0) {
+    if (event.target.value === '') {
       this.service.streets(this.street).subscribe(response => {
         if (response.status === 200) {
-          this.streetList = response.body;
+          this.streetList = response.body.filter((item: any) => item.district_code === this.street.districtCode);
         }
       });
     } else {
       this.streetList = this.search2(event.target.value);
+      console.log('Street info', this.streetList);
     }
   }
 

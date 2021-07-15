@@ -131,6 +131,7 @@ export interface Feedback {
 export interface Street {
   cityCode: string;
   regionCode: string;
+  districtCode?: string;
 }
 
 // Interface to delete customer
