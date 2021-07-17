@@ -4,6 +4,7 @@ import {JournalButtonsComponent} from './journal-buttons/journal-buttons.compone
 import {RestapiService} from '../../restapi.service';
 import {concat} from 'rxjs';
 import {toArray} from 'rxjs/operators';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-journal',
@@ -11,6 +12,7 @@ import {toArray} from 'rxjs/operators';
   styleUrls: ['./journal.component.scss']
 })
 export class JournalComponent implements OnInit, OnChanges {
+  pipe = new DatePipe('en-US');
   public gridApi: any;
   public gridColumnApi: any;
   public rowData: any;
@@ -102,6 +104,23 @@ export class JournalComponent implements OnInit, OnChanges {
         flex: 1,
         minWidth: 150,
         maxWidth: 200
+      },
+      {
+        headerName: 'Дата изменения статуса',
+        field: 'orderDate',
+        sortable: false,
+        flex: 1,
+        minWidth: 200,
+        maxWidth: 300,
+      },
+      {
+        headerName: 'Время изменения статуса',
+        field: 'orderTime',
+        sortable: false,
+        flex: 1,
+        minWidth: 210,
+        maxWidth: 350,
+        id: '',
       },
       {
         headerName: 'Услуга',
@@ -255,6 +274,8 @@ export class JournalComponent implements OnInit, OnChanges {
           this.rowData.push({
             number: item.order_number,
             status: item.status,
+            orderDate: this.pipe.transform(item.orderDate.split('T')[0], 'dd.MM.yyyy'),
+            orderTime: item.orderDate.split('T')[1].substr(0, 5),
             service: item.deal_type,
             delivery: item.delivery_type,
             ttn: '',

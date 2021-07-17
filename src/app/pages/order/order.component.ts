@@ -886,14 +886,14 @@ export class OrderComponent implements OnChanges, OnInit {
             // Prevent Saturday and Sunday from being selected.
             return day !== 0 && day !== 1 && day !== 2 && day !== 3 && day !== 4 && day !== 5 && day !== 6;
           };
-          this.expressSenderSchedule = 'Данный адрес не обслуживается';
+          this.expressSenderSchedule = 'График не установлен. Ваш заказ будет обработан. С вами свяжется оператор.';
         } else if (field === 'expressRecipient') {
           this.expressRecipientDate = (d: Date): boolean => {
             const day = (d || new Date()).getDay();
             // Prevent Saturday and Sunday from being selected.
             return day !== 0 && day !== 1 && day !== 2 && day !== 3 && day !== 4 && day !== 5 && day !== 6;
           };
-          this.expressRecipientSchedule = 'Данный адрес не обслуживается';
+          this.expressRecipientSchedule = 'График не установлен. Ваш заказ будет обработан. С вами свяжется оператор.';
         }
       }
     }
