@@ -10,7 +10,7 @@
       <button class="white-btn" (click)="showModal($event)" modal="order-log">Отправить на Email</button>
       <button class="white-btn" (click)="selectAll($event)">Выбрать все</button>
       <button class="white-btn">Экспорт в эксель</button>
-      <button class="white-btn" (click)="sendOrders($event)" *ngIf="selectedOrderRows.length !== 0">Отправить запрос</button>
+      <button class="white-btn" (click)="sendOrders($event)" *ngIf="selectedOrderRows.length !== 0">Подтвердить</button>
     </div>
     <div class="row-controls-single">
       <button class="white-btn b-plus" (click)="showModal($event)" modal="filter-table-columns">Отображение столбцов в таблице</button>
