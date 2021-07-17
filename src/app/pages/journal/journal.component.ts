@@ -239,7 +239,7 @@ export class JournalComponent implements OnInit, OnChanges {
       resizable: true,
     };
     this.rowSelection = 'multiple';
-    this.paginationPageSize = 20;
+    this.paginationPageSize = 10;
   }
 
   ngOnChanges(): void {
@@ -364,7 +364,7 @@ export class JournalComponent implements OnInit, OnChanges {
   sendOrders(event: any): void {
     const observables = this.selectedOrderRows.map(x => this.service.sendOrder(x));
 
-    concat(...observables).pipe(toArray()).subscribe(response => console.log(response));
+    concat(...observables).pipe(toArray()).subscribe(response => window.location.reload());
     // for (const item of this.selectedOrderRows) {
     //   console.log('ITEM:', item);
     //   this.service.sendOrder(item).subscribe(response => {
@@ -373,7 +373,7 @@ export class JournalComponent implements OnInit, OnChanges {
     //     }
     //   });
     // }
-    window.location.reload();
+
   }
 
   elementType = NgxQrcodeElementTypes.URL;
