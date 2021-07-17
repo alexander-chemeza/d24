@@ -268,7 +268,8 @@
                 &-controls {
                   grid-area: controls;
                   display: grid;
-                  grid-template-columns: 45px auto 45px;
+                  grid-gap: 10px;
+                  grid-template-columns: 30px auto 30px;
                   grid-template-rows: min-content;
                 }
 
