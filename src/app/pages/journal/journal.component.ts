@@ -2,6 +2,8 @@ import {Component, OnChanges, OnInit} from '@angular/core';
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import {JournalButtonsComponent} from './journal-buttons/journal-buttons.component';
 import {RestapiService} from '../../restapi.service';
+import {concat} from 'rxjs';
+import {toArray} from 'rxjs/operators';
 
 @Component({
   selector: 'app-journal',
@@ -360,14 +362,17 @@ export class JournalComponent implements OnInit, OnChanges {
   }
 
   sendOrders(event: any): void {
-    for (const item of this.selectedOrderRows) {
-      console.log('ITEM:', item);
-      this.service.sendOrder(item).subscribe(response => {
-        if (response.status === 200) {
-          console.log('Order id ' + item + ' is sent');
-        }
-      });
-    }
+    const observables = this.selectedOrderRows.map(x => this.service.sendOrder(x));
+
+    concat(...observables).pipe(toArray()).subscribe(response => console.log(response));
+    // for (const item of this.selectedOrderRows) {
+    //   console.log('ITEM:', item);
+    //   this.service.sendOrder(item).subscribe(response => {
+    //     if (response.status === 200) {
+    //       console.log('Order id ' + item + ' is sent');
+    //     }
+    //   });
+    // }
     window.location.reload();
   }
 
