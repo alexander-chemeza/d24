@@ -1,18 +1,18 @@
 <div class="journal-content">
   <div class="row-search">
     <input class="m-0" type="search" placeholder="Поиск">
-    <button class="white-btn b-plus" (click)="showModal($event)" modal="filter">Фильтр</button>
+<!--    <button class="white-btn b-plus" (click)="showModal($event)" modal="filter">Фильтр</button>-->
   </div>
   <div class="row-controls">
     <div class="row-controls-group">
-      <button class="white-btn">Бланк доставки</button>
-      <button class="white-btn" (click)="showModal($event)" modal="sticker-printing">Этикетки</button>
+      <button class="white-btn" *ngIf="selectedAppliedOrderRows.length !== 0">Бланк доставки</button>
+      <button class="white-btn" (click)="showModal($event)" *ngIf="selectedAppliedOrderRows.length !== 0" modal="sticker-printing">Этикетки</button>
       <button class="white-btn" (click)="showModal($event)" modal="order-log">Отправить на Email</button>
       <button class="white-btn">Экспорт в эксель</button>
-      <button class="white-btn" (click)="sendOrders($event)" *ngIf="selectedOrderRows.length !== 0">Подтвердить</button>
+      <button class="white-btn" (click)="sendOrders($event)" *ngIf="selectedDraftOrderRow.length !== 0">Подтвердить</button>
     </div>
     <div class="row-controls-single">
-      <button class="white-btn b-plus" (click)="showModal($event)" modal="filter-table-columns">Отображение столбцов в таблице</button>
+<!--      <button class="white-btn b-plus" (click)="showModal($event)" modal="filter-table-columns">Отображение столбцов в таблице</button>-->
 
       <div id="filter-table-columns" class="filter-table-columns">
         <div class="row flex">

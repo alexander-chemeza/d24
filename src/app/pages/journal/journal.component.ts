@@ -20,7 +20,8 @@ export class JournalComponent implements OnInit, OnChanges {
   public defaultColDef: any;
   public rowSelection: any;
   public paginationPageSize: any;
-  public selectedOrderRows: number[] = [];
+  public selectedDraftOrderRow: number[] = [];
+  public selectedAppliedOrderRows: number[] = [];
 
   // columnDefs = [
   //   { headerName: 'Наименование',
@@ -303,6 +304,8 @@ export class JournalComponent implements OnInit, OnChanges {
           });
         }
         this.gridApi.setRowData(this.rowData);
+        this.selectedDraftOrderRow = [];
+        this.selectedAppliedOrderRows = [];
       }
     });
   }
@@ -377,20 +380,23 @@ export class JournalComponent implements OnInit, OnChanges {
   }
 
   selectedRows(event: any): void {
-    this.selectedOrderRows = [];
+    this.selectedDraftOrderRow = [];
+    this.selectedAppliedOrderRows = [];
     for (const item of event.api.getSelectedNodes()) {
       if (item.data.status === 'Черновик') {
-        this.selectedOrderRows.push(item.data.id);
+        this.selectedDraftOrderRow.push(item.data.id);
+      } else if (item.data.status === 'Загружен') {
+        this.selectedAppliedOrderRows.push(item.data.id);
       } else {
         this.gridApi.getRowNode(item.rowIndex).setSelected(false);
       }
     }
     console.log(event.api.getSelectedNodes());
-    console.log('Selected rows', this.selectedOrderRows);
+    console.log('Selected rows', this.selectedDraftOrderRow);
   }
 
   sendOrders(event: any): void {
-    const observables = this.selectedOrderRows.map(x => this.service.sendOrder(x));
+    const observables = this.selectedDraftOrderRow.map(x => this.service.sendOrder(x));
 
     concat(...observables).pipe(toArray()).subscribe(response => this.getTable());
     // for (const item of this.selectedOrderRows) {
