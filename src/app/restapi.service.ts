@@ -323,4 +323,8 @@ export class RestapiService {
   public sendOrder(id: number): Observable<any> {
     return this.http.post(`${this.url}/user/order/send?id=${id}`, id, {observe: 'response', withCredentials: true});
   }
+
+  public cancelOrder(id: number): Observable<any> {
+    return this.http.post(`${this.url}/user/order/cancelOrder?id=${id}`, id, {observe: 'response', withCredentials: true});
+  }
 }

@@ -64,14 +64,19 @@ export class JournalComponent implements OnInit, OnChanges {
       cellRenderer: 'btnCellRenderer',
       cellRendererParams: {
         clicked: (target: any): void => {
-          // alert(`${field} was clicked`);
+          // alert(`${field} was clicked`);`
           if (target === 'delete') {
             const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
-            console.log(id);
-
+            console.log('delete id = ', id);
+            this.service.cancelOrder(id).subscribe(response => {
+              if (response.status === 200) {
+                console.log('Order id = ' + id + ' is deleted');
+                this.getTable();
+              }
+            });
           } else if (target === 'edit') {
-            console.log('edit');
             const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+            console.log('edit id = ', id);
           }
         }
       },
@@ -268,7 +273,9 @@ export class JournalComponent implements OnInit, OnChanges {
   }
 
   getTable(): void {
+    this.rowData = [];
     this.service.getAllUserOrders().subscribe(response => {
+
       if (response.status === 200) {
         for (const item of response.body) {
           this.rowData.push({
@@ -385,7 +392,7 @@ export class JournalComponent implements OnInit, OnChanges {
   sendOrders(event: any): void {
     const observables = this.selectedOrderRows.map(x => this.service.sendOrder(x));
 
-    concat(...observables).pipe(toArray()).subscribe(response => window.location.reload());
+    concat(...observables).pipe(toArray()).subscribe(response => this.getTable());
     // for (const item of this.selectedOrderRows) {
     //   console.log('ITEM:', item);
     //   this.service.sendOrder(item).subscribe(response => {
