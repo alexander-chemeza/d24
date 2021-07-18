@@ -8,7 +8,6 @@
       <button class="white-btn">Бланк доставки</button>
       <button class="white-btn" (click)="showModal($event)" modal="sticker-printing">Этикетки</button>
       <button class="white-btn" (click)="showModal($event)" modal="order-log">Отправить на Email</button>
-      <button class="white-btn" (click)="selectAll($event)">Выбрать все</button>
       <button class="white-btn">Экспорт в эксель</button>
       <button class="white-btn" (click)="sendOrders($event)" *ngIf="selectedOrderRows.length !== 0">Подтвердить</button>
     </div>
