@@ -83,6 +83,8 @@ export class JournalComponent implements OnInit, OnChanges {
           } else if (target === 'show') {
             const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
             this.itemToShow = this.storedTableResponse.find((item: any) => item.id === id);
+            console.log('item to show', this.itemToShow);
+
             this.showModal('view-request');
           }
         }
@@ -286,29 +288,31 @@ export class JournalComponent implements OnInit, OnChanges {
       if (response.status === 200) {
         this.storedTableResponse = response.body;
         for (const item of response.body) {
-          this.rowData.push({
-            number: item.order_number,
-            status: item.status,
-            orderDate: this.pipe.transform(item.orderDate.split('T')[0], 'dd.MM.yyyy'),
-            orderTime: item.orderDate.split('T')[1].substr(0, 5),
-            service: item.deal_type,
-            delivery: item.delivery_type,
-            ttn: '',
-            sender: item.sender_name,
-            recipient: item.recipient_name,
-            place: item.delivery_placing_type,
-            amount: item.amount_packages,
-            address1: item.sender_address,
-            date1: item.sender_delivery_from.split(' ')[0],
-            time11: item.sender_delivery_from.split(' ')[1],
-            time12: item.sender_delivery_to.split(' ')[1],
-            address2: item.recipient_address,
-            date2: item.recipient_accept_from.split(' ')[0],
-            time21: item.recipient_accept_from.split(' ')[1],
-            time22: item.recipient_accept_to.split(' ')[1],
-            author: item.userId,
-            id: item.id
-          });
+          if (item.status !== 'Отменен') {
+            this.rowData.push({
+              number: item.order_number,
+              status: item.status,
+              orderDate: this.pipe.transform(item.orderDate.split('T')[0], 'dd.MM.yyyy'),
+              orderTime: item.orderDate.split('T')[1].substr(0, 5),
+              service: item.deal_type,
+              delivery: item.delivery_type,
+              ttn: '',
+              sender: item.sender_name,
+              recipient: item.recipient_name,
+              place: item.delivery_placing_type,
+              amount: item.amount_packages,
+              address1: item.sender_address,
+              date1: item.sender_delivery_from.split(' ')[0],
+              time11: item.sender_delivery_from.split(' ')[1],
+              time12: item.sender_delivery_to.split(' ')[1],
+              address2: item.recipient_address,
+              date2: item.recipient_accept_from.split(' ')[0],
+              time21: item.recipient_accept_from.split(' ')[1],
+              time22: item.recipient_accept_to.split(' ')[1],
+              author: item.userId,
+              id: item.id
+            });
+          }
         }
         this.gridApi.setRowData(this.rowData);
         this.selectedDraftOrderRow = [];

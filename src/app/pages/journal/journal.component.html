@@ -7,8 +7,8 @@
     <div class="row-controls-group">
       <button class="white-btn" *ngIf="selectedAppliedOrderRows.length !== 0">Бланк доставки</button>
       <button class="white-btn" (click)="showModal('sticker-printing')" *ngIf="selectedAppliedOrderRows.length !== 0">Этикетки</button>
-      <button class="white-btn" (click)="showModal('order-log')">Отправить на Email</button>
-      <button class="white-btn">Экспорт в эксель</button>
+<!--      <button class="white-btn" (click)="showModal('order-log')">Отправить на Email</button>-->
+<!--      <button class="white-btn">Экспорт в эксель</button>-->
       <button class="white-btn" (click)="sendOrders($event)" *ngIf="selectedDraftOrderRow.length !== 0">Подтвердить</button>
     </div>
     <div class="row-controls-single">
@@ -293,22 +293,36 @@
 </div>
 
 <div id="view-request" class="modal view-request-modal">
-  <div class="popup-align popup popup-bg">
+  <form class="popup-align popup popup-bg">
     <div class="popup_title">Просмотр заявки</div>
 
     <div class="grey-box mb-30">
       <div class="flex flex-wrap">
         <div class="col-33">
           <div class="popup_subtitle">Услуга:</div>
-          <div class="popup_text">Экспресс-доставка грузов</div>
+          <div class="popup_text">
+            <mat-form-field floatLabel="never">
+              <mat-select>
+                <mat-option>
+                  1
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
         <div class="col-33">
           <div class="popup_subtitle">Тип доставки:</div>
-          <div class="popup_text">Терминал/Дверь</div>
+          <mat-form-field floatLabel="never">
+            <mat-select>
+              <mat-option>
+                1
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
         <div class="col-33">
           <div class="popup_subtitle">Описание груза:</div>
-          <div class="popup_text">...</div>
+          <input type="text">
         </div>
       </div>
     </div>
@@ -328,28 +342,50 @@
             <div class="col-50">
               <div class="grey-box">
                 <div class="popup_subtitle">Отправитель:</div>
-                <div class="popup_text">ООО "НТТ Импорт"</div>
+                <mat-form-field floatLabel="never">
+                  <mat-select>
+                    <mat-option>
+                      1
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
 
                 <div class="popup_subtitle">Адрес выдачи груза:</div>
-                <div class="popup_text">МИНСКАЯ ОБЛАСТЬ, Минский, д. Большое Стиклево, ТЕР. РАЙОН Д. БОЛЬШОЕ СТИКЛЕВО, д. 40, корп. 2</div>
+                <mat-form-field floatLabel="never">
+                  <mat-select>
+                    <mat-option>
+                      1
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
 
                 <div class="popup_subtitle">Контакт (по адресу доставки груза):</div>
-                <div class="popup_text">Артём</div>
+                <mat-form-field floatLabel="never">
+                  <mat-select>
+                    <mat-option>
+                      1
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
 
                 <div class="popup_subtitle">Дата выдачи груза:</div>
-                <div class="popup_text">25.02.2021 г.</div>
+                <mat-form-field class="example-full-width" appearance="fill">
+                  <input id="expressSenderDeliveryDate" formControlName="expressSenderDeliveryDate" matInput [matDatepicker]="expressSenderDatePicker">
+                  <mat-datepicker-toggle matSuffix [for]="expressSenderDatePicker"></mat-datepicker-toggle>
+                  <mat-datepicker #expressSenderDatePicker></mat-datepicker>
+                </mat-form-field>
 
                 <div class="popup_subtitle">Время выдачи груза</div>
-                <div class="popup_text"> с 09:00 по 18:00</div>
+                <input type="text">
 
                 <div class="popup_subtitle">Время перерыва</div>
-                <div class="popup_text">00:00 по 00:00</div>
+                <input type="text">
 
-                <div class="popup_subtitle">ТТН:</div>
-                <div class="popup_text">...</div>
+<!--                <div class="popup_subtitle">ТТН:</div>-->
+<!--                <div class="popup_text">...</div>-->
 
                 <div class="popup_subtitle">Примечание (по адресу выдачи груза):</div>
-                <div class="popup_text">...</div>
+                <input type="text">
               </div>
             </div>
             <div class="col-50">
@@ -454,7 +490,7 @@
     </div>
 
     <button class="active-btn circle-btn close-btn" (click)="hideModal('view-request')"></button>
-  </div>
+  </form>
 </div>
 
 <div id="order-log" class="order-log">

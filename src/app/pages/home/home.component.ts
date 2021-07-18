@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit, OnChanges {
     this.service.getAllUserOrders().subscribe(response => {
       if (response.status === 200) {
         for (const item of response.body) {
-          if (item.status !== 'Черновик') {
+          if (item.status === 'Загружен') {
             this.rowData.push({
               number: item.order_number,
               status: item.status,
