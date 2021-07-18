@@ -163,14 +163,14 @@
 }
 
 #view-request {
-  position: absolute;
-  left: 0;
-  top: 0;
+  //position: absolute;
+  //left: 0;
+  //top: 0;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
-  display: none;
+  //display: none;
 }
 
 .popup-align {
@@ -283,7 +283,7 @@ button {
   &.show-modal {
     display: block;
   }
-  
+
   .checkbox-block {
     margin-right: 10px;
   }
@@ -391,7 +391,7 @@ button {
   width: 100%;
   height: 100%;
   display: none;
-  
+
   &.show-modal {
     display: flex;
   }
@@ -406,7 +406,7 @@ button {
   width: 100%;
   height: 100%;
   display: flex;
-  
+
   &.show-modal {
     display: flex;
   }
@@ -436,7 +436,7 @@ button {
       width: 100px;
     }
   }
-  
+
   table {
     border-collapse: collapse;
     width: 100%;
@@ -451,7 +451,7 @@ button {
 
     thead {
       font-size: 14px;
-      font-weight: bold;      
+      font-weight: bold;
     }
 
     .report-header {
@@ -494,6 +494,29 @@ button {
       td {
         border: 0;
       }
+    }
+  }
+}
+
+.modal {
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background-color: #A070B5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -webkit-box-shadow: 5px 5px 28px 14px rgba(0,0,0,0.31);
+  box-shadow: 5px 5px 28px 14px rgba(0,0,0,0.31);
+
+  &.view-request-modal {
+    display: none;
+    max-width: 1240px;
+    max-height: 820px;
+
+    &.show-modal {
+      display: flex;
     }
   }
 }

@@ -22,6 +22,8 @@ export class JournalComponent implements OnInit, OnChanges {
   public paginationPageSize: any;
   public selectedDraftOrderRow: number[] = [];
   public selectedAppliedOrderRows: number[] = [];
+  public storedTableResponse: any;
+  public itemToShow: any;
 
   // columnDefs = [
   //   { headerName: 'Наименование',
@@ -78,6 +80,10 @@ export class JournalComponent implements OnInit, OnChanges {
           } else if (target === 'edit') {
             const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
             console.log('edit id = ', id);
+          } else if (target === 'show') {
+            const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+            this.itemToShow = this.storedTableResponse.find((item: any) => item.id === id);
+            this.showModal('view-request');
           }
         }
       },
@@ -275,9 +281,10 @@ export class JournalComponent implements OnInit, OnChanges {
 
   getTable(): void {
     this.rowData = [];
+    this.storedTableResponse = [];
     this.service.getAllUserOrders().subscribe(response => {
-
       if (response.status === 200) {
+        this.storedTableResponse = response.body;
         for (const item of response.body) {
           this.rowData.push({
             number: item.order_number,
@@ -335,15 +342,14 @@ export class JournalComponent implements OnInit, OnChanges {
     this.gridApi.paginationSetPageSize(Number(event.target.value));
   }
 
-  showModal(event: any): void {
-    const targetId = event.target.getAttribute('modal');
-    const modal: any = document.getElementById(targetId);
-    modal.classList.toggle('show-modal');
+  showModal(id: string): void {
+    const modal: any = document.getElementById(id);
+    modal.classList.remove('hide-modal');
+    modal.classList.add('show-modal');
   }
 
-  hideModal(event: any): void {
-    const targetId = event.target.getAttribute('modal');
-    const modal: any = document.getElementById(targetId);
+  hideModal(id: string): void {
+    const modal: any = document.getElementById(id);
     modal.classList.add('hide-modal');
     modal.classList.remove('show-modal');
   }
