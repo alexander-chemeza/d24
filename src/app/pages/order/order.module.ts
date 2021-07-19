@@ -9,6 +9,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {MatInputModule} from '@angular/material/input';
 import {CustomDateAdapter} from './CustomDateAdapter';
+import {NgxMaskModule} from 'ngx-mask';
 
 
 
@@ -22,7 +23,8 @@ import {CustomDateAdapter} from './CustomDateAdapter';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ScrollingModule
+    ScrollingModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'ru-RU'},

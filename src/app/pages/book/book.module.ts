@@ -8,6 +8,7 @@ import {BookComponent} from './book.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {NgxMaskModule} from 'ngx-mask';
 
 
 
@@ -23,7 +24,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     ContragentsModule,
     MatSelectModule,
     MatFormFieldModule,
-    ScrollingModule
+    ScrollingModule,
+    NgxMaskModule.forRoot(),
   ]
 })
 export class BookModule { }
