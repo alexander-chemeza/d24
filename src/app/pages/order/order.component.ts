@@ -1595,7 +1595,7 @@ export class OrderComponent implements OnChanges, OnInit {
   }
 
   filterCities(value: string): Cities[] {
-    return this.citiesList.filter(option => option.fullName.toLowerCase().includes(value.toLowerCase()));
+    return this.citiesList.filter(option => option.fullName.indexOf(value) > -1);
   }
 
   getCities(): void {
