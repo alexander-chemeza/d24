@@ -101,9 +101,9 @@
         <label for="contact-position">Должность:</label>
         <input type="text" name="contact-position" id="contact-position" formControlName="position">
         <label for="contact-phone-1">Телефон:</label>
-        <input type="text" name="contact-phone-1" id="contact-phone-1" formControlName="tel1" mask="+000 (00) 000 00 00">
+        <input type="text" name="contact-phone-1" id="contact-phone-1" formControlName="tel1" mask="(00) 000 00 00" prefix="+375" [showMaskTyped]="true">
         <label for="contact-phone-2"> Телефон 2:</label>
-        <input type="text" name="contact-phone-2" id="contact-phone-2" formControlName="tel2" mask="+000 (00) 000 00 00">
+        <input type="text" name="contact-phone-2" id="contact-phone-2" formControlName="tel2" mask="(00) 000 00 00" prefix="+375" [showMaskTyped]="true">
         <label for="contact-email">Email:</label>
         <input type="text" name="contact-email" id="contact-email" formControlName="email">
       </div>
