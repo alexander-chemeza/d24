@@ -293,8 +293,9 @@ export class BookComponent implements OnInit {
   }
 
   private search(value: string): any {
-    const filter = value.toLowerCase();
-    return this.citiesList.filter(option => option.fullName.toLowerCase().includes(filter));
+    // const filter = value.toLowerCase();
+    // return this.citiesList.filter(option => option.fullName.toLowerCase().includes(filter));
+    return this.citiesList.filter(option => option.fullName.indexOf(value) > -1);
   }
 
   onKey2(event: any): void {
