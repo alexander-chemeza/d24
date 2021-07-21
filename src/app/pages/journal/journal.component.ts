@@ -431,6 +431,16 @@ export class JournalComponent implements OnInit, OnChanges {
     console.log(this.selectedBlankArrays);
     this.showModal('report-blank');
   }
+
+  showStickers(): void {
+    this.selectedBlankArrays = [];
+    for (const item of this.selectedAppliedOrderRows) {
+      const itemInfo = this.storedTableResponse.find((i: any) => i.id === item);
+      this.selectedBlankArrays.push(itemInfo);
+    }
+    console.log(this.selectedBlankArrays);
+    this.showModal('sticker-printing');
+  }
 }
 
 
