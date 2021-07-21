@@ -26,7 +26,10 @@ import {QRCodeModule} from 'angularx-qrcode';
     MatDatepickerModule,
     MatNativeDateModule,
     ScrollingModule,
-    QRCodeModule
+    QRCodeModule,
+    MatSelectModule,
+    MatFormFieldModule,
+    MatInputModule,
   ]
 })
 export class JournalModule { }

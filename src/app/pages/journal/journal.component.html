@@ -828,25 +828,31 @@
     <div class="grey-box flex justify-content-between mb-30">
       <div>
         <div class="popup_subtitle">Номер:</div>
-        <div class="popup_text">123345678900</div>
+        <mat-form-field floatLabel="never">
+          <mat-select [(ngModel)]="blankToType" style="width: 250px">
+            <mat-option *ngFor="let item of selectedBlankArrays" [value]="item.order_number">
+              {{item.order_number}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
       </div>
 
       <div class="flex">
-        <input type="submit" value="Распечатать">
-        <input type="submit" value="Сохранить в PDF" class="ml-30">
+        <input type="submit" value="Распечатать" class="mt-40">
+        <input type="submit" value="Сохранить в PDF" class="ml-30 mt-40">
       </div>
     </div>
 
     <div class="report-box">
       <div class="width-a4"> <!-- БЛАНК ЭКСПРЕСС-ДОСТАВКИ -->
         <div *ngFor="let item of selectedBlankArrays">
-          <div class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
+          <div [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
             <div class="blank">
               <table>
                 <thead>
                 <tr>
                   <th colspan="7" style="text-align: left;">
-
+                    <img src="../../assets/img/menu/logo-blank.svg" alt="">
                   </th>
                   <th colspan="5" style="font-size: 24px; line-height: 30px;">
                     БЛАНК  ДОСТАВКИ  № <br> {{item.order_number}}

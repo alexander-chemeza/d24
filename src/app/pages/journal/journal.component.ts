@@ -12,6 +12,7 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./journal.component.scss']
 })
 export class JournalComponent implements OnInit, OnChanges {
+  blankToType = '';
   selectedBlankArrays: any;
   pipe = new DatePipe('en-US');
   public gridApi: any;
