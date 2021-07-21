@@ -12,6 +12,7 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./journal.component.scss']
 })
 export class JournalComponent implements OnInit, OnChanges {
+  selectedBlankArrays: any;
   pipe = new DatePipe('en-US');
   public gridApi: any;
   public gridColumnApi: any;
@@ -418,6 +419,16 @@ export class JournalComponent implements OnInit, OnChanges {
     //   });
     // }
 
+  }
+
+  showBlanks(): void {
+    this.selectedBlankArrays = [];
+    for (const item of this.selectedAppliedOrderRows) {
+      const itemInfo = this.storedTableResponse.find((i: any) => i.id === item);
+      this.selectedBlankArrays.push(itemInfo);
+    }
+    console.log(this.selectedBlankArrays);
+    this.showModal('report-blank');
   }
 
   elementType = NgxQrcodeElementTypes.URL;
