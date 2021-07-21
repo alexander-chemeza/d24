@@ -430,11 +430,6 @@ export class JournalComponent implements OnInit, OnChanges {
     console.log(this.selectedBlankArrays);
     this.showModal('report-blank');
   }
-
-  elementType = NgxQrcodeElementTypes.URL;
-  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-  value = 'https://www.test.com/';
-
 }
 
 
