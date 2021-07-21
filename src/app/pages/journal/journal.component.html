@@ -5,7 +5,7 @@
   </div>
   <div class="row-controls">
     <div class="row-controls-group">
-      <button class="white-btn" *ngIf="selectedAppliedOrderRows.length !== 0">Бланк доставки</button>
+      <button class="white-btn" *ngIf="selectedAppliedOrderRows.length !== 0" (click)="showModal('report-blank')">Бланк доставки</button>
       <button class="white-btn" (click)="showModal('sticker-printing')" *ngIf="selectedAppliedOrderRows.length !== 0">Этикетки</button>
 <!--      <button class="white-btn" (click)="showModal('order-log')">Отправить на Email</button>-->
 <!--      <button class="white-btn">Экспорт в эксель</button>-->
@@ -821,7 +821,7 @@
   </div>
 </div>
 
-<div id="report-blank" class="report-blank">
+<div id="report-blank" class="report-blank modal">
   <div class="popup-align popup popup-bg">
     <div class="popup_title">Печать Бланка</div>
 
