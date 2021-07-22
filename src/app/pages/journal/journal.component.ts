@@ -428,7 +428,7 @@ export class JournalComponent implements OnInit, OnChanges {
       const itemInfo = this.storedTableResponse.find((i: any) => i.id === item);
       this.selectedBlankArrays.push(itemInfo);
     }
-    console.log(this.selectedBlankArrays);
+    this.blankToType = this.selectedBlankArrays.map((item: any) => item.order_number).join(', ');
     this.showModal('report-blank');
   }
 
@@ -438,7 +438,7 @@ export class JournalComponent implements OnInit, OnChanges {
       const itemInfo = this.storedTableResponse.find((i: any) => i.id === item);
       this.selectedBlankArrays.push(itemInfo);
     }
-    console.log(this.selectedBlankArrays);
+    this.blankToType = this.selectedBlankArrays.map((item: any) => item.order_number).join(', ');
     this.showModal('sticker-printing');
   }
 }
