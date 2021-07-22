@@ -680,11 +680,11 @@
 
       <div class="flex">
         <input type="submit" value="Распечатать">
-        <input type="submit" value="Сохранить в PDF" class="ml-30">
+        <input type="submit" value="Сохранить в PDF" class="ml-30" (click)="openPDF('stickers')">
       </div>
     </div>
 
-    <div class="sticker-box">
+    <div class="sticker-box" id="stickers">
       <div class="bbb flex flex-wrap" *ngFor="let item of selectedBlankArrays">
         <div class="col-50 sticker">
           <div class="flex justify-content-between align-items-start">
@@ -855,12 +855,12 @@
 
       <div class="flex">
         <input type="submit" value="Распечатать" class="mt-40">
-        <input type="submit" value="Сохранить в PDF" class="ml-30 mt-40">
+        <input type="submit" value="Сохранить в PDF" class="ml-30 mt-40" (click)="openPDF('blanks')">
       </div>
     </div>
 
     <div class="report-box">
-      <div class="width-a4"> <!-- БЛАНК ЭКСПРЕСС-ДОСТАВКИ -->
+      <div class="width-a4" id="blanks"> <!-- БЛАНК ЭКСПРЕСС-ДОСТАВКИ -->
         <div *ngFor="let item of selectedBlankArrays">
           <div [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
             <div class="blank">
