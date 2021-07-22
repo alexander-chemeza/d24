@@ -473,6 +473,10 @@ export class JournalComponent implements OnInit, OnChanges {
       });
     }
   }
+
+  printBlanks(): void {
+    window.print();
+  }
 }
 
 
