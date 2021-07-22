@@ -837,6 +837,13 @@
       <div>
         <div class="popup_subtitle">Номер:</div>
         <label for="">{{blankToType}}</label>
+        <div style="display: flex; align-items: center; margin-top: 15px">
+          <div class="checkbox-block">
+            <input class="checkbox-block-item" type="checkbox" name="ifPrintSenderBlank" id="ifPrintSenderBlank" [checked]="printSenderBlank" (change)="printSenderBlank = !printSenderBlank">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="ifPrintSenderBlank">"Экземпляр отправителя"</label>
+        </div>
 <!--        <mat-form-field floatLabel="never">-->
 <!--          <mat-select [(ngModel)]="blankToType" style="width: 250px">-->
 <!--            <mat-option *ngFor="let item of selectedBlankArrays" [value]="item.order_number">-->
@@ -1287,7 +1294,7 @@
             </div>
           </div>
 
-          <div [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
+          <div *ngIf="printSenderBlank" [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
             <div class="blank">
               <table>
                 <thead>
