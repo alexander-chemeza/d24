@@ -455,18 +455,18 @@ export class JournalComponent implements OnInit, OnChanges {
         const imgHeight = canvas.height * imgWidth / canvas.width;
         let heightLeft = imgHeight;
         console.log(heightLeft);
-        const imgData = canvas.toDataURL('image/png');
+        const imgData = canvas.toDataURL('image/jpeg');
         const doc = new jsPDF('p', 'mm', 'a4', true);
         let position = 0;
 
-        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, 'FAST');
+        doc.addImage(imgData, 'jpeg', 0, position, imgWidth, imgHeight, 'FAST');
         heightLeft -= pageHeight;
 
 
         while (heightLeft >= 0) {
           position = heightLeft - imgHeight;
           doc.addPage();
-          doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          doc.addImage(imgData, 'jpeg', 0, position, imgWidth, imgHeight);
           heightLeft -= pageHeight;
         }
         doc.save( `${id}.pdf`);
