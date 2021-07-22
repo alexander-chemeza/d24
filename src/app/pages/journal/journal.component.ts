@@ -448,27 +448,30 @@ export class JournalComponent implements OnInit, OnChanges {
   public openPDF(id: string): void {
     const DATA: any = document.getElementById(id);
 
-    html2canvas(DATA).then(canvas => {
-      const imgWidth = 210;
-      const pageHeight = 295;
-      const imgHeight = canvas.height * imgWidth / canvas.width;
-      let heightLeft = imgHeight;
-      console.log(heightLeft);
-      const imgData = canvas.toDataURL('image/png');
-      const doc = new jsPDF('p', 'mm');
-      let position = 0;
+    for (const item of DATA.children) {
+      html2canvas(item).then(canvas => {
+        const imgWidth = 210;
+        const pageHeight = 295;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        let heightLeft = imgHeight;
+        console.log(heightLeft);
+        const imgData = canvas.toDataURL('image/png');
+        const doc = new jsPDF('p', 'mm', 'a4', true);
+        let position = 0;
 
-      doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        doc.addPage();
-        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight, 'FAST');
         heightLeft -= pageHeight;
-      }
-      doc.save( `${id}.pdf`);
-    });
+
+
+        while (heightLeft >= 0) {
+          position = heightLeft - imgHeight;
+          doc.addPage();
+          doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+        doc.save( `${id}.pdf`);
+      });
+    }
   }
 }
 
