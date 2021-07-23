@@ -176,16 +176,24 @@
 .popup-align {
   width: 100%;
   // max-width: 900px;
-  //max-width: 1180px;
+  max-width: 1180px;
   border-radius: 10px;
   // height: 85%;
   position: relative;
   overflow: auto;
-  //padding: 30px;
+  padding: 30px;
 }
 
 .popup-bg {
   background-color: #A070B5;
+}
+
+.sticker-printing {
+  .grey-box {
+    .flex {
+      align-items: center;
+    }
+  }
 }
 
 .popup {
@@ -349,13 +357,13 @@ button {
     box-sizing: border-box;
     padding: 25px;
 
-    &:nth-child(2n) {
-      border-bottom: 0;
-    }
-    &:nth-child(2n+1) {
-      border-bottom: 0;
-      border-right: 0;
-    }
+    // &:nth-child(2n) {
+    //   border-bottom: 0;
+    // }
+    // &:nth-child(2n+1) {
+    //   border-bottom: 0;
+    //   border-right: 0;
+    // }
   }
 }
 
