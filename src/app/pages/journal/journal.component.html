@@ -668,22 +668,23 @@
     <div class="grey-box flex justify-content-between mb-30">
       <div>
         <div class="popup_subtitle">Номер:</div>
-        <mat-form-field floatLabel="never">
-          <mat-select [(ngModel)]="blankToType" style="width: 250px">
-            <mat-option *ngFor="let item of selectedBlankArrays" [value]="item.order_number">
-              {{item.order_number}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <label for="">{{blankToType}}</label>
+<!--        <mat-form-field floatLabel="never">-->
+<!--          <mat-select [(ngModel)]="blankToType" style="width: 250px">-->
+<!--            <mat-option *ngFor="let item of selectedBlankArrays" [value]="item.order_number">-->
+<!--              {{item.order_number}}-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
       </div>
 
       <div class="flex">
-        <input type="submit" value="Распечатать">
-        <input type="submit" value="Сохранить в PDF" class="ml-30">
+        <input type="submit" value="Распечатать" (click)="printBlanks()">
+        <input type="submit" value="Сохранить в PDF" class="ml-30" (click)="openPDF('stickers')">
       </div>
     </div>
 
-    <div class="sticker-box">
+    <div class="sticker-box" id="stickers">
       <div class="bbb flex flex-wrap" *ngFor="let item of selectedBlankArrays">
         <div class="col-50 sticker">
           <div class="flex justify-content-between align-items-start">
@@ -835,23 +836,31 @@
     <div class="grey-box flex justify-content-between mb-30">
       <div>
         <div class="popup_subtitle">Номер:</div>
-        <mat-form-field floatLabel="never">
-          <mat-select [(ngModel)]="blankToType" style="width: 250px">
-            <mat-option *ngFor="let item of selectedBlankArrays" [value]="item.order_number">
-              {{item.order_number}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+        <label for="">{{blankToType}}</label>
+        <div style="display: flex; align-items: center; margin-top: 15px">
+          <div class="checkbox-block">
+            <input class="checkbox-block-item" type="checkbox" name="ifPrintSenderBlank" id="ifPrintSenderBlank" [checked]="printSenderBlank" (change)="printSenderBlank = !printSenderBlank">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="ifPrintSenderBlank">"Экземпляр отправителя"</label>
+        </div>
+<!--        <mat-form-field floatLabel="never">-->
+<!--          <mat-select [(ngModel)]="blankToType" style="width: 250px">-->
+<!--            <mat-option *ngFor="let item of selectedBlankArrays" [value]="item.order_number">-->
+<!--              {{item.order_number}}-->
+<!--            </mat-option>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
       </div>
 
       <div class="flex">
-        <input type="submit" value="Распечатать" class="mt-40">
-        <input type="submit" value="Сохранить в PDF" class="ml-30 mt-40">
+        <input type="submit" value="Распечатать" class="mt-40" (click)="printBlanks()">
+        <input type="submit" value="Сохранить в PDF" class="ml-30 mt-40" (click)="openPDF('blanks')">
       </div>
     </div>
 
     <div class="report-box">
-      <div class="width-a4"> <!-- БЛАНК ЭКСПРЕСС-ДОСТАВКИ -->
+      <div class="width-a4" id="blanks"> <!-- БЛАНК ЭКСПРЕСС-ДОСТАВКИ -->
         <div *ngFor="let item of selectedBlankArrays">
           <div [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
             <div class="blank">
@@ -1063,6 +1072,438 @@
                   <td colspan="4"><strong>тел.:  +375 (29/33) 671 90 90</strong></td>
                   <td colspan="5"><strong>e-mail: info@dostavka24.by</strong></td>
                   <td colspan="5"><strong><i>ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ</i></strong></td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <div [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
+            <div class="blank">
+              <table>
+                <thead>
+                <tr>
+                  <th colspan="7" style="text-align: left;">
+                    <img src="../../assets/img/menu/logo-blank.svg" alt="">
+                  </th>
+                  <th colspan="5" style="font-size: 24px; line-height: 30px;">
+                    БЛАНК  ДОСТАВКИ  № <br> {{item.order_number}}
+                  </th>
+                  <th colspan="6" style="text-align: right;">
+                    <qrcode [qrdata]="item.order_number" [width]="148" [errorCorrectionLevel]="'M'"></qrcode>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="report-header">
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="6">Грузоотправитель</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="6">Грузополучатель</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Организация</td>
+                  <td colspan="6">{{item.sender_name}}</td>
+                  <td colspan="3">Организация</td>
+                  <td colspan="6">{{item.recipient_name}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Область, район</td>
+                  <td colspan="6">{{item.sender_region}}</td>
+                  <td colspan="3">Область, район</td>
+                  <td colspan="6">{{item.recipient_region}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Населенный пункт</td>
+                  <td colspan="6">{{item.sender_city}}</td>
+                  <td colspan="3">Населенный пункт</td>
+                  <td colspan="6">{{item.recipient_city}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Улица, <br>дом/корпус/квартира</td>
+                  <td colspan="6">{{item.sender_address}}</td>
+                  <td colspan="3">Улица, <br>дом/корпус/квартира</td>
+                  <td colspan="6">{{item.recipient_address}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Контактное лицо <br>(ФИО)</td>
+                  <td colspan="6">{{item.sender_contact_phone}}</td>
+                  <td colspan="3">Контактное лицо <br>(ФИО)</td>
+                  <td colspan="6">{{item.recipient_contact_phone}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Телефон</td>
+                  <td colspan="6">{{item.sender_contact_phone}}</td>
+                  <td colspan="3">Телефон</td>
+                  <td colspan="6">{{item.recipient_contact_phone}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <strong>Незаконных вложений нет, с условиями доставки ознакомлен</strong>
+                  </td>
+                  <td colspan="6">
+                    <strong>Подпись, штамп</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>Отметка грузополучателя о доставке</strong>
+                  </td>
+                  <td colspan="6">
+                    <strong>Подпись, штамп</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Описание отправки</td>
+                  <td colspan="9">Контроль отправки</td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Количество грузовых мест указанных в заявке на перевозку</strong>
+                  </td>
+                  <td colspan="1">{{item.amount_packages}}</td>
+                  <td colspan="3">
+                    <strong>Общий вес, указанный в заявке на перевозку, кг</strong>
+                  </td>
+                  <td colspan="1">{{item.delivery_weight}}</td>
+                  <td colspan="4">
+                    <strong>Общее количество грузовых мест</strong> <br> (без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4" class="td-has-child">
+                    <table class="inner-table">
+                      <tbody>
+                      <tr>
+                        <td>
+                          <strong>Физический вес, кг</strong>
+                        </td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <strong>Объем м3</strong>
+                        </td>
+                        <td>{{item.delivery_volume}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Количество грузовых мест принятых к доставке</strong> <br>(без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Наименование содержимого</strong>
+                  </td>
+                  <td colspan="4">
+                    <strong>Количество объединенных грузовых мест</strong>
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="2">
+                    <strong>Объемный вес, кг</strong> <br> (1 м<sup>3</sup> = 250 кг.)
+                  </td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Из них с грузовых мест принятых с повреждениями упаковки</strong> <br>(без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Характер повреждения упаковки</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дополнительная упаковка</strong> <br> (КОД)
+                  </td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="5">
+                    <strong>Примечания</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <strong>Сопроводительные документы</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="1">
+                    <strong>Время</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>ФИО кладовщика</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>Подпись  кладовщика</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Получение отправки</td>
+                  <td colspan="9">Доставка отправки</td>
+                </tr>
+                <tr style="height: 14mm;">
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время прибытия</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время убытия</strong>
+                  </td>
+                  <td colspan="3" rowspan="2">
+                    <strong>Штамп</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время прибытия</strong>
+                  </td>
+                  <td colspan="5">
+                    <strong>Время убытия</strong>
+                  </td>
+                </tr>
+                <tr style="height: 14mm;">
+                  <td colspan="4">
+                    <strong>ФИО</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Подпись</strong>
+                  </td>
+                  <td colspan="4">
+                    <strong>ФИО</strong>
+                  </td>
+                  <td colspan="5">
+                    <strong>Подпись</strong>
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td colspan="4"><strong>www.dostavka24.by</strong></td>
+                  <td colspan="4"><strong>тел.:  +375 (29/33) 671 90 90</strong></td>
+                  <td colspan="5"><strong>e-mail: info@dostavka24.by</strong></td>
+                  <td colspan="5"><strong><i>ЭКЗЕМПЛЯР ПЕРЕВОЗЧИКА</i></strong></td>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+          </div>
+
+          <div *ngIf="printSenderBlank" [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
+            <div class="blank">
+              <table>
+                <thead>
+                <tr>
+                  <th colspan="7" style="text-align: left;">
+                    <img src="../../assets/img/menu/logo-blank.svg" alt="">
+                  </th>
+                  <th colspan="5" style="font-size: 24px; line-height: 30px;">
+                    БЛАНК  ДОСТАВКИ  № <br> {{item.order_number}}
+                  </th>
+                  <th colspan="6" style="text-align: right;">
+                    <qrcode [qrdata]="item.order_number" [width]="148" [errorCorrectionLevel]="'M'"></qrcode>
+                  </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="report-header">
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="6">Грузоотправитель</td>
+                  <td colspan="3">&nbsp;</td>
+                  <td colspan="6">Грузополучатель</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Организация</td>
+                  <td colspan="6">{{item.sender_name}}</td>
+                  <td colspan="3">Организация</td>
+                  <td colspan="6">{{item.recipient_name}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Область, район</td>
+                  <td colspan="6">{{item.sender_region}}</td>
+                  <td colspan="3">Область, район</td>
+                  <td colspan="6">{{item.recipient_region}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Населенный пункт</td>
+                  <td colspan="6">{{item.sender_city}}</td>
+                  <td colspan="3">Населенный пункт</td>
+                  <td colspan="6">{{item.recipient_city}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Улица, <br>дом/корпус/квартира</td>
+                  <td colspan="6">{{item.sender_address}}</td>
+                  <td colspan="3">Улица, <br>дом/корпус/квартира</td>
+                  <td colspan="6">{{item.recipient_address}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Контактное лицо <br>(ФИО)</td>
+                  <td colspan="6">{{item.sender_contact_phone}}</td>
+                  <td colspan="3">Контактное лицо <br>(ФИО)</td>
+                  <td colspan="6">{{item.recipient_contact_phone}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">Телефон</td>
+                  <td colspan="6">{{item.sender_contact_phone}}</td>
+                  <td colspan="3">Телефон</td>
+                  <td colspan="6">{{item.recipient_contact_phone}}</td>
+                </tr>
+                <tr>
+                  <td colspan="3">
+                    <strong>Незаконных вложений нет, с условиями доставки ознакомлен</strong>
+                  </td>
+                  <td colspan="6">
+                    <strong>Подпись, штамп</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>Отметка грузополучателя о доставке</strong>
+                  </td>
+                  <td colspan="6">
+                    <strong>Подпись, штамп</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Описание отправки</td>
+                  <td colspan="9">Контроль отправки</td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Количество грузовых мест указанных в заявке на перевозку</strong>
+                  </td>
+                  <td colspan="1">{{item.amount_packages}}</td>
+                  <td colspan="3">
+                    <strong>Общий вес, указанный в заявке на перевозку, кг</strong>
+                  </td>
+                  <td colspan="1">{{item.delivery_weight}}</td>
+                  <td colspan="4">
+                    <strong>Общее количество грузовых мест</strong> <br> (без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4" class="td-has-child">
+                    <table class="inner-table">
+                      <tbody>
+                      <tr>
+                        <td>
+                          <strong>Физический вес, кг</strong>
+                        </td>
+                        <td>&nbsp;</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <strong>Объем м3</strong>
+                        </td>
+                        <td>{{item.delivery_volume}}</td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Количество грузовых мест принятых к доставке</strong> <br>(без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Наименование содержимого</strong>
+                  </td>
+                  <td colspan="4">
+                    <strong>Количество объединенных грузовых мест</strong>
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="2">
+                    <strong>Объемный вес, кг</strong> <br> (1 м<sup>3</sup> = 250 кг.)
+                  </td>
+                  <td colspan="2">&nbsp;</td>
+                </tr>
+                <tr>
+                  <td colspan="4">
+                    <strong>Из них с грузовых мест принятых с повреждениями упаковки</strong> <br>(без пересчета вложений)
+                  </td>
+                  <td colspan="1">&nbsp;</td>
+                  <td colspan="4">
+                    <strong>Характер повреждения упаковки</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дополнительная упаковка</strong> <br> (КОД)
+                  </td>
+                  <td colspan="2">&nbsp;</td>
+                  <td colspan="5">
+                    <strong>Примечания</strong>
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="9">
+                    <strong>Сопроводительные документы</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="1">
+                    <strong>Время</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>ФИО кладовщика</strong>
+                  </td>
+                  <td colspan="3">
+                    <strong>Подпись  кладовщика</strong>
+                  </td>
+                </tr>
+                <tr class="report-header">
+                  <td colspan="9">Получение отправки</td>
+                  <td colspan="9">Доставка отправки</td>
+                </tr>
+                <tr style="height: 14mm;">
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время прибытия</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время убытия</strong>
+                  </td>
+                  <td colspan="3" rowspan="2">
+                    <strong>Штамп</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Дата</strong> <br>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                  </td>
+                  <td colspan="2">
+                    <strong>Время прибытия</strong>
+                  </td>
+                  <td colspan="5">
+                    <strong>Время убытия</strong>
+                  </td>
+                </tr>
+                <tr style="height: 14mm;">
+                  <td colspan="4">
+                    <strong>ФИО</strong>
+                  </td>
+                  <td colspan="2">
+                    <strong>Подпись</strong>
+                  </td>
+                  <td colspan="4">
+                    <strong>ФИО</strong>
+                  </td>
+                  <td colspan="5">
+                    <strong>Подпись</strong>
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <td colspan="4"><strong>www.dostavka24.by</strong></td>
+                  <td colspan="4"><strong>тел.:  +375 (29/33) 671 90 90</strong></td>
+                  <td colspan="5"><strong>e-mail: info@dostavka24.by</strong></td>
+                  <td colspan="5"><strong><i>ЭКЗЕМПЛЯР ОТПРАВИТЕЛЯ</i></strong></td>
                 </tr>
                 </tfoot>
               </table>

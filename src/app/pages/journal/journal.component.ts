@@ -1,10 +1,12 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
-import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
 import {JournalButtonsComponent} from './journal-buttons/journal-buttons.component';
 import {RestapiService} from '../../restapi.service';
 import {concat} from 'rxjs';
 import {toArray} from 'rxjs/operators';
 import {DatePipe} from '@angular/common';
+
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
   selector: 'app-journal',
@@ -12,6 +14,7 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./journal.component.scss']
 })
 export class JournalComponent implements OnInit, OnChanges {
+  printSenderBlank = true;
   blankToType = '';
   selectedBlankArrays: any;
   pipe = new DatePipe('en-US');
@@ -428,7 +431,7 @@ export class JournalComponent implements OnInit, OnChanges {
       const itemInfo = this.storedTableResponse.find((i: any) => i.id === item);
       this.selectedBlankArrays.push(itemInfo);
     }
-    console.log(this.selectedBlankArrays);
+    this.blankToType = this.selectedBlankArrays.map((item: any) => item.order_number).join(', ');
     this.showModal('report-blank');
   }
 
@@ -438,8 +441,41 @@ export class JournalComponent implements OnInit, OnChanges {
       const itemInfo = this.storedTableResponse.find((i: any) => i.id === item);
       this.selectedBlankArrays.push(itemInfo);
     }
-    console.log(this.selectedBlankArrays);
+    this.blankToType = this.selectedBlankArrays.map((item: any) => item.order_number).join(', ');
     this.showModal('sticker-printing');
+  }
+
+  public openPDF(id: string): void {
+    const DATA: any = document.getElementById(id);
+
+    for (const item of DATA.children) {
+      html2canvas(item).then(canvas => {
+        const imgWidth = 210;
+        const pageHeight = 295;
+        const imgHeight = canvas.height * imgWidth / canvas.width;
+        let heightLeft = imgHeight;
+        console.log(heightLeft);
+        const imgData = canvas.toDataURL('image/jpeg');
+        const doc = new jsPDF('p', 'mm', 'a4', true);
+        let position = 0;
+
+        doc.addImage(imgData, 'jpeg', 0, position, imgWidth, imgHeight, 'FAST');
+        heightLeft -= pageHeight;
+
+
+        while (heightLeft >= 0) {
+          position = heightLeft - imgHeight;
+          doc.addPage();
+          doc.addImage(imgData, 'jpeg', 0, position, imgWidth, imgHeight);
+          heightLeft -= pageHeight;
+        }
+        doc.save( `${id}.pdf`);
+      });
+    }
+  }
+
+  printBlanks(): void {
+    window.print();
   }
 }
 
