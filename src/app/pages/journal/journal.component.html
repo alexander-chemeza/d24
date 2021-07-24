@@ -662,7 +662,7 @@
 </div>
 
 <div id="sticker-printing" class="sticker-printing">
-  <div class="popup-align popup popup-bg">
+  <div class="popup-align popup popup-bg" style="padding: 30px">
     <div class="popup_title">Печать наклеек</div>
 
     <div class="grey-box flex justify-content-between mb-30">
@@ -685,7 +685,7 @@
     </div>
 
     <div class="sticker-box" id="stickers">
-      <div class="bbb flex flex-wrap" *ngFor="let item of selectedBlankArrays">
+      <div style="width: 50%" *ngFor="let item of selectedBlankArrays">
         <div class="col-50 sticker">
           <div class="flex justify-content-between align-items-start">
             <div class="sticker_num">
@@ -825,7 +825,7 @@
 <!--        </div>-->
       </div>
     </div>
-    <button class="active-btn circle-btn close-btn" (click)="hideModal('sticker-printing')"></button>
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('sticker-printing')" style="position: absolute; top: 30px; right: 30px"></button>
   </div>
 </div>
 

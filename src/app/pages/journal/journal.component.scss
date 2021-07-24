@@ -340,6 +340,8 @@ button {
 }
 
 .sticker-box {
+  display: flex;
+  flex-wrap: wrap;
   max-height: 590px;
   overflow: auto;
   box-sizing: border-box;
@@ -353,6 +355,7 @@ button {
   }
 
   .sticker {
+    width: 100%;
     border: 1px solid #000;
     box-sizing: border-box;
     padding: 25px;
