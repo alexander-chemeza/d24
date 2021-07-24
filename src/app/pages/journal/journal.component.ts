@@ -97,15 +97,15 @@ export class JournalComponent implements OnInit, OnChanges {
       maxWidth: 150,
     },
       {
-        headerName: 'Выбрать',
+        headerName: '',
         field: 'select',
         sortable: false,
         flex: 1,
         headerCheckboxSelection: true,
         headerCheckboxSelectionFilteredOnly: true,
         checkboxSelection: true,
-        minWidth: 150,
-        maxWidth: 200,
+        minWidth: 50,
+        maxWidth: 50,
         id: '',
       },
       {
@@ -171,7 +171,7 @@ export class JournalComponent implements OnInit, OnChanges {
         sortable: true,
         flex: 1,
         minWidth: 150,
-        maxWidth: 200
+        maxWidth: 500
       },
       {
         headerName: 'Получатель',
@@ -179,15 +179,15 @@ export class JournalComponent implements OnInit, OnChanges {
         sortable: true,
         flex: 1,
         minWidth: 150,
-        maxWidth: 200
+        maxWidth: 500
       },
       {
         headerName: 'Тип грузового места',
         field: 'place',
         sortable: true,
         flex: 1,
-        minWidth: 150,
-        maxWidth: 200
+        minWidth: 250,
+        maxWidth: 300
       },
       {
         headerName: 'Количество',
@@ -202,72 +202,72 @@ export class JournalComponent implements OnInit, OnChanges {
         field: 'address1',
         sortable: true,
         flex: 1,
-        minWidth: 150,
-        maxWidth: 200
+        minWidth: 350,
+        maxWidth: 500
       },
       {
         headerName: 'Дата выдачи груза',
         field: 'date1',
         sortable: true,
         flex: 1,
-        minWidth: 150,
-        maxWidth: 200
+        minWidth: 250,
+        maxWidth: 300
       },
       {
         headerName: 'Время выдачи груза с',
         field: 'time11',
         sortable: true,
         flex: 1,
-        minWidth: 150,
-        maxWidth: 200
+        minWidth: 250,
+        maxWidth: 300
       },
       {
         headerName: 'Время выдачи груза по',
         field: 'time12',
         sortable: true,
         flex: 1,
-        minWidth: 150,
-        maxWidth: 200
+        minWidth: 250,
+        maxWidth: 300
       },
       {
         headerName: 'Адрес доставки груза',
         field: 'address2',
         sortable: true,
         flex: 1,
-        minWidth: 150,
-        maxWidth: 200
+        minWidth: 350,
+        maxWidth: 500
       },
       {
         headerName: 'Дата доставки груза',
         field: 'date2',
         sortable: true,
         flex: 1,
-        minWidth: 150,
-        maxWidth: 200
+        minWidth: 250,
+        maxWidth: 300
       },
       {
         headerName: 'Время доставки груза с',
         field: 'time21',
         sortable: true,
         flex: 1,
-        minWidth: 150,
-        maxWidth: 200
+        minWidth: 250,
+        maxWidth: 300
       },
       {
         headerName: 'Время доставки груза по',
         field: 'time22',
         sortable: true,
         flex: 1,
-        minWidth: 150,
-        maxWidth: 200
+        minWidth: 250,
+        maxWidth: 300
       },
       {
         headerName: 'Автор документа',
         field: 'author',
         sortable: true,
         flex: 1,
-        minWidth: 150,
-        maxWidth: 200
+        minWidth: 250,
+        maxWidth: 300
       },
     ];
     this.rowData = [];
