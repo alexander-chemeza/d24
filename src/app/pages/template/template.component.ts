@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 interface ServiceTypesList {
   value: string;
@@ -11,6 +12,9 @@ interface ServiceTypesList {
   styleUrls: ['./template.component.scss']
 })
 export class TemplateComponent implements OnInit {
+  userOldInfo: any = sessionStorage.getItem('currentUser');
+  user: any;
+
   public gridApi: any;
   public gridColumnApi: any;
   public rowData: any;
@@ -25,7 +29,7 @@ export class TemplateComponent implements OnInit {
     {value: '0', viewValue: '(все)'},
   ];
 
-  constructor() {
+  constructor(private router: Router) {
     this.columnDefs = [
       {
         headerName: 'Название шаблона',
@@ -334,6 +338,13 @@ export class TemplateComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.userOldInfo) {
+      this.user = JSON.parse(this.userOldInfo);
+      delete this.user.password;
+    } else {
+      this.router.navigate(['login']);
+    }
+
     this.serviceType = this.serviceTypes[0].value;
   }
 

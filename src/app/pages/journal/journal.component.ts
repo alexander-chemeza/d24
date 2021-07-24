@@ -7,6 +7,7 @@ import {DatePipe} from '@angular/common';
 
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-journal',
@@ -14,6 +15,8 @@ import html2canvas from 'html2canvas';
   styleUrls: ['./journal.component.scss']
 })
 export class JournalComponent implements OnInit, OnChanges {
+  userOldInfo: any = sessionStorage.getItem('currentUser');
+  user: any;
   printSenderBlank = true;
   blankToType = '';
   selectedBlankArrays: any;
@@ -60,7 +63,7 @@ export class JournalComponent implements OnInit, OnChanges {
 
   frameworkComponents: any;
 
-  constructor(private service: RestapiService) {
+  constructor(private service: RestapiService, private router: Router) {
     this.frameworkComponents = {
       btnCellRenderer: JournalButtonsComponent,
     };
@@ -284,6 +287,12 @@ export class JournalComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    if (this.userOldInfo) {
+      this.user = JSON.parse(this.userOldInfo);
+      delete this.user.password;
+    } else {
+      this.router.navigate(['login']);
+    }
   }
 
   getTable(): void {

@@ -2,6 +2,7 @@ import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RestapiService, UserRegistration} from '../../restapi.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -9,6 +10,9 @@ import {RestapiService, UserRegistration} from '../../restapi.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  userOldInfo: any = sessionStorage.getItem('currentUser');
+  user: any;
+
   gridApi: any;
   gridColumnApi: any;
   columnDefs: any;
@@ -23,7 +27,7 @@ export class UsersComponent implements OnInit {
   groupsList: any;
   selectedGroups = [];
 
-  constructor(private service: RestapiService) {
+  constructor(private service: RestapiService, private router: Router) {
     this.passwordEquality = false;
     this.columnDefs = [
       {
@@ -86,6 +90,13 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.userOldInfo) {
+      this.user = JSON.parse(this.userOldInfo);
+      delete this.user.password;
+    } else {
+      this.router.navigate(['login']);
+    }
+
     this.newUserForm = new FormGroup({
       id: new FormControl('', []),
       agreement: new FormControl('', [
@@ -148,7 +159,7 @@ export class UsersComponent implements OnInit {
         } else {
           console.log('Bad request');
         }
-      });  
+      });
     }
 
     this.hideModal('new-user');
@@ -261,7 +272,7 @@ export class UsersComponent implements OnInit {
 
   changeGroup(e: any) {
     this.clearAllManagers();
-    this.getAllManagers();    
+    this.getAllManagers();
   }
 
   clearForm() {

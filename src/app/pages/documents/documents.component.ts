@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-documents',
@@ -6,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./documents.component.scss']
 })
 export class DocumentsComponent implements OnInit {
+  userOldInfo: any = sessionStorage.getItem('currentUser');
+  user: any;
+
   gridApi: any;
   gridColumnApi: any;
   rowData: any;
@@ -13,7 +17,7 @@ export class DocumentsComponent implements OnInit {
   defaultColDef: any;
   paginationPageSize: any;
 
-  constructor() {
+  constructor(private router: Router) {
     this.columnDefs = [
       {
         field: 'document',
@@ -59,6 +63,12 @@ export class DocumentsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (this.userOldInfo) {
+      this.user = JSON.parse(this.userOldInfo);
+      delete this.user.password;
+    } else {
+      this.router.navigate(['login']);
+    }
   }
 
   onGridReady(params: any): void {

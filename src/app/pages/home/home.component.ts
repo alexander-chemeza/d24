@@ -1,5 +1,6 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
 import {RestapiService} from '../../restapi.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit, OnChanges {
   public columnDefs: any;
   public rowData: any;
 
-  constructor(private service: RestapiService) {
+  constructor(private service: RestapiService, private router: Router) {
     this.columnDefs = [
       {
         headerName: 'Номер',
@@ -89,6 +90,8 @@ export class HomeComponent implements OnInit, OnChanges {
     if (this.userOldInfo) {
       this.user = JSON.parse(this.userOldInfo);
       delete this.user.password;
+    } else {
+      this.router.navigate(['login']);
     }
   }
 

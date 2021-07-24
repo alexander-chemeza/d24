@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RestapiService} from '../../restapi.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -63,13 +64,15 @@ export class ProfileComponent implements OnInit {
     ])
   });
 
-  constructor(private service: RestapiService) { }
+  constructor(private service: RestapiService, private router: Router) { }
 
   ngOnInit(): void {
     // Make user object with his data
     if (this.userOldInfo) {
       this.user = JSON.parse(this.userOldInfo);
       delete this.user.password;
+    } else {
+      this.router.navigate(['login']);
     }
     // Clear data if exists
     if (this.senderAgents || this.receiverAgents) {

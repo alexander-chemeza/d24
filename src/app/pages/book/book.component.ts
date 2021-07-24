@@ -5,6 +5,7 @@ import {Cities, StreetsList} from '../order/order.component';
 import {ContragentsComponent} from './contragents/contragents.component';
 import {AddressComponent} from './address/address.component';
 import {ContactsComponent} from './contacts/contacts.component';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-book',
@@ -13,6 +14,8 @@ import {ContactsComponent} from './contacts/contacts.component';
 })
 
 export class BookComponent implements OnInit {
+  userOldInfo: any = sessionStorage.getItem('currentUser');
+  user: any;
   // @ts-ignore
   @ViewChild(ContragentsComponent) contragents: ContragentsComponent;
 
@@ -43,12 +46,18 @@ export class BookComponent implements OnInit {
 
   request = '';
 
-  constructor(private service: RestapiService) {
+  constructor(private service: RestapiService, private router: Router) {
     this.customerId = 0;
     this.customerAddressId = -1;
   }
 
   ngOnInit(): void {
+    if (this.userOldInfo) {
+      this.user = JSON.parse(this.userOldInfo);
+      delete this.user.password;
+    } else {
+      this.router.navigate(['login']);
+    }
     this.service.cities().subscribe(data => {
       if (data.status === 200) {
         this.citiesList = data.body;

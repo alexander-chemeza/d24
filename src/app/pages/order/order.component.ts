@@ -671,6 +671,8 @@ export class OrderComponent implements OnChanges, OnInit {
     if (this.userOldInfo) {
       this.user = JSON.parse(this.userOldInfo);
       delete this.user.password;
+    } else {
+      this.router.navigate(['login']);
     }
     // 1. Define available contracts types
     this.contractList = this.user.contractList;
