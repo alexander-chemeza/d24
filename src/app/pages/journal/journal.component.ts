@@ -20,6 +20,7 @@ export class JournalComponent implements OnInit, OnChanges {
   printSenderBlank = true;
   blankToType = '';
   selectedBlankArrays: any;
+  selectedBlanksArraysForSticker: any;
   pipe = new DatePipe('en-US');
   public gridApi: any;
   public gridColumnApi: any;
@@ -446,9 +447,15 @@ export class JournalComponent implements OnInit, OnChanges {
 
   showStickers(): void {
     this.selectedBlankArrays = [];
+    this.selectedBlanksArraysForSticker = [];
     for (const item of this.selectedAppliedOrderRows) {
       const itemInfo = this.storedTableResponse.find((i: any) => i.id === item);
       this.selectedBlankArrays.push(itemInfo);
+    }
+    for (let i = 0; i < this.selectedBlankArrays.length; i++) {
+      for (let j = 0; j < this.selectedBlankArrays[i].amount_packages; j++) {
+        this.selectedBlanksArraysForSticker.push(this.selectedBlankArrays[i]);
+      }
     }
     this.blankToType = this.selectedBlankArrays.map((item: any) => item.order_number).join(', ');
     this.showModal('sticker-printing');
