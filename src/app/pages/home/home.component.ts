@@ -7,6 +7,9 @@ import {RestapiService} from '../../restapi.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnChanges {
+  userOldInfo: any = sessionStorage.getItem('currentUser');
+  user: any;
+
   public gridApi: any;
   public gridColumnApi: any;
   public defaultColDef: any;
@@ -83,6 +86,10 @@ export class HomeComponent implements OnInit, OnChanges {
   }
 
   ngOnInit(): void {
+    if (this.userOldInfo) {
+      this.user = JSON.parse(this.userOldInfo);
+      delete this.user.password;
+    }
   }
 
   getTable(): void {
