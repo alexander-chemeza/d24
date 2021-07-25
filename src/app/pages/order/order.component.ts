@@ -1649,7 +1649,7 @@ export class OrderComponent implements OnChanges, OnInit {
         }
       });
     } else {
-      this.streetList = this.streetList.filter(option => option.name.toLowerCase().includes(event.target.value));
+      this.streetList = this.streetList.filter(option => option.name.toLowerCase().includes(event.target.value.toLowerCase()));
     }
   }
 
