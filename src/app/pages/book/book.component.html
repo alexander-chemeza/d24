@@ -151,7 +151,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-address', newAddress)"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newAddress" (ngSubmit)="createNewAddress()">
+    <form [formGroup]="newAddress">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -161,27 +161,61 @@
           <label for="type2">Основной адрес</label>
         </div>
         <label for="place-carrier-sender">Населенный пункт:</label>
-        <mat-form-field floatLabel="never">
-          <mat-select formControlName="place" (keyup)="$event.stopPropagation()" (selectionChange)="selectPlace($event, newAddress)">
-            <input type="text" placeholder="Поиск" (input)="onKey($event)" (keydown)="$event.stopPropagation()">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <input id="new-city" type="text"
+                 placeholder="Введите город"
+                 aria-label="Number"
+                 matInput
+                 formControlName="place"
+                 [matAutocomplete]="auto"
+                 (input)="onKey($event)" (keydown)="$event.stopPropagation()"
+          >
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selectPlace($event, newAddress)" [displayWith]="cityShow">
             <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
-              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city.id" class="example-item">
+              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city" class="example-item">
                 {{city.fullName}}
               </mat-option>
             </cdk-virtual-scroll-viewport>
-          </mat-select>
+          </mat-autocomplete>
         </mat-form-field>
+<!--        <mat-form-field floatLabel="never">-->
+<!--          <mat-select formControlName="place" (keyup)="$event.stopPropagation()" (selectionChange)="selectPlace($event, newAddress)">-->
+<!--            <input type="text" placeholder="Поиск" (input)="onKey($event)" (keydown)="$event.stopPropagation()">-->
+<!--            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">-->
+<!--              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city.id" class="example-item">-->
+<!--                {{city.fullName}}-->
+<!--              </mat-option>-->
+<!--            </cdk-virtual-scroll-viewport>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
         <label for="street-carrier-sender">Улица:</label>
-        <mat-form-field floatLabel="never">
-          <mat-select formControlName="street" (keyup)="$event.stopPropagation()">
-            <input type="text" placeholder="Поиск" (input)="onKey2($event)" (keydown)="$event.stopPropagation()">
+        <mat-form-field class="example-full-width" appearance="fill">
+          <input id="new-street" type="text"
+                 placeholder="Введите улицу"
+                 aria-label="Number"
+                 matInput
+                 formControlName="street"
+                 [matAutocomplete]="auto2"
+                 (input)="onKey2($event)" (keydown)="$event.stopPropagation()"
+          >
+          <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="streetShow">
             <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
-              <mat-option *cdkVirtualFor="let street of streetList" [value]="street.id" class="example-item">
+              <mat-option *cdkVirtualFor="let street of streetList" [value]="street" class="example-item">
                 {{street.name}}
               </mat-option>
             </cdk-virtual-scroll-viewport>
-          </mat-select>
+          </mat-autocomplete>
         </mat-form-field>
+<!--        <mat-form-field floatLabel="never">-->
+<!--          <mat-select formControlName="street" (keyup)="$event.stopPropagation()">-->
+<!--            <input type="text" placeholder="Поиск" (input)="onKey2($event)" (keydown)="$event.stopPropagation()">-->
+<!--            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">-->
+<!--              <mat-option *cdkVirtualFor="let street of streetList" [value]="street.id" class="example-item">-->
+<!--                {{street.name}}-->
+<!--              </mat-option>-->
+<!--            </cdk-virtual-scroll-viewport>-->
+<!--          </mat-select>-->
+<!--        </mat-form-field>-->
         <div class="row-multi mt-15">
           <div class="box">
             <label for="building">Дом:</label>
@@ -229,7 +263,7 @@
       </div>
       <div class="row-controls">
         <a class="white-btn round-btn" (click)="hideModal('new-address', newAddress)">Отмена</a>
-        <input type="submit" value="Сохранить">
+        <input type="submit" value="Сохранить" (click)="createNewAddress('new-city', 'new-street')">
       </div>
     </form>
   </div>

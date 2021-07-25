@@ -2,6 +2,16 @@
   color: transparent !important;
 }
 
+.mat-form-field-infix {
+  border-top: 0 !important;
+}
+
+.mat-form-field-infix,
+.mat-form-field-appearance-fill .mat-form-field-infix,
+.mat-form-field-infix {
+  padding: 0 !important;
+}
+
 .example-viewport {
   height: 168px;
   width: 100%;
@@ -19,7 +29,7 @@
   display: block;
   position: relative;
   text-align: left;
-  
+
   @media (max-width: 2000px) {
     & {
       margin-top: 6px;
@@ -146,7 +156,7 @@
 }
 
 .mat-datepicker-content .mat-calendar {
-  
+
 }
 
 .mat-form-field-appearance-fill {

@@ -140,7 +140,7 @@ export class BookComponent implements OnInit {
 
   selectPlace(event: any, form: any): void {
     // Get city id
-    const currentCityCode = form.value.place;
+    const currentCityCode = form.value.place.id;
     console.log('Selected city code', currentCityCode);
     // Find city by the id
     const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
@@ -221,13 +221,13 @@ export class BookComponent implements OnInit {
     });
   }
   // New address button event
-  createNewAddress(): void {
+  createNewAddress(cityBlock: string, streetBlock: string): void {
     // This vars will get correct name of city and street
     let city: string;
     let street: string;
     // This constants will get the objects describing city and street
-    const cityCorrectName = this.citiesList.find(item => item.id === this.newAddress.value.place);
-    const streetCorrectName = this.streetList.find(item => item.id === this.newAddress.value.street);
+    const cityCorrectName = this.citiesList.find(item => item.id === this.newAddress.value.place.id);
+    const streetCorrectName = this.streetList.find(item => item.id === this.newAddress.value.street.id);
     if (cityCorrectName && streetCorrectName) {
       // Get correct names
       city = cityCorrectName.fullName;
@@ -236,7 +236,7 @@ export class BookComponent implements OnInit {
       // Read fields from popup
       const data = {
         building: this.newAddress.value.house,
-        cityId: this.newAddress.value.place,
+        cityId: this.newAddress.value.place.id,
         cityName: city,
         description: this.newAddress.value.description as string,
         house: this.newAddress.value.building as string,
@@ -246,7 +246,7 @@ export class BookComponent implements OnInit {
         pauseFrom: this.newAddress.value.timeoutFrom as string,
         pauseTo: this.newAddress.value.timeoutTo as string,
         room: this.newAddress.value.apartment as string,
-        streetId: this.newAddress.value.street,
+        streetId: this.newAddress.value.street.id,
         streetName: street,
         timeFrom: this.newAddress.value.deliveryFrom as string,
         timeTo: this.newAddress.value.deliveryTo as string,
@@ -258,6 +258,13 @@ export class BookComponent implements OnInit {
         if (response.status === 200) {
           this.hideModal('new-address', this.newAddress);
           this.newAddress.reset();
+          const cityInput: any = document.getElementById(cityBlock);
+          const streetInput: any = document.getElementById(streetBlock);
+          if (cityInput && streetInput) {
+            cityInput.value = '';
+            streetInput.value = '';
+          }
+
           // window.location.reload();
           this.addresslist.ngOnChanges();
         }
@@ -478,5 +485,13 @@ export class BookComponent implements OnInit {
         this.contactslist.ngOnChanges();
       }
     });
+  }
+
+  cityShow(city: any): any {
+    return city.fullName;
+  }
+
+  streetShow(street: any): any {
+    return street.name;
   }
 }
