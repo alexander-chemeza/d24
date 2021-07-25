@@ -10,6 +10,7 @@ import {DateAdapter, MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/materi
 import {MatInputModule} from '@angular/material/input';
 import {CustomDateAdapter} from './CustomDateAdapter';
 import {NgxMaskModule} from 'ngx-mask';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 
 
@@ -25,6 +26,7 @@ import {NgxMaskModule} from 'ngx-mask';
     MatNativeDateModule,
     ScrollingModule,
     NgxMaskModule.forRoot(),
+    MatAutocompleteModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'ru-RU'},

@@ -1128,7 +1128,8 @@ export class OrderComponent implements OnChanges, OnInit {
 
   selectPlace(event: any, form: any): void {
     // Get city id
-    const currentCityCode = form.value.place;
+    const currentCityCode = form.value.place.id;
+
     // Find city by the id
     const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
     // Check and build data
@@ -1285,8 +1286,8 @@ export class OrderComponent implements OnChanges, OnInit {
     let city: string;
     let street: string;
     // This constants will get the objects describing city and street
-    const cityCorrectName = this.citiesList.find(item => item.id === form.value.place);
-    const streetCorrectName = this.streetList.find(item => item.id === form.value.street);
+    const cityCorrectName = this.citiesList.find(item => item.id === form.value.place.id);
+    const streetCorrectName = this.streetList.find(item => item.id === form.value.street.id);
     if (cityCorrectName && streetCorrectName) {
       // Get correct names
       city = cityCorrectName.fullName;
@@ -1295,7 +1296,7 @@ export class OrderComponent implements OnChanges, OnInit {
       // Read fields from popup
       const data = {
         building: form.value.house,
-        cityId: form.value.place,
+        cityId: form.value.place.id,
         cityName: city,
         description: form.value.description as string,
         house: form.value.building as string,
@@ -1305,12 +1306,13 @@ export class OrderComponent implements OnChanges, OnInit {
         pauseFrom: form.value.timeoutFrom as string,
         pauseTo: form.value.timeoutTo as string,
         room: form.value.apartment as string,
-        streetId: form.value.street,
+        streetId: form.value.street.id,
         streetName: street,
         timeFrom: form.value.deliveryFrom as string,
         timeTo: form.value.deliveryTo as string,
         customerId: id
       };
+      console.log('NEW', data);
       // Save the data
       this.service.saveUserCustomerAddress(data).subscribe(response => {
         // addresses.pop();
@@ -1643,5 +1645,13 @@ export class OrderComponent implements OnChanges, OnInit {
     } else {
       this.streetList = this.streetList.filter(option => option.name.toLowerCase().includes(event.target.value));
     }
+  }
+
+  cityShow(city: any): any {
+    return city.fullName;
+  }
+
+  streetShow(street: any): any {
+    return street.name;
   }
 }
