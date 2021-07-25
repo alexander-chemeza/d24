@@ -1556,6 +1556,23 @@ export class OrderComponent implements OnChanges, OnInit {
       } else {
         disabledSubmit = true;
         console.log('Incorrect data', data);
+        const invalidItems: any = document.getElementsByClassName('ng-invalid');
+        for (const item of invalidItems) {
+          item.classList.add('error');
+        }
+
+        if (this.orderForm.value.expressDeliveryVolume !== 0 &&
+          this.orderForm.value.expressDeliveryVolume !== '') {
+          const x: any = document.getElementById('expressDeliveryLength');
+          const y: any = document.getElementById('expressDeliveryWidth');
+          const z: any = document.getElementById('expressDeliveryHeight');
+          if (x && y && z) {
+            x.classList.remove('error');
+            y.classList.remove('error');
+            z.classList.remove('error');
+          }
+        }
+        alert('Проверте обязательные к заполнению поля, выделенные красным цветом.');
       }
     }
   }

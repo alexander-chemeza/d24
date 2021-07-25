@@ -1162,3 +1162,11 @@
 .hide-modal {
   display: none !important;
 }
+
+.error {
+  border: 2px solid red;
+}
+
+mat-select, textarea, .mat-input-element {
+  border: none !important;
+}
