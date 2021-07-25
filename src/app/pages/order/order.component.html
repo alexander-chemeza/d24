@@ -1374,7 +1374,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-sender-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewAddress(newExpressSenderAddress, orderForm.value.expressSender, 'new-express-sender-address')">
+    <form [formGroup]="newExpressSenderAddress" (ngSubmit)="createNewAddress(newExpressSenderAddress, orderForm.value.expressSender, 'new-express-sender-address', 'new-city-express-sender', 'new-street-express-sender')">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
@@ -1413,7 +1413,7 @@
 <!--        </mat-form-field>-->
         <label for="street-express-sender">Улица:</label>
         <mat-form-field class="example-full-width" appearance="fill">
-          <input id="new-street" type="text"
+          <input id="new-street-express-sender" type="text"
                  placeholder="Введите улицу"
                  aria-label="Number"
                  matInput
@@ -1546,7 +1546,7 @@
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('new-express-recipient-address')"></button>
     <h2 class="white-header">Новый адрес</h2>
-    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewAddress(newExpressRecipientAddress, orderForm.value.expressRecipient, 'new-express-recipient-address')">
+    <form [formGroup]="newExpressRecipientAddress" (ngSubmit)="createNewAddress(newExpressRecipientAddress, orderForm.value.expressRecipient, 'new-express-recipient-address', 'new-city-express-recipient', 'new-street-express-recipient')">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">

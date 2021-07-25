@@ -1280,7 +1280,7 @@ export class OrderComponent implements OnChanges, OnInit {
     });
   }
 
-  createNewAddress(form: any, id: number, modalId: string): void {
+  createNewAddress(form: any, id: number, modalId: string, cityOldId: string, streetOldId: string): void {
     // addresses.pop();
     // This vars will get correct name of city and street
     let city: string;
@@ -1319,6 +1319,12 @@ export class OrderComponent implements OnChanges, OnInit {
         if (response.status === 200) {
           this.hideModal(modalId);
           form.reset();
+          const oldCity: any = document.getElementById(cityOldId);
+          const oldStreet: any = document.getElementById(streetOldId);
+          if (oldCity && oldStreet) {
+            oldCity.value = '';
+            oldStreet.value = '';
+          }
           this.service.getAllUserCustomerAddress(id).subscribe(resp => {
             if (response.status === 200) {
               if (modalId === 'new-express-sender-address') {
