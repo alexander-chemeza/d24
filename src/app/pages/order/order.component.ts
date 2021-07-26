@@ -772,8 +772,6 @@ export class OrderComponent implements OnChanges, OnInit {
                     item.fullName = `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`;
                   }
 
-                  this.schedule(addresses.body, 'expressSender', this.user.senderAddress.id);
-
                   this.service.getAllUserCustomerContact(this.user.senderAddress.id).subscribe(contacts => {
                     if (contacts.status === 200) {
                       for (const contact of contacts.body) {
@@ -791,9 +789,11 @@ export class OrderComponent implements OnChanges, OnInit {
                             expressSenderAddress: this.user.senderAddress.id,
                             expressSenderContact: this.user.senderCustomerContact.id,
                           });
+                          this.schedule(addresses.body, 'expressSender', this.user.senderAddress.id);
                         } else {
                           this.expressSenderAddresses = [];
                           this.expressSenderContacts = [];
+                          this.expressSenderSchedule = '';
                         }
                       }
                     }
@@ -827,8 +827,6 @@ export class OrderComponent implements OnChanges, OnInit {
                     item.fullName = `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`;
                   }
 
-                  this.schedule(addresses.body, 'expressRecipient', this.user.recipientAddress.id);
-
                   this.service.getAllUserCustomerContact(this.user.recipientAddress.id).subscribe(contacts => {
                     if (contacts.status === 200) {
                       for (const contact of contacts.body) {
@@ -846,9 +844,11 @@ export class OrderComponent implements OnChanges, OnInit {
                             expressRecipientAddress: this.user.recipientAddress.id,
                             expressRecipientContact: this.user.recipientCustomerContact.id,
                           });
+                          this.schedule(addresses.body, 'expressRecipient', this.user.recipientAddress.id);
                         } else {
                           this.expressReceiverAddresses = [];
                           this.expressReceiverContacts = [];
+                          this.expressRecipientSchedule = '';
                         }
                       }
                     }
