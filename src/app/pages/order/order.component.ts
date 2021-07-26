@@ -1326,7 +1326,7 @@ export class OrderComponent implements OnChanges, OnInit {
             oldStreet.value = '';
           }
           this.service.getAllUserCustomerAddress(id).subscribe(resp => {
-            if (response.status === 200) {
+            if (resp.status === 200) {
               if (modalId === 'new-express-sender-address') {
                 this.expressSenderAddresses = [];
                 for (const item of resp.body) {
@@ -1351,10 +1351,11 @@ export class OrderComponent implements OnChanges, OnInit {
                     fullName: `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`
                   });
                 }
+                const currentID = this.expressSenderAddresses.sort((a: any, b: any) => a.id > b.id ? 1 : -1)[this.expressSenderAddresses.length - 1].id;
                 this.orderForm.patchValue({
-                  expressSenderAddress: this.expressSenderAddresses.sort((a: any, b: any) => a.id > b.id ? 1 : -1)[this.expressSenderAddresses.length - 1].id
+                  expressSenderAddress: currentID
                 });
-                this.schedule(this.expressSenderAddresses, 'expressSender', this.orderForm.value.expressSenderAddress);
+                this.schedule(resp.body, 'expressSender', currentID);
                 this.expressSenderContacts = [];
               } else if (modalId === 'new-express-recipient-address') {
                 this.expressReceiverAddresses = [];
@@ -1380,10 +1381,11 @@ export class OrderComponent implements OnChanges, OnInit {
                     fullName: `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`
                   });
                 }
+                const currentID = this.expressReceiverAddresses.sort((a: any, b: any) => a.id > b.id ? 1 : -1)[this.expressReceiverAddresses.length - 1].id;
                 this.orderForm.patchValue({
-                  expressRecipientAddress: this.expressReceiverAddresses.sort((a: any, b: any) => a.id > b.id ? 1 : -1)[this.expressReceiverAddresses.length - 1].id
+                  expressRecipientAddress: currentID
                 });
-                this.schedule(this.expressReceiverAddresses, 'expressRecipient', this.orderForm.value.expressRecipientAddress);
+                this.schedule(resp.body, 'expressRecipient', currentID);
                 this.expressReceiverContacts = [];
               }
             }
