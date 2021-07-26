@@ -839,6 +839,9 @@ export class OrderComponent implements OnChanges, OnInit {
                 expressSenderContact: this.user.senderCustomerContact.id,
               });
             }
+          } else {
+            this.expressSenderAddresses = [];
+            this.expressSenderContacts = [];
           }
           if (defaultRecipient) {
             defaultRecipient = JSON.parse(defaultRecipient);
@@ -849,6 +852,9 @@ export class OrderComponent implements OnChanges, OnInit {
                 expressRecipientAddress: this.user.recipientAddress.id,
                 expressRecipientContact: this.user.recipientCustomerContact.id,
               });
+            } else {
+              this.expressReceiverAddresses = [];
+              this.expressReceiverContacts = [];
             }
           }
         }
