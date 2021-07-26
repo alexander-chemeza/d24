@@ -740,6 +740,8 @@ export class OrderComponent implements OnChanges, OnInit {
         // User common data reception
         if (this.user) {
           // Express form fields
+          let defaultRecipient = localStorage.getItem('defaultRecipient');
+          let defaultSender = localStorage.getItem('defaultSender');
           this.service.getAllUserCustomer().subscribe(response => {
             if (response.status === 200) {
               this.expressSenderAgents = response.body;
@@ -779,6 +781,20 @@ export class OrderComponent implements OnChanges, OnInit {
                           id: contact.id,
                           name: contact.name
                         });
+                      }
+                      if (defaultSender) {
+                        defaultSender = JSON.parse(defaultSender);
+                        console.log(defaultSender);
+                        if (defaultSender) {
+                          this.orderForm.patchValue({
+                            expressSender: this.user.senderCustomer.id,
+                            expressSenderAddress: this.user.senderAddress.id,
+                            expressSenderContact: this.user.senderCustomerContact.id,
+                          });
+                        } else {
+                          this.expressSenderAddresses = [];
+                          this.expressSenderContacts = [];
+                        }
                       }
                     }
                   });
@@ -821,42 +837,26 @@ export class OrderComponent implements OnChanges, OnInit {
                           name: contact.name
                         });
                       }
+                      if (defaultRecipient) {
+                        defaultRecipient = JSON.parse(defaultRecipient);
+                        console.log(defaultRecipient);
+                        if (defaultRecipient) {
+                          this.orderForm.patchValue({
+                            expressRecipient: this.user.recipientCustomer.id,
+                            expressRecipientAddress: this.user.recipientAddress.id,
+                            expressRecipientContact: this.user.recipientCustomerContact.id,
+                          });
+                        } else {
+                          this.expressReceiverAddresses = [];
+                          this.expressReceiverContacts = [];
+                        }
+                      }
                     }
                   });
                 }
               });
             }
           });
-          let defaultRecipient = localStorage.getItem('defaultRecipient');
-          let defaultSender = localStorage.getItem('defaultSender');
-          if (defaultSender) {
-            defaultSender = JSON.parse(defaultSender);
-            console.log(defaultSender);
-            if (defaultSender) {
-              this.orderForm.patchValue({
-                expressSender: this.user.senderCustomer.id,
-                expressSenderAddress: this.user.senderAddress.id,
-                expressSenderContact: this.user.senderCustomerContact.id,
-              });
-            }
-          } else {
-            this.expressSenderAddresses = [];
-            this.expressSenderContacts = [];
-          }
-          if (defaultRecipient) {
-            defaultRecipient = JSON.parse(defaultRecipient);
-            console.log(defaultRecipient);
-            if (defaultRecipient) {
-              this.orderForm.patchValue({
-                expressRecipient: this.user.recipientCustomer.id,
-                expressRecipientAddress: this.user.recipientAddress.id,
-                expressRecipientContact: this.user.recipientCustomerContact.id,
-              });
-            } else {
-              this.expressReceiverAddresses = [];
-              this.expressReceiverContacts = [];
-            }
-          }
         }
       }
     });
