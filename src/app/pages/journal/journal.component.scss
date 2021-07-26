@@ -67,6 +67,23 @@
     grid-area: table;
     height: 600px;
     overflow: auto;
+
+    @media (max-height: 900px) {
+      & {
+        height: 440px;
+      }
+    }
+
+    @media (max-height: 700px) {
+      & {
+        height: 350px;
+      }
+    }
+    @media (max-height: 600px) {
+      & {
+        height: 240px;
+      }
+    }
   }
 
   & .row-table-controls {
@@ -181,7 +198,7 @@
   // height: 85%;
   position: relative;
   overflow: auto;
-  //padding: 30px;
+  padding: 30px;
 }
 
 .popup-bg {
@@ -219,8 +236,8 @@
 
   & .close-btn {
     position: absolute;
-    top: 0;
-    right: 0;
+    top: 15px;
+    right: 30px;
   }
 
   &_title {
@@ -549,4 +566,29 @@ button {
     font-size: 14px;
     line-height: 18px;
   }
+  .close-btn {
+    display: none !important;
+  }
+  .pdf-page {
+    page-break-after: always;
+  }
+  .journal-content {
+    display: none;
+  }
+  .sticker_num {
+    font-size: 19px;
+  }
+  .qrcode {
+    width: 108px !important;
+    height: 108px !important;
+
+    canvas {
+      width: 108px !important;
+      height: 108px !important;
+    }
+  }
+}
+
+.pdf-page {
+  page-break-after: always;
 }

@@ -294,6 +294,7 @@ button {
     background-repeat: no-repeat;
     background-image: url("../../assets/img/common/close.svg");
     // background-size: cover;
+    box-shadow: 1px 0px 15px 2px rgb(0 0 0 / 31%);
   }
 
   &.active-btn, &.purple-btn {
