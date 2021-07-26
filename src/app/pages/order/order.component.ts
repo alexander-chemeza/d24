@@ -849,6 +849,7 @@ export class OrderComponent implements OnChanges, OnInit {
     let deliveryZone = '';
     if (currentCity) {
       deliveryZone = currentCity.delivery_zone_id;
+      console.log('DELIVERY', deliveryZone);
       if (deliveryZone !== '') {
         this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
           if (deliveryZoneId.status === 200) {
@@ -884,16 +885,12 @@ export class OrderComponent implements OnChanges, OnInit {
       } else {
         if (field === 'expressSender') {
           this.expressSenderDate = (d: Date): boolean => {
-            const day = (d || new Date()).getDay();
-            // Prevent Saturday and Sunday from being selected.
-            return day !== 0 && day !== 1 && day !== 2 && day !== 3 && day !== 4 && day !== 5 && day !== 6;
+            return true;
           };
           this.expressSenderSchedule = 'График не установлен. Ваш заказ будет обработан. С вами свяжется оператор.';
         } else if (field === 'expressRecipient') {
           this.expressRecipientDate = (d: Date): boolean => {
-            const day = (d || new Date()).getDay();
-            // Prevent Saturday and Sunday from being selected.
-            return day !== 0 && day !== 1 && day !== 2 && day !== 3 && day !== 4 && day !== 5 && day !== 6;
+            return true;
           };
           this.expressRecipientSchedule = 'График не установлен. Ваш заказ будет обработан. С вами свяжется оператор.';
         }
