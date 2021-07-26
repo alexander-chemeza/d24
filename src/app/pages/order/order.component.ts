@@ -827,14 +827,30 @@ export class OrderComponent implements OnChanges, OnInit {
               });
             }
           });
-          this.orderForm.patchValue({
-            expressSender: this.user.senderCustomer.id,
-            expressSenderAddress: this.user.senderAddress.id,
-            expressSenderContact: this.user.senderCustomerContact.id,
-            expressRecipient: this.user.recipientCustomer.id,
-            expressRecipientAddress: this.user.recipientAddress.id,
-            expressRecipientContact: this.user.recipientCustomerContact.id,
-          });
+          let defaultRecipient = localStorage.getItem('defaultRecipient');
+          let defaultSender = localStorage.getItem('defaultSender');
+          if (defaultSender) {
+            defaultSender = JSON.parse(defaultSender);
+            console.log(defaultSender);
+            if (defaultSender) {
+              this.orderForm.patchValue({
+                expressSender: this.user.senderCustomer.id,
+                expressSenderAddress: this.user.senderAddress.id,
+                expressSenderContact: this.user.senderCustomerContact.id,
+              });
+            }
+          }
+          if (defaultRecipient) {
+            defaultRecipient = JSON.parse(defaultRecipient);
+            console.log(defaultRecipient);
+            if (defaultRecipient) {
+              this.orderForm.patchValue({
+                expressRecipient: this.user.recipientCustomer.id,
+                expressRecipientAddress: this.user.recipientAddress.id,
+                expressRecipientContact: this.user.recipientCustomerContact.id,
+              });
+            }
+          }
         }
       }
     });

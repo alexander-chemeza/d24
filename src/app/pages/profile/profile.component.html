@@ -1,5 +1,5 @@
 <div class="profile-content">
-  <form [formGroup]="profileForm" (ngSubmit)="updateUser($event)">
+  <form [formGroup]="profileForm">
     <div class="box-1">
       <h2 class="white-header mb-5">Общее</h2>
       <div class="grey-box">
@@ -15,6 +15,13 @@
       <h2 class="white-header mb-5">Настройки отправителя</h2>
       <div class="grey-box">
 <!--        <button class="btn close-btn red-btn small-btn" style="position: absolute; top: 15px; right: 20px"></button>-->
+        <div class="row">
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="checkbox" name="checkbox-express-recipient" id="checkbox-express-recipient" [checked]="defaultSender" (change)="saveDefaultSender()">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="checkbox-express-recipient">Использовать по умолчанию</label>
+        </div>
         <h2 class="grey-header">Отправитель:</h2>
         <mat-form-field floatLabel="never">
           <mat-select formControlName="sender" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, profileForm.value.sender, senderAddresses, senderContacts)">
@@ -56,6 +63,13 @@
     <div class="box-3">
       <h2 class="white-header mb-5">Настройки получателя</h2>
       <div class="grey-box">
+        <div class="row">
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="checkbox" name="checkbox-express-recipient" id="recipient" [checked]="defaultRecipient" (change)="saveDefaultRecipient()">
+            <span class="checkbox-block-icon"></span>
+          </div>
+          <label for="recipient">Использовать по умолчанию</label>
+        </div>
 <!--        <button (click)="clearFields($event)" class="btn close-btn red-btn small-btn" style="position: absolute; top: 15px; right: 20px"></button>-->
         <h2 class="grey-header">Получатель:</h2>
         <mat-form-field floatLabel="never">
@@ -95,25 +109,25 @@
 <!--        </div>-->
       </div>
     </div>
-    <div class="box-4">
-      <h2 class="white-header mb-5">Уведомления</h2>
-      <div class="grey-box">
-        <div class="row m-0">
-          <div class="checkbox-block" style="margin-right: 15px;">
-            <input formControlName="costNotification" class="checkbox-block-item" type="checkbox" name="notify" id="notify" checked>
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label class="description mt-10" style="display: inline" for="notify">Уведомлять о предварительной стоимости доставки груза по заявке</label>
-        </div>
-        <div class="row">
-          <div class="checkbox-block" style="margin-right: 15px;">
-            <input formControlName="smsNotification" class="checkbox-block-item" type="checkbox" name="sms" id="sms" checked>
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label class="description mt-10" style="display: inline" for="sms">Смс-оповещение о приходе груза</label>
-        </div>
-      </div>
-    </div>
-    <input type="submit" value="Сохранить">
+<!--    <div class="box-4">-->
+<!--      <h2 class="white-header mb-5">Уведомления</h2>-->
+<!--      <div class="grey-box">-->
+<!--        <div class="row m-0">-->
+<!--          <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--            <input formControlName="costNotification" class="checkbox-block-item" type="checkbox" name="notify" id="notify" checked>-->
+<!--            <span class="checkbox-block-icon"></span>-->
+<!--          </div>-->
+<!--          <label class="description mt-10" style="display: inline" for="notify">Уведомлять о предварительной стоимости доставки груза по заявке</label>-->
+<!--        </div>-->
+<!--        <div class="row">-->
+<!--          <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--            <input formControlName="smsNotification" class="checkbox-block-item" type="checkbox" name="sms" id="sms" checked>-->
+<!--            <span class="checkbox-block-icon"></span>-->
+<!--          </div>-->
+<!--          <label class="description mt-10" style="display: inline" for="sms">Смс-оповещение о приходе груза</label>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+    <input type="submit" value="Сохранить" (click)="updateUser($event)">
   </form>
 </div>

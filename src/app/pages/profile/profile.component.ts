@@ -9,6 +9,9 @@ import {Router} from '@angular/router';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  defaultSender: any;
+  defaultRecipient: any;
+
   userOldInfo: any = sessionStorage.getItem('currentUser');
   user: any;
   // Agents array
@@ -67,6 +70,16 @@ export class ProfileComponent implements OnInit {
   constructor(private service: RestapiService, private router: Router) { }
 
   ngOnInit(): void {
+    let defaultRecipient = localStorage.getItem('defaultRecipient');
+    let defaultSender = localStorage.getItem('defaultSender');
+    if (defaultSender) {
+      defaultSender = JSON.parse(defaultSender);
+      this.defaultSender = defaultSender;
+    }
+    if (defaultRecipient) {
+      defaultRecipient = JSON.parse(defaultRecipient);
+      this.defaultRecipient = defaultRecipient;
+    }
     // Make user object with his data
     if (this.userOldInfo) {
       this.user = JSON.parse(this.userOldInfo);
@@ -150,6 +163,16 @@ export class ProfileComponent implements OnInit {
       });
     }
 
+  }
+
+  saveDefaultSender(): void {
+    this.defaultSender = !this.defaultSender;
+    localStorage.setItem('defaultSender', JSON.stringify(this.defaultSender));
+  }
+
+  saveDefaultRecipient(): void {
+    this.defaultRecipient = !this.defaultRecipient;
+    localStorage.setItem('defaultRecipient', JSON.stringify(this.defaultRecipient));
   }
 
   selectAgent($event: any, agentId: any, addresses: any, contacts: any): void {

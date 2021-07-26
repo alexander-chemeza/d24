@@ -47,6 +47,12 @@ export class LoginComponent implements OnInit {
           alert('No such user or invalid password');
         }
       });
+    if (!localStorage.getItem('defaultSender')) {
+      localStorage.setItem('defaultSender', JSON.stringify(false));
+    }
+    if (!localStorage.getItem('defaultRecipient')) {
+      localStorage.setItem('defaultRecipient', JSON.stringify(false));
+    }
   }
 
 }
