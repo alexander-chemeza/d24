@@ -1162,7 +1162,7 @@ export class OrderComponent implements OnChanges, OnInit {
       // Get streets
       this.service.streets(this.street).subscribe(response => {
         if (response.status === 200) {
-          this.streetList = response.body.filter((item: any) => item.district_code === cityInfo.district_code);
+          this.streetList = response.body;
         }
       });
     }

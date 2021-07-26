@@ -157,7 +157,7 @@ export class BookComponent implements OnInit {
       // Get streets
       this.service.streets(this.street).subscribe(response => {
         if (response.status === 200) {
-          this.streetList = response.body.filter((item: any) => item.district_code === cityInfo.district_code);
+          this.streetList = response.body;
           console.log('Street list', this.streetList);
         }
       });
