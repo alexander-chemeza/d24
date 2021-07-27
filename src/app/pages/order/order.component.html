@@ -676,7 +676,7 @@
                   <label for="">Количество грузовых мест</label>
                   <div class="counter-controls">
                     <button class="minus-btn active-btn" (click)="decrease('expressDeliveryCounter1', orderForm.controls.expressDeliveryCounter1)"></button>
-                    <input class="m-0" type="number" name="expressDeliveryCounter1" id="expressDeliveryCounter1" formControlName="expressDeliveryCounter1" min="0" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57">
+                    <input class="m-0" type="number" name="expressDeliveryCounter1" id="expressDeliveryCounter1" formControlName="expressDeliveryCounter1" min="1" onkeypress="return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57">
                     <button class="add-btn active-btn" (click)="increase('expressDeliveryCounter1', orderForm.controls.expressDeliveryCounter1)"></button>
                   </div>
                 </div>

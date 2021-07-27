@@ -133,7 +133,7 @@ export class JournalComponent implements OnInit, OnChanges {
         field: 'orderDate',
         sortable: true,
         sort: ['desc'],
-        sortingOrder: ['desc', 'asc'],
+        sortingOrder: ['asc', 'desc'],
         flex: 1,
         minWidth: 300,
         maxWidth: 350,
@@ -216,7 +216,7 @@ export class JournalComponent implements OnInit, OnChanges {
         field: 'date1',
         sortable: true,
         sort: ['desc'],
-        sortingOrder: ['desc', 'asc'],
+        sortingOrder: ['asc', 'desc'],
         flex: 1,
         minWidth: 250,
         maxWidth: 300
@@ -250,7 +250,7 @@ export class JournalComponent implements OnInit, OnChanges {
         field: 'date2',
         sortable: true,
         sort: ['desc'],
-        sortingOrder: ['desc', 'asc'],
+        sortingOrder: ['asc', 'desc'],
         flex: 1,
         minWidth: 250,
         maxWidth: 300
@@ -308,8 +308,11 @@ export class JournalComponent implements OnInit, OnChanges {
     this.storedTableResponse = [];
     this.service.getAllUserOrders().subscribe(response => {
       if (response.status === 200) {
-        this.storedTableResponse = response.body;
+        this.storedTableResponse = response.body.reverse();
         for (const item of response.body) {
+          if (item.deal_type === 1) {
+            item.deal_type = 'Экспресс-доставка грузов';
+          }
           if (item.status !== 'Отменен') {
             this.rowData.push({
               number: item.order_number,

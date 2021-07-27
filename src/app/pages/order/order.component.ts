@@ -718,8 +718,8 @@ export class OrderComponent implements OnChanges, OnInit {
 
   ngOnInit(): void {
     // Set value to amount counters
-    this.orderForm.controls.expressDeliveryCounter1.setValue(0);
-    this.orderForm.controls.expressDeliveryCounter2.setValue(0);
+    this.orderForm.controls.expressDeliveryCounter1.setValue(1);
+    this.orderForm.controls.expressDeliveryCounter2.setValue(1);
 
     this.orderForm.patchValue({
       expressSenderTimeoutFrom: '00:00',
@@ -1465,11 +1465,11 @@ export class OrderComponent implements OnChanges, OnInit {
     if (input) {
       inputValue = input.value;
 
-      if (inputValue > 0) {
+      if (inputValue > 1) {
         inputValue--;
         formValue.setValue(inputValue);
-      } else if (inputValue === 0) {
-        formValue.setValue(0);
+      } else if (inputValue === 1) {
+        formValue.setValue(1);
       }
     }
   }
