@@ -309,6 +309,7 @@ export class JournalComponent implements OnInit, OnChanges {
     this.service.getAllUserOrders().subscribe(response => {
       if (response.status === 200) {
         this.storedTableResponse = response.body.reverse();
+        console.log(this.storedTableResponse);
         for (const item of response.body) {
           if (item.deal_type === 1) {
             item.deal_type = 'Экспресс-доставка грузов';
@@ -317,8 +318,8 @@ export class JournalComponent implements OnInit, OnChanges {
             this.rowData.push({
               number: item.order_number,
               status: item.status,
-              orderDate: this.pipe.transform(item.orderDate.split('T')[0], 'dd.MM.yyyy'),
-              orderTime: item.orderDate.split('T')[1].substr(0, 5),
+              orderDate: item.orderDate.split(' ')[0],
+              orderTime: item.orderDate.split(' ')[1].substr(0, 5),
               service: item.deal_type,
               delivery: item.delivery_type,
               ttn: '',
@@ -334,7 +335,7 @@ export class JournalComponent implements OnInit, OnChanges {
               date2: item.recipient_accept_from.split(' ')[0],
               time21: item.recipient_accept_from.split(' ')[1],
               time22: item.recipient_accept_to.split(' ')[1],
-              author: item.userId,
+              author: item.userName,
               id: item.id
             });
           }
