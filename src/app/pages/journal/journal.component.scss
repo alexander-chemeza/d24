@@ -554,15 +554,24 @@ button {
 }
 
 @media print {
+  
+  .blank table .report-header {
+    color: #000;
+    background: #fff;
+    font-weight: bold;
+  }
+  
   #blanks, #stickers {
     background-color: white;
     height: 100%;
-    width: 100%;
-    position: fixed;
+    width: 99%;
+    // position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     margin: 0;
-    padding: 15px;
+    // padding: 15px;
+    padding: 0 !important;
     font-size: 14px;
     line-height: 18px;
   }
@@ -587,8 +596,83 @@ button {
       height: 108px !important;
     }
   }
+  .report-box {
+    max-height: 100%;
+    padding: 0 !important;
+
+    .width-a4 {
+      padding: 20px !important;
+    }
+  }
+  .blank {
+    img {
+      width: 120px;
+    }
+    thead {
+      th {
+        font-size: 12px !important;
+      }
+    }
+    td {
+      font-size: 8px !important;
+    }
+  }
+  .modal {
+    position: relative;
+    top: 0;
+    left: 0;
+    transform: none;
+    box-shadow: none;
+    max-height: 100%;
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .popup_title {
+    display: none;
+  }
+  .grey-box {
+    display: none;
+  }
+  .pdf-page {
+    // padding: 15px;
+  }
+
+  .sticker-printing {
+    position: relative;
+    align-items: flex-start;
+  }
+  .sticker_text {
+    font-size: 16.5px;
+  }
+  .sticker-box {
+    display: block;
+    overflow: visible;
+    max-height: 100%;
+    
+    & > div {
+      // break-after: page;
+      display: inline-block;
+    }
+  }
 }
 
 .pdf-page {
   page-break-after: always;
 }
+
+.blank {
+  thead {
+    display:table-row-group;
+  }
+  tfoot {
+    display:table-row-group;
+  }
+}
+.width-a4 {
+  page-break-after: always;
+
+  .pdf-page {
+    page-break-after: always;
+  }
+}
+
