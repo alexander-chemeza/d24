@@ -409,3 +409,38 @@ a {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: "Montserrat-Medium", sans-serif !important; }
+
+@media print {
+  html {
+    overflow: visible !important;
+  }
+  body {
+    overflow: visible !important;
+  }
+  .container {
+    overflow: visible !important;
+  }
+  .content {
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+  .navigation {
+    display: none !important;
+  }
+  .popup-align {
+    max-width: 100% !important;
+    padding: 0 !important;
+  }
+  .sticker_qr {
+    .qrcode {
+      canvas {
+        width: 77px !important;
+        height: 77px !important;
+      }
+    }
+    .sticker_angle {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

@@ -686,6 +686,7 @@
 
     <div class="sticker-box" id="stickers">
       <div style="width: 50%" *ngFor="let item of selectedBlanksArraysForSticker">
+        <!-- {{item.id}} -->
         <div class="col-50 sticker">
           <div class="flex justify-content-between align-items-start">
             <div class="sticker_num">
@@ -693,12 +694,6 @@
             </div>
             <div class="sticker_qr">
               <qrcode [qrdata]="item.order_number" [width]="148" [errorCorrectionLevel]="'M'"></qrcode>
-<!--              <ngx-qrcode-->
-<!--                [elementType]="elementType"-->
-<!--                [errorCorrectionLevel]="correctionLevel"-->
-<!--                [value]="value"-->
-<!--                cssClass="bshadow">-->
-<!--              </ngx-qrcode>-->
             </div>
           </div>
           <div class="flex justify-content-between align-items-end">
@@ -710,120 +705,9 @@
             </div>
           </div>
         </div>
-<!--        <div class="col-50 sticker">-->
-<!--          <div class="flex justify-content-between align-items-start">-->
-<!--            <div class="sticker_num">-->
-<!--              12412123123124124-->
-<!--            </div>-->
-<!--            <div class="sticker_qr">-->
-<!--&lt;!&ndash;              <ngx-qrcode&ndash;&gt;-->
-<!--&lt;!&ndash;                [elementType]="elementType"&ndash;&gt;-->
-<!--&lt;!&ndash;                [errorCorrectionLevel]="correctionLevel"&ndash;&gt;-->
-<!--&lt;!&ndash;                [value]="value"&ndash;&gt;-->
-<!--&lt;!&ndash;                cssClass="bshadow">&ndash;&gt;-->
-<!--&lt;!&ndash;              </ngx-qrcode>&ndash;&gt;-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="flex justify-content-between align-items-end">-->
-<!--            <div class="sticker_text">-->
-<!--              Наименование организации, которая формирует заказ-->
-<!--            </div>-->
-<!--            <div class="sticker_angle">-->
-
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="col-50 sticker">-->
-<!--          <div class="flex justify-content-between align-items-start">-->
-<!--            <div class="sticker_num">-->
-<!--              12412123123124124-->
-<!--            </div>-->
-<!--            <div class="sticker_qr">-->
-<!--&lt;!&ndash;              <ngx-qrcode&ndash;&gt;-->
-<!--&lt;!&ndash;                [elementType]="elementType"&ndash;&gt;-->
-<!--&lt;!&ndash;                [errorCorrectionLevel]="correctionLevel"&ndash;&gt;-->
-<!--&lt;!&ndash;                [value]="value"&ndash;&gt;-->
-<!--&lt;!&ndash;                cssClass="bshadow">&ndash;&gt;-->
-<!--&lt;!&ndash;              </ngx-qrcode>&ndash;&gt;-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="flex justify-content-between align-items-end">-->
-<!--            <div class="sticker_text">-->
-<!--              Наименование организации, которая формирует заказ-->
-<!--            </div>-->
-<!--            <div class="sticker_angle">-->
-
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="col-50 sticker">-->
-<!--          <div class="flex justify-content-between align-items-start">-->
-<!--            <div class="sticker_num">-->
-<!--              12412123123124124-->
-<!--            </div>-->
-<!--            <div class="sticker_qr">-->
-<!--&lt;!&ndash;              <ngx-qrcode&ndash;&gt;-->
-<!--&lt;!&ndash;                [elementType]="elementType"&ndash;&gt;-->
-<!--&lt;!&ndash;                [errorCorrectionLevel]="correctionLevel"&ndash;&gt;-->
-<!--&lt;!&ndash;                [value]="value"&ndash;&gt;-->
-<!--&lt;!&ndash;                cssClass="bshadow">&ndash;&gt;-->
-<!--&lt;!&ndash;              </ngx-qrcode>&ndash;&gt;-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="flex justify-content-between align-items-end">-->
-<!--            <div class="sticker_text">-->
-<!--              Наименование организации, которая формирует заказ-->
-<!--            </div>-->
-<!--            <div class="sticker_angle">-->
-
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="col-50 sticker">-->
-<!--          <div class="flex justify-content-between align-items-start">-->
-<!--            <div class="sticker_num">-->
-<!--              12412123123124124-->
-<!--            </div>-->
-<!--            <div class="sticker_qr">-->
-<!--&lt;!&ndash;              <ngx-qrcode&ndash;&gt;-->
-<!--&lt;!&ndash;                [elementType]="elementType"&ndash;&gt;-->
-<!--&lt;!&ndash;                [errorCorrectionLevel]="correctionLevel"&ndash;&gt;-->
-<!--&lt;!&ndash;                [value]="value"&ndash;&gt;-->
-<!--&lt;!&ndash;                cssClass="bshadow">&ndash;&gt;-->
-<!--&lt;!&ndash;              </ngx-qrcode>&ndash;&gt;-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="flex justify-content-between align-items-end">-->
-<!--            <div class="sticker_text">-->
-<!--              Наименование организации, которая формирует заказ-->
-<!--            </div>-->
-<!--            <div class="sticker_angle">-->
-
-<!--            </div>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--        <div class="col-50 sticker">-->
-<!--          <div class="flex justify-content-between align-items-start">-->
-<!--            <div class="sticker_num">-->
-<!--              12412123123124124-->
-<!--            </div>-->
-<!--            <div class="sticker_qr">-->
-<!--&lt;!&ndash;              <ngx-qrcode&ndash;&gt;-->
-<!--&lt;!&ndash;                [elementType]="elementType"&ndash;&gt;-->
-<!--&lt;!&ndash;                [errorCorrectionLevel]="correctionLevel"&ndash;&gt;-->
-<!--&lt;!&ndash;                [value]="value"&ndash;&gt;-->
-<!--&lt;!&ndash;                cssClass="bshadow">&ndash;&gt;-->
-<!--&lt;!&ndash;              </ngx-qrcode>&ndash;&gt;-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <div class="flex justify-content-between align-items-end">-->
-<!--            <div class="sticker_text">-->
-<!--              Наименование организации, которая формирует заказ-->
-<!--            </div>-->
-<!--            <div class="sticker_angle"></div>-->
-<!--          </div>-->
-<!--        </div>-->
       </div>
+
+      <!-- <div style="break-after:page"></div> -->
     </div>
     <button class="active-btn circle-btn close-btn" (click)="hideModal('sticker-printing')" style="position: absolute; top: 15px; right: 30px"></button>
   </div>
@@ -1077,7 +961,9 @@
               </table>
             </div>
           </div>
-
+          <div style="break-after:page"></div>
+          <br>
+          <br>
           <div [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
             <div class="blank">
               <table>
@@ -1293,7 +1179,9 @@
               </table>
             </div>
           </div>
-
+          <div style="break-after:page"></div>
+          <br>
+          <br>
           <div *ngIf="printSenderBlank" [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
             <div class="blank">
               <table>
@@ -1509,6 +1397,9 @@
               </table>
             </div>
           </div>
+          <div style="break-after:page"></div>
+          <br>
+          <br>
         </div>
 <!--        <div class="pdf-page"> &lt;!&ndash; ЭКЗЕМПЛЯР ПЕРЕВОЗЧИКА &ndash;&gt;-->
 <!--          <div class="blank">-->
