@@ -131,10 +131,12 @@ export class JournalComponent implements OnInit, OnChanges {
       {
         headerName: 'Дата изменения статуса',
         field: 'orderDate',
-        sortable: false,
+        sortable: true,
+        sort: ['desc'],
+        sortingOrder: ['desc', 'asc'],
         flex: 1,
-        minWidth: 200,
-        maxWidth: 300,
+        minWidth: 300,
+        maxWidth: 350,
       },
       {
         headerName: 'Время изменения статуса',
@@ -213,6 +215,8 @@ export class JournalComponent implements OnInit, OnChanges {
         headerName: 'Дата выдачи груза',
         field: 'date1',
         sortable: true,
+        sort: ['desc'],
+        sortingOrder: ['desc', 'asc'],
         flex: 1,
         minWidth: 250,
         maxWidth: 300
@@ -245,6 +249,8 @@ export class JournalComponent implements OnInit, OnChanges {
         headerName: 'Дата доставки груза',
         field: 'date2',
         sortable: true,
+        sort: ['desc'],
+        sortingOrder: ['desc', 'asc'],
         flex: 1,
         minWidth: 250,
         maxWidth: 300
@@ -279,6 +285,7 @@ export class JournalComponent implements OnInit, OnChanges {
       flex: 1,
       minWidth: 100,
       resizable: true,
+      sortingOrder: ['desc', 'asc'],
     };
     this.rowSelection = 'multiple';
     this.paginationPageSize = 10;
