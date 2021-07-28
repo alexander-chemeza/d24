@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 
 // New order
 export interface NewOrder {
+  id?: number;
   client_type?: number; // on backend
   contact_customer?: string; // on backend
   cost?: number;
@@ -49,12 +50,12 @@ export interface NewOrder {
   // Step 1
   deal_type?: number;
   delivery_type?: string;
-  senderCustomerId: number;
-  senderCustomerAddressId: number;
-  senderCustomerContactId: number;
-  recipientCustomerId: number;
-  recipientCustomerAddressId: number;
-  recipientCustomerContactId: number;
+  senderCustomerId?: number;
+  senderCustomerAddressId?: number;
+  senderCustomerContactId?: number;
+  recipientCustomerId?: number;
+  recipientCustomerAddressId?: number;
+  recipientCustomerContactId?: number;
   sender_delivery_from?: string;
   sender_delivery_to?: string;
   recipient_accept_from?: string;

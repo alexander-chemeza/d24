@@ -2,7 +2,7 @@ import {Component, OnChanges, OnInit} from '@angular/core';
 import {RestapiService, SaveUserCustomerAddress, Street} from '../../restapi.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 interface ContractList {
   contractActive: string | boolean;
@@ -72,6 +72,7 @@ interface DeliverySchedulte {
   styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent implements OnChanges, OnInit {
+  dataFromJournal: any;
   // Work with user contracts
   userType = ''; // Юр.лицо / Физ.лицо
   contractList: ContractList[] = []; // List of available contracts of the user
@@ -659,7 +660,7 @@ export class OrderComponent implements OnChanges, OnInit {
     ])
   });
 
-  constructor(private service: RestapiService, private router: Router) {
+  constructor(private service: RestapiService, private router: Router, private route: ActivatedRoute) {
     // this.serviceType = this.serviceTypes[0].value;
     this.deliveryType = '';
     this.currentCity = 0;
@@ -717,6 +718,10 @@ export class OrderComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
+    if (this.router.url !== '/order') {
+      this.route.queryParamMap.subscribe(params => this.dataFromJournal = params);
+      this.dataFromJournal = JSON.parse(this.dataFromJournal.params.data);
+    }
     // Set value to amount counters
     this.orderForm.controls.expressDeliveryCounter1.setValue(1);
     this.orderForm.controls.expressDeliveryCounter2.setValue(1);
@@ -1543,7 +1548,9 @@ export class OrderComponent implements OnChanges, OnInit {
         // relocation: this.orderForm.value.expressDeliveryRelocate,
         // agreement: this.orderForm.value.expressDeliveryAgreement
       };
-
+      if (this.dataFromJournal) {
+        data.id = this.dataFromJournal.id;
+      }
       if (
         data.deal_type === 1 &&
         data.delivery_type !== '' &&

@@ -89,12 +89,11 @@ export class JournalComponent implements OnInit, OnChanges {
           } else if (target === 'edit') {
             const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
             console.log('edit id = ', id);
+            this.showModal('view-request');
           } else if (target === 'show') {
             const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
-            this.itemToShow = this.storedTableResponse.find((item: any) => item.id === id);
-            console.log('item to show', this.itemToShow);
-
-            this.showModal('view-request');
+            const journalItem = this.storedTableResponse.find((item: any) => item.id === id);
+            this.router.navigate(['order'], {queryParams: {data: JSON.stringify(journalItem)}});
           } else if (target === 'copy') {
             // Get copied order data
             const itemToCopy = this.storedTableResponse
