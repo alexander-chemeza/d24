@@ -65,7 +65,7 @@ export interface NewOrder {
 
   // Step 2
   description_delivery?: string;
-  delivery_placing_type?: number;
+  delivery_placing_type?: number | string;
   amount_packages?: number;
   delivery_weight?: number;
   delivery_volume?: number;

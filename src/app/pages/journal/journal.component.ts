@@ -95,6 +95,69 @@ export class JournalComponent implements OnInit, OnChanges {
             console.log('item to show', this.itemToShow);
 
             this.showModal('view-request');
+          } else if (target === 'copy') {
+            // Get copied order data
+            const itemToCopy = this.storedTableResponse
+              .find((item: any) => item.id === this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id);
+            let deliveryType = '';
+            let placingType = '';
+            // Detect correct value of delivery type
+            if (itemToCopy.delivery_type === 'Дверь/Дверь') {
+              deliveryType = 'dt0';
+            } else if (itemToCopy.delivery_type === 'Терминал/Дверь') {
+              deliveryType = 'dt1';
+            } else if (itemToCopy.delivery_type === 'Дверь/Терминал') {
+              deliveryType = 'dt2';
+            } else if (itemToCopy.delivery_type === 'Терминал/Терминал') {
+              deliveryType = 'dt3';
+            }
+            // Detect correct value of placing type
+            if (itemToCopy.delivery_placing_type === 'Короб') {
+              placingType = 'pt0';
+            } else if (itemToCopy.delivery_placing_type === 'Паллета') {
+              placingType = 'pt1';
+            } else if (itemToCopy.delivery_placing_type === 'Негабарит') {
+              placingType = 'pt2';
+            }else if (itemToCopy.delivery_placing_type === 'Документы') {
+              placingType = 'pt3';
+            } else if (itemToCopy.delivery_placing_type === 'Мешок') {
+              placingType = 'pt4';
+            }
+            const data = {
+              deal_type: 1,
+              delivery_type: deliveryType,
+              senderCustomerId: itemToCopy.senderCustomerId,
+              senderCustomerAddressId: itemToCopy.senderCustomerAddressId,
+              senderCustomerContactId: itemToCopy.senderCustomerContactId,
+              recipientCustomerId: itemToCopy.recipientCustomerId,
+              recipientCustomerAddressId: itemToCopy.recipientCustomerAddressId,
+              recipientCustomerContactId: itemToCopy.recipientCustomerContactId,
+              sender_delivery_from: itemToCopy.sender_delivery_from,
+              sender_delivery_to: itemToCopy.sender_delivery_to,
+              sender_lunch_break_start: itemToCopy.sender_lunch_break_start,
+              sender_lunch_break_finish: itemToCopy.sender_lunch_break_finish,
+              sender_description: itemToCopy.sender_description,
+              recipient_accept_from: itemToCopy.recipient_accept_from,
+              recipient_accept_to: itemToCopy.recipient_accept_to,
+              recipient_description: itemToCopy.recipient_description,
+              recipient_email: itemToCopy.recipient_email,
+              recipient_lunch_break_start: itemToCopy.recipient_lunch_break_start,
+              recipient_lunch_break_finish: itemToCopy.recipient_lunch_break_finish,
+              description_delivery: itemToCopy.description_delivery,
+              delivery_placing_type: placingType,
+              delivery_weight: itemToCopy.delivery_weight,
+              delivery_volume: itemToCopy.delivery_volume,
+              delivery_size_x: itemToCopy.delivery_size_x,
+              delivery_size_y: itemToCopy.delivery_size_y,
+              delivery_size_z: itemToCopy.delivery_size_z,
+              amount_packages: itemToCopy.amount_packages,
+            };
+            console.log('COPIED DATA', data);
+            this.service.placeNewOrder(data).subscribe(response => {
+              if (response.status === 200) {
+                this.getTable();
+              }
+            })
           }
         }
       },
