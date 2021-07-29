@@ -88,12 +88,14 @@ export class JournalComponent implements OnInit, OnChanges {
             });
           } else if (target === 'edit') {
             const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
-            console.log('edit id = ', id);
-            this.showModal('view-request');
-          } else if (target === 'show') {
-            const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
             const journalItem = this.storedTableResponse.find((item: any) => item.id === id);
-            this.router.navigate(['order'], {queryParams: {data: JSON.stringify(journalItem)}});
+            if (journalItem.status === 'Черновик') {
+              this.router.navigate(['order'], {queryParams: {data: JSON.stringify(journalItem)}});
+            } else {
+              alert('Редактирование заказов доступно только для статуса "Черновик".');
+            }
+          } else if (target === 'show') {
+
           } else if (target === 'copy') {
             // Get copied order data
             const itemToCopy = this.storedTableResponse
