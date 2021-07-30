@@ -746,6 +746,13 @@ export class OrderComponent implements OnChanges, OnInit {
     });
   }
 
+  deserializeDate(date: string): any {
+    const year = Number(date.split('.')[2]);
+    const month = Number(date.split('.')[1]) - 1;
+    const day = Number(date.split('.')[0]);
+    return new Date(year, month, day);
+  }
+
   showPreloadData(info: any): void {
     if (!this.dataFromJournal) {
       // Set value to amount counters
@@ -920,13 +927,13 @@ export class OrderComponent implements OnChanges, OnInit {
           });
           if (this.dataFromJournal) {
             this.orderForm.patchValue({
-              expressSenderDeliveryDate: this.dataFromJournal.sender_delivery_from.split(' ')[0],
+              expressSenderDeliveryDate: this.deserializeDate(this.dataFromJournal.sender_delivery_from.split(' ')[0]),
               expressSenderDeliverFrom: this.dataFromJournal.sender_delivery_from.split(' ')[1],
               expressSenderDeliverTo: this.dataFromJournal.sender_delivery_to.split(' ')[1],
               expressSenderTimeoutFrom: this.dataFromJournal.sender_lunch_break_start.split(' ')[1],
               expressSenderTimeoutTo: this.dataFromJournal.sender_lunch_break_finish.split(' ')[1],
               expressSenderDescription: this.dataFromJournal.sender_description,
-              expressRecipientDeliveryDate: this.dataFromJournal.recipient_accept_from.split(' ')[0],
+              expressRecipientDeliveryDate: this.deserializeDate(this.dataFromJournal.recipient_accept_from.split(' ')[0]),
               expressRecipientDeliverFrom: this.dataFromJournal.recipient_accept_from.split(' ')[1],
               expressRecipientDeliverTo: this.dataFromJournal.recipient_accept_to.split(' ')[1],
               expressRecipientDescription: this.dataFromJournal.recipient_description,
@@ -974,7 +981,7 @@ export class OrderComponent implements OnChanges, OnInit {
             const senderDate: any = document.getElementById('expressSenderDeliveryDate');
             const recipientDate: any = document.getElementById('expressRecipientDeliveryDate');
             senderDate.value = this.dataFromJournal.sender_delivery_from.split(' ')[0];
-            recipientDate.value = this.dataFromJournal.sender_delivery_from.split(' ')[0];
+            recipientDate.value = this.dataFromJournal.recipient_accept_from.split(' ')[0];
           }
         }
       }
@@ -1624,17 +1631,17 @@ export class OrderComponent implements OnChanges, OnInit {
         recipientCustomerId: this.orderForm.value.expressRecipient,
         recipientCustomerAddressId: this.orderForm.value.expressRecipientAddress,
         recipientCustomerContactId: this.orderForm.value.expressRecipientContact,
-        sender_delivery_from: `${this.orderForm.value.expressSenderDeliveryDate} ${this.orderForm.value.expressSenderDeliverFrom}`,
-        sender_delivery_to: `${this.orderForm.value.expressSenderDeliveryDate} ${this.orderForm.value.expressSenderDeliverTo}`,
-        sender_lunch_break_start: `${this.orderForm.value.expressSenderDeliveryDate} ${this.orderForm.value.expressSenderTimeoutFrom}`,
-        sender_lunch_break_finish: `${this.orderForm.value.expressSenderDeliveryDate} ${this.orderForm.value.expressSenderTimeoutTo}`,
+        sender_delivery_from: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderDeliverFrom}`,
+        sender_delivery_to: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderDeliverTo}`,
+        sender_lunch_break_start: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderTimeoutFrom}`,
+        sender_lunch_break_finish: `${this.pipe.transform(this.orderForm.value.expressSenderDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressSenderTimeoutTo}`,
         sender_description: this.orderForm.value.expressSenderDescription,
-        recipient_accept_from: `${this.orderForm.value.expressRecipientDeliveryDate} ${this.orderForm.value.expressRecipientDeliverFrom}`,
-        recipient_accept_to: `${this.orderForm.value.expressRecipientDeliveryDate} ${this.orderForm.value.expressRecipientDeliverTo}`,
         recipient_description: this.orderForm.value.expressRecipientDescription,
         recipient_email: this.orderForm.value.expressRecipientNotificationEmail,
-        recipient_lunch_break_start: `${this.orderForm.value.expressRecipientDeliveryDate} ${this.orderForm.value.expressRecipientTimeoutFrom}`,
-        recipient_lunch_break_finish: `${this.orderForm.value.expressRecipientDeliveryDate} ${this.orderForm.value.expressRecipientTimeoutTo}`,
+        recipient_accept_from: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientDeliverFrom}`,
+        recipient_accept_to: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientDeliverTo}`,
+        recipient_lunch_break_start: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutFrom}`,
+        recipient_lunch_break_finish: `${this.pipe.transform(this.orderForm.value.expressRecipientDeliveryDate, 'dd.MM.yyyy')} ${this.orderForm.value.expressRecipientTimeoutTo}`,
 
         // Missed
         // senderDate: this.orderForm.value.expressSenderDeliveryDate,
