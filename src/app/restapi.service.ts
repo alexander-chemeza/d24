@@ -211,7 +211,7 @@ export class RestapiService {
     });
 
     // GET method to login, that returns an object {"name": "value", role: "value"}
-    return this.http.get<User>(`${this.url}/login`, {headers, responseType: 'json', observe: 'response'});
+    return this.http.get<User>(`${this.url}/login`, {headers, responseType: 'json'});
   }
   // user-controller POST
   public register(data: UserRegistration): Observable<any> {
