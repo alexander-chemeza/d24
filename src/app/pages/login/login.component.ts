@@ -9,22 +9,24 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  loginForm = new FormGroup({
-    userName: new FormControl('', [
-      Validators.required,
-      Validators.minLength(4)
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(1)
-    ])
-  });
+  incorrect = false;
+  loginForm: any;
 
   constructor(private service: RestapiService, private router: Router) {
   }
 
   ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      userName: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4)
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(1)
+      ])
+    });
+
     if (sessionStorage.getItem('currentUser')) {
       this.router.navigate(['home']);
     } else {
@@ -35,16 +37,12 @@ export class LoginComponent implements OnInit {
   doLogin(): void {
     this.service.login(this.loginForm.value.userName as string, this.loginForm.value.password as string)
       .subscribe(data => {
-        if (data) {
-          sessionStorage.setItem('currentUser', JSON.stringify(data));
-          // this.service.getUserInfo().subscribe(resp => {
-          //   if (resp.status === 200) {
-          //     sessionStorage.setItem('userInfo', JSON.stringify(resp.body));
-          //   }
-          // });
-          this.router.navigate(['home']);
-        } else {
-          alert('No such user or invalid password');
+        sessionStorage.setItem('currentUser', JSON.stringify(data));
+        this.router.navigate(['home']);
+      }, error => {
+        if (error.status === 401) {
+          console.log('401');
+          this.incorrect = true;
         }
       });
     if (!localStorage.getItem('defaultSender')) {
@@ -53,6 +51,14 @@ export class LoginComponent implements OnInit {
     if (!localStorage.getItem('defaultRecipient')) {
       localStorage.setItem('defaultRecipient', JSON.stringify(false));
     }
+  }
+
+  get userName(): any {
+    return this.loginForm.get('userName');
+  }
+
+  get password(): any {
+    return this.loginForm.get('password');
   }
 
 }

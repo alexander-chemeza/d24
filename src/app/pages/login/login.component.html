@@ -1,14 +1,19 @@
 <div class="login-content" style="display: block;">
   <p class="preheader">
-    Пожалуйста, введите свои данные для вход в личный кабинет
+    Пожалуйста, введите свои данные для входа в личный кабинет
   </p>
 
   <div class="grey-box form">
     <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
       <label for="login">Логин</label>
       <input type="text" name="login" id="login" formControlName="userName">
+      <p *ngIf="userName.invalid && userName.touched && userName.dirty" class="alert-message">Минимальная длина 4 символа</p>
+      <p *ngIf="userName.touched && userName.invalid && userName.pristine" class="alert-message">Данное поле обязательно</p>
       <label for="password">Пароль</label>
       <input type="password" name="password" id="password" formControlName="password">
+      <p *ngIf="password.touched && password.invalid && password.dirty" class="alert-message">Минимальная длина 1 символ</p>
+      <p *ngIf="password.touched && password.invalid && password.pristine" class="alert-message">Данное поле обязательно</p>
+      <p class="grey-text" *ngIf="incorrect" style="color: red; position: absolute">Неверный логин или пароль</p>
       <input type="submit" value="Войти" class="submit-btn" [disabled]="loginForm.invalid">
     </form>
   </div>
