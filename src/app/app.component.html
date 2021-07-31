@@ -114,12 +114,12 @@
           </a>
         </li>
         <li>
-          <a (click)="showModal('to-be-better')">
+          <a (click)="showModal($event,'to-be-better')">
             <img src="../assets/img/menu/alert-dark.svg" class="icon" alt="ico">
             <span class="menu-text">Хотим стать лучше</span>
           </a>
         </li>
-        <li (click)="doLogout()">
+        <li (click)="showModal($event,'ask-if-logout')">
           <a href="">
             <img src="../assets/img/menu/log-out-dark.svg" class="icon" alt="ico">
             <span class="menu-text">Выход</span>
@@ -145,5 +145,13 @@
       <input type="submit" value="Отправить">
     </form>
     <p class="description-violet mt-30" style="">Мы хотим, чтобы вам было максимально удобно  пользываться нашим кабинетом, а для этого нам нужна ваша обратная связь!</p>
+  </div>
+</div>
+
+<div id="ask-if-logout" class="modal ask-if-logout">
+  <p class="white-header">Вы действительно хотите выйти?</p>
+  <div class="row">
+    <button class="green-btn round-btn" (click)="doLogout()">Выйти</button>
+    <button class="white-btn round-btn" (click)="hideModal('ask-if-logout')">Остаться</button>
   </div>
 </div>

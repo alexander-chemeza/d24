@@ -40,13 +40,16 @@ export class AppComponent implements OnInit {
 
   doLogout(): void {
     sessionStorage.removeItem('currentUser');
-    this.service.logout().subscribe(data => {
-      console.log(data);
-    });
     this.router.navigate(['login']);
+    this.service.logout().subscribe(data => {
+      return;
+    });
+    this.hideModal('ask-if-logout');
   }
 
-  showModal(id: string): void {
+  showModal(event: any, id: string): void {
+    event.preventDefault();
+    event.stopPropagation();
     const modal: any = document.getElementById(id);
     modal.classList.remove('hide-modal');
     modal.classList.add('show-modal');
