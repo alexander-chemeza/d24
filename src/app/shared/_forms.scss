@@ -428,3 +428,26 @@ textarea {
   color: rgba(0,0,0,0.5);
   box-sizing: border-box;
 }
+
+.pswd-icon {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+  width: 20px;
+  height: 20px;
+  background-color: transparent;
+  padding: 0 !important;
+  background-size: cover;
+  background-repeat: no-repeat;
+  transition: all .3s;
+  outline: none;
+
+  &.pswd-hide {
+    background-image: url("../../assets/img/common/hide-interface-symbol.svg");
+    transition: all .3s;
+  }
+  &.pswd-show {
+    background-image: url("../../assets/img/common/eye-with-thick-outline-variant.svg");
+    transition: all .3s;
+  }
+}

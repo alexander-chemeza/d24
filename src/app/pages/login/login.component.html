@@ -10,7 +10,10 @@
       <p *ngIf="userName.invalid && userName.touched && userName.dirty" class="alert-message">Минимальная длина 4 символа</p>
       <p *ngIf="userName.touched && userName.invalid && userName.pristine" class="alert-message">Данное поле обязательно</p>
       <label for="password">Пароль</label>
-      <input type="password" name="password" id="password" formControlName="password">
+      <div class="row-pswd">
+        <button class="pswd-icon pswd-hide" (click)="togglePasswordType($event)"></button>
+        <input style="padding-left: 50px" type="password" name="password" id="password" formControlName="password">
+      </div>
       <p *ngIf="password.touched && password.invalid && password.dirty" class="alert-message">Минимальная длина 1 символ</p>
       <p *ngIf="password.touched && password.invalid && password.pristine" class="alert-message">Данное поле обязательно</p>
       <p class="grey-text" *ngIf="incorrect" style="color: red; position: absolute">Неверный логин или пароль</p>

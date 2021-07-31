@@ -61,4 +61,20 @@ export class LoginComponent implements OnInit {
     return this.loginForm.get('password');
   }
 
+  togglePasswordType(event: any): void {
+    event.preventDefault();
+    event.stopPropagation();
+    const passwordField: any = document.getElementById('password');
+    const type = passwordField.getAttribute('type');
+    if (type === 'password') {
+      event.target.classList.remove('pswd-hide');
+      event.target.classList.add('pswd-show');
+      passwordField.setAttribute('type', 'text');
+    } else {
+      event.target.classList.add('pswd-hide');
+      event.target.classList.remove('pswd-show');
+      passwordField.setAttribute('type', 'password');
+    }
+  }
+
 }

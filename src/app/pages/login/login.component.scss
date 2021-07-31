@@ -33,7 +33,7 @@
 }
 
 @media (max-width: 2000px) {
-  
+
 }
 
 @media (max-width: 2000px) {
@@ -46,4 +46,10 @@
   .recover-content .preheader {
     font-size: 1.6rem;
   }
+}
+
+.row-pswd {
+  position: relative;
+  width: 100%;
+  height: fit-content;
 }
