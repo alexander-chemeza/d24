@@ -11,6 +11,8 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {QRCodeModule} from 'angularx-qrcode';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from '../../AuthInterceptor';
 
 
 
@@ -30,6 +32,9 @@ import {QRCodeModule} from 'angularx-qrcode';
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ]
 })
 export class JournalModule { }

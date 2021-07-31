@@ -5,6 +5,8 @@ import {SharedModule} from '../../shared/shared.module';
 import {MatSelectModule} from '@angular/material/select';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {ScrollingModule} from '@angular/cdk/scrolling';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from '../../AuthInterceptor';
 
 
 
@@ -16,6 +18,9 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
     MatSelectModule,
     MatFormFieldModule,
     ScrollingModule
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ]
 })
 export class ProfileModule { }

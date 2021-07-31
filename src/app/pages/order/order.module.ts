@@ -11,6 +11,8 @@ import {MatInputModule} from '@angular/material/input';
 import {CustomDateAdapter} from './CustomDateAdapter';
 import {NgxMaskModule} from 'ngx-mask';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from '../../AuthInterceptor';
 
 
 
@@ -30,7 +32,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'ru-RU'},
-    {provide: DateAdapter, useClass: CustomDateAdapter}
+    {provide: DateAdapter, useClass: CustomDateAdapter},
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ]
 })
 export class OrderModule { }

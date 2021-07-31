@@ -4,6 +4,8 @@ import {ContactsComponent} from './contacts.component';
 import {SharedModule} from '../../../shared/shared.module';
 import {AgGridModule} from 'ag-grid-angular';
 import { ContactsButtonsComponent } from './contacts-buttons/contacts-buttons.component';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from '../../../AuthInterceptor';
 
 
 
@@ -14,6 +16,9 @@ import { ContactsButtonsComponent } from './contacts-buttons/contacts-buttons.co
     CommonModule,
     SharedModule,
     AgGridModule.withComponents([ContactsButtonsComponent])
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ]
 })
 export class ContactsModule { }

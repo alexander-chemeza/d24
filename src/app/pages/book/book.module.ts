@@ -11,6 +11,8 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {NgxMaskModule} from 'ngx-mask';
 import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {AuthInterceptor} from '../../AuthInterceptor';
 
 
 
@@ -30,6 +32,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     NgxMaskModule.forRoot(),
     MatInputModule,
     MatAutocompleteModule
+  ],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
   ]
 })
 export class BookModule { }

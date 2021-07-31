@@ -211,125 +211,125 @@ export class RestapiService {
     });
 
     // GET method to login, that returns an object {"name": "value", role: "value"}
-    return this.http.get<User>(`${this.url}/login`, {headers, responseType: 'json', withCredentials: true});
+    return this.http.get<User>(`${this.url}/login`, {headers, responseType: 'json', });
   }
   // user-controller POST
   public register(data: UserRegistration): Observable<any> {
-    return this.http.post(`${this.url}/registration`, data, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/registration`, data, {observe: 'response'});
   }
   // user-controller POST
   public addManager(data: UserRegistration): Observable<any> {
-    return this.http.post(`${this.url}/adminUser/addManager`, data, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/adminUser/addManager`, data, {observe: 'response'});
   }
   // user-controller GET
   public getAllManagers(params: any): Observable<any> {
-    return this.http.get(`${this.url}/adminUser/getAllManagers`, {observe: 'response', withCredentials: true, params});
+    return this.http.get(`${this.url}/adminUser/getAllManagers`, {observe: 'response', params});
   }
   // user-controller GET
   public getUserById(params: any): Observable<any> {
-    return this.http.get(`${this.url}/adminUser/getUserById`, {observe: 'response', withCredentials: true, params});
+    return this.http.get(`${this.url}/adminUser/getUserById`, {observe: 'response', params});
   }
   // user controller get groups GET
   public getGroups(): Observable<any> {
-    return this.http.get(`${this.url}/user/group/getAll`, {observe: 'response', withCredentials: true});
+    return this.http.get(`${this.url}/user/group/getAll`, {observe: 'response'});
   }
   // user-controller GET
   public logout(): Observable<any> {
-    return this.http.get(`${this.url}/logout`, {withCredentials: true});
+    return this.http.get(`${this.url}/logout`, {});
   }
   // delivery-type-controller GET
   public deliveryTypes(): Observable<any> {
     // const headers = new HttpHeaders({});
     // headers.append('Set-Cookies', 'JSESSIONID=<jsessionid>');
     // console.log(headers);
-    return this.http.get(`${this.url}/user/deliveryType/getAll`, {responseType: 'json', withCredentials: true});
+    return this.http.get(`${this.url}/user/deliveryType/getAll`, {responseType: 'json', });
   }
   // feedback-controller POST
   public feedback(data: Feedback): Observable<any> {
-    return  this.http.post(`${this.url}/user/sendFeedback`, data, {observe: 'response', withCredentials: true});
+    return  this.http.post(`${this.url}/user/sendFeedback`, data, {observe: 'response'});
   }
   // user-contract-controller GET
   public contracts(): Observable<any> {
-    return this.http.get(`${this.url}/user/contracts`, {observe: 'response', withCredentials: true});
+    return this.http.get(`${this.url}/user/contracts`, {observe: 'response'});
   }
   // address-controller GET
   public cities(): Observable<any> {
-    return this.http.get(`${this.url}/user/address/getAllCities`, {observe: 'response', withCredentials: true});
+    return this.http.get(`${this.url}/user/address/getAllCities`, {observe: 'response'});
   }
   // address-controller POST
   public streets(data: Street): Observable<any> {
-    return this.http.post(`${this.url}/user/address/getAllStreet`, data, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/address/getAllStreet`, data, {observe: 'response'});
   }
   // user-customer-address-controller POST
   public deleteUserCustomerAddress(data: number): Observable<any> {
-    return this.http.post(`${this.url}/user/customerAddress/delete`, data, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/customerAddress/delete`, data, {observe: 'response'});
   }
   // user-customer-address-controller POST
   public getAllUserCustomerAddress(customerID: number): Observable<any> {
-    return this.http.post(`${this.url}/user/customerAddress/getAll`, customerID, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/customerAddress/getAll`, customerID, {observe: 'response'});
   }
   //  user-customer-address-controller POST
   public saveUserCustomerAddress(data: SaveUserCustomerAddress): Observable<any> {
-    return this.http.post(`${this.url}/user/customerAddress/save`, data, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/customerAddress/save`, data, {observe: 'response'});
   }
 
   // user-customer-controller POST
   public deleteUserCustomer(data: number): Observable<any> {
-    return this.http.post(`${this.url}/user/customer/delete`, data, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/customer/delete`, data, {observe: 'response'});
   }
   // user-customer-address-controller GET
   public getAllUserCustomer(): Observable<any> {
-    return this.http.get(`${this.url}/user/customer/getAll`, {observe: 'response', withCredentials: true});
+    return this.http.get(`${this.url}/user/customer/getAll`, {observe: 'response'});
   }
   //  user-customer-address-controller POST
   public saveUserCustomer(data: SaveUserCustomer): Observable<any> {
-    return this.http.post(`${this.url}/user/customer/save`, data, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/customer/save`, data, {observe: 'response'});
   }
 
   // user-customer-contact-controller POST
   public deleteUserCustomerContact(data: GetUserCustomerContact): Observable<any> {
-    return this.http.post(`${this.url}/user/customerContact/delete`, data, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/customerContact/delete`, data, {observe: 'response'});
   }
   // user-customer-contact-controller POST
   public getAllUserCustomerContact(customerAddressId: number): Observable<any> {
-    return this.http.post(`${this.url}/user/customerContact/getAll`, customerAddressId, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/customerContact/getAll`, customerAddressId, {observe: 'response'});
   }
   //  user-customer-contact-controller POST
   public saveUserCustomerContact(data: SaveUserCustomerContact): Observable<any> {
-    return this.http.post(`${this.url}/user/customerContact/save`, data, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/customerContact/save`, data, {observe: 'response'});
   }
 
   public getUserInfo(): Observable<any> {
-    return this.http.get(`${this.url}/user/userInfo`, {observe: 'response', withCredentials: true});
+    return this.http.get(`${this.url}/user/userInfo`, {observe: 'response'});
   }
 
   public updateUser(data: any): Observable<any> {
-    return this.http.post(`${this.url}/user/updateUser`, data, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/updateUser`, data, {observe: 'response'});
   }
 
   // New order
   public placeNewOrder(data: NewOrder): Observable<any> {
-    return this.http.post(`${this.url}/user/order/addNew`, data, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/order/addNew`, data, {observe: 'response'});
   }
 
   // Get delivery schedule
   public getDeliveryCalendar(deliveryZoneId: string): Observable<any> {
-    return this.http.get(`${this.url}/user/deliveryCalendar/get?deliverZoneId=${deliveryZoneId}`, {observe: 'response', withCredentials: true});
+    return this.http.get(`${this.url}/user/deliveryCalendar/get?deliverZoneId=${deliveryZoneId}`, {observe: 'response'});
   }
 
   public getAllUserOrders(): Observable<any> {
-    return this.http.get(`${this.url}/user/order/getAllOrders`, {observe: 'response', withCredentials: true});
+    return this.http.get(`${this.url}/user/order/getAllOrders`, {observe: 'response'});
   }
 
   public sendOrder(id: number): Observable<any> {
-    return this.http.post(`${this.url}/user/order/send?id=${id}`, id, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/order/send?id=${id}`, id, {observe: 'response'});
   }
 
   public cancelOrder(id: number): Observable<any> {
-    return this.http.post(`${this.url}/user/order/cancelOrder?id=${id}`, id, {observe: 'response', withCredentials: true});
+    return this.http.post(`${this.url}/user/order/cancelOrder?id=${id}`, id, {observe: 'response'});
   }
 
   public cleanAddress(): Observable<any> {
-    return this.http.get(`${this.url}/user/cleanAddress`, {observe: 'response', withCredentials: true});
+    return this.http.get(`${this.url}/user/cleanAddress`, {observe: 'response'});
   }
 }
