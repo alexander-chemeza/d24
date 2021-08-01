@@ -34,7 +34,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  doLogin(): void {
+  doLogin(event: any): void {
+    event.preventDefault();
+    event.stopPropagation();
     this.service.login(this.loginForm.value.userName as string, this.loginForm.value.password as string)
       .subscribe(data => {
         sessionStorage.setItem('currentUser', JSON.stringify(data));
