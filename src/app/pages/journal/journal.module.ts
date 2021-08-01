@@ -13,6 +13,7 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {QRCodeModule} from 'angularx-qrcode';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../../AuthInterceptor';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -32,6 +33,7 @@ import {AuthInterceptor} from '../../AuthInterceptor';
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

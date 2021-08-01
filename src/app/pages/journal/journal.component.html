@@ -1,4 +1,6 @@
 <div class="journal-content">
+  <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+  <div *ngIf="loading" class="preloader-bg" style="position: absolute; z-index: 998; top: 0; left: 0; background-color: #A070B5; width: 100%; height: 100%"></div>
   <div class="row-search">
     <input class="m-0" type="search" placeholder="Поиск">
 <!--    <button class="white-btn b-plus" (click)="showModal('filter')">Фильтр</button>-->
@@ -292,227 +294,227 @@
   </div>
 </div>
 
-<div id="view-request" class="modal view-request-modal">
-  <form class="popup-align popup popup-bg">
-    <div class="popup_title">Просмотр заявки</div>
+<!--<div id="view-request" class="modal view-request-modal">-->
+<!--  <form class="popup-align popup popup-bg">-->
+<!--    <div class="popup_title">Просмотр заявки</div>-->
 
-    <div class="grey-box mb-30">
-      <div class="flex flex-wrap">
-        <div class="col-33">
-          <div class="popup_subtitle">Услуга:</div>
-          <div class="popup_text">
-            <mat-form-field floatLabel="never">
-              <mat-select>
-                <mat-option>
-                  1
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-        </div>
-        <div class="col-33">
-          <div class="popup_subtitle">Тип доставки:</div>
-          <mat-form-field floatLabel="never">
-            <mat-select>
-              <mat-option>
-                1
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-        <div class="col-33">
-          <div class="popup_subtitle">Описание груза:</div>
-          <input type="text">
-        </div>
-      </div>
-    </div>
+<!--    <div class="grey-box mb-30">-->
+<!--      <div class="flex flex-wrap">-->
+<!--        <div class="col-33">-->
+<!--          <div class="popup_subtitle">Услуга:</div>-->
+<!--          <div class="popup_text">-->
+<!--            <mat-form-field floatLabel="never">-->
+<!--              <mat-select>-->
+<!--                <mat-option>-->
+<!--                  1-->
+<!--                </mat-option>-->
+<!--              </mat-select>-->
+<!--            </mat-form-field>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div class="col-33">-->
+<!--          <div class="popup_subtitle">Тип доставки:</div>-->
+<!--          <mat-form-field floatLabel="never">-->
+<!--            <mat-select>-->
+<!--              <mat-option>-->
+<!--                1-->
+<!--              </mat-option>-->
+<!--            </mat-select>-->
+<!--          </mat-form-field>-->
+<!--        </div>-->
+<!--        <div class="col-33">-->
+<!--          <div class="popup_subtitle">Описание груза:</div>-->
+<!--          <input type="text">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
-    <div class="row-stage mb-30">
-      <div class="col">
-        <button class="stage-btn active-btn" (click)="changeStage($event)" stage="1">Доставка</button>
-        <button class="stage-btn white-btn" (click)="changeStage($event)" stage="2">Вес, габариты</button>
-        <button class="stage-btn white-btn" (click)="changeStage($event)" stage="3">Дополнительные услуги</button>
-      </div>
-    </div>
+<!--    <div class="row-stage mb-30">-->
+<!--      <div class="col">-->
+<!--        <button class="stage-btn active-btn" (click)="changeStage($event)" stage="1">Доставка</button>-->
+<!--        <button class="stage-btn white-btn" (click)="changeStage($event)" stage="2">Вес, габариты</button>-->
+<!--        <button class="stage-btn white-btn" (click)="changeStage($event)" stage="3">Дополнительные услуги</button>-->
+<!--      </div>-->
+<!--    </div>-->
 
-    <div class="row-form col-100">
-      <div class="row-form-content">
-        <div id="form-0" class="form form-content-1">
-          <div class="flex justify-content-between">
-            <div class="col-50">
-              <div class="grey-box">
-                <div class="popup_subtitle">Отправитель:</div>
-                <mat-form-field floatLabel="never">
-                  <mat-select>
-                    <mat-option>
-                      1
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+<!--    <div class="row-form col-100">-->
+<!--      <div class="row-form-content">-->
+<!--        <div id="form-0" class="form form-content-1">-->
+<!--          <div class="flex justify-content-between">-->
+<!--            <div class="col-50">-->
+<!--              <div class="grey-box">-->
+<!--                <div class="popup_subtitle">Отправитель:</div>-->
+<!--                <mat-form-field floatLabel="never">-->
+<!--                  <mat-select>-->
+<!--                    <mat-option>-->
+<!--                      1-->
+<!--                    </mat-option>-->
+<!--                  </mat-select>-->
+<!--                </mat-form-field>-->
 
-                <div class="popup_subtitle">Адрес выдачи груза:</div>
-                <mat-form-field floatLabel="never">
-                  <mat-select>
-                    <mat-option>
-                      1
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+<!--                <div class="popup_subtitle">Адрес выдачи груза:</div>-->
+<!--                <mat-form-field floatLabel="never">-->
+<!--                  <mat-select>-->
+<!--                    <mat-option>-->
+<!--                      1-->
+<!--                    </mat-option>-->
+<!--                  </mat-select>-->
+<!--                </mat-form-field>-->
 
-                <div class="popup_subtitle">Контакт (по адресу доставки груза):</div>
-                <mat-form-field floatLabel="never">
-                  <mat-select>
-                    <mat-option>
-                      1
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+<!--                <div class="popup_subtitle">Контакт (по адресу доставки груза):</div>-->
+<!--                <mat-form-field floatLabel="never">-->
+<!--                  <mat-select>-->
+<!--                    <mat-option>-->
+<!--                      1-->
+<!--                    </mat-option>-->
+<!--                  </mat-select>-->
+<!--                </mat-form-field>-->
 
-                <div class="popup_subtitle">Дата выдачи груза:</div>
-                <mat-form-field class="example-full-width" appearance="fill">
-                  <input id="expressSenderDeliveryDate" formControlName="expressSenderDeliveryDate" matInput [matDatepicker]="expressSenderDatePicker">
-                  <mat-datepicker-toggle matSuffix [for]="expressSenderDatePicker"></mat-datepicker-toggle>
-                  <mat-datepicker #expressSenderDatePicker></mat-datepicker>
-                </mat-form-field>
+<!--                <div class="popup_subtitle">Дата выдачи груза:</div>-->
+<!--                <mat-form-field class="example-full-width" appearance="fill">-->
+<!--                  <input id="expressSenderDeliveryDate" formControlName="expressSenderDeliveryDate" matInput [matDatepicker]="expressSenderDatePicker">-->
+<!--                  <mat-datepicker-toggle matSuffix [for]="expressSenderDatePicker"></mat-datepicker-toggle>-->
+<!--                  <mat-datepicker #expressSenderDatePicker></mat-datepicker>-->
+<!--                </mat-form-field>-->
 
-                <div class="popup_subtitle">Время выдачи груза</div>
-                <input type="text">
+<!--                <div class="popup_subtitle">Время выдачи груза</div>-->
+<!--                <input type="text">-->
 
-                <div class="popup_subtitle">Время перерыва</div>
-                <input type="text">
+<!--                <div class="popup_subtitle">Время перерыва</div>-->
+<!--                <input type="text">-->
 
-<!--                <div class="popup_subtitle">ТТН:</div>-->
+<!--&lt;!&ndash;                <div class="popup_subtitle">ТТН:</div>&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="popup_text">...</div>&ndash;&gt;-->
+
+<!--                <div class="popup_subtitle">Примечание (по адресу выдачи груза):</div>-->
+<!--                <input type="text">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-50">-->
+<!--              <div class="grey-box">-->
+<!--                <div class="popup_subtitle">Получатель:</div>-->
+<!--                <mat-form-field floatLabel="never">-->
+<!--                  <mat-select>-->
+<!--                    <mat-option>-->
+<!--                      1-->
+<!--                    </mat-option>-->
+<!--                  </mat-select>-->
+<!--                </mat-form-field>-->
+
+<!--                <div class="popup_subtitle">Адрес доставки груза:</div>-->
+<!--                <mat-form-field floatLabel="never">-->
+<!--                  <mat-select>-->
+<!--                    <mat-option>-->
+<!--                      1-->
+<!--                    </mat-option>-->
+<!--                  </mat-select>-->
+<!--                </mat-form-field>-->
+
+<!--                <div class="popup_subtitle">Контакт (по адресу доставки груза):</div>-->
+<!--                <mat-form-field floatLabel="never">-->
+<!--                  <mat-select>-->
+<!--                    <mat-option>-->
+<!--                      1-->
+<!--                    </mat-option>-->
+<!--                  </mat-select>-->
+<!--                </mat-form-field>-->
+
+<!--                <div class="popup_subtitle">Дата доставки груза:</div>-->
+<!--                <div class="popup_text">02.03.2021 г.</div>-->
+
+<!--                <div class="popup_subtitle">Время доставки груза :</div>-->
+<!--                <div class="popup_text"> с 09:00 по 17:00</div>-->
+
+<!--                <div class="popup_subtitle">Время перерыва </div>-->
+<!--                <div class="popup_text">с 17:00 по 17.30</div>-->
+
+<!--                <div class="popup_subtitle">Примечание (по адресу доставки груза):</div>-->
+<!--                <input type="text">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div id="form-02" class="form form-content-2 another-form">-->
+<!--          <div class="flex justify-content-between">-->
+<!--            <div class="col-50">-->
+<!--              <div class="grey-box">-->
+<!--                <div class="popup_subtitle">Тип грузового места:</div>-->
+<!--                <mat-form-field floatLabel="never">-->
+<!--                  <mat-select>-->
+<!--                    <mat-option>-->
+<!--                      1-->
+<!--                    </mat-option>-->
+<!--                  </mat-select>-->
+<!--                </mat-form-field>-->
+
+<!--                <div class="popup_subtitle">Кол-во грузовых мест:</div>-->
+<!--                <input type="text">-->
+
+<!--                <div class="popup_subtitle">Вес груза (кг):</div>-->
+<!--                <input type="text">-->
+
+<!--                <div class="popup_subtitle">Объем груза (м3):</div>-->
+<!--                <input type="text">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-50">-->
+<!--              <div class="grey-box">-->
+<!--                <div class="popup_subtitle">Длина груза (см):</div>-->
+<!--                <input type="text">-->
+
+<!--                <div class="popup_subtitle">Ширина груза (см):</div>-->
+<!--                <input type="text">-->
+
+<!--                <div class="popup_subtitle">Высота груза (см):</div>-->
+<!--                <input type="text">-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div id="form-03" class="form form-content-3 another-form">-->
+<!--          <div class="flex justify-content-between">-->
+<!--            <div class="col-50">-->
+<!--              <div class="grey-box">-->
+<!--                <div class="popup_text">Для грузоотправителя:</div>-->
+
+<!--                <div class="popup_subtitle">Владелец автомобиля:</div>-->
 <!--                <div class="popup_text">...</div>-->
 
-                <div class="popup_subtitle">Примечание (по адресу выдачи груза):</div>
-                <input type="text">
-              </div>
-            </div>
-            <div class="col-50">
-              <div class="grey-box">
-                <div class="popup_subtitle">Получатель:</div>
-                <mat-form-field floatLabel="never">
-                  <mat-select>
-                    <mat-option>
-                      1
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+<!--                <div class="popup_subtitle">Автомобиль:</div>-->
+<!--                <div class="popup_text">...</div>-->
 
-                <div class="popup_subtitle">Адрес доставки груза:</div>
-                <mat-form-field floatLabel="never">
-                  <mat-select>
-                    <mat-option>
-                      1
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+<!--                <div class="popup_subtitle">Путевой лист:</div>-->
+<!--                <div class="popup_text">...</div>-->
 
-                <div class="popup_subtitle">Контакт (по адресу доставки груза):</div>
-                <mat-form-field floatLabel="never">
-                  <mat-select>
-                    <mat-option>
-                      1
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+<!--                <div class="popup_subtitle">Водитель:</div>-->
+<!--                <div class="popup_text">...</div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="col-50">-->
+<!--              <div class="grey-box">-->
+<!--                <div class="popup_text">Для грузополучателя:</div>-->
 
-                <div class="popup_subtitle">Дата доставки груза:</div>
-                <div class="popup_text">02.03.2021 г.</div>
+<!--                <div class="popup_subtitle">Владелец автомобиля:</div>-->
+<!--                <div class="popup_text">...</div>-->
 
-                <div class="popup_subtitle">Время доставки груза :</div>
-                <div class="popup_text"> с 09:00 по 17:00</div>
+<!--                <div class="popup_subtitle">Автомобиль:</div>-->
+<!--                <div class="popup_text">...</div>-->
 
-                <div class="popup_subtitle">Время перерыва </div>
-                <div class="popup_text">с 17:00 по 17.30</div>
+<!--                <div class="popup_subtitle">Путевой лист:</div>-->
+<!--                <div class="popup_text">...</div>-->
 
-                <div class="popup_subtitle">Примечание (по адресу доставки груза):</div>
-                <input type="text">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="form-02" class="form form-content-2 another-form">
-          <div class="flex justify-content-between">
-            <div class="col-50">
-              <div class="grey-box">
-                <div class="popup_subtitle">Тип грузового места:</div>
-                <mat-form-field floatLabel="never">
-                  <mat-select>
-                    <mat-option>
-                      1
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+<!--                <div class="popup_subtitle">Водитель:</div>-->
+<!--                <div class="popup_text">...</div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
 
-                <div class="popup_subtitle">Кол-во грузовых мест:</div>
-                <input type="text">
-
-                <div class="popup_subtitle">Вес груза (кг):</div>
-                <input type="text">
-
-                <div class="popup_subtitle">Объем груза (м3):</div>
-                <input type="text">
-              </div>
-            </div>
-            <div class="col-50">
-              <div class="grey-box">
-                <div class="popup_subtitle">Длина груза (см):</div>
-                <input type="text">
-
-                <div class="popup_subtitle">Ширина груза (см):</div>
-                <input type="text">
-
-                <div class="popup_subtitle">Высота груза (см):</div>
-                <input type="text">
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="form-03" class="form form-content-3 another-form">
-          <div class="flex justify-content-between">
-            <div class="col-50">
-              <div class="grey-box">
-                <div class="popup_text">Для грузоотправителя:</div>
-
-                <div class="popup_subtitle">Владелец автомобиля:</div>
-                <div class="popup_text">...</div>
-
-                <div class="popup_subtitle">Автомобиль:</div>
-                <div class="popup_text">...</div>
-
-                <div class="popup_subtitle">Путевой лист:</div>
-                <div class="popup_text">...</div>
-
-                <div class="popup_subtitle">Водитель:</div>
-                <div class="popup_text">...</div>
-              </div>
-            </div>
-            <div class="col-50">
-              <div class="grey-box">
-                <div class="popup_text">Для грузополучателя:</div>
-
-                <div class="popup_subtitle">Владелец автомобиля:</div>
-                <div class="popup_text">...</div>
-
-                <div class="popup_subtitle">Автомобиль:</div>
-                <div class="popup_text">...</div>
-
-                <div class="popup_subtitle">Путевой лист:</div>
-                <div class="popup_text">...</div>
-
-                <div class="popup_subtitle">Водитель:</div>
-                <div class="popup_text">...</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <button class="active-btn circle-btn close-btn" (click)="hideModal('view-request')"></button>
-  </form>
-</div>
+<!--    <button class="active-btn circle-btn close-btn" (click)="hideModal('view-request')"></button>-->
+<!--  </form>-->
+<!--</div>-->
 
 <div id="order-log" class="order-log">
   <div class="popup-align popup popup-bg">

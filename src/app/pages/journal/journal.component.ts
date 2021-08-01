@@ -7,7 +7,7 @@ import {DatePipe} from '@angular/common';
 
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-import {Router} from '@angular/router';
+import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
 
 @Component({
   selector: 'app-journal',
@@ -15,6 +15,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./journal.component.scss']
 })
 export class JournalComponent implements OnInit, OnChanges {
+  loading = false;
   userOldInfo: any = sessionStorage.getItem('currentUser');
   user: any;
   printSenderBlank = true;
@@ -65,6 +66,26 @@ export class JournalComponent implements OnInit, OnChanges {
   frameworkComponents: any;
 
   constructor(private service: RestapiService, private router: Router) {
+    // @ts-ignore
+    this.router.events.subscribe((event: Event) => {
+      switch (true) {
+        case event instanceof NavigationStart: {
+          this.loading = true;
+          break;
+        }
+
+        case event instanceof NavigationEnd:
+        case event instanceof NavigationCancel:
+        case event instanceof NavigationError: {
+          this.loading = false;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    });
+
     this.frameworkComponents = {
       btnCellRenderer: JournalButtonsComponent,
     };
@@ -368,6 +389,7 @@ export class JournalComponent implements OnInit, OnChanges {
   }
 
   getTable(): void {
+    this.loading = true;
     this.rowData = [];
     this.storedTableResponse = [];
     this.service.getAllUserOrders().subscribe(response => {
@@ -407,6 +429,7 @@ export class JournalComponent implements OnInit, OnChanges {
         this.gridApi.setRowData(this.rowData);
         this.selectedDraftOrderRow = [];
         this.selectedAppliedOrderRows = [];
+        this.loading = false;
       }
     });
   }

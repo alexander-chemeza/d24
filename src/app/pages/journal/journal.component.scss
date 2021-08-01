@@ -1,4 +1,5 @@
 .journal-content {
+  position: relative;
   background-color: #B3A4C1;
   border-radius: 10px;
   width: 100%;
@@ -554,13 +555,13 @@ button {
 }
 
 @media print {
-  
+
   .blank table .report-header {
     color: #000;
     background: #fff;
     font-weight: bold;
   }
-  
+
   #blanks, #stickers {
     background-color: white;
     height: 100%;
@@ -648,7 +649,7 @@ button {
     display: block;
     overflow: visible;
     max-height: 100%;
-    
+
     & > div {
       // break-after: page;
       display: inline-block;
