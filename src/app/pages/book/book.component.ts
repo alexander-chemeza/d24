@@ -58,12 +58,6 @@ export class BookComponent implements OnInit {
     } else {
       this.router.navigate(['login']);
     }
-    this.service.cities().subscribe(data => {
-      if (data.status === 200) {
-        this.citiesList = data.body;
-        this.currentCity = this.citiesList[0].id;
-      }
-    });
 
     this.newContragent = new FormGroup({
       type: new FormControl('', [
@@ -166,6 +160,9 @@ export class BookComponent implements OnInit {
 
   // Show modal event
   showModal(id: string): void {
+    if (id === 'new-address' || id === 'edit-address') {
+      this.getCities();
+    }
 
     const modal: any = document.getElementById(id);
     modal.classList.remove('hide-modal');
@@ -180,6 +177,13 @@ export class BookComponent implements OnInit {
     // this.citiesList = [];
     this.streetList = [];
     this.selectedCustomerAddress = null;
+  }
+  getCities(): void {
+    this.service.cities().subscribe(data => {
+      if (data.status === 200) {
+        this.citiesList = data.body;
+      }
+    });
   }
   // New contragent button event
   createNewContragent(): void {
@@ -302,7 +306,7 @@ export class BookComponent implements OnInit {
 
   onKey(event: any): void {
     if (event.target.value === '' || this.citiesList.length === 0) {
-      this.ngOnInit();
+      this.getCities();
     } else {
       this.citiesList = this.search(event.target.value);
     }

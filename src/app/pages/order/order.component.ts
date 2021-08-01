@@ -766,226 +766,220 @@ export class OrderComponent implements OnChanges, OnInit {
         expressRecipientTimeoutTo: info.expressRecipientTimeoutToValue,
       });
     }
-    // Get cities list from database
-    this.service.cities().subscribe(data => {
-      if (data.status === 200) {
-        this.citiesList = data.body;
-        // User common data reception
-        if (this.user) {
-          // Express form fields
-          let defaultRecipient = localStorage.getItem('defaultRecipient');
-          let defaultSender = localStorage.getItem('defaultSender');
-          this.service.getAllUserCustomer().subscribe(response => {
-            if (response.status === 200) {
-              this.expressSenderAgents = response.body;
-              this.expressReceiverAgents = response.body;
-              let senderCustomerId: any;
-              let senderAddressId: any;
-              let senderContactId: any;
-              let recipientCustomerId: any;
-              let recipientAddressId: any;
-              let recipientContactId: any;
-              if (!this.dataFromJournal) {
-                senderCustomerId = info.expressSenderCustomerId;
-                senderAddressId = info.expressSenderAddressId;
-                senderContactId = info.expressSenderContactId;
-                recipientCustomerId = info.expressRecipientCustomerId;
-                recipientAddressId = info.expressRecipientAddressId;
-                recipientContactId = info.expressRecipientContactId;
-              } else {
-                senderCustomerId = this.dataFromJournal.senderCustomerId;
-                senderAddressId = this.dataFromJournal.senderCustomerAddressId;
-                senderContactId = this.dataFromJournal.senderCustomerContactId;
-                recipientCustomerId = this.dataFromJournal.recipientCustomerId;
-                recipientAddressId = this.dataFromJournal.recipientCustomerAddressId;
-                recipientContactId = this.dataFromJournal.recipientCustomerContactId;
+
+    if (this.user) {
+      // Express form fields
+      let defaultRecipient = localStorage.getItem('defaultRecipient');
+      let defaultSender = localStorage.getItem('defaultSender');
+      this.service.getAllUserCustomer().subscribe(response => {
+        if (response.status === 200) {
+          this.expressSenderAgents = response.body;
+          this.expressReceiverAgents = response.body;
+          let senderCustomerId: any;
+          let senderAddressId: any;
+          let senderContactId: any;
+          let recipientCustomerId: any;
+          let recipientAddressId: any;
+          let recipientContactId: any;
+          if (!this.dataFromJournal) {
+            senderCustomerId = info.expressSenderCustomerId;
+            senderAddressId = info.expressSenderAddressId;
+            senderContactId = info.expressSenderContactId;
+            recipientCustomerId = info.expressRecipientCustomerId;
+            recipientAddressId = info.expressRecipientAddressId;
+            recipientContactId = info.expressRecipientContactId;
+          } else {
+            senderCustomerId = this.dataFromJournal.senderCustomerId;
+            senderAddressId = this.dataFromJournal.senderCustomerAddressId;
+            senderContactId = this.dataFromJournal.senderCustomerContactId;
+            recipientCustomerId = this.dataFromJournal.recipientCustomerId;
+            recipientAddressId = this.dataFromJournal.recipientCustomerAddressId;
+            recipientContactId = this.dataFromJournal.recipientCustomerContactId;
+          }
+          this.service.getAllUserCustomerAddress(senderCustomerId).subscribe(addresses => {
+            if (addresses.status === 200) {
+              for (const address of addresses.body) {
+                this.expressSenderAddresses.push(address);
               }
-              this.service.getAllUserCustomerAddress(senderCustomerId).subscribe(addresses => {
-                if (addresses.status === 200) {
-                  for (const address of addresses.body) {
-                    this.expressSenderAddresses.push(address);
-                  }
 
-                  for (const item of this.expressSenderAddresses) {
-                    let housing = '';
-                    let building = '';
-                    let office = '';
-                    let room = '';
-                    if (item.housing !== '') {
-                      housing = `корп. ${item.housing}, `;
-                    }
-                    if (item.building !== '') {
-                      building = `строение ${item.building}, `;
-                    }
-                    if (item.office !== '') {
-                      office = `офис ${item.office}, `;
-                    }
-                    if (item.room !== '') {
-                      room = `кв. ${item.room}`;
-                    }
-                    item.fullName = `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`;
-                  }
-
-                  this.service.getAllUserCustomerContact(senderAddressId).subscribe(contacts => {
-                    if (contacts.status === 200) {
-                      for (const contact of contacts.body) {
-                        this.expressSenderContacts.push({
-                          id: contact.id,
-                          name: contact.name
-                        });
-                      }
-                      if (defaultSender) {
-                        defaultSender = JSON.parse(defaultSender);
-                        console.log(defaultSender);
-                        if (defaultSender && !this.dataFromJournal) {
-                          this.orderForm.patchValue({
-                            expressSender: info.expressSenderCustomerId,
-                            expressSenderAddress: info.expressSenderAddressId,
-                            expressSenderContact: info.expressSenderContactId,
-                          });
-                          this.schedule(addresses.body, 'expressSender', info.expressSenderAddressId);
-                        } else if (!defaultSender && !this.dataFromJournal) {
-                          this.expressSenderAddresses = [];
-                          this.expressSenderContacts = [];
-                          this.expressSenderSchedule = '';
-                        } else if (this.dataFromJournal) {
-                          this.orderForm.patchValue({
-                            expressSender: this.dataFromJournal.senderCustomerId,
-                            expressSenderAddress: this.dataFromJournal.senderCustomerAddressId,
-                            expressSenderContact: this.dataFromJournal.senderCustomerContactId,
-                          });
-                          this.schedule(addresses.body, 'expressSender', this.dataFromJournal.senderCustomerAddressId);
-                        }
-                      }
-                    }
-                  });
+              for (const item of this.expressSenderAddresses) {
+                let housing = '';
+                let building = '';
+                let office = '';
+                let room = '';
+                if (item.housing !== '') {
+                  housing = `корп. ${item.housing}, `;
                 }
-              });
+                if (item.building !== '') {
+                  building = `строение ${item.building}, `;
+                }
+                if (item.office !== '') {
+                  office = `офис ${item.office}, `;
+                }
+                if (item.room !== '') {
+                  room = `кв. ${item.room}`;
+                }
+                item.fullName = `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`;
+              }
 
-              this.service.getAllUserCustomerAddress(recipientCustomerId).subscribe(addresses => {
-                if (addresses.status === 200) {
-                  for (const address of addresses.body) {
-                    this.expressReceiverAddresses.push(address);
+              this.service.getAllUserCustomerContact(senderAddressId).subscribe(contacts => {
+                if (contacts.status === 200) {
+                  for (const contact of contacts.body) {
+                    this.expressSenderContacts.push({
+                      id: contact.id,
+                      name: contact.name
+                    });
                   }
-
-                  for (const item of this.expressReceiverAddresses) {
-                    let housing = '';
-                    let building = '';
-                    let office = '';
-                    let room = '';
-                    if (item.housing !== '') {
-                      housing = `корп. ${item.housing}, `;
+                  if (defaultSender) {
+                    defaultSender = JSON.parse(defaultSender);
+                    console.log(defaultSender);
+                    if (defaultSender && !this.dataFromJournal) {
+                      this.orderForm.patchValue({
+                        expressSender: info.expressSenderCustomerId,
+                        expressSenderAddress: info.expressSenderAddressId,
+                        expressSenderContact: info.expressSenderContactId,
+                      });
+                      this.schedule(addresses.body, 'expressSender', info.expressSenderAddressId);
+                    } else if (!defaultSender && !this.dataFromJournal) {
+                      this.expressSenderAddresses = [];
+                      this.expressSenderContacts = [];
+                      this.expressSenderSchedule = '';
+                    } else if (this.dataFromJournal) {
+                      this.orderForm.patchValue({
+                        expressSender: this.dataFromJournal.senderCustomerId,
+                        expressSenderAddress: this.dataFromJournal.senderCustomerAddressId,
+                        expressSenderContact: this.dataFromJournal.senderCustomerContactId,
+                      });
+                      this.schedule(addresses.body, 'expressSender', this.dataFromJournal.senderCustomerAddressId);
                     }
-                    if (item.building !== '') {
-                      building = `строение ${item.building}, `;
-                    }
-                    if (item.office !== '') {
-                      office = `офис ${item.office}, `;
-                    }
-                    if (item.room !== '') {
-                      room = `кв. ${item.room}`;
-                    }
-                    item.fullName = `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`;
                   }
-
-                  this.service.getAllUserCustomerContact(recipientAddressId).subscribe(contacts => {
-                    if (contacts.status === 200) {
-                      for (const contact of contacts.body) {
-                        this.expressReceiverContacts.push({
-                          id: contact.id,
-                          name: contact.name
-                        });
-                      }
-                      if (defaultRecipient) {
-                        defaultRecipient = JSON.parse(defaultRecipient);
-                        console.log(defaultRecipient);
-                        if (defaultRecipient && !this.dataFromJournal) {
-                          this.orderForm.patchValue({
-                            expressRecipient: info.expressRecipientCustomerId,
-                            expressRecipientAddress: info.expressRecipientAddressId,
-                            expressRecipientContact: info.expressRecipientContactId,
-                          });
-                          this.schedule(addresses.body, 'expressRecipient', info.expressRecipientAddressId);
-                        } else if (!defaultRecipient && !this.dataFromJournal) {
-                          this.expressReceiverAddresses = [];
-                          this.expressReceiverContacts = [];
-                          this.expressRecipientSchedule = '';
-                        } else if (this.dataFromJournal) {
-                          this.orderForm.patchValue({
-                            expressRecipient: this.dataFromJournal.recipientCustomerId,
-                            expressRecipientAddress: this.dataFromJournal.recipientCustomerAddressId,
-                            expressRecipientContact: this.dataFromJournal.recipientCustomerContactId,
-                          });
-                          this.schedule(addresses.body, 'expressRecipient', this.dataFromJournal.recipientCustomerAddressId);
-                        }
-                      }
-                    }
-                  });
                 }
               });
             }
           });
-          if (this.dataFromJournal) {
-            this.orderForm.patchValue({
-              expressSenderDeliveryDate: this.deserializeDate(this.dataFromJournal.sender_delivery_from.split(' ')[0]),
-              expressSenderDeliverFrom: this.dataFromJournal.sender_delivery_from.split(' ')[1],
-              expressSenderDeliverTo: this.dataFromJournal.sender_delivery_to.split(' ')[1],
-              expressSenderTimeoutFrom: this.dataFromJournal.sender_lunch_break_start.split(' ')[1],
-              expressSenderTimeoutTo: this.dataFromJournal.sender_lunch_break_finish.split(' ')[1],
-              expressSenderDescription: this.dataFromJournal.sender_description,
-              expressRecipientDeliveryDate: this.deserializeDate(this.dataFromJournal.recipient_accept_from.split(' ')[0]),
-              expressRecipientDeliverFrom: this.dataFromJournal.recipient_accept_from.split(' ')[1],
-              expressRecipientDeliverTo: this.dataFromJournal.recipient_accept_to.split(' ')[1],
-              expressRecipientDescription: this.dataFromJournal.recipient_description,
-              expressRecipientTimeoutFrom: this.dataFromJournal.recipient_lunch_break_start.split(' ')[1],
-              expressRecipientTimeoutTo: this.dataFromJournal.recipient_lunch_break_finish.split(' ')[1],
-              expressDeliveryWeight: this.dataFromJournal.delivery_weight,
-              expressDeliveryVolume: this.dataFromJournal.delivery_volume,
-              expressDeliveryLength: this.dataFromJournal.delivery_size_x,
-              expressDeliveryWidth: this.dataFromJournal.delivery_size_y,
-              expressDeliveryHeight: this.dataFromJournal.delivery_size_z,
-              expressDeliveryCounter1: this.dataFromJournal.amount_packages
-            });
-            console.log('DELIVERY TYPES', this.deliveryTypes);
-            if (this.dataFromJournal.delivery_type === 'Дверь/Дверь') {
-              this.deliveryType = 'dt0';
-            } else if (this.dataFromJournal.delivery_type === 'Терминал/Дверь') {
-              this.deliveryType = 'dt1';
-            } else if (this.dataFromJournal.delivery_type === 'Дверь/Терминал') {
-              this.deliveryType = 'dt2';
-            } else if (this.dataFromJournal.delivery_type === 'Терминал/Терминал') {
-              this.deliveryType = 'dt03';
-            }
-            this.cargoDescription = this.dataFromJournal.description_delivery;
-            if (this.dataFromJournal.delivery_volume &&
-            !this.dataFromJournal.delivery_size_x &&
-            !this.dataFromJournal.delivery_size_y &&
-            !this.dataFromJournal.delivery_size_z) {
-              const fields: any = document.getElementsByClassName('size');
-              for (const item of fields) {
-                item.value = '';
-                item.disabled = true;
+
+          this.service.getAllUserCustomerAddress(recipientCustomerId).subscribe(addresses => {
+            if (addresses.status === 200) {
+              for (const address of addresses.body) {
+                this.expressReceiverAddresses.push(address);
               }
-            }
-            let pts: any = document.getElementsByClassName('express-placing-type');
-            let pt: any;
-            for  (const item of pts) {
-              if (item.innerHTML === this.dataFromJournal.delivery_placing_type) {
-                pt = item;
-                pt.classList.add('active-btn');
-              } else {
-                item.classList.remove('active-btn');
-                item.classList.add('white-btn');
+
+              for (const item of this.expressReceiverAddresses) {
+                let housing = '';
+                let building = '';
+                let office = '';
+                let room = '';
+                if (item.housing !== '') {
+                  housing = `корп. ${item.housing}, `;
+                }
+                if (item.building !== '') {
+                  building = `строение ${item.building}, `;
+                }
+                if (item.office !== '') {
+                  office = `офис ${item.office}, `;
+                }
+                if (item.room !== '') {
+                  room = `кв. ${item.room}`;
+                }
+                item.fullName = `${item.cityName}, ${item.streetName}, д. ${item.house}, ${housing + building + office + room}`;
               }
+
+              this.service.getAllUserCustomerContact(recipientAddressId).subscribe(contacts => {
+                if (contacts.status === 200) {
+                  for (const contact of contacts.body) {
+                    this.expressReceiverContacts.push({
+                      id: contact.id,
+                      name: contact.name
+                    });
+                  }
+                  if (defaultRecipient) {
+                    defaultRecipient = JSON.parse(defaultRecipient);
+                    console.log(defaultRecipient);
+                    if (defaultRecipient && !this.dataFromJournal) {
+                      this.orderForm.patchValue({
+                        expressRecipient: info.expressRecipientCustomerId,
+                        expressRecipientAddress: info.expressRecipientAddressId,
+                        expressRecipientContact: info.expressRecipientContactId,
+                      });
+                      this.schedule(addresses.body, 'expressRecipient', info.expressRecipientAddressId);
+                    } else if (!defaultRecipient && !this.dataFromJournal) {
+                      this.expressReceiverAddresses = [];
+                      this.expressReceiverContacts = [];
+                      this.expressRecipientSchedule = '';
+                    } else if (this.dataFromJournal) {
+                      this.orderForm.patchValue({
+                        expressRecipient: this.dataFromJournal.recipientCustomerId,
+                        expressRecipientAddress: this.dataFromJournal.recipientCustomerAddressId,
+                        expressRecipientContact: this.dataFromJournal.recipientCustomerContactId,
+                      });
+                      this.schedule(addresses.body, 'expressRecipient', this.dataFromJournal.recipientCustomerAddressId);
+                    }
+                  }
+                }
+              });
             }
-            const senderDate: any = document.getElementById('expressSenderDeliveryDate');
-            const recipientDate: any = document.getElementById('expressRecipientDeliveryDate');
-            senderDate.value = this.dataFromJournal.sender_delivery_from.split(' ')[0];
-            recipientDate.value = this.dataFromJournal.recipient_accept_from.split(' ')[0];
+          });
+        }
+      });
+      if (this.dataFromJournal) {
+        this.orderForm.patchValue({
+          expressSenderDeliveryDate: this.deserializeDate(this.dataFromJournal.sender_delivery_from.split(' ')[0]),
+          expressSenderDeliverFrom: this.dataFromJournal.sender_delivery_from.split(' ')[1],
+          expressSenderDeliverTo: this.dataFromJournal.sender_delivery_to.split(' ')[1],
+          expressSenderTimeoutFrom: this.dataFromJournal.sender_lunch_break_start.split(' ')[1],
+          expressSenderTimeoutTo: this.dataFromJournal.sender_lunch_break_finish.split(' ')[1],
+          expressSenderDescription: this.dataFromJournal.sender_description,
+          expressRecipientDeliveryDate: this.deserializeDate(this.dataFromJournal.recipient_accept_from.split(' ')[0]),
+          expressRecipientDeliverFrom: this.dataFromJournal.recipient_accept_from.split(' ')[1],
+          expressRecipientDeliverTo: this.dataFromJournal.recipient_accept_to.split(' ')[1],
+          expressRecipientDescription: this.dataFromJournal.recipient_description,
+          expressRecipientTimeoutFrom: this.dataFromJournal.recipient_lunch_break_start.split(' ')[1],
+          expressRecipientTimeoutTo: this.dataFromJournal.recipient_lunch_break_finish.split(' ')[1],
+          expressDeliveryWeight: this.dataFromJournal.delivery_weight,
+          expressDeliveryVolume: this.dataFromJournal.delivery_volume,
+          expressDeliveryLength: this.dataFromJournal.delivery_size_x,
+          expressDeliveryWidth: this.dataFromJournal.delivery_size_y,
+          expressDeliveryHeight: this.dataFromJournal.delivery_size_z,
+          expressDeliveryCounter1: this.dataFromJournal.amount_packages
+        });
+        console.log('DELIVERY TYPES', this.deliveryTypes);
+        if (this.dataFromJournal.delivery_type === 'Дверь/Дверь') {
+          this.deliveryType = 'dt0';
+        } else if (this.dataFromJournal.delivery_type === 'Терминал/Дверь') {
+          this.deliveryType = 'dt1';
+        } else if (this.dataFromJournal.delivery_type === 'Дверь/Терминал') {
+          this.deliveryType = 'dt2';
+        } else if (this.dataFromJournal.delivery_type === 'Терминал/Терминал') {
+          this.deliveryType = 'dt03';
+        }
+        this.cargoDescription = this.dataFromJournal.description_delivery;
+        if (this.dataFromJournal.delivery_volume &&
+          !this.dataFromJournal.delivery_size_x &&
+          !this.dataFromJournal.delivery_size_y &&
+          !this.dataFromJournal.delivery_size_z) {
+          const fields: any = document.getElementsByClassName('size');
+          for (const item of fields) {
+            item.value = '';
+            item.disabled = true;
           }
         }
+        let pts: any = document.getElementsByClassName('express-placing-type');
+        let pt: any;
+        for  (const item of pts) {
+          if (item.innerHTML === this.dataFromJournal.delivery_placing_type) {
+            pt = item;
+            pt.classList.add('active-btn');
+          } else {
+            item.classList.remove('active-btn');
+            item.classList.add('white-btn');
+          }
+        }
+        const senderDate: any = document.getElementById('expressSenderDeliveryDate');
+        const recipientDate: any = document.getElementById('expressRecipientDeliveryDate');
+        senderDate.value = this.dataFromJournal.sender_delivery_from.split(' ')[0];
+        recipientDate.value = this.dataFromJournal.recipient_accept_from.split(' ')[0];
       }
-    });
+    }
   }
 
   schedule(arr: any, field: any, id: any): void {
@@ -1377,6 +1371,9 @@ export class OrderComponent implements OnChanges, OnInit {
   }
 
   showModal(id: string): void {
+    if (id === 'new-express-sender-address' || id === 'new-express-recipient-address' || id === 'new-carrier-sender-address') {
+      this.getCities();
+    }
     const modal: any = document.getElementById(id);
     modal.classList.remove('hide-modal');
     modal.classList.add('show-modal');
