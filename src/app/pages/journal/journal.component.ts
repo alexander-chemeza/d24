@@ -506,7 +506,7 @@ export class JournalComponent implements OnInit, OnChanges {
     this.selectedDraftOrderRow = [];
     this.selectedAppliedOrderRows = [];
     for (const item of event.api.getSelectedNodes()) {
-      if (item.data.status === 'Черновик') {
+      if (item.data.status === 'Черновик' || item.data.status === 'Ошибка отправки заявки') {
         this.selectedDraftOrderRow.push(item.data.id);
       } else if (item.data.status === 'Загружен') {
         this.selectedAppliedOrderRows.push(item.data.id);
@@ -514,14 +514,14 @@ export class JournalComponent implements OnInit, OnChanges {
         this.gridApi.getRowNode(item.rowIndex).setSelected(false);
       }
     }
-    console.log(event.api.getSelectedNodes());
-    console.log('Selected rows', this.selectedDraftOrderRow);
   }
 
   sendOrders(event: any): void {
+    this.loading = true;
     const observables = this.selectedDraftOrderRow.map(x => this.service.sendOrder(x));
 
     concat(...observables).pipe(toArray()).subscribe(response => this.getTable());
+    // this.loading = false;
     // for (const item of this.selectedOrderRows) {
     //   console.log('ITEM:', item);
     //   this.service.sendOrder(item).subscribe(response => {
