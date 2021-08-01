@@ -7,6 +7,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../../AuthInterceptor';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -17,7 +18,8 @@ import {AuthInterceptor} from '../../AuthInterceptor';
     SharedModule,
     MatSelectModule,
     MatFormFieldModule,
-    ScrollingModule
+    ScrollingModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

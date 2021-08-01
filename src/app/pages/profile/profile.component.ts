@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {RestapiService} from '../../restapi.service';
-import {Router} from '@angular/router';
+import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -9,6 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
+  loading = true;
   defaultSender: any;
   defaultRecipient: any;
 
@@ -67,7 +68,27 @@ export class ProfileComponent implements OnInit {
     ])
   });
 
-  constructor(private service: RestapiService, private router: Router) { }
+  constructor(private service: RestapiService, private router: Router) {
+    // @ts-ignore
+    this.router.events.subscribe((event: Event) => {
+      switch (true) {
+        case event instanceof NavigationStart: {
+          this.loading = true;
+          break;
+        }
+
+        case event instanceof NavigationEnd:
+        case event instanceof NavigationCancel:
+        case event instanceof NavigationError: {
+          this.loading = false;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    });
+  }
 
   ngOnInit(): void {
     let defaultRecipient = localStorage.getItem('defaultRecipient');
@@ -94,6 +115,7 @@ export class ProfileComponent implements OnInit {
     }
     // User common data reception
     if (this.user) {
+      this.loading = true;
       // Get agents from address book and split it into divided arrays
       this.service.getAllUserCustomer().subscribe(response => {
         if (response.status === 200) {
@@ -142,6 +164,10 @@ export class ProfileComponent implements OnInit {
               });
             }
           });
+
+          setTimeout(() => {
+            this.loading = false;
+          }, 500);
         }
       });
       // Put some logic to get some user info
