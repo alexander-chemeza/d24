@@ -5,7 +5,7 @@ import {Cities, StreetsList} from '../order/order.component';
 import {ContragentsComponent} from './contragents/contragents.component';
 import {AddressComponent} from './address/address.component';
 import {ContactsComponent} from './contacts/contacts.component';
-import {Router} from '@angular/router';
+import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
 
 @Component({
   selector: 'app-book',
@@ -14,6 +14,7 @@ import {Router} from '@angular/router';
 })
 
 export class BookComponent implements OnInit {
+  loading = false;
   userOldInfo: any = sessionStorage.getItem('currentUser');
   user: any;
   // @ts-ignore
@@ -47,11 +48,32 @@ export class BookComponent implements OnInit {
   request = '';
 
   constructor(private service: RestapiService, private router: Router) {
+    // @ts-ignore
+    this.router.events.subscribe((event: Event) => {
+      switch (true) {
+        case event instanceof NavigationStart: {
+          this.loading = true;
+          break;
+        }
+
+        case event instanceof NavigationEnd:
+        case event instanceof NavigationCancel:
+        case event instanceof NavigationError: {
+          this.loading = false;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    });
+
     this.customerId = 0;
     this.customerAddressId = -1;
   }
 
   ngOnInit(): void {
+    this.loading = true;
     if (this.userOldInfo) {
       this.user = JSON.parse(this.userOldInfo);
       delete this.user.password;
@@ -130,6 +152,10 @@ export class BookComponent implements OnInit {
         Validators.required
       ])
     });
+
+    setTimeout(() => {
+      this.loading = false;
+    }, 500);
   }
 
   selectPlace(event: any, form: any): void {

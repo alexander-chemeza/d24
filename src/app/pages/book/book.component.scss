@@ -3,6 +3,9 @@
 }
 
 .book-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
   display: grid;
   grid-template-rows: min-content min-content 485px;
   grid-template-columns: 1fr 1fr 1fr;
