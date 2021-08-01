@@ -83,13 +83,15 @@ export class ContragentsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
+  }
+
+  getTable(): void {
     if (this.requestText !== '') {
       this.rowDataContrAgent = this.rowDataContrAgent.filter(item => item.name.includes(this.requestText));
     } else {
       this.rowDataContrAgent = [];
       this.service.getAllUserCustomer().subscribe(response => {
         if (response.status === 200) {
-          console.log(response.body);
           for (const item of response.body) {
             this.rowDataContrAgent.push({
               name: item.customerName,
@@ -107,6 +109,7 @@ export class ContragentsComponent implements OnInit, OnChanges {
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    this.getTable();
   }
   // Pagination event
   onPaginationChanged(event: any, space: string): void {
