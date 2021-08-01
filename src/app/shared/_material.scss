@@ -169,3 +169,7 @@ mat-progress-spinner {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.mat-progress-spinner circle, .mat-spinner circle {
+  stroke: white !important;
+}
