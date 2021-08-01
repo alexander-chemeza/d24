@@ -2,7 +2,7 @@ import {Component, OnChanges, OnInit} from '@angular/core';
 import {RestapiService, SaveUserCustomerAddress, Street} from '../../restapi.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {DatePipe} from '@angular/common';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
 
 interface ContractList {
   contractActive: string | boolean;
@@ -72,6 +72,7 @@ interface DeliverySchedulte {
   styleUrls: ['./order.component.scss'],
 })
 export class OrderComponent implements OnChanges, OnInit {
+  loading = false;
   dataFromJournal: any;
   // Work with user contracts
   userType = ''; // Юр.лицо / Физ.лицо
@@ -661,6 +662,25 @@ export class OrderComponent implements OnChanges, OnInit {
   });
 
   constructor(private service: RestapiService, private router: Router, private route: ActivatedRoute) {
+    // @ts-ignore
+    this.router.events.subscribe((event: Event) => {
+      switch (true) {
+        case event instanceof NavigationStart: {
+          this.loading = true;
+          break;
+        }
+
+        case event instanceof NavigationEnd:
+        case event instanceof NavigationCancel:
+        case event instanceof NavigationError: {
+          this.loading = false;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    });
     // this.serviceType = this.serviceTypes[0].value;
     this.deliveryType = '';
     this.currentCity = 0;
@@ -768,6 +788,7 @@ export class OrderComponent implements OnChanges, OnInit {
     }
 
     if (this.user) {
+      this.loading = true;
       // Express form fields
       let defaultRecipient = localStorage.getItem('defaultRecipient');
       let defaultSender = localStorage.getItem('defaultSender');
@@ -919,6 +940,9 @@ export class OrderComponent implements OnChanges, OnInit {
               });
             }
           });
+          setTimeout(() => {
+            this.loading = false;
+          }, 500);
         }
       });
       if (this.dataFromJournal) {

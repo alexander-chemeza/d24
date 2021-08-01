@@ -161,3 +161,11 @@
     background: transparent;
   }
 }
+
+mat-progress-spinner {
+  position: absolute !important;
+  z-index: 999;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

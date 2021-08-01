@@ -13,6 +13,7 @@ import {NgxMaskModule} from 'ngx-mask';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../../AuthInterceptor';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -28,7 +29,8 @@ import {AuthInterceptor} from '../../AuthInterceptor';
     MatNativeDateModule,
     ScrollingModule,
     NgxMaskModule.forRoot(),
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: MAT_DATE_LOCALE, useValue: 'ru-RU'},
