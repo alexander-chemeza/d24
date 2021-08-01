@@ -1,4 +1,6 @@
 <div class="home-content">
+  <mat-progress-spinner *ngIf="loading" mode="indeterminate"></mat-progress-spinner>
+  <div *ngIf="loading" class="preloader-bg" style="position: absolute; z-index: 998; top: 0; left: 0; background-color: #A070B5; width: 100%; height: 100%"></div>
   <div class="box-1" style="display: none">
     <div class="row-header">
       <h2 class="header">Договор</h2>

@@ -5,6 +5,7 @@ import {AgGridModule} from 'ag-grid-angular';
 import {HomeComponent} from './home.component';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../../AuthInterceptor';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -13,7 +14,8 @@ import {AuthInterceptor} from '../../AuthInterceptor';
   imports: [
     CommonModule,
     SharedModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
+    MatProgressSpinnerModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}

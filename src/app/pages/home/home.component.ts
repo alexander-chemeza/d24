@@ -1,6 +1,6 @@
 import {Component, OnChanges, OnInit} from '@angular/core';
 import {RestapiService} from '../../restapi.service';
-import {Router} from '@angular/router';
+import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, OnChanges {
+  loading = false;
   userOldInfo: any = sessionStorage.getItem('currentUser');
   user: any;
 
@@ -20,6 +21,26 @@ export class HomeComponent implements OnInit, OnChanges {
   public rowData: any;
 
   constructor(private service: RestapiService, private router: Router) {
+    // @ts-ignore
+    this.router.events.subscribe((event: Event) => {
+      switch (true) {
+        case event instanceof NavigationStart: {
+          this.loading = true;
+          break;
+        }
+
+        case event instanceof NavigationEnd:
+        case event instanceof NavigationCancel:
+        case event instanceof NavigationError: {
+          this.loading = false;
+          break;
+        }
+        default: {
+          break;
+        }
+      }
+    });
+
     this.columnDefs = [
       {
         headerName: 'Номер',
@@ -96,6 +117,7 @@ export class HomeComponent implements OnInit, OnChanges {
   }
 
   getTable(): void {
+    this.loading = true;
     this.rowData = [];
     this.service.getAllUserOrders().subscribe(response => {
       if (response.status === 200) {
@@ -113,6 +135,7 @@ export class HomeComponent implements OnInit, OnChanges {
           }
         }
         this.gridApi.setRowData(this.rowData);
+        this.loading = false;
       }
     });
   }
