@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {RestapiService} from '../../restapi.service';
 
 @Component({
   selector: 'app-documents',
@@ -10,6 +12,12 @@ export class DocumentsComponent implements OnInit {
   userOldInfo: any = sessionStorage.getItem('currentUser');
   user: any;
 
+  addFileForm = new FormGroup({
+    file: new FormControl('', [
+      Validators.required
+    ]),
+  });
+
   gridApi: any;
   gridColumnApi: any;
   rowData: any;
@@ -17,7 +25,7 @@ export class DocumentsComponent implements OnInit {
   defaultColDef: any;
   paginationPageSize: any;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private service: RestapiService) {
     this.columnDefs = [
       {
         field: 'document',
@@ -29,29 +37,10 @@ export class DocumentsComponent implements OnInit {
             '<img class="list-icon-white" src="../../../assets/img/documents/file.svg" alt="ico">' +
             '<img src="../../../assets/img/documents/file-dark.svg" alt="ico" class="list-icon-dark">' + params.value + '</span>';
         }
-      },
-      {
-        field: 'buttons',
-        flex: 1,
-        minWidth: 100,
-        maxWidth: 125
       }
     ];
 
-    this.rowData = [
-      {
-        document: 'Документ',
-        buttons: 'Кнопки'
-      },
-      {
-        document: 'Документ',
-        buttons: 'Кнопки'
-      },
-      {
-        document: 'Документ',
-        buttons: 'Кнопки'
-      },
-    ];
+    this.rowData = [];
 
     this.defaultColDef = {
       flex: 1,
@@ -69,6 +58,11 @@ export class DocumentsComponent implements OnInit {
     } else {
       this.router.navigate(['login']);
     }
+    this.rowData = [{document: 'Type'}];
+    // this.service.getSavedFiles().subscribe(response => {
+    //   this.rowData = response.body;
+    //   this.gridApi.setRowData(this.rowData);
+    // });
   }
 
   onGridReady(params: any): void {
@@ -87,6 +81,11 @@ export class DocumentsComponent implements OnInit {
     this.gridApi.paginationSetPageSize(Number(event.target.value));
   }
 
+  saveFile($event: any): void {
+    this.service.saveFile(this.addFileForm.value.file).subscribe(response => {
+      console.log('ok');
+    });
+  }
 }
 
 function setText(selector: any, text: any): void {

@@ -332,4 +332,12 @@ export class RestapiService {
   public cleanAddress(): Observable<any> {
     return this.http.get(`${this.url}/user/cleanAddress`, {observe: 'response'});
   }
+
+  public saveFile(file: any): Observable<any> {
+    return this.http.post(`${this.url}/sys/uploadFile`, file, {observe: 'response'});
+  }
+
+  public getSavedFiles(): Observable<any> {
+    return this.http.get(`${this.url}/user/getAllFiles`, {observe: 'response'});
+  }
 }
