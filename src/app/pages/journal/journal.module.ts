@@ -14,11 +14,12 @@ import {QRCodeModule} from 'angularx-qrcode';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../../AuthInterceptor';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { JournalOnlyCopyComponent } from './journal-only-copy/journal-only-copy.component';
 
 
 
 @NgModule({
-  declarations: [JournalComponent, JournalButtonsComponent],
+  declarations: [JournalComponent, JournalButtonsComponent, JournalOnlyCopyComponent],
   imports: [
     CommonModule,
     SharedModule,

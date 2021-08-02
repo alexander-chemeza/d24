@@ -8,6 +8,7 @@ import {DatePipe} from '@angular/common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router} from '@angular/router';
+import {JournalOnlyCopyComponent} from './journal-only-copy/journal-only-copy.component';
 
 @Component({
   selector: 'app-journal',
@@ -89,14 +90,35 @@ export class JournalComponent implements OnInit, OnChanges {
     });
 
     this.frameworkComponents = {
-      btnCellRenderer: JournalButtonsComponent,
+      journalButtons: JournalButtonsComponent,
+      journalOnlyCopy: JournalOnlyCopyComponent
     };
 
     this.columnDefs = [
     {
       headerName: 'Управление',
       pinned: 'right',
-      cellRenderer: 'btnCellRenderer',
+      // cellRenderer: 'btnCellRenderer',
+      cellRendererSelector: (params: any): any => {
+        const draft = {
+          component: 'journalButtons',
+          params: {
+            values: ['status']
+          }
+        };
+
+        const other = {
+          component: 'journalOnlyCopy',
+          params: {
+            values: ['status']
+          }
+        };
+        if (params.data.status === 'Черновик') {
+          return draft;
+        } else {
+          return other;
+        }
+      },
       cellRendererParams: {
         clicked: (target: any): void => {
           // alert(`${field} was clicked`);`
