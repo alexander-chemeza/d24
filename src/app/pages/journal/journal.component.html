@@ -652,7 +652,7 @@
   <div class="popup-align popup popup-bg">
     <div class="popup_title">Печать Бланка</div>
 
-    <div class="grey-box flex justify-content-between mb-20">
+    <div class="grey-box flex justify-content-between mb-20" style="height: min-content">
       <div>
         <div class="popup_subtitle">Номер:</div>
         <label for="">{{blankToType}}</label>
@@ -672,7 +672,7 @@
 <!--        </mat-form-field>-->
       </div>
 
-      <div class="flex">
+      <div class="flex" style="height: min-content">
         <input type="submit" value="Распечатать" class="mt-40" (click)="printBlanks()">
         <input type="submit" value="Сохранить в PDF" class="ml-30 mt-40" (click)="openPDF('blanks')">
       </div>
@@ -3067,6 +3067,14 @@
       </div>
     </div>
     <button class="active-btn circle-btn close-btn" (click)="hideModal('report-blank')"></button>
+  </div>
+</div>
+
+<div id="ask-if-delete" class="modal ask-if-delete">
+  <p class="white-header">Вы действительно хотите удалить черновик?</p>
+  <div class="row">
+    <button class="green-btn round-btn" (click)="delete()">Удалить</button>
+    <button class="white-btn round-btn" (click)="hideModal('ask-if-delete')">Отменить</button>
   </div>
 </div>
 

@@ -686,3 +686,30 @@ button {
   }
 }
 
+.ask-if-delete {
+  width: 360px;
+  height: 130px;
+  background-color: #8D60B5;
+  display: none;
+  grid-template-columns: 1fr;
+  grid-template-rows: min-content min-content;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 15px;
+
+  & .row {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content;
+    grid-gap: 20px;
+  }
+}
+
+.show-modal {
+  display: grid !important;
+}
+
+.hide-modal {
+  display: none !important;
+}

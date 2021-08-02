@@ -123,12 +123,7 @@ export class JournalComponent implements OnInit, OnChanges {
         clicked: (target: any): void => {
           // alert(`${field} was clicked`);`
           if (target === 'delete') {
-            const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
-            this.service.cancelOrder(id).subscribe(response => {
-              if (response.status === 200) {
-                this.getTable();
-              }
-            });
+            this.showModal('ask-if-delete');
           } else if (target === 'edit') {
             const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
             const journalItem = this.storedTableResponse.find((item: any) => item.id === id);
@@ -639,6 +634,16 @@ export class JournalComponent implements OnInit, OnChanges {
 
   hideOnTimeout(): void {
     this.sidebarShow = !this.sidebarShow;
+  }
+
+  delete(): void {
+    const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
+    this.service.cancelOrder(id).subscribe(response => {
+      if (response.status === 200) {
+        this.getTable();
+        this.hideModal('ask-if-delete');
+      }
+    });
   }
 }
 
