@@ -381,31 +381,29 @@ export class JournalComponent implements OnInit, OnChanges {
           if (item.deal_type === 1) {
             item.deal_type = 'Экспресс-доставка грузов';
           }
-          if (item.status !== 'Отменен') {
-            this.rowData.push({
-              number: item.order_number,
-              status: item.status,
-              orderDate: item.orderDate.split(' ')[0],
-              orderTime: item.orderDate.split(' ')[1].substr(0, 5),
-              service: item.deal_type,
-              delivery: item.delivery_type,
-              ttn: '',
-              sender: item.sender_name,
-              recipient: item.recipient_name,
-              place: item.delivery_placing_type,
-              amount: item.amount_packages,
-              address1: item.sender_address,
-              date1: item.sender_delivery_from.split(' ')[0],
-              time11: item.sender_delivery_from.split(' ')[1],
-              time12: item.sender_delivery_to.split(' ')[1],
-              address2: item.recipient_address,
-              date2: item.recipient_accept_from.split(' ')[0],
-              time21: item.recipient_accept_from.split(' ')[1],
-              time22: item.recipient_accept_to.split(' ')[1],
-              author: item.userName,
-              id: item.id
-            });
-          }
+          this.rowData.push({
+            number: item.order_number,
+            status: item.status,
+            orderDate: item.orderDate.split(' ')[0],
+            orderTime: item.orderDate.split(' ')[1].substr(0, 5),
+            service: item.deal_type,
+            delivery: item.delivery_type,
+            ttn: '',
+            sender: item.sender_name,
+            recipient: item.recipient_name,
+            place: item.delivery_placing_type,
+            amount: item.amount_packages,
+            address1: item.sender_address,
+            date1: item.sender_delivery_from.split(' ')[0],
+            time11: item.sender_delivery_from.split(' ')[1],
+            time12: item.sender_delivery_to.split(' ')[1],
+            address2: item.recipient_address,
+            date2: item.recipient_accept_from.split(' ')[0],
+            time21: item.recipient_accept_from.split(' ')[1],
+            time22: item.recipient_accept_to.split(' ')[1],
+            author: item.userName,
+            id: item.id
+          });
         }
         this.gridApi.setRowData(this.rowData);
         this.selectedDraftOrderRow = [];
@@ -588,11 +586,21 @@ export class JournalComponent implements OnInit, OnChanges {
     this.gridColumnApi.setColumnVisible(event.target.getAttribute('id'), event.target.checked);
     const state = this.gridColumnApi.getColumnState();
     localStorage.setItem('journal', JSON.stringify(state));
+    this.prepareSidebar();
   }
 
   prepareSidebar(): void {
+    this.sidebarItems = [];
     const names = this.columnDefs.map((item: any) => item.headerName).splice(2);
-    const tableState = this.gridColumnApi.getColumnState().splice(2);
+    let tableState: any = [];
+    if (!localStorage.getItem('journal')) {
+      tableState = this.gridColumnApi.getColumnState().splice(2);
+    } else {
+      const setting = localStorage.getItem('journal');
+      if (setting) {
+        tableState = JSON.parse(setting).splice(2);
+      }
+    }
     for (let i = 0; i < names.length; i++) {
       this.sidebarItems.push({
         colId: tableState[i].colId,
@@ -600,11 +608,11 @@ export class JournalComponent implements OnInit, OnChanges {
         hide: tableState[i].hide
       });
     }
-    console.log('SIDEBAR', this.sidebarItems);
   }
 
   changedWidth(event: any): void {
     localStorage.setItem('journal', JSON.stringify(this.gridColumnApi.getColumnState()));
+    this.prepareSidebar();
   }
 }
 
