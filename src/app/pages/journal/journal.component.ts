@@ -34,6 +34,7 @@ export class JournalComponent implements OnInit, OnChanges {
   public selectedAppliedOrderRows: number[] = [];
   public storedTableResponse: any;
   public itemToShow: any;
+  public sidebarShow = false;
 
   // columnDefs = [
   //   { headerName: 'Наименование',

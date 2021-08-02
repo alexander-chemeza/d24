@@ -14,9 +14,9 @@
       <button class="white-btn" (click)="sendOrders($event)" *ngIf="selectedDraftOrderRow.length !== 0">Подтвердить</button>
     </div>
     <div class="row-controls-single">
-<!--      <button class="white-btn b-plus" (click)="showModal('filter-table-columns')" modal="">Отображение столбцов в таблице</button>-->
+      <button class="white-btn b-plus" (click)="sidebarShow = !sidebarShow" modal="">Отображение столбцов в таблице</button>
 
-      <div id="filter-table-columns" class="filter-table-columns">
+      <div *ngIf="sidebarShow" id="filter-table-columns" class="filter-table-columns">
         <div class="row flex">
           <div class="checkbox-block">
             <input type="checkbox" name="status" class="checkbox-block-item">
