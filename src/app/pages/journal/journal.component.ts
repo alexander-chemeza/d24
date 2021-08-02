@@ -233,22 +233,22 @@ export class JournalComponent implements OnInit, OnChanges {
         minWidth: 145
       },
       {
-        headerName: 'Дата изменения статуса',
+        headerName: 'Дата и время изменения статуса',
         field: 'orderDate',
         sortable: true,
         sort: ['desc'],
         sortingOrder: ['asc', 'desc'],
         flex: 1,
-        minWidth: 250
+        minWidth: 300
       },
-      {
-        headerName: 'Время изменения статуса',
-        field: 'orderTime',
-        sortable: false,
-        flex: 1,
-        id: '',
-        minWidth: 220
-      },
+      // {
+      //   headerName: 'Время изменения статуса',
+      //   field: 'orderTime',
+      //   sortable: false,
+      //   flex: 1,
+      //   id: '',
+      //   minWidth: 220
+      // },
       {
         headerName: 'Услуга',
         field: 'service',
@@ -406,8 +406,8 @@ export class JournalComponent implements OnInit, OnChanges {
           this.rowData.push({
             number: item.order_number,
             status: item.status,
-            orderDate: item.orderDate.split(' ')[0],
-            orderTime: item.orderDate.split(' ')[1].substr(0, 5),
+            orderDate: `${item.orderDate.split(' ')[0]}; ${item.orderDate.split(' ')[1].substr(0, 5)}`,
+            // orderTime: item.orderDate.split(' ')[1].substr(0, 5),
             service: item.deal_type,
             delivery: item.delivery_type,
             ttn: '',
