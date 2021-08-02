@@ -122,7 +122,7 @@ export class HomeComponent implements OnInit, OnChanges {
     this.service.getAllUserOrders().subscribe(response => {
       if (response.status === 200) {
         for (const item of response.body) {
-          if (item.status === 'Загружен') {
+          if (item.status !== 'Черновик' && item.status !== 'Отменен' && item.status !== 'Исполнен') {
             this.rowData.push({
               number: item.order_number,
               status: item.status,
@@ -130,7 +130,7 @@ export class HomeComponent implements OnInit, OnChanges {
               date1: item.sender_delivery_from.split(' ')[0],
               recipient: item.recipient_name,
               date2: item.recipient_accept_from.split(' ')[0],
-              author: item.userId,
+              author: item.userName,
             });
           }
         }
