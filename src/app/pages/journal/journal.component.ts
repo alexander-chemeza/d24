@@ -614,6 +614,10 @@ export class JournalComponent implements OnInit, OnChanges {
     localStorage.setItem('journal', JSON.stringify(this.gridColumnApi.getColumnState()));
     this.prepareSidebar();
   }
+
+  hideOnTimeout(): void {
+    this.sidebarShow = !this.sidebarShow;
+  }
 }
 
 

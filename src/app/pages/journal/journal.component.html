@@ -16,7 +16,7 @@
     <div class="row-controls-single">
       <button class="white-btn b-plus" (click)="sidebarShow = !sidebarShow" modal="">Отображение столбцов в таблице</button>
 
-      <div *ngIf="sidebarShow" id="filter-table-columns" class="filter-table-columns">
+      <div *ngIf="sidebarShow" id="filter-table-columns" class="filter-table-columns" (mouseleave)="hideOnTimeout()">
         <div class="row flex" *ngFor="let item of sidebarItems">
           <div class="checkbox-block">
             <input type="checkbox" name="{{item.colId}}" id="{{item.colId}}" class="checkbox-block-item" (change)="updateView($event)" [checked]="!item.hide">
