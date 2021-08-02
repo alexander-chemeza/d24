@@ -15,6 +15,7 @@ import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Route
   styleUrls: ['./journal.component.scss']
 })
 export class JournalComponent implements OnInit, OnChanges {
+  sidebarItems: any = [];
   loading = false;
   userOldInfo: any = sessionStorage.getItem('currentUser');
   user: any;
@@ -101,10 +102,8 @@ export class JournalComponent implements OnInit, OnChanges {
           // alert(`${field} was clicked`);`
           if (target === 'delete') {
             const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
-            console.log('delete id = ', id);
             this.service.cancelOrder(id).subscribe(response => {
               if (response.status === 200) {
-                console.log('Order id = ' + id + ' is deleted');
                 this.getTable();
               }
             });
@@ -175,7 +174,6 @@ export class JournalComponent implements OnInit, OnChanges {
               delivery_size_z: itemToCopy.delivery_size_z,
               amount_packages: itemToCopy.amount_packages,
             };
-            console.log('COPIED DATA', data);
             this.service.placeNewOrder(data).subscribe(response => {
               if (response.status === 200) {
                 this.getTable();
@@ -396,7 +394,6 @@ export class JournalComponent implements OnInit, OnChanges {
     this.service.getAllUserOrders().subscribe(response => {
       if (response.status === 200) {
         this.storedTableResponse = response.body.reverse();
-        console.log(this.storedTableResponse);
         for (const item of response.body) {
           if (item.deal_type === 1) {
             item.deal_type = 'Экспресс-доставка грузов';
@@ -439,6 +436,19 @@ export class JournalComponent implements OnInit, OnChanges {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.getTable();
+    if (!localStorage.getItem('journal')) {
+      localStorage.setItem('journal', JSON.stringify(this.gridColumnApi.getColumnState()));
+    } else {
+      const journalSetting = localStorage.getItem('journal');
+      if(journalSetting) {
+        const journalState = JSON.parse(journalSetting);
+        this.gridColumnApi.applyColumnState({
+          state: journalState,
+          applyOrder: true
+        });
+      }
+    }
+    this.prepareSidebar();
   }
 
   onPaginationChanged(): void {
@@ -493,7 +503,6 @@ export class JournalComponent implements OnInit, OnChanges {
     for (let i = 0; i < forms.length; i++) {
       forms[i].classList.add('another-form');
     }
-    console.log(currentForm);
 
     currentForm.classList.remove('another-form');
 
@@ -568,7 +577,6 @@ export class JournalComponent implements OnInit, OnChanges {
       const pageHeight = 295;
       const imgHeight = canvas.height * imgWidth / canvas.width;
       let heightLeft = imgHeight;
-      console.log(heightLeft);
       const imgData = canvas.toDataURL('image/jpeg');
       const doc = new jsPDF('p', 'mm', 'a4', true);
       let position = 0;
@@ -589,6 +597,29 @@ export class JournalComponent implements OnInit, OnChanges {
 
   printBlanks(): void {
     window.print();
+  }
+
+  updateView(event: any): void {
+    event.preventDefault();
+    event.stopPropagation();
+    console.log(event.target.checked);
+    console.log(event.target.getAttribute('id'));
+    this.gridColumnApi.setColumnVisible(event.target.getAttribute('id'), event.target.checked);
+    const state = this.gridColumnApi.getColumnState();
+    localStorage.setItem('journal', JSON.stringify(state));
+  }
+
+  prepareSidebar(): void {
+    const names = this.columnDefs.map((item: any) => item.headerName).splice(2);
+    const tableState = this.gridColumnApi.getColumnState().splice(2);
+    for (let i = 0; i < names.length; i++) {
+      this.sidebarItems.push({
+        colId: tableState[i].colId,
+        headerName: names[i],
+        hide: tableState[i].hide
+      });
+    }
+    console.log('SIDEBAR', this.sidebarItems);
   }
 }
 

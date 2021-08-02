@@ -17,104 +17,14 @@
       <button class="white-btn b-plus" (click)="sidebarShow = !sidebarShow" modal="">Отображение столбцов в таблице</button>
 
       <div *ngIf="sidebarShow" id="filter-table-columns" class="filter-table-columns">
-        <div class="row flex">
+        <div class="row flex" *ngFor="let item of sidebarItems">
           <div class="checkbox-block">
-            <input type="checkbox" name="status" class="checkbox-block-item">
+            <input type="checkbox" name="{{item.colId}}" id="{{item.colId}}" class="checkbox-block-item" (change)="updateView($event)" [checked]="!item.hide">
             <span class="checkbox-block-icon"></span>
           </div>
-          <label for="status">Статус заявки</label>
+          <label for="{{item.colId}}">{{item.headerName}}</label>
         </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="date_status" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="status">Дата / время изменения статуса заявки</label>
-        </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="service" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="service">Услуга</label>
-        </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="tth" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="tth">ТТН</label>
-        </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="sender" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="sender">Отправитель</label>
-        </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="delivery-address" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="delivery-address">Адрес выдачи груза</label>
-        </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="date-of-delivery" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="date-of-delivery">Дата выдачи груза</label>
-        </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="delivery-time-from" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="delivery-time-from">Время  выдачи груза с</label>
-        </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="delivery-time-to" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="delivery-time-top">Время  выдачи груза по</label>
-        </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="delivery-time-to" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="shipping-address">Адрес доставки груза</label>
-        </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="delivery-date" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="delivery-date">Дата доставки груза</label>
-        </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="delivery-date-to" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="delivery-date-to">Время доставки груза по</label>
-        </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="number-of-cargo-places" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="number-of-cargo-places">Кол-во грузовых мест</label>
-        </div>
-        <div class="row flex">
-          <div class="checkbox-block">
-            <input type="checkbox" name="document-author" class="checkbox-block-item">
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="document-author">Автор документа</label>
-        </div>
+
       </div>
     </div>
   </div>
