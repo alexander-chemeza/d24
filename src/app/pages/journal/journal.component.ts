@@ -602,8 +602,6 @@ export class JournalComponent implements OnInit, OnChanges {
   updateView(event: any): void {
     event.preventDefault();
     event.stopPropagation();
-    console.log(event.target.checked);
-    console.log(event.target.getAttribute('id'));
     this.gridColumnApi.setColumnVisible(event.target.getAttribute('id'), event.target.checked);
     const state = this.gridColumnApi.getColumnState();
     localStorage.setItem('journal', JSON.stringify(state));
@@ -620,6 +618,10 @@ export class JournalComponent implements OnInit, OnChanges {
       });
     }
     console.log('SIDEBAR', this.sidebarItems);
+  }
+
+  changedWidth(event: any): void {
+    localStorage.setItem('journal', JSON.stringify(this.gridColumnApi.getColumnState()));
   }
 }
 

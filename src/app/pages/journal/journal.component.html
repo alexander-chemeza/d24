@@ -45,6 +45,7 @@
       [pagination]="true"
       [paginationPageSize]="paginationPageSize"
       (paginationChanged)="onPaginationChanged()"
+      (columnResized)="changedWidth($event)"
       (gridReady)="onGridReady($event)"
     >
     </ag-grid-angular>
