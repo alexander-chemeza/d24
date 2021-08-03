@@ -340,4 +340,12 @@ export class RestapiService {
   public getSavedFiles(): Observable<any> {
     return this.http.get(`${this.url}/user/getAllFiles`, {observe: 'response'});
   }
+
+  public getPassCode(login: string, email: string): Observable<any> {
+    return this.http.get(`${this.url}/passwordRecovery?login=${login}&email=${email}`, {observe: 'response'});
+  }
+
+  public recover(data: {passCode: string, password: string}): Observable<any> {
+    return this.http.post(`${this.url}/passwordRecovery`, data, {observe: 'response'});
+  }
 }
