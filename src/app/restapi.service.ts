@@ -133,6 +133,7 @@ export interface Street {
   cityCode: string;
   regionCode: string;
   districtCode?: string;
+  localityCode?: string;
 }
 
 // Interface to delete customer

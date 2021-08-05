@@ -161,24 +161,21 @@ export class BookComponent implements OnInit {
   selectPlace(event: any, form: any): void {
     // Get city id
     const currentCityCode = form.value.place.id;
-    console.log('Selected city code', currentCityCode);
     // Find city by the id
     const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
-    console.log('City info', cityInfo);
     // Check and build data
     if (cityInfo) {
       // The request object
       this.street = {
         cityCode: cityInfo.city_code,
         regionCode: cityInfo.region_code,
-        districtCode: cityInfo.district_code
+        districtCode: cityInfo.district_code,
+        localityCode: cityInfo.locality_code
       };
-      console.log('Street search data', this.street);
       // Get streets
       this.service.streets(this.street).subscribe(response => {
         if (response.status === 200) {
           this.streetList = response.body;
-          console.log('Street list', this.streetList);
         }
       });
     }
@@ -282,7 +279,6 @@ export class BookComponent implements OnInit {
         timeTo: this.newAddress.value.deliveryTo as string,
         customerId: this.customerId
       };
-      console.log('New address', data);
       // Save the data
       this.service.saveUserCustomerAddress(data).subscribe(response => {
         if (response.status === 200) {
@@ -345,7 +341,6 @@ export class BookComponent implements OnInit {
   }
 
   onKey2(event: any): void {
-    console.log('from search', this.streetList);
     if (event.target.value === '') {
       this.service.streets(this.street).subscribe(response => {
         if (response.status === 200) {
@@ -354,7 +349,6 @@ export class BookComponent implements OnInit {
       });
     } else {
       this.streetList = this.search2(event.target.value);
-      console.log('Street info', this.streetList);
     }
   }
 
@@ -365,24 +359,18 @@ export class BookComponent implements OnInit {
 
   showCustomer(data: any): void {
     this.selectedCustomer = data;
-    console.log('Void in book', this.selectedCustomer);
     this.newContragent.patchValue({
       name: this.selectedCustomer[0].customerName,
       type: this.selectedCustomer[0].customerType
     });
     this.showModal('edit-contragent');
-    console.log('Name', this.newContragent.value.name);
   }
 
   showCustomerAddress(data: any): void {
-    console.log('Our cities list', this.citiesList);
     this.selectedCustomerAddress = data;
-    console.log('Our selected address data', this.selectedCustomerAddress);
     const currentCityCode = this.selectedCustomerAddress[0].cityId;
-    console.log('Current city code', currentCityCode);
     // Find city by the id
     const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
-    console.log('Info about selected city', cityInfo);
     // Check and build data
     if (cityInfo) {
       // The request object
@@ -390,12 +378,10 @@ export class BookComponent implements OnInit {
         cityCode: cityInfo.city_code,
         regionCode: cityInfo.region_code
       };
-      console.log('Selected city street search data', this.street);
       // Get streets
       this.service.streets(this.street).subscribe(resp => {
         if (resp.status === 200) {
           this.streetList = resp.body;
-          console.log('Our street list', this.streetList);
           const patch = {
             type: this.selectedCustomerAddress[0].mainAddress,
             place: this.selectedCustomerAddress[0].cityId,
@@ -411,11 +397,8 @@ export class BookComponent implements OnInit {
             timeoutTo: this.selectedCustomerAddress[0].pauseTo,
             description: this.selectedCustomerAddress[0].description
           };
-          console.log('Patch data', patch);
           this.newAddress.patchValue(patch);
-          console.log('Patched');
           this.showModal('edit-address');
-          console.log('Modal is shown');
         }
       });
     }
@@ -469,7 +452,6 @@ export class BookComponent implements OnInit {
         customerId: this.customerId,
         id: this.selectedCustomerAddress[0].id
       };
-      console.log('Edit address', data);
       // Save the data
       this.service.saveUserCustomerAddress(data).subscribe(response => {
         if (response.status === 200) {
@@ -484,7 +466,6 @@ export class BookComponent implements OnInit {
 
   showCustomerContact(data: any): void {
     this.selectedCustomerContact = data;
-    console.log('selected', this.selectedCustomerContact);
     this.newContact.patchValue({
       type: this.selectedCustomerContact[0].mainContact,
       name: this.selectedCustomerContact[0].name,

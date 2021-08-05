@@ -738,10 +738,11 @@ export class OrderComponent implements OnChanges, OnInit {
   }
 
   ngOnInit(): void {
+    this.getCities();
+    const currentCity = this.citiesList.find((item: any) => item.id === 16624);
     if (this.router.url !== '/order') {
       this.route.queryParamMap.subscribe(params => this.dataFromJournal = params);
       this.dataFromJournal = JSON.parse(this.dataFromJournal.params.data);
-      console.log(this.dataFromJournal);
     }
     let preloadData: any;
     this.service.deliveryTypes().subscribe(data => {
@@ -853,7 +854,6 @@ export class OrderComponent implements OnChanges, OnInit {
                   }
                   if (defaultSender) {
                     defaultSender = JSON.parse(defaultSender);
-                    console.log(defaultSender);
                     if (defaultSender && !this.dataFromJournal) {
                       this.orderForm.patchValue({
                         expressSender: info.expressSenderCustomerId,
@@ -915,7 +915,6 @@ export class OrderComponent implements OnChanges, OnInit {
                   }
                   if (defaultRecipient) {
                     defaultRecipient = JSON.parse(defaultRecipient);
-                    console.log(defaultRecipient);
                     if (defaultRecipient && !this.dataFromJournal) {
                       this.orderForm.patchValue({
                         expressRecipient: info.expressRecipientCustomerId,
@@ -966,7 +965,6 @@ export class OrderComponent implements OnChanges, OnInit {
           expressDeliveryHeight: this.dataFromJournal.delivery_size_z,
           expressDeliveryCounter1: this.dataFromJournal.amount_packages
         });
-        console.log('DELIVERY TYPES', this.deliveryTypes);
         if (this.dataFromJournal.delivery_type === 'Дверь/Дверь') {
           this.deliveryType = 'dt0';
         } else if (this.dataFromJournal.delivery_type === 'Терминал/Дверь') {
@@ -1008,55 +1006,50 @@ export class OrderComponent implements OnChanges, OnInit {
 
   schedule(arr: any, field: any, id: any): void {
     const currentAddress = arr.find((item: any) => item.id === id);
-    const currentCity = this.citiesList.find((item: any) => item.id === currentAddress.cityId);
-    let deliveryZone = '';
-    if (currentCity) {
-      deliveryZone = currentCity.delivery_zone_id;
-      console.log('DELIVERY', deliveryZone);
-      if (deliveryZone !== '') {
-        this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
-          if (deliveryZoneId.status === 200) {
-            let schedules: any;
-            schedules = deliveryZoneId.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
-            schedules[0].day = 'ПН';
-            schedules[1].day = 'ВТ';
-            schedules[2].day = 'СР';
-            schedules[3].day = 'ЧТ';
-            schedules[4].day = 'ПТ';
-            schedules[5].day = 'СБ';
-            schedules[6].day = 'ВС';
-            const activeArray = schedules.filter((item: any) => item.deliveryActive).map((item: any) => Number(item.delivery_day));
-            if (field === 'expressSender') {
-              this.expressSenderDate = (d: Date): boolean => {
-                const day = (d || new Date()).getDay();
-                // Prevent Saturday and Sunday from being selected.
-                return activeArray.indexOf(day) !== -1;
-              };
-              this.expressSenderSchedule = schedules.filter((item: any) => item.deliveryActive)
-                .map((a: any) => a.day).join(', ');
-            } else if (field === 'expressRecipient') {
-              this.expressRecipientDate = (d: Date): boolean => {
-                const day = (d || new Date()).getDay();
-                // Prevent Saturday and Sunday from being selected.
-                return activeArray.indexOf(day) !== -1;
-              };
-              this.expressRecipientSchedule = schedules.filter((item: any) => item.deliveryActive)
-                .map((a: any) => a.day).join(', ');
-            }
+    const deliveryZone = currentAddress.deliveryZoneId;
+    if (deliveryZone) {
+      this.service.getDeliveryCalendar(deliveryZone).subscribe(deliveryZoneId => {
+        if (deliveryZoneId.status === 200) {
+          let schedules: any;
+          schedules = deliveryZoneId.body.sort((a: any, b: any) => a.delivery_day > b.delivery_day ? 1 : -1);
+          schedules[0].day = 'ПН';
+          schedules[1].day = 'ВТ';
+          schedules[2].day = 'СР';
+          schedules[3].day = 'ЧТ';
+          schedules[4].day = 'ПТ';
+          schedules[5].day = 'СБ';
+          schedules[6].day = 'ВС';
+          const activeArray = schedules.filter((item: any) => item.deliveryActive).map((item: any) => Number(item.delivery_day));
+          if (field === 'expressSender') {
+            this.expressSenderDate = (d: Date): boolean => {
+              const day = (d || new Date()).getDay();
+              // Prevent Saturday and Sunday from being selected.
+              return activeArray.indexOf(day) !== -1;
+            };
+            this.expressSenderSchedule = schedules.filter((item: any) => item.deliveryActive)
+              .map((a: any) => a.day).join(', ');
+          } else if (field === 'expressRecipient') {
+            this.expressRecipientDate = (d: Date): boolean => {
+              const day = (d || new Date()).getDay();
+              // Prevent Saturday and Sunday from being selected.
+              return activeArray.indexOf(day) !== -1;
+            };
+            this.expressRecipientSchedule = schedules.filter((item: any) => item.deliveryActive)
+              .map((a: any) => a.day).join(', ');
           }
-        });
-      } else {
-        if (field === 'expressSender') {
-          this.expressSenderDate = (d: Date): boolean => {
-            return true;
-          };
-          this.expressSenderSchedule = 'График не установлен. Ваш заказ будет обработан. С вами свяжется оператор.';
-        } else if (field === 'expressRecipient') {
-          this.expressRecipientDate = (d: Date): boolean => {
-            return true;
-          };
-          this.expressRecipientSchedule = 'График не установлен. Ваш заказ будет обработан. С вами свяжется оператор.';
         }
+      });
+    } else {
+      if (field === 'expressSender') {
+        this.expressSenderDate = (d: Date): boolean => {
+          return true;
+        };
+        this.expressSenderSchedule = 'График не установлен. Ваш заказ будет обработан. С вами свяжется оператор.';
+      } else if (field === 'expressRecipient') {
+        this.expressRecipientDate = (d: Date): boolean => {
+          return true;
+        };
+        this.expressRecipientSchedule = 'График не установлен. Ваш заказ будет обработан. С вами свяжется оператор.';
       }
     }
   }
@@ -1298,7 +1291,8 @@ export class OrderComponent implements OnChanges, OnInit {
       this.street = {
         cityCode: cityInfo.city_code,
         regionCode: cityInfo.region_code,
-        districtCode: cityInfo.district_code
+        districtCode: cityInfo.district_code,
+        localityCode: cityInfo.locality_code
       };
       // Get streets
       this.service.streets(this.street).subscribe(response => {
@@ -1419,7 +1413,6 @@ export class OrderComponent implements OnChanges, OnInit {
         this.service.getAllUserCustomer().subscribe(resp => {
           if (resp.status === 200) {
             array = resp.body;
-            console.log(resp.body);
             form.reset();
             this.expressSenderAgents = resp.body.sort((a: any, b: any) => a.id > b.id ? 1 : -1);
             this.expressReceiverAgents = resp.body.sort((a: any, b: any) => a.id > b.id ? 1 : -1);
@@ -1475,7 +1468,6 @@ export class OrderComponent implements OnChanges, OnInit {
         timeTo: form.value.deliveryTo as string,
         customerId: id
       };
-      console.log('NEW', data);
       // Save the data
       this.service.saveUserCustomerAddress(data).subscribe(response => {
         // addresses.pop();
@@ -1687,7 +1679,6 @@ export class OrderComponent implements OnChanges, OnInit {
         // relocation: this.orderForm.value.expressDeliveryRelocate,
         // agreement: this.orderForm.value.expressDeliveryAgreement
       };
-      console.log('DATA', data);
       if (this.dataFromJournal) {
         data.id = this.dataFromJournal.id;
       }
@@ -1731,7 +1722,6 @@ export class OrderComponent implements OnChanges, OnInit {
         });
       } else {
         disabledSubmit = true;
-        console.log('Incorrect data', data);
         const invalidItems: any = document.getElementsByClassName('ng-invalid');
         for (const item of invalidItems) {
           item.classList.add('error');
@@ -1797,6 +1787,7 @@ export class OrderComponent implements OnChanges, OnInit {
     this.service.cities().subscribe(response => {
       if (response.status === 200) {
         this.citiesList = response.body;
+        const currentCity = this.citiesList.find((item: any) => item.id === 16624);
       }
     });
   }
