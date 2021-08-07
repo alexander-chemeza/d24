@@ -202,7 +202,8 @@ export class RestapiService {
 
   constructor(private http: HttpClient) {
     this.url = 'http://localhost:8080';
-    // this.url = 'http://31.130.201.42:8080';
+    // this.url = 'http://31.130.201.42:8080/d24-test';
+    // this.url = 'http://31.130.201.42:8080/d24-prod';
   }
   // user-controller GET
   public login(username: string, password: string): Observable<any> {
