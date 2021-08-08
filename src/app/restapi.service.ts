@@ -350,4 +350,8 @@ export class RestapiService {
   public recover(data: {passCode: string, password: string}): Observable<any> {
     return this.http.post(`${this.url}/passwordRecovery`, data, {observe: 'response'});
   }
+
+  public checkUNP(data: string): Observable<any> {
+    return this.http.post(`${this.url}/registrationAccess/check`, data, {observe: 'response'});
+  }
 }

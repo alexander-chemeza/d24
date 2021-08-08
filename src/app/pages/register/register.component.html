@@ -348,4 +348,16 @@
       </form>
     </div>
   </div>
+  <div id="user-updated" class="modal user-updated">
+    <p class="white-header">Настройки профиля сохранены</p>
+  </div>
+
+  <div id="user-forbidden" class="modal user-updated">
+    <p class="white-header">Пользователь с такими данными существует</p>
+  </div>
+
+  <div id="user-wait-agreement" class="modal user-updated">
+    <p class="white-header">По данному УНП не обнаружено действующего договора. Для заключения договора свяжитесь с нашим отделом продаж по телефонам:<br> +375 (29/33) 671-90-90</p>
+    <button class="btn-green btn-round" class="mt-15" (click)="hideModal('user-wait-agreement')">Принято</button>
+  </div>
 </div>

@@ -180,7 +180,20 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+  showModal(id: string): void {
+    const modal: any = document.getElementById(id);
+    modal.classList.remove('hide-modal');
+    modal.classList.add('show-modal');
+  }
+
+  hideModal(id: string): void {
+    const modal: any = document.getElementById(id);
+    modal.classList.add('hide-modal');
+    modal.classList.remove('show-modal');
+  }
+
   doRegistration(): void {
+    let ok = false;
     let data: UserRegistration = {} as any;
     const passwordRepeat: string = this.entityUserWithAgreementForm.value.passwordRepeat;
     console.log('Password repeat', passwordRepeat);
@@ -196,19 +209,44 @@ export class RegisterComponent implements OnInit {
         userType: 'Юр.лицо'
       };
 
+      for (const item in data) {
+        if(item !== null && item !== '') {
+          ok = true;
+        } else {
+          ok = false;
+        }
+      }
+
       this.passwordEquality = data.password !== passwordRepeat;
 
-      console.log('Equality', this.passwordEquality);
-
-      if (this.entityUserWithAgreementForm.valid && !this.passwordEquality) {
-        console.log(data);
-        this.service.register(data)
-          .subscribe(response => {
-            console.log(response);
+      if (this.entityUserWithAgreementForm.valid && !this.passwordEquality && ok) {
+        if (data.unp) {
+          this.service.checkUNP(data.unp).subscribe(response => {
             if (response.status === 200) {
-              this.router.navigate(['login']);
+              if (response.body === true) {
+                this.service.register(data)
+                  .subscribe(r => {
+                    if (r.status === 200) {
+                      if (r.body === 0) {
+                        this.showModal('user-updated');
+                        setTimeout(() => {
+                          this.hideModal('user-updated');
+                          this.router.navigate(['login']);
+                        }, 3000);
+                      } else {
+                        this.showModal('user-forbidden');
+                        setTimeout(() => {
+                          this.hideModal('user-forbidden');
+                        }, 3000);
+                      }
+                    }
+                  });
+              } else {
+                this.showModal('user-wait-agreement');
+              }
             }
           });
+        }
       }
     } else if (this.agreement && !this.personWithoutAgreement) {
       data = {
