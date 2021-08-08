@@ -16,7 +16,7 @@
       </div>
       <p *ngIf="password.touched && password.invalid && password.dirty" class="alert-message">Минимальная длина 1 символ</p>
       <p *ngIf="password.touched && password.invalid && password.pristine" class="alert-message">Данное поле обязательно</p>
-      <p class="grey-text" *ngIf="incorrect" style="color: red; position: absolute">Неверный логин или пароль</p>
+      <p class="grey-text" *ngIf="incorrect" style="color: red; position: absolute">Пользователя с таким именем не существует</p>
       <input type="submit" value="Войти" class="submit-btn" [disabled]="loginForm.invalid">
     </form>
   </div>
