@@ -82,18 +82,16 @@ export class ContactsComponent implements OnInit, OnChanges {
       cellRendererParams: {
         clicked: (target: any): void => {
           const id = this.rowDataContacts[Number(this.gridApi.getFocusedCell().rowIndex)].id;
-          console.log('Contact id', id);
-          if (target === 'delete') {
+          if (target === 'delete' && id) {
             this.service.deleteUserCustomerContact(id).subscribe(response => {
               if (response.status === 200) {
                 this.ngOnChanges();
               }
             });
-          } else if (target === 'edit') {
+          } else if (target === 'edit' && this.customerAddressId) {
             this.service.getAllUserCustomerContact(this.customerAddressId).subscribe(response => {
               if (response.status === 200) {
                 const selectedAgentContact = response.body.filter((item: any) => item.id === id);
-                console.log(selectedAgentContact);
                 this.onCustomerContactEdit.emit(selectedAgentContact);
               }
             });
@@ -127,24 +125,25 @@ export class ContactsComponent implements OnInit, OnChanges {
     // Clear table after previous user actions
     this.rowDataContacts = [];
     // Check if we've got addressId
-    console.log('Reading from contacts', this.customerAddressId);
     // Get row data
-    this.service.getAllUserCustomerContact(this.customerAddressId).subscribe(response => {
-      if (response.status === 200) {
-        for (const item of response.body) {
-          this.rowDataContacts.push({
-            contactName: item.name,
-            employee: item.position,
-            phone: '',
-            tel1: item.phone,
-            tel2: item.phone2,
-            email: item.email,
-            id: item.id
-          });
+    if (this.customerAddressId) {
+      this.service.getAllUserCustomerContact(this.customerAddressId).subscribe(response => {
+        if (response.status === 200) {
+          for (const item of response.body) {
+            this.rowDataContacts.push({
+              contactName: item.name,
+              employee: item.position,
+              phone: '',
+              tel1: item.phone,
+              tel2: item.phone2,
+              email: item.email,
+              id: item.id
+            });
+          }
+          this.gridApi.setRowData(this.rowDataContacts);
         }
-        this.gridApi.setRowData(this.rowDataContacts);
-      }
-    });
+      });
+    }
   }
 
   // Table build
