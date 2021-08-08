@@ -165,7 +165,6 @@ export class BookComponent implements OnInit {
     const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
     // Check and build data
     if (cityInfo) {
-      let ok = false;
       // The request object
       this.street = {
         cityCode: cityInfo.city_code,
@@ -174,13 +173,7 @@ export class BookComponent implements OnInit {
         localityCode: cityInfo.locality_code
       };
 
-      for (const item in this.street) {
-        if (item === null || item === '') {
-          ok = false;
-        } else {
-          ok = true;
-        }
-      }
+      const ok = !Object.values(this.street).every(o => o === null && o === '');
 
       if (ok) {
         // Get streets
@@ -222,20 +215,13 @@ export class BookComponent implements OnInit {
   }
   // New contragent button event
   createNewContragent(): void {
-    let ok = false;
     // Received data
     const data = {
       customerName: this.newContragent.value.name as string,
       customerType: this.newContragent.value.type as string
     };
 
-    for (const item in data) {
-      if (item === null || item === '') {
-        ok = false;
-      } else {
-        ok = true;
-      }
-    }
+    const ok = !Object.values(data).every(o => o === null && o === '');
 
     if (ok) {
       // POST to backend
@@ -251,7 +237,6 @@ export class BookComponent implements OnInit {
   }
   // New contact button event
   createNewContact(): void {
-    let ok = false;
     // Read fields from popup
     const data = {
       customerAddressId: this.customerAddressId,
@@ -263,15 +248,9 @@ export class BookComponent implements OnInit {
       position: this.newContact.value.position as string
     };
 
-    for (const item in data) {
-      if (item === null || item === '') {
-        ok = false;
-      } else {
-        ok = true;
-      }
-    }
+    const ok = !Object.values(data).every(o => o === null && o === '');
 
-   if (ok) {
+    if (ok) {
      // Post to backend
      this.service.saveUserCustomerContact(data).subscribe(response => {
        if (response.status === 200) {
@@ -285,7 +264,6 @@ export class BookComponent implements OnInit {
   }
   // New address button event
   createNewAddress(cityBlock: string, streetBlock: string): void {
-    let ok = false;
     // This vars will get correct name of city and street
     let city: string;
     let street: string;
@@ -317,13 +295,7 @@ export class BookComponent implements OnInit {
         customerId: this.customerId
       };
 
-      for (const item in data) {
-        if (item === null || item === '') {
-          ok = false;
-        } else {
-          ok = true;
-        }
-      }
+      const ok = !Object.values(data).every(o => o === null && o === '');
 
       if (ok) {
         // Save the data
@@ -390,7 +362,8 @@ export class BookComponent implements OnInit {
   }
 
   onKey2(event: any): void {
-    if (event.target.value === '') {
+    const ok = !Object.values(this.street).every(o => o === null && o === '');
+    if (event.target.value === '' && ok) {
       this.service.streets(this.street).subscribe(response => {
         if (response.status === 200) {
           this.streetList = response.body.filter((item: any) => item.district_code === this.street.districtCode);
@@ -416,7 +389,6 @@ export class BookComponent implements OnInit {
   }
 
   showCustomerAddress(data: any): void {
-    let ok = false;
     this.selectedCustomerAddress = data;
     const currentCityCode = this.selectedCustomerAddress[0].cityId;
     // Find city by the id
@@ -429,13 +401,7 @@ export class BookComponent implements OnInit {
         regionCode: cityInfo.region_code
       };
 
-      for (const item in this.street) {
-        if (item === null || item === '') {
-          ok = false;
-        } else {
-          ok = true;
-        }
-      }
+      const ok = !Object.values(this.street).every(o => o === null && o === '');
 
       if (ok) {
         // Get streets
@@ -466,7 +432,6 @@ export class BookComponent implements OnInit {
   }
 
   editCustomer(): void {
-    let ok = false;
     // Received data
     const data = {
       customerName: this.newContragent.value.name as string,
@@ -474,13 +439,7 @@ export class BookComponent implements OnInit {
       id: this.selectedCustomer[0].id
     };
 
-    for (const item in data) {
-      if (item === null || item === '') {
-        ok = false;
-      } else {
-        ok = true;
-      }
-    }
+    const ok = !Object.values(data).every(o => o === null && o === '');
 
     if (ok) {
       // POST to backend
@@ -496,7 +455,6 @@ export class BookComponent implements OnInit {
   }
 
   editNewAddress(): void {
-    let ok = false;
     // This vars will get correct name of city and street
     let city: string;
     let street: string;
@@ -527,13 +485,7 @@ export class BookComponent implements OnInit {
         id: this.selectedCustomerAddress[0].id
       };
 
-      for (const item in data) {
-        if (item === null || item === '') {
-          ok = false;
-        } else {
-          ok = true;
-        }
-      }
+      const ok = !Object.values(data).every(o => o === null && o === '');
 
       if (ok) {
         // Save the data
@@ -563,7 +515,6 @@ export class BookComponent implements OnInit {
   }
 
   editContact(): void {
-    let ok = false;
     // Read fields from popup
     const data = {
       customerAddressId: this.customerAddressId,
@@ -575,13 +526,8 @@ export class BookComponent implements OnInit {
       phone2: this.newContact.value.tel2 as string,
       position: this.newContact.value.position as string
     };
-    for (const item in data) {
-      if (item === null || item === '') {
-        ok = false;
-      } else {
-        ok = true;
-      }
-    }
+
+    const ok = !Object.values(data).every(o => o === null && o === '');
 
     if (ok) {
       // Post to backend
