@@ -86,7 +86,7 @@
         </mat-form-field>
         <h2 class="grey-header">Адрес получателя груза:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="receiverAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, 'sender')">
+          <mat-select formControlName="receiverAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, 'recipient')">
             <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey5($event)">
             <mat-option *ngFor="let address of receiverAddresses" [value]="address.id" class="example-item">
               {{address.name}}
