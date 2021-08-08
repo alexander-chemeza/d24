@@ -121,49 +121,55 @@ export class ProfileComponent implements OnInit {
         if (response.status === 200) {
           this.senderAgents = response.body;
           this.receiverAgents = response.body;
-          console.log('sender agents', this.senderAgents);
-          console.log('receiver agents', this.receiverAgents);
-          this.service.getAllUserCustomerAddress(this.user.senderCustomer.id).subscribe(addresses => {
-            if (addresses.status === 200) {
-              for (const address of addresses.body) {
-                this.senderAddresses.push({
-                  id: address.id,
-                  name: `${address.cityName}, ${address.streetName}`
-                });
-              }
-              this.service.getAllUserCustomerContact(this.user.senderAddress.id).subscribe(contacts => {
-                if (contacts.status === 200) {
-                  for (const contact of contacts.body) {
-                    this.senderContacts.push({
-                      id: contact.id,
-                      name: contact.name
-                    });
-                  }
+          if (this.user.senderCustomer.id !== null && this.user.senderCustomer.id !== '') {
+            this.service.getAllUserCustomerAddress(this.user.senderCustomer.id).subscribe(addresses => {
+              if (addresses.status === 200) {
+                for (const address of addresses.body) {
+                  this.senderAddresses.push({
+                    id: address.id,
+                    name: `${address.cityName}, ${address.streetName}`
+                  });
                 }
-              });
-            }
-          });
+                if (this.user.senderAddress.id !== null && this.user.senderAddress.id !== '') {
+                  this.service.getAllUserCustomerContact(this.user.senderAddress.id).subscribe(contacts => {
+                    if (contacts.status === 200) {
+                      for (const contact of contacts.body) {
+                        this.senderContacts.push({
+                          id: contact.id,
+                          name: contact.name
+                        });
+                      }
+                    }
+                  });
+                }
+              }
+            });
+          }
 
-          this.service.getAllUserCustomerAddress(this.user.recipientCustomer.id).subscribe(addresses => {
-            if (addresses.status === 200) {
-              for (const address of addresses.body) {
-                this.receiverAddresses.push({
-                  id: address.id,
-                  name: `${address.cityName}, ${address.streetName}`
-                });
-              }
-              this.service.getAllUserCustomerContact(this.user.recipientAddress.id).subscribe(contacts => {
-                if (contacts.status === 200) {
-                  for (const contact of contacts.body) {
-                    this.receiverContacts.push({
-                      id: contact.id,
-                      name: contact.name
-                    });
-                  }
+          if (this.user.recipientCustomer.id !== null && this.user.recipientCustomer.id !== '') {
+            this.service.getAllUserCustomerAddress(this.user.recipientCustomer.id).subscribe(addresses => {
+              if (addresses.status === 200) {
+                for (const address of addresses.body) {
+                  this.receiverAddresses.push({
+                    id: address.id,
+                    name: `${address.cityName}, ${address.streetName}`
+                  });
                 }
-              });
-            }
-          });
+                if (this.user.recipientAddress.id !== null && this.user.recipientAddress.id !== '') {
+                  this.service.getAllUserCustomerContact(this.user.recipientAddress.id).subscribe(contacts => {
+                    if (contacts.status === 200) {
+                      for (const contact of contacts.body) {
+                        this.receiverContacts.push({
+                          id: contact.id,
+                          name: contact.name
+                        });
+                      }
+                    }
+                  });
+                }
+              }
+            });
+          }
 
           setTimeout(() => {
             this.loading = false;
@@ -201,82 +207,66 @@ export class ProfileComponent implements OnInit {
     localStorage.setItem('defaultRecipient', JSON.stringify(this.defaultRecipient));
   }
 
-  selectAgent($event: any, agentId: any, addresses: any, contacts: any): void {
-    addresses.pop();
-    contacts.pop();
-    if (agentId) {
-      addresses.pop();
-      contacts.pop();
-      this.service.getAllUserCustomerAddress(agentId).subscribe(response => {
-        if (response.status === 200 && addresses.length === 0) {
-          for (const address of response.body) {
-            addresses.push({
-              id: address.id,
-              name: `${address.cityName}, ${address.streetName}`
-            });
-          }
-        }
-      });
-    }
-  }
-
-  selectAddress($event: any, addressId: any, contacts: any): void {
-    contacts.pop();
-    if (addressId) {
-      console.log('addressID', addressId);
-      if (contacts) {
-        contacts.pop();
-      }
-      this.service.getAllUserCustomerContact(addressId).subscribe(response => {
-        if (response.status === 200) {
-          for (const contact of response.body) {
-            contacts.push({
-              id: contact.id,
-              name: contact.name
-            });
-          }
-        }
-      });
-    }
-  }
-
-  updateSender($event: any): void {
-    // Получаю заготовку отправляемого объекта
-    const userInfo: any = sessionStorage.getItem('currentUser');
-    let user: any;
-    if (userInfo) {
-      user = JSON.parse(userInfo);
-    }
-
-    user.senderCustomer = this.senderAgents.filter((item: any) => item.id === this.profileForm.value.sender)[0];
-
-    // Получаю адресс
-    let address;
-    this.service.getAllUserCustomerAddress(this.profileForm.value.sender).subscribe(response => {
-      if (response.status === 200) {
-        // Фильтруюю до конкретного адреса
-        address = response.body.filter((item: any) => item.id === this.profileForm.value.address);
-        // Присваиваю значения полей
-        user.senderAddress = address[0];
-        console.log('Address ID', address[0].id);
-        this.service.getAllUserCustomerContact(address[0].id).subscribe(resp => {
-          if (resp.status === 200) {
-            user.senderCustomerContact = resp.body.filter((item: any) => item.id === this.profileForm.value.address)[0];
-            // Ввожу изменения в сессии
-            sessionStorage.setItem('currentUser', JSON.stringify(user));
-            // Убираю пароль чтоб не запороть пользователя
-            delete user.password;
-            // Меняю данные на сервере
-            this.service.updateUser(user).subscribe(r => {
-              if (r.status === 200) {
-                console.log('OK sender updated');
-                console.log('Updating data', user);
-              }
+  selectAgent($event: any, type: string): void {
+    if (type === 'sender') {
+      const agentId = this.profileForm.value.sender;
+      if (agentId !== null && agentId !== '') {
+        this.senderAddresses = [];
+        this.senderContacts = [];
+        this.service.getAllUserCustomerAddress(agentId).subscribe(response => {
+          for (const item of response.body) {
+            this.senderAddresses.push({
+              id: item.id,
+              name: `${item.cityName}, ${item.streetName}`
             });
           }
         });
       }
-    });
+    } else if (type === 'recipient') {
+      const agentId = this.profileForm.value.receiver;
+      if (agentId !== null && agentId !== '') {
+        this.receiverAddresses = [];
+        this.receiverContacts = [];
+        this.service.getAllUserCustomerAddress(agentId).subscribe(response => {
+          for (const item of response.body) {
+            this.receiverAddresses.push({
+              id: item.id,
+              name: `${item.cityName}, ${item.streetName}`
+            });
+          }
+        });
+      }
+    }
+  }
+
+  selectAddress($event: any, type: string): void {
+    if (type === 'sender') {
+      const addressId = this.profileForm.value.senderAddress;
+      if (addressId) {
+        this.senderContacts = [];
+        this.service.getAllUserCustomerContact(addressId).subscribe(response => {
+          for (const item of response.body) {
+            this.senderContacts.push({
+              id: item.id,
+              name: item.name
+            });
+          }
+        });
+      }
+    } else if (type === 'recipient') {
+      const addressId = this.profileForm.value.receiverAddress;
+      if (addressId) {
+        this.receiverContacts = [];
+        this.service.getAllUserCustomerContact(addressId).subscribe(response => {
+          for (const item of response.body) {
+            this.receiverContacts.push({
+              id: item.id,
+              name: item.name
+            });
+          }
+        });
+      }
+    }
   }
 
   onKey(event: any): void {
@@ -429,14 +419,6 @@ export class ProfileComponent implements OnInit {
         });
       }
     });
-  }
-
-  clearFields(event: any): void {
-    this.profileForm.patchValue({
-      receiver: ''
-    });
-    this.receiverAddresses = [];
-    this.receiverContacts = [];
   }
 
   showModal(id: string): void {

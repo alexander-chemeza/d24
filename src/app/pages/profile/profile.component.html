@@ -26,7 +26,7 @@
         </div>
         <h2 class="grey-header">Отправитель:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="sender" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, profileForm.value.sender, senderAddresses, senderContacts)">
+          <mat-select formControlName="sender" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, 'sender')">
             <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey($event)">
             <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
               <mat-option *cdkVirtualFor="let agent of senderAgents" [value]="agent.id" class="example-item">
@@ -37,7 +37,7 @@
         </mat-form-field>
         <h2 class="grey-header">Адрес выдачи груза:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="senderAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, profileForm.value.senderAddress, senderContacts)">
+          <mat-select formControlName="senderAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, 'sender')">
             <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey2($event)">
             <mat-option *ngFor="let address of senderAddresses" [value]="address.id" class="example-item">
               {{address.name}}
@@ -75,7 +75,7 @@
 <!--        <button (click)="clearFields($event)" class="btn close-btn red-btn small-btn" style="position: absolute; top: 15px; right: 20px"></button>-->
         <h2 class="grey-header">Получатель:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="receiver" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, profileForm.value.receiver, receiverAddresses, receiverContacts)">
+          <mat-select formControlName="receiver" (keyup)="$event.stopPropagation()" (selectionChange)="selectAgent($event, 'recipient')">
             <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey4($event)">
             <cdk-virtual-scroll-viewport *ngIf="receiverAgents" [itemSize]="42" class="example-viewport">
               <mat-option *cdkVirtualFor="let agent of receiverAgents" [value]="agent.id" class="example-item">
@@ -86,7 +86,7 @@
         </mat-form-field>
         <h2 class="grey-header">Адрес получателя груза:</h2>
         <mat-form-field floatLabel="never">
-          <mat-select formControlName="receiverAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, profileForm.value.receiverAddress, receiverContacts)">
+          <mat-select formControlName="receiverAddress" (keyup)="$event.stopPropagation()" (selectionChange)="selectAddress($event, 'sender')">
             <input type="text" placeholder="Поиск" (keydown)="$event.stopPropagation()" (input)="onKey5($event)">
             <mat-option *ngFor="let address of receiverAddresses" [value]="address.id" class="example-item">
               {{address.name}}
