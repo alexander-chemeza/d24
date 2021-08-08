@@ -415,6 +415,10 @@ export class ProfileComponent implements OnInit {
                     this.service.updateUser(this.user).subscribe(update => {
                       if (update.status === 200) {
                         sessionStorage.setItem('currentUser', JSON.stringify(this.user));
+                        this.showModal('user-updated');
+                        setTimeout(() => {
+                          this.hideModal('user-updated');
+                        }, 3000);
                       }
                     });
                   }
@@ -433,5 +437,17 @@ export class ProfileComponent implements OnInit {
     });
     this.receiverAddresses = [];
     this.receiverContacts = [];
+  }
+
+  showModal(id: string): void {
+    const modal: any = document.getElementById(id);
+    modal.classList.remove('hide-modal');
+    modal.classList.add('show-modal');
+  }
+
+  hideModal(id: string): void {
+    const modal: any = document.getElementById(id);
+    modal.classList.add('hide-modal');
+    modal.classList.remove('show-modal');
   }
 }
