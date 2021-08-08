@@ -10,6 +10,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
   incorrect = false;
+  noUser = false;
   loginForm: any;
 
   constructor(private service: RestapiService, private router: Router) {
@@ -31,27 +32,6 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['home']);
     } else {
       this.router.navigate(['login']);
-    }
-  }
-
-  doLogin(event: any): void {
-    event.preventDefault();
-    event.stopPropagation();
-    this.service.login(this.loginForm.value.userName as string, this.loginForm.value.password as string)
-      .subscribe(data => {
-        sessionStorage.setItem('currentUser', JSON.stringify(data));
-        this.router.navigate(['home']);
-      }, error => {
-        if (error.status === 401) {
-          console.log('401');
-          this.incorrect = true;
-        }
-      });
-    if (!localStorage.getItem('defaultSender')) {
-      localStorage.setItem('defaultSender', JSON.stringify(false));
-    }
-    if (!localStorage.getItem('defaultRecipient')) {
-      localStorage.setItem('defaultRecipient', JSON.stringify(false));
     }
   }
 
@@ -79,4 +59,31 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  doLogin(event: any): void {
+    event.preventDefault();
+    event.stopPropagation();
+    if (this.loginForm.value.userName !== null &&
+        this.loginForm.value.userName !== '' &&
+        this.loginForm.value.password !== null &&
+        this.loginForm.value.password !== '') {
+      this.incorrect = false;
+      this.noUser = false;
+      this.service.login(this.loginForm.value.userName, this.loginForm.value.password)
+        .subscribe(data => {
+          sessionStorage.setItem('currentUser', JSON.stringify(data));
+          if (!localStorage.getItem('defaultSender')) {
+            localStorage.setItem('defaultSender', JSON.stringify(false));
+          }
+          if (!localStorage.getItem('defaultRecipient')) {
+            localStorage.setItem('defaultRecipient', JSON.stringify(false));
+          }
+          this.router.navigate(['home']);
+        }, error => {
+          console.error(error);
+          this.noUser = true;
+      });
+    } else {
+      this.incorrect = true;
+    }
+  }
 }
