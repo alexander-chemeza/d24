@@ -187,11 +187,14 @@ export class JournalComponent implements OnInit, OnChanges {
               delivery_size_z: itemToCopy.delivery_size_z,
               amount_packages: itemToCopy.amount_packages,
             };
-            this.service.placeNewOrder(data).subscribe(response => {
-              if (response.status === 200) {
-                this.getTable();
-              }
-            })
+            const ok = !Object.values(data).every(o => o === null && o === '');
+            if (ok) {
+              this.service.placeNewOrder(data).subscribe(response => {
+                if (response.status === 200) {
+                  this.getTable();
+                }
+              });
+            }
           }
         }
       },
@@ -614,12 +617,14 @@ export class JournalComponent implements OnInit, OnChanges {
 
   delete(): void {
     const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
-    this.service.cancelOrder(id).subscribe(response => {
-      if (response.status === 200) {
-        this.getTable();
-        this.hideModal('ask-if-delete');
-      }
-    });
+    if (id) {
+      this.service.cancelOrder(id).subscribe(response => {
+        if (response.status === 200) {
+          this.getTable();
+          this.hideModal('ask-if-delete');
+        }
+      });
+    }
   }
 }
 
