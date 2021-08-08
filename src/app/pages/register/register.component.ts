@@ -193,7 +193,6 @@ export class RegisterComponent implements OnInit {
   }
 
   doRegistration(): void {
-    let ok = false;
     let data: UserRegistration = {} as any;
     const passwordRepeat: string = this.entityUserWithAgreementForm.value.passwordRepeat;
     const items: any = document.getElementsByClassName('entity-with-agreement-control');
@@ -210,13 +209,7 @@ export class RegisterComponent implements OnInit {
         userType: 'Юр.лицо'
       };
 
-      for (const item in data) {
-        if(item !== null && item !== '') {
-          ok = true;
-        } else {
-          ok = false;
-        }
-      }
+      const ok = !Object.values(data).every(o => o === null && o === '');
 
       this.passwordEquality = data.password !== passwordRepeat;
 
