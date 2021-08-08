@@ -750,10 +750,10 @@ export class OrderComponent implements OnChanges, OnInit {
       if (this.user && !this.dataFromJournal) {
         preloadData = {
           counterValue: 1,
-          expressSenderTimeoutFromValue: '00:00',
-          expressSenderTimeoutToValue: '00:00',
-          expressRecipientTimeoutFromValue: '00:00',
-          expressRecipientTimeoutToValue: '00:00',
+          expressSenderTimeoutFromValue: '06:00',
+          expressSenderTimeoutToValue: '06:00',
+          expressRecipientTimeoutFromValue: '06:00',
+          expressRecipientTimeoutToValue: '06:00',
           deliveryType: this.deliveryTypes[0].id,
           expressSenderCustomerId: this.user.senderCustomer.id,
           expressSenderAddressId: this.user.senderAddress.id,
