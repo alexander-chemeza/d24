@@ -229,7 +229,7 @@ export class BookComponent implements OnInit {
         if (response.status === 200) {
           this.hideModal('new-contragent', this.newContragent);
           this.newContragent.reset();
-          this.contragents.ngOnChanges();
+          this.contragents.getTable();
           // window.location.reload();
         }
       });

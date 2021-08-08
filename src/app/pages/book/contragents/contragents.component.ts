@@ -42,7 +42,7 @@ export class ContragentsComponent implements OnInit, OnChanges {
             console.log(id);
             this.service.deleteUserCustomer(id).subscribe(response => {
               if (response.status === 200) {
-                this.ngOnChanges();
+                this.getTable();
               }
             });
           } else if (target === 'edit') {
