@@ -38,7 +38,7 @@
         <div class="grey-box row-controls">
           <div class="row-item-1 pr-30">
             <label for="ur-with-company">Компания</label>
-            <input type="text" name="ur-with-company"
+            <input class="entity-with-agreement-control" type="text" name="ur-with-company"
                    id="ur-with-company"
                    placeholder="Введите название компании"
                    formControlName="companyName">
@@ -55,7 +55,7 @@
           </div>
           <div class="row-item-2 pl-30">
             <label for="ur-with-unp">УНП компании</label>
-            <input type="text" name="ur-with-unp"
+            <input class="entity-with-agreement-control" type="text" name="ur-with-unp"
                    id="ur-with-unp"
                    placeholder="Введите УНП"
                    formControlName="unp">
@@ -75,7 +75,7 @@
         <div class="column-controls">
           <div class="grey-box item-1">
             <label for="ur-with-name">Имя</label>
-            <input type="text" name="ur-with-name"
+            <input class="entity-with-agreement-control" type="text" name="ur-with-name"
                    id="ur-with-name"
                    placeholder="Введите имя"
                    formControlName="userName">
@@ -90,7 +90,7 @@
                entityUserWithAgreementForm.get('userName').dirty"
             >Мнимальная длина 4 символа</p>
             <label for="ur-with-email">Email</label>
-            <input type="email" name="ur-with-email"
+            <input class="entity-with-agreement-control" type="email" name="ur-with-email"
                    id="ur-with-email"
                    placeholder="Введите email"
                    formControlName="email">
@@ -105,7 +105,7 @@
                entityUserWithAgreementForm.get('email').dirty"
             >Введите корректный email</p>
             <label for="ur-with-phone">Телефон</label>
-            <input type="tel" name="ur-with-phone"
+            <input class="entity-with-agreement-control" type="tel" name="ur-with-phone"
                    id="ur-with-phone"
                    placeholder="Введите телефон"
                    formControlName="phone"
@@ -124,7 +124,7 @@
           </div>
           <div class="grey-box item-2">
             <label for="ur-with-login">Логин</label>
-            <input type="text" name="ur-with-login"
+            <input class="entity-with-agreement-control" type="text" name="ur-with-login"
                    id="ur-with-login"
                    placeholder="Введите логин"
                    formControlName="login">
@@ -139,7 +139,7 @@
                entityUserWithAgreementForm.get('login').dirty"
             >Кириллица не допускается</p>
             <label for="ur-with-password">Пароль</label>
-            <input type="password" name="ur-with-password"
+            <input class="entity-with-agreement-control" type="password" name="ur-with-password"
                    id="ur-with-password"
                    placeholder="Введите пароль"
                    formControlName="password">
@@ -149,7 +149,7 @@
                entityUserWithAgreementForm.get('password').pristine"
             >Данное поле обязательно</p>
             <label for="ur-with-password-repeat">Пароль (подтвердить)</label>
-            <input type="password" name="ur-with-password-repeat"
+            <input class="entity-with-agreement-control" type="password" name="ur-with-password-repeat"
                    id="ur-with-password-repeat"
                    placeholder="Повторите пароль"
                    formControlName="passwordRepeat">
@@ -165,7 +165,7 @@
         </div>
 <!--        Register row-->
         <div class="row-submit">
-          <input type="submit" value="Регистрация" [disabled]="entityUserWithAgreementForm.invalid">
+          <input type="submit" value="Регистрация">
         </div>
       </form>
 
@@ -207,7 +207,7 @@
         </div>
         <!--        Register row-->
         <div class="row-submit">
-          <input type="submit" value="Регистрация" [disabled]="individualUserWithAgreementForm.invalid">
+          <input type="submit" value="Регистрация">
         </div>
       </form>
     </div>
@@ -280,7 +280,7 @@
           </div>
         </div>
         <div class="submit-row">
-          <input type="submit" value="Регистрация" [disabled]="entityUserWithoutAgreementForm.invalid">
+          <input type="submit" value="Регистрация">
         </div>
       </form>
 
@@ -343,7 +343,7 @@
           </div>
         </div>
         <div class="submit-row">
-          <input type="submit" value="Регистрация" [disabled]="individualUserWithoutAgreementForm.invalid">
+          <input type="submit" value="Регистрация">
         </div>
       </form>
     </div>

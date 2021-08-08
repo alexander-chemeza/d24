@@ -196,6 +196,7 @@ export class RegisterComponent implements OnInit {
     let ok = false;
     let data: UserRegistration = {} as any;
     const passwordRepeat: string = this.entityUserWithAgreementForm.value.passwordRepeat;
+    const items: any = document.getElementsByClassName('entity-with-agreement-control');
     console.log('Password repeat', passwordRepeat);
     if (!this.agreement && !this.personWithAgreement) {
       data = {
@@ -228,6 +229,9 @@ export class RegisterComponent implements OnInit {
                   .subscribe(r => {
                     if (r.status === 200) {
                       if (r.body === 0) {
+                        for (const item of items) {
+                          item.classList.remove('alert-input');
+                        }
                         this.showModal('user-updated');
                         setTimeout(() => {
                           this.hideModal('user-updated');
@@ -246,6 +250,12 @@ export class RegisterComponent implements OnInit {
               }
             }
           });
+        }
+      } else {
+        for (const item of items) {
+          if (item.value === '') {
+            item.classList.add('alert-input');
+          }
         }
       }
     } else if (this.agreement && !this.personWithoutAgreement) {
