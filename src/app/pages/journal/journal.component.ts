@@ -127,11 +127,7 @@ export class JournalComponent implements OnInit, OnChanges {
           } else if (target === 'edit') {
             const id = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
             const journalItem = this.storedTableResponse.find((item: any) => item.id === id);
-            if (journalItem.status === 'Черновик') {
-              this.router.navigate(['order'], {queryParams: {data: JSON.stringify(journalItem)}});
-            } else {
-              alert('Редактирование заказов доступно только для статуса "Черновик".');
-            }
+            this.router.navigate(['order'], {queryParams: {data: JSON.stringify(journalItem)}});
           } else if (target === 'show') {
 
           } else if (target === 'copy') {
