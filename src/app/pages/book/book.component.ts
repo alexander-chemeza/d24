@@ -165,6 +165,7 @@ export class BookComponent implements OnInit {
     const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
     // Check and build data
     if (cityInfo) {
+      let ok = false;
       // The request object
       this.street = {
         cityCode: cityInfo.city_code,
@@ -172,12 +173,23 @@ export class BookComponent implements OnInit {
         districtCode: cityInfo.district_code,
         localityCode: cityInfo.locality_code
       };
-      // Get streets
-      this.service.streets(this.street).subscribe(response => {
-        if (response.status === 200) {
-          this.streetList = response.body;
+
+      for (const item in this.street) {
+        if (item === null || item === '') {
+          ok = false;
+        } else {
+          ok = true;
         }
-      });
+      }
+
+      if (ok) {
+        // Get streets
+        this.service.streets(this.street).subscribe(response => {
+          if (response.status === 200) {
+            this.streetList = response.body;
+          }
+        });
+      }
     }
   }
 
@@ -210,23 +222,36 @@ export class BookComponent implements OnInit {
   }
   // New contragent button event
   createNewContragent(): void {
+    let ok = false;
     // Received data
     const data = {
       customerName: this.newContragent.value.name as string,
       customerType: this.newContragent.value.type as string
     };
-    // POST to backend
-    this.service.saveUserCustomer(data).subscribe(response => {
-      if (response.status === 200) {
-        this.hideModal('new-contragent', this.newContragent);
-        this.newContragent.reset();
-        this.contragents.ngOnChanges();
-        // window.location.reload();
+
+    for (const item in data) {
+      if (item === null || item === '') {
+        ok = false;
+      } else {
+        ok = true;
       }
-    });
+    }
+
+    if (ok) {
+      // POST to backend
+      this.service.saveUserCustomer(data).subscribe(response => {
+        if (response.status === 200) {
+          this.hideModal('new-contragent', this.newContragent);
+          this.newContragent.reset();
+          this.contragents.ngOnChanges();
+          // window.location.reload();
+        }
+      });
+    }
   }
   // New contact button event
   createNewContact(): void {
+    let ok = false;
     // Read fields from popup
     const data = {
       customerAddressId: this.customerAddressId,
@@ -237,18 +262,30 @@ export class BookComponent implements OnInit {
       phone2: this.newContact.value.tel2 as string,
       position: this.newContact.value.position as string
     };
-    // Post to backend
-    this.service.saveUserCustomerContact(data).subscribe(response => {
-      if (response.status === 200) {
-        this.hideModal('new-contact', this.newContact);
-        this.newContact.reset();
-        // window.location.reload();
-        this.contactslist.ngOnChanges();
+
+    for (const item in data) {
+      if (item === null || item === '') {
+        ok = false;
+      } else {
+        ok = true;
       }
-    });
+    }
+
+   if (ok) {
+     // Post to backend
+     this.service.saveUserCustomerContact(data).subscribe(response => {
+       if (response.status === 200) {
+         this.hideModal('new-contact', this.newContact);
+         this.newContact.reset();
+         // window.location.reload();
+         this.contactslist.ngOnChanges();
+       }
+     });
+   }
   }
   // New address button event
   createNewAddress(cityBlock: string, streetBlock: string): void {
+    let ok = false;
     // This vars will get correct name of city and street
     let city: string;
     let street: string;
@@ -279,22 +316,34 @@ export class BookComponent implements OnInit {
         timeTo: this.newAddress.value.deliveryTo as string,
         customerId: this.customerId
       };
-      // Save the data
-      this.service.saveUserCustomerAddress(data).subscribe(response => {
-        if (response.status === 200) {
-          this.hideModal('new-address', this.newAddress);
-          this.newAddress.reset();
-          const cityInput: any = document.getElementById(cityBlock);
-          const streetInput: any = document.getElementById(streetBlock);
-          if (cityInput && streetInput) {
-            cityInput.value = '';
-            streetInput.value = '';
-          }
 
-          // window.location.reload();
-          this.addresslist.ngOnChanges();
+      for (const item in data) {
+        if (item === null || item === '') {
+          ok = false;
+        } else {
+          ok = true;
         }
-      });
+      }
+
+      if (ok) {
+        // Save the data
+        this.service.saveUserCustomerAddress(data).subscribe(response => {
+          if (response.status === 200) {
+            this.hideModal('new-address', this.newAddress);
+            this.newAddress.reset();
+            const cityInput: any = document.getElementById(cityBlock);
+            const streetInput: any = document.getElementById(streetBlock);
+            if (cityInput && streetInput) {
+              cityInput.value = '';
+              streetInput.value = '';
+            }
+
+            // window.location.reload();
+            this.addresslist.ngOnChanges();
+          }
+        });
+      }
+
     }
   }
   // Get customerID
@@ -367,6 +416,7 @@ export class BookComponent implements OnInit {
   }
 
   showCustomerAddress(data: any): void {
+    let ok = false;
     this.selectedCustomerAddress = data;
     const currentCityCode = this.selectedCustomerAddress[0].cityId;
     // Find city by the id
@@ -378,51 +428,75 @@ export class BookComponent implements OnInit {
         cityCode: cityInfo.city_code,
         regionCode: cityInfo.region_code
       };
-      // Get streets
-      this.service.streets(this.street).subscribe(resp => {
-        if (resp.status === 200) {
-          this.streetList = resp.body;
-          const patch = {
-            type: this.selectedCustomerAddress[0].mainAddress,
-            place: this.selectedCustomerAddress[0].cityId,
-            street: this.selectedCustomerAddress[0].streetId,
-            building: this.selectedCustomerAddress[0].house,
-            corpus: this.selectedCustomerAddress[0].housing,
-            house: this.selectedCustomerAddress[0].building,
-            office: this.selectedCustomerAddress[0].office,
-            apartment: this.selectedCustomerAddress[0].room,
-            deliveryFrom: this.selectedCustomerAddress[0].timeFrom,
-            deliveryTo: this.selectedCustomerAddress[0].timeTo,
-            timeoutFrom: this.selectedCustomerAddress[0].pauseFrom,
-            timeoutTo: this.selectedCustomerAddress[0].pauseTo,
-            description: this.selectedCustomerAddress[0].description
-          };
-          this.newAddress.patchValue(patch);
-          this.showModal('edit-address');
+
+      for (const item in this.street) {
+        if (item === null || item === '') {
+          ok = false;
+        } else {
+          ok = true;
         }
-      });
+      }
+
+      if (ok) {
+        // Get streets
+        this.service.streets(this.street).subscribe(resp => {
+          if (resp.status === 200) {
+            this.streetList = resp.body;
+            const patch = {
+              type: this.selectedCustomerAddress[0].mainAddress,
+              place: this.selectedCustomerAddress[0].cityId,
+              street: this.selectedCustomerAddress[0].streetId,
+              building: this.selectedCustomerAddress[0].house,
+              corpus: this.selectedCustomerAddress[0].housing,
+              house: this.selectedCustomerAddress[0].building,
+              office: this.selectedCustomerAddress[0].office,
+              apartment: this.selectedCustomerAddress[0].room,
+              deliveryFrom: this.selectedCustomerAddress[0].timeFrom,
+              deliveryTo: this.selectedCustomerAddress[0].timeTo,
+              timeoutFrom: this.selectedCustomerAddress[0].pauseFrom,
+              timeoutTo: this.selectedCustomerAddress[0].pauseTo,
+              description: this.selectedCustomerAddress[0].description
+            };
+            this.newAddress.patchValue(patch);
+            this.showModal('edit-address');
+          }
+        });
+      }
     }
   }
 
   editCustomer(): void {
+    let ok = false;
     // Received data
     const data = {
       customerName: this.newContragent.value.name as string,
       customerType: this.newContragent.value.type as string,
       id: this.selectedCustomer[0].id
     };
-    // POST to backend
-    this.service.saveUserCustomer(data).subscribe(response => {
-      if (response.status === 200) {
-        this.hideModal('edit-contragent', this.newContragent);
-        this.newContragent.reset();
-        this.contragents.ngOnChanges();
-        // window.location.reload();
+
+    for (const item in data) {
+      if (item === null || item === '') {
+        ok = false;
+      } else {
+        ok = true;
       }
-    });
+    }
+
+    if (ok) {
+      // POST to backend
+      this.service.saveUserCustomer(data).subscribe(response => {
+        if (response.status === 200) {
+          this.hideModal('edit-contragent', this.newContragent);
+          this.newContragent.reset();
+          this.contragents.ngOnChanges();
+          // window.location.reload();
+        }
+      });
+    }
   }
 
   editNewAddress(): void {
+    let ok = false;
     // This vars will get correct name of city and street
     let city: string;
     let street: string;
@@ -452,15 +526,26 @@ export class BookComponent implements OnInit {
         customerId: this.customerId,
         id: this.selectedCustomerAddress[0].id
       };
-      // Save the data
-      this.service.saveUserCustomerAddress(data).subscribe(response => {
-        if (response.status === 200) {
-          this.hideModal('edit-address', this.newAddress);
-          this.newAddress.reset();
-          // window.location.reload();
-          this.addresslist.ngOnChanges();
+
+      for (const item in data) {
+        if (item === null || item === '') {
+          ok = false;
+        } else {
+          ok = true;
         }
-      });
+      }
+
+      if (ok) {
+        // Save the data
+        this.service.saveUserCustomerAddress(data).subscribe(response => {
+          if (response.status === 200) {
+            this.hideModal('edit-address', this.newAddress);
+            this.newAddress.reset();
+            // window.location.reload();
+            this.addresslist.ngOnChanges();
+          }
+        });
+      }
     }
   }
 
@@ -478,6 +563,7 @@ export class BookComponent implements OnInit {
   }
 
   editContact(): void {
+    let ok = false;
     // Read fields from popup
     const data = {
       customerAddressId: this.customerAddressId,
@@ -489,13 +575,23 @@ export class BookComponent implements OnInit {
       phone2: this.newContact.value.tel2 as string,
       position: this.newContact.value.position as string
     };
-    // Post to backend
-    this.service.saveUserCustomerContact(data).subscribe(response => {
-      if (response.status === 200) {
-        this.hideModal('edit-contact', this.newContact);
-        this.contactslist.ngOnChanges();
+    for (const item in data) {
+      if (item === null || item === '') {
+        ok = false;
+      } else {
+        ok = true;
       }
-    });
+    }
+
+    if (ok) {
+      // Post to backend
+      this.service.saveUserCustomerContact(data).subscribe(response => {
+        if (response.status === 200) {
+          this.hideModal('edit-contact', this.newContact);
+          this.contactslist.ngOnChanges();
+        }
+      });
+    }
   }
 
   cityShow(city: any): any {
