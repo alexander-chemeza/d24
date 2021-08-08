@@ -214,14 +214,12 @@ export class JournalComponent implements OnInit, OnChanges {
         field: 'number',
         sortable: true,
         flex: 1,
-        minWidth: 145
       },
       {
         headerName: 'Статус',
         field: 'status',
         sortable: true,
         flex: 1,
-        minWidth: 145
       },
       {
         headerName: 'Дата и время изменения статуса',
@@ -230,7 +228,6 @@ export class JournalComponent implements OnInit, OnChanges {
         sort: ['desc'],
         sortingOrder: ['asc', 'desc'],
         flex: 1,
-        minWidth: 300
       },
       // {
       //   headerName: 'Время изменения статуса',
@@ -245,56 +242,48 @@ export class JournalComponent implements OnInit, OnChanges {
         field: 'service',
         sortable: true,
         flex: 1,
-        minWidth: 230
       },
       {
         headerName: 'Тип доставки',
         field: 'delivery',
         sortable: true,
         flex: 1,
-        minWidth: 200
       },
       {
         headerName: 'ТТН',
         field: 'ttn',
         sortable: true,
         flex: 1,
-        minWidth: 200
       },
       {
         headerName: 'Отправитель',
         field: 'sender',
         sortable: true,
         flex: 1,
-        minWidth: 200
       },
       {
         headerName: 'Получатель',
         field: 'recipient',
         sortable: true,
         flex: 1,
-        minWidth: 200
       },
       {
         headerName: 'Тип грузового места',
         field: 'place',
         sortable: true,
         flex: 1,
-        minWidth: 200
       },
       {
         headerName: 'Количество',
         field: 'amount',
         sortable: true,
         flex: 1,
-        minWidth: 150
       },
       {
         headerName: 'Адрес выдачи груза',
         field: 'address1',
         sortable: true,
         flex: 1,
-        minWidth: 400,
         maxWidth: 700
       },
       {
@@ -304,28 +293,24 @@ export class JournalComponent implements OnInit, OnChanges {
         sort: ['desc'],
         sortingOrder: ['asc', 'desc'],
         flex: 1,
-        minWidth: 200
       },
       {
         headerName: 'Время выдачи груза с',
         field: 'time11',
         sortable: true,
         flex: 1,
-        minWidth: 200
       },
       {
         headerName: 'Время выдачи груза по',
         field: 'time12',
         sortable: true,
         flex: 1,
-        minWidth: 200
       },
       {
         headerName: 'Адрес доставки груза',
         field: 'address2',
         sortable: true,
         flex: 1,
-        minWidth: 400,
         maxWidth: 700
       },
       {
@@ -335,34 +320,29 @@ export class JournalComponent implements OnInit, OnChanges {
         sort: ['desc'],
         sortingOrder: ['asc', 'desc'],
         flex: 1,
-        minWidth: 200
       },
       {
         headerName: 'Время доставки груза с',
         field: 'time21',
         sortable: true,
         flex: 1,
-        minWidth: 200
       },
       {
         headerName: 'Время доставки груза по',
         field: 'time22',
         sortable: true,
         flex: 1,
-        minWidth: 200
       },
       {
         headerName: 'Автор документа',
         field: 'author',
         sortable: true,
         flex: 1,
-        minWidth: 200
       },
     ];
     this.rowData = [];
     this.defaultColDef = {
       flex: 1,
-      minWidth: 100,
       resizable: true,
       sortingOrder: ['desc', 'asc'],
       maxWidth: 500
