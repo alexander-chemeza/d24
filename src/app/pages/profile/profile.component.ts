@@ -280,16 +280,18 @@ export class ProfileComponent implements OnInit {
   onKey2(event: any): void {
     if (event.target.value === '' || this.senderAddresses.length === 0) {
       this.senderAddresses.pop();
-      this.service.getAllUserCustomerAddress(this.profileForm.value.sender).subscribe(response => {
-        if (response.status === 200) {
-          for (const address of response.body) {
-            this.senderAddresses.push({
-              id: address.id,
-              name: `${address.cityName}, ${address.streetName}`
-            });
+      if(this.profileForm.value.sender !== null && this.profileForm.value.sender !== '') {
+        this.service.getAllUserCustomerAddress(this.profileForm.value.sender).subscribe(response => {
+          if (response.status === 200) {
+            for (const address of response.body) {
+              this.senderAddresses.push({
+                id: address.id,
+                name: `${address.cityName}, ${address.streetName}`
+              });
+            }
           }
-        }
-      });
+        });
+      }
     } else {
       this.senderAddresses = this.senderAddresses.filter((option: any) => {
         return option.name.toLowerCase().includes(event.target.value.toLowerCase());
@@ -300,16 +302,18 @@ export class ProfileComponent implements OnInit {
   onKey3(event: any): void {
     if (event.target.value === '' || this.senderContacts.length === 0) {
       this.senderContacts.pop();
-      this.service.getAllUserCustomerContact(this.profileForm.value.senderAddress).subscribe(response => {
-        if (response.status === 200) {
-          for (const contact of response.body) {
-            this.senderContacts.push({
-              id: contact.id,
-              name: contact.name
-            });
+      if (this.profileForm.value.senderAddress !== null && this.profileForm.value.senderAddress !== '') {
+        this.service.getAllUserCustomerContact(this.profileForm.value.senderAddress).subscribe(response => {
+          if (response.status === 200) {
+            for (const contact of response.body) {
+              this.senderContacts.push({
+                id: contact.id,
+                name: contact.name
+              });
+            }
           }
-        }
-      });
+        });
+      }
     } else {
       this.senderContacts = this.senderContacts.filter((option: any) => {
         return option.name.toLowerCase().includes(event.target.value.toLowerCase());
@@ -328,16 +332,18 @@ export class ProfileComponent implements OnInit {
   onKey5(event: any): void {
     if (event.target.value === '' || this.receiverAddresses.length === 0) {
       this.receiverAddresses.pop();
-      this.service.getAllUserCustomerAddress(this.profileForm.value.receiver).subscribe(response => {
-        if (response.status === 200) {
-          for (const address of response.body) {
-            this.receiverAddresses.push({
-              id: address.id,
-              name: `${address.cityName}, ${address.streetName}`
-            });
+      if (this.profileForm.value.receiver !== null && this.profileForm.value.receiver) {
+        this.service.getAllUserCustomerAddress(this.profileForm.value.receiver).subscribe(response => {
+          if (response.status === 200) {
+            for (const address of response.body) {
+              this.receiverAddresses.push({
+                id: address.id,
+                name: `${address.cityName}, ${address.streetName}`
+              });
+            }
           }
-        }
-      });
+        });
+      }
     } else {
       this.receiverAddresses = this.receiverAddresses.filter((option: any) => {
         return option.name.toLowerCase().includes(event.target.value.toLowerCase());
@@ -348,16 +354,18 @@ export class ProfileComponent implements OnInit {
   onKey6(event: any): void {
     if (event.target.value === '' || this.receiverContacts.length === 0) {
       this.receiverContacts.pop();
-      this.service.getAllUserCustomerContact(this.profileForm.value.receiverAddress).subscribe(response => {
-        if (response.status === 200) {
-          for (const contact of response.body) {
-            this.receiverContacts.push({
-              id: contact.id,
-              name: contact.name
-            });
+      if (this.profileForm.value.receiverAddress !== null && this.profileForm.value.receiverAddress !== '') {
+        this.service.getAllUserCustomerContact(this.profileForm.value.receiverAddress).subscribe(response => {
+          if (response.status === 200) {
+            for (const contact of response.body) {
+              this.receiverContacts.push({
+                id: contact.id,
+                name: contact.name
+              });
+            }
           }
-        }
-      });
+        });
+      }
     } else {
       this.receiverContacts = this.receiverContacts.filter((option: any) => {
         return option.name.toLowerCase().includes(event.target.value.toLowerCase());
@@ -375,50 +383,53 @@ export class ProfileComponent implements OnInit {
     const currentSenderAgent = this.senderAgents.filter((item: any) => item.id === this.profileForm.value.sender);
     let currentSenderAddress: any;
     let currentSenderContact: any;
-    this.service.getAllUserCustomerAddress(currentSenderAgent[0].id).subscribe(response => {
-      if (response.status === 200) {
-        currentSenderAddress = response.body.filter((item: any) => item.id === this.profileForm.value.senderAddress);
-        this.service.getAllUserCustomerContact(currentSenderAddress[0].id).subscribe(r => {
-          if (response.status === 200) {
-            currentSenderContact = r.body.filter((item: any) => item.id === this.profileForm.value.senderContact);
-            if (currentSenderAddress && currentSenderContact) {
-              const currentReceiverAgent = this.receiverAgents.filter((item: any) => item.id === this.profileForm.value.receiver);
-              let currentReceiverAddress: any;
-              let currentReceiverContact: any;
-              this.service.getAllUserCustomerAddress(currentReceiverAgent[0].id).subscribe(newResponse => {
-                currentReceiverAddress = newResponse.body.filter((item: any) => item.id === this.profileForm.value.receiverAddress);
-                this.service.getAllUserCustomerContact(currentReceiverAddress[0].id).subscribe(newR => {
-                  if (newR.status === 200) {
-                    currentReceiverContact = newR.body.filter((item: any) => item.id === this.profileForm.value.receiverContact);
-                    this.user.senderCustomer = currentSenderAgent[0];
-                    this.user.senderAddress = currentSenderAddress[0];
-                    this.user.senderCustomerContact = currentSenderContact[0];
-                    this.user.recipientCustomer = currentReceiverAgent[0] || null;
-                    this.user.recipientAddress = currentReceiverAddress[0];
-                    this.user.recipientCustomerContact = currentReceiverContact[0];
-                    this.user.senderAddress.mainAddress = this.profileForm.value.senderMainAddress;
-                    this.user.recipientAddress.mainAddress = this.profileForm.value.receiverMainAddress;
-                    this.user.costNotification = this.profileForm.value.costNotification;
-                    this.user.smsNotification = this.profileForm.value.smsNotification;
-                    console.log('USER', this.user);
-                    // Update user info
-                    this.service.updateUser(this.user).subscribe(update => {
-                      if (update.status === 200) {
-                        sessionStorage.setItem('currentUser', JSON.stringify(this.user));
-                        this.showModal('user-updated');
-                        setTimeout(() => {
-                          this.hideModal('user-updated');
-                        }, 3000);
-                      }
-                    });
-                  }
+    const ok = !Object.values(currentSenderAgent).every(o => o === null && o === '');
+    if (ok) {
+      this.service.getAllUserCustomerAddress(currentSenderAgent[0].id).subscribe(response => {
+        if (response.status === 200) {
+          currentSenderAddress = response.body.filter((item: any) => item.id === this.profileForm.value.senderAddress);
+          this.service.getAllUserCustomerContact(currentSenderAddress[0].id).subscribe(r => {
+            if (response.status === 200) {
+              currentSenderContact = r.body.filter((item: any) => item.id === this.profileForm.value.senderContact);
+              if (currentSenderAddress && currentSenderContact) {
+                const currentReceiverAgent = this.receiverAgents.filter((item: any) => item.id === this.profileForm.value.receiver);
+                let currentReceiverAddress: any;
+                let currentReceiverContact: any;
+                this.service.getAllUserCustomerAddress(currentReceiverAgent[0].id).subscribe(newResponse => {
+                  currentReceiverAddress = newResponse.body.filter((item: any) => item.id === this.profileForm.value.receiverAddress);
+                  this.service.getAllUserCustomerContact(currentReceiverAddress[0].id).subscribe(newR => {
+                    if (newR.status === 200) {
+                      currentReceiverContact = newR.body.filter((item: any) => item.id === this.profileForm.value.receiverContact);
+                      this.user.senderCustomer = currentSenderAgent[0];
+                      this.user.senderAddress = currentSenderAddress[0];
+                      this.user.senderCustomerContact = currentSenderContact[0];
+                      this.user.recipientCustomer = currentReceiverAgent[0] || null;
+                      this.user.recipientAddress = currentReceiverAddress[0];
+                      this.user.recipientCustomerContact = currentReceiverContact[0];
+                      this.user.senderAddress.mainAddress = this.profileForm.value.senderMainAddress;
+                      this.user.recipientAddress.mainAddress = this.profileForm.value.receiverMainAddress;
+                      this.user.costNotification = this.profileForm.value.costNotification;
+                      this.user.smsNotification = this.profileForm.value.smsNotification;
+                      console.log('USER', this.user);
+                      // Update user info
+                      this.service.updateUser(this.user).subscribe(update => {
+                        if (update.status === 200) {
+                          sessionStorage.setItem('currentUser', JSON.stringify(this.user));
+                          this.showModal('user-updated');
+                          setTimeout(() => {
+                            this.hideModal('user-updated');
+                          }, 3000);
+                        }
+                      });
+                    }
+                  });
                 });
-              });
+              }
             }
-          }
-        });
-      }
-    });
+          });
+        }
+      });
+    }
   }
 
   showModal(id: string): void {
