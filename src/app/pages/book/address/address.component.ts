@@ -47,20 +47,24 @@ export class AddressComponent implements OnInit, OnChanges {
           if (target === 'delete') {
             const id = this.rowDataAddress[Number(this.gridApi.getFocusedCell().rowIndex)].id;
             console.log(id);
-            this.service.deleteUserCustomerAddress(id).subscribe(response => {
-              if (response.status === 200) {
-                this.ngOnChanges();
-              }
-            });
+            if (id) {
+              this.service.deleteUserCustomerAddress(id).subscribe(response => {
+                if (response.status === 200) {
+                  this.ngOnChanges();
+                }
+              });
+            }
           } else if (target === 'edit') {
             const id = this.rowDataAddress[Number(this.gridApi.getFocusedCell().rowIndex)].id;
             console.log('Address id', id);
-            this.service.getAllUserCustomerAddress(this.customerId).subscribe(response => {
-              if (response.status === 200) {
-                const selectedAgentAddress = response.body.filter((item: any) => item.id === id);
-                this.onCustomerAddressEdit.emit(selectedAgentAddress);
-              }
-            });
+            if (this.customerId) {
+              this.service.getAllUserCustomerAddress(this.customerId).subscribe(response => {
+                if (response.status === 200) {
+                  const selectedAgentAddress = response.body.filter((item: any) => item.id === id);
+                  this.onCustomerAddressEdit.emit(selectedAgentAddress);
+                }
+              });
+            }
           }
         }
       },
@@ -95,19 +99,21 @@ export class AddressComponent implements OnInit, OnChanges {
     // Check if we've got customerID
     console.log('Reading from addressbook: ' + this.customerId);
     // Get data from database
-    this.service.getAllUserCustomerAddress(this.customerId).subscribe(response => {
-      if (response.status === 200) {
-        console.log('Addresslisting', response.body);
-        for (const item of response.body) {
-          this.rowDataAddress.push({
-            name: `${item.cityName}, ${item.streetName}`,
-            id: item.id
-          });
+    if (this.customerId) {
+      this.service.getAllUserCustomerAddress(this.customerId).subscribe(response => {
+        if (response.status === 200) {
+          console.log('Addresslisting', response.body);
+          for (const item of response.body) {
+            this.rowDataAddress.push({
+              name: `${item.cityName}, ${item.streetName}`,
+              id: item.id
+            });
+          }
+          console.log('We have got', this.rowDataAddress);
+          this.gridApi.setRowData(this.rowDataAddress);
         }
-        console.log('We have got', this.rowDataAddress);
-        this.gridApi.setRowData(this.rowDataAddress);
-      }
-    });
+      });
+    }
   }
 
   // Table build
