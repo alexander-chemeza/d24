@@ -40,11 +40,13 @@ export class ContragentsComponent implements OnInit, OnChanges {
           if (target === 'delete') {
             const id = this.rowDataContrAgent[Number(this.gridApi.getFocusedCell().rowIndex)].id;
             console.log(id);
-            this.service.deleteUserCustomer(id).subscribe(response => {
-              if (response.status === 200) {
-                this.getTable();
-              }
-            });
+            if (id) {
+              this.service.deleteUserCustomer(id).subscribe(response => {
+                if (response.status === 200) {
+                  this.getTable();
+                }
+              });
+            }
           } else if (target === 'edit') {
             console.log('edit');
             const id = this.rowDataContrAgent[Number(this.gridApi.getFocusedCell().rowIndex)].id;
@@ -52,7 +54,9 @@ export class ContragentsComponent implements OnInit, OnChanges {
               if (response.status === 200) {
                 const selectedAgent = response.body.filter((item: any) => item.id === id);
                 console.log('Selected user info', selectedAgent);
-                this.onCustomerEdit.emit(selectedAgent);
+                if (selectedAgent){
+                  this.onCustomerEdit.emit(selectedAgent);
+                }
               }
             });
           }
