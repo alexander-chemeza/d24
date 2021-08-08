@@ -11,6 +11,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 export class RecoverComponent implements OnInit {
   recover = false;
   incorrect = false;
+  noUser = false;
 
   getPassCodeForm = new FormGroup({
     login: new FormControl('', [
@@ -56,10 +57,14 @@ export class RecoverComponent implements OnInit {
   getPassCode(): void {
     if (this.getPassCodeForm.value.login && this.getPassCodeForm.value.email) {
       this.incorrect = false;
+      this.noUser = false;
       this.service.getPassCode(this.getPassCodeForm.value.login, this.getPassCodeForm.value.email).subscribe(response => {
         if (response.status === 200) {
           this.recover = !this.recover;
         }
+      }, error => {
+        console.log(error);
+        this.noUser = true;
       });
     } else {
       this.incorrect = true;

@@ -14,6 +14,7 @@
       <p *ngIf="email.invalid && email.touched && email.dirty" class="alert-message">Минимальная длина 4 символа</p>
       <p *ngIf="email.touched && email.invalid && email.pristine" class="alert-message">Данное поле обязательно</p>
       <p *ngIf="incorrect" class="alert-message">Оба поля обязательны к заполнению</p>
+      <p *ngIf="noUser" class="alert-message">Пользователя с такими данными не существует</p>
       <input type="submit" value="Получить код подтверждения" class="submit-btn">
     </form>
   </div>
