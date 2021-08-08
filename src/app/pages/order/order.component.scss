@@ -23,10 +23,10 @@
       grid-template-columns: 1fr 1fr 1fr 1fr;
       grid-template-rows: min-content;
       grid-gap: 30px;
-      background-image: url("../../../assets/img/background/grey-bg.png");
-      background-repeat: no-repeat;
-      background-position: 100% 0;
-      background-size: contain;
+      //background-image: url("../../../assets/img/background/grey-bg.png");
+      //background-repeat: no-repeat;
+      //background-position: 100% 0;
+      //background-size: contain;
 
       & .control-wide {
         grid-column: span 2;
