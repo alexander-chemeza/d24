@@ -104,7 +104,6 @@ export class HomeComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    this.getTable();
   }
 
   ngOnInit(): void {
