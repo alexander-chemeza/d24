@@ -1,16 +1,19 @@
 <div class="recover-content">
   <p class="preheader">
-    Если вы забыли пароль, введите логин или Email.
-    Контрольная строка для смены пароля, а также ваши
-    регистрационные данные, будут высланы вам по Email.
+    Если вы забыли пароль, введите ваш логин и Email. Контрольная строка для смены пароля и ваши регистрационные данные будут высланы вам по Email.
   </p>
 
   <div class="grey-box form" *ngIf="!recover">
     <form [formGroup]="getPassCodeForm" (ngSubmit)="getPassCode()">
       <label for="login">Логин:</label>
       <input type="text" name="login" id="login" formControlName="login">
+      <p *ngIf="login.invalid && login.touched && login.dirty" class="alert-message">Минимальная длина 4 символа</p>
+      <p *ngIf="login.touched && login.invalid && login.pristine" class="alert-message">Данное поле обязательно</p>
       <label for="email">Email:</label>
       <input type="email" name="email" id="email" formControlName="email">
+      <p *ngIf="email.invalid && email.touched && email.dirty" class="alert-message">Минимальная длина 4 символа</p>
+      <p *ngIf="email.touched && email.invalid && email.pristine" class="alert-message">Данное поле обязательно</p>
+      <p *ngIf="incorrect" class="alert-message">Оба поля обязательны к заполнению</p>
       <input type="submit" value="Получить код подтверждения" class="submit-btn">
     </form>
   </div>
@@ -19,9 +22,18 @@
     <form [formGroup]="recoverForm" (ngSubmit)="doRecover()">
       <label for="passCode">Код подтверждения:</label>
       <input type="text" name="passCode" id="passCode" formControlName="passCode">
+      <p *ngIf="passCode.invalid && passCode.touched && passCode.dirty" class="alert-message">Минимальная длина 4 символа</p>
+      <p *ngIf="passCode.touched && passCode.invalid && passCode.pristine" class="alert-message">Данное поле обязательно</p>
       <label for="password">Новый пароль</label>
       <input type="text" name="password" id="password" formControlName="password">
+      <p *ngIf="password.invalid && password.touched && password.dirty" class="alert-message">Минимальная длина 4 символа</p>
+      <p *ngIf="password.touched && password.invalid && password.pristine" class="alert-message">Данное поле обязательно</p>
+      <p *ngIf="incorrect" class="alert-message">Оба поля обязательны к заполнению</p>
       <input type="submit" value="Восстановить пароль" class="submit-btn">
     </form>
+  </div>
+
+  <div id="user-updated" class="modal user-updated">
+    <p class="white-header">Пароль изменен.</p>
   </div>
 </div>
