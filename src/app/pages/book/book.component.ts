@@ -180,6 +180,9 @@ export class BookComponent implements OnInit {
         this.service.streets(this.street).subscribe(response => {
           if (response.status === 200) {
             this.streetList = response.body;
+            this.newAddress.get('street').enable();
+          } else {
+            this.newAddress.get('street').disable();
           }
         });
       }
@@ -190,6 +193,7 @@ export class BookComponent implements OnInit {
   showModal(id: string): void {
     if (id === 'new-address' || id === 'edit-address') {
       this.getCities();
+      this.newAddress.get('street').disable();
     }
 
     const modal: any = document.getElementById(id);
@@ -309,6 +313,12 @@ export class BookComponent implements OnInit {
               cityInput.value = '';
               streetInput.value = '';
             }
+            this.citiesList = [];
+            this.streetList = [];
+            this.street = {
+              cityCode: '',
+              regionCode: ''
+            };
 
             // window.location.reload();
             this.addresslist.ngOnChanges();
