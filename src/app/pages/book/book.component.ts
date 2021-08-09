@@ -112,9 +112,9 @@ export class BookComponent implements OnInit {
     });
 
     this.newAddress = new FormGroup({
-      type: new FormControl('', [
-
-      ]),
+      // type: new FormControl('', [
+      //
+      // ]),
       place: new FormControl('', [
         Validators.required
       ]),
@@ -136,21 +136,21 @@ export class BookComponent implements OnInit {
       apartment: new FormControl('', [
         Validators.required
       ]),
-      deliveryFrom: new FormControl('', [
-        Validators.required
-      ]),
-      deliveryTo: new FormControl('', [
-        Validators.required
-      ]),
-      timeoutFrom: new FormControl('', [
-        Validators.required
-      ]),
-      timeoutTo: new FormControl('', [
-        Validators.required
-      ]),
-      description: new FormControl('', [
-        Validators.required
-      ])
+      // deliveryFrom: new FormControl('', [
+      //   Validators.required
+      // ]),
+      // deliveryTo: new FormControl('', [
+      //   Validators.required
+      // ]),
+      // timeoutFrom: new FormControl('', [
+      //   Validators.required
+      // ]),
+      // timeoutTo: new FormControl('', [
+      //   Validators.required
+      // ]),
+      // description: new FormControl('', [
+      //   Validators.required
+      // ])
     });
 
     setTimeout(() => {
@@ -159,6 +159,11 @@ export class BookComponent implements OnInit {
   }
 
   selectPlace(event: any, form: any): void {
+    this.streetList = [];
+    const streetInput1: any = document.getElementById('edit-street');
+    const streetInput2: any = document.getElementById('new-street');
+    streetInput1.value = '';
+    streetInput2.value = '';
     // Get city id
     const currentCityCode = form.value.place.id;
     // Find city by the id
@@ -360,6 +365,12 @@ export class BookComponent implements OnInit {
   onKey(event: any): void {
     if (event.target.value === '' || this.citiesList.length === 0) {
       this.getCities();
+      this.streetList = [];
+      this.newAddress.get('street').disable();
+      const streetInput1: any = document.getElementById('edit-street');
+      const streetInput2: any = document.getElementById('new-street');
+      streetInput1.value = '';
+      streetInput2.value = '';
     } else {
       this.citiesList = this.search(event.target.value);
     }
@@ -399,6 +410,8 @@ export class BookComponent implements OnInit {
   }
 
   showCustomerAddress(data: any): void {
+    this.loading = true;
+    this.newAddress.get('street').enable();
     this.selectedCustomerAddress = data;
     console.log('SELECTED FROM BOOK', this.selectedCustomerAddress);
     const currentCityCode = this.selectedCustomerAddress[0].cityId;
@@ -414,7 +427,9 @@ export class BookComponent implements OnInit {
           // The request object
           this.street = {
             cityCode: cityInfo.city_code,
-            regionCode: cityInfo.region_code
+            regionCode: cityInfo.region_code,
+            districtCode: cityInfo.district_code,
+            localityCode: cityInfo.locality_code
           };
 
           // const ok = !Object.values(this.street).every(o => o === null && o === '');
@@ -425,23 +440,31 @@ export class BookComponent implements OnInit {
               if (resp.status === 200) {
                 this.streetList = resp.body;
                 const patch = {
-                  type: this.selectedCustomerAddress[0].mainAddress,
-                  place: this.selectedCustomerAddress[0].cityId,
-                  street: this.selectedCustomerAddress[0].streetId,
+                  // type: this.selectedCustomerAddress[0].mainAddress,
+                  // place: this.selectedCustomerAddress[0].cityId,
+                  // street: this.selectedCustomerAddress[0].streetId,
                   building: this.selectedCustomerAddress[0].house,
                   corpus: this.selectedCustomerAddress[0].housing,
                   house: this.selectedCustomerAddress[0].building,
                   office: this.selectedCustomerAddress[0].office,
                   apartment: this.selectedCustomerAddress[0].room,
-                  deliveryFrom: this.selectedCustomerAddress[0].timeFrom,
-                  deliveryTo: this.selectedCustomerAddress[0].timeTo,
-                  timeoutFrom: this.selectedCustomerAddress[0].pauseFrom,
-                  timeoutTo: this.selectedCustomerAddress[0].pauseTo,
-                  description: this.selectedCustomerAddress[0].description
+                  // deliveryFrom: this.selectedCustomerAddress[0].timeFrom,
+                  // deliveryTo: this.selectedCustomerAddress[0].timeTo,
+                  // timeoutFrom: this.selectedCustomerAddress[0].pauseFrom,
+                  // timeoutTo: this.selectedCustomerAddress[0].pauseTo,
+                  // description: this.selectedCustomerAddress[0].description
                 };
                 this.newAddress.patchValue(patch);
+                const cityInput: any = document.getElementById('edit-city');
+                const streetInput: any = document.getElementById('edit-street');
+                cityInput.value = this.selectedCustomerAddress[0].cityName;
+                streetInput.value = this.selectedCustomerAddress[0].streetName;
+                console.log('CITY:', cityInput.value);
+                console.log('STREET', streetInput.value);
+                console.log('citiesList', this.citiesList);
+                console.log('streetList', this.streetList);
+                this.loading = false;
                 this.showModal('edit-address');
-
               }
             });
           }

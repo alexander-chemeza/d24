@@ -155,13 +155,13 @@
     <h2 class="white-header">Новый адрес</h2>
     <form [formGroup]="newAddress">
       <div class="grey-box">
-        <div class="row mb-20">
-          <div class="checkbox-block" style="margin-right: 15px;">
-            <input class="checkbox-block-item" type="checkbox" name="type2" id="type2" formControlName="type" checked>
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="type2">Основной адрес</label>
-        </div>
+<!--        <div class="row mb-20">-->
+<!--          <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--            <input class="checkbox-block-item" type="checkbox" name="type2" id="type2" formControlName="type" checked>-->
+<!--            <span class="checkbox-block-icon"></span>-->
+<!--          </div>-->
+<!--          <label for="type2">Основной адрес</label>-->
+<!--        </div>-->
         <label for="place-carrier-sender">Населенный пункт:</label>
         <mat-form-field class="example-full-width" appearance="fill">
           <input id="new-city" type="text"
@@ -277,16 +277,16 @@
     <h2 class="white-header">Редактировать адрес</h2>
     <form [formGroup]="newAddress">
       <div class="grey-box">
-        <div class="row mb-20">
-          <div class="checkbox-block" style="margin-right: 15px;">
-            <input class="checkbox-block-item" type="checkbox" name="type2" id="type2" formControlName="type" checked>
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="type2">Основной адрес</label>
-        </div>
+<!--        <div class="row mb-20">-->
+<!--          <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--            <input class="checkbox-block-item" type="checkbox" name="type2" id="type2" formControlName="type" checked>-->
+<!--            <span class="checkbox-block-icon"></span>-->
+<!--          </div>-->
+<!--          <label for="type2">Основной адрес</label>-->
+<!--        </div>-->
         <label for="place-carrier-sender">Населенный пункт:</label>
         <mat-form-field class="example-full-width" appearance="fill">
-          <input id="new-city" type="text"
+          <input id="edit-city" type="text"
                  placeholder="Введите город"
                  aria-label="Number"
                  matInput
@@ -314,7 +314,7 @@
         <!--        </mat-form-field>-->
         <label for="street-carrier-sender">Улица:</label>
         <mat-form-field class="example-full-width" appearance="fill">
-          <input id="new-street" type="text"
+          <input id="edit-street" type="text"
                  placeholder="Введите улицу"
                  aria-label="Number"
                  matInput
