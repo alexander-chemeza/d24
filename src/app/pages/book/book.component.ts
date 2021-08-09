@@ -191,7 +191,7 @@ export class BookComponent implements OnInit {
 
   // Show modal event
   showModal(id: string): void {
-    if (id === 'new-address' || id === 'edit-address') {
+    if (id === 'new-address') {
       this.getCities();
       this.newAddress.get('street').disable();
     }
