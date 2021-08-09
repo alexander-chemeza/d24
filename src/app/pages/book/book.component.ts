@@ -400,45 +400,54 @@ export class BookComponent implements OnInit {
 
   showCustomerAddress(data: any): void {
     this.selectedCustomerAddress = data;
+    console.log('SELECTED FROM BOOK', this.selectedCustomerAddress);
     const currentCityCode = this.selectedCustomerAddress[0].cityId;
-    // Find city by the id
-    const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
-    // Check and build data
-    if (cityInfo) {
-      // The request object
-      this.street = {
-        cityCode: cityInfo.city_code,
-        regionCode: cityInfo.region_code
-      };
+    console.log('CITY ID FROM BOOK', currentCityCode);
+    this.service.cities().subscribe(cities => {
+      if (cities.status === 200) {
+        this.citiesList = cities.body;
+        // Find city by the id
+        const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
+        console.log('CITY INFORMATION', cityInfo);
+        // Check and build data
+        if (cityInfo) {
+          // The request object
+          this.street = {
+            cityCode: cityInfo.city_code,
+            regionCode: cityInfo.region_code
+          };
 
-      const ok = !Object.values(this.street).every(o => o === null && o === '');
+          // const ok = !Object.values(this.street).every(o => o === null && o === '');
 
-      if (ok) {
-        // Get streets
-        this.service.streets(this.street).subscribe(resp => {
-          if (resp.status === 200) {
-            this.streetList = resp.body;
-            const patch = {
-              type: this.selectedCustomerAddress[0].mainAddress,
-              place: this.selectedCustomerAddress[0].cityId,
-              street: this.selectedCustomerAddress[0].streetId,
-              building: this.selectedCustomerAddress[0].house,
-              corpus: this.selectedCustomerAddress[0].housing,
-              house: this.selectedCustomerAddress[0].building,
-              office: this.selectedCustomerAddress[0].office,
-              apartment: this.selectedCustomerAddress[0].room,
-              deliveryFrom: this.selectedCustomerAddress[0].timeFrom,
-              deliveryTo: this.selectedCustomerAddress[0].timeTo,
-              timeoutFrom: this.selectedCustomerAddress[0].pauseFrom,
-              timeoutTo: this.selectedCustomerAddress[0].pauseTo,
-              description: this.selectedCustomerAddress[0].description
-            };
-            this.newAddress.patchValue(patch);
-            this.showModal('edit-address');
+          if (true) {
+            // Get streets
+            this.service.streets(this.street).subscribe(resp => {
+              if (resp.status === 200) {
+                this.streetList = resp.body;
+                const patch = {
+                  type: this.selectedCustomerAddress[0].mainAddress,
+                  place: this.selectedCustomerAddress[0].cityId,
+                  street: this.selectedCustomerAddress[0].streetId,
+                  building: this.selectedCustomerAddress[0].house,
+                  corpus: this.selectedCustomerAddress[0].housing,
+                  house: this.selectedCustomerAddress[0].building,
+                  office: this.selectedCustomerAddress[0].office,
+                  apartment: this.selectedCustomerAddress[0].room,
+                  deliveryFrom: this.selectedCustomerAddress[0].timeFrom,
+                  deliveryTo: this.selectedCustomerAddress[0].timeTo,
+                  timeoutFrom: this.selectedCustomerAddress[0].pauseFrom,
+                  timeoutTo: this.selectedCustomerAddress[0].pauseTo,
+                  description: this.selectedCustomerAddress[0].description
+                };
+                this.newAddress.patchValue(patch);
+                this.showModal('edit-address');
+
+              }
+            });
           }
-        });
+        }
       }
-    }
+    });
   }
 
   editCustomer(): void {

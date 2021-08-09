@@ -274,86 +274,120 @@
 <div id="edit-address" class="modal new-address">
   <div class="new-address-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('edit-address', newAddress)"></button>
-    <h2 class="white-header">Редактирование адреса</h2>
-    <form [formGroup]="newAddress" (ngSubmit)="editNewAddress()">
+    <h2 class="white-header">Редактировать адрес</h2>
+    <form [formGroup]="newAddress">
       <div class="grey-box">
         <div class="row mb-20">
           <div class="checkbox-block" style="margin-right: 15px;">
-            <input class="checkbox-block-item" type="checkbox" name="type2-edit" id="type2-edit" formControlName="type" checked>
+            <input class="checkbox-block-item" type="checkbox" name="type2" id="type2" formControlName="type" checked>
             <span class="checkbox-block-icon"></span>
           </div>
-          <label for="type2-edit">Основной адрес</label>
+          <label for="type2">Основной адрес</label>
         </div>
-        <label for="place-carrier-sender-edit">Населенный пункт:</label>
-        <mat-form-field floatLabel="never">
-          <mat-select formControlName="place" (keyup)="$event.stopPropagation()" (selectionChange)="selectPlace($event, newAddress)">
-            <input type="text" placeholder="Поиск" (input)="onKey($event)" (keydown)="$event.stopPropagation()">
+        <label for="place-carrier-sender">Населенный пункт:</label>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <input id="new-city" type="text"
+                 placeholder="Введите город"
+                 aria-label="Number"
+                 matInput
+                 formControlName="place"
+                 [matAutocomplete]="auto"
+                 (input)="onKey($event)" (keydown)="$event.stopPropagation()"
+          >
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)="selectPlace($event, newAddress)" [displayWith]="cityShow">
             <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
-              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city.id" class="example-item">
+              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city" class="example-item">
                 {{city.fullName}}
               </mat-option>
             </cdk-virtual-scroll-viewport>
-          </mat-select>
+          </mat-autocomplete>
         </mat-form-field>
-        <label for="street-carrier-sender-edit">Улица:</label>
-        <mat-form-field floatLabel="never">
-          <mat-select formControlName="street" (keyup)="$event.stopPropagation()">
-            <input type="text" placeholder="Поиск" (input)="onKey2($event)" (keydown)="$event.stopPropagation()">
+        <!--        <mat-form-field floatLabel="never">-->
+        <!--          <mat-select formControlName="place" (keyup)="$event.stopPropagation()" (selectionChange)="selectPlace($event, newAddress)">-->
+        <!--            <input type="text" placeholder="Поиск" (input)="onKey($event)" (keydown)="$event.stopPropagation()">-->
+        <!--            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">-->
+        <!--              <mat-option *cdkVirtualFor="let city of citiesList" [value]="city.id" class="example-item">-->
+        <!--                {{city.fullName}}-->
+        <!--              </mat-option>-->
+        <!--            </cdk-virtual-scroll-viewport>-->
+        <!--          </mat-select>-->
+        <!--        </mat-form-field>-->
+        <label for="street-carrier-sender">Улица:</label>
+        <mat-form-field class="example-full-width" appearance="fill">
+          <input id="new-street" type="text"
+                 placeholder="Введите улицу"
+                 aria-label="Number"
+                 matInput
+                 formControlName="street"
+                 [matAutocomplete]="auto2"
+                 (input)="onKey2($event)" (keydown)="$event.stopPropagation()"
+          >
+          <mat-autocomplete autoActiveFirstOption #auto2="matAutocomplete" [displayWith]="streetShow">
             <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">
-              <mat-option *cdkVirtualFor="let street of streetList" [value]="street.id" class="example-item">
+              <mat-option *cdkVirtualFor="let street of streetList" [value]="street" class="example-item">
                 {{street.name}}
               </mat-option>
             </cdk-virtual-scroll-viewport>
-          </mat-select>
+          </mat-autocomplete>
         </mat-form-field>
+        <!--        <mat-form-field floatLabel="never">-->
+        <!--          <mat-select formControlName="street" (keyup)="$event.stopPropagation()">-->
+        <!--            <input type="text" placeholder="Поиск" (input)="onKey2($event)" (keydown)="$event.stopPropagation()">-->
+        <!--            <cdk-virtual-scroll-viewport [itemSize]="42" class="example-viewport">-->
+        <!--              <mat-option *cdkVirtualFor="let street of streetList" [value]="street.id" class="example-item">-->
+        <!--                {{street.name}}-->
+        <!--              </mat-option>-->
+        <!--            </cdk-virtual-scroll-viewport>-->
+        <!--          </mat-select>-->
+        <!--        </mat-form-field>-->
         <div class="row-multi mt-15">
           <div class="box">
-            <label for="building-edit">Дом:</label>
-            <input type="text" name="building-edit" id="building-edit" formControlName="building">
+            <label for="building">Дом:</label>
+            <input type="text" name="building" id="building" formControlName="building">
           </div>
           <div class="box">
-            <label for="corpus-edit">Корпус:</label>
-            <input type="text" name="corpus-edit" id="corpus-edit" formControlName="corpus">
+            <label for="corpus">Корпус:</label>
+            <input type="text" name="corpus" id="corpus" formControlName="corpus">
           </div>
           <div class="box">
-            <label for="house-edit">Строение</label>
-            <input type="text" id="house-edit" name="house-edit" formControlName="house">
+            <label for="house">Строение</label>
+            <input type="text" id="house" name="house" formControlName="house">
           </div>
           <div class="box">
-            <label for="office-edit">Офис:</label>
-            <input type="text" name="office-edit" id="office-edit" formControlName="office">
+            <label for="office">Офис:</label>
+            <input type="text" name="office" id="office" formControlName="office">
           </div>
           <div class="box">
-            <label for="appartment-edit">Квартира</label>
-            <input type="text" name="appartment-edit" id="appartment-edit" formControlName="apartment">
+            <label for="appartment">Квартира</label>
+            <input type="text" name="appartment" id="appartment" formControlName="apartment">
           </div>
         </div>
-        <div class="row-some mt-15">
-          <div class="box">
-            <label for="delivery-from-edit">Время доставки с:</label>
-            <input type="text" name="delivery-from-edit" id="delivery-from-edit" formControlName="deliveryFrom">
-          </div>
-          <div class="box">
-            <label for="delivery-from-edit">по:</label>
-            <input type="text" formControlName="deliveryTo">
-          </div>
-        </div>
-        <div class="row-some mt-15">
-          <div class="box">
-            <label for=timeout-from-edit>Время перерыва c:</label>
-            <input type="text" name="timeout-from-edit" id="timeout-from-edit" formControlName="timeoutFrom">
-          </div>
-          <div class="box">
-            <label for="timeout-to-edit">по:</label>
-            <input type="text" name="timeout-to-edit" id="timeout-to-edit" formControlName="timeoutTo">
-          </div>
-        </div>
-        <label for="description-area-edit">Примечание</label>
-        <textarea name="description-area-edit" id="description-area-edit" formControlName="description"></textarea>
+        <!--        <div class="row-some mt-15">-->
+        <!--          <div class="box">-->
+        <!--            <label for="delivery-from">Время доставки с:</label>-->
+        <!--            <input type="text" name="delivery-from" id="delivery-from" formControlName="deliveryFrom">-->
+        <!--          </div>-->
+        <!--          <div class="box">-->
+        <!--            <label for="delivery-from">по:</label>-->
+        <!--            <input type="text" formControlName="deliveryTo">-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <div class="row-some mt-15">-->
+        <!--          <div class="box">-->
+        <!--            <label for=timeout-from>Время перерыва c:</label>-->
+        <!--            <input type="text" name="timeout-from" id="timeout-from" formControlName="timeoutFrom">-->
+        <!--          </div>-->
+        <!--          <div class="box">-->
+        <!--            <label for="timeout-to">по:</label>-->
+        <!--            <input type="text" name="timeout-to" id="timeout-to" formControlName="timeoutTo">-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <!--        <label for="description-area">Примечание</label>-->
+        <!--        <textarea name="description-area" id="description-area" formControlName="description"></textarea>-->
       </div>
       <div class="row-controls">
-        <a class="white-btn round-btn" (click)="hideModal('new-address', newAddress)">Отмена</a>
-        <input type="submit" value="Сохранить">
+        <a class="white-btn round-btn" (click)="hideModal('edit-address', newAddress)">Отмена</a>
+        <input type="submit" value="Сохранить" (click)="editNewAddress()">
       </div>
     </form>
   </div>

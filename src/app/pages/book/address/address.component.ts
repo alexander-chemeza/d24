@@ -61,6 +61,7 @@ export class AddressComponent implements OnInit, OnChanges {
               this.service.getAllUserCustomerAddress(this.customerId).subscribe(response => {
                 if (response.status === 200) {
                   const selectedAgentAddress = response.body.filter((item: any) => item.id === id);
+                  console.log('selected', selectedAgentAddress);
                   this.onCustomerAddressEdit.emit(selectedAgentAddress);
                 }
               });
