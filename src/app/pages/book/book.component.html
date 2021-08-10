@@ -163,7 +163,7 @@
 <!--          <label for="type2">Основной адрес</label>-->
 <!--        </div>-->
         <label for="place-carrier-sender">Населенный пункт:</label>
-        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-form-field class="address" class="example-full-width" appearance="fill">
           <input id="new-city" type="text"
                  placeholder="Введите город"
                  aria-label="Number"
@@ -191,7 +191,7 @@
 <!--          </mat-select>-->
 <!--        </mat-form-field>-->
         <label for="street-carrier-sender">Улица:</label>
-        <mat-form-field class="example-full-width" appearance="fill">
+        <mat-form-field class="address" class="example-full-width" appearance="fill">
           <input id="new-street" type="text"
                  placeholder="Введите улицу"
                  aria-label="Number"
@@ -221,23 +221,23 @@
         <div class="row-multi mt-15">
           <div class="box">
             <label for="building">Дом:</label>
-            <input type="text" name="building" id="building" formControlName="building">
+            <input class="address" type="text" name="building" id="building" formControlName="building">
           </div>
           <div class="box">
             <label for="corpus">Корпус:</label>
-            <input type="text" name="corpus" id="corpus" formControlName="corpus">
+            <input class="address" type="text" name="corpus" id="corpus" formControlName="corpus">
           </div>
           <div class="box">
             <label for="house">Строение</label>
-            <input type="text" id="house" name="house" formControlName="house">
+            <input class="address" type="text" id="house" name="house" formControlName="house">
           </div>
           <div class="box">
             <label for="office">Офис:</label>
-            <input type="text" name="office" id="office" formControlName="office">
+            <input class="address" type="text" name="office" id="office" formControlName="office">
           </div>
           <div class="box">
             <label for="appartment">Квартира</label>
-            <input type="text" name="appartment" id="appartment" formControlName="apartment">
+            <input class="address" type="text" name="appartment" id="appartment" formControlName="apartment">
           </div>
         </div>
 <!--        <div class="row-some mt-15">-->

@@ -289,6 +289,7 @@ export class BookComponent implements OnInit {
   }
   // New address button event
   createNewAddress(cityBlock: string, streetBlock: string): void {
+    const addresses: any = document.getElementsByClassName('address');
     // This vars will get correct name of city and street
     let city: string;
     let street: string;
@@ -322,7 +323,7 @@ export class BookComponent implements OnInit {
 
       const ok = !Object.values(data).every(o => o === null && o === '');
 
-      if (ok) {
+      if (data.cityId !== '' && data.cityId !== null && data.streetId !== '' && data.streetId !== null && data.house !== null && data.house !== '') {
         // Save the data
         this.service.saveUserCustomerAddress(data).subscribe(response => {
           if (response.status === 200) {
@@ -346,6 +347,12 @@ export class BookComponent implements OnInit {
             this.addresslist.ngOnChanges();
           }
         });
+      } else {
+        for (const item of addresses) {
+          if(item.value === '' || item.value === null) {
+            item.classList.add('alert-input');
+          }
+        }
       }
 
     }
