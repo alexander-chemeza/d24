@@ -224,15 +224,17 @@ export class BookComponent implements OnInit {
   }
   // New contragent button event
   createNewContragent(): void {
+    const contragents: any = document.getElementsByClassName('contragent');
     // Received data
     const data = {
       customerName: this.newContragent.value.name as string,
       customerType: this.newContragent.value.type as string
     };
 
-    const ok = !Object.values(data).every(o => o === null && o === '');
-
-    if (ok) {
+    if (data.customerName && data.customerType) {
+      for (const item of contragents) {
+        item.classList.remove('alert-input');
+      }
       // POST to backend
       this.service.saveUserCustomer(data).subscribe(response => {
         if (response.status === 200) {
@@ -242,6 +244,12 @@ export class BookComponent implements OnInit {
           // window.location.reload();
         }
       });
+    } else {
+      for (const item of contragents) {
+        if (item.value === null || item.value === '') {
+          item.classList.add('alert-input');
+        }
+      }
     }
   }
   // New contact button event
@@ -462,6 +470,7 @@ export class BookComponent implements OnInit {
   }
 
   editCustomer(): void {
+    const contragents: any = document.getElementsByClassName('contragent');
     // Received data
     const data = {
       customerName: this.newContragent.value.name as string,
@@ -469,17 +478,24 @@ export class BookComponent implements OnInit {
       id: this.selectedCustomer[0].id
     };
 
-    const ok = !Object.values(data).every(o => o === null && o === '');
-
-    if (ok) {
+    if (data.customerName && data.customerType) {
+      for (const item of contragents) {
+        item.classList.remove('alert-input');
+      }
       // POST to backend
       this.service.saveUserCustomer(data).subscribe(response => {
         if (response.status === 200) {
           this.hideModal('edit-contragent', this.newContragent);
           this.newContragent.reset();
-          this.contragents.ngOnChanges();
+          this.contragents.getTable();
         }
       });
+    } else {
+      for (const item of contragents) {
+        if (item.value === null || item.value === '') {
+          item.classList.add('alert-input');
+        }
+      }
     }
   }
 
@@ -589,10 +605,14 @@ export class BookComponent implements OnInit {
   }
 
   cityShow(city: any): any {
-    return city.fullName;
+    if (city) {
+      return city.fullName;
+    }
   }
 
   streetShow(street: any): any {
-    return street.name;
+    if (street) {
+      return street.name;
+    }
   }
 }

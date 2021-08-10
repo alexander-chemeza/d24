@@ -54,9 +54,9 @@
     <form [formGroup]="newContragent" (ngSubmit)="createNewContragent()">
       <div class="grey-box">
         <label for="type"> Форма собственности :</label>
-        <input type="text" id="type" name="type" formControlName="type">
+        <input class="contragent" type="text" id="type" name="type" formControlName="type">
         <label for="contragent">Наименование контрагента:</label>
-        <input type="text" id="contragent" name="contragent" formControlName="name">
+        <input class="contragent" type="text" id="contragent" name="contragent" formControlName="name">
       </div>
       <div class="btns-row">
         <a class="white-btn round-btn" (click)="hideModal('new-contragent', newContragent)">Отмена</a>
@@ -73,9 +73,9 @@
     <form [formGroup]="newContragent" (ngSubmit)="editCustomer()">
       <div class="grey-box">
         <label for="type-edit"> Форма собственности :</label>
-        <input type="text" id="type-edit" name="type-edit" formControlName="type">
+        <input class="contragent" type="text" id="type-edit" name="type-edit" formControlName="type">
         <label for="contragent-edit">Наименование контрагента:</label>
-        <input type="text" id="contragent-edit" name="contragent-edit" formControlName="name">
+        <input class="contragent" type="text" id="contragent-edit" name="contragent-edit" formControlName="name">
       </div>
       <div class="btns-row">
         <a class="white-btn round-btn" (click)="hideModal('edit-contragent', newContragent)">Отмена</a>
