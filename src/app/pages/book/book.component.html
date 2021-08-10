@@ -91,13 +91,13 @@
     <h2 class="white-header">Новый контакт</h2>
     <form [formGroup]="newContact" (ngSubmit)="createNewContact()">
       <div class="grey-box">
-        <div class="row mb-20">
-          <div class="checkbox-block" style="margin-right: 15px;">
-            <input class="checkbox-block-item" type="checkbox" name="type" id="type" formControlName="type" checked>
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="type">Основной адрес</label>
-        </div>
+<!--        <div class="row mb-20">-->
+<!--          <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--            <input class="checkbox-block-item" type="checkbox" name="type" id="type" formControlName="type" checked>-->
+<!--            <span class="checkbox-block-icon"></span>-->
+<!--          </div>-->
+<!--          <label for="type">Основной адрес</label>-->
+<!--        </div>-->
         <label for="contact-name">Имя контакта:</label>
         <input type="text" name="contact-name" id="contact-name" formControlName="name">
         <label for="contact-position">Должность:</label>
@@ -121,29 +121,29 @@
   <div class="new-contact-content">
     <button class="active-btn circle-btn close-btn" (click)="hideModal('edit-contact', newContact)"></button>
     <h2 class="white-header">Изменить контакт</h2>
-    <form [formGroup]="newContact" (ngSubmit)="editContact()">
+    <form [formGroup]="newContact">
       <div class="grey-box">
-        <div class="row mb-20">
-          <div class="checkbox-block" style="margin-right: 15px;">
-            <input class="checkbox-block-item" type="checkbox" name="type-edit" id="type-edit" formControlName="type" checked>
-            <span class="checkbox-block-icon"></span>
-          </div>
-          <label for="type-edit">Основной адрес</label>
-        </div>
-        <label for="contact-name-edit">Имя контакта:</label>
-        <input type="text" name="contact-name-edit" id="contact-name-edit" formControlName="name">
-        <label for="contact-position-edit">Должность:</label>
-        <input type="text" name="contact-position-edit" id="contact-position-edit" formControlName="position">
-        <label for="contact-phone-1-edit">Телефон:</label>
-        <input type="text" name="contact-phone-1-edit" id="contact-phone-1-edit" formControlName="tel1">
-        <label for="contact-phone-2-edit"> Телефон 2:</label>
-        <input type="text" name="contact-phone-2-edit" id="contact-phone-2-edit" formControlName="tel2">
-        <label for="contact-email-edit">Email:</label>
-        <input type="text" name="contact-email-edit" id="contact-email-edit" formControlName="email">
+<!--        <div class="row mb-20">-->
+<!--          <div class="checkbox-block" style="margin-right: 15px;">-->
+<!--            <input class="checkbox-block-item" type="checkbox" name="type" id="type" formControlName="type" checked>-->
+<!--            <span class="checkbox-block-icon"></span>-->
+<!--          </div>-->
+<!--          <label for="type">Основной адрес</label>-->
+<!--        </div>-->
+        <label for="contact-name">Имя контакта:</label>
+        <input type="text" name="contact-name" id="contact-name" formControlName="name">
+        <label for="contact-position">Должность:</label>
+        <input type="text" name="contact-position" id="contact-position" formControlName="position">
+        <label for="contact-phone-1">Телефон:</label>
+        <input type="text" name="contact-phone-1" id="contact-phone-1" formControlName="tel1" mask="(00) 000 00 00" prefix="+375" [showMaskTyped]="true">
+        <label for="contact-phone-2"> Телефон 2:</label>
+        <input type="text" name="contact-phone-2" id="contact-phone-2" formControlName="tel2" mask="(00) 000 00 00" prefix="+375" [showMaskTyped]="true">
+        <label for="contact-email">Email:</label>
+        <input type="text" name="contact-email" id="contact-email" formControlName="email">
       </div>
       <div class="row-controls">
         <a class="white-btn round-btn" (click)="hideModal('edit-contact', newContact)">Отмена</a>
-        <input type="submit" value="Сохранить">
+        <input type="submit" value="Сохранить" (click)="editContact()">
       </div>
     </form>
   </div>
