@@ -579,6 +579,7 @@ export class BookComponent implements OnInit {
   }
 
   editContact(): void {
+    const contacts: any = document.getElementsByClassName('contact');
     // Read fields from popup
     const data = {
       customerAddressId: this.customerAddressId,
@@ -591,9 +592,10 @@ export class BookComponent implements OnInit {
       position: this.newContact.value.position as string
     };
 
-    const ok = !Object.values(data).every(o => o === null && o === '');
-
-    if (ok) {
+    if (data.email  && data.name && data.phone && data.phone2 && data.position) {
+      for (const item of contacts) {
+        item.classList.remove('alert-input');
+      }
       // Post to backend
       this.service.saveUserCustomerContact(data).subscribe(response => {
         if (response.status === 200) {
@@ -601,6 +603,12 @@ export class BookComponent implements OnInit {
           this.contactslist.ngOnChanges();
         }
       });
+    } else {
+      for (const item of contacts) {
+        if (item.value === null || item.value === '') {
+          item.classList.add('alert-input');
+        }
+      }
     }
   }
 
