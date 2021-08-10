@@ -265,7 +265,6 @@ export class BookComponent implements OnInit {
        if (response.status === 200) {
          this.hideModal('new-contact', this.newContact);
          this.newContact.reset();
-         // window.location.reload();
          this.contactslist.ngOnChanges();
        }
      });
@@ -322,10 +321,11 @@ export class BookComponent implements OnInit {
             this.streetList = [];
             this.street = {
               cityCode: '',
-              regionCode: ''
+              regionCode: '',
+              districtCode: '',
+              localityCode: ''
             };
 
-            // window.location.reload();
             this.addresslist.ngOnChanges();
           }
         });
@@ -377,8 +377,6 @@ export class BookComponent implements OnInit {
   }
 
   private search(value: string): any {
-    // const filter = value.toLowerCase();
-    // return this.citiesList.filter(option => option.fullName.toLowerCase().includes(filter));
     return this.citiesList.filter(option => option.fullName.indexOf(value) > -1);
   }
 
@@ -413,15 +411,12 @@ export class BookComponent implements OnInit {
     this.loading = true;
     this.newAddress.get('street').enable();
     this.selectedCustomerAddress = data;
-    console.log('SELECTED FROM BOOK', this.selectedCustomerAddress);
     const currentCityCode = this.selectedCustomerAddress[0].cityId;
-    console.log('CITY ID FROM BOOK', currentCityCode);
     this.service.cities().subscribe(cities => {
       if (cities.status === 200) {
         this.citiesList = cities.body;
         // Find city by the id
         const cityInfo = this.citiesList.find(item => item.id === currentCityCode);
-        console.log('CITY INFORMATION', cityInfo);
         // Check and build data
         if (cityInfo) {
           // The request object
@@ -432,17 +427,18 @@ export class BookComponent implements OnInit {
             localityCode: cityInfo.locality_code
           };
 
-          // const ok = !Object.values(this.street).every(o => o === null && o === '');
+          const ok = !Object.values(this.street).every(o => o === null && o === '');
 
-          if (true) {
+          if (ok) {
             // Get streets
             this.service.streets(this.street).subscribe(resp => {
               if (resp.status === 200) {
                 this.streetList = resp.body;
+                const currentStreet = this.streetList.find((item) => item.id === this.selectedCustomerAddress[0].streetId)
                 const patch = {
                   // type: this.selectedCustomerAddress[0].mainAddress,
-                  // place: this.selectedCustomerAddress[0].cityId,
-                  // street: this.selectedCustomerAddress[0].streetId,
+                  place: cityInfo,
+                  street: currentStreet,
                   building: this.selectedCustomerAddress[0].house,
                   corpus: this.selectedCustomerAddress[0].housing,
                   house: this.selectedCustomerAddress[0].building,
@@ -455,14 +451,6 @@ export class BookComponent implements OnInit {
                   // description: this.selectedCustomerAddress[0].description
                 };
                 this.newAddress.patchValue(patch);
-                const cityInput: any = document.getElementById('edit-city');
-                const streetInput: any = document.getElementById('edit-street');
-                cityInput.value = this.selectedCustomerAddress[0].cityName;
-                streetInput.value = this.selectedCustomerAddress[0].streetName;
-                console.log('CITY:', cityInput.value);
-                console.log('STREET', streetInput.value);
-                console.log('citiesList', this.citiesList);
-                console.log('streetList', this.streetList);
                 this.loading = false;
                 this.showModal('edit-address');
               }
@@ -490,19 +478,18 @@ export class BookComponent implements OnInit {
           this.hideModal('edit-contragent', this.newContragent);
           this.newContragent.reset();
           this.contragents.ngOnChanges();
-          // window.location.reload();
         }
       });
     }
   }
 
-  editNewAddress(): void {
+  editNewAddress(cityBlock: string, streetBlock: string): void {
     // This vars will get correct name of city and street
     let city: string;
     let street: string;
     // This constants will get the objects describing city and street
-    const cityCorrectName = this.citiesList.find(item => item.id === this.newAddress.value.place);
-    const streetCorrectName = this.streetList.find(item => item.id === this.newAddress.value.street);
+    const cityCorrectName = this.citiesList.find(item => item.id === this.newAddress.value.place.id);
+    const streetCorrectName = this.streetList.find(item => item.id === this.newAddress.value.street.id);
     if (cityCorrectName && streetCorrectName) {
       // Get correct names
       city = cityCorrectName.fullName;
@@ -511,6 +498,7 @@ export class BookComponent implements OnInit {
       // Read fields from popup
       const data = {
         building: this.newAddress.value.house,
+        cityId: this.newAddress.value.place.id,
         cityName: city,
         description: this.newAddress.value.description as string,
         house: this.newAddress.value.building as string,
@@ -520,6 +508,7 @@ export class BookComponent implements OnInit {
         pauseFrom: this.newAddress.value.timeoutFrom as string,
         pauseTo: this.newAddress.value.timeoutTo as string,
         room: this.newAddress.value.apartment as string,
+        streetId: this.newAddress.value.street.id,
         streetName: street,
         timeFrom: this.newAddress.value.deliveryFrom as string,
         timeTo: this.newAddress.value.deliveryTo as string,
@@ -535,7 +524,24 @@ export class BookComponent implements OnInit {
           if (response.status === 200) {
             this.hideModal('edit-address', this.newAddress);
             this.newAddress.reset();
-            // window.location.reload();
+            const cityInput: any = document.getElementById(cityBlock);
+            const streetInput: any = document.getElementById(streetBlock);
+            const cityInput2: any = document.getElementById('new-city');
+            const streetInput2: any = document.getElementById('new-street');
+            if (cityInput && streetInput && cityInput2 && streetInput2) {
+              cityInput.value = '';
+              streetInput.value = '';
+              cityInput2.value = '';
+              streetInput2.value = '';
+            }
+            this.citiesList = [];
+            this.streetList = [];
+            this.street = {
+              cityCode: '',
+              regionCode: '',
+              districtCode: '',
+              localityCode: ''
+            };
             this.addresslist.ngOnChanges();
           }
         });
