@@ -293,11 +293,11 @@
         <input (input)="onUserPageGrid($event)" class="controls-current-number" type="number" value="10">
       </div>
       <div class="page-controls">
-        <span (click)="onBtPrevious()" class="page-prev"></span>
+        <span id="prev" (click)="onBtPrevious()" class="page-prev"></span>
         <span id="current-address" class="page-current"></span>
         <span class="page-of">из</span>
         <span id="total-address" class="page-total"></span>
-        <span (click)="onBtNext()" class="page-next"></span>
+        <span id="next" (click)="onBtNext()" class="page-next"></span>
       </div>
     </div>
   </div>

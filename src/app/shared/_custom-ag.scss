@@ -228,12 +228,20 @@
   cursor: pointer;
 }
 
+.page-prev-white {
+  background-image: url("../../assets/img/common/prev-white.svg") !important;
+}
+
 .page-next {
   display: block;
   width: 9px;
   height: 15px;
   background-image: url("../../assets/img/common/next.svg");
   cursor: pointer;
+}
+
+.page-next-grey {
+  background-image: url("../../assets/img/common/next-grey.svg") !important;
 }
 
 .page-current {
