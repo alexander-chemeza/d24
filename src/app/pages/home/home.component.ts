@@ -143,8 +143,6 @@ export class HomeComponent implements OnInit, OnChanges {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
     this.getTable();
-    const currentPage = this.gridApi.paginationGetCurrentPage();
-    console.log(currentPage);
   }
 
   onPaginationChanged(event: any, space: string): void {
