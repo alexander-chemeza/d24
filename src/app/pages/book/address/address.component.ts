@@ -46,7 +46,6 @@ export class AddressComponent implements OnInit, OnChanges {
         clicked: (target: any): void => {
           if (target === 'delete') {
             const id = this.rowDataAddress[Number(this.gridApi.getFocusedCell().rowIndex)].id;
-            console.log(id);
             if (id) {
               this.service.deleteUserCustomerAddress(id).subscribe(response => {
                 if (response.status === 200) {
@@ -56,12 +55,10 @@ export class AddressComponent implements OnInit, OnChanges {
             }
           } else if (target === 'edit') {
             const id = this.rowDataAddress[Number(this.gridApi.getFocusedCell().rowIndex)].id;
-            console.log('Address id', id);
             if (this.customerId) {
               this.service.getAllUserCustomerAddress(this.customerId).subscribe(response => {
                 if (response.status === 200) {
                   const selectedAgentAddress = response.body.filter((item: any) => item.id === id);
-                  console.log('selected', selectedAgentAddress);
                   this.onCustomerAddressEdit.emit(selectedAgentAddress);
                 }
               });
@@ -98,19 +95,16 @@ export class AddressComponent implements OnInit, OnChanges {
     // Clear rowDataAddress after previous user actions
     this.rowDataAddress = [];
     // Check if we've got customerID
-    console.log('Reading from addressbook: ' + this.customerId);
     // Get data from database
     if (this.customerId) {
       this.service.getAllUserCustomerAddress(this.customerId).subscribe(response => {
         if (response.status === 200) {
-          console.log('Addresslisting', response.body);
           for (const item of response.body) {
             this.rowDataAddress.push({
               name: `${item.cityName}, ${item.streetName}`,
               id: item.id
             });
           }
-          console.log('We have got', this.rowDataAddress);
           this.gridApi.setRowData(this.rowDataAddress);
         }
       });
@@ -121,6 +115,13 @@ export class AddressComponent implements OnInit, OnChanges {
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    const totalPages = this.gridApi.paginationGetTotalPages();
+    const nextBtn: any = document.getElementById('next');
+    if (totalPages === 1) {
+      nextBtn.classList.add('page-next-grey');
+    } else {
+      nextBtn.classList.remove('page-next-grey');
+    }
   }
   // Pagination change event
   onPaginationChanged(event: any, space: string): void {
@@ -128,24 +129,72 @@ export class AddressComponent implements OnInit, OnChanges {
       setText(`#current-${space}`, this.gridApi.paginationGetCurrentPage() + 1);
       setText(`#total-${space}`, this.gridApi.paginationGetTotalPages());
     }
+    const totalPages = this.gridApi.paginationGetTotalPages();
+    const nextBtn: any = document.getElementById('next');
+    nextBtn.classList.remove('page-next-grey');
+    if (totalPages === 1) {
+      nextBtn.classList.add('page-next-grey');
+    } else {
+      nextBtn.classList.remove('page-next-grey');
+    }
   }
   // Controls event
   onBtNext(): void {
+    const currentPage = this.gridApi.paginationGetCurrentPage();
+    const totalPages = this.gridApi.paginationGetTotalPages();
+    const prevBtn: any = document.getElementById('prev');
+    const nextBtn: any = document.getElementById('next');
     this.gridApi.paginationGoToNextPage();
+    if (currentPage + 1 !== totalPages) {
+      if (currentPage === 0) {
+        prevBtn.classList.add('page-prev-white');
+      } else if (currentPage === totalPages - 2) {
+        nextBtn.classList.add('page-next-grey');
+      }
+    }
   }
   // Controls event
   onBtPrevious(): void {
+    const currentPage = this.gridApi.paginationGetCurrentPage();
+    const totalPages = this.gridApi.paginationGetTotalPages();
+    const prevBtn: any = document.getElementById('prev');
+    const nextBtn: any = document.getElementById('next');
     this.gridApi.paginationGoToPreviousPage();
+    if (currentPage + 1 !== totalPages) {
+      if (currentPage === totalPages - 1) {
+        nextBtn.classList.remove('page-next-grey');
+      } else if (currentPage === 1) {
+        prevBtn.classList.remove('page-prev-white');
+      }
+    }
   }
   // Pagination change event
   onUserPageGrid(event: any): void {
     this.gridApi.paginationSetPageSize(Number(event.target.value));
+    const currentPage = this.gridApi.paginationGetCurrentPage();
+    const totalPages = this.gridApi.paginationGetTotalPages();
+    const nextBtn: any = document.getElementById('next');
+    if (totalPages === 1) {
+      nextBtn.classList.add('page-next-grey');
+    } else {
+      nextBtn.classList.remove('page-next-grey');
+    }
   }
   // Emit address ID
   selectedRow(event: any): void{
     if (event.node.isSelected()) {
       const id = event.node.data.id;
       this.onSelectAddressId.emit(id);
+    }
+  }
+
+  ifChanged(event: any): void {
+    const totalPages = this.gridApi.paginationGetTotalPages();
+    const nextBtn: any = document.getElementById('next');
+    if (totalPages === 1) {
+      nextBtn.classList.add('page-next-grey');
+    } else {
+      nextBtn.classList.remove('page-next-grey');
     }
   }
 

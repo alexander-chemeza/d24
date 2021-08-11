@@ -150,6 +150,13 @@ export class ContactsComponent implements OnInit, OnChanges {
   onGridReady(params: any): void {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
+    const totalPages = this.gridApi.paginationGetTotalPages();
+    const nextBtn: any = document.getElementById('next');
+    if (totalPages === 1) {
+      nextBtn.classList.add('page-next-grey');
+    } else {
+      nextBtn.classList.remove('page-next-grey');
+    }
   }
   // Pagination event
   onPaginationChanged(event: any, space: string): void {
@@ -157,14 +164,44 @@ export class ContactsComponent implements OnInit, OnChanges {
       setText(`#current-${space}`, this.gridApi.paginationGetCurrentPage() + 1);
       setText(`#total-${space}`, this.gridApi.paginationGetTotalPages());
     }
+
+    const totalPages = this.gridApi.paginationGetTotalPages();
+    const nextBtn: any = document.getElementById('next');
+    if (totalPages === 1) {
+      nextBtn.classList.add('page-next-grey');
+    } else {
+      nextBtn.classList.remove('page-next-grey');
+    }
   }
   // Controls event
   onBtNext(): void {
+    const currentPage = this.gridApi.paginationGetCurrentPage();
+    const totalPages = this.gridApi.paginationGetTotalPages();
+    const prevBtn: any = document.getElementById('prev');
+    const nextBtn: any = document.getElementById('next');
     this.gridApi.paginationGoToNextPage();
+    if (currentPage + 1 !== totalPages) {
+      if (currentPage === 0) {
+        prevBtn.classList.add('page-prev-white');
+      } else if (currentPage === totalPages - 2) {
+        nextBtn.classList.add('page-next-grey');
+      }
+    }
   }
   // Controls event
   onBtPrevious(): void {
+    const currentPage = this.gridApi.paginationGetCurrentPage();
+    const totalPages = this.gridApi.paginationGetTotalPages();
+    const prevBtn: any = document.getElementById('prev');
+    const nextBtn: any = document.getElementById('next');
     this.gridApi.paginationGoToPreviousPage();
+    if (currentPage + 1 !== totalPages) {
+      if (currentPage === totalPages - 1) {
+        nextBtn.classList.remove('page-next-grey');
+      } else if (currentPage === 1) {
+        prevBtn.classList.remove('page-prev-white');
+      }
+    }
   }
   // Pagination event
   onUserPageGrid(event: any): void {
