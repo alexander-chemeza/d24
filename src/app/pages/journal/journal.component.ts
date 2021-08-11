@@ -436,11 +436,29 @@ export class JournalComponent implements OnInit, OnChanges {
   }
 
   onBtNext(): void {
+    const currentPage = this.gridApi.paginationGetCurrentPage();
+    const totalPages = this.gridApi.paginationGetTotalPages();
+    const prevBtn: any = document.getElementById('prev');
+    const nextBtn: any = document.getElementById('next');
     this.gridApi.paginationGoToNextPage();
+    if (currentPage === 0) {
+      prevBtn.classList.add('page-prev-white');
+    } else if (currentPage === totalPages - 2) {
+      nextBtn.classList.add('page-next-grey');
+    }
   }
 
   onBtPrevious(): void {
+    const currentPage = this.gridApi.paginationGetCurrentPage();
+    const totalPages = this.gridApi.paginationGetTotalPages();
+    const prevBtn: any = document.getElementById('prev');
+    const nextBtn: any = document.getElementById('next');
     this.gridApi.paginationGoToPreviousPage();
+    if (currentPage === totalPages - 1) {
+      nextBtn.classList.remove('page-next-grey');
+    } else if (currentPage === 1) {
+      prevBtn.classList.remove('page-prev-white');
+    }
   }
 
   onUserPageGrid(event: any): void {
