@@ -7,7 +7,27 @@
   height: 100%;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: max-content;
+  grid-template-rows: auto;
+
+  & .grey-box {
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+
+    & .row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      & img {
+        margin-right: 15px;
+      }
+    }
+  }
 
   & .dark-grey-box {
     width: 100%;

@@ -1,34 +1,55 @@
-<div class="documents-content">
+<!--<div class="documents-content">-->
 <!--  <form [formGroup]="addFileForm" class="white-box">-->
 <!--    <input (input)="saveFile($event)" formControlName="file" type="file">-->
 <!--  </form>-->
-  <div class="dark-grey-box pt-0 pr-0 pl-0">
-    <div class="row-table">
-      <div class="grey-box pr-0 pl-0">
-        <ag-grid-angular
-          style="width: 100%; height: 100%; overflow: visible"
-          class="ag-theme-alpine"
-          [headerHeight]="0"
-          [suppressPaginationPanel]="true"
-          [debug]="true"
-          [suppressScrollOnNewData]="true"
-          [rowData]="rowData"
-          [columnDefs]="columnDefs"
-          [defaultColDef]="defaultColDef"
-          [suppressRowClickSelection]="true"
-          [pagination]="true"
-          [paginationPageSize]="paginationPageSize"
-          (paginationChanged)="onPaginationChanged()"
-          (gridReady)="onGridReady($event)"
-        >
-        </ag-grid-angular>
-      </div>
+<!--  <div class="dark-grey-box pt-0 pr-0 pl-0">-->
+<!--    <div class="row-table">-->
+<!--      <div class="grey-box pr-0 pl-0">-->
+<!--        <ag-grid-angular-->
+<!--          style="width: 100%; height: 100%; overflow: visible"-->
+<!--          class="ag-theme-alpine"-->
+<!--          [headerHeight]="0"-->
+<!--          [suppressPaginationPanel]="true"-->
+<!--          [debug]="true"-->
+<!--          [suppressScrollOnNewData]="true"-->
+<!--          [rowData]="rowData"-->
+<!--          [columnDefs]="columnDefs"-->
+<!--          [defaultColDef]="defaultColDef"-->
+<!--          [suppressRowClickSelection]="true"-->
+<!--          [pagination]="true"-->
+<!--          [paginationPageSize]="paginationPageSize"-->
+<!--          (paginationChanged)="onPaginationChanged()"-->
+<!--          (gridReady)="onGridReady($event)"-->
+<!--        >-->
+<!--        </ag-grid-angular>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--    <div class="row-controls pt-30 pl-30 pr-30">-->
+<!--      <div class="num-of-items">-->
+<!--        <span>На странице</span>-->
+<!--        <input class="controls-current-number" (input)="onUserPageGrid($event)" style="max-width: 150px" type="number" value="10">-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="documents-content">
+  <div class="grey-box">
+    <div class="row">
+      <img src="../../../assets/img/menu/docs-dark.svg" alt="ico">
+      <a download href="../../shared/files/reestr_zayavok_d24_b2b.xlsx">Реестр заявок</a>
     </div>
-    <div class="row-controls pt-30 pl-30 pr-30">
-      <div class="num-of-items">
-        <span>На странице</span>
-        <input class="controls-current-number" (input)="onUserPageGrid($event)" style="max-width: 150px" type="number" value="10">
-      </div>
+    <div class="row">
+      <img src="../../../assets/img/menu/docs-dark.svg" alt="ico">
+      <a download href="../../shared/files/лицензия%20почтовая.pdf">Лицензия почтовая</a>
+    </div>
+    <div class="row">
+      <img src="../../../assets/img/menu/docs-dark.svg" alt="ico">
+      <a download href="../../shared/files/Регламент_ООО_Доставлено_с_22_июня_2021.pdf">Регламент</a>
+    </div>
+    <div class="row">
+      <img src="../../../assets/img/menu/docs-dark.svg" alt="ico">
+      <a download href="../../shared/files/св-во%20Доставлено.pdf">Свидетельство</a>
     </div>
   </div>
 </div>
