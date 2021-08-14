@@ -1,11 +1,31 @@
 .instruction-content {
   width: 100%;
   height: 100%;
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: min-content calc(100% - 255px);
-  grid-template-areas: "buttons" "main" "controls";
-  grid-gap: 30px;
+  //display: grid;
+  //grid-template-columns: 1fr;
+  //grid-template-rows: min-content calc(100% - 255px);
+  //grid-template-areas: "buttons" "main" "controls";
+  //grid-gap: 30px;
+
+  & .grey-box {
+    width: 100%;
+    height: 100%;
+    padding: 30px;
+
+    & .row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+
+      & img {
+        margin-right: 15px;
+      }
+    }
+  }
 
   & .row-1 {
     grid-area: buttons;
