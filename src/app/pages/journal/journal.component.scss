@@ -595,6 +595,14 @@ button {
       width: 50%;
       box-sizing: border-box;
 
+      &:nth-of-type(13) {
+        margin-top: 46px !important;
+      }
+
+      &:nth-of-type(14) {
+        margin-top: 46px !important;
+      }
+
       & .sticker {
         width: 100%;
         display: flex;
