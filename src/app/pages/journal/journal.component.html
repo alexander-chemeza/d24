@@ -601,7 +601,7 @@
     <div class="popup_title">Печать наклеек</div>
 
     <div class="grey-box flex justify-content-between mb-30">
-      <div>
+      <div style="margin-right: 10px">
         <div class="popup_subtitle">Номер:</div>
         <label for="">{{blankToType}}</label>
 <!--        <mat-form-field floatLabel="never">-->
@@ -620,7 +620,7 @@
     </div>
 
     <div class="sticker-box" id="stickers">
-      <div *ngFor="let item of selectedBlanksArraysForSticker">
+      <div *ngFor="let item of selectedBlanksArraysForSticker" style="width: 50%">
         <!-- {{item.id}} -->
         <div class="col-50 sticker">
           <div class="flex justify-content-between align-items-start">
@@ -636,7 +636,6 @@
               {{item.sender_name}}
             </div>
             <div class="sticker_angle">
-
             </div>
           </div>
         </div>

@@ -585,6 +585,46 @@ button {
     font-size: 14px;
     line-height: 18px;
   }
+
+  #stickers {
+    display: flex;
+    box-sizing: border-box;
+
+    & div {
+      display: flex;
+      width: 50%;
+      box-sizing: border-box;
+
+      & .sticker {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+
+        & div {
+          width: 100%;
+          display: flex;
+          box-sizing: border-box;
+
+          & div:first-of-type {
+            width: 70%;
+          }
+
+          & div:last-of-type {
+            width: 30%;
+          }
+
+          & .sticker_angle {
+            width: 34px !important;
+            height: 34px !important;
+            max-width: 34px !important;
+            max-height: 34px !important;
+            display: block !important;
+          }
+        }
+      }
+    }
+  }
   .close-btn {
     display: none !important;
   }
