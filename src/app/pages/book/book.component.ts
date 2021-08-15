@@ -14,6 +14,9 @@ import {NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Route
 })
 
 export class BookComponent implements OnInit {
+  contactsPhoneCode1 = false;
+  contactsPhoneCode2 = false;
+  contactsFieldIsEmpty = false;
   loading = false;
   userOldInfo: any = sessionStorage.getItem('currentUser');
   user: any;
@@ -214,6 +217,12 @@ export class BookComponent implements OnInit {
     // this.citiesList = [];
     this.streetList = [];
     this.selectedCustomerAddress = null;
+
+    if (id === 'new-contact' || id === 'edit-contact') {
+      this.contactsFieldIsEmpty = false;
+      this.contactsPhoneCode2 = false;
+      this.contactsPhoneCode1 = false;
+    }
   }
   getCities(): void {
     this.service.cities().subscribe(data => {
@@ -267,24 +276,35 @@ export class BookComponent implements OnInit {
     };
 
 
-    if (data.email  && data.name && data.phone && data.phone2 && data.position) {
-      for (const item of contacts) {
-        item.classList.remove('alert-input');
+    if (data.name && data.phone && data.phone2) {
+      const t1 = data.phone.slice(0, 2);
+      const t2 = data.phone2.slice(0, 2);
+      this.contactsFieldIsEmpty = false;
+
+      if (t1 === '25' || t1 === '29' || t1 === '33' || t1 === '44') {
+        this.contactsPhoneCode1 = false;
+      } else {
+        this.contactsPhoneCode1 = true;
       }
-     // Post to backend
-     this.service.saveUserCustomerContact(data).subscribe(response => {
-       if (response.status === 200) {
-         this.hideModal('new-contact', this.newContact);
-         this.newContact.reset();
-         this.contactslist.ngOnChanges();
-       }
-     });
+
+      if (t2 === '25' || t2 === '29' || t2 === '33' || t2 === '44') {
+        this.contactsPhoneCode2 = false;
+      } else {
+        this.contactsPhoneCode2 = true;
+      }
+
+      if (!this.contactsPhoneCode1 && !this.contactsPhoneCode2) {
+        // Post to backend
+        this.service.saveUserCustomerContact(data).subscribe(response => {
+          if (response.status === 200) {
+            this.hideModal('new-contact', this.newContact);
+            this.newContact.reset();
+            this.contactslist.ngOnChanges();
+          }
+        });
+      }
    } else {
-      for (const item of contacts) {
-        if (item.value === null || item.value === '') {
-          item.classList.add('alert-input');
-        }
-      }
+      this.contactsFieldIsEmpty = true;
     }
   }
   // New address button event
@@ -612,23 +632,34 @@ export class BookComponent implements OnInit {
       position: this.newContact.value.position as string
     };
 
-    if (data.email  && data.name && data.phone && data.phone2 && data.position) {
-      for (const item of contacts) {
-        item.classList.remove('alert-input');
+    if (data.name && data.phone && data.phone2) {
+      const t1 = data.phone.slice(0, 2);
+      const t2 = data.phone2.slice(0, 2);
+      this.contactsFieldIsEmpty = false;
+
+      if (t1 === '25' || t1 === '29' || t1 === '33' || t1 === '44') {
+        this.contactsPhoneCode1 = false;
+      } else {
+        this.contactsPhoneCode1 = true;
       }
-      // Post to backend
-      this.service.saveUserCustomerContact(data).subscribe(response => {
-        if (response.status === 200) {
-          this.hideModal('edit-contact', this.newContact);
-          this.contactslist.ngOnChanges();
-        }
-      });
+
+      if (t2 === '25' || t2 === '29' || t2 === '33' || t2 === '44') {
+        this.contactsPhoneCode2 = false;
+      } else {
+        this.contactsPhoneCode2 = true;
+      }
+
+      if (!this.contactsPhoneCode1 && !this.contactsPhoneCode2) {
+        // Post to backend
+        this.service.saveUserCustomerContact(data).subscribe(response => {
+          if (response.status === 200) {
+            this.hideModal('edit-contact', this.newContact);
+            this.contactslist.ngOnChanges();
+          }
+        });
+      }
     } else {
-      for (const item of contacts) {
-        if (item.value === null || item.value === '') {
-          item.classList.add('alert-input');
-        }
-      }
+      this.contactsFieldIsEmpty = true;
     }
   }
 
