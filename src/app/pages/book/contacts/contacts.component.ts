@@ -44,14 +44,6 @@ export class ContactsComponent implements OnInit, OnChanges {
       maxWidth: 400
     },
     {
-      headerName: 'Телефон',
-      field: 'phone',
-      sortable: true,
-      flex: 1,
-      minWidth: 200,
-      maxWidth: 400
-    },
-    {
       headerName: 'Телефон 1',
       field: 'tel1',
       sortable: true,
@@ -133,7 +125,6 @@ export class ContactsComponent implements OnInit, OnChanges {
             this.rowDataContacts.push({
               contactName: item.name,
               employee: item.position,
-              phone: '',
               tel1: item.phone,
               tel2: item.phone2,
               email: item.email,

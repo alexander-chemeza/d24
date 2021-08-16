@@ -270,15 +270,15 @@ export class BookComponent implements OnInit {
       email: this.newContact.value.email as string,
       mainContact: this.newContact.value.type as boolean,
       name: this.newContact.value.name as string,
-      phone: this.newContact.value.tel1 as string,
-      phone2: this.newContact.value.tel2 as string,
+      phone: `+375${this.newContact.value.tel1}` as string,
+      phone2: `+375${this.newContact.value.tel2}` as string,
       position: this.newContact.value.position as string
     };
 
 
-    if (data.name && data.phone && data.phone2) {
-      const t1 = data.phone.slice(0, 2);
-      const t2 = data.phone2.slice(0, 2);
+    if (data.name && data.phone) {
+      const t1 = data.phone.slice(4, 6);
+      const t2 = data.phone2.slice(4, 6);
       this.contactsFieldIsEmpty = false;
 
       if (t1 === '25' || t1 === '29' || t1 === '33' || t1 === '44') {
@@ -287,13 +287,18 @@ export class BookComponent implements OnInit {
         this.contactsPhoneCode1 = true;
       }
 
-      if (t2 === '25' || t2 === '29' || t2 === '33' || t2 === '44') {
-        this.contactsPhoneCode2 = false;
+      if (data.phone2.length === 13) {
+        if (t2 === '25' || t2 === '29' || t2 === '33' || t2 === '44') {
+          this.contactsPhoneCode2 = false;
+        } else {
+          this.contactsPhoneCode2 = true;
+          return;
+        }
       } else {
-        this.contactsPhoneCode2 = true;
+        data.phone2 = '';
       }
 
-      if (!this.contactsPhoneCode1 && !this.contactsPhoneCode2) {
+      if (!this.contactsPhoneCode1) {
         // Post to backend
         this.service.saveUserCustomerContact(data).subscribe(response => {
           if (response.status === 200) {
@@ -610,8 +615,8 @@ export class BookComponent implements OnInit {
     this.newContact.patchValue({
       type: this.selectedCustomerContact[0].mainContact,
       name: this.selectedCustomerContact[0].name,
-      tel1: this.selectedCustomerContact[0].phone,
-      tel2: this.selectedCustomerContact[0].phone2,
+      tel1: this.selectedCustomerContact[0].phone.slice(4,13),
+      tel2: this.selectedCustomerContact[0].phone2.slice(4,13),
       email: this.selectedCustomerContact[0].email,
       position: this.selectedCustomerContact[0].position
     });
@@ -627,14 +632,14 @@ export class BookComponent implements OnInit {
       id: this.selectedCustomerContact[0].id,
       mainContact: this.newContact.value.type as boolean,
       name: this.newContact.value.name as string,
-      phone: this.newContact.value.tel1 as string,
-      phone2: this.newContact.value.tel2 as string,
+      phone: `+375${this.newContact.value.tel1}` as string,
+      phone2: `+375${this.newContact.value.tel2}` as string,
       position: this.newContact.value.position as string
     };
 
-    if (data.name && data.phone && data.phone2) {
-      const t1 = data.phone.slice(0, 2);
-      const t2 = data.phone2.slice(0, 2);
+    if (data.name && data.phone) {
+      const t1 = data.phone.slice(4, 6);
+      const t2 = data.phone2.slice(4, 6);
       this.contactsFieldIsEmpty = false;
 
       if (t1 === '25' || t1 === '29' || t1 === '33' || t1 === '44') {
@@ -643,13 +648,18 @@ export class BookComponent implements OnInit {
         this.contactsPhoneCode1 = true;
       }
 
-      if (t2 === '25' || t2 === '29' || t2 === '33' || t2 === '44') {
-        this.contactsPhoneCode2 = false;
+      if (data.phone2.length === 13) {
+        if (t2 === '25' || t2 === '29' || t2 === '33' || t2 === '44') {
+          this.contactsPhoneCode2 = false;
+        } else {
+          this.contactsPhoneCode2 = true;
+          return;
+        }
       } else {
-        this.contactsPhoneCode2 = true;
+        data.phone2 = '';
       }
 
-      if (!this.contactsPhoneCode1 && !this.contactsPhoneCode2) {
+      if (!this.contactsPhoneCode1) {
         // Post to backend
         this.service.saveUserCustomerContact(data).subscribe(response => {
           if (response.status === 200) {
