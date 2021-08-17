@@ -561,7 +561,7 @@ export class JournalComponent implements OnInit, OnChanges {
       }
     }
     this.blankToType = this.selectedBlankArrays.map((item: any) => item.order_number).join(', ');
-    this.showModal('sticker-printing');
+    this.showModal('stickers-modal');
   }
 
   public openPDF(id: string): void {

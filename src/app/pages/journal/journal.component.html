@@ -647,6 +647,41 @@
   </div>
 </div>
 
+<div id="stickers-modal" class="modal stickers-modal">
+  <div class="stickers-modal-content">
+    <button class="active-btn circle-btn close-btn" (click)="hideModal('stickers-modal')"></button>
+    <div class="row-contols">
+      <p class="stick-header">Печать наклеек</p>
+      <div class="grey-box">
+        <div class="col-nums">
+          <p class="num">Номер</p>
+          <p class="num-item">{{blankToType}}</p>
+        </div>
+        <div class="col-controls">
+          <input type="submit" value="Распечатать" (click)="printBlanks()">
+          <input type="submit" value="Сохранить в PDF" (click)="openPDF('stickers-box')">
+        </div>
+      </div>
+    </div>
+    <div class="row-stickers">
+      <div id="stickers-box" class="w-a4">
+        <div class="item" *ngFor="let item of selectedBlanksArraysForSticker">
+          <div class="s">
+            <div class="row-data">
+              <p class="order-num">{{item.order_number}}</p>
+              <qrcode [qrdata]="item.order_number" [width]="148" [errorCorrectionLevel]="'M'"></qrcode>
+            </div>
+            <div class="row-sender">
+              <p class="sender">{{item.sender_name}}</p>
+              <div class="angle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div id="report-blank" class="report-blank modal">
   <div class="popup-align popup popup-bg">
     <div class="popup_title">Печать Бланка</div>

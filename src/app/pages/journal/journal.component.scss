@@ -726,10 +726,10 @@ button {
     display:table-row-group;
   }
 }
-.width-a4 {
+.width-a4, .w-a4 {
   page-break-after: always;
 
-  .pdf-page {
+  .pdf-page, .s {
     page-break-after: always;
   }
 }
@@ -760,4 +760,125 @@ button {
 
 .hide-modal {
   display: none !important;
+}
+
+.stickers-modal {
+  width: 100%;
+  height: 100%;
+  max-width: 1000px;
+  max-height: 500px;
+
+  &-content {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content auto;
+    grid-gap: 20px;
+    overflow: hidden;
+
+    & .close-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      box-shadow: none;
+    }
+
+    & .row-contols {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: min-content min-content;
+      grid-gap: 30px;
+
+      .stick-header {
+        font-size: 14px;
+        line-height: 17px;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+        margin-bottom: 30px;
+        font-weight: 500;
+      }
+
+      & .grey-box {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: min-content;
+
+        .col-nums .num {
+          font-size: 14px;
+          line-height: 17px;
+          color: rgba(0, 0, 0, 0.5);
+          font-weight: 600;
+        }
+
+        .col-nums .num-item {
+          font-family: "Montserrat-SemiBold", sans-serif !important;
+          font-size: 12px;
+        }
+
+        .col-controls input {
+          margin-left: 45px;
+        }
+      }
+    }
+
+    & .row-stickers {
+      width: 100%;
+      background-color: white;
+      overflow: auto;
+
+      & #stickers-box {
+        padding: 30px;
+        box-sizing: border-box;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        overflow: auto;
+
+        & .item {
+          border: 1px solid black;
+          margin-left: -1px;
+          margin-top: -1px;
+          padding: 10px 10px 25px 25px;
+          box-sizing: border-box;
+
+          & .s {
+            & .row-data {
+              display: grid;
+              grid-template-columns: 3fr 1fr;
+
+              & .order-num {
+                margin-top: 15px !important;
+                font-weight: 500;
+                font-size: 34.2966px;
+                line-height: 42px;
+                color: #000000;
+              }
+            }
+
+            & .row-sender {
+              display: grid;
+              grid-template-columns: 5fr 1fr;
+
+              .sender {
+                font-weight: 500;
+                font-size: 19.5981px;
+                line-height: 24px;
+                color: #000000;
+                max-width: 70%;
+              }
+
+              & .angle {
+                width: 40px;
+                height: 40px;
+                border-bottom: 1px solid black;
+                border-right: 1px solid black;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
