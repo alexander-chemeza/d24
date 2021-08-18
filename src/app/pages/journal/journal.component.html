@@ -712,9 +712,9 @@
       </div>
     </div>
 
-    <div class="report-box">
-      <div class="width-a4" id="blanks"> <!-- БЛАНК ЭКСПРЕСС-ДОСТАВКИ -->
-        <div *ngFor="let item of selectedBlankArrays">
+    <div class="report-box" style="padding: 0">
+      <div class="width-a4" id="blanks" style="padding: 30px"> <!-- БЛАНК ЭКСПРЕСС-ДОСТАВКИ -->
+        <div *ngFor="let item of selectedBlankArrays" class="couple">
           <div [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
             <div class="blank">
               <table>

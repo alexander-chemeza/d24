@@ -898,3 +898,50 @@ button {
     }
   }
 }
+
+.pdf-page {
+  &:first-of-type {
+    margin: 0;
+  }
+  margin-top: -30px;
+}
+
+#blanks .couple {
+  &:first-of-type {
+    margin: 0;
+  }
+  margin-top: 733.39px;
+}
+
+@media (max-width: 1366px) {
+  .pdf-page {
+    &:first-of-type {
+      margin: 0;
+    }
+    margin-top: -28px;
+  }
+
+  #blanks .couple {
+    &:first-of-type {
+      margin: 0;
+    }
+    margin-top: 733.39px;
+  }
+}
+
+@media (max-width: 1600px) {
+  .pdf-page {
+    &:first-of-type {
+      margin: 0;
+    }
+    margin-top: -28px;
+  }
+
+  #blanks .couple {
+    &:first-of-type {
+      margin: 0;
+    }
+    margin-top: 735.39px;
+  }
+}
+
