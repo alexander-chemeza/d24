@@ -567,7 +567,7 @@ export class JournalComponent implements OnInit, OnChanges {
   public openPDF(id: string): void {
     const DATA: any = document.getElementById(id);
 
-    html2canvas(DATA).then(canvas => {
+    html2canvas(DATA, {scale: 2}).then(canvas => {
       const imgWidth = 210;
       const pageHeight = 295;
       const imgHeight = canvas.height * imgWidth / canvas.width;
