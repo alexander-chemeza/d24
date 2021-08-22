@@ -713,7 +713,7 @@
     </div>
 
     <div class="report-box" style="padding: 0">
-      <div class="width-a4" id="blanks" style="padding: 30px"> <!-- БЛАНК ЭКСПРЕСС-ДОСТАВКИ -->
+      <div class="width-a4" id="blanks" style="padding: 40px"> <!-- БЛАНК ЭКСПРЕСС-ДОСТАВКИ -->
         <div *ngFor="let item of selectedBlankArrays" class="couple">
           <div [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
             <div class="blank">
@@ -727,7 +727,7 @@
                     БЛАНК  ДОСТАВКИ  № <br> {{item.order_number}}
                   </th>
                   <th colspan="6" style="text-align: right;">
-                    <qrcode [qrdata]="item.order_number" [width]="97.5" [errorCorrectionLevel]="'M'"></qrcode>
+                    <qrcode [qrdata]="item.order_number" [width]="80" [errorCorrectionLevel]="'M'"></qrcode>
                   </th>
                 </tr>
                 </thead>
@@ -863,7 +863,7 @@
                   </td>
                   <td colspan="2">
                     <strong>Дата</strong> <br>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>
                   </td>
                   <td colspan="1">
                     <strong>Время</strong>
@@ -882,7 +882,7 @@
                 <tr style="height: 14mm;">
                   <td colspan="2">
                     <strong>Дата</strong> <br>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>
                   </td>
                   <td colspan="2">
                     <strong>Время прибытия</strong>
@@ -895,7 +895,7 @@
                   </td>
                   <td colspan="2">
                     <strong>Дата</strong> <br>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>
                   </td>
                   <td colspan="2">
                     <strong>Время прибытия</strong>
@@ -933,7 +933,7 @@
           <div style="break-after:page"></div>
           <br>
           <br>
-          <div [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
+          <div [id]="item.order_number" class="pdf-page" style="margin-top: -30px; margin-bottom: 30px;"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
             <div class="blank">
               <table>
                 <thead>
@@ -945,7 +945,7 @@
                     БЛАНК  ДОСТАВКИ  № <br> {{item.order_number}}
                   </th>
                   <th colspan="6" style="text-align: right;">
-                    <qrcode [qrdata]="item.order_number" [width]="97.5" [errorCorrectionLevel]="'M'"></qrcode>
+                    <qrcode [qrdata]="item.order_number" [width]="80" [errorCorrectionLevel]="'M'"></qrcode>
                   </th>
                 </tr>
                 </thead>
@@ -1081,7 +1081,7 @@
                   </td>
                   <td colspan="2">
                     <strong>Дата</strong> <br>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>
                   </td>
                   <td colspan="1">
                     <strong>Время</strong>
@@ -1100,7 +1100,7 @@
                 <tr style="height: 14mm;">
                   <td colspan="2">
                     <strong>Дата</strong> <br>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>
                   </td>
                   <td colspan="2">
                     <strong>Время прибытия</strong>
@@ -1113,7 +1113,7 @@
                   </td>
                   <td colspan="2">
                     <strong>Дата</strong> <br>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>
                   </td>
                   <td colspan="2">
                     <strong>Время прибытия</strong>
@@ -1163,7 +1163,7 @@
                     БЛАНК  ДОСТАВКИ  № <br> {{item.order_number}}
                   </th>
                   <th colspan="6" style="text-align: right;">
-                    <qrcode [qrdata]="item.order_number" [width]="97.5" [errorCorrectionLevel]="'M'"></qrcode>
+                    <qrcode [qrdata]="item.order_number" [width]="80" [errorCorrectionLevel]="'M'"></qrcode>
                   </th>
                 </tr>
                 </thead>
@@ -1299,7 +1299,7 @@
                   </td>
                   <td colspan="2">
                     <strong>Дата</strong> <br>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>
                   </td>
                   <td colspan="1">
                     <strong>Время</strong>
@@ -1318,7 +1318,7 @@
                 <tr style="height: 14mm;">
                   <td colspan="2">
                     <strong>Дата</strong> <br>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>
                   </td>
                   <td colspan="2">
                     <strong>Время прибытия</strong>
@@ -1331,7 +1331,7 @@
                   </td>
                   <td colspan="2">
                     <strong>Дата</strong> <br>
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>
+                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>
                   </td>
                   <td colspan="2">
                     <strong>Время прибытия</strong>
@@ -1523,7 +1523,7 @@
 <!--                  </td>-->
 <!--                  <td colspan="2">-->
 <!--                    <strong>Дата</strong> <br>-->
-<!--                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>-->
+<!--                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>-->
 <!--                  </td>-->
 <!--                  <td colspan="1">-->
 <!--                    <strong>Время</strong>-->
@@ -1542,7 +1542,7 @@
 <!--                <tr style="height: 14mm;">-->
 <!--                  <td colspan="2">-->
 <!--                    <strong>Дата</strong> <br>-->
-<!--                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>-->
+<!--                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>-->
 <!--                  </td>-->
 <!--                  <td colspan="2">-->
 <!--                    <strong>Время прибытия</strong>-->
@@ -1555,7 +1555,7 @@
 <!--                  </td>-->
 <!--                  <td colspan="2">-->
 <!--                    <strong>Дата</strong> <br>-->
-<!--                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>-->
+<!--                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>-->
 <!--                  </td>-->
 <!--                  <td colspan="2">-->
 <!--                    <strong>Время прибытия</strong>-->
@@ -1743,7 +1743,7 @@
 <!--                  </td>-->
 <!--                  <td colspan="2">-->
 <!--                    <strong>Дата</strong> <br>-->
-<!--                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>-->
+<!--                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>-->
 <!--                  </td>-->
 <!--                  <td colspan="1">-->
 <!--                    <strong>Время</strong>-->
@@ -1762,7 +1762,7 @@
 <!--                <tr style="height: 14mm;">-->
 <!--                  <td colspan="2">-->
 <!--                    <strong>Дата</strong> <br>-->
-<!--                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>-->
+<!--                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>-->
 <!--                  </td>-->
 <!--                  <td colspan="2">-->
 <!--                    <strong>Время прибытия</strong>-->
@@ -1775,7 +1775,7 @@
 <!--                  </td>-->
 <!--                  <td colspan="2">-->
 <!--                    <strong>Дата</strong> <br>-->
-<!--                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/201</span>-->
+<!--                    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/2021</span>-->
 <!--                  </td>-->
 <!--                  <td colspan="2">-->
 <!--                    <strong>Время прибытия</strong>-->
