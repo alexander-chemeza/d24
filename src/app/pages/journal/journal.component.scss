@@ -563,171 +563,171 @@ button {
   }
 }
 
-@media print {
-
-  .blank table .report-header {
-    color: #000;
-    background: #fff;
-    font-weight: bold;
-  }
-
-  #blanks, #stickers {
-    background-color: white;
-    height: 100%;
-    width: 99%;
-    // position: fixed;
-    position: relative;
-    top: 0;
-    left: 0;
-    margin: 0;
-    // padding: 15px;
-    padding: 0 !important;
-    font-size: 14px;
-    line-height: 18px;
-  }
-
-  #stickers {
-    display: flex;
-    box-sizing: border-box;
-
-    & div {
-      display: flex;
-      width: 50%;
-      box-sizing: border-box;
-
-      &:nth-of-type(13) {
-        margin-top: 46px !important;
-      }
-
-      &:nth-of-type(14) {
-        margin-top: 46px !important;
-      }
-
-      & .sticker {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-
-        & div {
-          width: 100%;
-          display: flex;
-          box-sizing: border-box;
-
-          & div:first-of-type {
-            width: 70%;
-          }
-
-          & div:last-of-type {
-            width: 30%;
-          }
-
-          & .sticker_angle {
-            width: 34px !important;
-            height: 34px !important;
-            max-width: 34px !important;
-            max-height: 34px !important;
-            display: block !important;
-          }
-        }
-      }
-    }
-  }
-  .close-btn {
-    display: none !important;
-  }
-  .pdf-page {
-    page-break-after: always;
-  }
-  .journal-content {
-    display: none;
-  }
-  .sticker_num {
-    font-size: 19px;
-  }
-  .qrcode {
-    width: 108px !important;
-    height: 108px !important;
-
-    canvas {
-      width: 108px !important;
-      height: 108px !important;
-    }
-  }
-  .report-box {
-    max-height: 100%;
-    padding: 0 !important;
-
-    .width-a4 {
-      padding: 20px !important;
-    }
-  }
-  .blank {
-    img {
-      width: 120px;
-    }
-    thead {
-      th {
-        font-size: 12px !important;
-      }
-    }
-    td {
-      font-size: 8px !important;
-    }
-  }
-  .modal {
-    position: relative;
-    top: 0;
-    left: 0;
-    transform: none;
-    box-shadow: none;
-    max-height: 100%;
-    max-width: 100% !important;
-    padding: 0 !important;
-  }
-  .popup_title {
-    display: none;
-  }
-  .grey-box {
-    display: none;
-  }
-  .pdf-page {
-    // padding: 15px;
-  }
-
-  .sticker-printing {
-    position: relative;
-    align-items: flex-start;
-  }
-  .sticker_text {
-    font-size: 16.5px;
-  }
-  .sticker-box {
-    display: block;
-    overflow: visible;
-    max-height: 100%;
-
-    & > div {
-      // break-after: page;
-      display: inline-block;
-    }
-  }
-
-  #stickers-box {
-    background-color: white;
-    width: 100%;
-    height: 100%;
-    align-items: start;
-    position: fixed;
-    left: 0;
-    top: 0;
-    margin: 0;
-    page-break-after: auto;
-
-    & .item {
-    }
-  }
-}
+//@media print {
+//
+//  .blank table .report-header {
+//    color: #000;
+//    background: #fff;
+//    font-weight: bold;
+//  }
+//
+//  #blanks, #stickers {
+//    background-color: white;
+//    height: 100%;
+//    width: 99%;
+//    // position: fixed;
+//    position: relative;
+//    top: 0;
+//    left: 0;
+//    margin: 0;
+//    // padding: 15px;
+//    padding: 0 !important;
+//    font-size: 14px;
+//    line-height: 18px;
+//  }
+//
+//  #stickers {
+//    display: flex;
+//    box-sizing: border-box;
+//
+//    & div {
+//      display: flex;
+//      width: 50%;
+//      box-sizing: border-box;
+//
+//      &:nth-of-type(13) {
+//        margin-top: 46px !important;
+//      }
+//
+//      &:nth-of-type(14) {
+//        margin-top: 46px !important;
+//      }
+//
+//      & .sticker {
+//        width: 100%;
+//        display: flex;
+//        flex-direction: column;
+//        box-sizing: border-box;
+//
+//        & div {
+//          width: 100%;
+//          display: flex;
+//          box-sizing: border-box;
+//
+//          & div:first-of-type {
+//            width: 70%;
+//          }
+//
+//          & div:last-of-type {
+//            width: 30%;
+//          }
+//
+//          & .sticker_angle {
+//            width: 34px !important;
+//            height: 34px !important;
+//            max-width: 34px !important;
+//            max-height: 34px !important;
+//            display: block !important;
+//          }
+//        }
+//      }
+//    }
+//  }
+//  .close-btn {
+//    display: none !important;
+//  }
+//  .pdf-page {
+//    page-break-after: always;
+//  }
+//  .journal-content {
+//    display: none;
+//  }
+//  .sticker_num {
+//    font-size: 19px;
+//  }
+//  .qrcode {
+//    width: 108px !important;
+//    height: 108px !important;
+//
+//    canvas {
+//      width: 108px !important;
+//      height: 108px !important;
+//    }
+//  }
+//  .report-box {
+//    max-height: 100%;
+//    padding: 0 !important;
+//
+//    .width-a4 {
+//      padding: 20px !important;
+//    }
+//  }
+//  .blank {
+//    img {
+//      width: 120px;
+//    }
+//    thead {
+//      th {
+//        font-size: 12px !important;
+//      }
+//    }
+//    td {
+//      font-size: 8px !important;
+//    }
+//  }
+//  .modal {
+//    position: relative;
+//    top: 0;
+//    left: 0;
+//    transform: none;
+//    box-shadow: none;
+//    max-height: 100%;
+//    max-width: 100% !important;
+//    padding: 0 !important;
+//  }
+//  .popup_title {
+//    display: none;
+//  }
+//  .grey-box {
+//    display: none;
+//  }
+//  .pdf-page {
+//    // padding: 15px;
+//  }
+//
+//  .sticker-printing {
+//    position: relative;
+//    align-items: flex-start;
+//  }
+//  .sticker_text {
+//    font-size: 16.5px;
+//  }
+//  .sticker-box {
+//    display: block;
+//    overflow: visible;
+//    max-height: 100%;
+//
+//    & > div {
+//      // break-after: page;
+//      display: inline-block;
+//    }
+//  }
+//
+//  #stickers-box {
+//    background-color: white;
+//    width: 100%;
+//    height: 100%;
+//    align-items: start;
+//    position: fixed;
+//    left: 0;
+//    top: 0;
+//    margin: 0;
+//    page-break-after: auto;
+//
+//    & .item {
+//    }
+//  }
+//}
 
 .pdf-page {
   page-break-after: always;
@@ -942,6 +942,28 @@ button {
       margin: 0;
     }
     margin-top: 735.39px;
+  }
+}
+
+#pdf-blanks {
+  display: none;
+}
+
+@media print {
+  .journal-content, .journal-content > div {
+    display: none;
+  }
+
+  #report-blank {
+    display: none !important;
+  }
+
+  br {
+    display: none;
+  }
+
+  #pdf-blanks {
+    display: block;
   }
 }
 

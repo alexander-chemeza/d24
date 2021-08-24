@@ -591,7 +591,15 @@ export class JournalComponent implements OnInit, OnChanges {
   }
 
   printBlanks(): void {
-    window.print();
+    // window.print();
+    const mydiv: any = document.getElementById('blanks');
+    const placeBlanks: any = document.getElementById('pdf-blanks');
+    let content: any;
+    if (mydiv && placeBlanks) {
+      content = mydiv.innerHTML;
+      placeBlanks.innerHTML = content;
+      window.print();
+    }
   }
 
   updateView(event: any): void {
