@@ -958,12 +958,30 @@ button {
     display: none !important;
   }
 
-  br {
-    display: none;
+  table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  th, td {
+    padding: 3px;
+    box-sizing: border-box;
   }
 
   #pdf-blanks {
-    display: block;
+    display: table;
+  }
+
+  .pdf-page {
+    //margin: 0;
+  }
+
+  .couple {
+    margin: 0;
+  }
+
+  .hidden-row {
+    display: none;
   }
 }
 

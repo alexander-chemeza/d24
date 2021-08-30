@@ -930,8 +930,9 @@
               </table>
             </div>
           </div>
-          <div style="break-after:page"></div>
-          <br>
+          <div class="hidden-row" style="break-after:page"></div>
+          <br class="hidden-row">
+          <br class="hidden-row">
           <br>
           <div [id]="item.order_number" class="pdf-page" style="margin-top: -30px; margin-bottom: 30px;"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
             <div class="blank">
@@ -1148,9 +1149,9 @@
               </table>
             </div>
           </div>
-          <div style="break-after:page"></div>
-          <br>
-          <br>
+          <div class="hidden-row" style="break-after:page"></div>
+          <br class="hidden-row">
+          <br class="hidden-row">
           <div *ngIf="printSenderBlank" [id]="item.order_number" class="pdf-page"> <!-- ЭКЗЕМПЛЯР ГРУЗОПОЛУЧАТЕЛЯ -->
             <div class="blank">
               <table>
@@ -1366,9 +1367,9 @@
               </table>
             </div>
           </div>
-          <div style="break-after:page"></div>
-          <br>
-          <br>
+          <div class="hidden-row" style="break-after:page"></div>
+          <br class="hidden-row">
+          <br class="hidden-row">
         </div>
 <!--        <div class="pdf-page"> &lt;!&ndash; ЭКЗЕМПЛЯР ПЕРЕВОЗЧИКА &ndash;&gt;-->
 <!--          <div class="blank">-->
