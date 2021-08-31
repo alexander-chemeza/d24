@@ -1,7 +1,7 @@
 import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {RestapiService, UserRegistration} from '../../restapi.service';
+import {Group, RestapiService, UserRegistration} from '../../restapi.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  showGroupModal = false;
   userOldInfo: any = sessionStorage.getItem('currentUser');
   user: any;
 
@@ -22,6 +23,7 @@ export class UsersComponent implements OnInit {
   paginationPageSize: any;
 
   newUserForm: any;
+  groupForm: any;
   passwordEquality: boolean;
 
   groupsList: any;
@@ -126,6 +128,18 @@ export class UsersComponent implements OnInit {
       groupName: new FormControl('', [
         Validators.required
       ])
+    });
+
+    this.groupForm = new FormGroup({
+      groupName: new FormControl('', [
+        Validators.required
+      ]),
+      book: new FormControl('', [
+        Validators.required
+      ]),
+      template: new FormControl('', [
+        Validators.required
+      ]),
     });
 
     this.getGroups();
@@ -268,6 +282,38 @@ export class UsersComponent implements OnInit {
         this.groupsList = response.body;
       }
     });
+  }
+
+  updateGroups(): void {
+    let book: boolean;
+    let template: boolean;
+
+    if (this.groupForm.value.groupName) {
+      book = true;
+    } else {
+      book = false;
+    }
+
+    if (this.groupForm.value.template) {
+      template = true;
+    } else {
+      template = false;
+    }
+    const data: Group = {
+      mainUserId: this.user.id,
+      name: this.groupForm.value.groupName,
+      addressBookAccess: book,
+      templateAcces: template
+    };
+
+    console.log('OK', data);
+
+    if (data.mainUserId && data.name) {
+      this.service.updateGroups(data).subscribe(response => {
+        if (response.status === 200) {
+        }
+      });
+    }
   }
 
   changeGroup(e: any) {

@@ -6,14 +6,14 @@
     <label class="mr-15" for="group">Показать группы</label>
     <select name="selectedGroups" [(ngModel)]="selectedGroups" (change)="changeGroup($event)">
       <option selected="selected">-- Выберите группу --</option>
-      <option *ngFor="let group of groupsList">{{group.name}}</option> 
+      <option *ngFor="let group of groupsList">{{group.name}}</option>
     </select>
-    
+
     <!-- <input class="m-0" type="text" placeholder="Выберите группу" id="group" name="group"> -->
   </div>
   <div class="grey-box access">
     <label for="submit">Доступ группе пользователей <br>к адресной книге и шаблонам:</label>
-    <input type="submit" id="submit" name="submit" value="Выбрать группу">
+    <input type="submit" id="submit" name="submit" value="Выбрать группу" (click)="showGroupModal = !showGroupModal">
   </div>
   <div class="row-table">
     <ag-grid-angular
@@ -85,5 +85,28 @@
         <input type="submit" value="Сохранить">
       </div>
     </form>
+  </div>
+</div>
+
+<div id="add-group" class="modal groups-modal" *ngIf="showGroupModal">
+  <div class="row grey-box">
+    <h1 class="grey-header">Добавить группу</h1>
+    <form [formGroup]="groupForm">
+      <input type="text" formControlName="groupName">
+      <div class="checkbox-block">
+        <input class="checkbox-block-item" type="checkbox" name="new-book" id="new-book" formControlName="book">
+        <span class="checkbox-block-icon"></span>
+      </div>
+      <label for="new-book">Адрессная книга</label>
+      <div class="checkbox-block">
+        <input class="checkbox-block-item" type="checkbox" name="new-template" id="new-template" formControlName="template">
+        <span class="checkbox-block-icon"></span>
+      </div>
+      <label for="new-template">Шаблоны</label>
+      <input type="submit" value="Добавить" (click)="updateGroups()">
+    </form>
+    <div *ngIf="groupsList.length > 0" class="row groups">
+      <p>Выберите к какой группе пользователей доступны данные адресной книги и шаблонов</p>
+    </div>
   </div>
 </div>

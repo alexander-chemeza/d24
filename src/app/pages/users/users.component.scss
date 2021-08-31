@@ -158,3 +158,29 @@
 .hide-modal {
   display: none !important;
 }
+
+.groups-modal {
+  padding: 0;
+  width: 750px;
+  top: 120px;
+  left: 59%;
+  transform: none;
+  box-shadow: none;
+
+  .grey-header {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  form {
+    display: grid;
+    grid-template-rows: min-content;
+    grid-template-columns: 7fr 1fr 4fr 1fr 4fr 4fr;
+    grid-gap: 20px;
+    align-items: center;
+
+    & label {
+      margin: 0;
+    }
+  }
+}

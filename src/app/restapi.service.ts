@@ -82,6 +82,14 @@ export interface User {
   role: string;
 }
 
+export interface Group {
+  id?: number;
+  mainUserId?: number;
+  name: string;
+  addressBookAccess: boolean;
+  templateAcces: boolean;
+}
+
 export interface UserInfo {
   userName: string;
   userEmail: string;
@@ -234,6 +242,10 @@ export class RestapiService {
   // user controller get groups GET
   public getGroups(): Observable<any> {
     return this.http.get(`${this.url}/user/group/getAll`, {observe: 'response'});
+  }
+
+  public updateGroups(group: Group): Observable<any> {
+    return this.http.post(`${this.url}/user/group/update`, group, {observe: 'response'});
   }
   // user-controller GET
   public logout(): Observable<any> {
