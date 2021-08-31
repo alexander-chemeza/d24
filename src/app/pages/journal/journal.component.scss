@@ -954,7 +954,8 @@ button {
     display: none;
   }
 
-  #report-blank {
+  #report-blank,
+  #stickers-modal {
     display: none !important;
   }
 
@@ -970,6 +971,10 @@ button {
 
   #pdf-blanks {
     display: table;
+  }
+
+  .qrcode {
+    display: block !important;
   }
 
   .pdf-page {

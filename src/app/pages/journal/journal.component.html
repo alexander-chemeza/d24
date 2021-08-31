@@ -596,56 +596,56 @@
   </div>
 </div>
 
-<div id="sticker-printing" class="sticker-printing">
-  <div class="popup-align popup popup-bg" style="padding: 30px">
-    <div class="popup_title">Печать наклеек</div>
+<!--<div id="sticker-printing" class="sticker-printing">-->
+<!--  <div class="popup-align popup popup-bg" style="padding: 30px">-->
+<!--    <div class="popup_title">Печать наклеек</div>-->
 
-    <div class="grey-box flex justify-content-between mb-30">
-      <div style="margin-right: 10px">
-        <div class="popup_subtitle">Номер:</div>
-        <label for="">{{blankToType}}</label>
-<!--        <mat-form-field floatLabel="never">-->
-<!--          <mat-select [(ngModel)]="blankToType" style="width: 250px">-->
-<!--            <mat-option *ngFor="let item of selectedBlankArrays" [value]="item.order_number">-->
+<!--    <div class="grey-box flex justify-content-between mb-30">-->
+<!--      <div style="margin-right: 10px">-->
+<!--        <div class="popup_subtitle">Номер:</div>-->
+<!--        <label for="">{{blankToType}}</label>-->
+<!--&lt;!&ndash;        <mat-form-field floatLabel="never">&ndash;&gt;-->
+<!--&lt;!&ndash;          <mat-select [(ngModel)]="blankToType" style="width: 250px">&ndash;&gt;-->
+<!--&lt;!&ndash;            <mat-option *ngFor="let item of selectedBlankArrays" [value]="item.order_number">&ndash;&gt;-->
+<!--&lt;!&ndash;              {{item.order_number}}&ndash;&gt;-->
+<!--&lt;!&ndash;            </mat-option>&ndash;&gt;-->
+<!--&lt;!&ndash;          </mat-select>&ndash;&gt;-->
+<!--&lt;!&ndash;        </mat-form-field>&ndash;&gt;-->
+<!--      </div>-->
+
+<!--      <div class="flex">-->
+<!--        <input type="submit" value="Распечатать" (click)="printBlanks('stickers-box')">-->
+<!--        <input type="submit" value="Сохранить в PDF" class="ml-30" (click)="openPDF('stickers')">-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--    <div class="sticker-box" id="stickers">-->
+<!--      <div *ngFor="let item of selectedBlanksArraysForSticker" style="width: 50%">-->
+<!--        &lt;!&ndash; {{item.id}} &ndash;&gt;-->
+<!--        <div class="col-50 sticker">-->
+<!--          <div class="flex justify-content-between align-items-start">-->
+<!--            <div class="sticker_num">-->
 <!--              {{item.order_number}}-->
-<!--            </mat-option>-->
-<!--          </mat-select>-->
-<!--        </mat-form-field>-->
-      </div>
+<!--            </div>-->
+<!--            <div class="sticker_qr">-->
+<!--              <qrcode [qrdata]="item.order_number" [width]="148" [errorCorrectionLevel]="'M'"></qrcode>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--          <div class="flex justify-content-between align-items-end">-->
+<!--            <div class="sticker_text">-->
+<!--              {{item.sender_name}}-->
+<!--            </div>-->
+<!--            <div class="sticker_angle">-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
 
-      <div class="flex">
-        <input type="submit" value="Распечатать" (click)="printBlanks()">
-        <input type="submit" value="Сохранить в PDF" class="ml-30" (click)="openPDF('stickers')">
-      </div>
-    </div>
-
-    <div class="sticker-box" id="stickers">
-      <div *ngFor="let item of selectedBlanksArraysForSticker" style="width: 50%">
-        <!-- {{item.id}} -->
-        <div class="col-50 sticker">
-          <div class="flex justify-content-between align-items-start">
-            <div class="sticker_num">
-              {{item.order_number}}
-            </div>
-            <div class="sticker_qr">
-              <qrcode [qrdata]="item.order_number" [width]="148" [errorCorrectionLevel]="'M'"></qrcode>
-            </div>
-          </div>
-          <div class="flex justify-content-between align-items-end">
-            <div class="sticker_text">
-              {{item.sender_name}}
-            </div>
-            <div class="sticker_angle">
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- <div style="break-after:page"></div> -->
-    </div>
-    <button class="active-btn circle-btn close-btn" (click)="hideModal('sticker-printing')" style="position: absolute; top: 15px; right: 30px"></button>
-  </div>
-</div>
+<!--      &lt;!&ndash; <div style="break-after:page"></div> &ndash;&gt;-->
+<!--    </div>-->
+<!--    <button class="active-btn circle-btn close-btn" (click)="hideModal('sticker-printing')" style="position: absolute; top: 15px; right: 30px"></button>-->
+<!--  </div>-->
+<!--</div>-->
 
 <div id="stickers-modal" class="modal stickers-modal">
   <div class="stickers-modal-content">
@@ -658,7 +658,7 @@
           <p class="num-item">{{blankToType}}</p>
         </div>
         <div class="col-controls">
-          <input type="submit" value="Распечатать" (click)="printBlanks()">
+          <input type="submit" value="Распечатать" (click)="printBlanks('stickers-box')">
           <input type="submit" value="Сохранить в PDF" (click)="openPDF('stickers-box')">
         </div>
       </div>
@@ -707,7 +707,7 @@
       </div>
 
       <div class="flex" style="height: min-content">
-        <input type="submit" value="Распечатать" class="mt-40" (click)="printBlanks()">
+        <input type="submit" value="Распечатать" class="mt-40" (click)="printBlanks('blanks')">
         <input type="submit" value="Сохранить в PDF" class="ml-30 mt-40" (click)="openPDF('blanks')">
       </div>
     </div>
@@ -3114,4 +3114,5 @@
 </div>
 
 <div id="pdf-blanks"></div>
+<div id="pdf-stickers-box"></div>
 
