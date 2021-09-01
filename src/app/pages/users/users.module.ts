@@ -8,6 +8,7 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../../AuthInterceptor';
+import {NgxMaskModule} from 'ngx-mask';
 
 
 
@@ -19,6 +20,7 @@ import {AuthInterceptor} from '../../AuthInterceptor';
     MatSelectModule,
     MatFormFieldModule,
     ScrollingModule,
+    NgxMaskModule.forRoot(),
     AgGridModule.withComponents([])
   ],
   providers: [

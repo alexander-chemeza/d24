@@ -77,6 +77,10 @@
     max-height: 710px;
     display: none;
 
+    input {
+      height: 40px;
+    }
+
     @media (max-width: 2000px) {
       & {
         max-width: 920px;
@@ -162,6 +166,7 @@
 .groups-modal {
   padding: 0;
   width: 750px;
+  height: 200px;
   top: 120px;
   left: 59%;
   transform: none;
@@ -176,6 +181,33 @@
     display: grid;
     grid-template-rows: min-content;
     grid-template-columns: 7fr 1fr 4fr 1fr 4fr 4fr;
+    grid-gap: 20px;
+    align-items: center;
+
+    & label {
+      margin: 0;
+    }
+  }
+
+  .groups {
+    margin-top: 15px;
+  }
+
+  .groups-content {
+    box-sizing: border-box;
+    width: 100%;
+    overflow: auto;
+    display: grid;
+    grid-template-rows: min-content;
+    grid-template-columns: 1fr;
+  }
+
+  .groups-content div {
+    margin-top: 10px;
+
+    display: grid;
+    height: 20px;
+    grid-template-columns: 4fr 1fr 4fr 1fr 4fr;
     grid-gap: 20px;
     align-items: center;
 

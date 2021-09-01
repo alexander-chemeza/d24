@@ -4,10 +4,13 @@
   </div>
   <div class="grey-box group">
     <label class="mr-15" for="group">Показать группы</label>
-    <select name="selectedGroups" [(ngModel)]="selectedGroups" (change)="changeGroup($event)">
-      <option selected="selected">-- Выберите группу --</option>
-      <option *ngFor="let group of groupsList">{{group.name}}</option>
-    </select>
+    <mat-form-field floatLabel="never">
+      <mat-select>
+        <mat-option *ngFor="let item of groupsList" [value]="item.id" class="example-item">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <!-- <input class="m-0" type="text" placeholder="Выберите группу" id="group" name="group"> -->
   </div>
@@ -65,9 +68,9 @@
           <label for="email">Email:</label>
           <input type="text" name="email" id="email" formControlName="email">
           <label for="phone">Телефон:</label>
-          <input type="text" name="phone" id="phone" formControlName="phone">
+          <input type="text" name="phone" id="phone" formControlName="phone" mask="(00) 000 00 00" prefix="+375" [showMaskTyped]="true">
           <label for="phone2">Телефон 2:</label>
-          <input type="text" name="phone2" id="phone2" formControlName="phone2">
+          <input type="text" name="phone2" id="phone2" formControlName="phone2" mask="(00) 000 00 00" prefix="+375" [showMaskTyped]="true">
         </div>
         <div class="col">
           <label for="login">Логин:</label>
@@ -77,7 +80,13 @@
           <label for="password-repeat">Пароль ( повторить):</label>
           <input type="text" name="password-repeat" id="password-repeat" formControlName="passwordRepeat">
           <label for="group-name">Название группы: </label>
-          <input type="text" name="group-name" id="group-name" formControlName="groupName">
+          <mat-form-field floatLabel="never">
+            <mat-select formControlName="groupdName">
+              <mat-option *ngFor="let item of groupsList" [value]="item.id" class="example-item">
+                {{item.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
       </div>
       <div class="form-controls">
@@ -107,6 +116,24 @@
     </form>
     <div *ngIf="groupsList.length > 0" class="row groups">
       <p>Выберите к какой группе пользователей доступны данные адресной книги и шаблонов</p>
+    </div>
+    <div *ngIf="groupsList.length === 0" class="row groups">
+      <p>Список групп пуст</p>
+    </div>
+    <div *ngIf="groupsList.length > 0" class="row groups groups-content">
+      <div *ngFor="let item of groupsList">
+        <p>{{item.name}}</p>
+        <div class="checkbox-block">
+          <input class="checkbox-block-item" type="checkbox" name="new-book-{{item.id}}" id="new-book-{{item.id}}" formControlName="book" [checked]="item.addressBookAccess">
+          <span class="checkbox-block-icon"></span>
+        </div>
+        <label for="new-book">Адрессная книга</label>
+        <div class="checkbox-block">
+          <input class="checkbox-block-item" type="checkbox" name="new-template-{{item.id}}" id="new-template-{{item.id}}" formControlName="template" [checked]="item.templateAcces">
+          <span class="checkbox-block-icon"></span>
+        </div>
+        <label for="new-template">Шаблоны</label>
+      </div>
     </div>
   </div>
 </div>

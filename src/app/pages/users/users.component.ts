@@ -89,6 +89,8 @@ export class UsersComponent implements OnInit {
     };
     this.rowSelection = 'multiple';
     this.paginationPageSize = 10;
+
+    this.getGroups();
   }
 
   ngOnInit(): void {
@@ -141,8 +143,6 @@ export class UsersComponent implements OnInit {
         Validators.required
       ]),
     });
-
-    this.getGroups();
   }
 
   createNewUser(): void {
@@ -280,6 +280,7 @@ export class UsersComponent implements OnInit {
     this.service.getGroups().subscribe(response => {
       if (response.status === 200) {
         this.groupsList = response.body;
+        console.log(this.groupsList);
       }
     });
   }
