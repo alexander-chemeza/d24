@@ -81,7 +81,7 @@
           <input type="text" name="password-repeat" id="password-repeat" formControlName="passwordRepeat">
           <label for="group-name">Название группы: </label>
           <mat-form-field floatLabel="never">
-            <mat-select formControlName="groupdName">
+            <mat-select formControlName="groupName">
               <mat-option *ngFor="let item of groupsList" [value]="item.id" class="example-item">
                 {{item.name}}
               </mat-option>
@@ -120,11 +120,11 @@
     <div *ngIf="groupsList.length === 0" class="row groups">
       <p>Список групп пуст</p>
     </div>
-    <div *ngIf="groupsList.length > 0" class="row groups groups-content">
+    <div class="groups-content">
       <div *ngFor="let item of groupsList">
         <p>{{item.name}}</p>
         <div class="checkbox-block">
-          <input class="checkbox-block-item" type="checkbox" name="new-book-{{item.id}}" id="new-book-{{item.id}}" formControlName="book" [checked]="item.addressBookAccess">
+          <input class="checkbox-block-item" type="checkbox" name="new-book-{{item.id}}" id="new-book-{{item.id}}" [checked]="item.addressBookAccess">
           <span class="checkbox-block-icon"></span>
         </div>
         <label for="new-book">Адрессная книга</label>
