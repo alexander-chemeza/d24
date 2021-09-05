@@ -513,7 +513,7 @@ export class JournalComponent implements OnInit, OnChanges {
     for (const item of event.api.getSelectedNodes()) {
       if (item.data.status === 'Черновик' || item.data.status === 'Ошибка отправки заявки') {
         this.selectedDraftOrderRow.push(item.data.id);
-      } else if (item.data.status === 'Загружен') {
+      } else if (item.data.status === 'Загружен' || item.data.status === 'Обработан') {
         this.selectedAppliedOrderRows.push(item.data.id);
       } else {
         this.gridApi.getRowNode(item.rowIndex).setSelected(false);
