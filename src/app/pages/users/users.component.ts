@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Group, RestapiService, UserRegistration} from '../../restapi.service';
 import {Router} from '@angular/router';
+import {UserControllComponent} from './user-controll/user-controll.component';
 
 @Component({
   selector: 'app-users',
@@ -10,6 +11,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  frameworkComponents: any;
   showGroupModal = false;
   userOldInfo: any = sessionStorage.getItem('currentUser');
   user: any;
@@ -30,8 +32,18 @@ export class UsersComponent implements OnInit {
   selectedGroups = [];
 
   constructor(private service: RestapiService, private router: Router) {
+    this.frameworkComponents = {
+      userControl: UserControllComponent
+    };
+
     this.passwordEquality = false;
     this.columnDefs = [
+      // {
+      //   headerName: 'Управление',
+      //   pinned: 'right',
+      //
+      //   maxWidth: 150,
+      // },
       {
         headerName: 'Логин',
         field: 'login',
@@ -75,6 +87,19 @@ export class UsersComponent implements OnInit {
       {
         headerName: 'Статус блокировки',
         field: 'status',
+        cellRendererSelector: (params: any) => {
+          return {
+            component: 'userControl',
+            params: {
+              values: ['status']
+            }
+          };
+        },
+        cellRendererParams: {
+          clicked: (target: any) => {
+            console.log('settled');
+          }
+        },
         sortable: true,
         flex: 1,
         minWidth: 200,

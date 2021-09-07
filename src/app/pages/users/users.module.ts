@@ -9,11 +9,12 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../../AuthInterceptor';
 import {NgxMaskModule} from 'ngx-mask';
+import { UserControllComponent } from './user-controll/user-controll.component';
 
 
 
 @NgModule({
-  declarations: [UsersComponent],
+  declarations: [UsersComponent, UserControllComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -21,7 +22,7 @@ import {NgxMaskModule} from 'ngx-mask';
     MatFormFieldModule,
     ScrollingModule,
     NgxMaskModule.forRoot(),
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([UserControllComponent])
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
