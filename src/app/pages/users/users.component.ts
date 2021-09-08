@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Group, RestapiService, UserRegistration} from '../../restapi.service';
 import {Router} from '@angular/router';
 import {UserControllComponent} from './user-controll/user-controll.component';
+import {UserBlockControllComponent} from './user-block-controll/user-block-controll.component';
 
 @Component({
   selector: 'app-users',
@@ -33,7 +34,8 @@ export class UsersComponent implements OnInit {
 
   constructor(private service: RestapiService, private router: Router) {
     this.frameworkComponents = {
-      userControl: UserControllComponent
+      userControl: UserControllComponent,
+      userBlockControl: UserBlockControllComponent
     };
 
     this.passwordEquality = false;
@@ -88,16 +90,31 @@ export class UsersComponent implements OnInit {
         headerName: 'Статус блокировки',
         field: 'status',
         cellRendererSelector: (params: any) => {
-          return {
+          const unblocked = {
             component: 'userControl',
             params: {
               values: ['status']
             }
           };
+
+          const blocked = {
+            component: 'userBlockControl',
+            params: {
+              values: ['status']
+            }
+          };
+
+          if (params.data.status === true) {
+            return unblocked;
+          } else {
+            return blocked;
+          }
         },
         cellRendererParams: {
-          clicked: (target: any) => {
-            console.log('settled');
+          clicked: (target: any): void => {
+            if (target === 'status') {
+              console.log('settled');
+            }
           }
         },
         sortable: true,
@@ -245,7 +262,6 @@ export class UsersComponent implements OnInit {
   onRowClicked(event: any): void {
     this.clearForm();
     this.getUser(event.data.id);
-    this.showModal('new-user');
   }
 
   clearAllManagers(): void {

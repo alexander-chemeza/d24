@@ -10,11 +10,12 @@ import {HTTP_INTERCEPTORS} from '@angular/common/http';
 import {AuthInterceptor} from '../../AuthInterceptor';
 import {NgxMaskModule} from 'ngx-mask';
 import { UserControllComponent } from './user-controll/user-controll.component';
+import { UserBlockControllComponent } from './user-block-controll/user-block-controll.component';
 
 
 
 @NgModule({
-  declarations: [UsersComponent, UserControllComponent],
+  declarations: [UsersComponent, UserControllComponent, UserBlockControllComponent],
   imports: [
     CommonModule,
     SharedModule,

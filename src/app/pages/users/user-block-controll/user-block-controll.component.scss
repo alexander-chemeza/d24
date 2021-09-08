@@ -1,0 +1,16 @@
+button {
+  width: 100%;
+  background-color: #DF1010;
+  color: white;
+  transition: all .3s;
+  padding: 12px 30px 12px 12px;
+  text-align: left;
+  background-image: url("../../../../assets/img/common/plus.svg");
+  background-repeat: no-repeat;
+  background-position-x: 90%;
+  background-position-y: 50%;
+
+  &:hover {
+    background-color: #c90f0f;
+  }
+}
