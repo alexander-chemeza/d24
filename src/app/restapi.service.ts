@@ -237,7 +237,7 @@ export class RestapiService {
   }
   // user-controller GET
   public getUserById(params: any): Observable<any> {
-    return this.http.get(`${this.url}/adminUser/getUserById`, {observe: 'response', params});
+    return this.http.get(`${this.url}/adminUser/getUserById?id=${params}`, {observe: 'response'});
   }
   // user controller get groups GET
   public getGroups(): Observable<any> {

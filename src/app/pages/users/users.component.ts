@@ -12,6 +12,7 @@ import {UserBlockControllComponent} from './user-block-controll/user-block-contr
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  userEditId = -1;
   editUser = false;
   activeUser = true;
   frameworkComponents: any;
@@ -116,6 +117,7 @@ export class UsersComponent implements OnInit {
           clicked: (target: any): void => {
             this.editUser = !this.editUser;
             const block: any = document.getElementById('block');
+            this.userEditId = this.rowData[Number(this.gridApi.getFocusedCell().rowIndex)].id;
 
             if (target.state === 'Заблокирован') {
               this.activeUser = false;
@@ -200,6 +202,29 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  editUserState(event: any): void {
+    let state: boolean;
+    if (event.target.value === 'locked') {
+      state = false;
+    } else {
+      state = true;
+    }
+    this.service.getUserById(this.userEditId).subscribe(user => {
+      if (user.status === 200) {
+        const userObject = user.body;
+        userObject.status = state;
+        this.service.updateUser(userObject).subscribe(response => {
+          if (response.status === 200) {
+            const block: any = document.getElementById('block');
+            this.getAllManagers();
+            block.style.display = 'none';
+            this.userEditId = -1;
+          }
+        });
+      }
+    });
+  }
+
   createNewUser(): void {
     const data: UserRegistration = {
       id: this.newUserForm.value.id as string,
@@ -274,7 +299,7 @@ export class UsersComponent implements OnInit {
 
   onRowClicked(event: any): void {
     this.clearForm();
-    this.getUser(event.data.id);
+    // this.getUser(event.data.id);
   }
 
   clearAllManagers(): void {
@@ -306,6 +331,7 @@ export class UsersComponent implements OnInit {
   }
 
   getAllManagers(): void {
+    this.rowData = [];
     let params = new HttpParams();
     if (this.selectedGroups.length != 0) {
       let groupIds = this.groupsList.filter((g: any) => this.selectedGroups.find(s => s === g.name)).map((g: any) => g.id);

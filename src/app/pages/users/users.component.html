@@ -24,14 +24,14 @@
         <div class="blocked">
           <span>Заблокировать</span>
           <div class="checkbox-block" style="margin-right: 15px;">
-            <input class="checkbox-block-item" type="radio" name="status" id="status1" [checked]="!activeUser">
+            <input class="checkbox-block-item" type="radio" name="status" id="status1" value="locked" [checked]="!activeUser" (change)="editUserState($event)">
             <span class="checkbox-block-icon"></span>
           </div>
         </div>
         <div class="unblocked">
           <span>Разблокировать</span>
           <div class="checkbox-block" style="margin-right: 15px;">
-            <input class="checkbox-block-item" type="radio" name="status" id="status2" [checked]="activeUser">
+            <input class="checkbox-block-item" type="radio" name="status" id="status2" value="unlocked" [checked]="activeUser" (change)="editUserState($event)">
             <span class="checkbox-block-icon"></span>
           </div>
         </div>
