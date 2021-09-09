@@ -12,6 +12,8 @@ import {UserBlockControllComponent} from './user-block-controll/user-block-contr
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  editUser = false;
+  activeUser = true;
   frameworkComponents: any;
   showGroupModal = false;
   userOldInfo: any = sessionStorage.getItem('currentUser');
@@ -112,8 +114,19 @@ export class UsersComponent implements OnInit {
         },
         cellRendererParams: {
           clicked: (target: any): void => {
-            if (target === 'status') {
-              console.log('settled');
+            this.editUser = !this.editUser;
+            const block: any = document.getElementById('block');
+
+            if (target.state === 'Заблокирован') {
+              this.activeUser = false;
+            } else {
+              this.activeUser = true;
+            }
+            if (this.editUser) {
+              block.style.display = 'block';
+              block.style.top = `${Number(target.style.split('(')[1].split('p')[0]) + 96}px`;
+            } else {
+              block.style.display = 'none';
             }
           }
         },

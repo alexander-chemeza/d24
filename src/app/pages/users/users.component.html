@@ -18,7 +18,25 @@
     <label for="submit">Доступ группе пользователей <br>к адресной книге и шаблонам:</label>
     <input type="submit" id="submit" name="submit" value="Выбрать группу" (click)="showGroupModal = !showGroupModal">
   </div>
-  <div class="row-table">
+  <div class="row-table" style="position: relative">
+    <div class="cell" id="block" style="position: absolute; z-index: 1000; right: 10px">
+      <div class="modal-plus">
+        <div class="blocked">
+          <span>Заблокировать</span>
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="radio" name="status" id="status1" [checked]="!activeUser">
+            <span class="checkbox-block-icon"></span>
+          </div>
+        </div>
+        <div class="unblocked">
+          <span>Разблокировать</span>
+          <div class="checkbox-block" style="margin-right: 15px;">
+            <input class="checkbox-block-item" type="radio" name="status" id="status2" [checked]="activeUser">
+            <span class="checkbox-block-icon"></span>
+          </div>
+        </div>
+      </div>
+    </div>
     <ag-grid-angular
       style="width: 100%; height: 100%; overflow: visible"
       class="ag-theme-alpine"

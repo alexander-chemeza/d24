@@ -216,3 +216,38 @@
     }
   }
 }
+
+.cell {
+  position: relative;
+  display: none;
+
+  .modal-plus {
+    width: 230px;
+    background-color: #9863AE;
+    border-radius: 5px;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content;
+    grid-gap: 7px;
+
+    & .blocked, & .unblocked {
+      background-color: #DF1010;
+      border-radius: 5px;
+      padding: 12px 20px 12px 20px;
+      display: flex;
+      justify-content: space-between;
+
+      & span {
+        line-height: 1;
+        font-size: 14px;
+        color: white;
+        font-family: "Montserrat-Medium", sans-serif;
+      }
+    }
+
+    & .unblocked {
+      background-color: #5FDF10;
+    }
+  }
+}

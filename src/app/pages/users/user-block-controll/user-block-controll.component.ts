@@ -17,19 +17,10 @@ export class UserBlockControllComponent implements ICellRendererAngularComp, OnD
   }
 
   btnClickedHandler(event: any): void {
-    for (const item of this.cells) {
-      item.style.overflow = 'hidden';
-    }
-    this.state = !this.state;
-
-    if (this.state) {
-      event.currentTarget.parentNode.parentNode.parentNode.style.overflow = 'visible';
-    } else {
-      event.currentTarget.parentNode.parentNode.parentNode.style.overflow = 'hidden';
-    }
-    console.log('STATE', this.state);
-
-    const target = event.target.getAttribute('btntype');
+    const target = {
+      state: event.target.innerText,
+      style: event.currentTarget.parentNode.parentNode.parentNode.style.transform
+    };
     if (target) {
       this.params.clicked(target);
     } else {
