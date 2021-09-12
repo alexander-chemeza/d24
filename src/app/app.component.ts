@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'd24';
 
   state: boolean;
+  admin = true;
 
   feedbackForm: any;
 
@@ -22,9 +23,17 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     // On hashchange check if user have this item in the sessionStorage, true - full sidebar, false - basic
     this.router.events.forEach(event => {
+      const user = sessionStorage.getItem('currentUser');
       if (event instanceof NavigationEnd) {
-        if (sessionStorage.getItem('currentUser')) {
+        if (user) {
+          const userInfo = JSON.parse(user);
           this.state = true;
+          console.log('ROLE', userInfo.role);
+          if (userInfo.role === 'ROLE_USER_ADMIN') {
+            this.admin = true;
+          } else {
+            this.admin = false;
+          }
         } else {
           this.state = false;
         }

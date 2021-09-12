@@ -18,6 +18,7 @@
       <p *ngIf="password.touched && password.invalid && password.pristine" class="alert-message">Данное поле обязательно</p>
       <p class="grey-text" *ngIf="noUser" style="color: red; position: absolute">Пользователя с таким именем не существует</p>
       <p class="grey-text" *ngIf="incorrect" style="color: red; position: absolute">Оба поля обязательны к заполнению</p>
+      <p class="grey-text" *ngIf="userBlocked" style="color: red; position: absolute">Данный пользователь заблокирован</p>
       <input type="submit" value="Войти" class="submit-btn">
     </form>
   </div>

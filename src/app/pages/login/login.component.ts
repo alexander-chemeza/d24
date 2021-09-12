@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   incorrect = false;
   noUser = false;
   loginForm: any;
+  userBlocked = false;
 
   constructor(private service: RestapiService, private router: Router) {
   }
@@ -70,6 +71,13 @@ export class LoginComponent implements OnInit {
       this.noUser = false;
       this.service.login(this.loginForm.value.userName, this.loginForm.value.password)
         .subscribe(data => {
+          console.log('DATA DATA DATA', data);
+          if (data.status === false && data.role !== 'ROLE_USER_ADMIN') {
+            this.service.logout().subscribe(response => {
+              this.userBlocked = true;
+            });
+          }
+
           sessionStorage.setItem('currentUser', JSON.stringify(data));
           if (!localStorage.getItem('defaultSender')) {
             localStorage.setItem('defaultSender', JSON.stringify(false));

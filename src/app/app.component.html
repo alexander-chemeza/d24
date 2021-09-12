@@ -72,7 +72,7 @@
             <span class="menu-text">Адресная книга</span>
           </a>
         </li>
-        <li>
+        <li *ngIf="admin">
           <a routerLinkActive="active-menu" [routerLink]="['users']">
             <img src="../assets/img/menu/users-light.svg" class="white-icon" alt="ico">
             <img src="../assets/img/menu/users-dark.svg" class="black-icon" alt="ico">

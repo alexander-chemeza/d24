@@ -212,6 +212,7 @@ export class UsersComponent implements OnInit {
     this.service.getUserById(this.userEditId).subscribe(user => {
       if (user.status === 200) {
         const userObject = user.body;
+        delete userObject.password;
         userObject.status = state;
         this.service.updateUser(userObject).subscribe(response => {
           if (response.status === 200) {
