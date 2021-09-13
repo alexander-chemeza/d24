@@ -12,6 +12,7 @@ import {UserBlockControllComponent} from './user-block-controll/user-block-contr
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  currentGroup = 0;
   userEditId = -1;
   editUser = false;
   activeUser = true;
@@ -348,13 +349,22 @@ export class UsersComponent implements OnInit {
             groupName: item.groupName,
             name: item.userName,
             email: item.email,
-            phone: item.phone,
+            phone: `+375${item.phone}`,
             status: item.status
           });
         }
+        const group = this.groupsList.find((item: any) => item.id === this.currentGroup);
+        console.log('GROUP', group);
+        this.rowData = this.rowData.filter((item: any) => item.groupName === group.name);
+        console.log('DATA', this.rowData);
         this.gridApi.setRowData(this.rowData);
       }
     });
+  }
+
+  groupChange(event: any): void {
+    this.currentGroup = event.value;
+    this.getAllManagers();
   }
 
   getGroups() {
@@ -362,6 +372,8 @@ export class UsersComponent implements OnInit {
       if (response.status === 200) {
         this.groupsList = response.body;
         console.log(this.groupsList);
+        this.currentGroup = this.groupsList[0].id;
+        console.log('CURRENT GROUP', this.currentGroup);
       }
     });
   }

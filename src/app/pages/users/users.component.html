@@ -5,7 +5,7 @@
   <div class="grey-box group">
     <label class="mr-15" for="group">Показать группы</label>
     <mat-form-field floatLabel="never">
-      <mat-select>
+      <mat-select id="group" [(value)]="currentGroup" (selectionChange)="groupChange($event)">
         <mat-option *ngFor="let item of groupsList" [value]="item.id" class="example-item">
           {{item.name}}
         </mat-option>
@@ -95,9 +95,9 @@
           <label for="login">Логин:</label>
           <input type="text" name="login" id="login" formControlName="login">
           <label for="password">Пароль:</label>
-          <input type="text" name="password" id="password" formControlName="password">
+          <input type="password" name="password" id="password" formControlName="password">
           <label for="password-repeat">Пароль ( повторить):</label>
-          <input type="text" name="password-repeat" id="password-repeat" formControlName="passwordRepeat">
+          <input type="password" name="password-repeat" id="password-repeat" formControlName="passwordRepeat">
           <label for="group-name">Название группы: </label>
           <mat-form-field floatLabel="never">
             <mat-select formControlName="groupName">
