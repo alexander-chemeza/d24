@@ -121,20 +121,20 @@
     <h1 class="grey-header">Добавить группу</h1>
     <form [formGroup]="groupForm">
       <input type="text" formControlName="groupName">
-      <div class="checkbox-block">
-        <input class="checkbox-block-item" type="checkbox" name="new-book" id="new-book" formControlName="book">
-        <span class="checkbox-block-icon"></span>
-      </div>
-      <label for="new-book">Адрессная книга</label>
-      <div class="checkbox-block">
-        <input class="checkbox-block-item" type="checkbox" name="new-template" id="new-template" formControlName="template">
-        <span class="checkbox-block-icon"></span>
-      </div>
-      <label for="new-template">Шаблоны</label>
+<!--      <div class="checkbox-block">-->
+<!--        <input class="checkbox-block-item" type="checkbox" name="new-book" id="new-book" formControlName="book">-->
+<!--        <span class="checkbox-block-icon"></span>-->
+<!--      </div>-->
+<!--      <label for="new-book">Адрессная книга</label>-->
+<!--      <div class="checkbox-block">-->
+<!--        <input class="checkbox-block-item" type="checkbox" name="new-template" id="new-template" formControlName="template">-->
+<!--        <span class="checkbox-block-icon"></span>-->
+<!--      </div>-->
+<!--      <label for="new-template">Шаблоны</label>-->
       <input type="submit" value="Добавить" (click)="updateGroups()">
     </form>
     <div *ngIf="groupsList.length > 0" class="row groups">
-      <p>Выберите к какой группе пользователей доступны данные адресной книги и шаблонов</p>
+<!--      <p>Выберите к какой группе пользователей доступны данные адресной книги и шаблонов</p>-->
     </div>
     <div *ngIf="groupsList.length === 0" class="row groups">
       <p>Список групп пуст</p>
@@ -142,17 +142,27 @@
     <div class="groups-content">
       <div *ngFor="let item of groupsList">
         <p>{{item.name}}</p>
-        <div class="checkbox-block">
-          <input class="checkbox-block-item" type="checkbox" name="new-book-{{item.id}}" id="new-book-{{item.id}}" [checked]="item.addressBookAccess">
-          <span class="checkbox-block-icon"></span>
-        </div>
-        <label for="new-book">Адрессная книга</label>
-        <div class="checkbox-block">
-          <input class="checkbox-block-item" type="checkbox" name="new-template-{{item.id}}" id="new-template-{{item.id}}" formControlName="template" [checked]="item.templateAcces">
-          <span class="checkbox-block-icon"></span>
-        </div>
-        <label for="new-template">Шаблоны</label>
+        <a (click)="setCurrentGroupToDelete($event)" attr.group="{{item.id}}">Удалить</a>
+
+<!--        <div class="checkbox-block">-->
+<!--          <input class="checkbox-block-item" type="checkbox" name="new-book-{{item.id}}" id="new-book-{{item.id}}" [checked]="item.addressBookAccess">-->
+<!--          <span class="checkbox-block-icon"></span>-->
+<!--        </div>-->
+<!--        <label for="new-book">Адрессная книга</label>-->
+<!--        <div class="checkbox-block">-->
+<!--          <input class="checkbox-block-item" type="checkbox" name="new-template-{{item.id}}" id="new-template-{{item.id}}" formControlName="template" [checked]="item.templateAcces">-->
+<!--          <span class="checkbox-block-icon"></span>-->
+<!--        </div>-->
+<!--        <label for="new-template">Шаблоны</label>-->
       </div>
     </div>
+  </div>
+</div>
+
+<div id="ask-if-delete-group" class="modal ask-if-delete-group">
+  <p class="white-header">Вы действительно хотите удалить группу?</p>
+  <div class="row">
+    <button class="green-btn round-btn" (click)="deleteGroup($event)">Удалить</button>
+    <button class="white-btn round-btn" (click)="hideModal('ask-if-delete-group')">Отменить</button>
   </div>
 </div>

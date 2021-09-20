@@ -12,6 +12,7 @@ import {UserBlockControllComponent} from './user-block-controll/user-block-contr
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  currentGroupToDelete = -1;
   currentGroup = 0;
   userEditId = -1;
   editUser = false;
@@ -428,6 +429,17 @@ export class UsersComponent implements OnInit {
       passwordRepeat: '',
       groupName: ''
     });
+  }
+
+  setCurrentGroupToDelete(event: any): void {
+    this.currentGroupToDelete = Number(event.target.getAttribute('group'));
+    this.showModal('ask-if-delete-group');
+  }
+
+  deleteGroup(event: any): void {
+    if (this.currentGroupToDelete && this.currentGroupToDelete >= 0) {
+      // Do something
+    }
   }
 }
 
