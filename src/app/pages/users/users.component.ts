@@ -13,7 +13,7 @@ import {UserBlockControllComponent} from './user-block-controll/user-block-contr
 })
 export class UsersComponent implements OnInit {
   currentGroupToDelete = -1;
-  currentGroup = 0;
+  currentGroup = -1;
   userEditId = -1;
   editUser = false;
   activeUser = true;
@@ -34,7 +34,7 @@ export class UsersComponent implements OnInit {
   groupForm: any;
   passwordEquality: boolean;
 
-  groupsList: any;
+  groupsList: any = [{id: -1, name: 'Все', addressBookAccess: true, templateAcces: true}];
   selectedGroups = [];
 
   constructor(private service: RestapiService, private router: Router) {
@@ -335,13 +335,8 @@ export class UsersComponent implements OnInit {
 
   getAllManagers(): void {
     this.rowData = [];
-    let params = new HttpParams();
-    if (this.selectedGroups.length != 0) {
-      let groupIds = this.groupsList.filter((g: any) => this.selectedGroups.find(s => s === g.name)).map((g: any) => g.id);
-      params = params.set('groups', groupIds.join());
-    }
 
-    this.service.getAllManagers(params).subscribe(response => {
+    this.service.getAllManagers(this.currentGroup).subscribe(response => {
       if (response.status === 200) {
         for (const item of response.body) {
           this.rowData.push({
@@ -371,7 +366,9 @@ export class UsersComponent implements OnInit {
   getGroups() {
     this.service.getGroups().subscribe(response => {
       if (response.status === 200) {
-        this.groupsList = response.body;
+        for (let i = 0; i < response.body.length; i++) {
+          this.groupsList.push(response.body[i]);
+        }
         console.log(this.groupsList);
         this.currentGroup = this.groupsList[0].id;
         console.log('CURRENT GROUP', this.currentGroup);

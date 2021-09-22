@@ -233,7 +233,11 @@ export class RestapiService {
   }
   // user-controller GET
   public getAllManagers(params: any): Observable<any> {
-    return this.http.get(`${this.url}/adminUser/getAllManagers`, {observe: 'response', params});
+    if (params === -1) {
+      return this.http.get(`${this.url}/adminUser/getAllManagers`, {observe: 'response', params});
+    } else {
+      return this.http.get(`${this.url}/adminUser/getAllManagers?groupId=${params}`, {observe: 'response', params});
+    }
   }
   // user-controller GET
   public getUserById(params: any): Observable<any> {
