@@ -43,7 +43,7 @@ export class UsersComponent implements OnInit {
       userBlockControl: UserBlockControllComponent
     };
 
-    this.passwordEquality = false;
+    this.passwordEquality = true;
     this.columnDefs = [
       // {
       //   headerName: 'Управление',
@@ -161,30 +161,37 @@ export class UsersComponent implements OnInit {
     }
 
     this.newUserForm = new FormGroup({
-      id: new FormControl('', []),
-      agreement: new FormControl('', [
-        Validators.required
-      ]),
+      // id: new FormControl('', []),
+      // agreement: new FormControl('', [
+      //   Validators.required
+      // ]),
       name: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.minLength(4)
       ]),
       email: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.minLength(4),
+        Validators.email
       ]),
       phone: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.minLength(9)
       ]),
       phone2: new FormControl('', [
-        Validators.required
+        Validators.minLength(9)
       ]),
       login: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.minLength(4)
       ]),
       password: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.minLength(1)
       ]),
       passwordRepeat: new FormControl('', [
-        Validators.required
+        Validators.required,
+        Validators.minLength(1)
       ]),
       groupName: new FormControl('', [
         Validators.required
@@ -202,6 +209,38 @@ export class UsersComponent implements OnInit {
         Validators.required
       ]),
     });
+  }
+
+  get name(): any {
+    return this.newUserForm.get('name');
+  }
+
+  get email(): any {
+    return this.newUserForm.get('email');
+  }
+
+  get phone(): any {
+    return this.newUserForm.get('phone');
+  }
+
+  get phone2(): any {
+    return this.newUserForm.get('phone2');
+  }
+
+  get login(): any {
+    return this.newUserForm.get('login');
+  }
+
+  get password(): any {
+    return this.newUserForm.get('password');
+  }
+
+  get passwordRepeat(): any {
+    return this.newUserForm.get('passwordRepeat');
+  }
+
+  get groupName(): any {
+    return this.newUserForm.get('groupName');
   }
 
   editUserState(event: any): void {
@@ -241,13 +280,13 @@ export class UsersComponent implements OnInit {
       groupName: this.newUserForm.value.groupName as string
     };
 
-    if (this.newUserForm.value.password === this.newUserForm.value.passwordRepeat) {
+    if ( this.newUserForm.value.password === this.newUserForm.value.passwordRepeat) {
       this.passwordEquality = true;
+    } else if (this.newUserForm.value.password.length > 0 || this.newUserForm.value.passwordRepeat.length > 0 && this.newUserForm.value.password !== this.newUserForm.value.passwordRepeat) {
+      this.passwordEquality = false;
     }
 
-    console.log('Equal:', this.passwordEquality);
-
-    if (this.newUserForm.valid && this.passwordEquality) {
+    if (this.newUserForm.valid) {
       this.service.addManager(data).subscribe(response => {
         if (response.status === 200) {
           console.log('OK');
@@ -257,10 +296,9 @@ export class UsersComponent implements OnInit {
           console.log('Bad request');
         }
       });
+      this.hideModal('new-user');
+      this.clearForm();
     }
-
-    this.hideModal('new-user');
-    this.clearForm();
   }
 
   showModal(id: string): void {
@@ -413,19 +451,8 @@ export class UsersComponent implements OnInit {
     this.getAllManagers();
   }
 
-  clearForm() {
-    this.newUserForm.patchValue({
-      id: '',
-      agreement: '',
-      name: '',
-      email: '',
-      phone: '',
-      phone2: '',
-      login: '',
-      password: '',
-      passwordRepeat: '',
-      groupName: ''
-    });
+  clearForm(): void {
+    this.newUserForm.reset();
   }
 
   setCurrentGroupToDelete(event: any): void {

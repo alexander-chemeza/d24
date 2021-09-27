@@ -80,24 +80,38 @@
     <form [formGroup]="newUserForm" (ngSubmit)="createNewUser()">
       <div class="grey-box">
         <div class="col">
-          <label for="agreement">Договор:</label>
-          <input type="text" name="agreement" id="agreement" formControlName="agreement">
+<!--          <label for="agreement">Договор:</label>-->
+<!--          <input type="text" name="agreement" id="agreement" formControlName="agreement">-->
           <label for="name">Имя:</label>
           <input type="text" name="name" id="name" formControlName="name">
+          <p *ngIf="name.touched && name.invalid && name.dirty" class="alert-message">Минимальная длина 4 символа</p>
+          <p *ngIf="name.touched && name.invalid && name.pristine" class="alert-message">Данное поле обязательно</p>
           <label for="email">Email:</label>
           <input type="text" name="email" id="email" formControlName="email">
+          <p *ngIf="email.touched && email.invalid && email.dirty" class="alert-message">Минимальная длина 4 символа</p>
+          <p *ngIf="email.touched && email.invalid && email.pristine" class="alert-message">Данное поле обязательно</p>
           <label for="phone">Телефон:</label>
           <input type="text" name="phone" id="phone" formControlName="phone" mask="(00) 000 00 00" prefix="+375" [showMaskTyped]="true">
+          <p *ngIf="phone.touched && phone.invalid && phone.dirty" class="alert-message">Минимальная длина 9 символов</p>
+          <p *ngIf="phone.touched && phone.invalid && phone.pristine" class="alert-message">Данное поле обязательно</p>
           <label for="phone2">Телефон 2:</label>
           <input type="text" name="phone2" id="phone2" formControlName="phone2" mask="(00) 000 00 00" prefix="+375" [showMaskTyped]="true">
+          <p *ngIf="phone2.touched && phone2.invalid && phone2.dirty" class="alert-message">Минимальная длина 9 символов</p>
         </div>
         <div class="col">
           <label for="login">Логин:</label>
           <input type="text" name="login" id="login" formControlName="login">
+          <p *ngIf="login.touched && login.invalid && login.dirty" class="alert-message">Минимальная длина 4 символа</p>
+          <p *ngIf="login.touched && login.invalid && login.pristine" class="alert-message">Данное поле обязательно</p>
           <label for="password">Пароль:</label>
           <input type="password" name="password" id="password" formControlName="password">
+          <p *ngIf="password.touched && password.invalid && password.dirty" class="alert-message">Минимальная длина 1 символ</p>
+          <p *ngIf="password.touched && password.invalid && password.pristine" class="alert-message">Данное поле обязательно</p>
           <label for="password-repeat">Пароль ( повторить):</label>
           <input type="password" name="password-repeat" id="password-repeat" formControlName="passwordRepeat">
+          <p *ngIf="passwordRepeat.touched && passwordRepeat.invalid && passwordRepeat.dirty" class="alert-message">Минимальная длина 1 символ</p>
+          <p *ngIf="passwordRepeat.touched && passwordRepeat.invalid && passwordRepeat.pristine" class="alert-message">Данное поле обязательно</p>
+          <p *ngIf="!passwordEquality" class="alert-message">Пароли должны совпадать</p>
           <label for="group-name">Название группы: </label>
           <mat-form-field floatLabel="never">
             <mat-select formControlName="groupName">
@@ -106,6 +120,7 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+          <p *ngIf="groupName.touched && groupName.invalid && groupName.pristine" class="alert-message">Данное поле обязательно</p>
         </div>
       </div>
       <div class="form-controls">
