@@ -277,7 +277,7 @@ export class UsersComponent implements OnInit {
       phone2: this.newUserForm.value.phone2 as string,
       login: this.newUserForm.value.login as string,
       password: this.newUserForm.value.password as string,
-      groupName: this.newUserForm.value.groupName as string
+      groupId: this.newUserForm.value.groupName as string
     };
 
     if ( this.newUserForm.value.password === this.newUserForm.value.passwordRepeat) {
@@ -387,6 +387,7 @@ export class UsersComponent implements OnInit {
             status: item.status
           });
         }
+        console.log('PURE ROW DATA', this.rowData);
         const group = this.groupsList.find((item: any) => item.id === this.currentGroup);
         console.log('GROUP', group);
         this.rowData = this.rowData.filter((item: any) => item.groupName === group.name);
@@ -398,6 +399,7 @@ export class UsersComponent implements OnInit {
 
   groupChange(event: any): void {
     this.currentGroup = event.value;
+    console.log('CURRENT GROUP', this.currentGroup);
     this.getAllManagers();
   }
 
@@ -462,7 +464,12 @@ export class UsersComponent implements OnInit {
 
   deleteGroup(event: any): void {
     if (this.currentGroupToDelete && this.currentGroupToDelete >= 0) {
-      // Do something
+      console.log('DELETE', this.currentGroupToDelete);
+      this.service.deleteGroup(this.currentGroupToDelete).subscribe(response => {
+        if (response.status === 200) {
+          console.log('BINGO');
+        }
+      });
     }
   }
 }
