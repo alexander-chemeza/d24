@@ -268,6 +268,7 @@ export class UsersComponent implements OnInit {
   }
 
   createNewUser(): void {
+    const group = this.groupsList.find((item: any) => item.id === this.newUserForm.value.groupName).name;
     const data: UserRegistration = {
       id: this.newUserForm.value.id as string,
       agreement: this.newUserForm.value.agreement as string,
@@ -277,8 +278,11 @@ export class UsersComponent implements OnInit {
       phone2: this.newUserForm.value.phone2 as string,
       login: this.newUserForm.value.login as string,
       password: this.newUserForm.value.password as string,
-      groupId: this.newUserForm.value.groupName as string
+      groupId: this.newUserForm.value.groupName as string,
+      groupName: group
     };
+
+    console.log('SENDING DATA', data);
 
     if ( this.newUserForm.value.password === this.newUserForm.value.passwordRepeat) {
       this.passwordEquality = true;
