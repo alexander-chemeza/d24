@@ -407,15 +407,19 @@ export class UsersComponent implements OnInit {
     this.getAllManagers();
   }
 
-  getGroups() {
+  getGroups(): void {
     this.service.getGroups().subscribe(response => {
       if (response.status === 200) {
+        this.groupsList = [{
+          addressBookAccess: true,
+          id: -1,
+          name: 'Все',
+          templateAcces: false
+        }];
         for (let i = 0; i < response.body.length; i++) {
           this.groupsList.push(response.body[i]);
         }
-        console.log(this.groupsList);
-        this.currentGroup = this.groupsList[0].id;
-        console.log('CURRENT GROUP', this.currentGroup);
+        // this.currentGroup = this.groupsList[0].id;
       }
     });
   }
@@ -447,6 +451,7 @@ export class UsersComponent implements OnInit {
     if (data.mainUserId && data.name) {
       this.service.updateGroups(data).subscribe(response => {
         if (response.status === 200) {
+          this.getGroups();
         }
       });
     }
@@ -470,6 +475,11 @@ export class UsersComponent implements OnInit {
     if (this.currentGroupToDelete && this.currentGroupToDelete >= 0) {
       this.service.deleteGroup(this.currentGroupToDelete).subscribe(response => {
         if (response.status === 200) {
+          // const btnToDelete: any = document.querySelector(`[group="${this.currentGroupToDelete}"]`);
+          // if (btnToDelete) {
+          //   btnToDelete.parentElement.remove();
+          // }
+          this.getGroups();
           this.hideModal('ask-if-delete-group');
         }
       });
