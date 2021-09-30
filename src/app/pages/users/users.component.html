@@ -115,7 +115,7 @@
           <label for="group-name">Название группы: </label>
           <mat-form-field floatLabel="never">
             <mat-select formControlName="groupName">
-              <mat-option *ngFor="let item of groupsList" [value]="item.id" class="example-item">
+              <mat-option *ngFor="let item of showWithoutAllGroups()" [value]="item.id" class="example-item">
                 {{item.name}}
               </mat-option>
             </mat-select>
@@ -155,7 +155,7 @@
       <p>Список групп пуст</p>
     </div>
     <div class="groups-content">
-      <div *ngFor="let item of groupsList">
+      <div *ngFor="let item of showWithoutAllGroups()">
         <p>{{item.name}}</p>
         <a (click)="setCurrentGroupToDelete($event)" attr.group="{{item.id}}">Удалить</a>
 

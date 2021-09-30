@@ -485,6 +485,10 @@ export class UsersComponent implements OnInit {
       });
     }
   }
+
+  showWithoutAllGroups(): any {
+    return this.groupsList.filter((item: any) => item.id !== -1);
+  }
 }
 
 function setText(selector: any, text: any): void {
