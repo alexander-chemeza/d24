@@ -294,7 +294,6 @@ export class UsersComponent implements OnInit {
       this.service.addManager(data).subscribe(response => {
         if (response.status === 200) {
           console.log('OK');
-          this.clearAllManagers();
           this.getAllManagers();
         } else {
           console.log('Bad request');
@@ -302,6 +301,7 @@ export class UsersComponent implements OnInit {
       });
       this.hideModal('new-user');
       this.clearForm();
+
     }
   }
 
@@ -391,11 +391,11 @@ export class UsersComponent implements OnInit {
             status: item.status
           });
         }
-        console.log('PURE ROW DATA', this.rowData);
-        const group = this.groupsList.find((item: any) => item.id === this.currentGroup);
-        console.log('GROUP', group);
-        this.rowData = this.rowData.filter((item: any) => item.groupName === group.name);
-        console.log('DATA', this.rowData);
+        if (this.currentGroup !== -1) {
+          const group = this.groupsList.find((item: any) => item.id === this.currentGroup);
+          this.rowData = this.rowData.filter((item: any) => item.groupName === group.name);
+        }
+
         this.gridApi.setRowData(this.rowData);
       }
     });
@@ -480,6 +480,7 @@ export class UsersComponent implements OnInit {
           //   btnToDelete.parentElement.remove();
           // }
           this.getGroups();
+          this.getAllManagers();
           this.hideModal('ask-if-delete-group');
         }
       });
