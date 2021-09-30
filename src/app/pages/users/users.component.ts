@@ -468,10 +468,9 @@ export class UsersComponent implements OnInit {
 
   deleteGroup(event: any): void {
     if (this.currentGroupToDelete && this.currentGroupToDelete >= 0) {
-      console.log('DELETE', this.currentGroupToDelete);
       this.service.deleteGroup(this.currentGroupToDelete).subscribe(response => {
         if (response.status === 200) {
-          console.log('BINGO');
+          this.hideModal('ask-if-delete-group');
         }
       });
     }
